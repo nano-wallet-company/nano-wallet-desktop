@@ -24,8 +24,10 @@ export default function() {
     http://www.ember-cli-mirage.com/docs/v0.3.x/shorthands/
   */
 
-  this.post('/rpc', (schema, request) => {
+  this.namespace = 'rpc';
+
+  this.post('/', (schema, request) => {
     const params = JSON.parse(request.requestBody);
-    return schema.wallet.create(params);
+    return schema.accounts.find(params.account);
   });
 }

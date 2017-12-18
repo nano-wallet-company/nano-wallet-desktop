@@ -7,6 +7,10 @@ const Router = EmberRouter.extend({
 });
 
 Router.map(function() {
+  this.route('wallets', function() {
+    this.route('accounts', { path: '/:id' }, function() {
+    });
+  });
 });
 
 export default Router;

@@ -54,7 +54,9 @@
     "ember-electron": "^2.7.2",
     "ember-export-application-global": "^2.0.0",
     "ember-load-initializers": "^1.0.0",
+    "ember-localstorage-adapter": "^1.0.0",
     "ember-resolver": "^4.5.0",
+    "ember-simple-qrcode": "^0.1.0",
     "ember-source": "^2.17.0",
     "loader.js": "^4.6.0"
   },
