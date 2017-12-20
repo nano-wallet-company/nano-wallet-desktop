@@ -2,6 +2,8 @@
 const { app, BrowserWindow, protocol } = require('electron');
 const { dirname, join, resolve } = require('path');
 const protocolServe = require('electron-protocol-serve');
+const log = require('electron-log');
+const { spawn } = require('child_process');
 
 let mainWindow = null;
 
@@ -29,13 +31,17 @@ app.on('window-all-closed', () => {
 });
 
 app.on('ready', () => {
+  const cmd = join(process.resourcesPath, 'app', 'ember-electron', 'resources', 'rai_node');
+  const subprocess = spawn(cmd, ['--daemon']);
+  subprocess.on('error', err => log.error(err));
+
   mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
   });
 
   // If you want to open up dev tools programmatically, call
-  // mainWindow.openDevTools();
+  mainWindow.openDevTools();
 
   const emberAppLocation = 'serve://dist';
 
@@ -62,6 +68,7 @@ app.on('ready', () => {
   });
 
   mainWindow.on('closed', () => {
+    subprocess.kill();
     mainWindow = null;
   });
 });

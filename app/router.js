@@ -7,8 +7,8 @@ const Router = EmberRouter.extend({
 });
 
 Router.map(function() {
-  this.route('wallets', function() {
-    this.route('accounts', { path: '/:id' }, function() {
+  this.route('wallets', { path: '/:wallet_id' }, function() {
+    this.route('accounts', { path: '/:account_id' }, function() {
     });
   });
 });

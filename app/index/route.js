@@ -2,6 +2,7 @@ import Route from '@ember/routing/route';
 
 export default Route.extend({
   redirect() {
-    this.transitionTo('wallets');
+    const wallet = this.store.createRecord('wallet');
+    this.transitionTo('wallets', wallet.save());
   }
 });
