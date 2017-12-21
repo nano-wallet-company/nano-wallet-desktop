@@ -1,0 +1,15 @@
+<h1>Wallet</h1>
+
+Total Balance: {{totals.balance}}
+
+<h2>Accounts</h2>
+
+<ul>
+  {{#each wallet.accounts as |acc|}}
+    <li>{{acc.id}}</li>
+  {{/each}}
+</ul>
+
+{{#bs-button type="primary" icon="fa fa-plus-circle" value=wallet onClick=(action 'createAccount')}}
+  Create Account
+{{/bs-button}}

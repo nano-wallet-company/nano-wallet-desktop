@@ -24,7 +24,7 @@ export default function() {
     http://www.ember-cli-mirage.com/docs/v0.3.x/shorthands/
   */
 
-  this.passthrough('http://localhost:55000/');
+  this.passthrough('http://localhost:55000');
 
   this.namespace = 'rpc';
 
