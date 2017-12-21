@@ -1,18 +1,9 @@
 import Route from '@ember/routing/route';
+import { get } from '@ember/object';
 
 export default Route.extend({
-  actions: {
-    sendAmount(changeset) {
-      const wallet = this.modelFor('wallets');
-      const { source, destination, amount } = changeset.getProperties('source', 'destination', 'amount');
-      const block = this.store.createRecord('block', {
-        wallet,
-        source,
-        destination,
-        amount,
-      });
-
-      return block.save();
-    }
-  }
+  async afterModel(model) {
+    const source = await get(model, 'accounts.firstObject');
+    return this.transitionTo('wallets.accounts.send', source);
+  },
 });

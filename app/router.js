@@ -9,9 +9,10 @@ const Router = EmberRouter.extend({
 Router.map(function() {
   this.route('wallets', { path: '/:wallet_id' }, function() {
     this.route('overview');
+    this.route('send', function() {});
     this.route('accounts', { path: '/:account_id' }, function() {
+      this.route('send', function() {});
     });
-    this.route('send');
   });
 });
 
