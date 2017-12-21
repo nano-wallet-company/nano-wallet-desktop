@@ -13,9 +13,11 @@ const PREFIXES = {
   uxrb: base10.pow(18),
 };
 
-export function formatAmount([value = 0], { prefix = 'Mxrb' }) {
+export function formatAmount([value = 0], { prefix = 'Mxrb', precision = 6 }) {
   const divisor = PREFIXES[prefix] || PREFIXES['Mxrb'];
-  return BigNumber(value).dividedBy(divisor).toFormat();
+  const quotient = BigNumber(value).dividedBy(divisor);
+  const digits = Math.max(precision, Math.min(1, quotient.decimalPlaces()));
+  return quotient.toFormat(digits);
 }
 
 export default helper(formatAmount);

@@ -8,6 +8,6 @@ export default DS.Transform.extend({
   },
 
   serialize(deserialized = 0) {
-    return BigNumber(deserialized);
+    return BigNumber(deserialized).toFixed();
   }
 });

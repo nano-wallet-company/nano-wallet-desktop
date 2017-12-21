@@ -1,10 +1,9 @@
 <p class="lead">
-  Total Balance: {{format-amount wallet.balance}}
+  Wallet Balance: <span class="text-muted">&#11041;</span> {{format-amount wallet.balance}}
 </p>
 
-{{!-- <h2>Accounts</h2> --}}
-
 <table class="table table-striped table-responsive">
+  <caption class="sr-only">All your accounts</caption>
   <thead>
     <tr>
       <th scope="col">Account</th>
@@ -21,10 +20,10 @@
           {{/link-to}}
         </td>
         <td>
-          {{truncate (format-amount wallet.balance) 20}}
+          {{format-amount acc.balance}}
         </td>
         <td>
-          {{format-amount wallet.pending}}
+          {{format-amount acc.pending}}
         </td>
       </tr>
     {{/each}}
