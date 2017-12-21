@@ -1,6 +1,6 @@
 import { moduleForModel, test } from 'ember-qunit';
 
-moduleForModel('wallet', 'Unit | Model | wallet', {
+moduleForModel('block', 'Unit | Model | block', {
   // Specify the other units that are required for this test.
   needs: ['transform:big-number']
 });

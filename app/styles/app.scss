@@ -1,10 +1,15 @@
 @import "ember-bootstrap/bootstrap";
 
+@import "ember-power-select/themes/bootstrap";
+
+@import "ember-power-select";
+
 main {
   margin-top: 1em;
 }
 
-
-@import "ember-power-select/themes/bootstrap";
-
-@import "ember-power-select";
+h1 {
+  margin-bottom: 20px;
+  padding-bottom: 9px;
+  border-bottom: 1px solid #eee;
+}

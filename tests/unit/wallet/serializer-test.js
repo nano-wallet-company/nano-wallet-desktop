@@ -2,7 +2,7 @@ import { moduleForModel, test } from 'ember-qunit';
 
 moduleForModel('wallet', 'Unit | Serializer | wallet', {
   // Specify the other units that are required for this test.
-  needs: ['serializer:wallet']
+  needs: ['serializer:wallet', 'transform:big-number', 'model:account'],
 });
 
 // Replace this with your real tests.

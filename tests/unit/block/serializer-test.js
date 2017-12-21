@@ -1,8 +1,8 @@
 import { moduleForModel, test } from 'ember-qunit';
 
-moduleForModel('account', 'Unit | Serializer | account', {
+moduleForModel('block', 'Unit | Serializer | block', {
   // Specify the other units that are required for this test.
-  needs: ['serializer:account', 'transform:big-number', 'model:wallet', 'model:block']
+  needs: ['serializer:block', 'transform:big-number', 'model:wallet', 'model:account']
 });
 
 // Replace this with your real tests.

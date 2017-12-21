@@ -11,8 +11,9 @@ export default DS.Adapter.extend({
     return assign(data, info);
   },
 
-  createRecord(store, type, snapshot) {
+  async createRecord(store, type, snapshot) {
     const { wallet } = this.serialize(snapshot, { includeId: true });
-    return this.get('rpc').accountCreate(wallet);
+    const { account } = await this.get('rpc').accountCreate(wallet);
+    return this.get('rpc').accountInfo(account);
   },
 });

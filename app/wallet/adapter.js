@@ -1,6 +1,5 @@
 import DS from 'ember-data';
 import { inject as service } from '@ember/service';
-import { assign } from '@ember/polyfills';
 
 import { all } from 'rsvp';
 

@@ -1,29 +1,32 @@
-{{!-- Total Balance: {{model.balance}}
-{{qr-code content=model.id}} --}}
-
 <div class="card-group">
   <div class="card">
-    {{qr-code class="card-img-top" content=model.id}}
+    <h5 class="card-header text-center text-truncate" title="{{model.id}}">
+      {{model.id}}
+    </h5>
+
     <div class="card-body">
-      <h4 class="card-title">{{model.id}}</h4>
-      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-    </div>
-  </div>
-  <div class="card">
-    {{qr-code class="card-img-top" content=model.id}}
-    <div class="card-body">
-      <h4 class="card-title">{{model.id}}</h4>
-      <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-    </div>
-  </div>
-  <div class="card">
-    <{{qr-code class="card-img-top" content=model.id}}
-    <div class="card-body">
-      <h4 class="card-title">{{model.id}}</h4>
-      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      <div class="d-flex justify-content-center">
+        {{qr-code content=model.id}}
+      </div>
+
+      <dl class="row justify-content-md-center">
+        <dt class="col-md-3">Account</dt>
+        <dd class="col-md-9 text-truncate" title="{{model.id}}">{{model.id}}</dd>
+
+        <dt class="col-md-3">Balance</dt>
+        <dd class="col-md-9 text-truncate" title="{{model.balance}}">{{model.balance}}</dd>
+
+        <dt class="col-md-3">Pending</dt>
+        <dd class="col-md-9 text-truncate" title="{{model.pending}}">{{model.pending}}</dd>
+      </dl>
+
+      {{#link-to 'wallets.send' model.wallet class="card-link"}}
+        Send
+      {{/link-to}}
+
+      {{#link-to 'wallets.send' model.wallet class="card-link"}}
+        Receive
+      {{/link-to}}
     </div>
   </div>
 </div>

@@ -13,7 +13,7 @@ export default Component.extend({
     this._super(...args);
 
     const model = {
-      account: null,
+      source: null,
       destination: null,
       amount: null,
     };
