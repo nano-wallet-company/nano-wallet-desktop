@@ -2,14 +2,28 @@ import DS from 'ember-data';
 import { inject as service } from '@ember/service';
 import { assign } from '@ember/polyfills';
 
+import { all } from 'rsvp';
+
 export default DS.Adapter.extend({
   rpc: service(),
 
   async findRecord(store, type, id, snapshot) {
     const rpc = this.get('rpc');
-    const data = this.serialize(snapshot, { includeId: true });
-    const { accounts } = await rpc.accountList(id);
-    return assign(data, { accounts });
+    const { wallet } = this.serialize(snapshot, { includeId: true });
+    const [
+      { balance, pending },
+      { accounts },
+    ] = await all([
+      rpc.walletBalanceTotal(id),
+      rpc.accountList(id),
+    ]);
+
+    return {
+      wallet,
+      balance,
+      pending,
+      accounts,
+    }
   },
 
   createRecord() {

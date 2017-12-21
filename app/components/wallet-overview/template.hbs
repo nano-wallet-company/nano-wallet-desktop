@@ -1,12 +1,12 @@
 <h1>Wallet</h1>
 
-Total Balance: {{totals.balance}}
+Total Balance: {{wallet.balance}}
 
 <h2>Accounts</h2>
 
 <ul>
   {{#each wallet.accounts as |acc|}}
-    <li>{{acc.id}}</li>
+    <li>{{acc.id}} (balance: {{acc.balance}})</li>
   {{/each}}
 </ul>
 

@@ -11,6 +11,7 @@ Router.map(function() {
     this.route('overview');
     this.route('accounts', { path: '/:account_id' }, function() {
     });
+    this.route('send');
   });
 });
 

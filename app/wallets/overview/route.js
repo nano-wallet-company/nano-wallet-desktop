@@ -7,15 +7,6 @@ import { hash } from 'rsvp';
 export default Route.extend({
   rpc: service('rpc'),
 
-  model() {
-    const rpc = this.get('rpc');
-    const wallet = this.modelFor('wallets');
-    return hash({
-      wallet,
-      totals: rpc.walletBalanceTotal(get(wallet, 'id')),
-    });
-  },
-
   actions: {
     createAccount(wallet) {
       const account = this.store.createRecord('account', { wallet });

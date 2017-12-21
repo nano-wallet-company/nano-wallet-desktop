@@ -18,8 +18,16 @@ export default Service.extend({
     return this.call('account_create', { wallet });
   },
 
-  accountInfo(account) {
-    return this.call('account_info', { account });
+  async accountInfo(account) {
+    const info = await this.call('account_info', { account });
+
+    // When an account has no transactions, the RPC seems to return an
+    // HTTP OK *and* an error.
+    if (info.error === 'Account not found') {
+      return { account, balance: "0" };
+    }
+
+    return info;
   },
 
   walletBalanceTotal(wallet) {

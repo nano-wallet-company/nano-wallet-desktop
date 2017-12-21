@@ -1,0 +1,17 @@
+{{#bs-form model=changeset onSubmit=(action 'sendAmount') as |form|}}
+  {{#form.element class="form-control-lg" controlType="power-select" label="From Account" property="account" options=accounts as |el|}}
+    {{#el.control searchField="id" searchPlaceholder="Search for account" as |item|}}
+      <b>{{item.id}}</b>
+    {{/el.control}}
+  {{/form.element}}
+
+  {{form.element class="form-control-lg" controlType="text" label="Destination Account" property="destination" placeholder="e.g. xrb_3e3j5tkog48pnny9dmfzj1r16pg8t1e76dz5tmac6iq689wyjfpiij4txtdo"}}
+
+  {{form.element class="form-control-lg" static=true controlType="number" label="Amount (XRB)" property="amount"}}
+
+  <div role="group" class="d-flex justify-content-center">
+    {{#bs-button size="lg" type="primary" icon="fa fa-paper-plane" buttonType="submit"}}
+      Send
+    {{/bs-button}}
+  </div>
+{{/bs-form}}
