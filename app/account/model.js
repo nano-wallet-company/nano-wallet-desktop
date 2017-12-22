@@ -1,9 +1,12 @@
 import DS from 'ember-data';
 
-export default DS.Model.extend({
-  wallet: DS.belongsTo('wallet'),
-  blocks: DS.hasMany('block', { inverse: 'source' }),
+const { attr, hasMany, belongsTo } = DS;
 
-  balance: DS.attr('big-number'),
-  pending: DS.attr('big-number'),
+export default DS.Model.extend({
+  wallet: belongsTo('wallet'),
+  blocks: hasMany('block', { async: true, inverse: 'source' }),
+  history: hasMany('history', { async: true, inverse: 'parentAccount' }),
+
+  balance: attr('big-number'),
+  pending: attr('big-number'),
 });

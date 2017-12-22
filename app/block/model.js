@@ -1,9 +1,11 @@
 import DS from 'ember-data';
 
-export default DS.Model.extend({
-  wallet: DS.belongsTo('wallet', { inverse: null }),
-  source: DS.belongsTo('account', { inverse: 'blocks' }),
+const { attr, belongsTo } = DS;
 
-  destination: DS.attr('string'),
-  amount: DS.attr('big-number'),
+export default DS.Model.extend({
+  wallet: belongsTo('wallet', { inverse: null }),
+  source: belongsTo('account', { inverse: 'blocks' }),
+
+  destination: attr('string'),
+  amount: attr('big-number'),
 });

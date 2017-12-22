@@ -1,7 +1,9 @@
 import DS from 'ember-data';
 
-export default DS.Model.extend({
-  accounts: DS.hasMany('account', { async: true }),
+const { attr, hasMany } = DS;
 
-  balance: DS.attr('big-number'),
+export default DS.Model.extend({
+  accounts: hasMany('account', { async: true }),
+
+  balance: attr('big-number'),
 });

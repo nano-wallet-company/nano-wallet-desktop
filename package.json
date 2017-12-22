@@ -60,6 +60,7 @@
     "ember-cli-sri": "^2.1.1",
     "ember-cli-string-helpers": "^1.5.0",
     "ember-cli-uglify": "^2.0.0",
+    "ember-composable-helpers": "^2.0.3",
     "ember-crumbly": "^1.0.8",
     "ember-data": "^2.17.0",
     "ember-electron": "^2.7.2",
@@ -72,10 +73,12 @@
     "ember-parachute": "^0.3.6",
     "ember-power-select": "^2.0.0-beta.0",
     "ember-power-select-blockless": "^0.3.1",
+    "ember-promise-helpers": "^1.0.3",
     "ember-resolver": "^4.5.0",
     "ember-route-action-helper": "^2.0.6",
     "ember-simple-qrcode": "^0.1.0",
     "ember-source": "^2.17.0",
+    "ember-truth-helpers": "^2.0.0",
     "loader.js": "^4.6.0"
   },
   "engines": {

@@ -7,6 +7,7 @@ Storage.reopenClass({
   initialState() {
     return {
       wallet: null,
+      account: null,
     };
   }
 });

@@ -1,0 +1,27 @@
+<table class="table table-striped table-responsive">
+  <caption class="sr-only">History for account {{account.id}}</caption>
+  <thead>
+    <tr>
+      <th scope="col">Type</th>
+      <th scope="col">Account</th>
+      <th scope="col">Amount</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each history as |entry|}}
+      <tr scope="row">
+        <td>
+          {{entry.type}}
+        </td>
+        <td>
+          {{#link-to 'wallets.accounts.index' wallet account disabledWhen=(not (contains account wallet.accounts))}}
+            {{truncate entry.account 30}}
+          {{/link-to}}
+        </td>
+        <td>
+          {{format-amount entry.amount}}
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>

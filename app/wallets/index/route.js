@@ -5,4 +5,8 @@ export default Route.extend({
     title: 'Wallet',
     path: 'wallets.overview',
   },
+
+  redirect() {
+    this.transitionTo('wallets.overview');
+  },
 });

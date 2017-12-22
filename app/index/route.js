@@ -3,16 +3,16 @@ import { get } from '@ember/object';
 import { inject as service } from '@ember/service';
 
 export default Route.extend({
-  settings: service('settings'),
+  settings: service(),
 
-  async redirect() {
+  async beforeModel(transition) {
     const settings = get(this, 'settings');
     let wallet = settings.get('wallet');
     if (!wallet) {
+      transition.abort();
       wallet = await this.store.createRecord('wallet').save();
       settings.setProperties(this.store.serialize(wallet, { includeId: true }));
+      return this.transitionTo('wallets', wallet);
     }
-
-    return this.transitionTo('wallets', wallet);
   },
 });

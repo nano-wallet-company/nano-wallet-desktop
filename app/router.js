@@ -12,6 +12,7 @@ Router.map(function() {
     this.route('send', function() {});
     this.route('accounts', { path: '/:account_id' }, function() {
       this.route('send', function() {});
+      this.route('history');
     });
   });
 });
