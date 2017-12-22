@@ -2,8 +2,7 @@ import Route from '@ember/routing/route';
 
 export default Route.extend({
   // redirect() {
-  //   const account = this.store.findRecord('account', 'xrb_3e3j5tkog48pnny9dmfzj1r16pg8t1e76dz5tmac6iq689wyjfpiij4txtdo');
-  //   this.transitionTo('wallets.accounts', account);
+  //   this.transitionTo('wallets.overview');
   // },
 
   // actions: {
