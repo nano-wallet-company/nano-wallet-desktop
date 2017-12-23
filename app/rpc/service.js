@@ -1,19 +1,20 @@
 import Service from '@ember/service';
-import { inject as service } from '@ember/service';
 import { assign } from '@ember/polyfills';
 import { A } from '@ember/array';
 
-const ACTION_WALLET_CREATE        = 'wallet_create';
-const ACTION_ACCOUNT_CREATE       = 'account_create';
-const ACTION_ACCOUNT_INFO         = 'account_info';
+import { service } from 'ember-decorators/service';
+
+const ACTION_WALLET_CREATE = 'wallet_create';
+const ACTION_ACCOUNT_CREATE = 'account_create';
+const ACTION_ACCOUNT_INFO = 'account_info';
 const ACTION_WALLET_BALANCE_TOTAL = 'wallet_balance_total';
-const ACTION_ACCOUNT_LIST         = 'account_list';
-const ACTION_SEND                 = 'send';
-const ACTION_ACCOUNT_HISTORY      = 'account_history';
-const ACTION_PEERS                = 'peers';
+const ACTION_ACCOUNT_LIST = 'account_list';
+const ACTION_SEND = 'send';
+const ACTION_ACCOUNT_HISTORY = 'account_history';
+const ACTION_PEERS = 'peers';
 
 export default Service.extend({
-  ajax: service(),
+  @service ajax: null,
 
   call(action, params = {}) {
     const data = assign({ action }, params);
@@ -34,9 +35,9 @@ export default Service.extend({
     // When an account has no transactions, the RPC seems to return an
     // HTTP OK *and* an error.
     if (info.error === 'Account not found') {
-      info = { account, balance: "0" };
+      info = { account, balance: '0' };
       if (pending) {
-        info.pending = "0";
+        info.pending = '0';
       }
     }
 

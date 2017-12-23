@@ -16,7 +16,7 @@ let [, , indexUrl] = process.argv;
 indexUrl = indexUrl.replace(/__amp__/g, '&');
 let {
   pathname: originalIndexPath,
-  search: indexQuery,
+  search: indexQuery, // eslint-disable-line prefer-const
 } = url.parse(indexUrl);
 // When we extract the pathname from an absolute path on windows, it starts
 // with '/C:/', and the leading slash confuses everything, so we need to strip
@@ -28,9 +28,9 @@ if (process.platform === 'win32') {
 // Copy index-electron.html to a location not managed by broccoli so that it
 // doesn't get deleted when a change is detected.
 originalIndexPath = resolve(originalIndexPath);
-let emberAppDir = resolve(dirname(originalIndexPath), '..');
-let tmpDir = tmp.dirSync().name;
-let indexPath = resolve(tmpDir, basename(originalIndexPath));
+const emberAppDir = resolve(dirname(originalIndexPath), '..');
+const tmpDir = tmp.dirSync().name;
+const indexPath = resolve(tmpDir, basename(originalIndexPath));
 fs.writeFileSync(indexPath, fs.readFileSync(originalIndexPath, 'utf8').toString());
 const emberAppLocation = `serve://dist${indexQuery}`;
 
@@ -44,13 +44,13 @@ protocolServe({
   indexPath,
 });
 
-app.on('window-all-closed', function onWindowAllClosed() {
+app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit();
   }
 });
 
-app.on('ready', function onReady() {
+app.on('ready', () => {
   mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
@@ -64,7 +64,7 @@ app.on('ready', function onReady() {
   process.env.ELECTRON_PROTOCOL_SERVE_INDEX = originalIndexPath;
   mainWindow.loadURL(emberAppLocation);
 
-  mainWindow.on('closed', function onClosed() {
+  mainWindow.on('closed', () => {
     mainWindow = null;
   });
 });

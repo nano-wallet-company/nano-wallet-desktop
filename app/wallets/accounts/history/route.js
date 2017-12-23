@@ -17,5 +17,5 @@ export default Route.extend({
       account,
       history,
     });
-  }
+  },
 });

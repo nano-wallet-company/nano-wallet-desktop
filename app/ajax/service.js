@@ -1,5 +1,6 @@
-import { inject as service } from '@ember/service';
-import { readOnly } from '@ember/object/computed';
+import { service } from 'ember-decorators/service';
+import { readOnly } from 'ember-decorators/object';
+import { alias } from 'ember-decorators/object/computed';
 
 import AjaxService from 'ember-ajax/services/ajax';
 import AJAXPromise from 'ember-ajax/-private/promise';
@@ -7,20 +8,24 @@ import AJAXPromise from 'ember-ajax/-private/promise';
 import retryWithBackoff from 'ember-backoff/retry-with-backoff';
 
 export default AjaxService.extend({
-  hostManager: service(),
+  @service hostManager: null,
 
-  host: readOnly('hostManager.host.rpcHost'),
-  namespace: readOnly('hostManager.host.rpcNamespace'),
+  @readOnly
+  @alias('hostManager.host.rpcHost') host: null,
+
+  @readOnly
+  @alias('hostManager.host.rpcNamespace') namespace: null,
 
   contentType: 'application/json',
 
   request(...args) {
-    return retryWithBackoff(() => this._request(...args), 10, 500);
+    return retryWithBackoff(() => this.patchedRequest(...args), 10, 500);
   },
 
   // https://github.com/ember-cli/ember-ajax/issues/296
-  _request(url, options) {
+  patchedRequest(url, options) {
     const hash = this.options(url, options);
+    // eslint-disable-next-line no-underscore-dangle
     const internalPromise = this._makeRequest(hash);
 
     const ajaxPromise = new AJAXPromise((resolve, reject) => {
@@ -33,7 +38,7 @@ export default AjaxService.extend({
             return reject(response);
           }
 
-          reject(response.response);
+          return reject(response.response);
         });
     }, `ember-ajax: ${hash.type} ${hash.url} response`);
 

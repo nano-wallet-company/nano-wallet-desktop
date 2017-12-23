@@ -1,30 +1,30 @@
 module.exports = {
-  "make_targets": {
-    "win32": [
-      "squirrel"
+  make_targets: {
+    win32: [
+      'squirrel',
     ],
-    "darwin": [
-      "zip"
+    darwin: [
+      'zip',
     ],
-    "linux": [
-      "deb",
-      "rpm"
-    ]
+    linux: [
+      'deb',
+      'rpm',
+    ],
   },
-  "electronPackagerConfig": {
-    "packageManager": "npm"
+  electronPackagerConfig: {
+    packageManager: 'npm',
   },
-  "electronWinstallerConfig": {
-    "name": "raiwallet"
+  electronWinstallerConfig: {
+    name: 'raiwallet',
   },
-  "electronInstallerDebian": {},
-  "electronInstallerRedhat": {},
-  "github_repository": {
-    "owner": "",
-    "name": ""
+  electronInstallerDebian: {},
+  electronInstallerRedhat: {},
+  github_repository: {
+    owner: '',
+    name: '',
   },
-  "windowsStoreConfig": {
-    "packageName": "",
-    "name": "raiwallet"
-  }
+  windowsStoreConfig: {
+    packageName: '',
+    name: 'raiwallet',
+  },
 };

@@ -1,6 +1,9 @@
 import Route from '@ember/routing/route';
 
+import { action } from 'ember-decorators/object';
+
 export default Route.extend({
+  // eslint-disable-next-line ember/avoid-leaking-state-in-ember-objects
   breadCrumb: {
     title: 'Send',
     path: 'wallets.accounts.send',
@@ -17,14 +20,14 @@ export default Route.extend({
     });
   },
 
-  actions: {
-    changeSource(source) {
-      return this.transitionTo(this.routeName, source);
-    },
+  @action
+  changeSource(source) {
+    return this.transitionTo(this.routeName, source);
+  },
 
-    async sendAmount(changeset) {
-      await changeset.save();
-      return this.transitionTo('wallets.accounts');
-    }
-  }
+  @action
+  async sendAmount(changeset) {
+    await changeset.save();
+    return this.transitionTo('wallets.accounts');
+  },
 });

@@ -1,12 +1,11 @@
 import DS from 'ember-data';
 
-const { attr, belongsTo } = DS;
+import { attr, belongsTo } from 'ember-decorators/data';
 
 export default DS.Model.extend({
-  parentAccount: belongsTo('account'),
+  @belongsTo('account') source: null,
 
-  // hash: attr('string'),
-  type: attr('string'),
-  account: attr('string'),
-  amount: attr('big-number'),
+  @attr type: null,
+  @attr account: null,
+  @attr('big-number') amount: null,
 });

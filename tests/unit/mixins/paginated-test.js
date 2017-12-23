@@ -5,8 +5,8 @@ import { module, test } from 'qunit';
 module('Unit | Mixin | paginated');
 
 // Replace this with your real tests.
-test('it works', function(assert) {
-  let PaginatedObject = EmberObject.extend(PaginatedMixin);
-  let subject = PaginatedObject.create();
+test('it works', (assert) => {
+  const PaginatedObject = EmberObject.extend(PaginatedMixin);
+  const subject = PaginatedObject.create();
   assert.ok(subject);
 });

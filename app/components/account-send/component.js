@@ -1,5 +1,7 @@
 import Component from '@ember/component';
-import { get, set } from '@ember/object';
+import { get } from '@ember/object';
+
+import { on } from 'ember-decorators/object/evented';
 
 import Changeset from 'ember-changeset';
 import lookupValidator from 'ember-changeset-validations';
@@ -12,22 +14,9 @@ export default Component.extend({
 
   changeset: null,
 
-  init(...args) {
-    this._super(...args);
+  @on('init')
+  createChangeset() {
     const block = get(this, 'block');
     this.changeset = new Changeset(block, lookupValidator(SendValidations), SendValidations);
   },
-
-  actions: {
-    changeSource(source) {
-      const changeset = get(this, 'changeset');
-      set(changeset, 'source', source);
-      this.sendAction('changeSource', source);
-      return false;
-    },
-
-    sendAmount(changeset) {
-      this.sendAction('sendAmount', changeset);
-    }
-  }
 });

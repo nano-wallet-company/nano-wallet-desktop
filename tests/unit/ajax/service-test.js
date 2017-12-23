@@ -7,7 +7,7 @@ moduleFor('service:ajax', 'Unit | Service | ajax', {
 });
 
 // Replace this with your real tests.
-test('it exists', function(assert) {
-  let service = this.subject();
+test('it exists', function (assert) {
+  const service = this.subject();
   assert.ok(service);
 });

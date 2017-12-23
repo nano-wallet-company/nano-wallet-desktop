@@ -1,17 +1,18 @@
 /* eslint-env node */
-'use strict';
-
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
-module.exports = function(defaults) {
+module.exports = (defaults) => {
   const app = new EmberApp(defaults, {
+    babel: {
+      plugins: ['transform-decorators-legacy'],
+    },
     'ember-cli-babel': {
       includePolyfill: true,
     },
     'ember-bootstrap': {
-      'bootstrapVersion': 4,
-      'importBootstrapFont': false,
-      'importBootstrapCSS': false,
+      bootstrapVersion: 4,
+      importBootstrapFont: false,
+      importBootstrapCSS: false,
     },
   });
 

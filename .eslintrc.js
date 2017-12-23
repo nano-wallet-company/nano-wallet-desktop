@@ -3,14 +3,31 @@ module.exports = {
     server: true,
   },
   root: true,
+  parser: 'babel-eslint',
   parserOptions: {
     ecmaVersion: 2017,
-    sourceType: 'module'
+    sourceType: 'module',
   },
-  extends: 'eslint:recommended',
+  plugins: [
+    'babel',
+    'ember',
+  ],
+  extends: [
+    'airbnb-base',
+    'plugin:ember/recommended',
+  ],
   env: {
     browser: true
   },
   rules: {
-  }
+    'no-underscore-dangle': ['error', {
+      allow: ['_super'],
+      allowAfterThis: false,
+      allowAfterSuper: false,
+      enforceInMethodNames: false,
+    }],
+    'import/extensions': 'off',
+    'import/no-extraneous-dependencies': 'off',
+    'import/no-unresolved': 'off',
+  },
 };

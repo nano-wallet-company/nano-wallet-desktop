@@ -1,5 +1,5 @@
-{{#bs-form model=changeset onSubmit=(action 'sendAmount') as |form|}}
-  {{#form.element class="form-control-lg" controlType="power-select" label="Source Account" property="source" options=accounts onChange=(action 'changeSource') as |el|}}
+{{#bs-form model=changeset onSubmit=onSubmit as |form|}}
+  {{#form.element class="form-control-lg" controlType="power-select" label="Source Account" property="source" options=accounts onChange=onChange as |el|}}
     {{#el.control searchField="id" searchPlaceholder="Search for account" as |item|}}
       <b>{{item.id}}</b>
     {{/el.control}}

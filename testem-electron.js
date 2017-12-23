@@ -1,14 +1,16 @@
 /* eslint-env node */
+const Electron = require('ember-electron/test-runner');
+
 module.exports = {
-  'test_page': 'tests/index.html?hidepassed',
-  'disable_watching': true,
-  'launchers': {
-    'Electron': require('ember-electron/test-runner'),
+  test_page: 'tests/index.html?hidepassed',
+  disable_watching: true,
+  launchers: {
+    Electron,
   },
-  'launch_in_ci': [
+  launch_in_ci: [
     'Electron',
   ],
-  'launch_in_dev': [
+  launch_in_dev: [
     'Electron',
   ],
 };

@@ -1,5 +1,8 @@
 module.exports = {
   env: {
-    embertest: true
-  }
+    embertest: true,
+  },
+  rules: {
+    'func-names': 'off',
+  },
 };

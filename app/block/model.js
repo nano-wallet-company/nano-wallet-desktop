@@ -1,11 +1,11 @@
 import DS from 'ember-data';
 
-const { attr, belongsTo } = DS;
+import { attr, belongsTo } from 'ember-decorators/data';
 
 export default DS.Model.extend({
-  wallet: belongsTo('wallet', { inverse: null }),
-  source: belongsTo('account', { inverse: 'blocks' }),
+  @belongsTo({ inverse: null }) wallet: null,
+  @belongsTo('account', { inverse: 'blocks' }) source: null,
 
-  destination: attr('string'),
-  amount: attr('big-number'),
+  @attr('big-number') destination: null,
+  @attr('big-number') amount: null,
 });

@@ -5,7 +5,7 @@ moduleFor('route:wallets/accounts/history', 'Unit | Route | wallets/accounts/his
   // needs: ['controller:foo']
 });
 
-test('it exists', function(assert) {
-  let route = this.subject();
+test('it exists', function (assert) {
+  const route = this.subject();
   assert.ok(route);
 });

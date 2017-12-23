@@ -1,6 +1,6 @@
 /* eslint-env node */
 
-module.exports = function(/* environment */) {
+module.exports = (/* environment */) => {
   return {
     /*
       If present, the host configuration will be pulled based on the given
@@ -8,23 +8,23 @@ module.exports = function(/* environment */) {
 
       ex) `APP_HOST=myapp.com ember s`
      */
-    //hostOverride: process.env.APP_HOST,
+    // hostOverride: process.env.APP_HOST,
 
     /*
       If the host doesn't resolve to any of the defined configs here,
       this will be the config used
      */
-    'default': {
+    default: {
       rpcHost: 'http://localhost:55000',
-      rpcNamespace: null
+      rpcNamespace: null,
     },
 
     /*
       This is the host config that will be used in the test environment
      */
-    'test': {
+    test: {
       rpcHost: '',
-      rpcNamespace: 'rpc'
-    }
+      rpcNamespace: 'rpc',
+    },
   };
 };

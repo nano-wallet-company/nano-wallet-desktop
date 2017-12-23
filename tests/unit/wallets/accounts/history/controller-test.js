@@ -6,7 +6,7 @@ moduleFor('controller:wallets/accounts/history', 'Unit | Controller | wallets/ac
 });
 
 // Replace this with your real tests.
-test('it exists', function(assert) {
-  let controller = this.subject();
+test('it exists', function (assert) {
+  const controller = this.subject();
   assert.ok(controller);
 });

@@ -1,9 +1,9 @@
 import DS from 'ember-data';
 
-const { attr, hasMany } = DS;
+import { attr, hasMany } from 'ember-decorators/data';
 
 export default DS.Model.extend({
-  accounts: hasMany('account', { async: true }),
+  @hasMany('account', { async: true }) accounts: null,
 
-  balance: attr('big-number'),
+  @attr('big-number') balance: null,
 });

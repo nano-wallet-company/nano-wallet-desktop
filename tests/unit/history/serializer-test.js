@@ -2,14 +2,14 @@ import { moduleForModel, test } from 'ember-qunit';
 
 moduleForModel('history', 'Unit | Serializer | history', {
   // Specify the other units that are required for this test.
-  needs: ['serializer:history']
+  needs: ['serializer:history'],
 });
 
 // Replace this with your real tests.
-test('it serializes records', function(assert) {
-  let record = this.subject();
+test('it serializes records', function (assert) {
+  const record = this.subject();
 
-  let serializedRecord = record.serialize();
+  const serializedRecord = record.serialize();
 
   assert.ok(serializedRecord);
 });

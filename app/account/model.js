@@ -1,12 +1,13 @@
 import DS from 'ember-data';
 
-const { attr, hasMany, belongsTo } = DS;
+import { attr, hasMany, belongsTo } from 'ember-decorators/data';
 
 export default DS.Model.extend({
-  wallet: belongsTo('wallet'),
-  blocks: hasMany('block', { async: true, inverse: 'source' }),
-  history: hasMany('history', { async: true, inverse: 'parentAccount' }),
+  @belongsTo() wallet: null,
 
-  balance: attr('big-number'),
-  pending: attr('big-number'),
+  @hasMany({ async: true, inverse: 'source' }) blocks: null,
+  @hasMany({ async: true, inverse: 'source' }) history: null,
+
+  @attr('big-number') balance: null,
+  @attr('big-number') pending: null,
 });

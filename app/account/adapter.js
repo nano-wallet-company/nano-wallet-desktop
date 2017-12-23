@@ -1,9 +1,10 @@
 import DS from 'ember-data';
-import { inject as service } from '@ember/service';
 import { assign } from '@ember/polyfills';
 
+import { service } from 'ember-decorators/service';
+
 export default DS.Adapter.extend({
-  rpc: service(),
+  @service rpc: null,
 
   async findRecord(store, type, id, snapshot) {
     const info = await this.get('rpc').accountInfo(id);

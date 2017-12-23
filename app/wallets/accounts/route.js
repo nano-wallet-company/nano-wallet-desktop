@@ -1,9 +1,7 @@
 import Route from '@ember/routing/route';
-import { inject as service } from '@ember/service';
 
 export default Route.extend({
-  settings: service(),
-
+  // eslint-disable-next-line ember/avoid-leaking-state-in-ember-objects
   breadCrumb: {
     title: 'Account',
     path: 'wallets.accounts',

@@ -6,7 +6,7 @@ moduleFor('transform:big-number', 'Unit | Transform | big-number', {
 });
 
 // Replace this with your real tests.
-test('it exists', function(assert) {
-  let transform = this.subject();
+test('it exists', function (assert) {
+  const transform = this.subject();
   assert.ok(transform);
 });

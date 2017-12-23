@@ -1,8 +1,8 @@
 import DS from 'ember-data';
-import { inject as service } from '@ember/service';
+import { service } from 'ember-decorators/service';
 
 export default DS.Adapter.extend({
-  rpc: service(),
+  @service rpc: null,
 
   createRecord(store, type, snapshot) {
     const {

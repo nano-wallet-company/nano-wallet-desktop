@@ -14,7 +14,7 @@ const PREFIXES = {
 };
 
 export function formatAmount([value = 0], { prefix = 'Mxrb', precision = 6 }) {
-  const divisor = PREFIXES[prefix] || PREFIXES['Mxrb'];
+  const divisor = PREFIXES[prefix] || PREFIXES.Mxrb;
   const quotient = BigNumber(value).dividedBy(divisor);
   const digits = Math.max(precision, Math.min(1, quotient.decimalPlaces()));
   return quotient.toFormat(digits);

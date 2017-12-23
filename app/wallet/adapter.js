@@ -1,10 +1,10 @@
 import DS from 'ember-data';
-import { inject as service } from '@ember/service';
 
 import { all } from 'rsvp';
+import { service } from 'ember-decorators/service';
 
 export default DS.Adapter.extend({
-  rpc: service(),
+  @service rpc: null,
 
   async findRecord(store, type, id, snapshot) {
     const rpc = this.get('rpc');
@@ -22,7 +22,7 @@ export default DS.Adapter.extend({
       balance,
       pending,
       accounts,
-    }
+    };
   },
 
   createRecord() {
