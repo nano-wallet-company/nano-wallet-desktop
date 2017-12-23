@@ -1,7 +1,7 @@
 <h1>History</h1>
 
 <p class="lead">
-  Account: {{model.id}}
+  Account: {{model.account.id}}
 </p>
 
-{{account-history wallet=model.wallet account=model history=model.history}}
+{{account-history wallet=model.wallet account=model.account history=model.history page=page perPage=perPage}}
