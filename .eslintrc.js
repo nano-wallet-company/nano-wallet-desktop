@@ -10,6 +10,7 @@ module.exports = {
   },
   plugins: [
     'babel',
+    'hbs',
     'ember',
   ],
   extends: [
@@ -29,5 +30,6 @@ module.exports = {
     'import/extensions': 'off',
     'import/no-extraneous-dependencies': 'off',
     'import/no-unresolved': 'off',
+    'hbs/check-hbs-template-literals': 'error',
   },
 };

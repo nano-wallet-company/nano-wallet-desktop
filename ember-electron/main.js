@@ -1,6 +1,6 @@
 /* eslint-env node */
 /* eslint-disable no-console */
-const { app, BrowserWindow, protocol } = require('electron');
+const { app, Menu, BrowserWindow, protocol } = require('electron');
 const { dirname, join, resolve } = require('path');
 const protocolServe = require('electron-protocol-serve');
 const log = require('electron-log');
@@ -35,6 +35,31 @@ app.on('ready', () => {
   const cmd = join(process.resourcesPath, 'app', 'ember-electron', 'resources', 'rai_node');
   const subprocess = spawn(cmd, ['--daemon']);
   subprocess.on('error', err => log.error(err));
+
+  const template = [
+    {
+      label: 'Application',
+      submenu: [
+        { label: 'About Application', selector: 'orderFrontStandardAboutPanel:' },
+        { type: 'separator' },
+        { label: 'Quit', accelerator: 'Command+Q', click() { app.quit(); } },
+      ],
+    }, {
+      label: 'Edit',
+      submenu: [
+        { label: 'Undo', accelerator: 'CmdOrCtrl+Z', selector: 'undo:' },
+        { label: 'Redo', accelerator: 'Shift+CmdOrCtrl+Z', selector: 'redo:' },
+        { type: 'separator' },
+        { label: 'Cut', accelerator: 'CmdOrCtrl+X', selector: 'cut:' },
+        { label: 'Copy', accelerator: 'CmdOrCtrl+C', selector: 'copy:' },
+        { label: 'Paste', accelerator: 'CmdOrCtrl+V', selector: 'paste:' },
+        { label: 'Select All', accelerator: 'CmdOrCtrl+A', selector: 'selectAll:' },
+      ],
+    },
+  ];
+
+  const menu = Menu.buildFromTemplate(template);
+  Menu.setApplicationMenu(menu);
 
   mainWindow = new BrowserWindow({
     width: 800,
