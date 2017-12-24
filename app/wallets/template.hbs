@@ -1,1 +1,53 @@
-{{outlet}}
+<header role="banner">
+  {{#bs-navbar type="dark" class="bg-dark" as |navbar|}}
+    <a class="navbar-brand" href="#">
+      <img src="raiblocks.png" width="30" height="30" class="d-inline-block align-top" alt="RaiBlocks">
+      RaiWallet
+    </a>
+
+    <div class="ml-auto pr-3">
+      <span class="navbar-text">
+        {{#fa-icon "signal" class=(if (is-fulfilled status) 'text-success')}}
+          {{#bs-tooltip}}
+            <ul class="m-0 list-unstyled">
+              <li><b>Status:</b> {{if (is-fulfilled status) 'Online' 'Connecting'}}</li>
+              {{#if status.count}}
+                <li><b>Block Count:</b> {{status.count}}</li>
+              {{/if}}
+              {{#if status.unchecked}}
+                <li><b>Unchecked Blocks:</b> {{status.unchecked}}</li>
+              {{/if}}
+            </ul>
+          {{/bs-tooltip}}
+        {{/fa-icon}}
+      </span>
+    </div>
+
+    {{navbar.toggle}}
+
+    {{#navbar.content}}
+      {{#navbar.nav as |nav|}}
+        {{#nav.item}}
+          {{#nav.link-to 'wallets.overview' 'foo'}}
+            Overview
+          {{/nav.link-to}}
+        {{/nav.item}}
+        {{#nav.item}}
+          {{#nav.link-to 'wallets.send' 'foo'}}
+            Send
+          {{/nav.link-to}}
+        {{/nav.item}}
+      {{/navbar.nav}}
+    {{/navbar.content}}
+  {{/bs-navbar}}
+</header>
+
+<main role="main" class="container-fluid">
+  {{bread-crumbs tagName="ol" linkable=true crumbClass="breadcrumb-item"}}
+
+  <div class="row">
+    <div class="col">
+      {{outlet}}
+    </div>
+  </div>
+</main>

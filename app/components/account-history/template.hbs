@@ -1,13 +1,12 @@
-{{page-numbers content=history currentPage=page totalPages=totalPages}}
+{{page-numbers content=content currentPage=page totalPages=totalPages}}
 
 {{#light-table table tableClassNames='table table-striped' height='auto' as |t|}}
   {{t.head}}
 
   {{#t.body canSelect=false as |body|}}
-    {{#if (is-pending history)}}
+    {{#if (is-pending content)}}
       {{#body.loader}}
-        {{fa-icon 'refresh' size=3 spin=true}}
-        <span class="sr-only">Loading...</span>
+        {{fa-icon 'refresh' size=3 spin=true ariaLabel="Loading..."}}
       {{/body.loader}}
     {{/if}}
 

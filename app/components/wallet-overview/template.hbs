@@ -6,7 +6,27 @@
   Wallet: {{wallet.id}}
 </p>
 
-{{#if wallet.accounts}}
+{{page-numbers content=content currentPage=page totalPages=totalPages}}
+
+{{#light-table table tableClassNames='table table-striped' height='auto' as |t|}}
+  {{t.head}}
+
+  {{#t.body canSelect=false as |body|}}
+    {{#if (is-pending content)}}
+      {{#body.loader}}
+        {{fa-icon 'refresh' size=3 spin=true ariaLabel="Loading..."}}
+      {{/body.loader}}
+    {{/if}}
+
+    {{#if table.isEmpty}}
+      {{#body.no-data}}
+        No accounts in wallet.
+      {{/body.no-data}}
+    {{/if}}
+  {{/t.body}}
+{{/light-table}}
+
+{{!-- {{#if wallet.accounts}}
   <table class="table table-striped table-responsive">
     <caption class="sr-only">All your accounts</caption>
     <thead>
@@ -34,7 +54,7 @@
       {{/each}}
     </tbody>
   </table>
-{{/if}}
+{{/if}} --}}
 
 {{#bs-button type="primary" icon="fa fa-plus-circle" value=wallet onClick=createAccount}}
   Create Account

@@ -6,6 +6,6 @@ export default Route.extend({
   @action
   createAccount(wallet) {
     const account = this.store.createRecord('account', { wallet });
-    return account.save();
+    return this.transitionTo('wallets.accounts', account.save());
   },
 });

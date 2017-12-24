@@ -12,6 +12,7 @@ const ACTION_ACCOUNT_LIST = 'account_list';
 const ACTION_SEND = 'send';
 const ACTION_ACCOUNT_HISTORY = 'account_history';
 const ACTION_PEERS = 'peers';
+const ACTION_BLOCK_COUNT = 'block_count';
 
 export default Service.extend({
   @service ajax: null,
@@ -70,7 +71,16 @@ export default Service.extend({
     return A(history);
   },
 
-  peers() {
-    return this.call(ACTION_PEERS);
+  async peers() {
+    const { peers } = await this.call(ACTION_PEERS);
+    if (peers === '') {
+      return {};
+    }
+
+    return peers;
+  },
+
+  blockCount() {
+    return this.call(ACTION_BLOCK_COUNT);
   },
 });

@@ -27,7 +27,6 @@ export default Component.extend(PagedMixin, {
         label: 'Account',
         valuePath: 'account',
         width: '60%',
-        cellClassNames: 'text-truncate',
         cellComponent: 'account-link',
       },
       {
