@@ -24,18 +24,19 @@ export default Component.extend(PagedMixin, {
         width: '10%',
       },
       {
-        label: 'Account',
-        valuePath: 'account',
-        width: '60%',
-        cellComponent: 'account-link',
-      },
-      {
         label: 'Amount',
         valuePath: 'amount',
+        width: '20%',
         cellClassNames: 'text-truncate',
         format(rawValue) {
           return formatAmount(rawValue);
         },
+      },
+      {
+        label: 'Account',
+        valuePath: 'account',
+        // width: '60%',
+        cellComponent: 'account-link',
       },
     ];
   },

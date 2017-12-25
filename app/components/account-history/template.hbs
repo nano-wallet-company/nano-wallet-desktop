@@ -3,7 +3,7 @@
 {{#light-table table tableClassNames='table table-striped' height='auto' as |t|}}
   {{t.head}}
 
-  {{#t.body canSelect=false as |body|}}
+  {{#t.body canSelect=false rowComponent=(component 'account-history-entry') as |body|}}
     {{#if (is-pending content)}}
       {{#body.loader}}
         {{fa-icon 'refresh' size=3 spin=true ariaLabel="Loading..."}}

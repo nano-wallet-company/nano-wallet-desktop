@@ -28,12 +28,12 @@
     {{#navbar.content}}
       {{#navbar.nav as |nav|}}
         {{#nav.item}}
-          {{#nav.link-to 'wallets.overview' 'foo'}}
+          {{#nav.link-to 'wallets.overview' model}}
             Overview
           {{/nav.link-to}}
         {{/nav.item}}
         {{#nav.item}}
-          {{#nav.link-to 'wallets.send' 'foo'}}
+          {{#nav.link-to 'wallets.send' model}}
             Send
           {{/nav.link-to}}
         {{/nav.item}}
