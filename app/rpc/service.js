@@ -4,15 +4,17 @@ import { A } from '@ember/array';
 
 import { service } from 'ember-decorators/service';
 
-const ACTION_WALLET_CREATE = 'wallet_create';
-const ACTION_ACCOUNT_CREATE = 'account_create';
-const ACTION_ACCOUNT_INFO = 'account_info';
-const ACTION_WALLET_BALANCE_TOTAL = 'wallet_balance_total';
-const ACTION_ACCOUNT_LIST = 'account_list';
-const ACTION_SEND = 'send';
-const ACTION_ACCOUNT_HISTORY = 'account_history';
-const ACTION_PEERS = 'peers';
-const ACTION_BLOCK_COUNT = 'block_count';
+export const actions = {
+  WALLET_CREATE: 'wallet_create',
+  ACCOUNT_CREATE: 'account_create',
+  ACCOUNT_INFO: 'account_info',
+  WALLET_BALANCE_TOTAL: 'wallet_balance_total',
+  ACCOUNT_LIST: 'account_list',
+  SEND: 'send',
+  ACCOUNT_HISTORY: 'account_history',
+  PEERS: 'peers',
+  BLOCK_COUNT: 'block_count',
+};
 
 export default Service.extend({
   @service ajax: null,
@@ -23,19 +25,22 @@ export default Service.extend({
   },
 
   walletCreate() {
-    return this.call(ACTION_WALLET_CREATE);
+    return this.call(actions.WALLET_CREATE);
   },
 
   accountCreate(wallet) {
-    return this.call(ACTION_ACCOUNT_CREATE, { wallet });
+    return this.call(actions.ACCOUNT_CREATE, { wallet });
   },
 
   async accountInfo(account, pending = true) {
-    let info = await this.call(ACTION_ACCOUNT_INFO, { account, pending });
+    let info = await this.call(actions.ACCOUNT_INFO, {
+      account,
+      pending,
+    });
 
-    // When an account has no transactions, the RPC seems to return an
-    // HTTP OK *and* an error.
-    if (info.error === 'Account not found') {
+    // When an account has no transactions, the RPC replies with an
+    // HTTP 200 OK *and* an error.
+    if (info && info.error === 'Account not found') {
       info = { account, balance: '0' };
       if (pending) {
         info.pending = '0';
@@ -46,15 +51,15 @@ export default Service.extend({
   },
 
   walletBalanceTotal(wallet) {
-    return this.call(ACTION_WALLET_BALANCE_TOTAL, { wallet });
+    return this.call(actions.WALLET_BALANCE_TOTAL, { wallet });
   },
 
   accountList(wallet) {
-    return this.call(ACTION_ACCOUNT_LIST, { wallet });
+    return this.call(actions.ACCOUNT_LIST, { wallet });
   },
 
   send(wallet, source, destination, amount) {
-    return this.call(ACTION_SEND, {
+    return this.call(actions.SEND, {
       wallet,
       source,
       destination,
@@ -63,7 +68,7 @@ export default Service.extend({
   },
 
   async accountHistory(account, count = 1) {
-    const { history } = await this.call(ACTION_ACCOUNT_HISTORY, {
+    const { history } = await this.call(actions.ACCOUNT_HISTORY, {
       account,
       count,
     });
@@ -72,15 +77,20 @@ export default Service.extend({
   },
 
   async peers() {
-    const { peers } = await this.call(ACTION_PEERS);
-    if (peers === '') {
-      return {};
+    const { peers } = await this.call(actions.PEERS);
+
+    // When there are no peers, the RPC replies with an empty string.
+    if (!peers) {
+      return Object.create(null);
     }
 
-    return peers;
+    return Object.entries(peers).reduce((acc, [key, value]) => {
+      acc[key] = parseInt(value, 10);
+      return acc;
+    }, Object.create(null));
   },
 
   blockCount() {
-    return this.call(ACTION_BLOCK_COUNT);
+    return this.call(actions.BLOCK_COUNT);
   },
 });
