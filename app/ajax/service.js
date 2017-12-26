@@ -30,8 +30,8 @@ export default AjaxService.extend({
 
   request(...args) {
     const originalFn = this._super;
-    return retryWithBackoff(() => {
+    return retryWithBackoff(() => { // eslint-disable-line arrow-body-style
       return this.get('requestTask').perform(originalFn, ...args);
-    }, 5, 500);
+    }, 10, 250);
   },
 });
