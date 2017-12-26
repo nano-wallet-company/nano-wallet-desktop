@@ -24,10 +24,10 @@
     "electron-squirrel-startup": "^1.0.0"
   },
   "devDependencies": {
+    "@ember-decorators/babel-transforms": "^0.1.1",
     "android-versions": "^1.2.1",
     "babel-eslint": "^8.1.2",
     "babel-plugin-transform-async-to-generator": "^6.24.1",
-    "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "big-integer": "^1.6.26",
@@ -67,6 +67,8 @@
     "ember-cli-template-lint": "^0.7.5",
     "ember-cli-uglify": "^2.0.0",
     "ember-composable-helpers": "^2.0.3",
+    "ember-concurrency": "^0.8.12",
+    "ember-concurrency-decorators": "0.0.2",
     "ember-crumbly": "^1.0.8",
     "ember-data": "^2.17.0",
     "ember-decorators": "^1.3.2",
