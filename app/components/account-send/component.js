@@ -10,9 +10,13 @@ import lookupValidator from 'ember-changeset-validations';
 import BigNumber from 'npm:bignumber.js';
 
 import SendValidations from '../../validations/send';
+import ChangeAmountValidations from '../../validations/change-amount';
 import { prefixes } from '../../utils/format-amount';
 
 export default Component.extend({
+  SendValidations,
+  ChangeAmountValidations,
+
   accounts: null,
   block: null,
 
@@ -26,15 +30,17 @@ export default Component.extend({
   },
 
   @action
-  updateAmount(value, changeset) {
-    if (!value) {
+  async changeAmount(amount, changeset) {
+    set(changeset, 'amount', amount);
+    await changeset.validate();
+    if (changeset.get('isInvalid')) {
       return false;
     }
 
     const multiplier = prefixes.Mxrb;
-    const multiplicand = BigNumber(value).times(multiplier);
+    const multiplicand = BigNumber(amount).times(multiplier);
     const raw = multiplicand.toFixed(0);
-    set(changeset, 'amount', raw);
+    this.get('changeset').set('amount', raw);
     return false;
   },
 });
