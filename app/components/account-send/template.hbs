@@ -7,7 +7,7 @@
 
   {{form.element class="form-control-lg" controlType="text" label="Destination Account" property="destination" placeholder="e.g. xrb_3e3j5tkog48pnny9dmfzj1r16pg8t1e76dz5tmac6iq689wyjfpiij4txtdo"}}
 
-  {{form.element class="form-control-lg" static=true controlType="number" label="Amount (XRB)" property="amount"}}
+  {{form.element class="form-control-lg" static=true controlType="number" label="Amount (XRB)" value=amount onChange=(action 'updateAmount')}}
 
   <div role="group" class="d-flex justify-content-center">
     {{#bs-button size="lg" type="primary" icon="fa fa-paper-plane" buttonType="submit"}}
