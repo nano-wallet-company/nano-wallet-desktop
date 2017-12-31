@@ -1,24 +1,26 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { expect } from 'chai';
+import { it, describe } from 'mocha';
+import { setupComponentTest } from 'ember-mocha';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('account-link', 'Integration | Component | account link', {
-  integration: true,
-});
+describe('Integration | Component | account link', () => {
+  setupComponentTest('account-link', {
+    integration: true,
+  });
 
-test('it renders', function (assert) {
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
+  it('renders', function () {
+    // Set any properties with this.set('myProperty', 'value');
+    // Handle any actions with this.on('myAction', function(val) { ... });
+    // Template block usage:
+    // this.render(hbs`
+    //   {{#account-link}}
+    //     template content
+    //   {{/account-link}}
+    // `);
 
-  this.render(hbs`{{account-link}}`);
-
-  assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:
-  this.render(hbs`
-    {{#account-link}}
-      template block text
-    {{/account-link}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
+    const value = '1';
+    this.set('value', value);
+    this.render(hbs`{{account-link value=value}}`);
+    expect(this.$()).to.have.length(1);
+  });
 });

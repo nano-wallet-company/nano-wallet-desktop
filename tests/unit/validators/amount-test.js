@@ -1,11 +1,11 @@
 import { expect } from 'chai';
 import { describe, it } from 'mocha';
-import validateAccount from 'raiwallet/validators/account';
+import validateAmount from 'raiwallet/validators/amount';
 
-describe('Unit | Validator | account', () => {
+describe('Unit | Validator | amount', () => {
   // Replace this with your real tests.
   it('exists', () => {
-    const result = validateAccount();
+    const result = validateAmount();
     expect(result).to.be.ok;
   });
 });

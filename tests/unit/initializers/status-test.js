@@ -1,26 +1,29 @@
-import Application from '@ember/application';
+import { expect } from 'chai';
+import { describe, it, beforeEach, afterEach } from 'mocha';
 import { run } from '@ember/runloop';
-
+import Application from '@ember/application';
 import { initialize } from 'raiwallet/initializers/status';
-import { module, test } from 'qunit';
 import destroyApp from '../../helpers/destroy-app';
 
-module('Unit | Initializer | status', {
-  beforeEach() {
+describe('Unit | Initializer | status', () => {
+  let application;
+
+  beforeEach(() => {
     run(() => {
-      this.application = Application.create();
-      this.application.deferReadiness();
+      application = Application.create();
+      application.deferReadiness();
     });
-  },
-  afterEach() {
-    destroyApp(this.application);
-  },
-});
+  });
 
-// Replace this with your real tests.
-test('it works', function (assert) {
-  initialize(this.application);
+  afterEach(() => {
+    destroyApp(application);
+  });
 
-  // you would normally confirm the results of the initializer here
-  assert.ok(true);
+  // Replace this with your real tests.
+  it('works', () => {
+    initialize(application);
+
+    // you would normally confirm the results of the initializer here
+    expect(true).to.be.ok;
+  });
 });

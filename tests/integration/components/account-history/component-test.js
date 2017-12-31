@@ -1,24 +1,58 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { expect } from 'chai';
+import { it, describe } from 'mocha';
+import { setupComponentTest } from 'ember-mocha';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('account-history', 'Integration | Component | account history', {
-  integration: true,
-});
+describe('Integration | Component | account history', () => {
+  setupComponentTest('account-history', {
+    integration: true,
+  });
 
-test('it renders', function (assert) {
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
+  it('renders', function () {
+    // Set any properties with this.set('myProperty', 'value');
+    // Handle any actions with this.on('myAction', function(val) { ... });
+    // Template block usage:
+    // this.render(hbs`
+    //   {{#account-history}}
+    //     template content
+    //   {{/account-history}}
+    // `);
 
-  this.render(hbs`{{account-history}}`);
+    const wallet = {
+      id: '1',
+      balance: '1000000000000000000000000000000',
+      accounts: ['1'],
+    };
 
-  assert.equal(this.$().text().trim(), '');
+    const account = {
+      id: '1',
+      wallet: '1',
+      balance: '1000000000000000000000000000000',
+      pending: '0',
+    };
 
-  // Template block usage:
-  this.render(hbs`
-    {{#account-history}}
-      template block text
-    {{/account-history}}
-  `);
+    const history = [
+      {
+        id: '1',
+        type: 'receive',
+        amount: '1000000000000000000000000000000',
+        source: '1',
+        account: '2',
+      },
+    ];
 
-  assert.equal(this.$().text().trim(), 'template block text');
+    const page = 1;
+    const perPage = 10;
+
+    this.setProperties({
+      wallet,
+      account,
+      history,
+      page,
+      perPage,
+    });
+
+    this.render(hbs`{{account-history wallet=wallet account=account history=history page=page perPage=perPage}}`);
+    expect(this.$()).to.have.length(1);
+  });
 });

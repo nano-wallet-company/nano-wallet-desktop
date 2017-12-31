@@ -1,15 +1,25 @@
-import { moduleForModel, test } from 'ember-qunit';
+import { expect } from 'chai';
+import { describe, it } from 'mocha';
+import { setupModelTest } from 'ember-mocha';
 
-moduleForModel('account', 'Unit | Serializer | account', {
-  // Specify the other units that are required for this test.
-  needs: ['serializer:account', 'transform:big-number', 'model:wallet', 'model:block'],
-});
+describe('Unit | Serializer | account', () => {
+  setupModelTest('account', {
+    // Specify the other units that are required for this test.
+    needs: [
+      'serializer:account',
+      'transform:big-number',
+      'model:wallet',
+      'model:block',
+      'model:history',
+    ],
+  });
 
-// Replace this with your real tests.
-test('it serializes records', function (assert) {
-  const record = this.subject();
+  // Replace this with your real tests.
+  it('serializes records', function () {
+    const record = this.subject();
 
-  const serializedRecord = record.serialize();
+    const serializedRecord = record.serialize();
 
-  assert.ok(serializedRecord);
+    expect(serializedRecord).to.be.ok;
+  });
 });

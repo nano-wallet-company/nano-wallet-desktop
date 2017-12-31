@@ -1,12 +1,17 @@
-import { moduleForModel, test } from 'ember-qunit';
+import { expect } from 'chai';
+import { describe, it } from 'mocha';
+import { setupModelTest } from 'ember-mocha';
 
-moduleForModel('block', 'Unit | Model | block', {
-  // Specify the other units that are required for this test.
-  needs: ['transform:big-number'],
-});
+describe('Unit | Model | block', () => {
+  setupModelTest('block', {
+    // Specify the other units that are required for this test.
+    needs: [],
+  });
 
-test('it exists', function (assert) {
-  const model = this.subject();
-  // let store = this.store();
-  assert.ok(!!model);
+  // Replace this with your real tests.
+  it('exists', function () {
+    const model = this.subject();
+    // var store = this.store();
+    expect(model).to.be.ok;
+  });
 });

@@ -1,20 +1,51 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { expect } from 'chai';
+import { it, describe } from 'mocha';
+import { setupComponentTest } from 'ember-mocha';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('account-send', 'Integration | Component | account send', {
-  integration: true,
-});
+describe('Integration | Component | account send', () => {
+  setupComponentTest('account-send', {
+    integration: true,
+  });
 
-test('it renders', function (assert) {
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
+  it('renders', function () {
+    // Set any properties with this.set('myProperty', 'value');
+    // Handle any actions with this.on('myAction', function(val) { ... });
+    // Template block usage:
+    // this.render(hbs`
+    //   {{#account-send}}
+    //     template content
+    //   {{/account-send}}
+    // `);
 
-  this.set('accounts', [
-    { id: 'xrb_19ttre8s3pbixnkii6pzhhx9ur9nwwhm89y39pnk71wocxopajsuwj1bgqkq' },
-    { id: 'xrb_1d69neepcu4mpop7yxqus14foqaqt57zr96ps6f1o94nsuhjdxpfs43aazdh' },
-  ]);
+    const accounts = [
+      {
+        id: '1',
+        wallet: '1',
+        balance: '1000000000000000000000000000000',
+        pending: '0',
+      },
+    ];
 
-  this.render(hbs`{{account-send accounts=accounts}}`);
+    const block = {
+      id: '1',
+      wallet: '1',
+      source: '1',
+      destination: '2',
+      amount: '1000000000000000000000000000000',
+    };
 
-  assert.ok(this.$().html().includes('xrb_'));
+    const onChange = () => false;
+    const onSubmit = () => false;
+
+    this.setProperties({
+      accounts,
+      block,
+      onChange,
+      onSubmit,
+    });
+
+    this.render(hbs`{{account-send accounts=accounts block=block onChange=onChange onSubmit=onSubmit}}`);
+    expect(this.$()).to.have.length(1);
+  });
 });

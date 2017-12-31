@@ -1,24 +1,31 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { expect } from 'chai';
+import { it, describe } from 'mocha';
+import { setupComponentTest } from 'ember-mocha';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('account-history-entry', 'Integration | Component | account history entry', {
-  integration: true,
-});
+describe('Integration | Component | account history entry', () => {
+  setupComponentTest('account-history-entry', {
+    integration: true,
+  });
 
-test('it renders', function (assert) {
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
+  it('renders', function () {
+    // Set any properties with this.set('myProperty', 'value');
+    // Handle any actions with this.on('myAction', function(val) { ... });
+    // Template block usage:
+    // this.render(hbs`
+    //   {{#account-history-entry}}
+    //     template content
+    //   {{/account-history-entry}}
+    // `);
 
-  this.render(hbs`{{account-history-entry}}`);
+    const row = {
+      content: {
+        type: 'receive',
+      },
+    };
 
-  assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:
-  this.render(hbs`
-    {{#account-history-entry}}
-      template block text
-    {{/account-history-entry}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
+    this.set('row', row);
+    this.render(hbs`{{account-history-entry row=row}}`);
+    expect(this.$()).to.have.length(1);
+  });
 });

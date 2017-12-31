@@ -1,10 +1,11 @@
+import { expect } from 'chai';
+import { describe, it } from 'mocha';
 import fromRaw from 'raiwallet/utils/from-raw';
-import { module, test } from 'qunit';
 
-module('Unit | Utility | from raw');
-
-// Replace this with your real tests.
-test('it works', (assert) => {
-  const result = fromRaw();
-  assert.ok(result);
+describe('Unit | Utility | from raw', () => {
+  // Replace this with your real tests.
+  it('works', () => {
+    const result = fromRaw('1000000000000000000000000000000');
+    expect(result).to.be.ok;
+  });
 });

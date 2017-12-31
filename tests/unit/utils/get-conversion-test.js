@@ -1,10 +1,11 @@
+import { expect } from 'chai';
+import { describe, it } from 'mocha';
 import getConversion from 'raiwallet/utils/get-conversion';
-import { module, test } from 'qunit';
 
-module('Unit | Utility | conversion');
-
-// Replace this with your real tests.
-test('it works', (assert) => {
-  const result = getConversion();
-  assert.ok(result);
+describe('Unit | Utility | get conversion', () => {
+  // Replace this with your real tests.
+  it('works', () => {
+    const result = getConversion('Mxrb');
+    expect(result).to.be.ok;
+  });
 });

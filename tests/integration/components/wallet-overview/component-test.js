@@ -1,24 +1,52 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { expect } from 'chai';
+import { it, describe } from 'mocha';
+import { setupComponentTest } from 'ember-mocha';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('wallet-overview', 'Integration | Component | wallet overview', {
-  integration: true,
-});
-
-test('it renders', function (assert) {
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
-
-  this.set('wallet', {
-    balance: '1000',
-    pending: '0',
-    accounts: [
-      { id: 'xrb_19ttre8s3pbixnkii6pzhhx9ur9nwwhm89y39pnk71wocxopajsuwj1bgqkq', balance: '1000', pending: '0' },
-      { id: 'xrb_1d69neepcu4mpop7yxqus14foqaqt57zr96ps6f1o94nsuhjdxpfs43aazdh', balance: '0', pending: '0' },
-    ],
+describe('Integration | Component | wallet overview', () => {
+  setupComponentTest('wallet-overview', {
+    integration: true,
   });
 
-  this.render(hbs`{{wallet-overview wallet=wallet}}`);
+  it('renders', function () {
+    // Set any properties with this.set('myProperty', 'value');
+    // Handle any actions with this.on('myAction', function(val) { ... });
+    // Template block usage:
+    // this.render(hbs`
+    //   {{#wallet-overview}}
+    //     template content
+    //   {{/wallet-overview}}
+    // `);
 
-  assert.ok(this.$().html().includes('xrb_'));
+    const wallet = {
+      id: '1',
+      balance: '1000000000000000000000000000000',
+      accounts: ['1'],
+    };
+
+    const accounts = [
+      {
+        id: '1',
+        wallet: '1',
+        balance: '1000000000000000000000000000000',
+        pending: '0',
+      },
+    ];
+
+    const page = 1;
+    const perPage = 10;
+
+    const createAccount = () => false;
+
+    this.setProperties({
+      wallet,
+      accounts,
+      page,
+      perPage,
+      createAccount,
+    });
+
+    this.render(hbs`{{wallet-overview wallet=wallet accounts=accounts page=page perPage=perPage createAccount=createAccount}}`);
+    expect(this.$()).to.have.length(1);
+  });
 });

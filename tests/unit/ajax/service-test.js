@@ -1,13 +1,16 @@
-import { moduleFor, test } from 'ember-qunit';
+import { expect } from 'chai';
+import { it, describe } from 'mocha';
+import { setupTest } from 'ember-mocha';
 
-moduleFor('service:ajax', 'Unit | Service | ajax', {
-  // Specify the other units that are required for this test.
-  // needs: ['service:foo']
-  needs: ['service:hostManager'],
-});
+describe('Unit | Service | ajax', () => {
+  setupTest('service:ajax', {
+    // Specify the other units that are required for this test.
+    needs: ['service:hostManager'],
+  });
 
-// Replace this with your real tests.
-test('it exists', function (assert) {
-  const service = this.subject();
-  assert.ok(service);
+  // Replace this with your real tests.
+  it('exists', function () {
+    const service = this.subject();
+    expect(service).to.be.ok;
+  });
 });
