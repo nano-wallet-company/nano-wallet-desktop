@@ -79,6 +79,7 @@
     "ember-export-application-global": "^2.0.0",
     "ember-font-awesome": "^4.0.0-rc.2",
     "ember-host-manager": "^0.1.1",
+    "ember-intl": "^2.31.1",
     "ember-light-table": "^1.12.2",
     "ember-load-initializers": "^1.0.0",
     "ember-local-storage": "^1.4.1",

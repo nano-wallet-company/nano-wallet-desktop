@@ -1,5 +1,5 @@
 import Route from '@ember/routing/route';
-import { set } from '@ember/object';
+import { get, set } from '@ember/object';
 
 import { action } from 'ember-decorators/object';
 import { service } from 'ember-decorators/service';
@@ -39,6 +39,18 @@ export default Route.extend({
 
   @action
   done(wallet) {
+    const controller = this.controllerFor(this.routeName);
+    const needsConfirm = get(controller, 'needsConfirm');
+    if (needsConfirm) {
+      controller.toggleProperty('hasConfirmed');
+    }
+
+    const hasConfirmed = get(controller, 'hasConfirmed');
+    if (!hasConfirmed) {
+      controller.toggleProperty('needsConfirm');
+      return false;
+    }
+
     return this.transitionTo('wallets', wallet.save());
   },
 });

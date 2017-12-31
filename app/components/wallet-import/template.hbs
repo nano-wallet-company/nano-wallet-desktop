@@ -1,3 +1,22 @@
-{{#bs-form model=(changeset (hash seed=seed) ImportWalletValidations) onSubmit=(action onSubmit wallet) as |form|}}
-  {{form.element class="form-control-lg" controlType="text" label="Seed" property="seed" autocomplete='off' minlength=64 maxlength=64 required=true pattern="^[a-fA-F0-9]{64}$"}}
+{{#bs-form model=(changeset (hash type=type seed=seed mnemonic=mnemonic) ImportWalletValidations) onSubmit=(action (queue (action 'convertMnemonic') (action onSubmit)) wallet) as |form|}}
+  {{#form.group}}
+    {{#bs-button-group type="radio" value=type onChange=(action (mut type)) as |bg|}}
+      {{#bg.button type="secondary" value='seed'}}{{t 'seed'}}{{/bg.button}}
+      {{#bg.button type="secondary" value='mnemonic'}}{{t 'mnemonic'}}{{/bg.button}}
+    {{/bs-button-group}}
+  {{/form.group}}
+
+  {{#form.group}}
+    {{#if (eq type 'seed')}}
+      {{form.element size='lg' controlType="text" property="seed" autocomplete='off' minlength=64 maxlength=64 required=true pattern="^[a-fA-F0-9]{64}$"}}
+      <small class="form-text text-muted">Your wallet's 64 character hex seed.</small>
+    {{/if}}
+
+    {{#if (eq type 'mnemonic')}}
+      {{#form.element rows=4 controlType="textarea" property="mnemonic" autocomplete='off' required=true as |el|}}
+        {{el.control class="text-monospace"}}
+      {{/form.element}}
+      <small class="form-text text-muted">Your wallet's easy to remember seed mnemonic.</small>
+    {{/if}}
+  {{/form.group}}
 {{/bs-form}}

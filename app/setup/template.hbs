@@ -5,14 +5,14 @@
     <h1 class="display-3">
       <img class="img-fluid w-50" src="Cairn-light.svg" alt="Cairn">
     </h1>
-    <p class="lead">Let's get your wallet setup.</p>
+    <p class="lead">{{t 'setup.index.lead'}}</p>
     <hr class="my-4">
-    <p>To begin using Cairn, you must first create a new wallet or import your wallet data using a seed.</p>
+    <p>{{t 'setup.index.instructions'}}</p>
     {{#bs-button type="primary" block=true onClick=(route-action 'createWallet') }}
-      Create New Wallet
+      {{t 'setup.index.create'}}
     {{/bs-button}}
     {{#bs-button type="secondary" block=true onClick=(route-action 'importWallet')}}
-      Import Wallet
+      {{t 'setup.index.import'}}
     {{/bs-button}}
   </div>
 </div>

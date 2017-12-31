@@ -1,32 +1,37 @@
 {{#bs-modal onHide=(route-action 'cancel') onSubmit=(route-action 'done' model.wallet) as |modal|}}
   {{#modal.header}}
-    <h4 class="modal-title">Backup Seed</h4>
+    <h4 class="modal-title">{{t 'setup.backup.title'}}</h4>
   {{/modal.header}}
   {{#modal.body}}
     {{#each flashMessages.arrangedQueue as |flash|}}
       {{flash-message class="d-flex w-100" flash=flash}}
     {{/each}}
-    <p class="lead">This is your easy to remember seed mnemonic for your new wallet:</p>
+    <p class="lead">{{t 'setup.backup.lead'}}</p>
     <p><code>{{model.mnemonic}}</code></p>
     <p>
       {{#copy-button class="btn btn-sm btn-outline-danger" clipboardText=model.wallet.seed success=(route-action 'copySeed')}}
-        {{fa-icon 'copy'}} Copy Seed
+        {{fa-icon 'copy'}} {{t 'setup.backup.copy'}}
       {{/copy-button}}
-      {{#bs-button class="ml-1 btn-sm btn-outline-danger" onClick=(route-action 'downloadMnemonic' model.mnemonic)}}
-        {{fa-icon 'download'}} Download Mnemonic
+      {{#bs-button size='sm' type='outline-primary' class="ml-1" onClick=(route-action 'downloadMnemonic' model.mnemonic)}}
+        {{fa-icon 'download'}} {{t 'setup.backup.download'}}
       {{/bs-button}}
     </p>
-    <p class="text-muted">
-      It's best practice to physically write your seed mnemonic on a piece of paper and store it in a secure location for safe retrieval should you later lose your seed.
-    </p>
+    <small class="text-muted">{{t 'setup.backup.help'}}</small>
   {{/modal.body}}
   {{#modal.footer}}
     {{#bs-button onClick=(action modal.close) type="secondary"}}
-      Cancel
+      {{t 'cancel'}}
     {{/bs-button}}
     {{#bs-button onClick=(action modal.submit) type="primary"}}
-      {{fa-icon 'check'}}
-      Done
+      {{#bs-popover triggerElement="parentView"}}
+        {{t 'setup.backup.confirm'}}
+      {{/bs-popover}}
+      {{#if needsConfirm}}
+        {{fa-icon 'question-circle-o'}}
+      {{else}}
+        {{fa-icon 'check'}}
+      {{/if}}
+      {{t 'done'}}
     {{/bs-button}}
   {{/modal.footer}}
 {{/bs-modal}}

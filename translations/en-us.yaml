@@ -1,0 +1,20 @@
+cancel: 'Cancel'
+done: 'Done'
+import: 'Import'
+seed: 'Seed'
+mnemonic: 'Mnemonic'
+setup:
+  index:
+    lead: "Let's get your wallet setup."
+    instructions: 'To begin using Cairn, you must first create a new wallet or import your wallet data using a seed.'
+    create: 'Create New Wallet'
+    import: 'Import Wallet'
+  backup:
+    title: 'Backup Seed'
+    lead: "Here's your easy to remember seed mnemonic for your new wallet:"
+    copy: 'Copy Raw Seed'
+    download: 'Download Mnemonic'
+    help: "Adhere to best practices by physically writing your seed mnemonic on a piece of paper and storing it in a secure location for safe retrieval should you later lose your seed."
+    confirm: "Are you sure you've written down your mnemonic?"
+  import:
+    title: 'Import Wallet'
