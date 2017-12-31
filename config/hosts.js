@@ -1,5 +1,6 @@
 /* eslint-env node */
 
+// eslint-disable-next-line arrow-body-style
 module.exports = (/* environment */) => {
   return {
     /*
