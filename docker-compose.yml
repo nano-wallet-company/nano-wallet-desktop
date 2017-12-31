@@ -1,0 +1,15 @@
+version: '3'
+services:
+  app:
+    build: .
+    ports:
+      - 4200:4200
+      - 7020:7020
+      - 7357:7357
+      - 9222:9222
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/dist
+      - /app/tmp
+    env_file: .env
