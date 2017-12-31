@@ -87,16 +87,16 @@ app.on('ready', () => {
   });
 
   mainWindow.webContents.on('crashed', () => {
-    console.log('Your Ember app (or other code) in the main window has crashed.');
-    console.log('This is a serious issue that needs to be handled and/or debugged.');
+    log.error('Your Ember app (or other code) in the main window has crashed.');
+    log.error('This is a serious issue that needs to be handled and/or debugged.');
   });
 
   mainWindow.on('unresponsive', () => {
-    console.log('Your Ember app (or other code) has made the window unresponsive.');
+    log.warn('Your Ember app (or other code) has made the window unresponsive.');
   });
 
   mainWindow.on('responsive', () => {
-    console.log('The main window has become responsive again.');
+    log.info('The main window has become responsive again.');
   });
 
   mainWindow.on('closed', () => {
@@ -121,7 +121,7 @@ app.on('ready', () => {
 // resources (e.g. file descriptors, handles, etc) before shutting down the process. It is
 // not safe to resume normal operation after 'uncaughtException'.
 process.on('uncaughtException', (err) => {
-  console.log('An exception in the main thread was not handled.');
-  console.log('This is a serious issue that needs to be handled and/or debugged.');
-  console.log(`Exception: ${err}`);
+  log.error('An exception in the main thread was not handled.');
+  log.error('This is a serious issue that needs to be handled and/or debugged.');
+  log.error(`Exception: ${err}`);
 });

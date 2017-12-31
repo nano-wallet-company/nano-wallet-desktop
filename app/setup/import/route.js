@@ -1,12 +1,9 @@
 import Route from '@ember/routing/route';
-import { get } from '@ember/object';
+import { get, set } from '@ember/object';
 
-import { service } from 'ember-decorators/service';
 import { action } from 'ember-decorators/object';
 
 export default Route.extend({
-  @service rpc: null,
-
   model() {
     return this.store.createRecord('wallet');
   },
@@ -18,10 +15,9 @@ export default Route.extend({
 
   @action
   changeSeed(wallet, changeset) {
-    const rpc = this.get('rpc');
     const seed = get(changeset, 'seed');
-    const model = rpc.walletChangeSeed(get(wallet, 'id'), seed).then(() => wallet);
-    return this.transitionTo('wallets', model);
+    set(wallet, 'seed', seed);
+    return this.transitionTo('wallets', wallet.save());
   },
 
   @action

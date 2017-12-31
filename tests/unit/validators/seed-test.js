@@ -1,8 +1,11 @@
-import { module, test } from 'qunit';
+import { expect } from 'chai';
+import { describe, it } from 'mocha';
 import validateSeed from 'cairn/validators/seed';
 
-module('Unit | Validator | seed');
-
-test('it exists', (assert) => {
-  assert.ok(validateSeed());
+describe('Unit | Validator | seed', () => {
+  // Replace this with your real tests.
+  it('exists', () => {
+    const result = validateSeed();
+    expect(result).to.be.ok;
+  });
 });

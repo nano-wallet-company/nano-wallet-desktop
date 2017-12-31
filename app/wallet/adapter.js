@@ -28,4 +28,10 @@ export default DS.Adapter.extend({
   createRecord() {
     return this.get('rpc').walletCreate();
   },
+
+  async updateRecord(store, type, snapshot) {
+    const rpc = this.get('rpc');
+    const { wallet, seed } = this.serialize(snapshot, { includeId: true });
+    await rpc.walletChangeSeed(wallet, seed);
+  },
 });

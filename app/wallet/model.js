@@ -7,4 +7,5 @@ export default DS.Model.extend({
 
   @attr('big-number') balance: null,
   @attr('big-number') pending: null,
+  @attr seed: null,
 });
