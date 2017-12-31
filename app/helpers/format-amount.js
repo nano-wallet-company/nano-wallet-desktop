@@ -1,9 +1,9 @@
 import { helper } from '@ember/component/helper';
 
-import formatAmountUtil from '../utils/format-amount';
+import fromRaw from '../utils/from-raw';
 
-export function formatAmount([value], hash) {
-  return formatAmountUtil(value, hash);
+export function formatAmount([value = 0], hash) {
+  return fromRaw(value, hash);
 }
 
 export default helper(formatAmount);

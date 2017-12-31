@@ -7,11 +7,9 @@ import { on } from 'ember-decorators/object/evented';
 import Changeset from 'ember-changeset';
 import lookupValidator from 'ember-changeset-validations';
 
-import BigNumber from 'npm:bignumber.js';
-
 import SendValidations from '../../validations/send';
 import ChangeAmountValidations from '../../validations/change-amount';
-import { prefixes } from '../../utils/format-amount';
+import toRaw from '../../utils/to-raw';
 
 export default Component.extend({
   SendValidations,
@@ -37,9 +35,7 @@ export default Component.extend({
       return false;
     }
 
-    const multiplier = prefixes.Mxrb;
-    const multiplicand = BigNumber(amount).times(multiplier);
-    const raw = multiplicand.toFixed(0);
+    const raw = toRaw(amount);
     this.get('changeset').set('amount', raw);
     return false;
   },

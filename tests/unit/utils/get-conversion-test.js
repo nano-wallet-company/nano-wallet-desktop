@@ -1,10 +1,10 @@
-import formatAmount from 'raiwallet/utils/format-amount';
+import getConversion from 'raiwallet/utils/get-conversion';
 import { module, test } from 'qunit';
 
-module('Unit | Utility | format amount');
+module('Unit | Utility | conversion');
 
 // Replace this with your real tests.
 test('it works', (assert) => {
-  const result = formatAmount();
+  const result = getConversion();
   assert.ok(result);
 });

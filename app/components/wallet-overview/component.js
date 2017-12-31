@@ -6,7 +6,7 @@ import { computed } from 'ember-decorators/object';
 import Table from 'ember-light-table';
 
 import PagedMixin from '../../mixins/paged';
-import formatAmount from '../../utils/format-amount';
+import fromRaw from '../../utils/from-raw';
 
 export default Component.extend(PagedMixin, {
   wallet: null,
@@ -30,7 +30,7 @@ export default Component.extend(PagedMixin, {
         width: '20%',
         cellClassNames: 'text-truncate',
         format(rawValue) {
-          return formatAmount(rawValue);
+          return fromRaw(rawValue);
         },
       },
       {
@@ -38,7 +38,7 @@ export default Component.extend(PagedMixin, {
         valuePath: 'pending',
         cellClassNames: 'text-truncate',
         format(rawValue) {
-          return formatAmount(rawValue);
+          return fromRaw(rawValue);
         },
       },
     ];

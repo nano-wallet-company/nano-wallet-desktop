@@ -28,6 +28,7 @@ export default Route.extend({
   @action
   async sendAmount(changeset) {
     await changeset.save();
-    return this.transitionTo('wallets.accounts');
+    const account = this.modelFor('wallets.accounts');
+    return this.transitionTo('wallets.accounts', account.reload());
   },
 });
