@@ -26,7 +26,7 @@ export default AjaxService.extend({
     } finally {
       promise.xhr.abort();
     }
-  }).enqueue().maxConcurrency(5),
+  }).enqueue().maxConcurrency(10),
 
   request(...args) {
     const originalFn = this._super;

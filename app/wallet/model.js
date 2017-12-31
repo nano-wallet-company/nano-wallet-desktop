@@ -6,4 +6,5 @@ export default DS.Model.extend({
   @hasMany('account', { async: true }) accounts: null,
 
   @attr('big-number') balance: null,
+  @attr('big-number') pending: null,
 });

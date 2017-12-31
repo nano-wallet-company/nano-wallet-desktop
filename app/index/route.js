@@ -12,7 +12,6 @@ export default Route.extend({
     if (!wallet) {
       transaction.abort();
       wallet = await this.store.createRecord('wallet').save();
-      settings.setProperties(this.store.serialize(wallet, { includeId: true }));
       return this.transitionTo('wallets', wallet);
     }
 

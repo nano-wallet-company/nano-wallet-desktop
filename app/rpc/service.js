@@ -6,12 +6,13 @@ import { service } from 'ember-decorators/service';
 
 export const actions = {
   WALLET_CREATE: 'wallet_create',
+  WALLET_BALANCE_TOTAL: 'wallet_balance_total',
+  WALLET_CHANGE_SEED: 'wallet_change_seed',
   ACCOUNT_CREATE: 'account_create',
   ACCOUNT_INFO: 'account_info',
-  WALLET_BALANCE_TOTAL: 'wallet_balance_total',
   ACCOUNT_LIST: 'account_list',
-  SEND: 'send',
   ACCOUNT_HISTORY: 'account_history',
+  SEND: 'send',
   PEERS: 'peers',
   BLOCK_COUNT: 'block_count',
 };
@@ -26,6 +27,15 @@ export default Service.extend({
 
   walletCreate() {
     return this.call(actions.WALLET_CREATE);
+  },
+
+  walletBalanceTotal(wallet) {
+    return this.call(actions.WALLET_BALANCE_TOTAL, { wallet });
+  },
+
+  async walletChangeSeed() {
+    const { success } = this.call(actions.WALLET_CHANGE_SEED);
+    return success === '';
   },
 
   accountCreate(wallet) {
@@ -50,21 +60,8 @@ export default Service.extend({
     return info;
   },
 
-  walletBalanceTotal(wallet) {
-    return this.call(actions.WALLET_BALANCE_TOTAL, { wallet });
-  },
-
   accountList(wallet) {
     return this.call(actions.ACCOUNT_LIST, { wallet });
-  },
-
-  send(wallet, source, destination, amount) {
-    return this.call(actions.SEND, {
-      wallet,
-      source,
-      destination,
-      amount,
-    });
   },
 
   async accountHistory(account, count = 1) {
@@ -76,18 +73,19 @@ export default Service.extend({
     return A(history);
   },
 
+  send(wallet, source, destination, amount) {
+    return this.call(actions.SEND, {
+      wallet,
+      source,
+      destination,
+      amount,
+    });
+  },
+
   async peers() {
-    const { peers } = await this.call(actions.PEERS);
-
     // When there are no peers, the RPC replies with an empty string.
-    if (!peers) {
-      return Object.create(null);
-    }
-
-    return Object.entries(peers).reduce((acc, [key, value]) => {
-      acc[key] = parseInt(value, 10);
-      return acc;
-    }, Object.create(null));
+    const { peers } = await this.call(actions.PEERS);
+    return peers || {};
   },
 
   blockCount() {
