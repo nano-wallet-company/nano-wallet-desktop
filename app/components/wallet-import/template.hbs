@@ -1,0 +1,3 @@
+{{#bs-form model=(changeset (hash seed=seed) ImportWalletValidations) onSubmit=(action onSubmit wallet) as |form|}}
+  {{form.element class="form-control-lg" controlType="text" label="Seed" property="seed" autocomplete='off' minlength=64 maxlength=64 required=true pattern="^[a-fA-F0-9]{64}$"}}
+{{/bs-form}}

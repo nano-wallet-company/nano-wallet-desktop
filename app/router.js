@@ -7,6 +7,10 @@ const Router = EmberRouter.extend({
 });
 
 Router.map(function routerMap() {
+  this.route('setup', function setupRoute() {
+    this.route('import');
+  });
+
   return this.route('wallets', { path: '/:wallet_id' }, function walletsRoute() {
     this.route('overview');
     this.route('send');

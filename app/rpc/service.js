@@ -33,8 +33,8 @@ export default Service.extend({
     return this.call(actions.WALLET_BALANCE_TOTAL, { wallet });
   },
 
-  async walletChangeSeed() {
-    const { success } = this.call(actions.WALLET_CHANGE_SEED);
+  async walletChangeSeed(wallet, seed) {
+    const { success } = await this.call(actions.WALLET_CHANGE_SEED, { wallet, seed });
     return success === '';
   },
 
