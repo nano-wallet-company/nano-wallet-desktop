@@ -1,10 +1,16 @@
 /* eslint-env node */
 /* eslint-disable no-console */
-const { app, Menu, BrowserWindow, protocol } = require('electron');
 const { dirname, join, resolve } = require('path');
+const { spawn } = require('child_process');
+
+const {
+  app,
+  Menu,
+  BrowserWindow,
+  protocol,
+} = require('electron');
 const protocolServe = require('electron-protocol-serve');
 const log = require('electron-log');
-const { spawn } = require('child_process');
 
 let mainWindow = null;
 

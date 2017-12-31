@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { describe, it } from 'mocha';
-import fromRaw from 'raiwallet/utils/from-raw';
+import fromRaw from 'cairn/utils/from-raw';
 
 describe('Unit | Utility | from raw', () => {
   // Replace this with your real tests.

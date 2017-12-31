@@ -15,7 +15,7 @@ module.exports = {
     packageManager: 'npm',
   },
   electronWinstallerConfig: {
-    name: 'raiwallet',
+    name: 'cairn',
   },
   electronInstallerDebian: {},
   electronInstallerRedhat: {},
@@ -25,6 +25,6 @@ module.exports = {
   },
   windowsStoreConfig: {
     packageName: '',
-    name: 'raiwallet',
+    name: 'cairn',
   },
 };

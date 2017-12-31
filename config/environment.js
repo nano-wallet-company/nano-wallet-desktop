@@ -2,7 +2,7 @@
 
 module.exports = (environment) => {
   const ENV = {
-    modulePrefix: 'raiwallet',
+    modulePrefix: 'cairn',
     environment,
     rootURL: '',
     locationType: 'hash',

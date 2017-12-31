@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import { describe, it, beforeEach, afterEach } from 'mocha';
 import { run } from '@ember/runloop';
 import Application from '@ember/application';
-import { initialize } from 'raiwallet/initializers/status';
+import { initialize } from 'cairn/initializers/status';
 import destroyApp from '../../helpers/destroy-app';
 
 describe('Unit | Initializer | status', () => {

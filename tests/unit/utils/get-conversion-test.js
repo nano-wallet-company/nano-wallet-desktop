@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { describe, it } from 'mocha';
-import getConversion from 'raiwallet/utils/get-conversion';
+import getConversion from 'cairn/utils/get-conversion';
 
 describe('Unit | Utility | get conversion', () => {
   // Replace this with your real tests.

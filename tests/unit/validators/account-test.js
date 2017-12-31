@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { describe, it } from 'mocha';
-import validateAccount from 'raiwallet/validators/account';
+import validateAccount from 'cairn/validators/account';
 
 describe('Unit | Validator | account', () => {
   // Replace this with your real tests.
