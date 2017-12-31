@@ -1,4 +1,5 @@
 import Route from '@ember/routing/route';
+import { getProperties } from '@ember/object';
 
 import { service } from 'ember-decorators/service';
 
@@ -8,6 +9,6 @@ export default Route.extend({
   async afterModel(model) {
     const settings = this.get('settings');
     const serialized = this.store.serialize(model, { includeId: true });
-    settings.setProperties(serialized);
+    settings.setProperties(getProperties(serialized, 'wallet'));
   },
 });

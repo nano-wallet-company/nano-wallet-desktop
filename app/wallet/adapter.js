@@ -25,8 +25,17 @@ export default DS.Adapter.extend({
     };
   },
 
-  createRecord() {
-    return this.get('rpc').walletCreate();
+  async createRecord(store, type, snapshot) {
+    const data = await this.get('rpc').walletCreate();
+
+    const seed = snapshot.attr('seed');
+    if (seed) {
+      const { wallet } = data;
+      const rpc = this.get('rpc');
+      await rpc.walletChangeSeed(wallet, seed);
+    }
+
+    return data;
   },
 
   async updateRecord(store, type, snapshot) {

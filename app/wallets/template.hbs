@@ -11,13 +11,9 @@
           {{#bs-tooltip}}
             <ul class="m-0 list-unstyled">
               <li><b>Status:</b> {{if status.isFulfilled 'Online' 'Connecting'}}</li>
-              {{#if status.blocks.count}}
+              {{#if status.isFulfilled}}
                 <li><b>Block Count:</b> {{status.blocks.count}}</li>
-              {{/if}}
-              {{#if status.blocks.unchecked}}
                 <li><b>Unchecked Blocks:</b> {{status.blocks.unchecked}}</li>
-              {{/if}}
-              {{#if status.peers.length}}
                 <li><b>Peers:</b> {{status.peers.length}}</li>
               {{/if}}
             </ul>

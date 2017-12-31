@@ -4,6 +4,8 @@ import { A } from '@ember/array';
 
 import { service } from 'ember-decorators/service';
 
+import { defineError } from 'ember-exex/error';
+
 export const actions = {
   WALLET_CREATE: 'wallet_create',
   WALLET_BALANCE_TOTAL: 'wallet_balance_total',
@@ -17,12 +19,22 @@ export const actions = {
   BLOCK_COUNT: 'block_count',
 };
 
+const RPCError = defineError({
+  name: 'RPCError',
+  message: 'RPC error',
+});
+
 export default Service.extend({
   @service ajax: null,
 
-  call(action, params = {}) {
+  async call(action, params = {}) {
     const data = assign({ action }, params);
-    return this.get('ajax').post('/', { data });
+    const resp = await this.get('ajax').post('/', { data });
+    if (typeof resp.error === 'string') {
+      throw new RPCError(resp.error);
+    }
+
+    return resp;
   },
 
   walletCreate() {
@@ -43,10 +55,17 @@ export default Service.extend({
   },
 
   async accountInfo(account, pending = true) {
-    let info = await this.call(actions.ACCOUNT_INFO, {
-      account,
-      pending,
-    });
+    let info;
+    try {
+      info = await this.call(actions.ACCOUNT_INFO, {
+        account,
+        pending,
+      });
+    } catch (err) {
+      if (!(err instanceof RPCError)) {
+        throw err;
+      }
+    }
 
     // When an account has no transactions, the RPC replies with an
     // HTTP 200 OK *and* an error.

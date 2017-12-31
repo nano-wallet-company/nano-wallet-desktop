@@ -9,6 +9,7 @@ const Router = EmberRouter.extend({
 Router.map(function routerMap() {
   this.route('setup', function setupRoute() {
     this.route('import');
+    this.route('backup');
   });
 
   return this.route('wallets', { path: '/:wallet_id' }, function walletsRoute() {

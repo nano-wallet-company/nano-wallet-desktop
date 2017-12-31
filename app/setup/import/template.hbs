@@ -6,7 +6,12 @@
     {{wallet-import wallet=model onSubmit=(action (queue (route-action 'saveWallet') (route-action 'changeSeed')))}}
   {{/modal.body}}
   {{#modal.footer}}
-    {{#bs-button onClick=(action modal.close) type="danger"}}Cancel{{/bs-button}}
-    {{#bs-button onClick=(action modal.submit) type="success"}}Import{{/bs-button}}
+    {{#bs-button onClick=(action modal.close) type="secondary"}}
+      Cancel
+    {{/bs-button}}
+    {{#bs-button onClick=(action modal.submit) type="primary"}}
+      {{fa-icon 'upload'}}
+      Import
+    {{/bs-button}}
   {{/modal.footer}}
 {{/bs-modal}}

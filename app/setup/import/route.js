@@ -4,10 +4,6 @@ import { get, set } from '@ember/object';
 import { action } from 'ember-decorators/object';
 
 export default Route.extend({
-  model() {
-    return this.store.createRecord('wallet');
-  },
-
   @action
   saveWallet(wallet) {
     return wallet.save();

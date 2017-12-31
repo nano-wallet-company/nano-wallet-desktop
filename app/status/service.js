@@ -18,7 +18,7 @@ const Service = ObjectProxy.extend(PromiseProxyMixin, {
   @on('init')
   startPolling() {
     const pollboy = this.get('pollboy');
-    const poller = pollboy.add(this, this.onPoll, DEFAULT_INTERVAL);
+    const poller = pollboy.add(this, this.onPoll, DEFAULT_INTERVAL).poll();
     this.set('poller', poller);
   },
 
@@ -34,7 +34,7 @@ const Service = ObjectProxy.extend(PromiseProxyMixin, {
   async onPoll() {
     const rpc = this.get('rpc');
     const blocks = rpc.blockCount();
-    const peers = rpc.peers();
+    const peers = rpc.peers().then(p => Object.keys(p));
     const promise = hash({
       blocks,
       peers,

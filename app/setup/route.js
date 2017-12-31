@@ -3,10 +3,13 @@ import Route from '@ember/routing/route';
 import { action } from 'ember-decorators/object';
 
 export default Route.extend({
+  model() {
+    return this.store.createRecord('wallet');
+  },
+
   @action
   createWallet() {
-    const wallet = this.store.createRecord('wallet');
-    return this.transitionTo('wallets', wallet.save());
+    return this.transitionTo('setup.backup');
   },
 
   @action

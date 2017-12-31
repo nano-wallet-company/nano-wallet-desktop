@@ -1,12 +1,18 @@
 {{outlet}}
 
-<div class="jumbotron">
-  <h1 class="display-3">Welcome!</h1>
-  <p class="lead">Let's get your wallet setup for use with Cairn.</p>
-  <hr class="my-4">
-  <p>To begin using Cairn, you must first create a new RaiBlocks wallet or import a wallet that already exists from a seed.</p>
-  <p class="lead">
-    <a class="btn btn-primary btn-lg" href="#" role="button" {{action (route-action 'createWallet')}}>Create New Wallet</a>
-    <a class="btn btn-primary btn-lg" href="#" role="button" {{action (route-action 'importWallet')}}>Import from Seed</a>
-  </p>
+<div class="jumbotron jumbotron-fluid" style="min-height: 100vh">
+  <div class="container-fluid">
+    <h1 class="display-3">
+      <img class="img-fluid w-50" src="Cairn-light.svg" alt="Cairn">
+    </h1>
+    <p class="lead">Let's get your wallet setup.</p>
+    <hr class="my-4">
+    <p>To begin using Cairn, you must first create a new wallet or import your wallet data using a seed.</p>
+    {{#bs-button type="primary" block=true onClick=(route-action 'createWallet') }}
+      Create New Wallet
+    {{/bs-button}}
+    {{#bs-button type="secondary" block=true onClick=(route-action 'importWallet')}}
+      Import Wallet
+    {{/bs-button}}
+  </div>
 </div>
