@@ -1,20 +1,63 @@
+product: 'Cairn'
 cancel: 'Cancel'
 done: 'Done'
+loading: 'Loading...'
+previous: 'Previous'
+next: 'Next'
+current: '(current)'
 import: 'Import'
+overview: 'Overview'
+send: 'Send'
+history: 'History'
 seed: 'Seed'
 mnemonic: 'Mnemonic'
-setup:
-  index:
-    lead: "Let's get your wallet setup."
-    instructions: 'To begin using Cairn, you must first create a new wallet or import your wallet data using a seed.'
-    create: 'Create New Wallet'
-    import: 'Import Wallet'
+type: 'Type'
+amount: 'Amount'
+wallet: 'Wallet'
+account: 'Account'
+balance: 'Balance'
+pending: 'Pending'
+status:
+  state: 'Status'
+  online: 'Online'
+  connecting: 'Connecting'
+  count: 'Block Count'
+  unchecked: 'Unchecked Blocks'
+  peers: 'Peers'
+wallets:
   backup:
     title: 'Backup Seed'
     lead: "Here's your easy to remember seed mnemonic for your new wallet:"
     copy: 'Copy Raw Seed'
     download: 'Download Mnemonic'
-    help: "Adhere to best practices by physically writing your seed mnemonic on a piece of paper and storing it in a secure location for safe retrieval should you later lose your seed."
+    help: >
+      Adhere to best practices by physically writing your seed mnemonic on a
+      piece of paper and storing it in a secure location for safe retrieval
+      should you later lose your seed.
     confirm: "Are you sure you've written down your mnemonic?"
   import:
     title: 'Import Wallet'
+    copied: 'Seed copied to clipboard!'
+    help:
+      seed: "Your wallet's 64 character hex seed."
+      mnemonic: "Your wallet's BIP39 mnemonic."
+  accounts:
+    send:
+      source: 'Source Account'
+      search: 'Search for account'
+      destination: 'Destination Account'
+      placeholder: 'e.g. xrb_3e3j5tkog48pnny9dmfzj1r16pg8t1e76dz5tmac6iq689wyjfpiij4txtdo'
+      amount: 'Amount (XRB)'
+    history:
+      none: 'No history found.'
+  overview:
+    balance: 'Total Balance: <span class="text-muted">&#11041;</span> {balance}'
+    none: 'No accounts in wallet.'
+    create: 'Create Account'
+setup:
+  lead: "Let's get your wallet setup."
+  instructions: >
+    To begin using Cairn, you must first create a new wallet or import your
+    wallet data using a seed.
+  create: 'Create New Wallet'
+  import: 'Import Wallet'

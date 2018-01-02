@@ -2,7 +2,7 @@
   <ul class="pagination">
     <li class="page-item {{if (not canStepBackward) 'disabled'}}">
       <a class="page-link" href="#" tabindex="-1" {{action 'incrementPage' -1}}>
-        {{fa-icon 'chevron-left' ariaLabel='Previous'}}
+        {{fa-icon 'chevron-left' ariaLabel=(t 'previous')}}
       </a>
     </li>
 
@@ -14,7 +14,7 @@
         <a class="page-link" href="#" {{action 'pageClicked' item.page}}>
           {{item.page}}
           {{#if item.current}}
-            <span class="sr-only">(current)</span>
+            <span class="sr-only">{{t 'current'}}</span>
           {{/if}}
         </a>
       </li>
@@ -22,7 +22,7 @@
 
     <li class="page-item {{if (not canStepForward) 'disabled'}}">
       <a class="page-link" href="#" {{action 'incrementPage' 1}}>
-        {{fa-icon 'chevron-right' ariaLabel='Next'}}
+        {{fa-icon 'chevron-right' ariaLabel=(t 'next')}}
       </a>
     </li>
   </ul>

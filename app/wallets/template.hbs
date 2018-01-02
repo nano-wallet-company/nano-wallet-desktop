@@ -1,8 +1,8 @@
 <header role="banner">
   {{#bs-navbar type="dark" class="bg-dark" as |navbar|}}
     <a class="navbar-brand" href="#">
-      <img src="Cairn.svg" height="40" class="d-inline-block align-top" alt="Cairn">
-      <span class="sr-only">Cairn</span>
+      <img src="cairn.svg" height="40" class="d-inline-block align-top" alt="{{t 'product'}}">
+      <span class="sr-only">{{t 'product'}}</span>
     </a>
 
     <div class="ml-auto pr-3">
@@ -10,11 +10,11 @@
         {{#fa-icon "signal" class=(if status.isFulfilled 'text-success')}}
           {{#bs-tooltip}}
             <ul class="m-0 list-unstyled">
-              <li><b>Status:</b> {{if status.isFulfilled 'Online' 'Connecting'}}</li>
+              <li><b>{{t 'status.state'}}:</b> {{if status.isFulfilled (t 'status.online') (t 'status.connecting')}}</li>
               {{#if status.isFulfilled}}
-                <li><b>Block Count:</b> {{status.blocks.count}}</li>
-                <li><b>Unchecked Blocks:</b> {{status.blocks.unchecked}}</li>
-                <li><b>Peers:</b> {{status.peers.length}}</li>
+                <li><b>{{t 'status.blockCount'}}:</b> {{status.blocks.count}}</li>
+                <li><b>{{t 'status.unchckedBlocks'}}:</b> {{status.blocks.unchecked}}</li>
+                <li><b>{{t 'status.peers'}}:</b> {{status.peers.length}}</li>
               {{/if}}
             </ul>
           {{/bs-tooltip}}
@@ -28,12 +28,12 @@
       {{#navbar.nav as |nav|}}
         {{#nav.item}}
           {{#nav.link-to 'wallets.overview' model}}
-            Overview
+            {{t 'overview'}}
           {{/nav.link-to}}
         {{/nav.item}}
         {{#nav.item}}
           {{#nav.link-to 'wallets.send' model}}
-            Send
+            {{t 'send'}}
           {{/nav.link-to}}
         {{/nav.item}}
       {{/navbar.nav}}

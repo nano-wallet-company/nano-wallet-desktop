@@ -1,9 +1,29 @@
-import { helper } from '@ember/component/helper';
+import Helper from '@ember/component/helper';
 
-import fromRaw from '../utils/from-raw';
+import { service } from 'ember-decorators/service';
+import { observes } from 'ember-decorators/object';
 
-export function formatAmount([value = 0], hash) {
-  return fromRaw(value, hash);
-}
+import BigNumber from 'npm:bignumber.js';
 
-export default helper(formatAmount);
+import getConversion from '../utils/get-conversion';
+
+export default Helper.extend({
+  @service intl: null,
+
+  @observes('intl.locale')
+  onLocaleChange() {
+    this.recompute();
+  },
+
+  compute([value = 0], { unit = 'Mxrb', precision = 6 } = {}) {
+    const divisor = getConversion(unit);
+    const quotient = BigNumber(value).dividedBy(divisor);
+    const maximumFractionDigits = Math.min(precision, Math.max(2, quotient.decimalPlaces()));
+    return this.get('intl').formatNumber(quotient, {
+      maximumFractionDigits,
+      style: 'currency',
+      currency: 'XRB',
+      currencyDisplay: 'name',
+    });
+  },
+});

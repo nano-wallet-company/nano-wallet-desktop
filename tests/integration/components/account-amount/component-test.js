@@ -1,12 +1,10 @@
 import { expect } from 'chai';
-
 import { it, describe } from 'mocha';
-
 import { setupComponentTest } from 'ember-mocha';
 import hbs from 'htmlbars-inline-precompile';
 
-describe('helper:format-amount', () => {
-  setupComponentTest('format-amount', {
+describe('Integration | Component | account amount', () => {
+  setupComponentTest('account-amount', {
     integration: true,
   });
 
@@ -15,13 +13,14 @@ describe('helper:format-amount', () => {
     // Handle any actions with this.on('myAction', function(val) { ... });
     // Template block usage:
     // this.render(hbs`
-    //   {{#format-amount}}
+    //   {{#account-amount}}
     //     template content
-    //   {{/format-amount}}
+    //   {{/account-amount}}
     // `);
 
-    this.set('inputValue', '1000000000000000000000000000000');
-    this.render(hbs`{{format-amount inputValue}}`);
-    expect(this.$().text().trim()).to.equal('1.00 XRB');
+    const value = '1000000000000000000000000000000';
+    this.set('value', value);
+    this.render(hbs`{{account-amount value=value}}`);
+    expect(this.$()).to.have.length(1);
   });
 });

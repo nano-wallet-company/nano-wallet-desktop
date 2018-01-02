@@ -10,8 +10,8 @@ module.exports = {
   },
   plugins: [
     'babel',
-    'hbs',
     'ember',
+    'hbs',
   ],
   extends: [
     'airbnb-base',

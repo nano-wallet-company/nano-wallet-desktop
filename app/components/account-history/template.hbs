@@ -6,13 +6,13 @@
   {{#t.body canSelect=false rowComponent=(component 'account-history-entry') as |body|}}
     {{#if (is-pending content)}}
       {{#body.loader}}
-        {{fa-icon 'refresh' size=3 spin=true ariaLabel="Loading..."}}
+        {{fa-icon 'refresh' size=3 spin=true ariaLabel=(t 'loading')}}
       {{/body.loader}}
     {{/if}}
 
     {{#if table.isEmpty}}
       {{#body.no-data}}
-        No history found.
+        {{t 'wallets.accounts.history.noData'}}
       {{/body.no-data}}
     {{/if}}
   {{/t.body}}

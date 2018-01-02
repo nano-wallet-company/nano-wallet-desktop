@@ -37,7 +37,7 @@ module.exports = (/* env */) => {
     * @type {Boolean}
     * @default "false"
     */
-    autoPolyfill: false,
+    autoPolyfill: true,
 
     /**
     * disablePolyfill prevents the polyfill from being bundled in the asset folder of the build

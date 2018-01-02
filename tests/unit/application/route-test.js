@@ -1,16 +1,15 @@
 import { expect } from 'chai';
-import { describeModule, it } from 'ember-mocha';
+import { it, describe } from 'mocha';
+import { setupTest } from 'ember-mocha';
 
-describeModule(
-  'route:application', 'Unit | Route | application',
-  {
+describe('Unit | Route | application', () => {
+  setupTest('route:application', {
     // Specify the other units that are required for this test.
-    // needs: ['controller:foo']
-  },
-  () => {
-    it('exists', function () {
-      const route = this.subject();
-      expect(route).to.be.ok;
-    });
-  },
-);
+    needs: ['service:intl'],
+  });
+
+  it('exists', function () {
+    const route = this.subject();
+    expect(route).to.be.ok;
+  });
+});

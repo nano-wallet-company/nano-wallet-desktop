@@ -1,0 +1,32 @@
+<div class="card-group">
+  <div class="card">
+    <h5 class="card-header text-center text-truncate">
+      {{account.id}}
+    </h5>
+
+    <div class="card-body">
+      <div class="d-flex justify-content-center">
+        {{qr-code content=account.id}}
+      </div>
+
+      <dl class="row justify-content-md-center">
+        <dt class="col-md-3">{{t 'account'}}</dt>
+        <dd class="col-md-9 text-truncate">{{account.id}}</dd>
+
+        <dt class="col-md-3">{{t 'balance'}}</dt>
+        <dd class="col-md-9 text-truncate">{{format-amount account.balance}}</dd>
+
+        <dt class="col-md-3">{{t 'pending'}}</dt>
+        <dd class="col-md-9 text-truncate">{{format-amount account.pending}}</dd>
+      </dl>
+
+      {{#link-to 'wallets.accounts.send' class="card-link"}}
+        {{t 'send'}}
+      {{/link-to}}
+
+      {{#link-to 'wallets.accounts.history' class="card-link"}}
+        {{t 'history'}}
+      {{/link-to}}
+    </div>
+  </div>
+</div>

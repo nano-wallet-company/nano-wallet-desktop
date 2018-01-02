@@ -3,16 +3,16 @@
 <div class="jumbotron jumbotron-fluid" style="min-height: 100vh">
   <div class="container-fluid">
     <h1 class="display-3">
-      <img class="img-fluid w-50" src="Cairn-light.svg" alt="Cairn">
+      <img class="img-fluid w-50" src="cairn-light.svg" alt="{{t 'product'}}">
     </h1>
-    <p class="lead">{{t 'setup.index.lead'}}</p>
+    <p class="lead">{{t 'setup.lead'}}</p>
     <hr class="my-4">
-    <p>{{t 'setup.index.instructions'}}</p>
+    <p>{{t 'setup.instructions'}}</p>
     {{#bs-button type="primary" block=true onClick=(route-action 'createWallet') }}
-      {{t 'setup.index.create'}}
+      {{t 'setup.create'}}
     {{/bs-button}}
     {{#bs-button type="secondary" block=true onClick=(route-action 'importWallet')}}
-      {{t 'setup.index.import'}}
+      {{t 'setup.import'}}
     {{/bs-button}}
   </div>
 </div>

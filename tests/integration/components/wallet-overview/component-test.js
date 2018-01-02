@@ -1,11 +1,16 @@
 import { expect } from 'chai';
-import { it, describe } from 'mocha';
+import { beforeEach, it, describe } from 'mocha';
 import { setupComponentTest } from 'ember-mocha';
 import hbs from 'htmlbars-inline-precompile';
 
 describe('Integration | Component | wallet overview', () => {
   setupComponentTest('wallet-overview', {
     integration: true,
+  });
+
+  beforeEach(function () {
+    this.inject.service('intl');
+    this.get('intl').setLocale('en-us');
   });
 
   it('renders', function () {

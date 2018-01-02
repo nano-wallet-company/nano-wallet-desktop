@@ -1,39 +1,38 @@
 import Component from '@ember/component';
-import { get } from '@ember/object';
 
+import { service } from 'ember-decorators/service';
 import { computed } from 'ember-decorators/object';
 
 import Table from 'ember-light-table';
 
 import PagedMixin from '../../mixins/paged';
-import fromRaw from '../../utils/from-raw';
 
 export default Component.extend(PagedMixin, {
+  @service intl: null,
+
   contentKey: 'history',
 
   wallet: null,
   account: null,
   history: null,
 
-  @computed
+  @computed('intl.locale')
   get columns() {
+    const intl = this.get('intl');
     return [
       {
-        label: 'Type',
+        label: intl.t('type'),
         valuePath: 'type',
         width: '10%',
       },
       {
-        label: 'Amount',
+        label: intl.t('amount'),
         valuePath: 'amount',
         width: '20%',
-        cellClassNames: 'text-truncate',
-        format(rawValue) {
-          return fromRaw(rawValue);
-        },
+        cellComponent: 'account-amount',
       },
       {
-        label: 'Account',
+        label: intl.t('account'),
         valuePath: 'account',
         // width: '60%',
         cellComponent: 'account-link',
@@ -43,6 +42,8 @@ export default Component.extend(PagedMixin, {
 
   @computed('columns', 'pagedContent.@each')
   get table() {
-    return new Table(get(this, 'columns'), get(this, 'pagedContent'));
+    const columns = this.get('columns');
+    const pagedContent = this.get('pagedContent');
+    return new Table(columns, pagedContent);
   },
 });

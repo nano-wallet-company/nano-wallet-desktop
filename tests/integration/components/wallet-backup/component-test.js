@@ -3,8 +3,8 @@ import { beforeEach, it, describe } from 'mocha';
 import { setupComponentTest } from 'ember-mocha';
 import hbs from 'htmlbars-inline-precompile';
 
-describe('Integration | Component | wallet import', () => {
-  setupComponentTest('wallet-import', {
+describe('Integration | Component | wallet backup', () => {
+  setupComponentTest('wallet-backup', {
     integration: true,
   });
 
@@ -18,9 +18,9 @@ describe('Integration | Component | wallet import', () => {
     // Handle any actions with this.on('myAction', function(val) { ... });
     // Template block usage:
     // this.render(hbs`
-    //   {{#wallet-import}}
+    //   {{#wallet-backup}}
     //     template content
-    //   {{/wallet-import}}
+    //   {{/wallet-backup}}
     // `);
 
     const wallet = {
@@ -29,11 +29,11 @@ describe('Integration | Component | wallet import', () => {
       accounts: ['1'],
     };
 
-    const onSubmit = () => false;
+    const onDone = () => false;
     const onCancel = () => false;
 
-    this.setProperties({ wallet, onSubmit, onCancel });
-    this.render(hbs`{{wallet-import wallet=wallet onSubmit=onSubmit onCancel=onCancel}}`);
+    this.setProperties({ wallet, onDone, onCancel });
+    this.render(hbs`{{wallet-backup wallet=wallet onDone=onDone onCancel=onCancel}}`);
     expect(this.$()).to.have.length(1);
   });
 });

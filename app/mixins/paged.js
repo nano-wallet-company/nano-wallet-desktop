@@ -1,5 +1,4 @@
 import Mixin from '@ember/object/mixin';
-import { get } from '@ember/object';
 
 import { computed } from 'ember-decorators/object';
 import { alias, oneWay } from 'ember-decorators/object/computed';
@@ -18,7 +17,8 @@ export default Mixin.create({
 
   @computed('contentKey')
   get content() {
-    return get(this, get(this, 'contentKey'));
+    const contentKey = this.get('contentKey');
+    return this.get(contentKey);
   },
 
   pagedContent: pagedArray('content', {

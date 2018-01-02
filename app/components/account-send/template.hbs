@@ -1,17 +1,17 @@
 {{#bs-form model=changeset onSubmit=onSubmit as |form|}}
-  {{#form.element class="form-control-lg" controlType="power-select" label="Source Account" property="source" required=true options=accounts onChange=onChange as |el|}}
-    {{#el.control searchField="id" searchPlaceholder="Search for account" as |item|}}
+  {{#form.element class="form-control-lg" controlType="power-select" label=(t 'wallets.accounts.send.source') property="source" required=true options=accounts onChange=onChange as |el|}}
+    {{#el.control searchField="id" searchPlaceholder=(t 'wallets.accounts.send.search') as |item|}}
       <b>{{item.id}}</b>
     {{/el.control}}
   {{/form.element}}
 
-  {{form.element class="form-control-lg" controlType="text" label="Destination Account" property="destination" autocomplete='on' minlength=64 maxlength=64 required=true pattern="^xrb_[a-z0-9]{60}$" placeholder="e.g. xrb_3e3j5tkog48pnny9dmfzj1r16pg8t1e76dz5tmac6iq689wyjfpiij4txtdo"}}
+  {{form.element class="form-control-lg" controlType="text" label=(t 'wallets.accounts.send.destination') property="destination" autocomplete='on' minlength=64 maxlength=64 required=true pattern="^xrb_[a-z0-9]{60}$" placeholder=(t 'wallets.accounts.send.placeholder')}}
 
-  {{form.element class="form-control-lg" controlType="text" label="Amount (XRB)" model=(changeset (hash amount=amount) ChangeAmountValidations) property='amount' required=true minlength=1 pattern="^\d*\.?\d+$" onChange=(action 'changeAmount')}}
+  {{form.element class="form-control-lg" controlType="text" label=(t 'wallets.accounts.send.amount') model=(changeset (hash amount=amount) ChangeAmountValidations) property='amount' required=true minlength=1 pattern="^\d*\.?\d+$" onChange=(action 'changeAmount')}}
 
   <div role="group" class="d-flex justify-content-center">
     {{#bs-button size="lg" type="primary" icon="fa fa-paper-plane" buttonType="submit"}}
-      Send
+      {{t 'send'}}
     {{/bs-button}}
   </div>
 {{/bs-form}}

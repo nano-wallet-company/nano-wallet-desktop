@@ -1,0 +1,37 @@
+{{#bs-modal onHide=(action onCancel) onSubmit=(action (queue (action 'confirmDone') (action onDone)) wallet seed) as |modal|}}
+  {{#modal.header}}
+    <h4 class="modal-title">{{t 'wallets.backup.title'}}</h4>
+  {{/modal.header}}
+  {{#modal.body}}
+    {{#each flashMessages.arrangedQueue as |flash|}}
+      {{flash-message class="d-flex w-100" flash=flash}}
+    {{/each}}
+    <p class="lead">{{t 'wallets.backup.lead'}}</p>
+    <p><code>{{mnemonic}}</code></p>
+    <p>
+      {{#copy-button class="btn btn-sm btn-outline-danger" clipboardText=seed success=(action 'copySeed')}}
+        {{fa-icon 'copy'}} {{t 'wallets.backup.copy'}}
+      {{/copy-button}}
+      {{#bs-button size='sm' type='outline-primary' class="ml-1" onClick=(action 'downloadMnemonic' mnemonic)}}
+        {{fa-icon 'download'}} {{t 'wallets.backup.download'}}
+      {{/bs-button}}
+    </p>
+    <small class="text-muted">{{t 'wallets.backup.help'}}</small>
+  {{/modal.body}}
+  {{#modal.footer}}
+    {{#bs-button onClick=(action modal.close) type="secondary"}}
+      {{t 'cancel'}}
+    {{/bs-button}}
+    {{#bs-button onClick=(action modal.submit) type="primary"}}
+      {{#bs-popover triggerElement="parentView"}}
+        {{t 'wallets.backup.confirm'}}
+      {{/bs-popover}}
+      {{#if needsConfirm}}
+        {{fa-icon 'question-circle-o'}}
+      {{else}}
+        {{fa-icon 'check'}}
+      {{/if}}
+      {{t 'done'}}
+    {{/bs-button}}
+  {{/modal.footer}}
+{{/bs-modal}}

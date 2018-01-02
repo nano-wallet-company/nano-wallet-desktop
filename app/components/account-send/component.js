@@ -1,5 +1,5 @@
 import Component from '@ember/component';
-import { get, set } from '@ember/object';
+import { set } from '@ember/object';
 
 import { action } from 'ember-decorators/object';
 import { on } from 'ember-decorators/object/evented';
@@ -23,7 +23,7 @@ export default Component.extend({
 
   @on('init')
   createChangeset() {
-    const block = get(this, 'block');
+    const block = this.get('block');
     this.changeset = new Changeset(block, lookupValidator(SendValidations), SendValidations);
   },
 

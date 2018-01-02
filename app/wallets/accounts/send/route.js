@@ -1,12 +1,17 @@
 import Route from '@ember/routing/route';
 
-import { action } from 'ember-decorators/object';
+import { service } from 'ember-decorators/service';
+import { computed, action } from 'ember-decorators/object';
 
 export default Route.extend({
-  // eslint-disable-next-line ember/avoid-leaking-state-in-ember-objects
-  breadCrumb: {
-    title: 'Send',
-    path: 'wallets.accounts.send',
+  @service intl: null,
+
+  @computed('intl.locale')
+  get breadCrumb() {
+    return {
+      title: this.get('intl').t('send'),
+      path: 'wallets.accounts.send',
+    };
   },
 
   model() {
