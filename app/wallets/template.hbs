@@ -12,8 +12,8 @@
             <ul class="m-0 list-unstyled">
               <li><b>{{t 'status.state'}}:</b> {{if status.isFulfilled (t 'status.online') (t 'status.connecting')}}</li>
               {{#if status.isFulfilled}}
-                <li><b>{{t 'status.blockCount'}}:</b> {{status.blocks.count}}</li>
-                <li><b>{{t 'status.unchckedBlocks'}}:</b> {{status.blocks.unchecked}}</li>
+                <li><b>{{t 'status.count'}}:</b> {{status.blocks.count}}</li>
+                <li><b>{{t 'status.unchecked'}}:</b> {{status.blocks.unchecked}}</li>
                 <li><b>{{t 'status.peers'}}:</b> {{status.peers.length}}</li>
               {{/if}}
             </ul>
