@@ -1,8 +1,10 @@
 <header role="banner">
   {{#bs-navbar type="dark" class="bg-dark" as |navbar|}}
     <a class="navbar-brand" href="#">
-      <img src="cairn.svg" height="40" class="d-inline-block align-top" alt="{{t 'product'}}">
-      <span class="sr-only">{{t 'product'}}</span>
+      <picture>
+        <source type="image/svg+xml" srcset="cairn.svg">
+        <img src="cairn.png" height="40" alt="{{t 'product'}}">
+      </picture>
     </a>
 
     <div class="ml-auto pr-3">
