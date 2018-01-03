@@ -1,8 +1,13 @@
 /* eslint-env node */
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
+const { extensions: defaultExtensions } = require('broccoli-asset-rev/lib/default-options');
 
 module.exports = (defaults) => {
   const app = new EmberApp(defaults, {
+    fingerprint: {
+      extensions: defaultExtensions.concat(['svg', 'webmanifest']),
+    },
+
     'ember-cli-babel': {
       includePolyfill: true,
     },
