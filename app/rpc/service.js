@@ -55,7 +55,7 @@ export default Service.extend({
   },
 
   async accountInfo(account, pending = true) {
-    let info;
+    let info = {};
     try {
       info = await this.call(actions.ACCOUNT_INFO, {
         account,
@@ -65,12 +65,11 @@ export default Service.extend({
       if (!(err instanceof RPCError)) {
         throw err;
       }
-    }
 
-    // When an account has no transactions, the RPC replies with an
-    // HTTP 200 OK *and* an error.
-    if (info && info.error === 'Account not found') {
-      info = { account, balance: '0' };
+      // When an account has no transactions, the RPC replies with an
+      // HTTP 200 OK *and* an error.
+      info.account = account;
+      info.balance = '0';
       if (pending) {
         info.pending = '0';
       }

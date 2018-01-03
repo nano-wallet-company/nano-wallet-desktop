@@ -5,6 +5,7 @@ import { service } from 'ember-decorators/service';
 
 export default Route.extend({
   @service settings: null,
+  @service flashMessages: null,
 
   async afterModel(model) {
     const settings = this.get('settings');

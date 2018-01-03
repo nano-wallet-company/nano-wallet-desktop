@@ -46,6 +46,10 @@
 <main role="main" class="container-fluid">
   {{bread-crumbs tagName="ol" linkable=true crumbClass="breadcrumb-item"}}
 
+  {{#each flashMessages.arrangedQueue as |flash|}}
+    {{flash-message flash=flash}}
+  {{/each}}
+
   <div class="row">
     <div class="col">
       {{outlet}}

@@ -1,9 +1,5 @@
-import BigNumber from 'npm:bignumber.js';
-
-import getConversion from './get-conversion';
+import toAmount from './to-amount';
 
 export default function toRaw(value, { unit = 'Mxrb' } = {}) {
-  const multiplier = getConversion(unit);
-  const multiplicand = BigNumber(value);
-  return multiplicand.times(multiplier).toFixed(0);
+  return toAmount(value, { unit }).toFixed(0);
 }

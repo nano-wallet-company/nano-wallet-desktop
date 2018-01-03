@@ -1,10 +1,7 @@
-import BigNumber from 'npm:bignumber.js';
-
-import getConversion from './get-conversion';
+import fromAmount from './from-amount';
 
 export default function fromRaw(value, { unit = 'Mxrb', precision = 6 } = {}) {
-  const divisor = getConversion(unit);
-  const quotient = BigNumber(value).dividedBy(divisor);
-  const digits = Math.min(precision, Math.max(0, quotient.decimalPlaces()));
-  return quotient.toFormat(digits);
+  const amount = fromAmount(value, { unit });
+  const digits = Math.min(precision, Math.max(0, amount.decimalPlaces()));
+  return amount.toFormat(digits);
 }

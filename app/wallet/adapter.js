@@ -6,6 +6,10 @@ import { service } from 'ember-decorators/service';
 export default DS.Adapter.extend({
   @service rpc: null,
 
+  shouldReloadRecord() {
+    return true;
+  },
+
   async findRecord(store, type, id, snapshot) {
     const rpc = this.get('rpc');
     const { wallet } = this.serialize(snapshot, { includeId: true });

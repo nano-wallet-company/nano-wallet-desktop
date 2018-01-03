@@ -1,16 +1,17 @@
 import Route from '@ember/routing/route';
-import { get } from '@ember/object';
 
 import { action } from 'ember-decorators/object';
+import { service } from 'ember-decorators/service';
 
 export default Route.extend({
-  afterModel(model) {
-    return get(model, 'accounts').reload();
-  },
+  @service intl: null,
+  @service flashMessages: null,
 
   @action
-  createAccount(wallet) {
-    const account = this.store.createRecord('account', { wallet });
-    return this.transitionTo('wallets.accounts', account.save());
+  async createAccount(wallet) {
+    const account = await this.store.createRecord('account', { wallet }).save();
+    const message = this.get('intl').t('wallets.overview.created');
+    this.get('flashMessages').success(message);
+    return this.transitionTo('wallets.accounts', account);
   },
 });

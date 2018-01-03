@@ -48,12 +48,14 @@ wallets:
       destination: 'Destination Account'
       placeholder: 'e.g. xrb_3e3j5tkog48pnny9dmfzj1r16pg8t1e76dz5tmac6iq689wyjfpiij4txtdo'
       amount: 'Amount (XRB)'
+      insufficient: 'Amount is greater than total account balance'
     history:
       none: 'No history found.'
   overview:
     balance: 'Total Balance: <span class="text-muted">&#11041;</span> {balance}'
     none: 'No accounts in wallet.'
     create: 'Create Account'
+    created: 'Account created!'
 setup:
   lead: "Let's get your wallet setup."
   instructions: >

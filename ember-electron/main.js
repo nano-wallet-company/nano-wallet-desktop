@@ -11,6 +11,10 @@ const {
 } = require('electron');
 const protocolServe = require('electron-protocol-serve');
 const log = require('electron-log');
+const { appReady } = require('electron-util');
+
+const fs = require('mz/fs');
+const download = require('download');
 
 let mainWindow = null;
 
@@ -37,10 +41,21 @@ app.on('window-all-closed', () => {
   }
 });
 
-app.on('ready', () => {
-  const cmd = join(process.resourcesPath, 'app', 'ember-electron', 'resources', 'rai_node');
+const run = async () => {
+  await appReady;
+
+  const binPath = join(app.getPath('userData'), 'bin');
+  const cmd = join(binPath, 'rai_node');
+  const exists = await fs.exists(cmd);
+  if (!exists) {
+    await fs.mkdir(binPath);
+    await download('https://devinus.ngrok.io/rai_node.zip', binPath, { extract: true });
+  }
+
   const subprocess = spawn(cmd, ['--daemon']);
-  subprocess.on('error', err => log.error(err));
+  subprocess.on('error', e => log.error(e));
+  subprocess.stdout.on('data', data => log.info('[rai_node]', data.toString()));
+  subprocess.stderr.on('data', data => log.error('[rai_node]', data.toString()));
 
   const template = [
     {
@@ -68,12 +83,17 @@ app.on('ready', () => {
   Menu.setApplicationMenu(menu);
 
   mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 1024,
+    height: 768,
   });
 
-  // If you want to open up dev tools programmatically, call
-  mainWindow.openDevTools();
+  if (process.env.ELECTRON_ENV === 'development') {
+    // eslint-disable-next-line global-require
+    const { default: installExtension, EMBER_INSPECTOR } = require('electron-devtools-installer');
+    installExtension(EMBER_INSPECTOR)
+      .then(() => mainWindow.openDevTools())
+      .catch(err => log.error(err));
+  }
 
   const emberAppLocation = 'serve://dist';
 
@@ -103,7 +123,7 @@ app.on('ready', () => {
     subprocess.kill();
     mainWindow = null;
   });
-});
+};
 
 // Handle an unhandled error in the main thread
 //
@@ -124,4 +144,14 @@ process.on('uncaughtException', (err) => {
   log.error('An exception in the main thread was not handled.');
   log.error('This is a serious issue that needs to be handled and/or debugged.');
   log.error(`Exception: ${err}`);
+});
+
+process.on('unhandledRejection', (reason) => {
+  log.error('An rejected promise in the main thread was not handled.');
+  log.error('This is a serious issue that needs to be handled and/or debugged.');
+  log.error(`Reason: ${reason}`);
+});
+
+module.exports = run().catch((err) => {
+  log.error('Failed to run:', err);
 });
