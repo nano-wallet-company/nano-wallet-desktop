@@ -9,6 +9,7 @@ import: 'Import'
 overview: 'Overview'
 send: 'Send'
 history: 'History'
+delete: 'Delete'
 seed: 'Seed'
 mnemonic: 'Mnemonic'
 type: 'Type'
@@ -42,6 +43,7 @@ wallets:
       seed: "Your wallet's 64 character hex seed."
       mnemonic: "Your wallet's BIP39 mnemonic."
   accounts:
+    cannotDelete: 'Cannot delete an account with a balance!'
     send:
       source: 'Source Account'
       search: 'Search for account'

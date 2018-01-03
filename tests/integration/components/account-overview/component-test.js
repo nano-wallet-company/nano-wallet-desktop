@@ -30,8 +30,10 @@ describe('Integration | Component | account overview', () => {
       pending: '0',
     };
 
-    this.set('account', account);
-    this.render(hbs`{{account-overview account=account}}`);
+    const onDelete = () => false;
+
+    this.setProperties({ account, onDelete });
+    this.render(hbs`{{account-overview account=account onDelete=(action onDelete)}}`);
     expect(this.$()).to.have.length(1);
   });
 });

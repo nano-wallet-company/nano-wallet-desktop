@@ -14,6 +14,7 @@ export const actions = {
   ACCOUNT_INFO: 'account_info',
   ACCOUNT_LIST: 'account_list',
   ACCOUNT_HISTORY: 'account_history',
+  ACCOUNT_REMOVE: 'account_remove',
   SEND: 'send',
   PEERS: 'peers',
   BLOCK_COUNT: 'block_count',
@@ -89,6 +90,10 @@ export default Service.extend({
     });
 
     return A(history);
+  },
+
+  accountRemove(wallet, account) {
+    return this.call(actions.ACCOUNT_REMOVE, { wallet, account });
   },
 
   send(wallet, source, destination, amount) {

@@ -31,7 +31,6 @@ export default DS.Adapter.extend({
 
   async createRecord(store, type, snapshot) {
     const data = await this.get('rpc').walletCreate();
-
     const seed = snapshot.attr('seed');
     if (seed) {
       const { wallet } = data;
