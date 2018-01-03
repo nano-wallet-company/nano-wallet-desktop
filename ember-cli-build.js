@@ -6,10 +6,22 @@ module.exports = (defaults) => {
     'ember-cli-babel': {
       includePolyfill: true,
     },
+
     'ember-bootstrap': {
       bootstrapVersion: 4,
       importBootstrapFont: false,
       importBootstrapCSS: false,
+    },
+
+    'ember-cli-image-transformer': {
+      images: [
+        {
+          inputFilename: 'public/images/brand-icon.svg',
+          outputFileName: 'icon-',
+          convertTo: 'png',
+          sizes: [32, 192, 310, 512],
+        },
+      ],
     },
   });
 
