@@ -1,10 +1,14 @@
+const path = require('path');
+
+const icon = path.join(__dirname, 'icons', 'app');
+
 module.exports = {
   make_targets: {
     win32: [
       'squirrel',
     ],
     darwin: [
-      'zip',
+      'dmg',
     ],
     linux: [
       'deb',
@@ -12,10 +16,11 @@ module.exports = {
     ],
   },
   electronPackagerConfig: {
+    icon,
     packageManager: 'npm',
   },
   electronWinstallerConfig: {
-    name: 'cairn',
+    name: 'Cairn',
   },
   electronInstallerDebian: {},
   electronInstallerRedhat: {},
@@ -25,6 +30,6 @@ module.exports = {
   },
   windowsStoreConfig: {
     packageName: '',
-    name: 'cairn',
+    name: 'Cairn',
   },
 };

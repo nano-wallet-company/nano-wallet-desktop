@@ -1,0 +1,14 @@
+{
+  "win32": {
+    "url": "https://devinus.ngrok.io/rai_node.zip",
+    "integrity": "sha512-eaHYg17ygwKQoYD2w1u9i3BMaUzEpqGW4gwklbNcQ/X2ostwt44UeIHkgWwUKq+2el5twwEjre9FGiskX8EgyQ=="
+  },
+  "darwin": {
+    "url": "https://devinus.ngrok.io/rai_node.zip",
+    "integrity": "sha512-eaHYg17ygwKQoYD2w1u9i3BMaUzEpqGW4gwklbNcQ/X2ostwt44UeIHkgWwUKq+2el5twwEjre9FGiskX8EgyQ=="
+  },
+  "linux": {
+    "url": "https://devinus.ngrok.io/rai_node.zip",
+    "integrity": "sha512-eaHYg17ygwKQoYD2w1u9i3BMaUzEpqGW4gwklbNcQ/X2ostwt44UeIHkgWwUKq+2el5twwEjre9FGiskX8EgyQ=="
+  }
+}
