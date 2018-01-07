@@ -4,9 +4,11 @@ const fs = require('fs');
 const path = require('path');
 const { spawn } = require('child_process');
 
-const pathExists = require('path-exists');
-const loadJsonFile = require('load-json-file');
+const debounceFn = require('debounce-fn');
+const decompress = require('decompress');
 const download = require('download');
+const loadJsonFile = require('load-json-file');
+const pathExists = require('path-exists');
 const ssri = require('ssri');
 
 const {
@@ -14,7 +16,9 @@ const {
   protocol,
   Menu,
   BrowserWindow,
+  ipcMain,
 } = require('electron');
+const { download: electronDownload } = require('electron-dl');
 const protocolServe = require('electron-protocol-serve');
 const log = require('electron-log');
 const unhandled = require('electron-unhandled');
@@ -46,12 +50,50 @@ app.on('window-all-closed', () => {
   }
 });
 
+const downloadAsset = async (url, onProgress) => {
+  const win = BrowserWindow.getFocusedWindow();
+  const directory = path.resolve(app.getPath('temp'));
+  const dl = await electronDownload(win, url, { directory, onProgress });
+  const savePath = dl.getSavePath();
+  const dataPath = path.resolve(app.getPath('userData'));
+  await decompress(savePath, dataPath);
+};
+
+ipcMain.on('download-start', (event, asset) => {
+  const onProgress = debounceFn((progress) => {
+    log.info('Download progress:', Number(progress * 100).toFixed(2));
+    if (!event.sender.isDestroyed()) {
+      event.sender.send('download-progress', progress);
+    }
+  }, { wait: 250, immediate: true });
+
+  log.info('Downloading asset:', asset);
+  const url = {
+    node: 'https://devinus.ngrok.io/rai_node.zip',
+    database: 'https://devinus.ngrok.io/data.zip',
+  }[asset];
+
+  downloadAsset(url, onProgress)
+    .then(() => {
+      if (!event.sender.isDestroyed()) {
+        event.sender.send('download-done');
+      }
+    })
+    .catch((err) => {
+      log.error(err);
+      if (!event.sender.isDestroyed()) {
+        event.sender.send('download-error', err);
+      }
+    });
+});
+
 const run = async () => {
   await appReady;
 
   const dataPath = path.resolve(app.getPath('userData'));
   const cmd = path.join(dataPath, 'rai_node');
   const exists = await pathExists(cmd);
+  global.nodeDownloaded = exists;
   if (!exists) {
     const metadata = await loadJsonFile(path.join(__dirname, 'metadata.json'));
     const { url, integrity } = metadata[process.platform];

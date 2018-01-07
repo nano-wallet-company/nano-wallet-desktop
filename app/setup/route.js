@@ -8,6 +8,11 @@ export default Route.extend({
   },
 
   @action
+  downloadDatabase() {
+    return this.transitionTo('setup.download');
+  },
+
+  @action
   createWallet() {
     return this.transitionTo('setup.backup');
   },

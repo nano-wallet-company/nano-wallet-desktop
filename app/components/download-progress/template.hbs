@@ -1,0 +1,10 @@
+{{#bs-modal as |modal|}}
+  {{#modal.header}}
+    <h4 class="modal-title">Downloading {{asset}}...</h4>
+  {{/modal.header}}
+  {{#modal.body}}
+    {{#bs-progress as |p|}}
+      {{p.bar value=value minValue=0 maxValue=1}}
+    {{/bs-progress}}
+  {{/modal.body}}
+{{/bs-modal}}

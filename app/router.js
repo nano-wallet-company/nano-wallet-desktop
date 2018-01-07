@@ -10,6 +10,7 @@ Router.map(function routerMap() {
   this.route('setup', function setupRoute() {
     this.route('import');
     this.route('backup');
+    this.route('download');
   });
 
   return this.route('wallets', { path: '/:wallet_id' }, function walletsRoute() {
