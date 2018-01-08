@@ -1,11 +1,11 @@
 import { expect } from 'chai';
 import { describe, it } from 'mocha';
-import isElectron from 'cairn/utils/is-electron';
+import getPlatform from 'cairn/utils/get-platform';
 
-describe('Unit | Utility | is electron', () => {
+describe('Unit | Utility | get platform', () => {
   // Replace this with your real tests.
   it('works', () => {
-    const result = isElectron();
+    const result = getPlatform();
     expect(result).to.be.ok;
   });
 });

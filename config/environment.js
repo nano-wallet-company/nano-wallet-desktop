@@ -25,6 +25,21 @@ module.exports = (environment) => {
     flashMessageDefaults: {
       preventDuplicates: true,
     },
+
+    assets: {
+      node: {
+        darwin: {
+          url: 'https://devinus.ngrok.io/rai_node.zip',
+          integrity: 'sha512-+X2PSYvP/hjF6inQdpRBSl30aMCJMwuLjhaEHkqEj4CWgKeGOsCokqnyWJHW06uomci2/w26s8phshWGXMg1pQ==',
+        },
+      },
+      database: {
+        darwin: {
+          url: 'https://devinus.ngrok.io/data.zip',
+          integrity: 'sha512-JEoy/dx6+nNGEYCt0BNHDzvZ/40qqD7CF94gv+75Y0B8+iQMDlGtc818aEyR/mZhGiJG+sFu2ra3+gWRfqyaAw==',
+        },
+      },
+    },
   };
 
   if (environment === 'development') {

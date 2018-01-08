@@ -6,8 +6,6 @@ const { spawn } = require('child_process');
 
 const debounceFn = require('debounce-fn');
 const decompress = require('decompress');
-const download = require('download');
-const loadJsonFile = require('load-json-file');
 const pathExists = require('path-exists');
 const ssri = require('ssri');
 
@@ -21,6 +19,8 @@ const {
 const { download: electronDownload } = require('electron-dl');
 const protocolServe = require('electron-protocol-serve');
 const log = require('electron-log');
+const debug = require('electron-debug');
+const isDev = require('electron-is-dev');
 const unhandled = require('electron-unhandled');
 const { appReady } = require('electron-util');
 const { default: installExtension, EMBER_INSPECTOR } = require('electron-devtools-installer');
@@ -50,61 +50,89 @@ app.on('window-all-closed', () => {
   }
 });
 
-const downloadAsset = async (url, onProgress) => {
-  const win = BrowserWindow.getFocusedWindow();
+const downloadAsset = async (sender, url, integrity, onProgress) => {
   const directory = path.resolve(app.getPath('temp'));
-  const dl = await electronDownload(win, url, { directory, onProgress });
+  const dl = await electronDownload(sender, url, { directory, onProgress });
   const savePath = dl.getSavePath();
+  await ssri.checkStream(fs.createReadStream(savePath), integrity);
   const dataPath = path.resolve(app.getPath('userData'));
   await decompress(savePath, dataPath);
 };
 
-ipcMain.on('download-start', (event, asset) => {
+ipcMain.on('download-start', ({ sender }, url, integrity) => {
   const onProgress = debounceFn((progress) => {
     log.info('Download progress:', Number(progress * 100).toFixed(2));
-    if (!event.sender.isDestroyed()) {
-      event.sender.send('download-progress', progress);
+    if (!sender.isDestroyed()) {
+      sender.send('download-progress', progress);
     }
   }, { wait: 250, immediate: true });
 
-  log.info('Downloading asset:', asset);
-  const url = {
-    node: 'https://devinus.ngrok.io/rai_node.zip',
-    database: 'https://devinus.ngrok.io/data.zip',
-  }[asset];
+  log.info('Downloading asset:', url, integrity);
 
-  downloadAsset(url, onProgress)
+  downloadAsset(sender, url, integrity, onProgress)
     .then(() => {
-      if (!event.sender.isDestroyed()) {
-        event.sender.send('download-done');
+      if (!sender.isDestroyed()) {
+        sender.send('download-done');
       }
     })
     .catch((err) => {
       log.error(err);
-      if (!event.sender.isDestroyed()) {
-        event.sender.send('download-error', err);
+      if (!sender.isDestroyed()) {
+        sender.send('download-error', err);
       }
     });
+});
+
+ipcMain.on('node-start', ({ sender }) => {
+  const cwd = path.resolve(app.getPath('userData'));
+  const cmd = path.join(cwd, 'rai_node');
+  const child = spawn(cmd, ['--daemon', '--data_path', cwd], {
+    // cwd,
+    // windowsHide: true,
+  });
+
+  child.on('error', (err) => {
+    log.error('Error starting node:', err);
+    if (!sender.isDestroyed()) {
+      sender.send('node-error', err);
+    }
+  });
+
+  child.stdout.on('data', data => log.info('[rai_node]', data.toString()));
+  child.stderr.on('data', data => log.error('[rai_node]', data.toString()));
+
+  mainWindow.on('closed', () => {
+    child.kill();
+  });
+
+  Object.defineProperty(global, 'isNodeStarted', {
+    get() {
+      return !child.killed;
+    },
+  });
+
+  if (!sender.isDestroyed()) {
+    sender.send('node-ready');
+  }
 });
 
 const run = async () => {
   await appReady;
 
   const dataPath = path.resolve(app.getPath('userData'));
-  const cmd = path.join(dataPath, 'rai_node');
-  const exists = await pathExists(cmd);
-  global.nodeDownloaded = exists;
-  if (!exists) {
-    const metadata = await loadJsonFile(path.join(__dirname, 'metadata.json'));
-    const { url, integrity } = metadata[process.platform];
-    await download(url, dataPath, { extract: true, useElectronNet: true });
-    await ssri.checkStream(fs.createReadStream(cmd), integrity);
-  }
+  global.isNodeStarted = false;
 
-  const subprocess = spawn(cmd, ['--daemon']);
-  subprocess.on('error', e => log.error(e));
-  subprocess.stdout.on('data', data => log.info('[rai_node]', data.toString()));
-  subprocess.stderr.on('data', data => log.error('[rai_node]', data.toString()));
+  Object.defineProperty(global, 'isNodeDownloaded', {
+    get() {
+      return pathExists.sync(path.join(dataPath, 'rai_node'));
+    },
+  });
+
+  Object.defineProperty(global, 'isDatabaseDownloaded', {
+    get() {
+      return pathExists.sync(path.join(dataPath, 'data.ldb'));
+    },
+  });
 
   const template = [
     {
@@ -133,13 +161,12 @@ const run = async () => {
   Menu.setApplicationMenu(menu);
 
   mainWindow = new BrowserWindow({
-    width: 1024,
-    height: 768,
+    width: 800,
+    height: 600,
   });
 
-  if (process.env.ELECTRON_ENV === 'development') {
+  if (isDev) {
     await installExtension(EMBER_INSPECTOR);
-    mainWindow.openDevTools();
   }
 
   const emberAppLocation = 'serve://dist';
@@ -167,10 +194,10 @@ const run = async () => {
   });
 
   mainWindow.on('closed', () => {
-    subprocess.kill();
     mainWindow = null;
   });
 };
+
 
 // Handle an unhandled error in the main thread
 //
@@ -188,5 +215,7 @@ const run = async () => {
 // resources (e.g. file descriptors, handles, etc) before shutting down the process. It is
 // not safe to resume normal operation after 'uncaughtException'.
 unhandled({ logger: log.error });
+
+debug({ showDevTools: true });
 
 run();

@@ -4,7 +4,6 @@ import { get } from '@ember/object';
 import { service } from 'ember-decorators/service';
 
 export default Route.extend({
-  @service settings: null,
   @service electron: null,
 
   // eslint-disable-next-line consistent-return
@@ -14,19 +13,8 @@ export default Route.extend({
     if (isElectron) {
       const isNodeStarted = electron.isNodeStarted();
       if (!isNodeStarted) {
-        return this.transitionTo('start');
+        return this.transitionTo('setup.start');
       }
     }
-  },
-
-  afterModel(model, transaction) {
-    const settings = this.get('settings');
-    const wallet = settings.get('wallet');
-    if (!wallet) {
-      transaction.abort();
-      return this.transitionTo('setup');
-    }
-
-    return this.transitionTo('wallets', wallet);
   },
 });

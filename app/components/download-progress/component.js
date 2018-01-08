@@ -13,9 +13,10 @@ export default Component.extend({
   @on('init')
   addListeners() {
     const downloader = this.get('downloader');
+    downloader.on('error', this, this.onError);
     downloader.on('progress', this, this.onProgress);
-    downloader.one('done', this, () => this.set('value', 0));
-    downloader.one('done', this, this.onDone);
+    downloader.on('done', this, () => this.updateProgress(0));
+    downloader.on('done', this, this.onDone);
   },
 
   @on('willDestroyElement')

@@ -6,14 +6,18 @@ const Router = EmberRouter.extend({
   rootURL: config.rootURL,
 });
 
+// eslint-disable-next-line array-callback-return
 Router.map(function routerMap() {
+  this.route('start');
+
   this.route('setup', function setupRoute() {
     this.route('import');
     this.route('backup');
     this.route('download');
+    this.route('start');
   });
 
-  return this.route('wallets', { path: '/:wallet_id' }, function walletsRoute() {
+  this.route('wallets', { path: '/:wallet_id' }, function walletsRoute() {
     this.route('overview');
     this.route('send');
     this.route('accounts', { path: '/:account_id' }, function accountsRoute() {

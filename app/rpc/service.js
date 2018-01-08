@@ -7,6 +7,7 @@ import { service } from 'ember-decorators/service';
 import { defineError } from 'ember-exex/error';
 
 export const actions = {
+  VERSION: 'version',
   WALLET_CREATE: 'wallet_create',
   WALLET_BALANCE_TOTAL: 'wallet_balance_total',
   WALLET_CHANGE_SEED: 'wallet_change_seed',
@@ -36,6 +37,10 @@ export default Service.extend({
     }
 
     return resp;
+  },
+
+  version() {
+    return this.call(actions.VERSION);
   },
 
   walletCreate() {
