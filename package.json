@@ -16,10 +16,14 @@
   "scripts": {
     "build": "ember build",
     "start": "ember serve",
-    "test": "ember test"
+    "test": "ember test",
+    "cm": "git-cz"
   },
   "config": {
-    "forge": "./ember-electron/electron-forge-config.js"
+    "forge": "./ember-electron/electron-forge-config.js",
+    "commitizen": {
+      "path": "@commitlint/prompt"
+    }
   },
   "dependencies": {
     "debounce-fn": "^1.0.0",
@@ -38,6 +42,8 @@
     "ssri": "^5.0.0"
   },
   "devDependencies": {
+    "@commitlint/config-conventional": "^5.2.3",
+    "@commitlint/prompt": "^6.0.1",
     "@ember-decorators/babel-transforms": "^0.1.1",
     "android-versions": "^1.2.2",
     "babel-eslint": "^8.2.1",
@@ -48,8 +54,10 @@
     "broccoli-asset-rev": "^2.6.0",
     "broccoli-funnel": "^2.0.1",
     "broccoli-merge-trees": "^2.0.0",
+    "commitizen": "^2.9.6",
     "corber": "1.1.12",
     "cordova": "^8.0.0",
+    "cz-conventional-changelog": "^2.1.0",
     "devtron": "^1.4.0",
     "downloadjs": "^1.4.7",
     "electron-forge": "^4.2.0",
@@ -129,6 +137,7 @@
     "eslint-plugin-hbs": "^0.1.1",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-mocha": "^4.11.0",
+    "husky": "^0.14.3",
     "loader.js": "^4.6.0"
   },
   "engines": {
