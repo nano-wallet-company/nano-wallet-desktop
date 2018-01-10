@@ -16,10 +16,24 @@ const Service = ObjectProxy.extend(PromiseProxyMixin, {
   poller: null,
 
   @on('init')
-  startPolling() {
+  setupPoller() {
     const pollboy = this.get('pollboy');
-    const poller = pollboy.add(this, this.onPoll, DEFAULT_INTERVAL).poll();
-    this.set('poller', poller);
+    this.poller = pollboy.add(this, this.onPoll, DEFAULT_INTERVAL);
+    this.poller.pause();
+  },
+
+  pausePolling() {
+    const poller = this.get('poller');
+    if (poller) {
+      poller.pause();
+    }
+  },
+
+  resumePolling() {
+    const poller = this.get('poller');
+    if (poller) {
+      poller.resume();
+    }
   },
 
   willDestroy(...args) {

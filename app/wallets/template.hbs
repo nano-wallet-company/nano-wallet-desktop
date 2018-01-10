@@ -9,18 +9,7 @@
 
     <div class="ml-auto pr-3">
       <span class="navbar-text">
-        {{#fa-icon "signal" class=(if status.isFulfilled 'text-success')}}
-          {{#bs-tooltip}}
-            <ul class="m-0 list-unstyled">
-              <li><b>{{t 'status.state'}}:</b> {{if status.isFulfilled (t 'status.online') (t 'status.connecting')}}</li>
-              {{#if status.isFulfilled}}
-                <li><b>{{t 'status.count'}}:</b> {{status.blocks.count}}</li>
-                <li><b>{{t 'status.unchecked'}}:</b> {{status.blocks.unchecked}}</li>
-                <li><b>{{t 'status.peers'}}:</b> {{status.peers.length}}</li>
-              {{/if}}
-            </ul>
-          {{/bs-tooltip}}
-        {{/fa-icon}}
+        {{status-tooltip}}
       </span>
     </div>
 
