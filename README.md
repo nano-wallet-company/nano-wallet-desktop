@@ -1,7 +1,8 @@
-# tachyon
+# Tachyon Nano Wallet
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+The official Nano desktop wallet, codename Tachyon.
+
+This is an Ember application that can build into an [Electron](https://electronjs.org/) app.
 
 ## Prerequisites
 
@@ -9,34 +10,40 @@ You will need the following things properly installed on your computer.
 
 * [Git](https://git-scm.com/)
 * [Node.js](https://nodejs.org/) (with npm)
-* [Ember CLI](https://ember-cli.com/)
 * [Google Chrome](https://google.com/chrome/)
 
 ## Installation
 
-* `git clone <repository-url>` this repository
+* `git clone https://github.com/nanocurrency/tachyon.git`
 * `cd tachyon`
 * `npm install`
 
 ## Running / Development
 
-* `ember serve`
-* Visit your app at [http://localhost:4200](http://localhost:4200).
-* Visit your tests at [http://localhost:4200/tests](http://localhost:4200/tests).
+* `npm start`
+* Visit the app at [http://localhost:4200](http://localhost:4200).
+* Visit the tests at [http://localhost:4200/tests](http://localhost:4200/tests).
 
 ### Code Generators
 
-Make use of the many generators for code, try `ember help generate` for more details
+Make use of the many generators for code, try `npx ember help generate` for more details.
 
 ### Running Tests
 
-* `ember test`
-* `ember test --server`
+* `npm test`
+* `npm test -- --server`
 
 ### Building
 
-* `ember build` (development)
-* `ember build --environment production` (production)
+* `npm run build` (development)
+* `npm run build --environment production` (production)
+
+### Using Docker Compose
+
+You can optionally develop and test using [Docker Compose](https://docs.docker.com/compose/).
+
+* `docker-compose build`
+* `docker-compose run --rm --service-ports app`
 
 ### Deploying
 
