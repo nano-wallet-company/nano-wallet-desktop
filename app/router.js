@@ -11,10 +11,11 @@ Router.map(function routerMap() {
   this.route('start');
 
   this.route('setup', function setupRoute() {
-    this.route('import');
-    this.route('backup');
     this.route('download');
     this.route('start');
+    this.route('import');
+    this.route('backup');
+    this.route('password', { path: '/:wallet_id' });
   });
 
   this.route('wallets', { path: '/:wallet_id' }, function walletsRoute() {
@@ -24,7 +25,11 @@ Router.map(function routerMap() {
       this.route('send');
       this.route('history');
     });
+    this.route('logout');
   });
+  this.route('login');
+  this.route('logout');
+  this.route('error');
 });
 
 export default Router;

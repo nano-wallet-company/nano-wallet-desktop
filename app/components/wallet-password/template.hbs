@@ -1,0 +1,16 @@
+{{#bs-modal as |modal|}}
+  {{#modal.header}}
+    <h4 class="modal-title">{{t 'wallets.password.title'}}</h4>
+  {{/modal.header}}
+  {{#modal.body}}
+    {{#bs-form model=(changeset (hash password=password) ChangePasswordValidations)
+        onSubmit=(action onSubmit wallet) as |form|}}
+      {{form.element controlType="password" label=(t 'password') property='password' required=true minlength=8}}
+    {{/bs-form}}
+  {{/modal.body}}
+  {{#modal.footer}}
+    {{#bs-button onClick=(action modal.submit) type="primary"}}
+      {{t 'wallets.password.submit'}}
+    {{/bs-button}}
+  {{/modal.footer}}
+{{/bs-modal}}

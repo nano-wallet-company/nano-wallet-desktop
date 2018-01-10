@@ -25,6 +25,6 @@ export default Route.extend({
   @action
   done(wallet, seed) {
     set(wallet, 'seed', seed);
-    return this.transitionTo('wallets', wallet.save());
+    return this.transitionTo('setup.password', wallet.save());
   },
 });

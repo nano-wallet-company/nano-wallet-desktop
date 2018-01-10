@@ -7,7 +7,7 @@ import { on } from 'ember-decorators/object/evented';
 
 import { hash } from 'rsvp';
 
-const DEFAULT_INTERVAL = 5000; // 5s
+const DEFAULT_INTERVAL = 10000; // 10s
 
 const Service = ObjectProxy.extend(PromiseProxyMixin, {
   @service pollboy: null,

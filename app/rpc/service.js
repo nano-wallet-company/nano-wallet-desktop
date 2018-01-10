@@ -19,11 +19,20 @@ export const actions = {
   SEND: 'send',
   PEERS: 'peers',
   BLOCK_COUNT: 'block_count',
+  PASSWORD_CHANGE: 'password_change',
+  PASSWORD_ENTER: 'password_enter',
+  PASSWORD_VALID: 'password_valid',
 };
 
 const RPCError = defineError({
   name: 'RPCError',
   message: 'RPC error',
+});
+
+const InvalidPasswordError = defineError({
+  name: 'InvalidPasswordError',
+  message: 'Invalid password',
+  extends: RPCError,
 });
 
 export default Service.extend({
@@ -118,5 +127,32 @@ export default Service.extend({
 
   blockCount() {
     return this.call(actions.BLOCK_COUNT);
+  },
+
+  async passwordChange(wallet, password) {
+    const { changed } = await this.call(actions.PASSWORD_CHANGE, { wallet, password });
+    if (changed !== '1') {
+      throw new RPCError('Password change failed');
+    }
+
+    return true;
+  },
+
+  async passwordEnter(wallet, password) {
+    const { valid } = await this.call(actions.PASSWORD_ENTER, { wallet, password });
+    if (valid !== '1') {
+      throw new InvalidPasswordError();
+    }
+
+    return true;
+  },
+
+  async passwordValid(wallet, password) {
+    const { valid } = await this.call(actions.PASSWORD_VALID, { wallet, password });
+    if (valid !== '1') {
+      throw new InvalidPasswordError();
+    }
+
+    return true;
   },
 });

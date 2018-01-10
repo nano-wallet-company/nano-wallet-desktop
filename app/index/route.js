@@ -4,7 +4,7 @@ import { get } from '@ember/object';
 import { service } from 'ember-decorators/service';
 
 export default Route.extend({
-  @service settings: null,
+  @service session: null,
   @service electron: null,
 
   // eslint-disable-next-line consistent-return
@@ -19,14 +19,14 @@ export default Route.extend({
     }
   },
 
-  afterModel(model, transaction) {
-    const settings = this.get('settings');
-    const wallet = settings.get('wallet');
-    if (!wallet) {
-      transaction.abort();
+  afterModel() {
+    const session = this.get('session');
+    const isAuthenticated = get(session, 'isAuthenticated');
+    if (!isAuthenticated) {
       return this.transitionTo('setup');
     }
 
+    const wallet = get(session, 'data.authenticated.wallet');
     return this.transitionTo('wallets', wallet);
   },
 });

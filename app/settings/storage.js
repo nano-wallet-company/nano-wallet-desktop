@@ -4,10 +4,7 @@ const Storage = StorageObject.extend();
 
 Storage.reopenClass({
   initialState() {
-    return {
-      wallet: null,
-      account: null,
-    };
+    return {};
   },
 });
 

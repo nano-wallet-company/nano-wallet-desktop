@@ -6,8 +6,10 @@ previous: 'Previous'
 next: 'Next'
 current: '(current)'
 import: 'Import'
+password: 'Password'
 overview: 'Overview'
 send: 'Send'
+logout: 'Logout'
 history: 'History'
 delete: 'Delete'
 seed: 'Seed'
@@ -36,9 +38,8 @@ wallets:
     copy: 'Copy Raw Seed'
     download: 'Download Mnemonic'
     help: >
-      Adhere to best practices by physically writing your seed mnemonic on a
-      piece of paper and storing it in a secure location for safe retrieval
-      should you later lose your seed.
+      Adhere to best practices by physically writing your seed mnemonic on a piece of paper and
+      storing it in a secure location for safe retrieval should you later lose your seed.
     confirm: "Are you sure you've written down your mnemonic?"
   import:
     title: 'Import Wallet'
@@ -46,6 +47,9 @@ wallets:
     help:
       seed: "Your wallet's 64 character hex seed."
       mnemonic: "Your wallet's BIP39 mnemonic."
+  password:
+    title: 'Wallet Password'
+    submit: 'Set Password'
   accounts:
     cannotDelete: 'Cannot delete an account with a balance!'
     send:
@@ -62,10 +66,16 @@ wallets:
     none: 'No accounts in wallet.'
     create: 'Create Account'
     created: 'Account created!'
+  logout:
+    title: 'Confirm Logout'
+    lead: 'Are you absolutely sure you wish to logout?'
+    warning: >
+      <strong>Warning</strong>: Logging out will forget your wallet and you wont be able to
+      retreive it again if you don't have your wallet seed!
 setup:
   lead: "Let's get your wallet setup."
   instructions: >
-    To begin using Tachyon, you must first create a new wallet or import your
-    wallet data using a seed.
+    To begin using Tachyon, you must first create a new wallet or import your wallet data using a
+    seed.
   create: 'Create New Wallet'
   import: 'Import Wallet'

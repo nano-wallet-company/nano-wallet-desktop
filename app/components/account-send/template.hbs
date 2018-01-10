@@ -1,4 +1,4 @@
-{{#bs-form model=changeset onSubmit=onSubmit as |form|}}
+{{#bs-form model=changeset onSubmit=(action onSubmit) as |form|}}
   {{#form.element controlType="power-select" label=(t 'wallets.accounts.send.source') property="source" required=true options=accounts onChange=(action onChange) as |el|}}
     {{#el.control searchField="id" searchPlaceholder=(t 'wallets.accounts.send.search') as |item|}}
       <b>{{item.id}}</b>

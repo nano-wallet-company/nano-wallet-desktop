@@ -18,6 +18,6 @@ export default Route.extend({
 
   @action
   cancel() {
-    return this.transitionTo('setup');
+    return this.transitionTo('setup.password');
   },
 });

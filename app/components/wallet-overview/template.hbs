@@ -2,10 +2,6 @@
   {{t 'wallets.overview.balance' htmlSafe=true balance=(format-amount wallet.balance)}}
 </p>
 
-<p class="small text-muted">
-  {{t 'wallet'}}: {{wallet.id}}
-</p>
-
 {{page-numbers content=content currentPage=page totalPages=totalPages}}
 
 {{#light-table table tableClassNames='table table-striped' height='auto' as |t|}}

@@ -1,0 +1,21 @@
+{{#bs-modal onHide=(route-action 'cancel') onSubmit=(route-action 'logout') as |modal|}}
+  {{#modal.header}}
+    <h4 class="modal-title">
+      {{fa-icon 'exclamation-triangle' class="text-danger"}}
+      {{t 'wallets.logout.title'}}
+    </h4>
+  {{/modal.header}}
+  {{#modal.body}}
+    <p class="lead">{{t 'wallets.logout.lead'}}</p>
+    <p>{{t 'wallets.logout.warning' htmlSafe=true}}</p>
+  {{/modal.body}}
+  {{#modal.footer}}
+    {{#bs-button onClick=(action modal.close) type="secondary"}}
+      {{t 'cancel'}}
+    {{/bs-button}}
+    {{#bs-button onClick=(action modal.submit) type="danger"}}
+      {{fa-icon 'sign-out'}}
+      {{t 'logout'}}
+    {{/bs-button}}
+  {{/modal.footer}}
+{{/bs-modal}}

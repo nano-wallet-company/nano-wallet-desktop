@@ -12,6 +12,11 @@ module.exports = (defaults) => {
       includePolyfill: true,
     },
 
+    'ember-service-worker': {
+      versionStrategy: 'every-build',
+      registrationStrategy: 'async',
+    },
+
     'ember-bootstrap': {
       bootstrapVersion: 4,
       importBootstrapFont: false,

@@ -1,15 +1,20 @@
 import Route from '@ember/routing/route';
-import { getProperties } from '@ember/object';
 
+import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
+
+import { action } from 'ember-decorators/object';
 import { service } from 'ember-decorators/service';
 
-export default Route.extend({
-  @service settings: null,
-  @service flashMessages: null,
+export default Route.extend(AuthenticatedRouteMixin, {
+  @service session: null,
 
-  async afterModel(model) {
-    const settings = this.get('settings');
-    const serialized = this.store.serialize(model, { includeId: true });
-    settings.setProperties(getProperties(serialized, 'wallet'));
+  @action
+  cancel() {
+    return window.history.back();
+  },
+
+  @action
+  logout() {
+    return this.transitionTo('logout');
   },
 });

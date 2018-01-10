@@ -1,11 +1,11 @@
 import { expect } from 'chai';
-import { it, describe } from 'mocha';
+import { describe, it } from 'mocha';
 import { setupTest } from 'ember-mocha';
 
-describe('Unit | Route | application', () => {
-  setupTest('route:application', {
+describe('Unit | Route | setup/password', () => {
+  setupTest('route:setup/password', {
     // Specify the other units that are required for this test.
-    needs: ['service:intl', 'service:session'],
+    needs: ['service:rpc', 'service:session'],
   });
 
   it('exists', function () {
