@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { describe, it } from 'mocha';
-import getPlatform from 'tachyon/utils/get-platform';
+import getPlatform from '@nanocurrency/tachyon/utils/get-platform';
 
 describe('Unit | Utility | get platform', () => {
   // Replace this with your real tests.

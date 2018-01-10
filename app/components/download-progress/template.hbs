@@ -1,6 +1,6 @@
 {{#bs-modal as |modal|}}
   {{#modal.header}}
-    <h4 class="modal-title">Downloading {{asset}}...</h4>
+    <h4 class="modal-title">{{t 'downloading' asset=(t asset)}}</h4>
   {{/modal.header}}
   {{#modal.body}}
     {{#bs-progress as |p|}}

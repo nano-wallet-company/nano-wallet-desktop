@@ -1,8 +1,10 @@
 /* eslint-env node */
 
+const { name: modulePrefix } = require('../package');
+
 module.exports = (environment) => {
   const ENV = {
-    modulePrefix: 'tachyon',
+    modulePrefix,
     environment,
     rootURL: '',
     locationType: 'hash',

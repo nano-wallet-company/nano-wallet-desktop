@@ -5,7 +5,7 @@ import { setupTest } from 'ember-mocha';
 describe('Unit | Route | setup/start', () => {
   setupTest('route:setup/start', {
     // Specify the other units that are required for this test.
-    // needs: ['controller:foo']
+    needs: ['service:electron'],
   });
 
   it('exists', function () {
