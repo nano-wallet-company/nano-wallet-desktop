@@ -12,6 +12,7 @@ module.exports = {
     Chrome: {
       mode: 'ci',
       args: [
+        '--no-sandbox',
         '--disable-gpu',
         '--headless',
         '--remote-debugging-port=0',

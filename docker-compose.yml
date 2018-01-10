@@ -10,6 +10,4 @@ services:
     volumes:
       - .:/app
       - /app/node_modules
-      - /app/dist
-      - /app/tmp
     env_file: .env

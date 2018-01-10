@@ -1,6 +1,9 @@
 const path = require('path');
 
+const { productName: packageDisplayName } = require('../package');
+
 const icon = path.join(__dirname, 'icons', 'app');
+const packageName = packageDisplayName.split(' ').join('');
 
 module.exports = {
   make_targets: {
@@ -17,19 +20,17 @@ module.exports = {
   },
   electronPackagerConfig: {
     icon,
-    packageManager: 'npm',
   },
-  electronWinstallerConfig: {
-    name: 'Tachyon',
-  },
+  electronWinstallerConfig: {},
+  electronInstallerDMG: {},
   electronInstallerDebian: {},
   electronInstallerRedhat: {},
   github_repository: {
-    owner: '',
-    name: '',
+    owner: 'nanocurrency',
+    name: 'tachyon',
   },
   windowsStoreConfig: {
-    packageName: '',
-    name: 'Tachyon',
+    packageName,
+    packageDisplayName,
   },
 };

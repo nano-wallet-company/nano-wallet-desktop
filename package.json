@@ -4,12 +4,15 @@
   "productName": "Nano Wallet",
   "description": "The official Nano desktop wallet",
   "license": "BSD-2-Clause",
-  "author": "Devin Alexander Torres <d@devinus.io>",
+  "author": "Nano Labs <engineering@nano.co>",
   "directories": {
     "doc": "doc",
     "test": "tests"
   },
-  "repository": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nanocurrency/tachyon.git"
+  },
   "scripts": {
     "build": "ember build",
     "start": "ember serve",

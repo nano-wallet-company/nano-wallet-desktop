@@ -9,8 +9,10 @@
 /bower_components
 
 # misc
+.config
 .env
 .git
+.local
 /.sass-cache
 /connect.lock
 /coverage/*
