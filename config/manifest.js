@@ -6,9 +6,9 @@ module.exports = (/* environment, appConfig */) => {
   // supported properties
 
   return {
-    name: 'Cairn',
-    short_name: 'Cairn',
-    description: 'RaiBlocks Wallet',
+    name: 'Nano Wallet',
+    short_name: 'Nano Wallet',
+    description: 'The official Nano desktop wallet',
     start_url: '/',
     display: 'standalone',
     background_color: '#e9ecef',

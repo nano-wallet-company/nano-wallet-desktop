@@ -1,4 +1,4 @@
-product: 'Cairn'
+product: 'Tachyon'
 cancel: 'Cancel'
 done: 'Done'
 loading: 'Loading...'
@@ -61,7 +61,7 @@ wallets:
 setup:
   lead: "Let's get your wallet setup."
   instructions: >
-    To begin using Cairn, you must first create a new wallet or import your
+    To begin using Tachyon, you must first create a new wallet or import your
     wallet data using a seed.
   create: 'Create New Wallet'
   import: 'Import Wallet'

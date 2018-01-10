@@ -2,7 +2,7 @@
 
 module.exports = (environment) => {
   const ENV = {
-    modulePrefix: 'cairn',
+    modulePrefix: 'tachyon',
     environment,
     rootURL: '',
     locationType: 'hash',

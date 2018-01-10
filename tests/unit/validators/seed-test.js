@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { describe, it } from 'mocha';
-import validateSeed from 'cairn/validators/seed';
+import validateSeed from 'tachyon/validators/seed';
 
 describe('Unit | Validator | seed', () => {
   // Replace this with your real tests.

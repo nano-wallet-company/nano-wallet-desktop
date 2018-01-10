@@ -20,7 +20,7 @@ module.exports = {
     packageManager: 'npm',
   },
   electronWinstallerConfig: {
-    name: 'Cairn',
+    name: 'Tachyon',
   },
   electronInstallerDebian: {},
   electronInstallerRedhat: {},
@@ -30,6 +30,6 @@ module.exports = {
   },
   windowsStoreConfig: {
     packageName: '',
-    name: 'Cairn',
+    name: 'Tachyon',
   },
 };

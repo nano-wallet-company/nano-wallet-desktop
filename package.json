@@ -1,7 +1,8 @@
 {
-  "name": "cairn",
+  "name": "@nanocurrency/tachyon",
   "version": "0.1.0",
-  "description": "RaiBlocks Wallet",
+  "productName": "Nano Wallet",
+  "description": "The official Nano desktop wallet",
   "license": "BSD-2-Clause",
   "author": "Devin Alexander Torres <d@devinus.io>",
   "directories": {
@@ -14,7 +15,6 @@
     "start": "ember serve",
     "test": "ember test"
   },
-  "productName": "Cairn",
   "config": {
     "forge": "./ember-electron/electron-forge-config.js"
   },

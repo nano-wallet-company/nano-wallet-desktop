@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { describe, it } from 'mocha';
-import toRaw from 'cairn/utils/to-raw';
+import toRaw from 'tachyon/utils/to-raw';
 
 describe('Unit | Utility | to raw', () => {
   // Replace this with your real tests.

@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { describe, it } from 'mocha';
 import EmberObject from '@ember/object';
-import PagedMixin from 'cairn/mixins/paged';
+import PagedMixin from 'tachyon/mixins/paged';
 
 describe('Unit | Mixin | paged', () => {
   // Replace this with your real tests.
