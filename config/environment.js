@@ -1,9 +1,17 @@
 /* eslint-env node */
 
-const { name: modulePrefix } = require('../package');
+const {
+  version,
+  description,
+  name: modulePrefix,
+  productName: title,
+} = require('../package');
 
 module.exports = (environment) => {
   const ENV = {
+    title,
+    version,
+    description,
     modulePrefix,
     environment,
     rootURL: '',

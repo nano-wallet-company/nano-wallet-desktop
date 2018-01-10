@@ -1,14 +1,16 @@
 /* eslint-env node */
 
+const { description, productName: name } = require('../package');
+
 // eslint-disable-next-line arrow-body-style
 module.exports = (/* environment, appConfig */) => {
   // See https://github.com/san650/ember-web-app#documentation for a list of
   // supported properties
 
   return {
-    name: 'Nano Wallet',
-    short_name: 'Nano Wallet',
-    description: 'The official Nano desktop wallet',
+    name,
+    description,
+    short_name: name,
     start_url: '/',
     display: 'standalone',
     background_color: '#e9ecef',
