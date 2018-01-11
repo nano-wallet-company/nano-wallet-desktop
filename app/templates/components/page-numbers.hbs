@@ -1,29 +1,31 @@
-<nav aria-label="Pagination">
-  <ul class="pagination">
-    <li class="page-item {{if (not canStepBackward) 'disabled'}}">
-      <a class="page-link" href="#" tabindex="-1" {{action 'incrementPage' -1}}>
-        {{fa-icon 'chevron-left' ariaLabel=(t 'previous')}}
-      </a>
-    </li>
-
-    {{#each pageItems as |item|}}
-      {{#if item.dots}}
-        <li class="page-item disabled">...</li>
-      {{/if}}
-      <li class="page-item {{if item.current 'active'}}">
-        <a class="page-link" href="#" {{action 'pageClicked' item.page}}>
-          {{item.page}}
-          {{#if item.current}}
-            <span class="sr-only">{{t 'current'}}</span>
-          {{/if}}
+{{#if hasPages}}
+  <nav aria-label="Pagination">
+    <ul class="pagination">
+      <li class="page-item {{if (not canStepBackward) 'disabled'}}">
+        <a class="page-link" href="#" tabindex="-1" {{action 'incrementPage' -1}}>
+          {{fa-icon 'chevron-left' ariaLabel=(t 'previous')}}
         </a>
       </li>
-    {{/each}}
 
-    <li class="page-item {{if (not canStepForward) 'disabled'}}">
-      <a class="page-link" href="#" {{action 'incrementPage' 1}}>
-        {{fa-icon 'chevron-right' ariaLabel=(t 'next')}}
-      </a>
-    </li>
-  </ul>
-</nav>
+      {{#each pageItems as |item|}}
+        {{#if item.dots}}
+          <li class="page-item disabled">...</li>
+        {{/if}}
+        <li class="page-item {{if item.current 'active'}}">
+          <a class="page-link" href="#" {{action 'pageClicked' item.page}}>
+            {{item.page}}
+            {{#if item.current}}
+              <span class="sr-only">{{t 'current'}}</span>
+            {{/if}}
+          </a>
+        </li>
+      {{/each}}
+
+      <li class="page-item {{if (not canStepForward) 'disabled'}}">
+        <a class="page-link" href="#" {{action 'incrementPage' 1}}>
+          {{fa-icon 'chevron-right' ariaLabel=(t 'next')}}
+        </a>
+      </li>
+    </ul>
+  </nav>
+{{/if}}

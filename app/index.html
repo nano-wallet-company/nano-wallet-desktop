@@ -16,6 +16,13 @@
     {{content-for "head-footer"}}
   </head>
   <body>
+    <div class="ember-load-indicator">
+      <picture>
+        <source type="image/svg+xml" srcset="{{rootURL}}images/brand-icon.svg">
+        <img width="192" height="192" src="{{rootURL}}assets/icons/icon-192.png" alt="{{content-for 'config.description'}}">
+      </picture>
+    </div>
+
     {{content-for "body"}}
 
     <script src="{{rootURL}}assets/vendor.js"></script>

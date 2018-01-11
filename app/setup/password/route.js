@@ -10,9 +10,11 @@ export default Route.extend({
 
   @action
   async changePassword(wallet, changeset) {
+    const session = this.get('session');
     const walletId = get(wallet, 'id');
     const password = get(changeset, 'password');
     await this.get('rpc').passwordChange(walletId, password);
-    return this.get('session').authenticate('authenticator:wallet', { password, wallet: walletId });
+    await session.invalidate();
+    return session.authenticate('authenticator:wallet', { password, wallet: walletId });
   },
 });

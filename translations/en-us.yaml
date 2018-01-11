@@ -1,4 +1,4 @@
-product: 'Tachyon'
+product: 'Nano Wallet'
 cancel: 'Cancel'
 done: 'Done'
 loading: 'Loading...'
@@ -62,7 +62,7 @@ wallets:
     history:
       none: 'No history found.'
   overview:
-    balance: 'Total Balance: <span class="text-muted">&#11041;</span> {balance}'
+    balance: 'Total Balance: {balance}'
     none: 'No accounts in wallet.'
     create: 'Create Account'
     created: 'Account created!'
