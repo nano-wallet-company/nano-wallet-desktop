@@ -1,0 +1,81 @@
+product: 'Nano Desktop'
+cancel: 'Cancelar'
+done: 'Realizado'
+loading: 'Cargando...'
+previous: 'Anterior'
+next: 'Proximo'
+current: '(actual)'
+import: 'Importar'
+password: 'Contraseña'
+overview: 'Resumen'
+send: 'Enviar'
+logout: 'Salir'
+history: 'Historial'
+delete: 'Borrar'
+seed: 'Seed'
+mnemonic: 'Mnemonic'
+type: 'Tipo'
+amount: 'Cantidad'
+wallet: 'Cartera'
+account: 'Cuenta'
+balance: 'Balance'
+pending: 'Pendiente'
+node: 'nodo'
+data: 'datos'
+downloading: 'Descargando {asset}'
+starting: 'Encendiendo nodo'
+status:
+  state: 'Estado'
+  online: 'Conectado'
+  connecting: 'Conectando'
+  count: 'Cantidad de Bloques'
+  unchecked: 'Bloques no comprobados'
+  peers: 'Compañeros'
+wallets:
+  backup:
+    title: 'Seed de reserva'
+    lead: 'Aqui está tu seed mnemonic fácil de recordar para tu nueva Cartera.'
+    copy: 'Copiar Seed Crudo'
+    download: 'Descargar Mnemonic'
+    help: >
+      Aderir a las mejores practicas escribiendo tu seed mnemonic en un pedazo de papel y
+      guardandolo en un lugar seguro donde lo puedas obtener seguramente en caso que pierdas tu seed.
+    confirm: 'Estás seguro que escribiste tu mnemonic?'
+  import:
+    title: 'Importar Cartera'
+    copied: 'El Seed fue copiada al clipboard!'
+    help:
+      seed: 'El seed de 64 caracteres hex de tu cartera.'
+      mnemonic: 'El BIP39 mnemonic de tu cartera.'
+  password:
+    title: 'Contraseña de Cartera'
+    submit: 'Cambiar contraseña'
+  accounts:
+    cannotDelete: 'No puede borrar una cuenta con balance!'
+    send:
+      source: 'Cuenta origen'
+      search: 'Buscar cuenta'
+      destination: 'Cuenta Destinataria'
+      placeholder: 'e.g. xrb_3e3j5tkog48pnny9dmfzj1r16pg8t1e76dz5tmac6iq689wyjfpiij4txtdo'
+      amount: 'Cantidad (XRB)'
+      insufficient: 'La cantidad es mayor que el balance total en la cuenta.'
+    history:
+      none: 'No hay historial.'
+  overview:
+    balance: 'Balance Total: {balance}'
+    none: 'No hay cuentas en la cartera.'
+    create: 'Crear Cuenta'
+    created: 'Cuenta creada!'
+  logout:
+    title: 'Confirmar Salida'
+    lead: 'Estás seguro que quieres salir?'
+    warning: >
+      <strong>Precaución</strong>: Salir provocara que tu cartera se olvide y no podras recuperarla
+      otra vez sin el seed!
+setup:
+  lead: 'Vamos, configuremos tu cartera.'
+  instructions: >
+    Para comenzar a usar Nano Desktop, primero tienes que crear una cartera o importar la data de
+    tu cartera utililizando el seed.
+  create: 'Crear cartera nueva'
+  import: 'Importar Cartera'
