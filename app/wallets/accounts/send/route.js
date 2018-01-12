@@ -1,4 +1,5 @@
 import Route from '@ember/routing/route';
+import { get, set } from '@ember/object';
 
 import { service } from 'ember-decorators/service';
 import { computed, action } from 'ember-decorators/object';

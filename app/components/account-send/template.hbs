@@ -1,17 +1,25 @@
-{{#bs-form model=changeset onSubmit=(action onSubmit) as |form|}}
-  {{#form.element controlType="power-select" label=(t 'wallets.accounts.send.source') property="source" required=true options=accounts onChange=(action onChange) as |el|}}
-    {{#el.control searchField="id" searchPlaceholder=(t 'wallets.accounts.send.search') as |item|}}
-      <b>{{item.id}}</b>
-    {{/el.control}}
-  {{/form.element}}
+{{#with (changeset block SendValidations) as |model|}}
+  {{#bs-form model=model onSubmit=(action onSubmit) as |form|}}
+    {{#form.element controlType="power-select" label=(t 'wallets.accounts.send.source')
+        required=true options=accounts property='source' onChange=(action onChange) as |el|}}
+      {{#el.control searchField="id" searchPlaceholder=(t 'wallets.accounts.send.search') as |item|}}
+        {{item.id}}
+      {{/el.control}}
+    {{/form.element}}
 
-  {{form.element controlType="text" label=(t 'wallets.accounts.send.destination') property="destination" autocomplete='on' minlength=64 maxlength=64 required=true pattern="^xrb_[a-z0-9]{60}$" placeholder=(t 'wallets.accounts.send.placeholder')}}
+    {{form.element controlType="text" label=(t 'wallets.accounts.send.destination') property="destination"
+        autocomplete='on' minlength=64 maxlength=64 required=true pattern="^xrb_[a-z0-9]{60}$"
+        placeholder=(t 'wallets.accounts.send.placeholder')}}
 
-  {{form.element controlType="text" label=(t 'wallets.accounts.send.amount') model=(changeset (hash amount=amount) ChangeAmountValidations) property='amount' required=true minlength=1 pattern="^\d*\.?\d+$" onChange=(action 'changeAmount')}}
+    {{form.element controlType="text" label=(t 'wallets.accounts.send.amount')
+        model=(changeset (hash amount=null) ChangeAmountValidations) property='amount'
+        required=true minlength=1 pattern="^\d*\.?\d+$"
+        onChange=(action 'changeAmount' model)}}
 
-  <div role="group" class="d-flex justify-content-center">
-    {{#bs-button size="lg" type="primary" icon="fa fa-paper-plane" buttonType="submit"}}
-      {{t 'send'}}
-    {{/bs-button}}
-  </div>
-{{/bs-form}}
+    <div role="group" class="d-flex justify-content-center">
+      {{#bs-button size="lg" type="primary" icon="fa fa-paper-plane" buttonType="submit"}}
+        {{t 'send'}}
+      {{/bs-button}}
+    </div>
+  {{/bs-form}}
+{{/with}}

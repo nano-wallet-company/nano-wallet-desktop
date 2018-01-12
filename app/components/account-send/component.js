@@ -22,17 +22,8 @@ export default Component.extend({
   accounts: null,
   block: null,
 
-  changeset: null,
-  amount: null,
-
-  @on('init')
-  createChangeset() {
-    const block = this.get('block');
-    this.changeset = new Changeset(block, lookupValidator(SendValidations), SendValidations);
-  },
-
   @action
-  async changeAmount(amount, changeset) {
+  async changeAmount(model, amount, changeset) {
     set(changeset, 'amount', amount);
     await changeset.validate();
     if (get(changeset, 'isInvalid')) {
@@ -49,7 +40,7 @@ export default Component.extend({
     }
 
     const raw = toRaw(amount);
-    this.get('changeset').set('amount', raw);
+    set(model, 'amount', raw);
     return false;
   },
 });

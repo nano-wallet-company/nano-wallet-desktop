@@ -4,6 +4,10 @@ import { service } from 'ember-decorators/service';
 export default DS.Adapter.extend({
   @service rpc: null,
 
+  shouldReloadRecord() {
+    return true;
+  },
+
   createRecord(store, type, snapshot) {
     const {
       wallet,

@@ -16,9 +16,9 @@ export default Route.extend({
         return this.transitionTo('setup.download', { queryParams: { asset: 'node' } });
       }
 
-      const isDatabaseDownloaded = electron.isDatabaseDownloaded();
-      if (!isDatabaseDownloaded) {
-        return this.transitionTo('setup.download', { queryParams: { asset: 'database' } });
+      const isDataDownloaded = electron.isDataDownloaded();
+      if (!isDataDownloaded) {
+        return this.transitionTo('setup.download', { queryParams: { asset: 'data' } });
       }
     }
   },

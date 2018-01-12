@@ -65,8 +65,8 @@ export default Service.extend(Evented, {
     return this.getRemoteGlobal('isNodeDownloaded', false);
   },
 
-  isDatabaseDownloaded() {
-    return this.getRemoteGlobal('isDatabaseDownloaded', false);
+  isDataDownloaded() {
+    return this.getRemoteGlobal('isDataDownloaded', false);
   },
 
   isNodeStarted() {

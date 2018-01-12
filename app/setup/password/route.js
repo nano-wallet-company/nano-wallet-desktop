@@ -14,7 +14,6 @@ export default Route.extend({
     const walletId = get(wallet, 'id');
     const password = get(changeset, 'password');
     await this.get('rpc').passwordChange(walletId, password);
-    await session.invalidate();
     return session.authenticate('authenticator:wallet', { password, wallet: walletId });
   },
 });
