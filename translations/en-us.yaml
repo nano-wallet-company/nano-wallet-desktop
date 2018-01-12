@@ -1,4 +1,4 @@
-product: 'Nano Wallet'
+product: 'Nano Desktop'
 cancel: 'Cancel'
 done: 'Done'
 loading: 'Loading...'
@@ -21,7 +21,7 @@ account: 'Account'
 balance: 'Balance'
 pending: 'Pending'
 node: 'node'
-database: 'database'
+data: 'data'
 downloading: 'Downloading {asset}'
 starting: 'Starting node'
 status:
@@ -75,7 +75,7 @@ wallets:
 setup:
   lead: "Let's get your wallet setup."
   instructions: >
-    To begin using Tachyon, you must first create a new wallet or import your wallet data using a
-    seed.
+    To begin using Nano Desktop, you must first create a new wallet or import your wallet data
+    using a seed.
   create: 'Create New Wallet'
   import: 'Import Wallet'

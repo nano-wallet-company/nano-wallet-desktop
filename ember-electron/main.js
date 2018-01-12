@@ -87,8 +87,8 @@ ipcMain.on('node-start', ({ sender }) => {
   const cwd = path.resolve(app.getPath('userData'));
   const cmd = path.join(cwd, 'rai_node');
   const child = spawn(cmd, ['--daemon', '--data_path', cwd], {
-    // cwd,
-    // windowsHide: true,
+    cwd,
+    windowsHide: true,
   });
 
   child.on('error', (err) => {
@@ -128,7 +128,7 @@ const run = async () => {
     },
   });
 
-  Object.defineProperty(global, 'isDatabaseDownloaded', {
+  Object.defineProperty(global, 'isDataDownloaded', {
     get() {
       return pathExists.sync(path.join(dataPath, 'data.ldb'));
     },
@@ -197,7 +197,6 @@ const run = async () => {
     mainWindow = null;
   });
 };
-
 
 // Handle an unhandled error in the main thread
 //

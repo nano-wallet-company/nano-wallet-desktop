@@ -39,14 +39,14 @@ module.exports = (environment) => {
     assets: {
       node: {
         darwin: {
-          url: 'https://devinus.ngrok.io/rai_node.zip',
-          integrity: 'sha512-+X2PSYvP/hjF6inQdpRBSl30aMCJMwuLjhaEHkqEj4CWgKeGOsCokqnyWJHW06uomci2/w26s8phshWGXMg1pQ==',
+          url: 'https://devinus.ngrok.io/node.zip',
+          integrity: 'sha512-U43/C5x+dGKBU0AtPXuKq7lE1XMMyNccaDhnqM6+YnBH9us+W7z9Q2rpN1ba0DEu4BufM0aEOQrtno+jo14Ueg==',
         },
       },
-      database: {
+      data: {
         darwin: {
           url: 'https://devinus.ngrok.io/data.zip',
-          integrity: 'sha512-JEoy/dx6+nNGEYCt0BNHDzvZ/40qqD7CF94gv+75Y0B8+iQMDlGtc818aEyR/mZhGiJG+sFu2ra3+gWRfqyaAw==',
+          integrity: 'sha512-KFFgyBboRaFjGM8bulJAeuYay0saBfgtf6i/WX3OXaO4T4vlJX0n0MjG1TApTpgSn32zNMTIdt3yMf8qBAFqJA==',
         },
       },
     },
