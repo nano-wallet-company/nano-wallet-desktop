@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { describe, it } from 'mocha';
-import validateAmount from '@nanocurrency/tachyon/validators/amount';
+import validateAmount from '@nanocurrency/nano-desktop/validators/amount';
 
 describe('Unit | Validator | amount', () => {
   // Replace this with your real tests.

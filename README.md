@@ -1,6 +1,6 @@
-# Tachyon Nano Wallet
+# Nano Desktop
 
-The official Nano desktop wallet, codename Tachyon.
+The official Nano wallet for desktop and web.
 
 This is an Ember application that can build into an [Electron](https://electronjs.org/) app.
 
@@ -14,8 +14,8 @@ You will need the following things properly installed on your computer.
 
 ## Installation
 
-* `git clone https://github.com/nanocurrency/tachyon.git`
-* `cd tachyon`
+* `git clone https://github.com/nanocurrency/nano-desktop.git`
+* `cd nano-desktop`
 * `npm install`
 
 ## Running / Development

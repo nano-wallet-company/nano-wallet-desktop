@@ -1,8 +1,8 @@
 {
-  "name": "@nanocurrency/tachyon",
-  "version": "0.1.0",
-  "productName": "Nano Wallet",
-  "description": "The official Nano desktop wallet",
+  "name": "@nanocurrency/nano-desktop",
+  "version": "0.0.1",
+  "productName": "Nano Desktop",
+  "description": "The official Nano wallet for desktop and web",
   "license": "BSD-2-Clause",
   "author": "Nano Labs <engineering@nano.co>",
   "directories": {
@@ -11,12 +11,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nanocurrency/tachyon.git"
+    "url": "git+https://github.com/nanocurrency/nano-desktop.git"
   },
   "scripts": {
     "build": "ember build",
     "start": "ember serve",
     "test": "ember test",
+    "precommit": "lint-staged",
     "cm": "git-cz"
   },
   "config": {
@@ -24,6 +25,12 @@
     "commitizen": {
       "path": "@commitlint/prompt"
     }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ]
   },
   "dependencies": {
     "debounce-fn": "^1.0.0",
@@ -42,8 +49,8 @@
     "ssri": "^5.0.0"
   },
   "devDependencies": {
-    "@commitlint/config-conventional": "^5.2.3",
-    "@commitlint/prompt": "^6.0.1",
+    "@commitlint/config-conventional": "^6.0.2",
+    "@commitlint/prompt": "^6.0.2",
     "@ember-decorators/babel-transforms": "^0.1.1",
     "android-versions": "^1.2.2",
     "babel-eslint": "^8.2.1",
@@ -101,7 +108,7 @@
     "ember-config-service": "^0.2.0",
     "ember-crumbly": "^1.0.8",
     "ember-data": "^2.18.0",
-    "ember-decorators": "^1.3.3",
+    "ember-decorators": "^1.3.4",
     "ember-electron": "^2.7.2",
     "ember-exex": "^0.1.13",
     "ember-export-application-global": "^2.0.0",
@@ -141,6 +148,7 @@
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-mocha": "^4.11.0",
     "husky": "^0.14.3",
+    "lint-staged": "^6.0.0",
     "loader.js": "^4.6.0"
   },
   "engines": {

@@ -1,12 +1,8 @@
 import Component from '@ember/component';
 import { get, set } from '@ember/object';
 
-import Changeset from 'ember-changeset';
-import lookupValidator from 'ember-changeset-validations';
-
 import { service } from 'ember-decorators/service';
 import { action } from 'ember-decorators/object';
-import { on } from 'ember-decorators/object/evented';
 
 import SendValidations from '../../validations/send';
 import ChangeAmountValidations from '../../validations/change-amount';

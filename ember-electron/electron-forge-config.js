@@ -27,7 +27,7 @@ module.exports = {
   electronInstallerRedhat: {},
   github_repository: {
     owner: 'nanocurrency',
-    name: 'tachyon',
+    name: 'nano-desktop',
   },
   windowsStoreConfig: {
     packageName,
