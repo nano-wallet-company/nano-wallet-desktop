@@ -29,11 +29,15 @@ describe('Integration | Component | wallet backup', () => {
       accounts: ['1'],
     };
 
+    const seed = '74F2B37AAD20F4A260F0A5B3CB3D7FB51673212263E58A380BC10474BB039CEE';
+
     const onDone = () => false;
     const onCancel = () => false;
 
-    this.setProperties({ wallet, onDone, onCancel });
-    this.render(hbs`{{wallet-backup wallet=wallet onDone=onDone onCancel=onCancel}}`);
+    this.setProperties({
+      wallet, seed, onDone, onCancel,
+    });
+    this.render(hbs`{{wallet-backup wallet=wallet seed=seed onDone=onDone onCancel=onCancel}}`);
     expect(this.$()).to.have.length(1);
   });
 });

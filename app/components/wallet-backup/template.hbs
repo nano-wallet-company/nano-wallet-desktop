@@ -7,12 +7,12 @@
       {{flash-message class="d-flex w-100" flash=flash}}
     {{/each}}
     <p class="lead">{{t 'wallets.backup.lead'}}</p>
-    <p><code>{{mnemonic}}</code></p>
+    <p><code>{{mnemonic seed}}</code></p>
     <p>
       {{#copy-button class="btn btn-sm btn-outline-danger" clipboardText=seed success=(action 'copySeed')}}
         {{fa-icon 'copy'}} {{t 'wallets.backup.copy'}}
       {{/copy-button}}
-      {{#bs-button size='sm' type='outline-primary' class="ml-1" onClick=(action 'downloadMnemonic' mnemonic)}}
+      {{#bs-button size='sm' type='outline-primary' class="ml-1" onClick=(action 'downloadMnemonic' (mnemonic seed))}}
         {{fa-icon 'download'}} {{t 'wallets.backup.download'}}
       {{/bs-button}}
     </p>

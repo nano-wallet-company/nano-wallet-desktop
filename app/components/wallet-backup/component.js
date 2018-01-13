@@ -1,14 +1,15 @@
 import Component from '@ember/component';
-import { reject } from 'rsvp';
+import { set } from '@ember/object';
 
 import { action } from 'ember-decorators/object';
+
+import { reject } from 'rsvp';
 
 import downloadjs from 'npm:downloadjs';
 
 export default Component.extend({
   wallet: null,
   seed: null,
-  mnemonic: null,
 
   onCancel: null,
   onDone: null,
@@ -28,7 +29,7 @@ export default Component.extend({
   },
 
   @action
-  confirmDone() {
+  confirmDone(wallet, seed) {
     const needsConfirm = this.get('needsConfirm');
     if (needsConfirm) {
       this.toggleProperty('hasConfirmed');
@@ -40,6 +41,7 @@ export default Component.extend({
       return reject();
     }
 
-    return true;
+    set(wallet, 'seed', seed);
+    return wallet;
   },
 });

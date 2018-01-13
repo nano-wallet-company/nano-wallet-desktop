@@ -1,19 +1,16 @@
 import Route from '@ember/routing/route';
-import { set } from '@ember/object';
 
 import { action } from 'ember-decorators/object';
 
-import bip39 from 'npm:bip39';
+import generateSeed from '../../utils/generate-seed';
 
 export default Route.extend({
   model() {
     const wallet = this.modelFor('setup');
-    const seed = bip39.mnemonicToSeedHex(bip39.generateMnemonic()).substr(0, 64);
-    const mnemonic = bip39.entropyToMnemonic(seed);
+    const seed = generateSeed();
     return {
       wallet,
       seed,
-      mnemonic,
     };
   },
 
@@ -23,8 +20,7 @@ export default Route.extend({
   },
 
   @action
-  done(wallet, seed) {
-    set(wallet, 'seed', seed);
+  done(wallet) {
     return this.transitionTo('setup.password', wallet.save());
   },
 });
