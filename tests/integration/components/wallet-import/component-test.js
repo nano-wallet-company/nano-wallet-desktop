@@ -29,11 +29,18 @@ describe('Integration | Component | wallet import', () => {
       accounts: ['1'],
     };
 
+    const onChange = () => false;
     const onSubmit = () => false;
     const onCancel = () => false;
 
-    this.setProperties({ wallet, onSubmit, onCancel });
-    this.render(hbs`{{wallet-import wallet=wallet onSubmit=onSubmit onCancel=onCancel}}`);
+    this.setProperties({
+      wallet,
+      onChange,
+      onSubmit,
+      onCancel,
+    });
+
+    this.render(hbs`{{wallet-import wallet=wallet onChange=onChange onSubmit=onSubmit onCancel=onCancel}}`);
     expect(this.$()).to.have.length(1);
   });
 });

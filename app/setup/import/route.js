@@ -1,5 +1,4 @@
 import Route from '@ember/routing/route';
-import { get, set } from '@ember/object';
 
 import { action } from 'ember-decorators/object';
 
@@ -10,14 +9,17 @@ export default Route.extend({
   },
 
   @action
+  changeType(type) {
+    return this.transitionTo({ queryParams: { type } });
+  },
+
+  @action
   saveWallet(wallet) {
     return wallet.save();
   },
 
   @action
-  changeSeed(wallet, changeset) {
-    const seed = get(changeset, 'seed');
-    set(wallet, 'seed', seed);
+  changeSeed(wallet) {
     return this.transitionTo('setup.password', wallet.save());
   },
 });

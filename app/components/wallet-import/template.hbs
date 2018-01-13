@@ -3,33 +3,34 @@
     <h4 class="modal-title">{{t 'wallets.import.title'}}</h4>
   {{/modal.header}}
   {{#modal.body}}
-    {{#bs-form model=(changeset (hash type=type seed=seed mnemonic=mnemonic) ImportWalletValidations)
-        onSubmit=(action (queue (action 'convertMnemonic') (action onSubmit)) wallet) as |form|}}
-      {{#form.group}}
-        {{#bs-button-group type="radio" value=type onChange=(action (mut type)) as |bg|}}
-          {{#bg.button type="secondary" value='seed'}}
-            {{t 'seed'}}
-          {{/bg.button}}
-          {{#bg.button type="secondary" value='mnemonic'}}
-            {{t 'mnemonic'}}
-          {{/bg.button}}
-        {{/bs-button-group}}
-      {{/form.group}}
+    {{#with (changeset (hash type=type seed=seed mnemonic=(mnemonic seed)) ImportWalletValidations) as |model|}}
+      {{#bs-form model=model onSubmit=(action (queue (action 'convertMnemonic') (action onSubmit)) wallet) as |form|}}
+        {{#form.group}}
+          {{#bs-button-group type="radio" property="type" value=type onChange=(action (queue (action (mut model.type)) (action onChange))) as |bg|}}
+            {{#bg.button type="secondary" value='seed'}}
+              {{t 'seed'}}
+            {{/bg.button}}
+            {{#bg.button type="secondary" value='mnemonic'}}
+              {{t 'mnemonic'}}
+            {{/bg.button}}
+          {{/bs-button-group}}
+        {{/form.group}}
 
-      {{#form.group}}
-        {{#if (eq type 'seed')}}
-          {{form.element size='lg' controlType="text" property="seed" autocomplete='off' minlength=64 maxlength=64 required=true pattern="^[a-fA-F0-9]{64}$"}}
-          <small class="form-text text-muted">{{t 'wallets.import.help.seed'}}</small>
-        {{/if}}
+        {{#form.group}}
+          {{#if (eq type 'seed')}}
+            {{form.element size='lg' controlType="text" property="seed" autocomplete='off' minlength=64 maxlength=64 required=true pattern="^[a-fA-F0-9]{64}$"}}
+            <small class="form-text text-muted">{{t 'wallets.import.help.seed'}}</small>
+          {{/if}}
 
-        {{#if (eq type 'mnemonic')}}
-          {{#form.element rows=4 controlType="textarea" property="mnemonic" autocomplete='off' required=true as |el|}}
-            {{el.control class="text-monospace"}}
-          {{/form.element}}
-          <small class="form-text text-muted">{{t 'wallets.import.help.mnemonic'}}</small>
-        {{/if}}
-      {{/form.group}}
-    {{/bs-form}}
+          {{#if (eq type 'mnemonic')}}
+            {{#form.element rows=4 controlType="textarea" property="mnemonic" autocomplete='off' required=true as |el|}}
+              {{el.control class="text-monospace"}}
+            {{/form.element}}
+            <small class="form-text text-muted">{{t 'wallets.import.help.mnemonic'}}</small>
+          {{/if}}
+        {{/form.group}}
+      {{/bs-form}}
+    {{/with}}
   {{/modal.body}}
   {{#modal.footer}}
     {{#bs-button onClick=(action modal.close) type="secondary"}}

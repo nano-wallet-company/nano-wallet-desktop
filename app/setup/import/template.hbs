@@ -1,4 +1,6 @@
 {{wallet-import
     wallet=model
+    type=type
+    onChange=(route-action 'changeType')
     onSubmit=(action (queue (route-action 'saveWallet') (route-action 'changeSeed')))
     onCancel=(route-action 'cancel')}}

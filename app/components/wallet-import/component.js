@@ -17,16 +17,17 @@ export default Component.extend({
   wallet: null,
   seed: null,
 
+  onChange: null,
   onCancel: null,
   onSubmit: null,
 
   @action
   convertMnemonic(wallet, changeset) {
-    const type = get(changeset, 'type');
+    const type = this.get('type');
     if (type === 'mnemonic') {
       const mnemonic = get(changeset, 'mnemonic');
       const seed = bip39.mnemonicToEntropy(mnemonic);
-      set(changeset, 'seed', seed);
+      set(wallet, 'seed', seed);
     }
   },
 });

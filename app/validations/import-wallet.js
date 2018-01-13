@@ -1,8 +1,7 @@
 import { get } from '@ember/object';
 
-import { validatePresence } from 'ember-changeset-validations/validators';
-
 import validateSeed from '../validators/seed';
+import validateMnemonic from '../validators/mnemonic';
 
 const when = (dependentKey, value, validator) => (key, newValue, oldValue, changes, content) => {
   if (get(content, dependentKey) === value) {
@@ -14,5 +13,5 @@ const when = (dependentKey, value, validator) => (key, newValue, oldValue, chang
 
 export default {
   seed: when('type', 'seed', validateSeed()),
-  mnemonic: when('type', 'mnemonic', validatePresence(true)),
+  mnemonic: when('type', 'mnemonic', validateMnemonic()),
 };
