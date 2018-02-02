@@ -1,1 +1,23 @@
-{{outlet}}
+<div class="jumbotron jumbotron-fluid" style="min-height: 100vh">
+  <div class="container">
+    <h1 class="display-3">
+      <picture>
+        <source type="image/svg+xml" srcset="images/brand-light.svg">
+        <img class="img-fluid" width="512" src="images/brand-light.png" alt="{{t 'product'}}">
+      </picture>
+    </h1>
+    <hr class="my-4">
+
+    {{#each flashMessages.arrangedQueue as |flash|}}
+      {{flash-message flash=flash}}
+    {{/each}}
+
+    <p class="lead">{{t 'login.lead'}}</p>
+
+    {{wallet-unlock wallet=model onSubmit=(route-action 'unlockWallet')}}
+
+    {{#bs-button type="secondary" block=true class="mt-2" onClick=(route-action 'setupWallet')}}
+      {{t 'login.setupWallet'}}
+    {{/bs-button}}
+  </div>
+</div>

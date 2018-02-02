@@ -8,7 +8,7 @@
     {{/form.element}}
 
     {{form.element controlType="text" label=(t 'wallets.accounts.send.destination') property="destination"
-        autocomplete='on' minlength=64 maxlength=64 required=true pattern="^xrb_[a-z0-9]{60}$"
+        autocomplete='on' minlength=64 maxlength=64 required=true pattern="^xrb_[13](?![lv])[a-z1-9]{59}$"
         placeholder=(t 'wallets.accounts.send.placeholder')}}
 
     {{form.element controlType="text" label=(t 'wallets.accounts.send.amount')

@@ -9,8 +9,10 @@ import: 'Import'
 password: 'Password'
 overview: 'Overview'
 send: 'Send'
+settings: 'Settings'
 logout: 'Logout'
 history: 'History'
+save: 'Save'
 delete: 'Delete'
 seed: 'Seed'
 mnemonic: 'Mnemonic'
@@ -31,11 +33,18 @@ status:
   count: 'Block Count'
   unchecked: 'Unchecked Blocks'
   peers: 'Peers'
+login:
+  lead: 'Login to unlock your wallet'
+  setupWallet: 'Create New Wallet'
 wallets:
+  unlock:
+    unlockWallet: 'Unlock Wallet'
+    invalidPassword: 'Invalid password!'
   backup:
     title: 'Backup Seed'
     lead: "Here's your easy to remember seed mnemonic for your new wallet:"
     copy: 'Copy Raw Seed'
+    copied: 'Seed copied to clipboard!'
     download: 'Download Mnemonic'
     help: >
       Adhere to best practices by physically writing your seed mnemonic on a piece of paper and
@@ -66,6 +75,9 @@ wallets:
     none: 'No accounts in wallet.'
     create: 'Create Account'
     created: 'Account created!'
+  settings:
+    changePassword: 'Change Password'
+    passwordChanged: 'Password changed!'
   logout:
     title: 'Confirm Logout'
     lead: 'Are you absolutely sure you wish to logout?'

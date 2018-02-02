@@ -21,10 +21,7 @@ module.exports = (environment) => {
         // Here you can enable experimental features on an ember canary build
         // e.g. 'with-controller': true
       },
-      EXTEND_PROTOTYPES: {
-        // Prevent Ember Data from overriding Date.parse.
-        Date: false,
-      },
+      EXTEND_PROTOTYPES: false,
     },
 
     APP: {
@@ -39,14 +36,14 @@ module.exports = (environment) => {
     assets: {
       node: {
         darwin: {
-          url: 'https://devinus.ngrok.io/node.zip',
-          integrity: 'sha512-U43/C5x+dGKBU0AtPXuKq7lE1XMMyNccaDhnqM6+YnBH9us+W7z9Q2rpN1ba0DEu4BufM0aEOQrtno+jo14Ueg==',
+          url: 'http://localhost:8080/node.zip',
+          integrity: 'sha512-9CxTuXbbrpqtOBnCNS5/8cNT9KhBAtxmLqGamMu4TtYhWyS1gL00DLcV0RXizpHpXGVgrQ5L9o8lrxTQTLwt0g==',
         },
       },
       data: {
         darwin: {
-          url: 'https://devinus.ngrok.io/data.zip',
-          integrity: 'sha512-KFFgyBboRaFjGM8bulJAeuYay0saBfgtf6i/WX3OXaO4T4vlJX0n0MjG1TApTpgSn32zNMTIdt3yMf8qBAFqJA==',
+          url: 'http://localhost:8080/data.zip',
+          integrity: 'sha512-gsda0segATDiX6Cxk4g/mXqj3e+OIKNEL1dbVDJoFn0bbx4ZOQL9qC0I0ynh1xyHT23VuyqCcONhP3w0upnfeg==',
         },
       },
     },

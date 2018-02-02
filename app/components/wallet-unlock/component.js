@@ -4,16 +4,15 @@ import { tryInvoke } from '@ember/utils';
 
 import { action } from 'ember-decorators/object';
 
-import ChangePasswordValidations from '../../validations/change-password';
+import UnlockWalletValidations from '../../validations/unlock-wallet';
 
 export default Component.extend({
-  ChangePasswordValidations,
+  UnlockWalletValidations,
 
   wallet: null,
   password: null,
 
   onSubmit: null,
-  onHide: null,
 
   @action
   clearPassword(changeset) {

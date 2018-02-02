@@ -28,6 +28,11 @@
           {{/nav.link-to}}
         {{/nav.item}}
         {{#nav.item}}
+          {{#nav.link-to 'wallets.settings' model}}
+            {{t 'settings'}}
+          {{/nav.link-to}}
+        {{/nav.item}}
+        {{#nav.item}}
           {{#nav.link-to 'wallets.logout' model}}
             {{t 'logout'}}
           {{/nav.link-to}}

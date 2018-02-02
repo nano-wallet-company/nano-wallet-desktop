@@ -1,10 +1,10 @@
-{{#bs-modal as |modal|}}
+{{#bs-modal onHide=(action (optional onHide)) as |modal|}}
   {{#modal.header}}
     <h4 class="modal-title">{{t 'wallets.password.title'}}</h4>
   {{/modal.header}}
   {{#modal.body}}
     {{#bs-form model=(changeset (hash password=password) ChangePasswordValidations)
-        onSubmit=(action onSubmit wallet) as |form|}}
+        onSubmit=(action (queue (action onSubmit wallet) (action 'clearPassword'))) as |form|}}
       {{form.element controlType="password" label=(t 'password') property='password' required=true minlength=8}}
     {{/bs-form}}
   {{/modal.body}}

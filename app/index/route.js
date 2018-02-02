@@ -21,12 +21,16 @@ export default Route.extend({
 
   afterModel() {
     const session = this.get('session');
+    const wallet = get(session, 'data.wallet');
     const isAuthenticated = get(session, 'isAuthenticated');
-    if (!isAuthenticated) {
+    if (!wallet) {
       return this.transitionTo('setup');
     }
 
-    const wallet = get(session, 'data.authenticated.wallet');
+    if (wallet && !isAuthenticated) {
+      return this.transitionTo('login');
+    }
+
     return this.transitionTo('wallets', wallet);
   },
 });

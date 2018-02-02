@@ -1,6 +1,7 @@
 import Component from '@ember/component';
 import { set } from '@ember/object';
 
+import { service } from 'ember-decorators/service';
 import { action } from 'ember-decorators/object';
 
 import { reject } from 'rsvp';
@@ -8,6 +9,9 @@ import { reject } from 'rsvp';
 import downloadjs from 'npm:downloadjs';
 
 export default Component.extend({
+  @service intl: null,
+  @service flashMessages: null,
+
   wallet: null,
   seed: null,
 
@@ -19,7 +23,8 @@ export default Component.extend({
 
   @action
   copySeed() {
-    this.get('flashMessages').success('Seed copied to clipboard!');
+    const message = this.get('intl').t('wallets.backup.copied');
+    this.get('flashMessages').success(message);
   },
 
   @action

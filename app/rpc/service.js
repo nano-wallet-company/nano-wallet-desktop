@@ -9,6 +9,7 @@ import { defineError } from 'ember-exex/error';
 export const actions = {
   VERSION: 'version',
   WALLET_CREATE: 'wallet_create',
+  WALLET_LOCKED: 'wallet_locked',
   WALLET_BALANCE_TOTAL: 'wallet_balance_total',
   WALLET_CHANGE_SEED: 'wallet_change_seed',
   ACCOUNT_CREATE: 'account_create',
@@ -24,12 +25,35 @@ export const actions = {
   PASSWORD_VALID: 'password_valid',
 };
 
-const RPCError = defineError({
+export const errors = {
+  WALLET_NOT_FOUND: 'Wallet not found',
+  ACCOUNT_NOT_FOUND: 'Account not found',
+};
+
+export const RPCError = defineError({
   name: 'RPCError',
   message: 'RPC error',
 });
 
-const InvalidPasswordError = defineError({
+export const WalletNotFound = defineError({
+  name: 'WalletNotFound',
+  message: errors.WALLET_NOT_FOUND,
+  extends: RPCError,
+});
+
+export const AccountNotFound = defineError({
+  name: 'AccountNotFound',
+  message: errors.ACCOUNT_NOT_FOUND,
+  extends: RPCError,
+});
+
+export const PasswordChangeError = defineError({
+  name: 'PasswordChangeError',
+  message: 'Password change failed',
+  extends: RPCError,
+});
+
+export const InvalidPasswordError = defineError({
   name: 'InvalidPasswordError',
   message: 'Invalid password',
   extends: RPCError,
@@ -42,7 +66,14 @@ export default Service.extend({
     const data = assign({ action }, params);
     const resp = await this.get('ajax').post('/', { data });
     if (typeof resp.error === 'string') {
-      throw new RPCError(resp.error);
+      switch (resp.error) {
+        case errors.WALLET_NOT_FOUND:
+          throw new WalletNotFound();
+        case errors.ACCOUNT_NOT_FOUND:
+          throw new AccountNotFound();
+        default:
+          throw new RPCError(resp.error);
+      }
     }
 
     return resp;
@@ -54,6 +85,11 @@ export default Service.extend({
 
   walletCreate() {
     return this.call(actions.WALLET_CREATE);
+  },
+
+  async walletLocked(wallet) {
+    const { locked } = await this.call(actions.WALLET_LOCKED, { wallet });
+    return locked === '1';
   },
 
   walletBalanceTotal(wallet) {
@@ -77,12 +113,12 @@ export default Service.extend({
         pending,
       });
     } catch (err) {
-      if (!(err instanceof RPCError)) {
+      if (!(err instanceof AccountNotFound)) {
         throw err;
       }
 
       // When an account has no transactions, the RPC replies with an
-      // HTTP 200 OK *and* an error.
+      // HTTP 200 OK and an error.
       info.account = account;
       info.balance = '0';
       if (pending) {
@@ -132,7 +168,7 @@ export default Service.extend({
   async passwordChange(wallet, password) {
     const { changed } = await this.call(actions.PASSWORD_CHANGE, { wallet, password });
     if (changed !== '1') {
-      throw new RPCError('Password change failed');
+      throw new PasswordChangeError();
     }
 
     return true;
