@@ -34,6 +34,6 @@ export default Route.extend({
   async sendAmount(changeset) {
     await changeset.save();
     const account = this.modelFor('wallets.accounts');
-    return this.transitionTo('wallets.accounts', account);
+    return this.transitionTo('wallets.accounts.history', account.reload());
   },
 });

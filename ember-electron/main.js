@@ -2,12 +2,15 @@
 /* eslint-disable no-console */
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 const { spawn } = require('child_process');
 
-const debounceFn = require('debounce-fn');
-const decompress = require('decompress');
-const pathExists = require('path-exists');
 const ssri = require('ssri');
+const decompress = require('decompress');
+const debounceFn = require('debounce-fn');
+const pathExists = require('path-exists');
+const loadJsonFile = require('load-json-file');
+const writeJsonFile = require('write-json-file');
 
 const {
   app,
@@ -26,6 +29,8 @@ const { appReady } = require('electron-util');
 const { default: installExtension, EMBER_INSPECTOR } = require('electron-devtools-installer');
 
 let mainWindow = null;
+
+global.isNodeStarted = false;
 
 // Registering a protocol & schema to serve our Ember application
 protocol.registerStandardSchemes(['serve'], { secure: true });
@@ -120,17 +125,28 @@ const run = async () => {
   await appReady;
 
   const dataPath = path.resolve(app.getPath('userData'));
-  global.isNodeStarted = false;
+  const configPath = path.join(dataPath, 'config.json');
+  const configExists = await pathExists(configPath);
+  if (!configExists) {
+    const config = await loadJsonFile(path.join(__dirname, 'config.json'));
+    config.rpc.authorization_token = crypto.randomBytes(20).toString('hex');
+    await writeJsonFile(configPath, config);
+  }
 
+  const config = await loadJsonFile(configPath);
+  global.authorizationToken = config.rpc.authorization_token;
+
+  const nodePath = path.join(dataPath, 'rai_node');
   Object.defineProperty(global, 'isNodeDownloaded', {
     get() {
-      return pathExists.sync(path.join(dataPath, 'rai_node'));
+      return pathExists.sync(nodePath);
     },
   });
 
+  const databasePath = path.join(dataPath, 'data.ldb');
   Object.defineProperty(global, 'isDataDownloaded', {
     get() {
-      return pathExists.sync(path.join(dataPath, 'data.ldb'));
+      return pathExists.sync(databasePath);
     },
   });
 

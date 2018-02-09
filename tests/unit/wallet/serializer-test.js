@@ -5,7 +5,12 @@ import { setupModelTest } from 'ember-mocha';
 describe('Unit | Serializer | wallet', () => {
   setupModelTest('wallet', {
     // Specify the other units that are required for this test.
-    needs: ['serializer:wallet', 'transform:big-number', 'model:account'],
+    needs: [
+      'serializer:wallet',
+      'service:settings',
+      'transform:big-number',
+      'model:account',
+    ],
   });
 
   // Replace this with your real tests.
