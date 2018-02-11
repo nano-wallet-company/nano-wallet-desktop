@@ -20,6 +20,7 @@ module.exports = {
   },
   electronPackagerConfig: {
     icon,
+    asar: true,
   },
   electronWinstallerConfig: {},
   electronInstallerDMG: {},

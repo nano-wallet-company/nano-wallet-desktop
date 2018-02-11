@@ -125,16 +125,17 @@ const run = async () => {
   await appReady;
 
   const dataPath = path.resolve(app.getPath('userData'));
-  const configPath = path.join(dataPath, 'config.json');
-  const configExists = await pathExists(configPath);
-  if (!configExists) {
-    const config = await loadJsonFile(path.join(__dirname, 'config.json'));
-    config.rpc.authorization_token = crypto.randomBytes(20).toString('hex');
-    await writeJsonFile(configPath, config);
-  }
+  const config = await loadJsonFile(path.join(__dirname, 'config.json'));
+  config.rpc.authorization_token = crypto.randomBytes(20).toString('hex');
 
-  const config = await loadJsonFile(configPath);
-  global.authorizationToken = config.rpc.authorization_token;
+  const configPath = path.join(dataPath, 'config.json');
+  await writeJsonFile(configPath, config);
+
+  Object.defineProperty(global, 'authorizationToken', {
+    get() {
+      return loadJsonFile.sync(configPath).rpc.authorization_token;
+    },
+  });
 
   const nodePath = path.join(dataPath, 'rai_node');
   Object.defineProperty(global, 'isNodeDownloaded', {
