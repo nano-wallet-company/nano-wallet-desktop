@@ -73,10 +73,6 @@ export default Service.extend(Evented, {
     return this.getRemoteGlobal('isNodeStarted', false);
   },
 
-  authorizationToken() {
-    return this.getRemoteGlobal('authorizationToken', null);
-  },
-
   download(asset) {
     return new Promise((resolve) => {
       const config = this.get('config');

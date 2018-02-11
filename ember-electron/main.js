@@ -2,10 +2,12 @@
 /* eslint-disable no-console */
 const fs = require('fs');
 const path = require('path');
+const http = require('http');
 const crypto = require('crypto');
 const { spawn } = require('child_process');
 
 const ssri = require('ssri');
+const httpProxy = require('http-proxy');
 const decompress = require('decompress');
 const debounceFn = require('debounce-fn');
 const pathExists = require('path-exists');
@@ -89,7 +91,13 @@ ipcMain.on('download-start', ({ sender }, url, integrity) => {
 });
 
 ipcMain.on('node-start', ({ sender }) => {
+  const config = loadJsonFile.sync(path.join(__dirname, 'config.json'));
+  const authorizationToken = crypto.randomBytes(20).toString('hex');
+  config.rpc.authorization_token = authorizationToken;
+
   const cwd = path.resolve(app.getPath('userData'));
+  writeJsonFile.sync(path.join(cwd, 'config.json'), config);
+
   const cmd = path.join(cwd, 'rai_node');
   const child = spawn(cmd, ['--daemon', '--data_path', cwd], {
     cwd,
@@ -103,40 +111,53 @@ ipcMain.on('node-start', ({ sender }) => {
     }
   });
 
-  child.stdout.on('data', data => log.info('[rai_node]', data.toString()));
-  child.stderr.on('data', data => log.error('[rai_node]', data.toString()));
+  child.stdout.on('data', data => log.info('[node]', data.toString()));
+  child.stderr.on('data', data => log.error('[node]', data.toString()));
 
-  mainWindow.on('closed', () => {
+  const { port, address: host } = config.rpc;
+  const proxy = httpProxy.createProxyServer({
+    target: { host, port },
+  });
+
+  proxy.on('error', (err) => {
+    log.error('[proxy]', err);
+  });
+
+  proxy.on('proxyReq', (proxyReq) => {
+    proxyReq.setHeader('Authorization', `Bearer ${authorizationToken}`);
+  });
+
+  const server = http.createServer((req, res) => {
+    proxy.web(req, res);
+  });
+
+  server.once('close', () => {
     child.kill();
+  });
+
+  mainWindow.prependOnceListener('closed', () => {
+    server.close();
   });
 
   Object.defineProperty(global, 'isNodeStarted', {
     get() {
-      return !child.killed;
+      return !!server.listening;
     },
   });
 
-  if (!sender.isDestroyed()) {
-    sender.send('node-ready');
-  }
+  server.once('listening', () => {
+    if (!sender.isDestroyed()) {
+      sender.send('node-ready');
+    }
+  });
+
+  server.listen(3000);
 });
 
 const run = async () => {
   await appReady;
 
   const dataPath = path.resolve(app.getPath('userData'));
-  const config = await loadJsonFile(path.join(__dirname, 'config.json'));
-  config.rpc.authorization_token = crypto.randomBytes(20).toString('hex');
-
-  const configPath = path.join(dataPath, 'config.json');
-  await writeJsonFile(configPath, config);
-
-  Object.defineProperty(global, 'authorizationToken', {
-    get() {
-      return loadJsonFile.sync(configPath).rpc.authorization_token;
-    },
-  });
-
   const nodePath = path.join(dataPath, 'rai_node');
   Object.defineProperty(global, 'isNodeDownloaded', {
     get() {

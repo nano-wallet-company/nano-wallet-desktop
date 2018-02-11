@@ -23,20 +23,20 @@ export default AjaxService.extend({
 
   contentType: 'application/json',
 
-  @computed('electron.isElectron')
-  get headers() {
-    const headers = {};
-    const electron = this.get('electron');
-    const isElectron = get(electron, 'isElectron');
-    if (isElectron) {
-      const token = electron.authorizationToken();
-      if (token) {
-        headers.Authorization = `Bearer ${token}`;
-      }
-    }
+  // @computed('electron.isElectron')
+  // get headers() {
+  //   const headers = {};
+  //   const electron = this.get('electron');
+  //   const isElectron = get(electron, 'isElectron');
+  //   if (isElectron) {
+  //     const token = electron.authorizationToken();
+  //     if (token) {
+  //       headers.Authorization = `Bearer ${token}`;
+  //     }
+  //   }
 
-    return headers;
-  },
+  //   return headers;
+  // },
 
   requestTask: task(function* requestTask(fn, ...args) {
     const promise = fn.apply(this, args);
