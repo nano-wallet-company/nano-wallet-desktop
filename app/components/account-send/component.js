@@ -10,6 +10,7 @@ import toAmount from '../../utils/to-amount';
 import toRaw from '../../utils/to-raw';
 
 export default Component.extend({
+  classNames: ['send-form', 'd-flex', 'justify-content-center', 'align-items-center'],
   @service intl: null,
 
   SendValidations,

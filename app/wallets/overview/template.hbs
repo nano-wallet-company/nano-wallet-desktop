@@ -1,3 +1,129 @@
-<h1>{{t 'overview'}}</h1>
+{{!-- <h1>{{t 'overview'}}</h1> --}}
 
-{{wallet-overview wallet=model accounts=model.accounts createAccount=(route-action 'createAccount') page=page perPage=perPage}}
+{{!-- {{wallet-overview wallet=model accounts=model.accounts createAccount=(route-action 'createAccount') page=page perPage=perPage}} --}}
+{{navigation-bar wallet=model createAccount=(route-action 'createAccount')}}
+
+<main role="main">
+
+    {{total-amount wallet=model}}
+
+    <section>
+        <div class="container-fluid">
+            <div class="row">
+                <hr>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col">
+                    {{#slick-slider autoplay=false slidesToShow=(if (lte model.accounts.length 3) 1 3) afterChange='afterChange' centerPadding='60px' centerMode=true slidesToScroll=1
+                    arrows=true class="main-gallery"}} {{#each model.accounts as |account|}} {{gallery-slide model=account}}
+                    {{/each}} {{/slick-slider}}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    {{#link-to 'wallets.send' model class="arrow"}} {{fa-icon "chevron-up"}} {{/link-to}}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {{send-button model=model}} {{#each flashMessages.arrangedQueue as |flash|}} {{flash-message flash=flash}} {{/each}}
+
+    <div class="row">
+        <div class="col">
+            {{outlet}}
+        </div>
+    </div>
+</main>
+
+<section>
+    <div class="container">
+        <div class="row history-item-list">
+            <div class="col-lg-12 history-item d-flex justify-content-around align-items-center">
+                {{fa-icon "envelope-open"}}
+                <p>0.002461</p>
+                <p>
+                    <span>xrb_17oqj</span>4rpads4o6ud448yymzk9jot8yzmzyeuteq3bj38cwjpt4rrgxhfx
+                    <span>fr1</span>
+                </p>
+            </div>
+            <div class="col-lg-12 history-item d-flex justify-content-around align-items-center">
+                {{fa-icon "envelope-open"}}
+                <p>0.002461</p>
+                <p>
+                    <span>xrb_17oqj</span>4rpads4o6ud448yymzk9jot8yzmzyeuteq3bj38cwjpt4rrgxhfx
+                    <span>fr1</span>
+                </p>
+            </div>
+            <div class="col-lg-12 history-item d-flex justify-content-around align-items-center">
+                {{fa-icon "envelope-open"}}
+                <p>0.002461</p>
+                <p>
+                    <span>xrb_17oqj</span>4rpads4o6ud448yymzk9jot8yzmzyeuteq3bj38cwjpt4rrgxhfx
+                    <span>fr1</span>
+                </p>
+            </div>
+            <div class="col-lg-12 history-item d-flex justify-content-around align-items-center">
+                {{fa-icon "envelope-open"}}
+                <p>0.002461</p>
+                <p>
+                    <span>xrb_17oqj</span>4rpads4o6ud448yymzk9jot8yzmzyeuteq3bj38cwjpt4rrgxhfx
+                    <span>fr1</span>
+                </p>
+            </div>
+            <div class="col-lg-12 history-item d-flex justify-content-around align-items-center">
+                {{fa-icon "envelope-open"}}
+                <p>0.002461</p>
+                <p>
+                    <span>xrb_17oqj</span>4rpads4o6ud448yymzk9jot8yzmzyeuteq3bj38cwjpt4rrgxhfx
+                    <span>fr1</span>
+                </p>
+            </div>
+            <div class="col-lg-12 history-item d-flex justify-content-around align-items-center">
+                {{fa-icon "envelope-open"}}
+                <p>0.002461</p>
+                <p>
+                    <span>xrb_17oqj</span>4rpads4o6ud448yymzk9jot8yzmzyeuteq3bj38cwjpt4rrgxhfx
+                    <span>fr1</span>
+                </p>
+            </div>
+            <div class="col-lg-12 history-item d-flex justify-content-around align-items-center">
+                {{fa-icon "envelope-open"}}
+                <p>0.002461</p>
+                <p>
+                    <span>xrb_17oqj</span>4rpads4o6ud448yymzk9jot8yzmzyeuteq3bj38cwjpt4rrgxhfx
+                    <span>fr1</span>
+                </p>
+            </div>
+            <div class="col-lg-12 history-item d-flex justify-content-around align-items-center">
+                {{fa-icon "envelope-open"}}
+                <p>0.002461</p>
+                <p>
+                    <span>xrb_17oqj</span>4rpads4o6ud448yymzk9jot8yzmzyeuteq3bj38cwjpt4rrgxhfx
+                    <span>fr1</span>
+                </p>
+            </div>
+
+        </div>
+    </div>
+</section>

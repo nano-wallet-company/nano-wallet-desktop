@@ -62,7 +62,7 @@ wallets:
     history:
       none: 'No history found.'
   overview:
-    balance: 'Total Balance: {balance}'
+    balance: '{balance}'
     none: 'No accounts in wallet.'
     create: 'Create Account'
     created: 'Account created!'

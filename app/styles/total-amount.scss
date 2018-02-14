@@ -1,0 +1,44 @@
+.currency-tabs {
+  margin:  0;
+  padding:  0;
+  margin: 0 0 10px;
+}
+
+.currency-tabs li > a {
+    font-size: 20px;
+    color: #fff;
+    letter-spacing: 0.89px;
+}
+
+.currency-tabs li > a.active {
+  color: #EDA63F;
+  text-decoration: underline;
+}
+
+.lead {
+  text-align:  center;
+  font-size: 90px;
+  color: #fff;
+  margin:  0;
+  padding:  0;
+  line-height: 1;
+  border: 0;
+}
+
+.pending {
+    text-align:  center;
+    font-family: MyriadPro-Regular;
+    font-size: 16px;
+    color: #8787A9;
+    letter-spacing: 2px;
+    margin: 20px 0 0;
+    text-transform:  uppercase;
+}
+
+.pending > span {
+    font-family: MyriadPro-Regular;
+    font-size: 30px;
+    color: #50E3C2;
+    letter-spacing: 1.33px;
+    margin:  0;
+}

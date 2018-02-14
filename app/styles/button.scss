@@ -1,0 +1,153 @@
+.wrapper {
+  box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+  position: absolute;
+  right: 30px;
+    bottom: 30px;
+  margin: 0 auto;
+  margin-top: 20px;
+  font-family: 'Roboto', sans-serif;
+  overflow:hidden;
+  width: 70px;
+  height:70px;
+  cursor: pointer;
+  color:white;
+  background-color: #538DCA;
+  border-bottom-left-radius: 80px;
+  border-top-left-radius: 80px;
+  border-top-right-radius: 80px;
+  border-bottom-right-radius: 80px;
+  transition: all 1s ease-in-out; 
+  -webkit-transition: all 1s ease-in-out; 
+ 
+}
+.wrapper p
+{
+  padding-left: 30px;
+  padding-right: 30px;
+  margin-top: -3px;
+  text-align:left;
+  font-size:20px;
+}
+#icon
+{
+    position: absolute;
+    position: absolute;
+    /* width: auto; */
+    /* height: auto; */
+    /* margin-left: 10px; */
+    right: 22px;
+    bottom: 20px;
+    /* left: 59px; */
+    margin: 0 auto;
+    font-size: 30px;
+    transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+}
+#icon.expand
+{
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+}
+.wrapper.expand
+{
+  animation: expandWidth 1s 1 forwards, expandHeight 1s 1 forwards;
+ -webkit-animation: expandWidth 1s 1 forwards, expandHeight 1s 1 forwards;
+  border-radius:0;
+}
+.wrapper.shrink
+{
+  transition: all 2.4s ease-in-out; 
+  -webkit-transition: all 2.3s ease-in-out; 
+ animation: shrinkWidth 1s 1 forwards, shrinkHeight 1s 1 forwards;
+ -webkit-animation: shrinkWidth 1s 1 forwards, shrinkHeight 1s 1 forwards;
+}
+.photo
+{
+  height:70px;
+  width:70px;
+  border-radius:50%;
+/*   background-color:#76a1e8; */
+}
+
+
+
+@keyframes expandWidth {
+  from {
+    width: 70px;
+    right: 30px;
+    bottom: 30px;
+  }
+  to {
+    width: 100%;
+    right: 0;
+    bottom: 0;
+  }
+}
+
+@-webkit-keyframes expandWidth {
+  from {
+    width: 70px;
+    right: 30px;
+    bottom: 30px;
+  }
+  to {
+    width: 100%;
+    right: 0;
+    bottom: 0;
+  }
+}
+@keyframes expandHeight {
+  from {
+    height: 70px;
+  }
+  to {
+    height: 100vh;
+  }
+}
+
+@-webkit-keyframes expandHeight {
+  from {
+    height: 70px;
+  }
+  to {
+    height: 100vh;
+  }
+}
+@keyframes shrinkWidth {
+    from {
+    width: 100%;
+    right: 0;
+    bottom: 0;
+  }
+  to {
+    width: 70px;
+    right: 30px;
+    bottom: 30px;
+  }
+}
+
+@-webkit-keyframes shrinkWidth {
+    from {
+    width: 100%;
+  }
+  to {
+    width: 70px;
+  }
+}
+@keyframes shrinkHeight {
+  from {
+    height: 100vh;
+  }
+  to {
+    height: 70px;
+  }
+}
+
+@-webkit-keyframes shrinkHeight {
+  from {
+    height: 100vh;
+  }
+  to {
+    height: 70px;
+  }
+}

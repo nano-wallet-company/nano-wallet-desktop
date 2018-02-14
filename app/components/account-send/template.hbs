@@ -1,5 +1,6 @@
 {{#with (changeset block SendValidations) as |model|}}
   {{#bs-form model=model onSubmit=(action onSubmit) as |form|}}
+    <h1 class="d-flex justify-content-center">0.00</h1>
     {{#form.element controlType="power-select" label=(t 'wallets.accounts.send.source')
         required=true options=accounts property='source' onChange=(action onChange) as |el|}}
       {{#el.control searchField="id" searchPlaceholder=(t 'wallets.accounts.send.search') as |item|}}
@@ -14,6 +15,7 @@
     {{form.element controlType="text" label=(t 'wallets.accounts.send.amount')
         model=(changeset (hash amount=null) ChangeAmountValidations) property='amount'
         required=true minlength=1 pattern="^\d*\.?\d+$"
+        placeholder="0.00"
         onChange=(action 'changeAmount' model)}}
 
     <div role="group" class="d-flex justify-content-center">

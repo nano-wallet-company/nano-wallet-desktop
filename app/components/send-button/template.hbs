@@ -1,0 +1,15 @@
+<div>
+    <div class="container send-form">
+        <div class="row justify-content-md-center">
+            <div class="col col-lg-6 col-sm-12">
+                {{account-send accounts=model.wallet.accounts block=model onChange=(route-action 'changeSource') onSubmit=(route-action 'sendAmount')}}
+            </div>
+        </div>
+    </div>
+</div>
+
+{{#if expand}}
+    {{fa-icon "times" click=(action 'toggleButton') id="icon"}}
+{{else}}
+    {{fa-icon "paper-plane" ariaHidden=true click=(action 'toggleButton') id="icon"}}
+{{/if}}
