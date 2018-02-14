@@ -2,6 +2,15 @@
 
 // eslint-disable-next-line arrow-body-style
 module.exports = (/* environment */) => {
+  if (process.env.EMBER_CLI_ELECTRON) {
+    return {
+      default: {
+        rpcHost: 'https://localhost:17076',
+        rpcNamespace: 'rpc',
+      },
+    };
+  }
+
   return {
     /*
       If present, the host configuration will be pulled based on the given
@@ -16,7 +25,7 @@ module.exports = (/* environment */) => {
       this will be the config used
      */
     default: {
-      rpcHost: 'http://localhost:3000',
+      rpcHost: 'https://localhost:55000',
       rpcNamespace: null,
     },
 

@@ -42,7 +42,7 @@ module.exports = (environment) => {
       node: {
         darwin: {
           url: 'https://devinus.ngrok.io/node.zip',
-          integrity: 'sha512-0FmIl3YkwW1l12ld0MBjVusuqt9ktBALtVODhE5qWdpLV9l5ptEHTd7y3XnowfAeqw4QqFnrMNj4iOX152YBBw==',
+          integrity: 'sha512-uyX7CHUzm+ivlaoEryOfOhxeB5jLy6jneD1BeaSqv32Z0bcu6kyru6JvkO4EqsnAhNuJETBWKqsBC3hBijZdSA==',
         },
       },
       data: {

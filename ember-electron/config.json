@@ -45,9 +45,9 @@
         "enable_voting": "true",
         "bootstrap_connections": "4",
         "bootstrap_connections_max": "64",
-        "callback_address": "",
-        "callback_port": "0",
-        "callback_target": "",
+        "callback_address": "::1",
+        "callback_port": "17076",
+        "callback_target": "/callback",
         "lmdb_max_dbs": "128"
     },
     "opencl_enable": "false",

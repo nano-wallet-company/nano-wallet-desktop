@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import { beforeEach, describe, it } from 'mocha';
 import { setupTest } from 'ember-mocha';
 
-import { mockWindow } from 'ember-window-mock';
+import { reset } from 'ember-window-mock';
 
 describe('Unit | Route | wallets/logout', () => {
   setupTest('route:wallets/logout', {
@@ -10,9 +10,7 @@ describe('Unit | Route | wallets/logout', () => {
     // needs: ['controller:foo']
   });
 
-  beforeEach(function () {
-    mockWindow(this);
-  });
+  beforeEach(() => reset());
 
   it('exists', function () {
     const route = this.subject();

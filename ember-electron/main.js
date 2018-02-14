@@ -2,17 +2,21 @@
 /* eslint-disable no-console */
 const fs = require('fs');
 const path = require('path');
-const http = require('http');
 const crypto = require('crypto');
 const { spawn } = require('child_process');
 
 const ssri = require('ssri');
+const express = require('express');
+const bodyParser = require('body-parser');
 const httpProxy = require('http-proxy');
+const httpolyglot = require('httpolyglot');
+const selfsigned = require('selfsigned');
 const decompress = require('decompress');
 const debounceFn = require('debounce-fn');
 const pathExists = require('path-exists');
 const loadJsonFile = require('load-json-file');
 const writeJsonFile = require('write-json-file');
+const normalizeNewline = require('normalize-newline');
 
 const {
   app,
@@ -117,19 +121,52 @@ ipcMain.on('node-start', ({ sender }) => {
   const { port, address: host } = config.rpc;
   const proxy = httpProxy.createProxyServer({
     target: { host, port },
+    xfwd: true,
+    headers: {
+      Authorization: `Bearer ${authorizationToken}`,
+    },
   });
 
   proxy.on('error', (err) => {
     log.error('[proxy]', err);
   });
 
-  proxy.on('proxyReq', (proxyReq) => {
-    proxyReq.setHeader('Authorization', `Bearer ${authorizationToken}`);
+  const expressApp = express();
+  expressApp.set('trust proxy', host);
+
+  expressApp.all('/rpc', (req, res) => proxy.web(req, res, { ignorePath: true }));
+
+  const reviver = (key, value) => {
+    if (key === 'block' && typeof value === 'string') {
+      return JSON.parse(value);
+    }
+
+    return value;
+  };
+
+  expressApp.post('/callback', bodyParser.json({ reviver }), (req, res) => {
+    const { type } = req.body;
+    if (type === 'open' || type === 'receive') {
+      log.info('TODO', req.body);
+    }
+
+    return res.status(202).end();
   });
 
-  const server = http.createServer((req, res) => {
-    proxy.web(req, res);
+  // eslint-disable-next-line no-unused-vars
+  expressApp.use((err, req, res, next) => {
+    if (res.headersSent) {
+      return next(err);
+    }
+
+    log.error(err);
+    return res.status(502).end();
   });
+
+  const pems = selfsigned.generate([{ name: 'commonName', value: 'nano.org' }]);
+  const key = normalizeNewline(pems.private);
+  const cert = normalizeNewline(pems.cert);
+  const server = httpolyglot.createServer({ key, cert }, expressApp);
 
   server.once('close', () => {
     child.kill();
@@ -137,6 +174,15 @@ ipcMain.on('node-start', ({ sender }) => {
 
   mainWindow.prependOnceListener('closed', () => {
     server.close();
+  });
+
+  app.on('certificate-error', (event, webContents, url, error, { data }, callback) => {
+    const isTrusted = data === cert;
+    if (isTrusted) {
+      event.preventDefault();
+    }
+
+    return callback(isTrusted);
   });
 
   Object.defineProperty(global, 'isNodeStarted', {
@@ -151,7 +197,7 @@ ipcMain.on('node-start', ({ sender }) => {
     }
   });
 
-  server.listen(3000);
+  server.listen(17076);
 });
 
 const run = async () => {
@@ -199,8 +245,8 @@ const run = async () => {
   Menu.setApplicationMenu(menu);
 
   mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 1024,
+    height: 768,
   });
 
   if (isDev) {
