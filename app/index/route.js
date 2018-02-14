@@ -3,21 +3,10 @@ import { get } from '@ember/object';
 
 import { service } from 'ember-decorators/service';
 
-export default Route.extend({
-  @service session: null,
-  @service electron: null,
+import ElectronRouteMixin from '../mixins/electron-route';
 
-  // eslint-disable-next-line consistent-return
-  beforeModel() {
-    const electron = this.get('electron');
-    const isElectron = get(electron, 'isElectron');
-    if (isElectron) {
-      const isNodeStarted = electron.isNodeStarted();
-      if (!isNodeStarted) {
-        return this.transitionTo('start');
-      }
-    }
-  },
+export default Route.extend(ElectronRouteMixin, {
+  @service session: null,
 
   afterModel() {
     const session = this.get('session');

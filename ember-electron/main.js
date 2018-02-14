@@ -72,7 +72,6 @@ const downloadAsset = async (sender, url, integrity, onProgress) => {
 
 ipcMain.on('download-start', ({ sender }, url, integrity) => {
   const onProgress = debounceFn((progress) => {
-    log.info('Download progress:', Number(progress * 100).toFixed(2));
     if (!sender.isDestroyed()) {
       sender.send('download-progress', progress);
     }
@@ -167,31 +166,42 @@ ipcMain.on('node-start', ({ sender }) => {
   const key = normalizeNewline(pems.private);
   const cert = normalizeNewline(pems.cert);
   const server = httpolyglot.createServer({ key, cert }, expressApp);
-
-  server.once('close', () => {
-    child.kill();
-  });
-
-  mainWindow.prependOnceListener('closed', () => {
-    server.close();
-  });
-
-  app.on('certificate-error', (event, webContents, url, error, { data }, callback) => {
+  const onCertificateError = (event, webContents, url, error, { data }, callback) => {
     const isTrusted = data === cert;
     if (isTrusted) {
       event.preventDefault();
     }
 
     return callback(isTrusted);
+  };
+
+  app.on('certificate-error', onCertificateError);
+
+  server.once('close', () => {
+    log.info('Server closing');
+    app.removeListener('certificate-error', onCertificateError);
+    child.kill();
+  });
+
+  child.once('exit', () => {
+    log.info('Node exited');
+    if (server.listening) {
+      server.close();
+    }
+  });
+
+  mainWindow.prependOnceListener('closed', () => {
+    server.close();
   });
 
   Object.defineProperty(global, 'isNodeStarted', {
     get() {
-      return !!server.listening;
+      return server.listening && !child.killed;
     },
   });
 
   server.once('listening', () => {
+    log.info('Server listening');
     if (!sender.isDestroyed()) {
       sender.send('node-ready');
     }

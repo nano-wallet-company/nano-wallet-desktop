@@ -15,6 +15,6 @@ export default Route.extend({
   },
 
   redirect() {
-    this.transitionTo('wallets.overview');
+    return this.transitionTo('wallets.overview');
   },
 });

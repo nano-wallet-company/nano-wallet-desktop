@@ -5,7 +5,12 @@ import { setupTest } from 'ember-mocha';
 describe('Unit | Route | login', () => {
   setupTest('route:login', {
     // Specify the other units that are required for this test.
-    needs: ['service:intl', 'service:session', 'service:flashMessages'],
+    needs: [
+      'service:intl',
+      'service:session',
+      'service:electron',
+      'service:flashMessages',
+    ],
   });
 
   it('exists', function () {

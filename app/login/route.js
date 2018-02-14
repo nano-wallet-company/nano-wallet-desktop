@@ -6,9 +6,11 @@ import UnauthenticatedRouteMixin from 'ember-simple-auth/mixins/unauthenticated-
 import { service } from 'ember-decorators/service';
 import { action } from 'ember-decorators/object';
 
+import ElectronRouteMixin from '../mixins/electron-route';
+
 import { InvalidPasswordError } from '../authenticators/wallet';
 
-export default Route.extend(UnauthenticatedRouteMixin, {
+export default Route.extend(UnauthenticatedRouteMixin, ElectronRouteMixin, {
   @service intl: null,
   @service session: null,
   @service flashMessages: null,

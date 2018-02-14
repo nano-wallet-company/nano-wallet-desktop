@@ -20,7 +20,7 @@ module.exports = (environment) => {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
         // e.g. 'with-controller': true
-        // 'ember-improved-instrumentation': true,
+        'ember-improved-instrumentation': true,
       },
       EXTEND_PROTOTYPES: false,
     },
@@ -48,7 +48,7 @@ module.exports = (environment) => {
       data: {
         darwin: {
           url: 'https://devinus.ngrok.io/data.zip',
-          integrity: 'sha512-gsda0segATDiX6Cxk4g/mXqj3e+OIKNEL1dbVDJoFn0bbx4ZOQL9qC0I0ynh1xyHT23VuyqCcONhP3w0upnfeg==',
+          integrity: 'sha512-dbHjtEzWbrlk8SE6iaQDJXsTLle+khy0Luvp7D1YOX8rlk5iSdzxR4i+0segXw4MoJp5WjnTK/M8q0xNqVrkZQ==',
         },
       },
     },

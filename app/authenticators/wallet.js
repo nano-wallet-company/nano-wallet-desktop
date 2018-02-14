@@ -1,3 +1,5 @@
+import { get } from '@ember/object';
+
 import Base from 'ember-simple-auth/authenticators/base';
 
 import { service } from 'ember-decorators/service';
@@ -15,6 +17,12 @@ export const SessionRestoreError = defineError({
   extends: AuthenticationError,
 });
 
+export const NodeNotStartedError = defineError({
+  name: 'NodeStoppedError',
+  message: 'Node not started',
+  extends: SessionRestoreError,
+});
+
 export const WalletLockedError = defineError({
   name: 'WalletLocked',
   message: 'Wallet locked',
@@ -30,10 +38,20 @@ export const InvalidPasswordError = defineError({
 export default Base.extend({
   @service rpc: null,
   @service store: null,
+  @service electron: null,
 
   async restore({ wallet }) {
     if (!wallet) {
       throw new SessionRestoreError();
+    }
+
+    const electron = this.get('electron');
+    const isElectron = get(electron, 'isElectron');
+    if (isElectron) {
+      const isNodeStarted = electron.isNodeStarted();
+      if (!isNodeStarted) {
+        throw new NodeNotStartedError();
+      }
     }
 
     const locked = await this.get('rpc').walletLocked(wallet);
