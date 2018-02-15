@@ -6,14 +6,26 @@ import UnauthenticatedRouteMixin from 'ember-simple-auth/mixins/unauthenticated-
 import { service } from 'ember-decorators/service';
 import { action } from 'ember-decorators/object';
 
-import ElectronRouteMixin from '../mixins/electron-route';
-
 import { InvalidPasswordError } from '../authenticators/wallet';
 
-export default Route.extend(UnauthenticatedRouteMixin, ElectronRouteMixin, {
+export default Route.extend(UnauthenticatedRouteMixin, {
   @service intl: null,
   @service session: null,
+  @service electron: null,
   @service flashMessages: null,
+
+  beforeModel() {
+    const electron = this.get('electron');
+    const isElectron = get(electron, 'isElectron');
+    if (isElectron) {
+      const isNodeStarted = electron.isNodeStarted();
+      if (!isNodeStarted) {
+        return this.transitionTo('start');
+      }
+    }
+
+    return true;
+  },
 
   model() {
     const wallet = this.get('session.data.wallet');

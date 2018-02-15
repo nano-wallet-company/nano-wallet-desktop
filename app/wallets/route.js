@@ -5,14 +5,11 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 import { service } from 'ember-decorators/service';
 import { storageFor } from 'ember-local-storage';
 
-import ElectronRouteMixin from '../mixins/electron-route';
-
-export default Route.extend(AuthenticatedRouteMixin, ElectronRouteMixin, {
+export default Route.extend(AuthenticatedRouteMixin, {
   @service electron: null,
 
   settings: storageFor('settings'),
 
-  // eslint-disable-next-line consistent-return
   beforeModel() {
     const electron = this.get('electron');
     const isElectron = get(electron, 'isElectron');
@@ -22,6 +19,8 @@ export default Route.extend(AuthenticatedRouteMixin, ElectronRouteMixin, {
         return this.transitionTo('start');
       }
     }
+
+    return true;
   },
 
   async afterModel(model) {

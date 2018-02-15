@@ -3,10 +3,22 @@ import { get } from '@ember/object';
 
 import { service } from 'ember-decorators/service';
 
-import ElectronRouteMixin from '../mixins/electron-route';
-
-export default Route.extend(ElectronRouteMixin, {
+export default Route.extend({
   @service session: null,
+  @service electron: null,
+
+  beforeModel() {
+    const electron = this.get('electron');
+    const isElectron = get(electron, 'isElectron');
+    if (isElectron) {
+      const isNodeStarted = electron.isNodeStarted();
+      if (!isNodeStarted) {
+        return this.transitionTo('start');
+      }
+    }
+
+    return true;
+  },
 
   afterModel() {
     const session = this.get('session');
