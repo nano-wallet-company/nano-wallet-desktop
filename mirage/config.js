@@ -23,11 +23,9 @@ export default function () {
     http://www.ember-cli-mirage.com/docs/v0.3.x/shorthands/
   */
 
-  if (process.env.EMBER_CLI_ELECTRON) {
-    this.passthrough('https://localhost:17076/**');
-  }
-
+  this.passthrough('http://localhost:7076');
   this.passthrough('http://localhost:55000');
+  this.passthrough('https://localhost:17076/**');
 
   this.namespace = 'rpc';
 

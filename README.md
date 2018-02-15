@@ -33,6 +33,11 @@ Make use of the many generators for code, try `npx ember help generate` for more
 * `npm test`
 * `npm test -- --server`
 
+### Linting
+
+* `npm run lint:js`
+* `npm run lint:js -- --fix`
+
 ### Building
 
 * `npm run build` (development)

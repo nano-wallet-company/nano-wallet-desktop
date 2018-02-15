@@ -1,5 +1,4 @@
 /* eslint-env node */
-
 const {
   version,
   description,
@@ -42,13 +41,13 @@ module.exports = (environment) => {
       node: {
         darwin: {
           url: 'https://devinus.ngrok.io/node.zip',
-          integrity: 'sha512-uyX7CHUzm+ivlaoEryOfOhxeB5jLy6jneD1BeaSqv32Z0bcu6kyru6JvkO4EqsnAhNuJETBWKqsBC3hBijZdSA==',
+          integrity: 'sha512-U7nGfzr/L9zrDSDmx0C4jDyjYQeKc98JJAAlNLHQ8OodmSz6ojETrT0v6nZJYwo4IKsKf9FMn4B4vNZ3t2S4kw==',
         },
       },
       data: {
         darwin: {
           url: 'https://devinus.ngrok.io/data.zip',
-          integrity: 'sha512-dbHjtEzWbrlk8SE6iaQDJXsTLle+khy0Luvp7D1YOX8rlk5iSdzxR4i+0segXw4MoJp5WjnTK/M8q0xNqVrkZQ==',
+          integrity: 'sha512-+KpaNlir22fU+y1hT/gZ1ViMDUKbXl+zMHe+l7HrTgH3ljwQnfZ50u4FaYnILyBKuqFHq1SmS0cT08MAGKVRzQ==',
         },
       },
     },

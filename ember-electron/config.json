@@ -12,9 +12,9 @@
         "version": "9",
         "peering_port": "54000",
         "bootstrap_fraction_numerator": "1",
-        "receive_minimum": "1",
+        "receive_minimum": "1000000000000000000000000",
         "logging": {
-            "version": "2",
+            "version": "3",
             "ledger": "false",
             "ledger_duplicate": "false",
             "vote": "false",
