@@ -6,10 +6,10 @@ const crypto = require('crypto');
 const { spawn } = require('child_process');
 
 const ssri = require('ssri');
-const express = require('express');
-const bodyParser = require('body-parser');
+const spdy = require('spdy');
+const helmet = require('helmet');
+const connect = require('connect');
 const httpProxy = require('http-proxy');
-const httpolyglot = require('httpolyglot');
 const selfsigned = require('selfsigned');
 const decompress = require('decompress');
 const debounceFn = require('debounce-fn');
@@ -108,7 +108,7 @@ ipcMain.on('node-start', ({ sender }) => {
   });
 
   child.on('error', (err) => {
-    log.error('Error starting node:', err);
+    log.error('[node]', 'Error starting node:', err);
     if (!sender.isDestroyed()) {
       sender.send('node-error', err);
     }
@@ -126,46 +126,17 @@ ipcMain.on('node-start', ({ sender }) => {
     },
   });
 
-  proxy.on('error', (err) => {
-    log.error('[proxy]', err);
-  });
-
-  const expressApp = express();
-  expressApp.set('trust proxy', host);
-
-  expressApp.all('/rpc', (req, res) => proxy.web(req, res, { ignorePath: true }));
-
-  const reviver = (key, value) => {
-    if (key === 'block' && typeof value === 'string') {
-      return JSON.parse(value);
-    }
-
-    return value;
-  };
-
-  expressApp.post('/callback', bodyParser.json({ reviver }), (req, res) => {
-    const { type } = req.body;
-    if (type === 'open' || type === 'receive') {
-      log.info('TODO', req.body);
-    }
-
-    return res.status(202).end();
-  });
+  const connectApp = connect();
+  connectApp.use(helmet());
+  connectApp.use((req, res, next) => proxy.web(req, res, { ignorePath: true }, next));
 
   // eslint-disable-next-line no-unused-vars
-  expressApp.use((err, req, res, next) => {
-    if (res.headersSent) {
-      return next(err);
-    }
-
-    log.error(err);
-    return res.status(502).end();
-  });
+  connectApp.use((err, req, res, next) => log.error('[proxy]', err));
 
   const pems = selfsigned.generate([{ name: 'commonName', value: 'nano.org' }]);
   const key = normalizeNewline(pems.private);
   const cert = normalizeNewline(pems.cert);
-  const server = httpolyglot.createServer({ key, cert }, expressApp);
+  const server = spdy.createServer({ key, cert }, connectApp);
   const onCertificateError = (event, webContents, url, error, { data }, callback) => {
     const isTrusted = data === cert;
     if (isTrusted) {
@@ -178,20 +149,19 @@ ipcMain.on('node-start', ({ sender }) => {
   app.on('certificate-error', onCertificateError);
 
   server.once('close', () => {
-    log.info('Server closing');
+    log.info('[proxy]', 'Server closing');
     app.removeListener('certificate-error', onCertificateError);
     child.kill();
   });
 
   child.once('exit', () => {
-    log.info('Node exited');
-    if (server.listening) {
-      server.close();
-    }
+    log.info('[node]', 'Exited');
+    server.close();
   });
 
-  mainWindow.prependOnceListener('closed', () => {
+  mainWindow.once('close', () => {
     server.close();
+    child.kill();
   });
 
   Object.defineProperty(global, 'isNodeStarted', {
@@ -201,13 +171,13 @@ ipcMain.on('node-start', ({ sender }) => {
   });
 
   server.once('listening', () => {
-    log.info('Server listening');
+    log.info('[proxy]', 'Server listening');
     if (!sender.isDestroyed()) {
       sender.send('node-ready');
     }
   });
 
-  server.listen(17076);
+  server.listen(17076, '::1');
 });
 
 const run = async () => {
