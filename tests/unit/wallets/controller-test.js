@@ -5,7 +5,11 @@ import { setupTest } from 'ember-mocha';
 describe('Unit | Controller | wallets', () => {
   setupTest('controller:wallets', {
     // Specify the other units that are required for this test.
-    needs: ['service:flashMessages'],
+    needs: [
+      'service:pollboy',
+      'service:flashMessages',
+      'service:rpc',
+    ],
   });
 
   // Replace this with your real tests.

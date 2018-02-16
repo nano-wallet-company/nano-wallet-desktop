@@ -7,7 +7,7 @@ import { on } from 'ember-decorators/object/evented';
 
 import { hash } from 'rsvp';
 
-const DEFAULT_INTERVAL = 10000; // 10s
+const STATUS_POLL_INTERVAL = 10000; // 10s
 
 const Service = ObjectProxy.extend(PromiseProxyMixin, {
   @service pollboy: null,
@@ -18,7 +18,7 @@ const Service = ObjectProxy.extend(PromiseProxyMixin, {
   @on('init')
   setupPoller() {
     const pollboy = this.get('pollboy');
-    this.poller = pollboy.add(this, this.onPoll, DEFAULT_INTERVAL);
+    this.poller = pollboy.add(this, this.onPoll, STATUS_POLL_INTERVAL);
     this.poller.pause();
   },
 

@@ -31,7 +31,7 @@ export default Component.extend({
   },
 
   updateProgress(value) {
-    if (!this.isDestroyed) {
+    if (!this.isDestroying) {
       this.set('value', value);
     }
   },

@@ -11,6 +11,7 @@ export const actions = {
   WALLET_CREATE: 'wallet_create',
   WALLET_LOCKED: 'wallet_locked',
   WALLET_BALANCE_TOTAL: 'wallet_balance_total',
+  WALLET_BALANCES: 'wallet_balances',
   WALLET_CHANGE_SEED: 'wallet_change_seed',
   ACCOUNT_CREATE: 'account_create',
   ACCOUNT_INFO: 'account_info',
@@ -96,6 +97,11 @@ export default Service.extend({
     return this.call(actions.WALLET_BALANCE_TOTAL, { wallet });
   },
 
+  async walletBalances(wallet) {
+    const { balances } = await this.call(actions.WALLET_BALANCES, { wallet });
+    return balances;
+  },
+
   async walletChangeSeed(wallet, seed) {
     const { success } = await this.call(actions.WALLET_CHANGE_SEED, { wallet, seed });
     return success === '';
@@ -124,6 +130,10 @@ export default Service.extend({
       if (pending) {
         info.pending = '0';
       }
+    }
+
+    if (!info.modified_timestamp) {
+      info.modified_timestamp = String(Date.now());
     }
 
     return info;

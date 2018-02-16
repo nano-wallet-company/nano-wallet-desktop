@@ -16,6 +16,8 @@ export default DS.Model.extend({
   @attr('big-number') balance: null,
   @attr('big-number') pending: null,
 
+  @attr('date') modifiedTimestamp: null,
+
   toString() {
     const id = this.get('id');
     const wallet = this.get('wallet.id');
