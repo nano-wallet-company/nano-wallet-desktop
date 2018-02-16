@@ -112,7 +112,7 @@ h1 {
 }
 
 .history-item-list {
-  max-height: 380px;
+  max-height: 50vh;
     overflow: scroll;
     background-color: transparent;
 }
@@ -125,5 +125,17 @@ h1 {
 
     p {
       margin: 0;
+    }
+
+    &.send  i {
+        color: #538DCA;
+      }
+
+    &.receive i {
+      color: #EDA63F;
+    }
+
+    i {
+      font-size: 24px;
     }
 }

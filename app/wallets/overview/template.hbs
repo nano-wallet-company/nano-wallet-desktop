@@ -5,17 +5,19 @@
 
 <main role="main">
 
-    {{total-amount wallet=model}}
+    {{#unless showHistory}}
+        {{total-amount wallet=model}}
 
-    <section>
-        <div class="container-fluid">
-            <div class="row">
-                <hr>
+        <section>
+            <div class="container-fluid">
+                <div class="row">
+                    <hr>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+    {{/unless}}
 
-    <section>
+    <section class="{{if showHistory 'history-show'}}">
         <div class="container-fluid">
             <div class="row">
                 <div class="col">
@@ -31,99 +33,88 @@
         <div class="container">
             <div class="row">
                 <div class="col">
-                    {{#link-to 'wallets.send' model class="arrow"}} {{fa-icon "chevron-up"}} {{/link-to}}
+                    {{#if showHistory}}
+                        <a href="#" class="arrow" {{action 'toggleHistory'}}>{{fa-icon "chevron-down"}}</a>
+                    {{else}}
+                        <a href="#" class="arrow" {{action 'toggleHistory'}}>{{fa-icon "chevron-up"}}</a>
+                    {{/if}}
                 </div>
             </div>
         </div>
     </section>
 
-    <section>
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    
+    {{#if showHistory}}
+        <section>
+            <div class="container-fluid">
+                <div class="row history-item-list justify-content-md-center">
+                    <div class="col-lg-10 col-sm-12 history-item send d-flex justify-content-around align-items-center">
+                        {{fa-icon "paper-plane" ariaHidden=true}}
+                        <p><sup><img src="images/nano-icon.svg" alt=""></sup>0.002461</p>
+                        <p>
+                            <span>xrb_17oqj</span>4rpads4o6ud448yymzk9jot8yzmzyeuteq3bj38cwjpt4rrgxhfx
+                            <span>fr1</span>
+                        </p>
+                    </div>
+                    <div class="col-lg-10 col-sm-12 history-item receive d-flex justify-content-around align-items-center">
+                        {{fa-icon "envelope-open"}}
+                        <p><sup><img src="images/nano-icon.svg" alt=""></sup>0.002461</p>
+                        <p>
+                            <span>xrb_17oqj</span>4rpads4o6ud448yymzk9jot8yzmzyeuteq3bj38cwjpt4rrgxhfx
+                            <span>fr1</span>
+                        </p>
+                    </div>
+                    <div class="col-lg-10 col-sm-12 history-item d-flex send justify-content-around align-items-center">
+                        {{fa-icon "paper-plane" ariaHidden=true}}
+                        <p><sup><img src="images/nano-icon.svg" alt=""></sup>0.002461</p>
+                        <p>
+                            <span>xrb_17oqj</span>4rpads4o6ud448yymzk9jot8yzmzyeuteq3bj38cwjpt4rrgxhfx
+                            <span>fr1</span>
+                        </p>
+                    </div>
+                    <div class="col-lg-10 col-sm-12 history-item d-flex receive justify-content-around align-items-center">
+                        {{fa-icon "envelope-open"}}
+                        <p><sup><img src="images/nano-icon.svg" alt=""></sup>0.002461</p>
+                        <p>
+                            <span>xrb_17oqj</span>4rpads4o6ud448yymzk9jot8yzmzyeuteq3bj38cwjpt4rrgxhfx
+                            <span>fr1</span>
+                        </p>
+                    </div>
+                    <div class="col-lg-10 col-sm-12 history-item send d-flex justify-content-around align-items-center">
+                        {{fa-icon "paper-plane" ariaHidden=true}}
+                        <p><sup><img src="images/nano-icon.svg" alt=""></sup>0.002461</p>
+                        <p>
+                            <span>xrb_17oqj</span>4rpads4o6ud448yymzk9jot8yzmzyeuteq3bj38cwjpt4rrgxhfx
+                            <span>fr1</span>
+                        </p>
+                    </div>
+                    <div class="col-lg-10 col-sm-12 history-item receive d-flex justify-content-around align-items-center">
+                        {{fa-icon "envelope-open"}}
+                        <p><sup><img src="images/nano-icon.svg" alt=""></sup>0.002461</p>
+                        <p>
+                            <span>xrb_17oqj</span>4rpads4o6ud448yymzk9jot8yzmzyeuteq3bj38cwjpt4rrgxhfx
+                            <span>fr1</span>
+                        </p>
+                    </div>
+                    <div class="col-lg-10 col-sm-12 history-item send d-flex justify-content-around align-items-center">
+                        {{fa-icon "paper-plane" ariaHidden=true}}
+                        <p><sup><img src="images/nano-icon.svg" alt=""></sup>0.002461</p>
+                        <p>
+                            <span>xrb_17oqj</span>4rpads4o6ud448yymzk9jot8yzmzyeuteq3bj38cwjpt4rrgxhfx
+                            <span>fr1</span>
+                        </p>
+                    </div>
+                    <div class="col-lg-10 col-sm-12 history-item receive d-flex justify-content-around align-items-center">
+                        {{fa-icon "envelope-open"}}
+                        <p><sup><img src="images/nano-icon.svg" alt=""></sup>0.002461</p>
+                        <p>
+                            <span>xrb_17oqj</span>4rpads4o6ud448yymzk9jot8yzmzyeuteq3bj38cwjpt4rrgxhfx
+                            <span>fr1</span>
+                        </p>
+                    </div>
+        
                 </div>
             </div>
-        </div>
-    </section>
-
+        </section>
+    {{/if}}
     {{send-button model=model}} {{#each flashMessages.arrangedQueue as |flash|}} {{flash-message flash=flash}} {{/each}}
-
-    <div class="row">
-        <div class="col">
-            {{outlet}}
-        </div>
-    </div>
 </main>
-
-<section>
-    <div class="container">
-        <div class="row history-item-list">
-            <div class="col-lg-12 history-item d-flex justify-content-around align-items-center">
-                {{fa-icon "envelope-open"}}
-                <p>0.002461</p>
-                <p>
-                    <span>xrb_17oqj</span>4rpads4o6ud448yymzk9jot8yzmzyeuteq3bj38cwjpt4rrgxhfx
-                    <span>fr1</span>
-                </p>
-            </div>
-            <div class="col-lg-12 history-item d-flex justify-content-around align-items-center">
-                {{fa-icon "envelope-open"}}
-                <p>0.002461</p>
-                <p>
-                    <span>xrb_17oqj</span>4rpads4o6ud448yymzk9jot8yzmzyeuteq3bj38cwjpt4rrgxhfx
-                    <span>fr1</span>
-                </p>
-            </div>
-            <div class="col-lg-12 history-item d-flex justify-content-around align-items-center">
-                {{fa-icon "envelope-open"}}
-                <p>0.002461</p>
-                <p>
-                    <span>xrb_17oqj</span>4rpads4o6ud448yymzk9jot8yzmzyeuteq3bj38cwjpt4rrgxhfx
-                    <span>fr1</span>
-                </p>
-            </div>
-            <div class="col-lg-12 history-item d-flex justify-content-around align-items-center">
-                {{fa-icon "envelope-open"}}
-                <p>0.002461</p>
-                <p>
-                    <span>xrb_17oqj</span>4rpads4o6ud448yymzk9jot8yzmzyeuteq3bj38cwjpt4rrgxhfx
-                    <span>fr1</span>
-                </p>
-            </div>
-            <div class="col-lg-12 history-item d-flex justify-content-around align-items-center">
-                {{fa-icon "envelope-open"}}
-                <p>0.002461</p>
-                <p>
-                    <span>xrb_17oqj</span>4rpads4o6ud448yymzk9jot8yzmzyeuteq3bj38cwjpt4rrgxhfx
-                    <span>fr1</span>
-                </p>
-            </div>
-            <div class="col-lg-12 history-item d-flex justify-content-around align-items-center">
-                {{fa-icon "envelope-open"}}
-                <p>0.002461</p>
-                <p>
-                    <span>xrb_17oqj</span>4rpads4o6ud448yymzk9jot8yzmzyeuteq3bj38cwjpt4rrgxhfx
-                    <span>fr1</span>
-                </p>
-            </div>
-            <div class="col-lg-12 history-item d-flex justify-content-around align-items-center">
-                {{fa-icon "envelope-open"}}
-                <p>0.002461</p>
-                <p>
-                    <span>xrb_17oqj</span>4rpads4o6ud448yymzk9jot8yzmzyeuteq3bj38cwjpt4rrgxhfx
-                    <span>fr1</span>
-                </p>
-            </div>
-            <div class="col-lg-12 history-item d-flex justify-content-around align-items-center">
-                {{fa-icon "envelope-open"}}
-                <p>0.002461</p>
-                <p>
-                    <span>xrb_17oqj</span>4rpads4o6ud448yymzk9jot8yzmzyeuteq3bj38cwjpt4rrgxhfx
-                    <span>fr1</span>
-                </p>
-            </div>
-
-        </div>
-    </div>
-</section>

@@ -57,6 +57,10 @@
     padding: 30px 20px;
     /* justify-content: space-evenly; */
     align-items: center;
+
+    sup > img {
+        display: inline-block;
+    }
 }
 
 .slick-center {
@@ -183,4 +187,18 @@
 
 .slick-prev {
     left: 55px;
+}
+
+.history-show {
+    .slick-list,
+    .slick-slider {
+        height: auto!important;
+    }
+    .gallery-cell {
+        height: auto!important;
+
+        canvas {
+            height: 0!important;
+        }
+    }
 }

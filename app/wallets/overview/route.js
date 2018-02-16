@@ -6,6 +6,7 @@ import { service } from 'ember-decorators/service';
 export default Route.extend({
   @service intl: null,
   @service flashMessages: null,
+  showHistory: true,
 
   activeAccount: 0,
     @action
@@ -22,6 +23,7 @@ export default Route.extend({
   afterChange(swiped) {
     this.set('activeAccount', swiped.currentSlide);
   },
+
 @action
   async createAccount(wallet) {
     const account = await this.store.createRecord('account', { wallet }).save();
