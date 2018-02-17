@@ -96,6 +96,7 @@ ipcMain.on('download-start', ({ sender }, url, integrity) => {
 ipcMain.on('node-start', ({ sender }) => {
   const config = loadJsonFile.sync(path.join(__dirname, 'config.json'));
   const authorizationToken = crypto.randomBytes(20).toString('hex');
+  global.authorizationToken = authorizationToken;
   config.rpc.authorization_token = authorizationToken;
 
   const cwd = path.resolve(app.getPath('userData'));
@@ -121,9 +122,6 @@ ipcMain.on('node-start', ({ sender }) => {
   const proxy = httpProxy.createProxyServer({
     target: { host, port },
     xfwd: true,
-    headers: {
-      Authorization: `Bearer ${authorizationToken}`,
-    },
   });
 
   const connectApp = connect();

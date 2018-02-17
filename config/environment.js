@@ -39,15 +39,23 @@ module.exports = (environment) => {
 
     assets: {
       node: {
+        win32: {
+          url: 'https://d2ev7f87i7jwuo.cloudfront.net/node-win32-d674353de23b4513908cf46d90cb89a7.zip',
+          integrity: 'sha512-XsUQBv2ziUdJgJyTeNzN4P54gasoS8T3x5fIMWeZkgpksndiM64XXrgoKPZAZEEwXHOrUlD3xc3rxMwanuohvg==',
+        },
         darwin: {
-          url: 'https://devinus.ngrok.io/node.zip',
-          integrity: 'sha512-U7nGfzr/L9zrDSDmx0C4jDyjYQeKc98JJAAlNLHQ8OodmSz6ojETrT0v6nZJYwo4IKsKf9FMn4B4vNZ3t2S4kw==',
+          url: 'https://d2ev7f87i7jwuo.cloudfront.net/node-darwin-67f9568651d44b2273c2d70130a30e4a.zip',
+          integrity: 'sha512-8H57O2I93uTD0LzDD62O8WJYsfz6IJIs9JDceIAhaxDJvzADiw4D0W+Ex1agHAU4JpI9fn4eglF3624SYyDGqQ==',
         },
       },
       data: {
+        win32: {
+          url: 'https://d2ev7f87i7jwuo.cloudfront.net/data-c70a503c477cf852fb7ad67be1af45bd.zip',
+          integrity: 'sha512-PAPSghnKb/FzCKWIcBsHvzmBEbarUM4X+L/iHUnIuhKXsRzd+AXh1ke4CJ36cO8VzAQP4ihnRuWqrVhESMiT9w==',
+        },
         darwin: {
-          url: 'https://devinus.ngrok.io/data.zip',
-          integrity: 'sha512-+KpaNlir22fU+y1hT/gZ1ViMDUKbXl+zMHe+l7HrTgH3ljwQnfZ50u4FaYnILyBKuqFHq1SmS0cT08MAGKVRzQ==',
+          url: 'https://d2ev7f87i7jwuo.cloudfront.net/data-c70a503c477cf852fb7ad67be1af45bd.zip',
+          integrity: 'sha512-PAPSghnKb/FzCKWIcBsHvzmBEbarUM4X+L/iHUnIuhKXsRzd+AXh1ke4CJ36cO8VzAQP4ihnRuWqrVhESMiT9w==',
         },
       },
     },

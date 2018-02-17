@@ -8,6 +8,7 @@ describe('Unit | Service | ajax', () => {
     needs: [
       'service:session',
       'service:hostManager',
+      'service:electron',
     ],
   });
 

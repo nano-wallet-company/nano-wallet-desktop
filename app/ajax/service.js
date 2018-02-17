@@ -1,7 +1,8 @@
 import AjaxService from 'ember-ajax/services/ajax';
+import { get } from '@ember/object';
 
 import { service } from 'ember-decorators/service';
-import { readOnly } from 'ember-decorators/object';
+import { computed, readOnly } from 'ember-decorators/object';
 import { alias } from 'ember-decorators/object/computed';
 
 import { task } from 'ember-concurrency';
@@ -11,6 +12,7 @@ import retryWithBackoff from 'ember-backoff/retry-with-backoff';
 export default AjaxService.extend({
   @service session: null,
   @service hostManager: null,
+  @service electron: null,
 
   @readOnly
   @alias('hostManager.host.rpcHost') host: null,
@@ -19,6 +21,21 @@ export default AjaxService.extend({
   @alias('hostManager.host.rpcNamespace') namespace: null,
 
   contentType: 'application/json',
+
+  @computed('electron.isElectron')
+  get headers() {
+    const headers = {};
+    const electron = this.get('electron');
+    const isElectron = get(electron, 'isElectron');
+    if (isElectron) {
+      const token = electron.authorizationToken();
+      if (token) {
+        headers.Authorization = `Bearer ${token}`;
+      }
+    }
+
+    return headers;
+  },
 
   requestTask: task(function* requestTask(fn, ...args) {
     const promise = fn.apply(this, args);
