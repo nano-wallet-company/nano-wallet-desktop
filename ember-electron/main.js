@@ -1,5 +1,6 @@
 /* eslint-env node */
 /* eslint-disable no-console */
+const os = require('os');
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
@@ -10,6 +11,7 @@ const ssri = require('ssri');
 const spdy = require('spdy');
 const helmet = require('helmet');
 const connect = require('connect');
+const getPort = require('get-port');
 const httpProxy = require('http-proxy');
 const selfsigned = require('selfsigned');
 const debounceFn = require('debounce-fn');
@@ -131,17 +133,10 @@ ipcMain.on('download-start', ({ sender }, url, integrity) => {
     });
 });
 
+const config = loadJsonFile.sync(path.join(__dirname, 'config.json'));
+
 ipcMain.on('node-start', ({ sender }) => {
-  const config = loadJsonFile.sync(path.join(__dirname, 'config.json'));
-  const authorizationToken = crypto.randomBytes(20).toString('hex');
-  global.authorizationToken = authorizationToken;
-  config.rpc.authorization_token = authorizationToken;
-
   const cwd = path.resolve(app.getPath('userData'));
-  const configPath = path.join(cwd, 'config.json');
-  log.info('Writing node configuration:', configPath);
-  writeJsonFile.sync(configPath, config);
-
   const cmd = path.join(cwd, 'rai_node');
   const child = spawn(cmd, ['--daemon', '--data_path', cwd], {
     cwd,
@@ -224,9 +219,25 @@ ipcMain.on('node-start', ({ sender }) => {
 });
 
 const run = async () => {
-  await appReady;
+  config.rpc.port = await getPort({ port: config.rpc.port });
+  config.node.peering_port = await getPort({ port: config.node.peering_port });
+  config.node.io_threads = os.cpus().length;
+
+  const authorizationToken = crypto.randomBytes(20).toString('hex');
+  global.authorizationToken = authorizationToken;
+  config.rpc.authorization_token = authorizationToken;
 
   const dataPath = path.resolve(app.getPath('userData'));
+  const configPath = path.join(dataPath, 'config.json');
+  log.info('Writing node configuration:', configPath);
+  await writeJsonFile(configPath, config, {
+    replacer(key, value) {
+      return typeof value === 'number' ? String(value) : value;
+    },
+  });
+
+  await appReady;
+
   const nodePath = path.join(dataPath, 'rai_node');
   Object.defineProperty(global, 'isNodeDownloaded', {
     get() {
