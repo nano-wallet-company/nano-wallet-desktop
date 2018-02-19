@@ -66,22 +66,26 @@ const extract = promisify(extractZip);
 
 const downloadAsset = async (sender, url, integrity, onProgress) => {
   const directory = path.resolve(app.getPath('temp'));
+  log.info('Downloading asset:', url);
+
   const dl = await electronDownload(sender, url, { directory, onProgress });
   const savePath = dl.getSavePath();
-  log.info('Verifying asset:', savePath, integrity);
   if (!sender.isDestroyed()) {
     sender.send('download-verify');
   }
 
+  log.info('Verifying asset:', savePath, integrity);
   await ssri.checkStream(fs.createReadStream(savePath), integrity);
 
   const dir = path.resolve(app.getPath('userData'));
-  log.info('Extracting asset:', savePath, '->', dir);
   if (!sender.isDestroyed()) {
     sender.send('download-extract');
   }
 
+  log.info('Extracting asset:', savePath, '->', dir);
   await extract(savePath, { dir });
+
+  log.info('Asset download done:', dir);
 };
 
 ipcMain.on('download-start', ({ sender }, url, integrity) => {
@@ -91,8 +95,6 @@ ipcMain.on('download-start', ({ sender }, url, integrity) => {
     }
   }, { wait: 250, immediate: true });
 
-  log.info('Downloading asset:', url);
-
   downloadAsset(sender, url, integrity, onProgress)
     .then(() => {
       if (!sender.isDestroyed()) {
@@ -100,7 +102,7 @@ ipcMain.on('download-start', ({ sender }, url, integrity) => {
       }
     })
     .catch((err) => {
-      log.error(err);
+      log.error('Error downloading asset:', err);
       if (!sender.isDestroyed()) {
         sender.send('download-error', err);
       }
@@ -114,7 +116,9 @@ ipcMain.on('node-start', ({ sender }) => {
   config.rpc.authorization_token = authorizationToken;
 
   const cwd = path.resolve(app.getPath('userData'));
-  writeJsonFile.sync(path.join(cwd, 'config.json'), config);
+  const configPath = path.join(cwd, 'config.json');
+  log.info('Writing node configuration:', configPath);
+  writeJsonFile.sync(configPath, config);
 
   const cmd = path.join(cwd, 'rai_node');
   const child = spawn(cmd, ['--daemon', '--data_path', cwd], {
@@ -123,7 +127,7 @@ ipcMain.on('node-start', ({ sender }) => {
   });
 
   child.on('error', (err) => {
-    log.error('[node]', 'Error starting node:', err);
+    log.error('[node]', 'Error starting:', err);
     if (!sender.isDestroyed()) {
       sender.send('node-error', err);
     }
@@ -182,14 +186,19 @@ ipcMain.on('node-start', ({ sender }) => {
     },
   });
 
-  server.once('listening', () => {
-    log.info('[proxy]', 'Server listening');
+  log.info('[proxy] Starting server');
+  server.listen(17076, '::1', function Server(err) {
+    if (err) {
+      log.error('[proxy]', 'Error starting server:', err);
+      return err;
+    }
+
+    const { port: listenPort } = this.address();
+    log.info('[proxy]', `Server listening on port ${listenPort}`);
     if (!sender.isDestroyed()) {
       sender.send('node-ready');
     }
   });
-
-  server.listen(17076, '::1');
 });
 
 const run = async () => {
