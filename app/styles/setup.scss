@@ -1,0 +1,47 @@
+.setup {
+  height: 100vh;
+
+  &.info {
+    background-color: $light-blue;
+    background-image: url(../../images/setup.jpg);
+    background-position: center;
+    background-size: cover;
+    color: $white;
+
+    h5 {
+      font-weight: 400;
+      line-height: 1.6;
+    }
+
+    .wrapper {
+      text-shadow: 1px 1px rgba(0,0,0,0.3);
+    }
+  }
+}
+
+.liquid-outlet {
+  button.btn-lg {
+    width: 49%;
+  }
+  .lead {
+    margin-bottom: 20px;
+    text-align: left;
+  }
+
+  code {
+    background-color: #000064;
+    border-radius: 5px;
+    color: rgba(251,251,251,.8);
+    display: block;
+    font-size: 87.5%;
+    padding: 10px;
+    margin-bottom: 10px;
+    word-break: break-word;
+  }
+
+  .text-muted {
+    display: block;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+}
