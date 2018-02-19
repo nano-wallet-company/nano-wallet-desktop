@@ -3,6 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
+const { promisify } = require('util');
 const { spawn } = require('child_process');
 
 const ssri = require('ssri');
@@ -11,8 +12,8 @@ const helmet = require('helmet');
 const connect = require('connect');
 const httpProxy = require('http-proxy');
 const selfsigned = require('selfsigned');
-const decompress = require('decompress');
 const debounceFn = require('debounce-fn');
+const extractZip = require('extract-zip');
 const pathExists = require('path-exists');
 const loadJsonFile = require('load-json-file');
 const writeJsonFile = require('write-json-file');
@@ -61,13 +62,26 @@ app.on('window-all-closed', () => {
   }
 });
 
+const extract = promisify(extractZip);
+
 const downloadAsset = async (sender, url, integrity, onProgress) => {
   const directory = path.resolve(app.getPath('temp'));
   const dl = await electronDownload(sender, url, { directory, onProgress });
   const savePath = dl.getSavePath();
+  log.info('Verifying asset:', savePath, integrity);
+  if (!sender.isDestroyed()) {
+    sender.send('download-verify');
+  }
+
   await ssri.checkStream(fs.createReadStream(savePath), integrity);
-  const dataPath = path.resolve(app.getPath('userData'));
-  await decompress(savePath, dataPath);
+
+  const dir = path.resolve(app.getPath('userData'));
+  log.info('Extracting asset:', savePath, '->', dir);
+  if (!sender.isDestroyed()) {
+    sender.send('download-extract');
+  }
+
+  await extract(savePath, { dir });
 };
 
 ipcMain.on('download-start', ({ sender }, url, integrity) => {
@@ -77,7 +91,7 @@ ipcMain.on('download-start', ({ sender }, url, integrity) => {
     }
   }, { wait: 250, immediate: true });
 
-  log.info('Downloading asset:', url, integrity);
+  log.info('Downloading asset:', url);
 
   downloadAsset(sender, url, integrity, onProgress)
     .then(() => {
