@@ -18,12 +18,12 @@ export default Helper.extend({
   compute([value = 0], { unit = 'Mxrb', precision = 6 } = {}) {
     const divisor = getConversion(unit);
     const quotient = BigNumber(value).dividedBy(divisor);
-    const maximumFractionDigits = Math.min(precision, Math.max(2, quotient.decimalPlaces()));
-    return this.get('intl').formatNumber(quotient, {
+    const maximumFractionDigits = Math.min(precision, Math.min(2, quotient.decimalPlaces()));
+    const maximumSignificantDigits = Math.max(21, quotient.precision());
+    const amount = this.get('intl').formatNumber(quotient, {
       maximumFractionDigits,
-      style: 'currency',
-      currency: 'XRB',
-      currencyDisplay: 'name',
+      maximumSignificantDigits,
     });
+    return this.get('intl').t('currency', { amount });
   },
 });
