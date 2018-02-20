@@ -6,9 +6,15 @@
 
 @import "colors";
 
+@import "utilities";
+
 @import "setup";
 
+@import "balance-overview";
+
 @import "navigation-bar";
+
+@import "account-card";
 
 body {
   background-image: linear-gradient(-180deg, #000064 0%, #000034 100%);
@@ -24,7 +30,7 @@ main {
 
 hr {
   width: 90%;
-  border-top: 1px solid #8787A6;
+  border-top: 1px solid $purple;
 }
 
 body {

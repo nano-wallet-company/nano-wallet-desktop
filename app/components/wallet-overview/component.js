@@ -13,8 +13,43 @@ export default Component.extend(PagedMixin, {
   wallet: null,
   accounts: null,
   totals: null,
-
   contentKey: 'accounts',
+
+  @computed()
+  get breakpoints() {
+    return [
+      {
+        breakpoint: 1500,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 1200,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 780,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 430,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          arrows: false,
+          draggable: true,
+        },
+      },
+    ];
+  },
 
   @computed('intl.locale')
   get columns() {

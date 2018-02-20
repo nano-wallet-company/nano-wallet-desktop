@@ -1,0 +1,33 @@
+<section>
+  <div class="contianer">
+    <div class="row">
+      <div class="col">
+        <ul class="nav justify-content-center currency-tabs">
+          <li class="nav-item">
+            <a class="nav-link {{if (eq activeTab 'nano') 'active'}}" href="#" {{action "update" 'nano' on="click" }}>NANO</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {{if (eq activeTab 'btc') 'active'}}" href="#" {{action "update" 'btc' on="click" }}>BTC</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {{if (eq activeTab 'usd') 'active'}}" href="#" {{action "update" 'usd' on="click" }}>USD</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="text-center">
+          <h1 class="lead">{{t 'wallets.overview.balance' htmlSafe=true balance=(format-amount total)}}</h1>
+          <p class="pending">
+            BALANCE PENDING
+            <br>
+            <span>
+              100.00
+            </span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

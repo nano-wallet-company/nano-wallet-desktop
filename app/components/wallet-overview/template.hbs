@@ -1,27 +1,22 @@
-<p class="lead">
-  {{t 'wallets.overview.balance' htmlSafe=true balance=(format-amount wallet.balance)}}
-</p>
-
-{{page-numbers content=content currentPage=page totalPages=totalPages}}
-
-{{#light-table table tableClassNames='table table-striped' height='auto' as |t|}}
-  {{t.head}}
-
-  {{#t.body canSelect=false as |body|}}
-    {{#if (is-pending content)}}
-      {{#body.loader}}
-        {{fa-icon 'refresh' size=3 spin=true ariaLabel=(t 'loading')}}
-      {{/body.loader}}
-    {{/if}}
-
-    {{#if table.isEmpty}}
-      {{#body.no-data}}
-        {{t 'wallets.overview.none'}}
-      {{/body.no-data}}
-    {{/if}}
-  {{/t.body}}
-{{/light-table}}
-
-{{#bs-button type="primary" icon="fa fa-plus-circle" value=wallet onClick=createAccount}}
-  {{t 'wallets.overview.create'}}
-{{/bs-button}}
+<section>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        {{#slick-slider 
+          dots=true
+          slidesToShow=(if (lte accounts.length 3) accounts.length 4)
+          slidesToScroll = 1
+          arrows=true
+          centerMode=true
+          lazyLoad=true
+          edgeFriction=true
+          centerPadding='10px'
+          responsive=breakpoints}}
+          {{#each accounts as |account|}}
+            {{account-card model=account}}
+          {{/each}}
+        {{/slick-slider}}
+      </div>
+    </div>
+  </div>
+</section>
