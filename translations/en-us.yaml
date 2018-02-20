@@ -25,6 +25,8 @@ pending: 'Pending'
 node: 'node'
 data: 'data'
 downloading: 'Downloading {asset}'
+verifying: 'Verifying {asset}'
+extracting: 'Extracting {asset}'
 starting: 'Starting node'
 currency: '{amount} NANO'
 status:

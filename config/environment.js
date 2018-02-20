@@ -50,12 +50,12 @@ module.exports = (environment) => {
       },
       data: {
         win32: {
-          url: 'https://d2ev7f87i7jwuo.cloudfront.net/data-c70a503c477cf852fb7ad67be1af45bd.zip',
-          integrity: 'sha512-PAPSghnKb/FzCKWIcBsHvzmBEbarUM4X+L/iHUnIuhKXsRzd+AXh1ke4CJ36cO8VzAQP4ihnRuWqrVhESMiT9w==',
+          url: 'http://localhost:8000/data-fef3905c198b24431bbc562115d768e6.zip',
+          integrity: 'sha512-roWSP19IqVIWkMk6Bd82esiWzhgidrNCbs2SyoDTeuN5kaVfumh580g1Q/olxrnniGrsykrqPeWJeS9cuaujhg==',
         },
         darwin: {
-          url: 'https://d2ev7f87i7jwuo.cloudfront.net/data-c70a503c477cf852fb7ad67be1af45bd.zip',
-          integrity: 'sha512-PAPSghnKb/FzCKWIcBsHvzmBEbarUM4X+L/iHUnIuhKXsRzd+AXh1ke4CJ36cO8VzAQP4ihnRuWqrVhESMiT9w==',
+          url: 'http://localhost:8000/data-fef3905c198b24431bbc562115d768e6.zip',
+          integrity: 'sha512-roWSP19IqVIWkMk6Bd82esiWzhgidrNCbs2SyoDTeuN5kaVfumh580g1Q/olxrnniGrsykrqPeWJeS9cuaujhg==',
         },
       },
     },

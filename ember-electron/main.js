@@ -109,7 +109,7 @@ const downloadAsset = async (sender, url, integrity, onProgress) => {
   log.info('Extracting asset:', savePath, '->', dir);
   await extract(savePath, { dir });
 
-  log.info('Asset download done:', dir);
+  log.info('Asset download done:', url);
 };
 
 ipcMain.on('download-start', ({ sender }, url, integrity) => {
@@ -188,7 +188,7 @@ ipcMain.on('node-start', ({ sender }) => {
   });
 
   child.once('exit', () => {
-    log.info('[node]', 'Exited');
+    log.info('[node]', 'Node exited');
     server.close();
   });
 

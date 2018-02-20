@@ -1,10 +1,12 @@
 {{#bs-modal backdropClose=false as |modal|}}
   {{#modal.header}}
-    <h4 class="modal-title">{{t 'downloading' asset=(t asset)}}</h4>
+    <h4 class="modal-title">
+      {{t status asset=(t asset)}}
+    </h4>
   {{/modal.header}}
   {{#modal.body}}
     {{#bs-progress as |p|}}
-      {{p.bar value=value minValue=0 maxValue=1 striped=true animate=true}}
+      {{p.bar value=progress minValue=0 maxValue=1 striped=true animate=true}}
     {{/bs-progress}}
   {{/modal.body}}
 {{/bs-modal}}
