@@ -1,8 +1,7 @@
 import DS from 'ember-data';
 import { A } from '@ember/array';
-import { get, computed } from '@ember/object';
+import { computed } from '@ember/object';
 
-import { service } from 'ember-decorators/service';
 import { attr, hasMany } from 'ember-decorators/data';
 
 import sumAmounts from '../utils/sum-amounts';
@@ -17,18 +16,10 @@ const sumAccountsProperty = dependentKey =>
   });
 
 export default DS.Model.extend({
-  @service settings: null,
-
   @hasMany('account', { async: true }) accounts: null,
 
   @attr seed: null,
 
   balance: sumAccountsProperty('balance'),
   pending: sumAccountsProperty('pending'),
-
-  toString() {
-    const id = this.get('id');
-    const settings = this.get('settings');
-    return get(settings, `wallets.${id}.label`) || id;
-  },
 });

@@ -11,7 +11,7 @@ export default Route.extend({
   @service flashMessages: null,
 
   afterModel() {
-    return this.modelFor('wallets');
+    return this.modelFor('wallets').reload();
   },
 
   @action
