@@ -1,46 +1,4 @@
-<header role="banner">
-  {{#bs-navbar type="dark" class="bg-dark" as |navbar|}}
-    {{#link-to 'index' class="navbar-brand"}}
-      <picture>
-        <source type="image/svg+xml" srcset="images/brand-dark.svg">
-        <img height="20" src="images/brand-dark.png" alt="{{t 'product'}}">
-      </picture>
-    {{/link-to}}
-
-    <div class="ml-auto pr-3">
-      <span class="navbar-text">
-        {{status-tooltip}}
-      </span>
-    </div>
-
-    {{navbar.toggle}}
-
-    {{#navbar.content}}
-      {{#navbar.nav as |nav|}}
-        {{#nav.item}}
-          {{#nav.link-to 'wallets.overview' model}}
-            {{t 'overview'}}
-          {{/nav.link-to}}
-        {{/nav.item}}
-        {{#nav.item}}
-          {{#nav.link-to 'wallets.send' model}}
-            {{t 'send'}}
-          {{/nav.link-to}}
-        {{/nav.item}}
-        {{#nav.item}}
-          {{#nav.link-to 'wallets.settings' model}}
-            {{t 'settings'}}
-          {{/nav.link-to}}
-        {{/nav.item}}
-        {{#nav.item}}
-          {{#nav.link-to 'wallets.logout' model}}
-            {{t 'logout'}}
-          {{/nav.link-to}}
-        {{/nav.item}}
-      {{/navbar.nav}}
-    {{/navbar.content}}
-  {{/bs-navbar}}
-</header>
+{{navigation-bar model=model}}
 
 <main role="main" class="container">
   {{bread-crumbs tagName="ol" linkable=true crumbClass="breadcrumb-item"}}
