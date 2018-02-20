@@ -1,5 +1,6 @@
 import Component from '@ember/component';
 import { get, set } from '@ember/object';
+import { tryInvoke } from '@ember/utils';
 
 import { service } from 'ember-decorators/service';
 import { action } from 'ember-decorators/object';
@@ -22,12 +23,18 @@ export default Component.extend({
   onSubmit: null,
 
   @action
-  convertMnemonic(wallet, changeset) {
+  convertMnemonic(changeset) {
     const type = this.get('type');
     if (type === 'mnemonic') {
       const mnemonic = get(changeset, 'mnemonic');
       const seed = bip39.mnemonicToEntropy(mnemonic);
-      set(wallet, 'seed', seed);
+      set(changeset, 'seed', seed);
     }
+  },
+
+  @action
+  clearSeed(changeset) {
+    set(changeset, 'seed', null);
+    tryInvoke(changeset, 'destroy');
   },
 });

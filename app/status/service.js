@@ -45,7 +45,7 @@ const Service = ObjectProxy.extend(PromiseProxyMixin, {
     }
   },
 
-  async onPoll() {
+  onPoll() {
     const rpc = this.get('rpc');
     const blocks = rpc.blockCount();
     const peers = rpc.peers().then(p => Object.keys(p));
