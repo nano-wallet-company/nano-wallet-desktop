@@ -1,7 +1,3 @@
-<p class="lead">
-  {{t 'wallets.overview.balance' htmlSafe=true balance=(format-amount wallet.balance)}}
-</p>
-
 {{page-numbers content=content currentPage=page totalPages=totalPages}}
 
 {{#light-table table tableClassNames='table table-striped' height='auto' as |t|}}
@@ -21,7 +17,3 @@
     {{/if}}
   {{/t.body}}
 {{/light-table}}
-
-{{#bs-button type="primary" icon="fa fa-plus-circle" value=wallet onClick=createAccount}}
-  {{t 'wallets.overview.create'}}
-{{/bs-button}}

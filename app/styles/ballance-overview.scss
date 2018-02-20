@@ -1,0 +1,41 @@
+.currency-tabs {
+  padding:  0;
+  margin: 0 0 10px;
+}
+
+.currency-tabs li > a {
+  color: $white;
+  font-size: 20px;
+  letter-spacing: 0.89px;
+}
+
+.currency-tabs li > a.active {
+  color: $orange;
+  text-decoration: underline;
+}
+
+.lead {
+  border: 0;
+  color: $white;
+  font-size: 90px;
+  line-height: 1;
+  margin: 0;
+  padding: 0;
+  text-align:  center;
+}
+
+.pending {
+  color: $white;
+  font-size: 16px;
+  letter-spacing: 2px;
+  margin: 20px 0 0;
+  text-align:  center;
+  text-transform:  uppercase;
+}
+
+.pending > span {
+  color: $green;
+  font-size: 30px;
+  letter-spacing: 1.33px;
+  margin: 0;
+}

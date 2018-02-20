@@ -1,15 +1,10 @@
 {{navigation-bar model=model}}
 
-<main role="main" class="container">
-  {{bread-crumbs tagName="ol" linkable=true crumbClass="breadcrumb-item"}}
+<main role="main">
 
   {{#each flashMessages.arrangedQueue as |flash|}}
     {{flash-message flash=flash}}
   {{/each}}
 
-  <div class="row">
-    <div class="col">
-      {{outlet}}
-    </div>
-  </div>
+  {{outlet}}
 </main>
