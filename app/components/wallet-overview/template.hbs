@@ -1,6 +1,10 @@
 {{page-numbers content=content currentPage=page totalPages=totalPages}}
 
-{{#light-table table tableClassNames='table table-striped' height='auto' as |t|}}
+{{#each wallet.accounts as |account|}}
+  {{account-card model=account}}
+{{/each}}
+
+{{!-- {{#light-table table tableClassNames='table table-striped' height='auto' as |t|}}
   {{t.head}}
 
   {{#t.body canSelect=false as |body|}}
@@ -16,4 +20,4 @@
       {{/body.no-data}}
     {{/if}}
   {{/t.body}}
-{{/light-table}}
+{{/light-table}} --}}

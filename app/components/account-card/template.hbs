@@ -1,0 +1,17 @@
+{{#link-to 'wallets.accounts.index' account class="text-decoration-none"}}
+  <div class="account-card">
+    {{qr-code content=model.id}}
+    <p class="ballance">
+      <sup>
+        <img src="images/nano-icon.svg" alt="">
+      </sup>{{model.balance}}
+      <br>
+      <sub>+{{model.pending}}</sub>
+    </p>
+    <p class="account-id">
+      {{model.id}} {{!--
+      <span>xrb_17oqj</span>4rpads4o6ud448yymzk9jot8yzmzyeuteq3bj38cwjpt4rrgxhfx
+      <span>fr1</span> --}}
+    </p>
+  </div>
+{{/link-to}}
