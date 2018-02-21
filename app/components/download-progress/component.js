@@ -3,9 +3,16 @@ import { debounce } from '@ember/runloop';
 
 import { on } from 'ember-decorators/object/evented';
 
+import { defineError } from 'ember-exex/error';
+
 export const STATUS_DOWNLOADING = 'downloading';
 export const STATUS_VERIFYING = 'verifying';
 export const STATUS_EXTRACTING = 'extracting';
+
+export const DownloadError = defineError({
+  name: 'DownloadError',
+  message: 'Error downloading {asset}',
+});
 
 export default Component.extend({
   downloader: null,
@@ -35,6 +42,11 @@ export default Component.extend({
     downloader.off('extract', this, this.onExtract);
     downloader.off('done', this, this.reset);
     downloader.off('done', this, this.onDone);
+  },
+
+  onError() {
+    const asset = this.get('asset');
+    throw new DownloadError({ params: { asset } });
   },
 
   onProgress(value) {
