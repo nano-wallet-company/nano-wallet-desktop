@@ -20,6 +20,7 @@ const pathExists = require('path-exists');
 const loadJsonFile = require('load-json-file');
 const writeJsonFile = require('write-json-file');
 const normalizeNewline = require('normalize-newline');
+const toExecutableName = require('to-executable-name');
 
 const {
   app,
@@ -137,7 +138,7 @@ const config = loadJsonFile.sync(path.join(__dirname, 'config.json'));
 
 ipcMain.on('node-start', ({ sender }) => {
   const cwd = path.resolve(app.getPath('userData'));
-  const cmd = path.join(cwd, 'rai_node');
+  const cmd = path.join(cwd, toExecutableName('rai_node'));
   const child = spawn(cmd, ['--daemon', '--data_path', cwd], {
     cwd,
     windowsHide: true,

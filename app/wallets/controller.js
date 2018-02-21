@@ -29,7 +29,7 @@ export default Controller.extend({
     }
   },
 
-  onPoll() {
+  async onPoll() {
     if (!this.isDestroying) {
       const model = this.get('model');
       if (model) {
