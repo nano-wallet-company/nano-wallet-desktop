@@ -22,7 +22,9 @@ module.exports = {
     icon,
     asar: true,
   },
-  electronWinstallerConfig: {},
+  electronWinstallerConfig: {
+    name: packageName,
+  },
   electronInstallerDMG: {},
   electronInstallerDebian: {},
   electronInstallerRedhat: {},

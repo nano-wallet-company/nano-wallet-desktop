@@ -116,7 +116,7 @@ const downloadAsset = async (sender, url, integrity, onProgress) => {
 ipcMain.on('download-start', ({ sender }, url, integrity) => {
   const onProgress = debounceFn((progress) => {
     if (!sender.isDestroyed()) {
-      sender.send('download-progress', progress);
+      sender.send('download-progress', progress || 0);
     }
   }, { wait: 250, immediate: true });
 
@@ -239,7 +239,7 @@ const run = async () => {
 
   await appReady;
 
-  const nodePath = path.join(dataPath, 'rai_node');
+  const nodePath = path.join(dataPath, toExecutableName('rai_node'));
   Object.defineProperty(global, 'isNodeDownloaded', {
     get() {
       return pathExists.sync(nodePath);

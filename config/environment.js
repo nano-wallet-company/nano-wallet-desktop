@@ -40,21 +40,21 @@ module.exports = (environment) => {
     assets: {
       node: {
         win32: {
-          url: 'https://d2ev7f87i7jwuo.cloudfront.net/node-win32-d674353de23b4513908cf46d90cb89a7.zip',
+          url: 'https://s3-us-west-2.amazonaws.com/nano-apps/node-win32-d674353de23b4513908cf46d90cb89a7.zip',
           integrity: 'sha512-XsUQBv2ziUdJgJyTeNzN4P54gasoS8T3x5fIMWeZkgpksndiM64XXrgoKPZAZEEwXHOrUlD3xc3rxMwanuohvg==',
         },
         darwin: {
-          url: 'https://d2ev7f87i7jwuo.cloudfront.net/node-darwin-67f9568651d44b2273c2d70130a30e4a.zip',
+          url: 'https://s3-us-west-2.amazonaws.com/nano-apps/node-darwin-67f9568651d44b2273c2d70130a30e4a.zip',
           integrity: 'sha512-8H57O2I93uTD0LzDD62O8WJYsfz6IJIs9JDceIAhaxDJvzADiw4D0W+Ex1agHAU4JpI9fn4eglF3624SYyDGqQ==',
         },
       },
       data: {
         win32: {
-          url: 'https://d2ev7f87i7jwuo.cloudfront.net/data-fef3905c198b24431bbc562115d768e6.zip',
+          url: 'https://s3-us-west-2.amazonaws.com/nano-apps/data-fef3905c198b24431bbc562115d768e6.zip',
           integrity: 'sha512-roWSP19IqVIWkMk6Bd82esiWzhgidrNCbs2SyoDTeuN5kaVfumh580g1Q/olxrnniGrsykrqPeWJeS9cuaujhg==',
         },
         darwin: {
-          url: 'https://d2ev7f87i7jwuo.cloudfront.net/data-fef3905c198b24431bbc562115d768e6.zip',
+          url: 'https://s3-us-west-2.amazonaws.com/nano-apps/data-fef3905c198b24431bbc562115d768e6.zip',
           integrity: 'sha512-roWSP19IqVIWkMk6Bd82esiWzhgidrNCbs2SyoDTeuN5kaVfumh580g1Q/olxrnniGrsykrqPeWJeS9cuaujhg==',
         },
       },
