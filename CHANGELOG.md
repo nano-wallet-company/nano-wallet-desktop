@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.0.0-beta.4"></a>
+# [1.0.0-beta.4](https://github.com/nanocurrency/nano-desktop/compare/v1.0.0-beta.3...v1.0.0-beta.4) (2018-02-21)
+
+
+### Bug Fixes
+
+* **download-progress:** add error handler ([dabac8c](https://github.com/nanocurrency/nano-desktop/commit/dabac8c))
+* **electron:** ensure Windows targets use rai_node.exe ([8362414](https://github.com/nanocurrency/nano-desktop/commit/8362414))
+* **setup:** fix race conditions around setup and imports of wallets ([f4c6bb5](https://github.com/nanocurrency/nano-desktop/commit/f4c6bb5))
+
+
+
 <a name="1.0.0-beta.3"></a>
 # [1.0.0-beta.3](https://github.com/nanocurrency/nano-desktop/compare/v1.0.0-beta.2...v1.0.0-beta.3) (2018-02-20)
 
