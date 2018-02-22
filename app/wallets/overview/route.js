@@ -20,9 +20,8 @@ export default Route.extend({
 
   @action
   async createAccount(wallet) {
-    const account = await this.store.createRecord('account', { wallet }).save();
+    await this.store.createRecord('account', { wallet }).save();
     const message = this.get('intl').t('wallets.overview.created');
     this.get('flashMessages').success(message);
-    return this.transitionTo('wallets.accounts', account);
   },
 });
