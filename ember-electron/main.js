@@ -20,6 +20,7 @@ const pathExists = require('path-exists');
 const loadJsonFile = require('load-json-file');
 const writeJsonFile = require('write-json-file');
 const normalizeNewline = require('normalize-newline');
+const toExecutableName = require('to-executable-name');
 
 const {
   app,
@@ -109,13 +110,13 @@ const downloadAsset = async (sender, url, integrity, onProgress) => {
   log.info('Extracting asset:', savePath, '->', dir);
   await extract(savePath, { dir });
 
-  log.info('Asset download done:', dir);
+  log.info('Asset download done:', url);
 };
 
 ipcMain.on('download-start', ({ sender }, url, integrity) => {
   const onProgress = debounceFn((progress) => {
     if (!sender.isDestroyed()) {
-      sender.send('download-progress', progress);
+      sender.send('download-progress', progress || 0);
     }
   }, { wait: 250, immediate: true });
 
@@ -137,7 +138,7 @@ const config = loadJsonFile.sync(path.join(__dirname, 'config.json'));
 
 ipcMain.on('node-start', ({ sender }) => {
   const cwd = path.resolve(app.getPath('userData'));
-  const cmd = path.join(cwd, 'rai_node');
+  const cmd = path.join(cwd, toExecutableName('rai_node'));
   const child = spawn(cmd, ['--daemon', '--data_path', cwd], {
     cwd,
     windowsHide: true,
@@ -188,7 +189,7 @@ ipcMain.on('node-start', ({ sender }) => {
   });
 
   child.once('exit', () => {
-    log.info('[node]', 'Exited');
+    log.info('[node]', 'Node exited');
     server.close();
   });
 
@@ -238,7 +239,7 @@ const run = async () => {
 
   await appReady;
 
-  const nodePath = path.join(dataPath, 'rai_node');
+  const nodePath = path.join(dataPath, toExecutableName('rai_node'));
   Object.defineProperty(global, 'isNodeDownloaded', {
     get() {
       return pathExists.sync(nodePath);

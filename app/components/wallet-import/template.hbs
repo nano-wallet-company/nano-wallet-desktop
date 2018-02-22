@@ -4,7 +4,7 @@
   {{/modal.header}}
   {{#modal.body}}
     {{#with (changeset (hash type=type seed=seed mnemonic=(mnemonic seed)) ImportWalletValidations) as |model|}}
-      {{#bs-form model=model onSubmit=(action (queue (action 'convertMnemonic') (action onSubmit)) wallet) as |form|}}
+      {{#bs-form model=model onSubmit=(action (queue (action 'convertMnemonic') (action onSubmit wallet) (action 'clearSeed'))) as |form|}}
         {{#form.group}}
           {{#bs-button-group type="radio" property="type" value=type onChange=(action (queue (action (mut model.type)) (action onChange))) as |bg|}}
             {{#bg.button type="secondary" value='seed'}}

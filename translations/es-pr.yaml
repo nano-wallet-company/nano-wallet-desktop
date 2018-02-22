@@ -26,6 +26,7 @@ node: 'nodo'
 data: 'datos'
 downloading: 'Descargando {asset}'
 starting: 'Encendiendo nodo'
+currency: '{amount} NANO'
 status:
   state: 'Estado'
   online: 'Conectado'
@@ -59,7 +60,7 @@ wallets:
       search: 'Buscar cuenta'
       destination: 'Cuenta Destinataria'
       placeholder: 'e.g. xrb_3e3j5tkog48pnny9dmfzj1r16pg8t1e76dz5tmac6iq689wyjfpiij4txtdo'
-      amount: 'Cantidad (XRB)'
+      amount: 'Cantidad (NANO)'
       insufficient: 'La cantidad es mayor que el balance total en la cuenta.'
     history:
       none: 'No hay historial.'

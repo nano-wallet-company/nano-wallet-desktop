@@ -5,7 +5,9 @@ import { isEmpty } from '@ember/utils';
 import { action } from 'ember-decorators/object';
 import { service } from 'ember-decorators/service';
 
-export default Route.extend({
+import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
+
+export default Route.extend(AuthenticatedRouteMixin, {
   @service intl: null,
   @service flashMessages: null,
 

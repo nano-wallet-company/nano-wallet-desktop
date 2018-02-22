@@ -5,12 +5,9 @@ import { action } from 'ember-decorators/object';
 
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 import { service } from 'ember-decorators/service';
-import { storageFor } from 'ember-local-storage';
 
 export default Route.extend(AuthenticatedRouteMixin, {
   @service electron: null,
-
-  settings: storageFor('settings'),
 
   beforeModel() {
     const electron = this.get('electron');
@@ -23,19 +20,6 @@ export default Route.extend(AuthenticatedRouteMixin, {
     }
 
     return true;
-  },
-
-  async afterModel(model) {
-    const wallet = get(model, 'id');
-    const settings = this.get('settings');
-    const settingsKey = `wallets.${wallet}`;
-    const walletSettings = get(settings, settingsKey);
-    if (!walletSettings) {
-      settings.set(settingsKey, {
-        label: null,
-        accounts: {},
-      });
-    }
   },
 
   setupController(controller, model) {

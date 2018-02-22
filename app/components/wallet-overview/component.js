@@ -75,7 +75,7 @@ export default Component.extend(PagedMixin, {
     ];
   },
 
-  @computed('columns', 'pagedContent.@each')
+  @computed('columns.@each', 'pagedContent.@each')
   get table() {
     const columns = this.get('columns');
     const pagedContent = this.get('pagedContent');

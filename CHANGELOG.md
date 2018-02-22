@@ -2,6 +2,37 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.0.0-beta.4"></a>
+# [1.0.0-beta.4](https://github.com/nanocurrency/nano-desktop/compare/v1.0.0-beta.3...v1.0.0-beta.4) (2018-02-21)
+
+
+### Bug Fixes
+
+* **download-progress:** add error handler ([dabac8c](https://github.com/nanocurrency/nano-desktop/commit/dabac8c))
+* **electron:** ensure Windows targets use rai_node.exe ([8362414](https://github.com/nanocurrency/nano-desktop/commit/8362414))
+* **setup:** fix race conditions around setup and imports of wallets ([f4c6bb5](https://github.com/nanocurrency/nano-desktop/commit/f4c6bb5))
+
+
+
+<a name="1.0.0-beta.3"></a>
+# [1.0.0-beta.3](https://github.com/nanocurrency/nano-desktop/compare/v1.0.0-beta.2...v1.0.0-beta.3) (2018-02-20)
+
+
+### Bug Fixes
+
+* **setup:** disable closing modals when backdrop clicked ([63477ad](https://github.com/nanocurrency/nano-desktop/commit/63477ad))
+
+
+### Features
+
+* **electron:** add a default context menu ([57ab125](https://github.com/nanocurrency/nano-desktop/commit/57ab125))
+* **electron:** give UI feedback when verifying and extracting assets ([a0b6d3e](https://github.com/nanocurrency/nano-desktop/commit/a0b6d3e))
+* **electron:** log more pertinent information during asset downloads ([8edc25d](https://github.com/nanocurrency/nano-desktop/commit/8edc25d))
+* **electron:** pick random ports for node when the defaults aretaken ([b18bfc0](https://github.com/nanocurrency/nano-desktop/commit/b18bfc0))
+* **intl:** use custom currency formatting to support NANO ([4bbe402](https://github.com/nanocurrency/nano-desktop/commit/4bbe402))
+
+
+
 <a name="1.0.0-beta.2"></a>
 # [1.0.0-beta.2](https://github.com/nanocurrency/nano-desktop/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2018-02-19)
 

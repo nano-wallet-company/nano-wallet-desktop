@@ -1,5 +1,4 @@
 import Component from '@ember/component';
-import { set } from '@ember/object';
 
 import { service } from 'ember-decorators/service';
 import { action } from 'ember-decorators/object';
@@ -34,7 +33,7 @@ export default Component.extend({
   },
 
   @action
-  confirmDone(wallet, seed) {
+  confirmDone(wallet) {
     const needsConfirm = this.get('needsConfirm');
     if (needsConfirm) {
       this.toggleProperty('hasConfirmed');
@@ -46,7 +45,6 @@ export default Component.extend({
       return reject();
     }
 
-    set(wallet, 'seed', seed);
     return wallet;
   },
 });

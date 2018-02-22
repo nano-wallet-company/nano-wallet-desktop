@@ -37,7 +37,7 @@ export default Route.extend(UnauthenticatedRouteMixin, {
   },
 
   @action
-  async unlockWallet(changeset) {
+  unlockWallet(changeset) {
     const wallet = get(changeset, 'wallet');
     const password = get(changeset, 'password');
     try {

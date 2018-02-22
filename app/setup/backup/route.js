@@ -1,17 +1,28 @@
 import Route from '@ember/routing/route';
+import { get } from '@ember/object';
 
+import { hash } from 'rsvp';
 import { action } from 'ember-decorators/object';
+import { service } from 'ember-decorators/service';
 
 import generateSeed from '../../utils/generate-seed';
 
 export default Route.extend({
+  @service rpc: null,
+
   model() {
-    const wallet = this.modelFor('setup');
+    const wallet = this.modelFor('setup').save();
     const seed = generateSeed();
-    return {
+    return hash({
       wallet,
       seed,
-    };
+    });
+  },
+
+  afterModel(model) {
+    const wallet = get(model, 'wallet.id');
+    const seed = get(model, 'seed');
+    return this.get('rpc').walletChangeSeed(wallet, seed);
   },
 
   @action
@@ -21,6 +32,6 @@ export default Route.extend({
 
   @action
   done(wallet) {
-    return this.transitionTo('setup.password', wallet.save());
+    return this.transitionTo('setup.password', wallet);
   },
 });

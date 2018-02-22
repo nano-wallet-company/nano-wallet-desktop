@@ -54,6 +54,8 @@ export default Service.extend(Evented, {
       this.ipcRenderer.on('node-error', this.onNodeError.bind(this));
       this.ipcRenderer.on('download-error', this.onDownloadError.bind(this));
       this.ipcRenderer.on('download-progress', this.onDownloadProgress.bind(this));
+      this.ipcRenderer.on('download-verify', this.onDownloadVerify.bind(this));
+      this.ipcRenderer.on('download-extract', this.onDownloadExtract.bind(this));
     }
   },
 
@@ -107,6 +109,14 @@ export default Service.extend(Evented, {
 
   onDownloadProgress(event, progress) {
     this.trigger('progress', parseFloat(progress));
+  },
+
+  onDownloadExtract() {
+    this.trigger('extract');
+  },
+
+  onDownloadVerify() {
+    this.trigger('verify');
   },
 
   onDownloadFinished() {
