@@ -11,6 +11,10 @@ export default Route.extend(AuthenticatedRouteMixin, {
   @service intl: null,
   @service flashMessages: null,
 
+  beforeModel() {
+    this.controllerFor('wallets.overview').set('hideHistory', true);
+  },
+
   async afterModel(wallet) {
     const accounts = await get(wallet, 'accounts');
     if (isEmpty(accounts)) {

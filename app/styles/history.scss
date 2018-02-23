@@ -1,0 +1,42 @@
+.history-item-list {
+  background-color: transparent;
+  max-height: 50vh;
+  overflow: scroll;
+}
+
+.history-item {
+  background: #fff;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  padding: 20px 0;
+
+  p {
+    margin: 0;
+  }
+
+  &.send  i {
+    color: #538DCA;
+  }
+
+  &.receive i {
+    color: #EDA63F;
+  }
+
+  i {
+    font-size: 24px;
+  }
+}
+
+.arrow,
+.arrow:hover {
+  align-items: center;
+  border-radius: 100%;
+  color: #fff;
+  display: flex;
+  height: 25px;
+  justify-content: center;
+  left: calc(50% - 25px);
+  margin: 0 auto 20px;
+  text-decoration: none;
+  width: 25px;
+}

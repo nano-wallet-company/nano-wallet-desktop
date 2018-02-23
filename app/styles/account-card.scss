@@ -13,13 +13,8 @@
     height: 350px;
     margin: 0 auto;
     padding: 30px 20px;
-    transition: .4s;
+    transition: 1s;
     width: 280px;
-  
-    &:hover,
-    &.active {
-      transform: scale(1.10)!important;
-    }
   
     sup > img {
       display: inline-block;
@@ -68,7 +63,26 @@
     }
   }
 
+  .active .account-card,
+  .account-card:hover{
+    transform: scale(1.10)!important;
+  }
 }
+.show-history {
+  margin-top: -60px;
+  transition: .4s;
+  .slick-slide {
+    height: 200px;
+
+    .account-card {
+      height: auto;
+    }
+  }
+}
+.slick-list {
+  height: auto!important;
+}
+
 .slick-prev,
 .slick-next {
   height: 50px;

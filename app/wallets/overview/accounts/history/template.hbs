@@ -1,0 +1,38 @@
+{{!-- {{account-history wallet=model.wallet account=model.account history=model.history page=page perPage=perPage}} --}}
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        {{#unless hideHistory}}
+        <a href="#" class="arrow" {{action 'toggleHistory'}}>{{fa-icon "chevron-down"}}</a>
+        {{else}}
+        <a href="#" class="arrow" {{action 'toggleHistory'}}>{{fa-icon "chevron-up"}}</a>
+        {{/unless}}
+      </div>
+    </div>
+  </div>
+</section>
+{{#liquid-if (not hideHistory) class="hide-history"}}
+  <section>
+    <div class="container-fluid">
+      <div class="row history-item-list justify-content-md-center">
+        {{#each history as |item|}}
+          <div class="col-lg-10 col-sm-12 history-item send d-flex justify-content-around align-items-center">
+            {{!-- {{fa-icon "paper-plane" ariaHidden=true}} --}}
+            {{item.type}}
+            <p>
+              <sup>
+                <img src="images/nano-icon.svg" alt="">
+              </sup>{{item.amount}}
+            </p>
+            <p>
+              {{item.account}}
+              {{!-- <span>xrb_17oqj</span>4rpads4o6ud448yymzk9jot8yzmzyeuteq3bj38cwjpt4rrgxhfx
+              <span>fr1</span> --}}
+            </p>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+  </section>
+{{/liquid-if}}

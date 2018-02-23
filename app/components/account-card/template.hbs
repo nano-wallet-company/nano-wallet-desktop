@@ -1,6 +1,8 @@
-{{#link-to 'wallets.accounts.index' model class="text-decoration-none"}}
+{{#link-to 'wallets.overview.accounts.history' model class="text-decoration-none"}}
   <div class="account-card">
-    {{qr-code content=model.id}}
+    {{#liquid-if hideHistory class="hide-qr"}}
+      {{qr-code content=model.id}}
+    {{/liquid-if}}
     <p class="ballance">
       <sup>
         <img src="images/nano-icon.svg" alt="">
