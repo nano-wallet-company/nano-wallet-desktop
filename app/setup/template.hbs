@@ -1,21 +1,24 @@
-{{outlet}}
+<div class="row mx-0">
+  <section class="setup float-left info d-none d-sm-flex col-sm-6 col-md-7 align-items-end justify-content-end">
+    <div class="col-12 col-md-8 w-70">
+      <h1 class="mb-0 border-bottom-0">{{t 'setup.lead'}}</h1>
+      <hr class="my-4">
+      <h5>{{t 'setup.instructions'}}</h5>
+      <br>
+    </div>
+  </section>
+  <section class="setup float-left bg-white col-md-5 col-sm-6 col-12 d-flex justify-content-center align-items-center">
+    <div class="row w-100 justify-content-center align-items-center">
+      <div class="col-12 col-md-9">
+        <h1 class="display-3 border-bottom-0 mb-4">
+          <picture>
+            <source type="image/svg+xml" srcset="images/brand-light.svg">
+            <img class="img-fluid d-block w-50 mt-0 mx-auto mb-40" width="512" src="images/brand-light.png" alt="{{t 'product'}}">
+          </picture>
+        </h1>
 
-<div class="jumbotron jumbotron-fluid" style="min-height: 100vh">
-  <div class="container">
-    <h1 class="display-3">
-      <picture>
-        <source type="image/svg+xml" srcset="images/brand-light.svg">
-        <img class="img-fluid" width="512" src="images/brand-light.png" alt="{{t 'product'}}">
-      </picture>
-    </h1>
-    <p class="lead">{{t 'setup.lead'}}</p>
-    <hr class="my-4">
-    <p>{{t 'setup.instructions'}}</p>
-    {{#bs-button type="primary" block=true onClick=(route-action 'createWallet') }}
-      {{t 'setup.create'}}
-    {{/bs-button}}
-    {{#bs-button type="secondary" block=true onClick=(route-action 'importWallet')}}
-      {{t 'setup.import'}}
-    {{/bs-button}}
-  </div>
+        {{liquid-outlet class="toLeft liquid-outlet px-2"}}
+      </div>
+    </div>
+  </section>
 </div>

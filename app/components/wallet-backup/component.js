@@ -10,6 +10,7 @@ import downloadjs from 'npm:downloadjs';
 export default Component.extend({
   @service intl: null,
   @service flashMessages: null,
+  classNames: ['import'],
 
   wallet: null,
   seed: null,

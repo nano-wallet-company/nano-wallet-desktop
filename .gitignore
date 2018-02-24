@@ -10,6 +10,7 @@
 
 # misc
 .config
+.DS_Store
 .env
 .git
 .local

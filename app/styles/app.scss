@@ -4,14 +4,13 @@
 
 @import "ember-power-select";
 
-main {
-  margin: 1em 0 1em 0;
-}
+@import "colors";
 
-h1 {
-  margin-bottom: 20px;
-  padding-bottom: 9px;
-  border-bottom: 1px solid #eee;
+@import "setup";
+
+body {
+  margin: 0;
+  padding: 0;
 }
 
 .text-monospace {
