@@ -14,7 +14,7 @@ export default function () {
     // this makes our rule apply when the liquid-if transitions to the
     // true state.
     this.toValue(false),
-    this.use('fade', { duration: 1000 }),
+    this.use('fade', { duration: 400 }),
     this.reverse('fade', { duration: 250 }),
   );
   this.transition(
@@ -23,11 +23,11 @@ export default function () {
     // this makes our rule apply when the liquid-if transitions to the
     // true state.
     this.toValue(false),
-    this.use('fade', { duration: 2000 }),
+    this.use('fade', { duration: 500 }),
 
     // which means we can also apply a reverse rule for transitions to
     // the false state.
-    this.reverse('fade', { duration: 1000 }),
+    this.reverse('fade', { duration: 500 }),
   );
   this.transition(
     this.fromRoute('wallets.overview'),

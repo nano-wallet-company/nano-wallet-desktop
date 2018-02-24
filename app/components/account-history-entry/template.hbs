@@ -1,7 +1,13 @@
-{{#each columns as |column|}}
-  {{component (concat 'light-table/cells/' column.cellType) column row
-      table=table
-      rawValue=(get row column.valuePath)
-      tableActions=tableActions
-      extra=extra}}
-{{/each}}
+<div class="col-lg-10 col-sm-12 history-item send d-flex justify-content-around align-items-center">
+  {{!-- {{fa-icon "paper-plane" ariaHidden=true}} --}} {{model.type}}
+  <p>
+    <sup>
+      <img src="images/nano-icon.svg" alt="">
+    </sup>{{model.amount}}
+  </p>
+  <p>
+    {{model.account}} {{!--
+    <span>xrb_17oqj</span>4rpads4o6ud448yymzk9jot8yzmzyeuteq3bj38cwjpt4rrgxhfx
+    <span>fr1</span> --}}
+  </p>
+</div>
