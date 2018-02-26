@@ -12,7 +12,11 @@ export default Route.extend(AuthenticatedRouteMixin, {
   @service flashMessages: null,
 
   beforeModel() {
-    this.controllerFor('wallets.overview').set('hideHistory', true);
+    const walletOverviewController = this.controllerFor('wallets.overview');
+    walletOverviewController.set('hideHistory', true);
+    walletOverviewController.set('expand', false);
+    walletOverviewController.set('shrink', false);
+    walletOverviewController.set('active', false);
   },
 
   async afterModel(wallet) {
@@ -20,7 +24,6 @@ export default Route.extend(AuthenticatedRouteMixin, {
     if (isEmpty(accounts)) {
       return this.store.createRecord('account', { wallet }).save();
     }
-
     return wallet;
   },
 
@@ -29,5 +32,21 @@ export default Route.extend(AuthenticatedRouteMixin, {
     await this.store.createRecord('account', { wallet }).save();
     const message = this.get('intl').t('wallets.overview.created');
     this.get('flashMessages').success(message);
+    this.transitionTo('wallets.overview');
+  },
+
+  @action
+  toggleButton() {
+    const walletOverviewController = this.controllerFor('wallets.overview');
+    if (walletOverviewController.get('expand')) {
+      walletOverviewController.toggleProperty('shrink');
+      walletOverviewController.toggleProperty('expand');
+    } else if (walletOverviewController.get('firstTime')) {
+      walletOverviewController.set('firstTime', false);
+      walletOverviewController.toggleProperty('expand');
+    } else {
+      walletOverviewController.toggleProperty('shrink');
+      walletOverviewController.toggleProperty('expand');
+    }
   },
 });

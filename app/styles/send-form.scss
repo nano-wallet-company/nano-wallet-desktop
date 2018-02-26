@@ -1,0 +1,37 @@
+.send-form {
+    height: 100vh;
+
+    h1 {
+        font-size: 90px;
+        margin-bottom: 30px;
+        border: 0;
+    }
+
+    form {
+        width: 100%;
+    }
+
+    label {
+        text-transform: uppercase;
+        font-size: 14px;
+    }
+
+    .form-group {
+        margin-bottom: 30px;
+    }
+
+    form input,
+    .ember-power-select-trigger {
+        height: 50px;
+        border: 0;
+        box-shadow: none;
+    }
+
+    button {
+        width: 100%;
+    height: 60px;
+    border-radius: 33px;
+    background-color: #50E3C2;
+    border: 0;
+    }
+}

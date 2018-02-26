@@ -1,0 +1,19 @@
+<div>
+  <div class="container send-form">
+    <div class="row justify-content-md-center align-items-center h-100">
+      <div class="col col-lg-6 col-sm-12">
+        {{yield}}
+      </div>
+    </div>
+  </div>
+</div>
+
+{{#if expand}}
+  {{#link-to 'wallets.overview' model class="nav-link"}}
+    {{fa-icon "times" click=(route-action 'toggleButton') id="icon"}}
+  {{/link-to}}
+{{else}}
+  {{#link-to 'wallets.send' model class="nav-link"}}
+    {{fa-icon "paper-plane" ariaHidden=true click=(route-action 'toggleButton') id="icon"}}
+  {{/link-to}}
+{{/if}}

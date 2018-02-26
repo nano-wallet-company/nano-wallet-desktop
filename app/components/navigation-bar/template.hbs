@@ -25,11 +25,6 @@
         <a href="#" class="nav-link" {{action (route-action 'createAccount') model}}>{{fa-icon "plus-square"}} {{t 'wallets.overview.create'}}</a>
       </li>
       <li class="nav-item">
-        {{#link-to 'wallets.send' model class="nav-link"}}
-          {{t 'send'}}
-        {{/link-to}}
-      </li>
-      <li class="nav-item">
         {{#link-to 'wallets.settings' model class="nav-link"}}
           {{t 'settings'}}
         {{/link-to}}

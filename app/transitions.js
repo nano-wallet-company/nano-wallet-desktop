@@ -70,4 +70,12 @@ export default function () {
     this.use('toLeft', { duration }),
     this.reverse('toRight', { duration }),
   );
+
+  this.transition(
+    this.fromRoute('wallets.overview'),
+    this.toRoute('wallets.overview.accounts.send'),
+    this.hasClass('send-outlet'),
+    this.use('wait', 1000, { then: 'fade' }),
+    this.reverse('wait', 1000, { then: 'fade' }),
+  );
 }
