@@ -15,6 +15,27 @@ export default Component.extend(PagedMixin, {
   totals: null,
   contentKey: 'accounts',
 
+  // didRender() {
+  //   this._super(...arguments);
+  //   // this.$('.slick-slider').slick('unslick');
+  //   this.$('.slick-list').remove();
+  //   this.$('.slick-slider').slick('unslick').slick(this.get('settings'));
+  // },
+
+  @computed()
+  get settings() {
+    return {
+      dots: true,
+      slidesToShow: (this.get('accounts.length') <= 3) ? this.get('accounts.length') : 4,
+      slidesToScroll: 1,
+      infinite: false,
+      arrows: true,
+      edgeFriction: true,
+      centerPadding: '10px',
+      responsive: this.get('breakpoints'),
+    };
+  },
+
   @computed()
   get breakpoints() {
     return [

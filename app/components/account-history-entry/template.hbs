@@ -1,5 +1,9 @@
 <div class="col-lg-10 col-sm-12 history-item send d-flex justify-content-around align-items-center">
-  {{fa-icon "paper-plane" ariaHidden=true}} {{model.type}}
+  {{#if (eq model.type 'send')}}
+    {{fa-icon "paper-plane" ariaHidden=true}}
+  {{else}}
+     {{fa-icon "envelope-open" ariaHidden=true}}
+  {{/if}}
   <p>
     <sup>
       <img src="images/nano-icon.svg" alt="">

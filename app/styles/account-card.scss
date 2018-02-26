@@ -4,62 +4,70 @@
   height: 400px;
   justify-content: center;
 
-  .account-card {
-    align-items: center;
-    background-color: #fff;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    height: 350px;
-    margin: 0 auto;
-    padding: 30px 20px;
-    transition: 1s;
-    width: 280px;
-  
-    sup > img {
-      display: inline-block;
+  a {
+    &:focus,
+    &:active {
+      outline: none;
     }
-  
-    .qr-code {
-      height: 157px;
-      margin-bottom: 20px;
-      width: 157px;
-    }
-  
-    .ballance {
-      color: $dark-purple;
-      font-size: 20px;
-      line-height: 1;
-      text-align: center;
-    }
-  
-    .ballance span {
-      font-size: 13px;
-    }
-  
-    .ballance sub {
-      color: $green;
-      font-size: 14px;
-    }
-  
-    .account-id {
-      background-color: $dark-purple;
-      color: $white;
-      display: block;
-      font-size: 12px;
-      height: 60px;
-      margin: 0;
-      padding: 10px;
-      overflow-wrap: break-word;
-      width: 100%;
-    }
-  
-    .account-id span:first-child {
-      color: $light-blue;
-    }
-  
-    .account-id span:last-child {
-      color: $orange;
+
+    .account-card {
+      align-items: center;
+      background-color: #fff;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      height: 350px;
+      margin: 0 auto;
+      padding: 30px 20px;
+      transition: 1s;
+      width: 280px;
+    
+      sup > img {
+        display: inline-block;
+      }
+    
+      .qr-code {
+        height: 157px;
+        margin-bottom: 20px;
+        width: 157px;
+      }
+    
+      .balance {
+        color: $dark-purple;
+        font-size: 20px;
+        height: 50px;
+        line-height: 1;
+        text-align: center;
+      }
+    
+      .balance span {
+        font-size: 13px;
+      }
+    
+      .balance sub {
+        color: $green;
+        font-size: 14px;
+      }
+    
+      .account-id {
+        background-color: $dark-purple;
+        color: $white;
+        display: block;
+        font-size: 12px;
+        height: 60px;
+        margin: 0;
+        padding: 10px;
+        overflow-wrap: break-word;
+        width: 100%;
+      }
+    
+      .account-id span:first-child {
+        color: $light-blue;
+      }
+    
+      .account-id span:last-child {
+        color: $orange;
+      }
     }
   }
 
@@ -87,6 +95,7 @@
 .slick-next {
   height: 50px;
   width: 50px;
+  z-index: 9;
 }
 
 .slick-prev:before, 
