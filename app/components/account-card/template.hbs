@@ -6,11 +6,11 @@
     <p class="ballance">
       <sup>
         <img src="images/nano-icon.svg" alt="">
-      </sup>{{model.balance}}
+      </sup>{{format-amount model.balance}}
       <br>
-      <sub>+{{model.pending}}</sub>
+      <sub class="text-truncate">+{{format-amount model.pending}}</sub>
     </p>
-    <p class="account-id">
+    <p class="account-id  ">
       {{model.id}} {{!--
       <span>xrb_17oqj</span>4rpads4o6ud448yymzk9jot8yzmzyeuteq3bj38cwjpt4rrgxhfx
       <span>fr1</span> --}}

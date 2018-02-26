@@ -17,7 +17,22 @@
   <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
     <ul class="navbar-nav">
       <li class="nav-item">
+        {{#link-to 'index' class="nav-link"}}
+          {{t 'overview'}}
+        {{/link-to}}
+      </li>
+      <li class="nav-item">
         <a href="#" class="nav-link" {{action (route-action 'createAccount') model}}>{{fa-icon "plus-square"}} {{t 'wallets.overview.create'}}</a>
+      </li>
+      <li class="nav-item">
+        {{#link-to 'wallets.send' model class="nav-link"}}
+          {{t 'send'}}
+        {{/link-to}}
+      </li>
+      <li class="nav-item">
+        {{#link-to 'wallets.settings' model class="nav-link"}}
+          {{t 'settings'}}
+        {{/link-to}}
       </li>
       {{!-- <li class="nav-item">
         {{#link-to 'wallets.overview' wallet class="nav-link"}} Show Seed {{/link-to}}

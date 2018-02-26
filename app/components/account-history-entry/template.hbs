@@ -1,9 +1,9 @@
 <div class="col-lg-10 col-sm-12 history-item send d-flex justify-content-around align-items-center">
-  {{!-- {{fa-icon "paper-plane" ariaHidden=true}} --}} {{model.type}}
+  {{fa-icon "paper-plane" ariaHidden=true}} {{model.type}}
   <p>
     <sup>
       <img src="images/nano-icon.svg" alt="">
-    </sup>{{model.amount}}
+    </sup>{{format-ammount model.amount}}
   </p>
   <p>
     {{model.account}} {{!--

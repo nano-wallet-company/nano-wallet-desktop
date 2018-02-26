@@ -16,6 +16,8 @@
 
 @import "history";
 
+@import "setup";
+
 
 body {
   background-image: linear-gradient(-180deg, #000064 0%, #000034 100%);
@@ -27,6 +29,11 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+}
+
+body {
+  margin: 0;
+  padding: 0;
 }
 
 hr {

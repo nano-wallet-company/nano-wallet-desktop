@@ -1,5 +1,6 @@
 import Route from '@ember/routing/route';
 import { get } from '@ember/object';
+import { action } from 'ember-decorators/object';
 
 import { service } from 'ember-decorators/service';
 
@@ -23,5 +24,15 @@ export default Route.extend({
         return this.transitionTo('setup.start');
       }
     }
+  },
+
+  @action
+  createWallet() {
+    return this.transitionTo('setup.backup');
+  },
+
+  @action
+  importWallet() {
+    return this.transitionTo('setup.import');
   },
 });

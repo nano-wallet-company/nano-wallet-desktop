@@ -38,6 +38,7 @@ status:
   peers: 'Peers'
 login:
   lead: 'Login to unlock your wallet'
+  instructions: 'You can login to continue using your current wallet by unlocking it. Alternatively, you may choose to create a new wallet.'
   setupWallet: 'Create New Wallet'
 wallets:
   unlock:
@@ -46,9 +47,9 @@ wallets:
   backup:
     title: 'Backup Seed'
     lead: "Here's your easy to remember seed mnemonic for your new wallet:"
-    copy: 'Copy Raw Seed'
+    copy: 'Copy Seed'
     copied: 'Seed copied to clipboard!'
-    download: 'Download Mnemonic'
+    download: 'Download'
     help: >
       Adhere to best practices by physically writing your seed mnemonic on a piece of paper and
       storing it in a secure location for safe retrieval should you later lose your seed.
@@ -88,7 +89,7 @@ wallets:
       <strong>Warning</strong>: Logging out will forget your wallet and you wont be able to
       retreive it again if you don't have your wallet seed!
 setup:
-  lead: "Let's get your wallet setup."
+  lead: "Let's get your wallet set up"
   instructions: >
     To begin using Nano Desktop, you must first create a new wallet or import your wallet data
     using a seed.

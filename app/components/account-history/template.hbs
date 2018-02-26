@@ -1,3 +1,9 @@
-{{#each model as |item|}}
-  {{account-history-entry model=item}}
-{{/each}}
+{{#if model}}
+  {{#each model as |item|}}
+    {{account-history-entry model=item}}
+  {{/each}}
+{{else}}
+  <div class="no-history">
+    <h1>No History found</h1>
+  </div>
+{{/if}}

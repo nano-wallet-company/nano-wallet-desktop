@@ -1,5 +1,6 @@
 .history-item-list {
   background-color: transparent;
+  height: 50vh;
   max-height: 50vh;
   overflow: scroll;
 }
@@ -39,4 +40,16 @@
   margin: 0 auto 20px;
   text-decoration: none;
   width: 25px;
+}
+
+.no-history {
+height: 100%;
+    display: flex;
+    align-items: center;
+    color: $dark-purple;
+    width: 80vw;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.2);
+    text-align: center;
+    justify-content: center;
 }
