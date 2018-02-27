@@ -2,20 +2,7 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col">
-        {{#slick-slider 
-          dots=true
-          slidesToShow=(if (lte accounts.length 3) accounts.length 4)
-          slidesToScroll = 1
-          arrows=true
-          centerMode=true
-          lazyLoad=true
-          edgeFriction=true
-          centerPadding='10px'
-          responsive=breakpoints}}
-          {{#each accounts as |account|}}
-            {{account-card model=account}}
-          {{/each}}
-        {{/slick-slider}}
+        {{account-carousel accounts=accounts}}
       </div>
     </div>
   </div>

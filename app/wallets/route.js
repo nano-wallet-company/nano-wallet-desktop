@@ -7,6 +7,7 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 import { service } from 'ember-decorators/service';
 
 export default Route.extend(AuthenticatedRouteMixin, {
+  @service intl: null,
   @service electron: null,
 
   beforeModel() {

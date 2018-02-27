@@ -27,6 +27,6 @@ describe('helper:format-amount', () => {
 
     this.set('inputValue', '1100000000000000000000000000000');
     this.render(hbs`{{format-amount inputValue}}`);
-    expect(this.$().text().trim()).to.equal('1.1 NANO');
+    expect(this.$().text().trim()).to.equal('1.1');
   });
 });

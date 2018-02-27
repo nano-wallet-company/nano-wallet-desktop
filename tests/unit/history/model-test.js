@@ -5,7 +5,7 @@ import { setupModelTest } from 'ember-mocha';
 describe('Unit | Model | history', () => {
   setupModelTest('history', {
     // Specify the other units that are required for this test.
-    needs: [],
+    needs: ['model:account'],
   });
 
   // Replace this with your real tests.

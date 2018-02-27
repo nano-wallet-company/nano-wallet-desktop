@@ -1,11 +1,5 @@
-{{balance-overview}}
+{{balance-overview wallet=model}}
 
-<section>
-  <div class="container-fluid">
-    <div class="row">
-      <hr>
-    </div>
-  </div>
-</section>
+<hr>
 
 {{wallet-overview wallet=model accounts=model.accounts createAccount=(route-action 'createAccount') page=page perPage=perPage}}

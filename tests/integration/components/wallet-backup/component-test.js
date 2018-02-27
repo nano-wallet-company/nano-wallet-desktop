@@ -35,8 +35,12 @@ describe('Integration | Component | wallet backup', () => {
     const onCancel = () => false;
 
     this.setProperties({
-      wallet, seed, onDone, onCancel,
+      wallet,
+      seed,
+      onDone,
+      onCancel,
     });
+
     this.render(hbs`{{wallet-backup wallet=wallet seed=seed onDone=onDone onCancel=onCancel}}`);
     expect(this.$()).to.have.length(1);
   });

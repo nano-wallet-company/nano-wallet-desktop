@@ -5,6 +5,7 @@ import { A } from '@ember/array';
 import { service } from 'ember-decorators/service';
 
 import { defineError } from 'ember-exex/error';
+import getTimestamp from '../utils/get-timestamp';
 
 export const actions = {
   VERSION: 'version',
@@ -130,10 +131,8 @@ export default Service.extend({
       if (pending) {
         info.pending = '0';
       }
-    }
 
-    if (!info.modified_timestamp) {
-      info.modified_timestamp = String(Date.now());
+      info.modified_timestamp = getTimestamp();
     }
 
     return info;

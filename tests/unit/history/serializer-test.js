@@ -5,7 +5,11 @@ import { setupModelTest } from 'ember-mocha';
 describe('Unit | Serializer | history', () => {
   setupModelTest('history', {
     // Specify the other units that are required for this test.
-    needs: ['serializer:history', 'transform:big-number', 'model:account'],
+    needs: [
+      'model:account',
+      'serializer:history',
+      'transform:big-number',
+    ],
   });
 
   // Replace this with your real tests.
