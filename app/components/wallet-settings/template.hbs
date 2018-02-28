@@ -1,10 +1,10 @@
 <form>
   <div class="form-group">
     <label><b>{{t 'wallet'}}</b></label>
-    <input type="text" readonly class="form-control-plaintext text-truncate text-monospace" value="{{wallet.id}}">
+    <p>
+      <code>{{wallet.id}}</code>
+    </p>
   </div>
 </form>
 
-{{#bs-button size="lg" type="danger" icon="fa fa-key" onClick=(action onChangePassword)}}
-  {{t 'wallets.settings.changePassword'}}
-{{/bs-button}}
+{{wallet-password wallet=wallet setup=false onSubmit=(route-action 'changePassword')}}

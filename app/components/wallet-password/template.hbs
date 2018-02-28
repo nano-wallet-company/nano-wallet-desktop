@@ -1,8 +1,13 @@
-<h4 class="modal-title">{{t 'wallets.password.title'}}</h4>
 {{#bs-form model=(changeset (hash password=password) ChangePasswordValidations)
     onSubmit=(action (queue (action onSubmit wallet) (action 'clearPassword'))) as |form|}}
   {{form.element controlType="password" label=(t 'password') property='password' required=true minlength=8}}
-  {{#bs-button buttonType="submit" type="primary"}}
-    {{t 'wallets.password.submit'}}
-  {{/bs-button}}
+  {{#if setup}}
+    {{#bs-button buttonType="submit" type="primary" class="w-100"}}
+      {{t 'wallets.password.submit'}}
+    {{/bs-button}}
+  {{else}}
+    {{#bs-button buttonType="submit" type="danger" icon="fa fa-key" class="w-100"}}
+      {{t 'wallets.settings.changePassword'}}
+    {{/bs-button}}
+  {{/if}}
 {{/bs-form}}

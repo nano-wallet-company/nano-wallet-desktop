@@ -32,6 +32,11 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+
+  hr {
+    border-top: 1px solid $purple;   
+    width: 90%;
+  }
 }
 
 body {
@@ -39,9 +44,15 @@ body {
   padding: 0;
 }
 
-hr {
-  width: 90%;
-  border-top: 1px solid $purple;   
+code {
+  background-color: #000064;
+  border-radius: 5px;
+  color: rgba(251,251,251,.8);
+  display: block;
+  font-size: 87.5%;
+  padding: 10px;
+  margin-bottom: 10px;
+  word-break: break-word;
 }
 
 #nprogress .spinner {

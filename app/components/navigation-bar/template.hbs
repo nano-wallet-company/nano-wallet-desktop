@@ -25,9 +25,10 @@
         <a href="#" class="nav-link" {{action (route-action 'createAccount') model}}>{{fa-icon "plus-square"}} {{t 'wallets.overview.create'}}</a>
       </li>
       <li class="nav-item">
-        {{#link-to 'wallets.settings' model class="nav-link"}}
+        <a href="#" class="nav-link">
           {{t 'settings'}}
-        {{/link-to}}
+          {{#bs-popover placement="bottom" title=(concat (t 'wallet') ' ' (t 'settings'))}}{{wallet-settings wallet=model onChangePassword=(route-action 'changePassword')}}{{/bs-popover}}
+        </a>
       </li>
       {{!-- <li class="nav-item">
         {{#link-to 'wallets.overview' wallet class="nav-link"}} Show Seed {{/link-to}}
