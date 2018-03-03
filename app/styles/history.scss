@@ -5,9 +5,6 @@
   overflow: scroll;
 
   > div {
-    align-items: center;
-    display: flex;
-    justify-content: center;
     width: 100%;
   }
 }
@@ -22,11 +19,11 @@
     margin: 0;
   }
 
-  &.send  i {
+  .send {
     color: #538DCA;
   }
 
-  &.receive i {
+  .receive {
     color: #EDA63F;
   }
 

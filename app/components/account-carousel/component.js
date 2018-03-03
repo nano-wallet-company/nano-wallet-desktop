@@ -43,10 +43,12 @@ export default Component.extend({
         initialSlide,
         adaptiveHeight: true,
         centerPadding: '10px',
+        slidesToShow: 4,
+        slidesToScroll: 4,
         dots: true,
         infinite: false,
-        mobileFirst: true,
         speed: 250,
+        arrows: true,
       });
     }
 
@@ -81,28 +83,33 @@ export default Component.extend({
   get breakpoints() {
     return [
       {
-        breakpoint: 1200,
-        settings: {
-          slidesToShow: 4,
-        },
-      },
-      {
-        breakpoint: 992,
+        breakpoint: 1500,
         settings: {
           slidesToShow: 3,
+          slidesToScroll: 3,
         },
       },
       {
-        breakpoint: 768,
+        breakpoint: 1200,
         settings: {
           slidesToShow: 2,
+          slidesToScroll: 2,
         },
       },
       {
-        breakpoint: 576,
+        breakpoint: 780,
         settings: {
           slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 430,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
           arrows: false,
+          draggable: true,
         },
       },
     ];

@@ -18,8 +18,8 @@
 {{#liquid-if (not hideHistory) class="hide-history"}}
   <section>
     <div class="container-fluid">
-      <div class="row history-item-list justify-content-md-center">
-        {{account-history model=history}}
+      <div class="row history-item-list">
+        {{account-history history=model.history}}
       </div>
     </div>
   </section>
