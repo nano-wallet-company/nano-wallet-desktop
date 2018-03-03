@@ -1,12 +1,17 @@
 import Component from '@ember/component';
-import { computed, set } from '@ember/object';
+
+import { computed } from 'ember-decorators/object';
+
+import getExchangeRate, { DEFAULT_CURRENCY } from '../../utils/get-exchange-rate';
+
 
 export default Component.extend({
-  total: computed.alias('wallet.balance'),
-  activeTab: 'nano',
-  actions: {
-    update(type) {
-      set(this, 'activeTab', type);
-    },
+  wallet: null,
+  currency: Symbol.keyFor(DEFAULT_CURRENCY),
+
+  @computed('currency')
+  get exchangeRate() {
+    const currency = this.get('currency');
+    return getExchangeRate(Symbol.for(currency));
   },
 });

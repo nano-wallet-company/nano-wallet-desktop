@@ -2,19 +2,7 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col {{unless hideHistory 'show-history'}}">
-        {{#slick-slider 
-          dots=true
-          slidesToShow=(if (lte accounts.length 3) accounts.length 4)
-          slidesToScroll=1
-          infinite=false
-          arrows=true
-          edgeFriction=true
-          centerPadding='10px'
-          responsive=breakpoints}}
-          {{#each accounts as |account|}}
-            {{account-card hideHistory=hideHistory model=account}}
-          {{/each}}
-        {{/slick-slider}}
+        {{account-carousel hideHistory=hideHistory accounts=accounts}}
       </div>
     </div>
   </div>

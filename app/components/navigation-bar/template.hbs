@@ -10,8 +10,8 @@
       {{status-tooltip}}
     </span>
   </div>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
-    aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
@@ -22,12 +22,12 @@
         {{/link-to}}
       </li>
       <li class="nav-item">
-        <a href="#" class="nav-link" {{action (route-action 'createAccount') model}}>{{fa-icon "plus-square"}} {{t 'wallets.overview.create'}}</a>
+        <a href="#" class="nav-link" {{action onCreateAccount wallet}}>{{fa-icon "plus-square"}} {{t 'wallets.overview.create'}}</a>
       </li>
       <li class="nav-item">
         <a href="#" class="nav-link">
           {{t 'settings'}}
-          {{#bs-popover placement="bottom" title=(concat (t 'wallet') ' ' (t 'settings'))}}{{wallet-settings wallet=model onChangePassword=(route-action 'changePassword')}}{{/bs-popover}}
+          {{#bs-popover placement="bottom" title=(concat (t 'wallet') ' ' (t 'settings'))}}{{wallet-settings wallet=wallet onChangePassword=(route-action 'changePassword')}}{{/bs-popover}}
         </a>
       </li>
       {{!-- <li class="nav-item">
@@ -47,7 +47,9 @@
         {{/bs-dropdown}}
       </li> --}}
       <li class="nav-item">
-        {{#link-to 'wallets.logout' model class="nav-link"}} {{t 'logout'}} {{/link-to}}
+        {{#link-to 'wallets.logout' wallet class="nav-link"}}
+          {{t 'logout'}}
+        {{/link-to}}
       </li>
     </ul>
   </div>

@@ -1,7 +1,6 @@
-{{navigation-bar model=model}}
+{{navigation-bar wallet=model onCreateAccount=(route-action 'createAccount')}}
 
 <main role="main">
-
   {{#each flashMessages.arrangedQueue as |flash|}}
     {{flash-message flash=flash}}
   {{/each}}

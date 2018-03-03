@@ -26,5 +26,13 @@ export default {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     },
+    NANO: {
+      style: 'currency',
+      currency: 'NANO',
+    },
+    BTC: {
+      style: 'currency',
+      currency: 'BTC',
+    },
   },
 };

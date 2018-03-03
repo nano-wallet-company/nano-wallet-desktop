@@ -5,7 +5,11 @@ import { setupModelTest } from 'ember-mocha';
 describe('Unit | Model | account', () => {
   setupModelTest('account', {
     // Specify the other units that are required for this test.
-    // needs: ['transform:foo']
+    needs: [
+      'model:wallet',
+      'model:block',
+      'model:history',
+    ],
   });
 
   // Replace this with your real tests.

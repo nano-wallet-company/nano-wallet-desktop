@@ -1,0 +1,39 @@
+import { expect } from 'chai';
+import { beforeEach, describe, it } from 'mocha';
+import { setupComponentTest } from 'ember-mocha';
+import hbs from 'htmlbars-inline-precompile';
+
+describe('Integration | Component | account-carousel', () => {
+  setupComponentTest('account-carousel', {
+    integration: true,
+  });
+
+  beforeEach(function () {
+    this.inject.service('intl');
+    this.get('intl').setLocale('en-us');
+  });
+
+  it('renders', function () {
+    // Set any properties with this.set('myProperty', 'value');
+    // Handle any actions with this.on('myAction', function(val) { ... });
+    // Template block usage:
+    // this.render(hbs`
+    //   {{#account-carousel}}
+    //     template content
+    //   {{/account-carousel}}
+    // `);
+
+    const accounts = [
+      {
+        id: '1',
+        wallet: '1',
+        balance: '1000000000000000000000000000000',
+        pending: '0',
+      },
+    ];
+
+    this.set('accounts', accounts);
+    this.render(hbs`{{account-carousel accounts=accounts}}`);
+    expect(this.$()).to.have.length(1);
+  });
+});

@@ -22,9 +22,13 @@
 
 @import "send-form";
 
+@import "pod-styles";
+
 body {
   background-image: linear-gradient(-180deg, #000064 0%, #000034 100%);
   height: 100vh;
+  margin: 0;
+  padding: 0;
 }
 
 main {
@@ -38,12 +42,6 @@ main {
     width: 90%;
   }
 }
-
-body {
-  margin: 0;
-  padding: 0;
-}
-
 code {
   background-color: #000064;
   border-radius: 5px;

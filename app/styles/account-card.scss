@@ -10,7 +10,7 @@
       outline: none;
     }
 
-    .account-card {
+    .account-card-content {
       align-items: center;
       background-color: #fff;
       border-radius: 10px;
@@ -71,8 +71,8 @@
     }
   }
 
-  .active .account-card,
-  .account-card:hover{
+  .active .account-card-content,
+  .account-card-content:hover{
     transform: scale(1.10)!important;
   }
 }
@@ -82,7 +82,7 @@
   .slick-slide {
     height: 200px;
 
-    .account-card {
+    .account-card-content {
       height: auto;
     }
   }

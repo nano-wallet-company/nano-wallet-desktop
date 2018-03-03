@@ -7,6 +7,8 @@ import { service } from 'ember-decorators/service';
 
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 
+import { debounce } from '@ember/runloop';
+
 export default Route.extend(AuthenticatedRouteMixin, {
   @service intl: null,
   @service flashMessages: null,
@@ -28,14 +30,6 @@ export default Route.extend(AuthenticatedRouteMixin, {
   },
 
   @action
-  async createAccount(wallet) {
-    await this.store.createRecord('account', { wallet }).save();
-    const message = this.get('intl').t('wallets.overview.created');
-    this.get('flashMessages').success(message);
-    this.transitionTo('wallets.overview');
-  },
-
-  @action
   toggleButton() {
     const walletOverviewController = this.controllerFor('wallets.overview');
     if (walletOverviewController.get('expand')) {
@@ -48,5 +42,19 @@ export default Route.extend(AuthenticatedRouteMixin, {
       walletOverviewController.toggleProperty('shrink');
       walletOverviewController.toggleProperty('expand');
     }
+  },
+
+  createAccount(wallet) {
+    return debounce(this, this.debouncedCreateAccount, wallet, 1000, true);
+  },
+
+  debouncedCreateAccount(wallet) {
+    return this.transitionTo(this.routeName, this.addAccount(wallet));
+  },
+
+  async addAccount(wallet) {
+    const account = this.store.createRecord('account', { wallet });
+    await account.save();
+    return wallet.reload();
   },
 });

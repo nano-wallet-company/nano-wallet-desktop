@@ -1,11 +1,16 @@
 import { expect } from 'chai';
-import { describe, it } from 'mocha';
+import { beforeEach, describe, it } from 'mocha';
 import { setupComponentTest } from 'ember-mocha';
 import hbs from 'htmlbars-inline-precompile';
 
 describe('Integration | Component | account-card', () => {
   setupComponentTest('account-card', {
     integration: true,
+  });
+
+  beforeEach(function () {
+    this.inject.service('intl');
+    this.get('intl').setLocale('en-us');
   });
 
   it('renders', function () {
@@ -18,7 +23,15 @@ describe('Integration | Component | account-card', () => {
     //   {{/account-card}}
     // `);
 
-    this.render(hbs`{{account-card}}`);
+    const account = {
+      id: '1',
+      wallet: '1',
+      balance: '1000000000000000000000000000000',
+      pending: '0',
+    };
+
+    this.set('account', account);
+    this.render(hbs`{{account-card account=account}}`);
     expect(this.$()).to.have.length(1);
   });
 });
