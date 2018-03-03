@@ -6,11 +6,12 @@ describe('Unit | Serializer | account', () => {
   setupModelTest('account', {
     // Specify the other units that are required for this test.
     needs: [
-      'serializer:account',
-      'transform:big-number',
       'model:wallet',
       'model:block',
       'model:history',
+      'serializer:account',
+      'transform:big-number',
+      'transform:timestamp',
     ],
   });
 

@@ -65,8 +65,8 @@ export default Base.extend({
   async authenticate({ wallet, password }) {
     try {
       await this.get('rpc').passwordEnter(wallet, password);
-    } catch (err) {
-      throw new InvalidPasswordError(err);
+    } catch (previous) {
+      throw new InvalidPasswordError({ previous });
     }
 
     return { wallet };

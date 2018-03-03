@@ -1,0 +1,6 @@
+{
+  "name": "@nanocurrency/nano-desktop",
+  "dependencies": {
+    "slick-carousel": "~1.8.1"
+  }
+}

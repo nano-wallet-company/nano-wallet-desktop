@@ -1,27 +1,9 @@
-<p class="lead">
-  {{t 'wallets.overview.balance' htmlSafe=true balance=(format-amount wallet.balance)}}
-</p>
-
-{{page-numbers content=content currentPage=page totalPages=totalPages}}
-
-{{#light-table table tableClassNames='table table-striped' height='auto' as |t|}}
-  {{t.head}}
-
-  {{#t.body canSelect=false as |body|}}
-    {{#if (is-pending content)}}
-      {{#body.loader}}
-        {{fa-icon 'refresh' size=3 spin=true ariaLabel=(t 'loading')}}
-      {{/body.loader}}
-    {{/if}}
-
-    {{#if table.isEmpty}}
-      {{#body.no-data}}
-        {{t 'wallets.overview.none'}}
-      {{/body.no-data}}
-    {{/if}}
-  {{/t.body}}
-{{/light-table}}
-
-{{#bs-button type="primary" icon="fa fa-plus-circle" value=wallet onClick=createAccount}}
-  {{t 'wallets.overview.create'}}
-{{/bs-button}}
+<section>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        {{account-carousel accounts=accounts}}
+      </div>
+    </div>
+  </div>
+</section>

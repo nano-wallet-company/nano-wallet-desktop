@@ -28,7 +28,7 @@ downloading: 'Downloading {asset}...'
 verifying: 'Verifying {asset}...'
 extracting: 'Extracting {asset}...'
 starting: 'Starting node'
-currency: '{amount} NANO'
+currency: '{amount}'
 status:
   state: 'Status'
   online: 'Online'
@@ -36,6 +36,10 @@ status:
   count: 'Block Count'
   unchecked: 'Unchecked Blocks'
   peers: 'Peers'
+balancePending: 'Balance Pending'
+NANO: 'NANO'
+BTC: 'BTC'
+USD: 'USD'
 login:
   lead: 'Login to unlock your wallet'
   instructions: 'You can login to continue using your current wallet by unlocking it. Alternatively, you may choose to create a new wallet.'
@@ -75,7 +79,6 @@ wallets:
     history:
       none: 'No history found.'
   overview:
-    balance: 'Total Balance: {balance}'
     none: 'No accounts in wallet.'
     create: 'Create Account'
     created: 'Account created!'
@@ -94,4 +97,5 @@ setup:
     To begin using Nano Desktop, you must first create a new wallet or import your wallet data
     using a seed.
   create: 'Create New Wallet'
+  or: 'or'
   import: 'Import Wallet'

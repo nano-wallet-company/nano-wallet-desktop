@@ -6,10 +6,10 @@ describe('Unit | Serializer | block', () => {
   setupModelTest('block', {
     // Specify the other units that are required for this test.
     needs: [
-      'serializer:block',
-      'transform:big-number',
       'model:wallet',
       'model:account',
+      'serializer:block',
+      'transform:big-number',
     ],
   });
 

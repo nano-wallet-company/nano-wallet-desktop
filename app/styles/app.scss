@@ -6,15 +6,32 @@
 
 @import "colors";
 
+@import "utilities";
+
 @import "setup";
+
+@import "pod-styles";
+
+body {
+  background-image: linear-gradient(-180deg, #000064 0%, #000034 100%);
+  height: 100vh;
+}
+
+main {
+  height: calc(100vh - 100px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+hr {
+  width: 90%;
+  border-top: 1px solid $purple;
+}
 
 body {
   margin: 0;
   padding: 0;
-}
-
-.text-monospace {
-  font-family: $font-family-monospace;
 }
 
 #nprogress .spinner {
@@ -50,4 +67,38 @@ body {
   100% {
     transform: rotate(360deg);
   }
+}
+
+.slick-slide {
+  align-items: center;
+  display: flex !important;
+  height: 400px;
+  justify-content: center;
+}
+
+.slick-prev,
+.slick-next {
+  height: 50px;
+  width: 50px;
+  z-index: 1001;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  font-size: 50px;
+}
+
+.slick-next {
+  right: 5px;
+  text-shadow: -1px 0 1px gray;
+}
+
+.slick-prev {
+  left: 5px;
+  text-shadow: 1px 0 1px gray;
+}
+
+.slick-dots li button:before,
+.slick-dots li.slick-active button:before {
+  color: white;
 }

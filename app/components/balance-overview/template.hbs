@@ -1,0 +1,49 @@
+<section>
+  <div class="contianer">
+    <div class="row">
+      <div class="col">
+        <ul class="nav justify-content-center currency-tabs">
+          <li class="nav-item">
+            <a class="nav-link {{if (eq currency 'NANO') 'active'}}" href="#" {{action (mut currency) 'NANO' on='click'}}>
+              {{t 'NANO'}}
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {{if (eq currency 'BTC') 'active'}}" href="#" {{action (mut currency) 'BTC' on='click'}}>
+              {{t 'BTC'}}
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {{if (eq currency 'USD') 'active'}}" href="#" {{action (mut currency) 'USD' on='click'}}>
+              {{t 'USD'}}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="text-center">
+          <h1 class="balance">
+            {{#if (is-fulfilled exchangeRate)}}
+              {{format-amount wallet.balance precision=2 exchangeRate=(or (await exchangeRate) 1)}}
+            {{else}}
+              {{fa-icon "spinner" spin=true ariaLabel=(t 'loading')}}
+            {{/if}}
+          </h1>
+          <p class="pending">
+            {{t 'balancePending'}}
+            <br>
+            <span>
+              {{#if (is-fulfilled exchangeRate)}}
+                {{format-amount wallet.pending precision=2 exchangeRate=(or (await exchangeRate) 1)}}
+              {{else}}
+                {{fa-icon "spinner" spin=true ariaLabel=(t 'loading')}}
+              {{/if}}
+            </span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

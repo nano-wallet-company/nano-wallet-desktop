@@ -1,3 +1,5 @@
-<h1>{{t 'overview'}}</h1>
+{{balance-overview wallet=model}}
+
+<hr>
 
 {{wallet-overview wallet=model accounts=model.accounts createAccount=(route-action 'createAccount') page=page perPage=perPage}}

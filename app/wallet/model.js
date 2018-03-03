@@ -2,7 +2,7 @@ import DS from 'ember-data';
 import { A } from '@ember/array';
 import { computed } from '@ember/object';
 
-import { attr, hasMany } from 'ember-decorators/data';
+import { hasMany } from 'ember-decorators/data';
 
 import sumAmounts from '../utils/sum-amounts';
 
@@ -17,8 +17,6 @@ const sumAccountsProperty = dependentKey =>
 
 export default DS.Model.extend({
   @hasMany('account', { async: true }) accounts: null,
-
-  @attr seed: null,
 
   balance: sumAccountsProperty('balance'),
   pending: sumAccountsProperty('pending'),

@@ -1,0 +1,47 @@
+<nav class="navbar navbar-expand-lg navbar-dark">
+  {{#link-to 'index' class="navbar-brand"}}
+    <picture>
+      <source type="image/svg+xml" srcset="images/brand-dark.svg">
+      <img height="20" src="images/brand-dark.png" alt="{{t 'product'}}">
+    </picture>
+  {{/link-to}}
+  <div class="ml-auto pr-3">
+    <span class="navbar-text pb-0">
+      {{status-tooltip}}
+    </span>
+  </div>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a href="#" class="nav-link" {{action onCreateAccount wallet}}>
+          {{fa-icon "plus-square"}} {{t 'wallets.overview.create'}}
+        </a>
+      </li>
+      {{!-- <li class="nav-item">
+        {{#link-to 'wallets.overview' wallet class="nav-link"}} Show Seed {{/link-to}}
+      </li>
+      <li class="nav-item">
+        {{#bs-dropdown as |dd|}}
+          {{#dd.button}}$ US Dollar <span class="caret"></span>{{/dd.button}}
+          {{#dd.menu as |menu|}}
+            {{#menu.item}}
+              {{#menu.link-to "index"}}Home{{/menu.link-to}}
+            {{/menu.item}}
+            {{#menu.item}}
+              {{#menu.link-to "index"}}Dropdowns{{/menu.link-to}}
+            {{/menu.item}}
+          {{/dd.menu}}
+        {{/bs-dropdown}}
+      </li> --}}
+      <li class="nav-item">
+        {{#link-to 'wallets.logout' wallet class="nav-link"}}
+          {{t 'logout'}}
+        {{/link-to}}
+      </li>
+    </ul>
+  </div>
+</nav>

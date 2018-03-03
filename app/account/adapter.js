@@ -20,7 +20,7 @@ export default DS.Adapter.extend({
     const { wallet } = this.serialize(snapshot, { includeId: true });
     const { account } = await this.get('rpc').accountCreate(wallet);
     const info = await this.get('rpc').accountInfo(account);
-    return assign(info, { wallet });
+    return assign({ account }, { wallet }, info);
   },
 
   async deleteRecord(store, type, snapshot) {
