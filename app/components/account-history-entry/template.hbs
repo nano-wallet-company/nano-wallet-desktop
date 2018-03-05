@@ -1,17 +1,16 @@
 <div class="col-lg-10 col-11 history-item send d-flex justify-content-around align-items-center">
-  {{#if (eq model.type 'send')}}
+  {{#if (eq entry.type 'send')}}
     {{fa-icon "paper-plane" ariaHidden=true class="send"}}
   {{else}}
      {{fa-icon "envelope-open" ariaHidden=true class="receive"}}
   {{/if}}
   <p>
     <sup>
-      <img src="images/nano-icon.svg" alt="">
-    </sup>{{format-amount model.amount precision=2}}
+      <img src="images/nano-icon.svg" alt="{{t 'NANO'}}">
+    </sup>
+    {{format-amount entry.amount}}
   </p>
   <p class="text-truncate">
-    {{model.account}} {{!--
-    <span>xrb_17oqj</span>4rpads4o6ud448yymzk9jot8yzmzyeuteq3bj38cwjpt4rrgxhfx
-    <span>fr1</span> --}}
+    {{account-address value=entry.account}}
   </p>
 </div>

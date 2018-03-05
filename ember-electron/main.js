@@ -29,15 +29,25 @@ const {
   BrowserWindow,
   ipcMain,
 } = require('electron');
-const protocolServe = require('electron-protocol-serve');
+
+if (typeof process.env.ELECTRON_IS_DEV === 'undefined') {
+  const env = process.env.NODE_ENV || process.env.EMBER_ENV;
+  if (env === 'development') {
+    process.env.ELECTRON_IS_DEV = 1;
+  }
+}
+
+const isDev = require('electron-is-dev');
 const log = require('electron-log');
 const debug = require('electron-debug');
-const isDev = require('electron-is-dev');
 const unhandled = require('electron-unhandled');
 const contextMenu = require('electron-context-menu');
+const protocolServe = require('electron-protocol-serve');
 const { download } = require('electron-dl');
 const { appReady } = require('electron-util');
 const { default: installExtension, EMBER_INSPECTOR } = require('electron-devtools-installer');
+
+const { productName: tabbingIdentifier } = require('../package');
 
 let mainWindow = null;
 
@@ -120,7 +130,13 @@ ipcMain.on('download-start', ({ sender }, url, integrity) => {
     }
   }, { wait: 250, immediate: true });
 
-  downloadAsset(sender, url, integrity, onProgress)
+  // sender.webContents.session.once('will-download', (event, item) => {
+  //   if (!sender.isDestroyed()) {
+  //     sender.once('close', () => item.pause());
+  //   }
+  // });
+
+  return downloadAsset(sender, url, integrity, onProgress)
     .then(() => {
       if (!sender.isDestroyed()) {
         sender.send('download-done');
@@ -280,8 +296,21 @@ const run = async () => {
   Menu.setApplicationMenu(menu);
 
   mainWindow = new BrowserWindow({
-    width: 1024,
+    tabbingIdentifier,
+    width: 1366,
     height: 768,
+    minWidth: 240,
+    minHeight: 320,
+    frame: false,
+    center: true,
+    darkTheme: true,
+    transparent: true,
+    scrollBounce: true,
+    experimentalFeatures: true,
+    experimentalCanvasFeatures: true,
+    // vibrancy: 'dark',
+    titleBarStyle: 'hiddenInset',
+    backgroundColor: '#000034',
   });
 
   contextMenu({

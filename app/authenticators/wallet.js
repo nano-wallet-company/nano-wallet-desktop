@@ -6,33 +6,33 @@ import { service } from 'ember-decorators/service';
 
 import { defineError } from 'ember-exex/error';
 
-export const AuthenticationError = defineError({
+export const AuthenticatorError = defineError({
   name: 'AuthenticationError',
-  message: 'Authentication error',
+  message: 'Wallet authenticator error',
 });
 
-export const SessionRestoreError = defineError({
-  name: 'SessionRestoreError',
-  message: 'Unable to restore session',
-  extends: AuthenticationError,
+export const RestoreError = defineError({
+  name: 'RestoreError',
+  message: 'Unable to restore wallet',
+  extends: AuthenticatorError,
 });
 
 export const NodeNotStartedError = defineError({
   name: 'NodeStoppedError',
   message: 'Node not started',
-  extends: SessionRestoreError,
+  extends: RestoreError,
 });
 
 export const WalletLockedError = defineError({
   name: 'WalletLocked',
   message: 'Wallet locked',
-  extends: SessionRestoreError,
+  extends: RestoreError,
 });
 
-export const InvalidPasswordError = defineError({
-  name: 'InvalidPasswordError',
-  message: 'Invalid password',
-  extends: AuthenticationError,
+export const AuthenticateError = defineError({
+  name: 'AuthenticateError',
+  message: 'Unable to authenticate wallet',
+  extends: AuthenticatorError,
 });
 
 export default Base.extend({
@@ -42,7 +42,7 @@ export default Base.extend({
 
   async restore({ wallet }) {
     if (!wallet) {
-      throw new SessionRestoreError();
+      throw new RestoreError();
     }
 
     const electron = this.get('electron');
@@ -65,8 +65,8 @@ export default Base.extend({
   async authenticate({ wallet, password }) {
     try {
       await this.get('rpc').passwordEnter(wallet, password);
-    } catch (previous) {
-      throw new InvalidPasswordError({ previous });
+    } catch (err) {
+      throw new AuthenticateError().withPreviousError(err);
     }
 
     return { wallet };

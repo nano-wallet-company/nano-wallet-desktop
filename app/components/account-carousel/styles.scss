@@ -1,0 +1,41 @@
+& {
+  -webkit-app-region: no-drag;
+}
+
+.slick-list {
+  height: auto !important;
+}
+
+.slick-slide {
+  align-items: center;
+  display: flex !important;
+  height: 400px;
+  justify-content: center;
+}
+
+.slick-prev,
+.slick-next {
+  height: 50px;
+  width: 50px;
+  z-index: 9;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  font-size: 50px;
+}
+
+.slick-next {
+  right: 5px;
+  text-shadow: -1px 0 2px lightgray;
+}
+
+.slick-prev {
+  left: 5px;
+  text-shadow: 0 1px 2px lightgray;
+}
+
+.slick-dots li button:before,
+.slick-dots li.slick-active button:before {
+  color: $white;
+}

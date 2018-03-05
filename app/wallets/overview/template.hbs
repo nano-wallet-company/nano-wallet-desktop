@@ -2,17 +2,6 @@
   {{balance-overview wallet=model}}
 {{/liquid-if}}
 
-{{#liquid-if hideHistory class="balance"}}
-  <section>
-    <div class="container-fluid">
-      <div class="row">
-        <hr>
-        {{accounts}}
-      </div>
-    </div>
-  </section>
-{{/liquid-if}}
-
 {{wallet-overview wallet=model accounts=model.accounts hideHistory=hideHistory createAccount=(route-action 'createAccount') page=page perPage=perPage}}
 
 {{liquid-outlet class="history"}}

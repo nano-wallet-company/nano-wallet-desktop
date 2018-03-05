@@ -10,10 +10,10 @@
 
 {{#if expand}}
   {{#link-to 'wallets.overview' model class="nav-link"}}
-    {{fa-icon "times" click=(route-action 'toggleButton') id="icon"}}
+    {{fa-icon "times" click=(route-action 'toggleButton')}}
   {{/link-to}}
 {{else}}
   {{#link-to 'wallets.send' model class="nav-link"}}
-    {{fa-icon "paper-plane" ariaHidden=true click=(route-action 'toggleButton') id="icon"}}
+    {{fa-icon "paper-plane" ariaHidden=true click=(route-action 'toggleButton')}}
   {{/link-to}}
 {{/if}}

@@ -1,9 +1,7 @@
-{{navigation-bar wallet=model onCreateAccount=(route-action 'createAccount')}}
+{{navigation-bar wallet=model onCreateAccount=(route-action 'createAccount') onChangePassword=(route-action 'changePassword')}}
 
 <main role="main">
-  {{#each flashMessages.arrangedQueue as |flash|}}
-    {{flash-message flash=flash}}
-  {{/each}}
+  {{notification-center}}
 
   {{outlet}}
 </main>

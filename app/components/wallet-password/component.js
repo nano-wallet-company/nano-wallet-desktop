@@ -1,6 +1,5 @@
 import Component from '@ember/component';
 import { set } from '@ember/object';
-import { tryInvoke } from '@ember/utils';
 
 import { action } from 'ember-decorators/object';
 
@@ -18,6 +17,5 @@ export default Component.extend({
   @action
   clearPassword(changeset) {
     set(changeset, 'password', null);
-    tryInvoke(changeset, 'destroy');
   },
 });

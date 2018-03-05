@@ -4,4 +4,5 @@ export default Component.extend({
   wallet: null,
 
   onCreateAccount: null,
+  onChangePassword: null,
 });

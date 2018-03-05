@@ -33,6 +33,7 @@ export default {
     BTC: {
       style: 'currency',
       currency: 'BTC',
+      maximumFractionDigits: 8,
     },
   },
 };

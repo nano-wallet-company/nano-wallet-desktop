@@ -3,7 +3,7 @@
     {{#form.element controlType="power-select" label=(t 'wallets.accounts.send.source')
         required=true options=accounts property='source' onChange=(action onChange) as |el|}}
       {{#el.control searchField="id" searchPlaceholder=(t 'wallets.accounts.send.search') as |item|}}
-        {{item.id}}
+        {{account-address value=item.id}}
       {{/el.control}}
     {{/form.element}}
 
