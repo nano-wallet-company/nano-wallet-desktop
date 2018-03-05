@@ -1,3 +1,3 @@
-export default function getTimestamp() {
-  return String(Math.round(Date.now() / 1000));
+export default function getTimestamp(epoch = Date.now()) {
+  return String(Math.round(epoch / 1000));
 }

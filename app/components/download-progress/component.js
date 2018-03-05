@@ -19,7 +19,8 @@ export default Component.extend({
 
   status: STATUS_DOWNLOADING,
   asset: null,
-  progress: 0,
+  value: 0,
+
   onDone: null,
 
   @on('init')
@@ -50,7 +51,7 @@ export default Component.extend({
   },
 
   onProgress(value) {
-    debounce(this, this.updateProgress, value, 250, true);
+    debounce(this, this.updateProgress, value, 250);
   },
 
   onVerify() {
@@ -65,14 +66,14 @@ export default Component.extend({
     if (!this.isDestroying) {
       this.setProperties({
         status,
-        progress: 1,
+        value: 1,
       });
     }
   },
 
   updateProgress(value) {
     if (!this.isDestroying) {
-      this.set('progress', value);
+      this.set('value', value);
     }
   },
 });

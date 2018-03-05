@@ -15,6 +15,17 @@
     transform: scale(1.10) !important;
   }
 
+  img.qr-code {
+    display: block;
+    height: auto;
+    margin: 0 auto;
+    width: 90%;
+  }
+
+  i {
+    color: $blue;
+  }
+
   sup > img {
     display: inline-block;
   }
@@ -40,30 +51,12 @@
     background-color: $dark-purple;
     color: white;
     display: block;
-    font-size: 12px;
+    font-size: 1.4vh;
     height: 60px;
     margin: 0;
-    padding: 10px;
     overflow-wrap: break-word;
+    padding: 10px;
+    text-align: center;
     width: 100%;
-  }
-
-  .account-id span:first-child {
-    color: $light-blue;
-  }
-
-  .account-id span:last-child {
-    color: $orange;
-  }
-
-  img.qr-code{
-    display: block;
-    height: auto;
-    margin: 0 auto;
-    width: 90%;
-  }
-
-  i {
-    color: $blue;
   }
 }

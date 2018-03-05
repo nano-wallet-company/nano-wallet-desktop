@@ -1,6 +1,6 @@
 {{#if history}}
-  {{#each history as |item|}}
-    {{account-history-entry model=item}}
+  {{#each history as |entry|}}
+    {{account-history-entry entry=entry}}
   {{/each}}
 {{else}}
   <div class="d-flex justify-content-center h-100">

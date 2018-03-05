@@ -13,7 +13,7 @@ export default Component.extend({
 
   @computed()
   get sortBy() {
-    return ['modifiedTimestamp'];
+    return ['modifiedTimestamp:desc', 'id'];
   },
 
   slickInstance: null,

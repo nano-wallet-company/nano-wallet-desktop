@@ -50,7 +50,7 @@ wallets:
     invalidPassword: 'Invalid password!'
   backup:
     title: 'Backup Seed'
-    lead: "Here's your easy to remember seed mnemonic for your new wallet:"
+    lead: "Here's your new easy to recognize seed mnemonic for your new wallet:"
     copy: 'Copy Seed'
     copied: 'Seed copied to clipboard!'
     download: 'Download'
@@ -77,7 +77,7 @@ wallets:
       amount: 'Amount (NANO)'
       insufficient: 'Amount is greater than total account balance'
     history:
-      none: 'No history found.'
+      none: 'No history yet'
   overview:
     none: 'No accounts in wallet.'
     create: 'Create Account'
@@ -89,7 +89,7 @@ wallets:
     title: 'Confirm Logout'
     lead: 'Are you absolutely sure you wish to logout?'
     warning: >
-      <strong>Warning</strong>: Logging out will forget your wallet and you wont be able to
+      <strong>Warning</strong>: Logging out will forget your wallet and you will be unable to
       retreive it again if you don't have your wallet seed!
 setup:
   lead: "Let's get your wallet set up"

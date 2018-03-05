@@ -12,10 +12,10 @@ USER app
 WORKDIR /usr/src/app
 
 COPY --chown=app:app package.json .
-COPY --chown=app:app package-lock.json .
-RUN npm install
+COPY --chown=app:app yarn.lock .
+RUN yarn install
 
 COPY --chown=app:app . .
 
 EXPOSE 4200 7020 7357 9222
-CMD ["npm", "start"]
+CMD ["yarn", "start"]

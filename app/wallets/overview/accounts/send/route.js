@@ -1,4 +1,5 @@
 import Route from '@ember/routing/route';
+import { get } from '@ember/object';
 
 import { action } from 'ember-decorators/object';
 
@@ -32,9 +33,9 @@ export default Route.extend({
 
   @action
   async sendAmount(changeset) {
-    await changeset.save();
-    const account = this.modelFor('wallets.accounts');
-    return this.transitionTo('wallets.accounts.history', account.reload());
+    const block = await changeset.save();
+    const source = await get(block, 'source');
+    const wallet = await get(source, 'wallet');
+    return this.transitionTo('wallets.overview', wallet.reload());
   },
 });
-
