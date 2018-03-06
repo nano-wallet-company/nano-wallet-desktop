@@ -1,7 +1,6 @@
 import Route from '@ember/routing/route';
 import { get } from '@ember/object';
 import { tryInvoke } from '@ember/utils';
-import { debounce } from '@ember/runloop';
 import { action } from 'ember-decorators/object';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 import { service } from 'ember-decorators/service';
@@ -34,10 +33,6 @@ export default Route.extend(AuthenticatedRouteMixin, {
 
   @action
   createAccount(wallet) {
-    debounce(this, this.debouncedCreateAccount, wallet, 250);
-  },
-
-  debouncedCreateAccount(wallet) {
     return this.transitionTo('wallets.overview', this.addAccount(wallet));
   },
 

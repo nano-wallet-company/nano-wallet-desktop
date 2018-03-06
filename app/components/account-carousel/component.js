@@ -1,11 +1,12 @@
 import Component from '@ember/component';
-import { run, debounce, scheduleOnce } from '@ember/runloop';
+import { scheduleOnce } from '@ember/runloop';
 import { sort } from '@ember/object/computed';
 
+import RunMixin from 'ember-lifeline/mixins/run';
 import { computed, observes } from 'ember-decorators/object';
 import { on } from 'ember-decorators/object/evented';
 
-export default Component.extend({
+export default Component.extend(RunMixin, {
   accounts: null,
 
   currentSlide: 0,
@@ -13,6 +14,7 @@ export default Component.extend({
 
   @computed()
   get sortBy() {
+    // Fallback to sorting by id for predicatable sorts
     return ['modifiedTimestamp:desc', 'id'];
   },
 
@@ -21,10 +23,8 @@ export default Component.extend({
   @on('didInsertElement')
   addChangeListener() {
     this.$().on('afterChange', (event, slick, currentSlide) => {
-      run(() => {
-        if (!this.isDestroying) {
-          this.set('currentSlide', currentSlide);
-        }
+      this.runTask(() => {
+        this.set('currentSlide', currentSlide);
       });
     });
   },
@@ -74,9 +74,9 @@ export default Component.extend({
     return this.slickInstance;
   },
 
-  @observes('sortedAccounts.@each')
+  @observes('sortedAccounts.@each.id')
   sortedAccountsDidChange() {
-    debounce(this, this.refreshSlider, 1000, true);
+    this.debounceTask('refreshSlider', 1000, true);
   },
 
   @computed()

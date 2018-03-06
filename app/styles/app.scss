@@ -32,6 +32,7 @@ main {
     width: 90%;
   }
 }
+
 code {
   background-color: #000064;
   border-radius: 5px;
@@ -41,40 +42,6 @@ code {
   padding: 10px;
   margin-bottom: 10px;
   word-break: break-word;
-}
-
-.notifications {
-  position: fixed;
-  width: 30%;
-  right: 0;
-  z-index: 10000;
-
-  .alert {
-    box-shadow: -2px 2px 5px rgba(0,0,0,0.5);
-    border: 0;
-    border-radius: 0;
-    text-align: center;
-    transform: translateX(100%);
-    animation: slide-in 3s ease-in-out;
-    animation-fill-mode: forwards;
-    will-change: transform;
-  }
-
-  .alert-success {
-    background-color: $green;
-  }
-}
-
-@keyframes slide-in {
-  10% {
-    transform: translateX(0);
-  }
-  90% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(100%);
-  }
 }
 
 #nprogress .spinner {

@@ -33,11 +33,6 @@ module.exports = (environment) => {
       enabled: environment === 'production',
     },
 
-    flashMessageDefaults: {
-      timeout: 5000,
-      preventDuplicates: true,
-    },
-
     assets: {
       node: {
         win32: {

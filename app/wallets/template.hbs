@@ -1,11 +1,7 @@
 {{navigation-bar wallet=model onCreateAccount=(route-action 'createAccount')}}
 
 <main role="main">
-  <div class="notifications">
-    {{#each flashMessages.arrangedQueue as |flash|}}
-      {{flash-message flash=flash sticky=true}}
-    {{/each}}
-  </div>
+  {{notification-center}}
 
   {{outlet}}
 </main>

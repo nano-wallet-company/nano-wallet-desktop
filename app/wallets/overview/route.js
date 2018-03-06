@@ -11,7 +11,7 @@ export default Route.extend(AuthenticatedRouteMixin, {
   @service intl: null,
   @service flashMessages: null,
 
-  activate() {
+  beforeModel() {
     const walletOverviewController = this.controllerFor('wallets.overview');
     setProperties(walletOverviewController, {
       hideHistory: true,

@@ -1,12 +1,13 @@
 import Controller from '@ember/controller';
 import { get } from '@ember/object';
 
+import RunMixin from 'ember-lifeline/mixins/run';
 import { service } from 'ember-decorators/service';
 import { on } from 'ember-decorators/object/evented';
 
 const WALLET_POLL_INTERVAL = 5000; // 5s
 
-export default Controller.extend({
+export default Controller.extend(RunMixin, {
   @service pollboy: null,
   @service flashMessages: null,
   @service rpc: null,
@@ -30,16 +31,18 @@ export default Controller.extend({
   },
 
   async onPoll() {
-    if (!this.isDestroying) {
+    return this.runTask(() => {
       const model = this.get('model');
       if (model) {
         const isNew = get(model, 'isNew');
         if (!isNew) {
           const wallet = get(model, 'id');
-          this.updateBalances(wallet);
+          return this.updateBalances(wallet);
         }
       }
-    }
+
+      return true;
+    });
   },
 
   async updateBalances(wallet) {
@@ -50,6 +53,6 @@ export default Controller.extend({
       type: 'account',
     }));
 
-    this.store.push({ data });
+    return this.store.push({ data });
   },
 });

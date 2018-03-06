@@ -24,9 +24,11 @@ export default Route.extend({
       history,
     });
   },
+
   @action
-  toggleHistory() {
-    this.controllerFor('wallets.overview').toggleProperty('hideHistory');
-    this.controllerFor('wallets.overview.accounts.history').toggleProperty('hideHistory');
+  hideHistory() {
+    this.controllerFor(this.routeName).set('hideHistory', true);
+    this.controllerFor('wallets.overview').set('hideHistory', true);
+    return this.transitionTo('wallets.overview');
   },
 });
