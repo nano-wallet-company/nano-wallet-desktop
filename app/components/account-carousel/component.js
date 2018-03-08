@@ -3,6 +3,7 @@ import { scheduleOnce } from '@ember/runloop';
 import { sort } from '@ember/object/computed';
 
 import RunMixin from 'ember-lifeline/mixins/run';
+
 import { computed, observes } from 'ember-decorators/object';
 import { on } from 'ember-decorators/object/evented';
 
@@ -14,8 +15,8 @@ export default Component.extend(RunMixin, {
 
   @computed()
   get sortBy() {
-    // Fallback to sorting by id for predicatable sorts
-    return ['modifiedTimestamp:desc', 'id'];
+    // Fallback to sorting by `id` for stable sort.
+    return ['modifiedTimestamp', 'id'];
   },
 
   slickInstance: null,

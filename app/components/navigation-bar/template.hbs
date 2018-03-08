@@ -27,25 +27,11 @@
       <li class="nav-item">
         <a href="#" class="nav-link">
           {{t 'settings'}}
-          {{#bs-popover placement="bottom" title=(concat (t 'wallet') ' ' (t 'settings'))}}{{wallet-settings wallet=wallet onChangePassword=(route-action 'changePassword')}}{{/bs-popover}}
+          {{#bs-popover placement="bottom" title=(t 'settings')}}
+            {{wallet-settings wallet=wallet onChangePassword=(action onChangePassword)}}
+          {{/bs-popover}}
         </a>
       </li>
-      {{!-- <li class="nav-item">
-        {{#link-to 'wallets.overview' wallet class="nav-link"}} Show Seed {{/link-to}}
-      </li>
-      <li class="nav-item">
-        {{#bs-dropdown as |dd|}}
-          {{#dd.button}}$ US Dollar <span class="caret"></span>{{/dd.button}}
-          {{#dd.menu as |menu|}}
-            {{#menu.item}}
-              {{#menu.link-to "index"}}Home{{/menu.link-to}}
-            {{/menu.item}}
-            {{#menu.item}}
-              {{#menu.link-to "index"}}Dropdowns{{/menu.link-to}}
-            {{/menu.item}}
-          {{/dd.menu}}
-        {{/bs-dropdown}}
-      </li> --}}
       <li class="nav-item">
         {{#link-to 'wallets.logout' wallet class="nav-link"}}
           {{t 'logout'}}

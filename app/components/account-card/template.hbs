@@ -8,9 +8,9 @@
         <sup>
           <img src="images/nano-icon.svg" alt="{{t 'NANO'}}">
         </sup>
-        {{format-amount account.balance precision=2}}
+        {{format-amount account.balance}}
         <br>
-        <sub>+{{format-amount account.pending precision=2}}</sub>
+        <sub>+{{format-amount account.pending}}</sub>
       </p>
       <p class="account-id">
         {{account-address value=account.id}}

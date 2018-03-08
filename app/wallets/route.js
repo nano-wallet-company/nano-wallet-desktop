@@ -1,11 +1,13 @@
 import Route from '@ember/routing/route';
 import { get } from '@ember/object';
 import { tryInvoke } from '@ember/utils';
-import { action } from 'ember-decorators/object';
+
+import RunMixin from 'ember-lifeline/mixins/run';
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
+import { action } from 'ember-decorators/object';
 import { service } from 'ember-decorators/service';
 
-export default Route.extend(AuthenticatedRouteMixin, {
+export default Route.extend(RunMixin, AuthenticatedRouteMixin, {
   @service intl: null,
   @service electron: null,
   @service rpc: null,
@@ -33,7 +35,7 @@ export default Route.extend(AuthenticatedRouteMixin, {
 
   @action
   createAccount(wallet) {
-    return this.transitionTo('wallets.overview', this.addAccount(wallet));
+    return this.debounceTask('addAccount', wallet, 1000, true);
   },
 
   async addAccount(wallet) {
@@ -42,7 +44,7 @@ export default Route.extend(AuthenticatedRouteMixin, {
 
     const message = this.get('intl').t('wallets.overview.created');
     this.get('flashMessages').success(message);
-    return wallet.reload();
+    return this.transitionTo('wallets.overview', wallet.reload());
   },
 
   @action

@@ -47,7 +47,7 @@ export default async function getExchangeRate(currency = DEFAULT_CURRENCY) {
   let ticker;
   try {
     ticker = await coinmarketcap.tickerByAsset(asset, { convert });
-  } catch (er) {
+  } catch (err) {
     throw new RequestExchangeRateError().withPreviousError(err);
   }
 

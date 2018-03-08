@@ -26,7 +26,7 @@
         <div class="text-center">
           <h1 class="balance">
             {{#if (is-fulfilled exchangeRate)}}
-              {{format-amount wallet.balance precision=2 exchangeRate=(or (await exchangeRate) 1)}}
+              {{format-amount wallet.balance currency=currency exchangeRate=(or (await exchangeRate) 1)}}
             {{else}}
               {{fa-icon "spinner" spin=true ariaLabel=(t 'loading')}}
             {{/if}}
@@ -36,7 +36,7 @@
             <br>
             <span>
               {{#if (is-fulfilled exchangeRate)}}
-                {{format-amount wallet.pending precision=2 exchangeRate=(or (await exchangeRate) 1)}}
+                {{format-amount wallet.pending currency=currency exchangeRate=(or (await exchangeRate) 1)}}
               {{else}}
                 {{fa-icon "spinner" spin=true ariaLabel=(t 'loading')}}
               {{/if}}

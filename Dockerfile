@@ -1,4 +1,4 @@
-FROM node:8.9.4
+FROM node:8.10.0
 LABEL maintainer="Nano Labs <engineering@nano.co>"
 
 RUN curl -fsSL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
