@@ -5,10 +5,12 @@ import { observes } from 'ember-decorators/object';
 
 import BigNumber from 'npm:bignumber.js';
 
-import { number as currencyFormats } from '../formats';
+import formats from '../formats';
 
 import getConversion, { DEFAULT_UNIT } from '../utils/get-conversion';
 import { DEFAULT_CURRENCY, DEFAULT_EXCHANGE_RATE } from '../utils/get-exchange-rate';
+
+const currencyFormats = formats.number || {};
 
 export default Helper.extend({
   @service intl: null,
