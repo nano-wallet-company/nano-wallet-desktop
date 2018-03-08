@@ -1,6 +1,5 @@
 import Route from '@ember/routing/route';
-import { get, set } from '@ember/object';
-import { tryInvoke } from '@ember/utils';
+import { get } from '@ember/object';
 
 import UnauthenticatedRouteMixin from 'ember-simple-auth/mixins/unauthenticated-route-mixin';
 

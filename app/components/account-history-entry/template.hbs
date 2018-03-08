@@ -1,8 +1,8 @@
 <div class="col-lg-10 col-11 history-item send d-flex justify-content-around align-items-center">
   {{#if (eq entry.type 'send')}}
-    {{fa-icon "paper-plane" ariaHidden=true class="send"}}
+    {{fa-icon "paper-plane" class="send" ariaLabel=(t 'send')}}
   {{else}}
-     {{fa-icon "envelope-open" ariaHidden=true class="receive"}}
+    {{fa-icon "envelope-open" class="receive" ariaLabel=(t 'receive')}}
   {{/if}}
   <p>
     <sup>
