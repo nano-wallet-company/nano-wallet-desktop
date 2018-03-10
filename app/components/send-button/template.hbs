@@ -9,11 +9,11 @@
 </div>
 
 {{#if expand}}
-  {{#link-to 'wallets.overview' model class="nav-link"}}
-    {{fa-icon "times" click=(route-action 'toggleButton')}}
+  {{#link-to 'wallets.overview' wallet class="nav-link"}}
+    {{fa-icon "times" click=(action onClose) ariaLabel=(t 'send')}}
   {{/link-to}}
 {{else}}
-  {{#link-to 'wallets.send' model class="nav-link"}}
-    {{fa-icon "paper-plane" ariaHidden=true click=(route-action 'toggleButton')}}
+  {{#link-to 'wallets.send' wallet class="nav-link"}}
+    {{fa-icon "paper-plane" click=(action onOpen) ariaLabel=(t 'receive')}}
   {{/link-to}}
 {{/if}}

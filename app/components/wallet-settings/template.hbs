@@ -7,4 +7,8 @@
   </div>
 </form>
 
-{{wallet-password wallet=wallet setup=false onSubmit=(route-action 'changePassword')}}
+{{#wallet-password wallet=wallet onSubmit=onChangePassword}}
+  {{#bs-button buttonType="submit" type="danger" icon="fa fa-key" class="w-100"}}
+    {{t 'wallets.settings.changePassword'}}
+  {{/bs-button}}
+{{/wallet-password}}

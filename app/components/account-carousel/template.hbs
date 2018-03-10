@@ -1,3 +1,5 @@
 {{#each sortedAccounts key='@guid' as |account|}}
-  {{account-card hideHistory=hideHistory account=account}}
+  <div style="display: none">
+    {{account-card hideHistory=hideHistory account=account}}
+  </div>
 {{/each}}

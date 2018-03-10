@@ -12,7 +12,6 @@ export default Component.extend({
   password: null,
 
   onSubmit: null,
-  onHide: null,
 
   @action
   clearPassword(changeset) {
