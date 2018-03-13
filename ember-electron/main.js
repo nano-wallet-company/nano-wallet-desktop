@@ -51,6 +51,8 @@ const { productName: tabbingIdentifier } = require('../package');
 
 let mainWindow = null;
 
+log.transports.rendererConsole.level = 'info';
+
 // Handle an unhandled error in the main thread
 //
 // Note that 'uncaughtException' is a crude mechanism for exception handling intended to
@@ -150,14 +152,13 @@ ipcMain.on('download-start', ({ sender }, url, integrity) => {
     });
 });
 
-const config = loadJsonFile.sync(path.join(__dirname, 'config.json'));
-
 ipcMain.on('node-start', ({ sender }) => {
   const cwd = path.resolve(app.getPath('userData'));
   const cmd = path.join(cwd, toExecutableName('rai_node'));
   const child = spawn(cmd, ['--daemon', '--data_path', cwd], {
     cwd,
     windowsHide: true,
+    stdio: ['ignore', 'pipe', 'pipe'],
   });
 
   child.on('error', (err) => {
@@ -170,7 +171,13 @@ ipcMain.on('node-start', ({ sender }) => {
   child.stdout.on('data', data => log.info('[node]', data.toString()));
   child.stderr.on('data', data => log.error('[node]', data.toString()));
 
-  const { port, address: host } = config.rpc;
+  const {
+    rpc: {
+      port,
+      address: host,
+    },
+  } = loadJsonFile.sync(path.join(cwd, 'config.json'));
+
   const proxy = httpProxy.createProxyServer({
     target: { host, port },
     xfwd: true,
@@ -204,7 +211,7 @@ ipcMain.on('node-start', ({ sender }) => {
     child.kill();
   });
 
-  child.once('exit', () => {
+  child.once('close', () => {
     log.info('[node]', 'Node exited');
     server.close();
   });
@@ -236,16 +243,26 @@ ipcMain.on('node-start', ({ sender }) => {
 });
 
 const run = async () => {
+  const dataPath = path.resolve(app.getPath('userData'));
+  const configPath = path.join(dataPath, 'config.json');
+  let config = {};
+  try {
+    config = await loadJsonFile(configPath);
+  } catch (err) {
+    config = await loadJsonFile(path.join(__dirname, 'config.json'));
+  }
+
   config.rpc.port = await getPort({ port: config.rpc.port });
   config.node.peering_port = await getPort({ port: config.node.peering_port });
-  config.node.io_threads = os.cpus().length;
+
+  const cpuCount = os.cpus().length;
+  config.node.io_threads = cpuCount;
+  config.node.work_threads = cpuCount;
 
   const authorizationToken = crypto.randomBytes(20).toString('hex');
   global.authorizationToken = authorizationToken;
   config.rpc.authorization_token = authorizationToken;
 
-  const dataPath = path.resolve(app.getPath('userData'));
-  const configPath = path.join(dataPath, 'config.json');
   log.info('Writing node configuration:', configPath);
   await writeJsonFile(configPath, config, {
     replacer(key, value) {

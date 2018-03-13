@@ -10,6 +10,7 @@ export default Route.extend({
     const hideHistory = this.controllerFor('wallets.overview').get('hideHistory');
     this.controllerFor('wallets.overview.accounts.history').set('hideHistory', hideHistory);
   },
+
   async model() {
     const wallet = this.modelFor('wallets');
     const account = this.modelFor('wallets.overview.accounts');

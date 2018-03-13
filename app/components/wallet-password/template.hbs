@@ -1,5 +1,6 @@
-{{#bs-form model=(changeset (hash password=password) ChangePasswordValidations)
-    onSubmit=(action (queue (action onSubmit wallet) (action 'clearPassword'))) as |form|}}
-  {{form.element controlType="password" label=(t 'password') property='password' required=true minlength=8}}
+{{#bs-form model=(changeset (hash password=password passwordConfirm=passwordConfirm) ChangePasswordValidations)
+    onSubmit=(action (queue (action 'confirmPassword') (action onSubmit wallet) (action 'clearPassword'))) as |form|}}
+  {{form.element controlType="password" placeholder=(t 'password') property='password' required=true minlength=8}}
+  {{form.element controlType="password" placeholder=(t 'confirmPassword') property='passwordConfirm' required=true minlength=8}}
   {{yield form}}
 {{/bs-form}}

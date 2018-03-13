@@ -1,4 +1,5 @@
 import Helper from '@ember/component/helper';
+import { typeOf } from '@ember/utils';
 
 import { service } from 'ember-decorators/service';
 import { observes } from 'ember-decorators/object';
@@ -26,6 +27,11 @@ export default Helper.extend({
       currency = Symbol.keyFor(DEFAULT_CURRENCY),
       exchangeRate = DEFAULT_EXCHANGE_RATE,
     } = params;
+
+    const valueType = typeOf(value);
+    if (!(value instanceof BigNumber) && (valueType !== 'string' && valueType !== 'number')) {
+      return 0;
+    }
 
     const divisor = getConversion(Symbol.for(unit));
     const quotient = BigNumber(value).dividedBy(divisor);

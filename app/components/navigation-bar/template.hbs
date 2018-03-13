@@ -30,7 +30,7 @@
         <a href="#" class="nav-link">
           {{t 'settings'}}
           {{#bs-popover placement="bottom" title=(t 'settings')}}
-            {{wallet-settings wallet=wallet onChangePassword=(action onChangePassword)}}
+            {{wallet-settings wallet=wallet representative=wallet.representative onChangeRepresentative=(action onChangeRepresentative) onChangePassword=(action onChangePassword)}}
           {{/bs-popover}}
         </a>
       </li>

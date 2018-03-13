@@ -69,18 +69,18 @@
     height: 100vh;
 
     h1 {
-        font-size: 90px;
-        margin-bottom: 30px;
-        border: 0;
+      font-size: 90px;
+      margin-bottom: 30px;
+      border: 0;
     }
 
     form {
-        width: 100%;
+      width: 100%;
     }
 
     label {
-        text-transform: uppercase;
-        font-size: 14px;
+      text-transform: uppercase;
+      font-size: 14px;
     }
 
     .form-group {
@@ -104,6 +104,10 @@
       border-radius: 33px;
       background-color: #50E3C2;
       border: 0;
+    }
+
+    .invalid-feedback {
+      color: lightsalmon;
     }
   }
 }

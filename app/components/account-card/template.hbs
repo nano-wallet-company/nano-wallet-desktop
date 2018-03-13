@@ -2,7 +2,7 @@
   <div class="account-card-content">
     {{#if account.id}}
       {{#liquid-if hideHistory class="hide-qr"}}
-        {{account-qrcode value=account.id}}
+        {{qr-code text=account.id width=170 height=170}}
       {{/liquid-if}}
       <p class="balance">
         <sup>

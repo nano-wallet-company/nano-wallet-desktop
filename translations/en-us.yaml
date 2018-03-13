@@ -7,6 +7,7 @@ next: 'Next'
 current: '(current)'
 import: 'Import'
 password: 'Password'
+confirmPassword: 'Confirm password'
 overview: 'Overview'
 send: 'Send'
 receive: 'Receive'
@@ -75,7 +76,7 @@ wallets:
       source: 'Source Account'
       search: 'Search for account'
       destination: 'Destination Account'
-      placeholder: 'e.g. xrb_3e3j5tkog48pnny9dmfzj1r16pg8t1e76dz5tmac6iq689wyjfpiij4txtdo'
+      placeholder: 'Address (e.g. xrb_...)'
       amount: 'Amount (NANO)'
       insufficient: 'Amount is greater than total account balance'
     history:
@@ -85,8 +86,12 @@ wallets:
     create: 'Create Account'
     created: 'New account created!'
   settings:
+    changeRepresentative: 'Change Representative'
     changePassword: 'Change Password'
+    representativeChanged: 'Wallet representative changed!'
+    representativeChangeFailed: 'Representative change failed!'
     passwordChanged: 'Password changed!'
+    passwordsDontMatch: "Passwords don't match!"
   logout:
     title: 'Confirm Logout'
     lead: 'Are you absolutely sure you wish to logout?'

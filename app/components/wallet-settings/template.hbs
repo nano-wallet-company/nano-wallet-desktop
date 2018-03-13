@@ -1,13 +1,22 @@
-<form>
+{{#bs-form model=(changeset (hash representative=representative) ChangeRepresentativeValidations) onSubmit=(action onChangeRepresentative wallet) as |form|}}
   <div class="form-group">
-    <label><b>{{t 'wallet'}}</b></label>
+    <label>{{t 'wallet'}}</label>
     <p translate='no'>
       <code>{{wallet.id}}</code>
     </p>
   </div>
-</form>
 
-{{#wallet-password wallet=wallet onSubmit=onChangePassword}}
+  {{form.element controlType="text" label='Representative' property='representative'
+      maxlength=64 required=true pattern="^xrb_[13](?![lv])[a-z1-9]{59}$"}}
+
+  {{#bs-button buttonType="submit" type="warning" icon="fa fa-cubes" class="w-100"}}
+    {{t 'wallets.settings.changeRepresentative'}}
+  {{/bs-button}}
+{{/bs-form}}
+
+<br>
+
+{{#wallet-password wallet=wallet onSubmit=(action onChangePassword)}}
   {{#bs-button buttonType="submit" type="danger" icon="fa fa-key" class="w-100"}}
     {{t 'wallets.settings.changePassword'}}
   {{/bs-button}}
