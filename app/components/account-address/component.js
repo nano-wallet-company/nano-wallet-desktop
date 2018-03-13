@@ -6,7 +6,10 @@ import { on } from 'ember-decorators/object/evented';
 export const MINIMUM_LENGTH = 64;
 
 export default Component.extend({
+  tagName: 'span',
+
   value: null,
+  truncate: false,
 
   attributeBindings: ['value:title', 'translate'],
   translate: false,

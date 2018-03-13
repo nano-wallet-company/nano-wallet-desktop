@@ -1,33 +1,30 @@
 import Component from '@ember/component';
 import { scheduleOnce } from '@ember/runloop';
-import { sort } from '@ember/object/computed';
 
-import RunMixin from 'ember-lifeline/mixins/run';
+import { runTask, debounceTask, runDisposables } from 'ember-lifeline';
 
 import { computed, observes } from 'ember-decorators/object';
 import { on } from 'ember-decorators/object/evented';
 
-export default Component.extend(RunMixin, {
+export default Component.extend({
   accounts: null,
 
   currentSlide: 0,
-  sortedAccounts: sort('accounts', 'sortBy'),
-
-  @computed()
-  get sortBy() {
-    // Fallback to sorting by `id` for stable sort.
-    return ['modifiedTimestamp', 'id'];
-  },
 
   slickInstance: null,
 
   @on('didInsertElement')
   addChangeListener() {
     this.$().on('afterChange', (event, slick, currentSlide) => {
-      this.runTask(() => {
+      runTask(this, () => {
         this.set('currentSlide', currentSlide);
       });
     });
+  },
+
+  willDestroy(...args) {
+    runDisposables(this);
+    return this._super(...args);
   },
 
   @on('didInsertElement')
@@ -75,9 +72,9 @@ export default Component.extend(RunMixin, {
     return this.slickInstance;
   },
 
-  @observes('sortedAccounts.@each.id')
-  sortedAccountsDidChange() {
-    this.debounceTask('refreshSlider', 1000, true);
+  @observes('accounts.@each.id')
+  accountsDidChange() {
+    debounceTask(this, 'refreshSlider', 1000, true);
   },
 
   @computed()

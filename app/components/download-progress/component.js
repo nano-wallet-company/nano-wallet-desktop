@@ -1,6 +1,6 @@
 import Component from '@ember/component';
 
-import RunMixin from 'ember-lifeline/mixins/run';
+import { runTask, debounceTask, runDisposables } from 'ember-lifeline';
 import { on } from 'ember-decorators/object/evented';
 
 import { defineError } from 'ember-exex/error';
@@ -14,7 +14,7 @@ export const DownloadError = defineError({
   message: 'Error downloading {asset}',
 });
 
-export default Component.extend(RunMixin, {
+export default Component.extend({
   downloader: null,
 
   status: STATUS_DOWNLOADING,
@@ -45,13 +45,18 @@ export default Component.extend(RunMixin, {
     downloader.off('done', this, this.onDone);
   },
 
+  willDestroy(...args) {
+    runDisposables(this);
+    return this._super(...args);
+  },
+
   onError() {
     const asset = this.get('asset');
     throw new DownloadError({ params: { asset } });
   },
 
   onProgress(value) {
-    this.debounceTask('updateProgress', value, 250);
+    debounceTask(this, 'updateProgress', value, 250);
   },
 
   onVerify() {
@@ -63,7 +68,7 @@ export default Component.extend(RunMixin, {
   },
 
   reset(status = STATUS_DOWNLOADING) {
-    this.runTask(() => {
+    runTask(this, () => {
       this.setProperties({
         status,
         value: 1,

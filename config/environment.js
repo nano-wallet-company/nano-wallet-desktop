@@ -33,6 +33,10 @@ module.exports = (environment) => {
       enabled: environment === 'production',
     },
 
+    flashMessageDefaults: {
+      preventDuplicates: true,
+    },
+
     assets: {
       node: {
         win32: {
@@ -46,12 +50,12 @@ module.exports = (environment) => {
       },
       data: {
         win32: {
-          url: 'https://s3-us-west-2.amazonaws.com/nano-apps/data-806f937d548e85a397a7a4aa914773b6.zip',
-          integrity: 'sha512-ftW6l8Nf1iCvJui1KyGnZXJaUGqKm/8zDcCaBdAQ+QdQkMFcXXWP14uF2mkx9OU7Yp09fytrVSTI+m3PBbvJRw==',
+          url: 'https://s3-us-west-2.amazonaws.com/nano-apps/data-5b4507be0d81113587603a82ad30adb3.zip',
+          integrity: 'sha512-qY5X3TrBmooul5WGyVtF4ohH24M7JqvMIllgFfRIuHsyU5kOgM47P+A8EcBu4KsHZYIaSxz68SPIN0NIco8KKg==',
         },
         darwin: {
-          url: 'https://s3-us-west-2.amazonaws.com/nano-apps/data-806f937d548e85a397a7a4aa914773b6.zip',
-          integrity: 'sha512-ftW6l8Nf1iCvJui1KyGnZXJaUGqKm/8zDcCaBdAQ+QdQkMFcXXWP14uF2mkx9OU7Yp09fytrVSTI+m3PBbvJRw==',
+          url: 'https://s3-us-west-2.amazonaws.com/nano-apps/data-5b4507be0d81113587603a82ad30adb3.zip',
+          integrity: 'sha512-qY5X3TrBmooul5WGyVtF4ohH24M7JqvMIllgFfRIuHsyU5kOgM47P+A8EcBu4KsHZYIaSxz68SPIN0NIco8KKg==',
         },
       },
     },

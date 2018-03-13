@@ -18,7 +18,7 @@ module.exports = {
     'plugin:ember/recommended',
   ],
   env: {
-    browser: true
+    browser: true,
   },
   rules: {
     'no-underscore-dangle': ['error', {
