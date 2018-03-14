@@ -2,13 +2,14 @@ const path = require('path');
 
 const { productName, name: packageName } = require('../package');
 
-const name = packageName.split('/').slice(-1);
+const [name] = packageName.split('/').slice(-1);
 const icon = path.join(__dirname, 'icons', 'app');
 
 module.exports = {
   make_targets: {
     win32: [
       'zip',
+      'squirrel',
     ],
     darwin: [
       'zip',
@@ -17,6 +18,7 @@ module.exports = {
     linux: [
       'zip',
       'deb',
+      'rpm',
     ],
   },
   electronPackagerConfig: {
