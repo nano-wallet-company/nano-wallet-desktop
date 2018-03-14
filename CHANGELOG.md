@@ -2,6 +2,35 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.0.0-beta.5"></a>
+# [1.0.0-beta.5](https://github.com/nanocurrency/nano-desktop/compare/v1.0.0-beta.4...v1.0.0-beta.5) (2018-03-14)
+
+
+### Bug Fixes
+
+* **account-history:** adjust history styling to mirror design ([8426a37](https://github.com/nanocurrency/nano-desktop/commit/8426a37))
+* **format-amount:** fix import of currency formats ([2f2ee7e](https://github.com/nanocurrency/nano-desktop/commit/2f2ee7e))
+* **package:** remove previous artificial version bump ([510503b](https://github.com/nanocurrency/nano-desktop/commit/510503b))
+* **setup:** add new translations ([19513e8](https://github.com/nanocurrency/nano-desktop/commit/19513e8))
+* **setup:** save wallet after setup route ([79de33f](https://github.com/nanocurrency/nano-desktop/commit/79de33f))
+* **wallet-overview:** fix typos and fine tunning ([81fe390](https://github.com/nanocurrency/nano-desktop/commit/81fe390))
+
+
+### Features
+
+* **navigation-bar:** add markup and style for navigation bar ([9101f74](https://github.com/nanocurrency/nano-desktop/commit/9101f74))
+* **navigation-bar:** add markup and style for navigation bar ([dabe50b](https://github.com/nanocurrency/nano-desktop/commit/dabe50b))
+* **setup:** style setup and login flow ([9c98459](https://github.com/nanocurrency/nano-desktop/commit/9c98459))
+* **wallet-settings:** add confirm password and ability to change rep ([aeccf4d](https://github.com/nanocurrency/nano-desktop/commit/aeccf4d))
+
+
+### Performance Improvements
+
+* **setup:** optimize setup backdrop ([f6c809e](https://github.com/nanocurrency/nano-desktop/commit/f6c809e))
+* **setup:** speed up setup transitions ([336664e](https://github.com/nanocurrency/nano-desktop/commit/336664e))
+
+
+
 <a name="1.0.0-beta.4"></a>
 # [1.0.0-beta.4](https://github.com/nanocurrency/nano-desktop/compare/v1.0.0-beta.3...v1.0.0-beta.4) (2018-02-21)
 
