@@ -12,9 +12,9 @@
         <br>
         <sub>+{{format-amount account.pending}}</sub>
       </p>
-      <p class="account-id">
+      {{#copy-button clipboardText=account.id}}
         {{account-address value=account.id}}
-      </p>
+      {{/copy-button}}
     {{else}}
       {{fa-icon "spinner" size=5 spin=true ariaLabel=(t 'loading')}}
     {{/if}}

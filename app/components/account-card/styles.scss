@@ -54,13 +54,15 @@ a {
     font-size: 14px;
   }
 
-  .account-id {
+  .copy-btn {
     background-color: $dark-purple;
+    border: 0;
     color: white;
     display: block;
     font-size: 1.4vh;
     height: 60px;
     margin: 0;
+    outline: none;
     overflow-wrap: break-word;
     padding: 10px;
     text-align: center;
