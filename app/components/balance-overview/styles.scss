@@ -3,7 +3,7 @@
   margin: 0 0 10px;
 
   li > a {
-    color: white;
+    color: $white;
     font-size: 20px;
     letter-spacing: 0.89px;
 
@@ -16,7 +16,7 @@
 
 .balance {
   border: 0;
-  color: white;
+  color: $white;
   font-size: 90px;
   font-weight: 300;
   line-height: 1;
@@ -26,7 +26,7 @@
 }
 
 .pending {
-  color: white;
+  color: $white;
   font-size: 16px;
   letter-spacing: 2px;
   margin: 20px 0 0;
@@ -35,7 +35,7 @@
 }
 
 .pending > span {
-  color: $green;
+  color: $text-light-blue;
   font-size: 30px;
   letter-spacing: 1.33px;
   margin: 0;
