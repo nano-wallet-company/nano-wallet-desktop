@@ -10,12 +10,12 @@
       {{status-tooltip}}
     </span>
   </div>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+  <button class="navbar-toggler" type="button" data-toggle="collapse" {{action toggleShow}} data-target="#navbarNavDropdown"
       aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
-    <ul class="navbar-nav">
+  <div class=" {{if show 'in' 'collapse'}} navbar-collapse justify-content-end" id="navbarNavDropdown">
+    <ul class="navbar-nav {{if show 'mt-10'}}">
       <li class="nav-item">
         {{#link-to 'index' class="nav-link"}}
           {{t 'overview'}}
