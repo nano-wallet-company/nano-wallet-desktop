@@ -1,5 +1,9 @@
 a {
   outline: none;
+
+  &.active .account-card-content {
+    transform: scale(1.10) !important;
+  }
 }
 
 .account-card-content {
