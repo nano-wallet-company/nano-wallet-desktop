@@ -11,7 +11,7 @@ export default Route.extend({
   @service rpc: null,
 
   model() {
-    const wallet = this.modelFor('setup');
+    const wallet = this.modelFor('setup').save();
     const seed = generateSeed();
     return hash({
       wallet,

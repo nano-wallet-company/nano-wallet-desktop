@@ -1,5 +1,5 @@
 FROM node:8.10.0
-LABEL maintainer="Nano Labs <engineering@nano.co>"
+LABEL maintainer="Nano <desktop@nano.org>"
 
 RUN curl -fsSL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 RUN curl -fsSL https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
