@@ -33,6 +33,12 @@ main {
   }
 }
 
+input,
+button,
+textarea {
+  -webkit-app-region: no-drag;
+}
+
 code {
   background-color: #000064;
   border-radius: 5px;
