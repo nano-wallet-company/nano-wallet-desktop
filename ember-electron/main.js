@@ -120,7 +120,7 @@ const downloadAsset = async (sender, url, integrity, onProgress) => {
   }
 
   log.info('Extracting asset:', savePath, '->', dir);
-  await extract(savePath, { dir });
+  await extract(savePath, { dir, defaultFileMode: 0o600 });
 
   log.info('Asset download done:', url);
 };
