@@ -7,8 +7,11 @@ next: 'Next'
 current: '(current)'
 import: 'Import'
 password: 'Password'
+confirmPassword: 'Confirm password'
 overview: 'Overview'
 send: 'Send'
+receive: 'Receive'
+close: 'Close'
 settings: 'Settings'
 logout: 'Logout'
 history: 'History'
@@ -41,7 +44,7 @@ NANO: 'NANO'
 BTC: 'BTC'
 USD: 'USD'
 login:
-  lead: 'Login to unlock your wallet'
+  lead: 'Login to unlock your wallet.'
   instructions: 'You can login to continue using your current wallet by unlocking it. Alternatively, you may choose to create a new wallet.'
   setupWallet: 'Create New Wallet'
 wallets:
@@ -50,7 +53,7 @@ wallets:
     invalidPassword: 'Invalid password!'
   backup:
     title: 'Backup Seed'
-    lead: "Here's your easy to remember seed mnemonic for your new wallet:"
+    lead: "Here's your new easy to recognize seed mnemonic for your new wallet:"
     copy: 'Copy Seed'
     copied: 'Seed copied to clipboard!'
     download: 'Download'
@@ -73,26 +76,30 @@ wallets:
       source: 'Source Account'
       search: 'Search for account'
       destination: 'Destination Account'
-      placeholder: 'e.g. xrb_3e3j5tkog48pnny9dmfzj1r16pg8t1e76dz5tmac6iq689wyjfpiij4txtdo'
+      placeholder: 'Address (e.g. xrb_...)'
       amount: 'Amount (NANO)'
       insufficient: 'Amount is greater than total account balance'
     history:
-      none: 'No history found.'
+      none: 'No history yet'
   overview:
     none: 'No accounts in wallet.'
     create: 'Create Account'
-    created: 'Account created!'
+    created: 'New account created!'
   settings:
+    changeRepresentative: 'Change Representative'
     changePassword: 'Change Password'
+    representativeChanged: 'Wallet representative changed!'
+    representativeChangeFailed: 'Representative change failed!'
     passwordChanged: 'Password changed!'
+    passwordsDontMatch: "Passwords don't match!"
   logout:
     title: 'Confirm Logout'
     lead: 'Are you absolutely sure you wish to logout?'
     warning: >
-      <strong>Warning</strong>: Logging out will forget your wallet and you wont be able to
+      <strong>Warning</strong>: Logging out will forget your wallet and you will be unable to
       retreive it again if you don't have your wallet seed!
 setup:
-  lead: "Let's get your wallet set up"
+  lead: "Let's get your wallet set up."
   instructions: >
     To begin using Nano Desktop, you must first create a new wallet or import your wallet data
     using a seed.

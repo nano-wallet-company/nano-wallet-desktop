@@ -1,0 +1,12 @@
+.show-history {
+  // margin-top: -60px;
+  transition: 0.4s;
+
+  .slick-slide {
+    height: 200px;
+
+    .account-card-content {
+      height: auto;
+    }
+  }
+}

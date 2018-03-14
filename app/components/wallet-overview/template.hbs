@@ -1,8 +1,8 @@
 <section>
   <div class="container-fluid">
     <div class="row">
-      <div class="col">
-        {{account-carousel accounts=accounts}}
+      <div class="col {{unless hideHistory 'show-history'}}">
+        {{account-carousel hideHistory=hideHistory accounts=accounts}}
       </div>
     </div>
   </div>

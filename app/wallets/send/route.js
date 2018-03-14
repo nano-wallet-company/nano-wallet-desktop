@@ -3,7 +3,10 @@ import { get } from '@ember/object';
 
 export default Route.extend({
   async afterModel(model) {
-    const source = await get(model, 'accounts.firstObject');
-    return this.transitionTo('wallets.accounts.send', source);
+    const overviewController = this.controllerFor('wallets/overview');
+    await get(model, 'accounts');
+
+    const source = get(overviewController, 'sortedAccounts.firstObject');
+    return this.transitionTo('wallets.overview.accounts.send', source);
   },
 });

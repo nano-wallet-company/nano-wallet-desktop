@@ -1,1 +1,5 @@
-{{wallet-password wallet=model onSubmit=(route-action 'changePassword')}}
+{{#wallet-password wallet=model onSubmit=(route-action 'changePassword')}}
+  {{#bs-button buttonType="submit" type="primary" class="w-100"}}
+    {{t 'wallets.password.submit'}}
+  {{/bs-button}}
+{{/wallet-password}}

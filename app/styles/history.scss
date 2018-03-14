@@ -1,0 +1,55 @@
+.history-item-list {
+  background-color: transparent;
+  height: 50vh;
+  max-height: 50vh;
+  overflow: scroll;
+
+  > div {
+    width: 100%;
+  }
+}
+
+.history-item {
+  background: #fff;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  padding: 20px 0;
+
+  p {
+    margin: 0;
+  }
+
+  .send {
+    color: #538DCA;
+  }
+
+  .receive {
+    color: #EDA63F;
+  }
+
+  i {
+    font-size: 24px;
+  }
+}
+
+.arrow,
+.arrow:hover {
+  align-items: center;
+  border-radius: 100%;
+  color: #fff;
+  display: flex;
+  height: 25px;
+  justify-content: center;
+  left: calc(50% - 25px);
+  margin: 0 auto 20px;
+  text-decoration: none;
+  width: 25px;
+}
+
+.no-history {
+  height: 100%;
+  color: $dark-purple;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.2);
+  text-align: center;
+}

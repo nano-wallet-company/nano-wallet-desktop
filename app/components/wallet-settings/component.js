@@ -1,12 +1,14 @@
 import Component from '@ember/component';
 
-import ChangePasswordValidations from '../../validations/change-password';
+import ChangeRepresentativeValidations from '../../validations/change-representative';
 
 export default Component.extend({
-  ChangePasswordValidations,
+  ChangeRepresentativeValidations,
 
   wallet: null,
   password: null,
+  representative: null,
 
+  onChangeRepresentative: null,
   onChangePassword: null,
 });

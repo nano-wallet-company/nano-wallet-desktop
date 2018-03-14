@@ -9,18 +9,19 @@ This is an Ember application that can build into an [Electron](https://electronj
 You will need the following things properly installed on your computer.
 
 * [Git](https://git-scm.com/)
-* [Node.js](https://nodejs.org/) (with npm)
+* [Node.js](https://nodejs.org/)
+* [Yarn](https://yarnpkg.com/)
 * [Google Chrome](https://google.com/chrome/)
 
 ## Installation
 
 * `git clone https://github.com/nanocurrency/nano-desktop.git`
 * `cd nano-desktop`
-* `npm install`
+* `yarn install`
 
 ## Running / Development
 
-* `npm start`
+* `yarn start`
 * Visit the app at [http://localhost:4200](http://localhost:4200).
 * Visit the tests at [http://localhost:4200/tests](http://localhost:4200/tests).
 
@@ -30,18 +31,18 @@ Make use of the many generators for code, try `npx ember help generate` for more
 
 ### Running Tests
 
-* `npm test`
-* `npm test -- --server`
+* `yarn test`
+* `yarn test -- --server`
 
 ### Linting
 
-* `npm run lint:js`
-* `npm run lint:js -- --fix`
+* `yarn run lint:js`
+* `yarn run lint:js -- --fix`
 
 ### Building
 
-* `npm run build` (development)
-* `npm run build --environment production` (production)
+* `yarn run build` (development)
+* `yarn run build --environment production` (production)
 
 ### Using Docker Compose
 

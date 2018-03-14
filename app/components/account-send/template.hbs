@@ -3,7 +3,7 @@
     {{#form.element controlType="power-select" label=(t 'wallets.accounts.send.source')
         required=true options=accounts property='source' onChange=(action onChange) as |el|}}
       {{#el.control searchField="id" searchPlaceholder=(t 'wallets.accounts.send.search') as |item|}}
-        {{item.id}}
+        <div>{{account-address value=item.id truncate=25}} ({{format-amount (if item.amount item.amount item.balance)}})</div>
       {{/el.control}}
     {{/form.element}}
 
@@ -17,7 +17,7 @@
         onChange=(action 'changeAmount' model)}}
 
     <div role="group" class="d-flex justify-content-center">
-      {{#bs-button size="lg" type="primary" icon="fa fa-paper-plane" buttonType="submit"}}
+      {{#bs-button disabled=model.isInvalid size="lg" type="none" icon="fa fa-paper-plane" buttonType="submit" class="text-light"}}
         {{t 'send'}}
       {{/bs-button}}
     </div>

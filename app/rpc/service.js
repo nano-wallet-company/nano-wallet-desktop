@@ -11,9 +11,11 @@ export const actions = {
   VERSION: 'version',
   WALLET_CREATE: 'wallet_create',
   WALLET_LOCKED: 'wallet_locked',
-  WALLET_BALANCE_TOTAL: 'wallet_balance_total',
   WALLET_BALANCES: 'wallet_balances',
+  WALLET_BALANCE_TOTAL: 'wallet_balance_total',
   WALLET_CHANGE_SEED: 'wallet_change_seed',
+  WALLET_REPRESENTATIVE: 'wallet_representative',
+  WALLET_REPRESENTATIVE_SET: 'wallet_representative_set',
   ACCOUNT_CREATE: 'account_create',
   ACCOUNT_INFO: 'account_info',
   ACCOUNT_LIST: 'account_list',
@@ -22,6 +24,7 @@ export const actions = {
   SEND: 'send',
   PEERS: 'peers',
   BLOCK_COUNT: 'block_count',
+  SEARCH_PENDING: 'search_pending',
   PASSWORD_CHANGE: 'password_change',
   PASSWORD_ENTER: 'password_enter',
   PASSWORD_VALID: 'password_valid',
@@ -58,6 +61,12 @@ export const PasswordChangeError = defineError({
 export const InvalidPasswordError = defineError({
   name: 'InvalidPasswordError',
   message: 'Invalid password',
+  extends: RPCError,
+});
+
+export const RepresentativeChangeError = defineError({
+  name: 'RepresentativeChangeError',
+  message: 'Could not change wallet representative: {representative}',
   extends: RPCError,
 });
 
@@ -108,6 +117,20 @@ export default Service.extend({
     return success === '';
   },
 
+  async walletRepresentative(wallet) {
+    const { representative } = await this.call(actions.WALLET_REPRESENTATIVE, { wallet });
+    return representative;
+  },
+
+  async walletRepresentativeSet(wallet, representative) {
+    const { set } = await this.call(actions.WALLET_REPRESENTATIVE_SET, { wallet, representative });
+    if (set !== '1') {
+      throw new RepresentativeChangeError({ params: { representative } });
+    }
+
+    return true;
+  },
+
   accountCreate(wallet) {
     return this.call(actions.ACCOUNT_CREATE, { wallet });
   },
@@ -138,8 +161,9 @@ export default Service.extend({
     return info;
   },
 
-  accountList(wallet) {
-    return this.call(actions.ACCOUNT_LIST, { wallet });
+  async accountList(wallet) {
+    const { accounts } = await this.call(actions.ACCOUNT_LIST, { wallet });
+    return accounts;
   },
 
   async accountHistory(account, count = 1) {
@@ -172,6 +196,10 @@ export default Service.extend({
 
   blockCount() {
     return this.call(actions.BLOCK_COUNT);
+  },
+
+  searchPending(wallet) {
+    return this.call(actions.SEARCH_PENDING, { wallet });
   },
 
   async passwordChange(wallet, password) {

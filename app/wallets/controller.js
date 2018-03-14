@@ -1,6 +1,7 @@
 import Controller from '@ember/controller';
 import { get } from '@ember/object';
 
+import { runTask, runDisposables } from 'ember-lifeline';
 import { service } from 'ember-decorators/service';
 import { on } from 'ember-decorators/object/evented';
 
@@ -21,28 +22,33 @@ export default Controller.extend({
   },
 
   willDestroy(...args) {
-    this._super(...args);
-
     const poller = this.get('poller');
     if (poller) {
       this.get('pollboy').remove(poller);
     }
+
+    runDisposables(this);
+    return this._super(...args);
   },
 
   async onPoll() {
-    if (!this.isDestroying) {
+    return runTask(this, () => {
       const model = this.get('model');
       if (model) {
         const isNew = get(model, 'isNew');
         if (!isNew) {
           const wallet = get(model, 'id');
-          this.updateBalances(wallet);
+          return this.updateBalances(wallet);
         }
       }
-    }
+
+      return true;
+    });
   },
 
   async updateBalances(wallet) {
+    await this.get('rpc').searchPending(wallet);
+
     const balances = await this.get('rpc').walletBalances(wallet);
     const data = Object.entries(balances).map(([id, attributes]) => ({
       id,
@@ -50,6 +56,6 @@ export default Controller.extend({
       type: 'account',
     }));
 
-    this.store.push({ data });
+    return this.store.push({ data });
   },
 });

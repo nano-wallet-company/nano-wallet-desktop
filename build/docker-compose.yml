@@ -1,0 +1,17 @@
+version: '3'
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: ./build/Dockerfile
+      args:
+        - NODE_ENV=${NODE_ENV:-production}
+        - EMBER_ENV=${EMBER_ENV:-production}
+        - ELECTRON_PLATFORM=${ELECTRON_PLATFORM:-linux}
+        - ELECTRON_ARCH=${ELECTRON_ARCH:-x64}
+    volumes:
+      - ..:/project
+      - /project/.config
+      - /project/dist
+      - /project/node_modules
+      - /project/tmp

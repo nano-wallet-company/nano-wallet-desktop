@@ -1,0 +1,39 @@
+& {
+  position: absolute;
+  width: 30%;
+  top: 100px;
+  right: 0;
+  z-index: 10000;
+}
+
+.alert {
+  box-shadow: -1px 1px 3px rgba(0,0,0,0.3);
+  border: 0;
+  border-radius: 0;
+  text-align: center;
+  transform: translateX(100%);
+  animation: slide-in 3s ease-in-out;
+  animation-fill-mode: forwards;
+  will-change: transform;
+
+  @keyframes slide-in {
+    10% {
+      transform: translateX(0);
+    }
+    90% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+}
+
+.alert-success {
+  background-color: $green;
+}
+
+.alert-danger {
+  color: white;
+  background-color: #bd2130;
+}

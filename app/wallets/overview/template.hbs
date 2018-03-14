@@ -1,5 +1,11 @@
-{{balance-overview wallet=model}}
+{{#liquid-if hideHistory class="balance"}}
+  {{balance-overview wallet=model}}
+{{/liquid-if}}
 
-<hr>
+{{wallet-overview wallet=model accounts=sortedAccounts hideHistory=hideHistory createAccount=(route-action 'createAccount') page=page perPage=perPage}}
 
-{{wallet-overview wallet=model accounts=model.accounts createAccount=(route-action 'createAccount') page=page perPage=perPage}}
+{{liquid-outlet class="history"}}
+
+{{#send-button wallet=model accounts=sortedAccounts expand=expand shrink=shrink onOpen=(route-action 'toggleButton') onClose=(route-action 'toggleButton')}}
+  {{liquid-outlet "sendOutlet" class="send-outlet"}}
+{{/send-button}}

@@ -1,7 +1,16 @@
-{{#each columns as |column|}}
-  {{component (concat 'light-table/cells/' column.cellType) column row
-      table=table
-      rawValue=(get row column.valuePath)
-      tableActions=tableActions
-      extra=extra}}
-{{/each}}
+<div class="col-lg-10 col-11 history-item send d-flex justify-content-around align-items-center">
+  {{#if (eq entry.type 'send')}}
+    {{fa-icon "paper-plane" class="send" ariaLabel=(t 'send')}}
+  {{else}}
+    {{fa-icon "envelope-open" class="receive" ariaLabel=(t 'receive')}}
+  {{/if}}
+  <p>
+    <sup>
+      <img src="images/nano-icon.svg" alt="{{t 'NANO'}}">
+    </sup>
+    {{format-amount entry.amount}}
+  </p>
+  <p class="text-truncate">
+    {{account-address value=entry.account}}
+  </p>
+</div>

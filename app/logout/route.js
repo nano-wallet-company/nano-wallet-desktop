@@ -1,4 +1,5 @@
 import Route from '@ember/routing/route';
+import { get } from '@ember/object';
 
 import { service } from 'ember-decorators/service';
 
@@ -6,6 +7,12 @@ export default Route.extend({
   @service session: null,
 
   beforeModel() {
-    return this.get('session').invalidate();
+    const session = this.get('session');
+    const isAuthenticated = get(session, 'isAuthenticated');
+    if (!isAuthenticated) {
+      return this.transitionTo('index');
+    }
+
+    return session.invalidate();
   },
 });

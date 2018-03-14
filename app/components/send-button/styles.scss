@@ -1,0 +1,139 @@
+& {
+  position: absolute;
+  overflow: hidden;
+  width: 70px;
+  height: 70px;
+  right: 30px;
+  bottom: 30px;
+  z-index: 10;
+  border-radius: 80px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+  background-color: #538DCA;
+  color:white;
+  cursor: pointer;
+  margin: 20 auto 0;
+  transition: all 1s ease-in-out;
+
+  &.expand {
+    animation: expand 1s 1 forwards;
+    border-radius: 0;
+  }
+
+  &.active {
+    border-radius: 0;
+    bottom: 0;
+    height: 100vh;
+    right: 0;
+    width: 100%;
+  }
+
+  &.shrink {
+    animation: shrink 1s 1 forwards;
+    transition: all 1s ease-in-out;
+  }
+
+  h1 {
+    font-weight: 300;
+  }
+
+  a {
+    color: $white;
+
+    &:hover {
+      color: $white;
+    }
+
+    i {
+      bottom: 20px;
+      font-size: 30px;
+      margin: 0 auto;
+      position: absolute;
+      right: 22px;
+      transition: all 0.3s ease-in-out;
+
+      &.expand {
+        transform: rotate(135deg);
+      }
+    }
+  }
+
+  p {
+    font-size:20px;
+    padding-left: 30px;
+    padding-right: 30px;
+    margin-top: -3px;
+    text-align:left;
+  }
+
+  .send-form {
+    height: 100vh;
+
+    h1 {
+      font-size: 90px;
+      margin-bottom: 30px;
+      border: 0;
+    }
+
+    form {
+      width: 100%;
+    }
+
+    label {
+      text-transform: uppercase;
+      font-size: 14px;
+    }
+
+    .form-group {
+      margin-bottom: 30px;
+    }
+
+    form input,
+    .ember-power-select-trigger {
+      height: 50px;
+      border: 0;
+      box-shadow: none;
+      color: #495057;
+      font-size: 0.95rem;
+      line-height: 1.05rem;
+      padding: 0 0.75rem;
+    }
+
+    button {
+      width: 100%;
+      height: 60px;
+      border-radius: 33px;
+      background-color: #50E3C2;
+      border: 0;
+    }
+
+    .invalid-feedback {
+      color: lightsalmon;
+    }
+  }
+}
+
+@keyframes expand {
+  from {
+    width: 70px;
+    height: 70px;
+    transform: translate(0);
+  }
+  to {
+    width: 100%;
+    height: 100%;
+    transform: translate(30px, 30px);
+  }
+}
+
+@keyframes shrink {
+  from {
+    width: 100%;
+    height: 100%;
+    transform: translate(30px, 30px);
+  }
+  to {
+    width: 70px;
+    height: 70px;
+    transform: translate(0);
+  }
+}

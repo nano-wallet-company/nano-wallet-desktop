@@ -1,19 +1,11 @@
-{{page-numbers content=content currentPage=page totalPages=totalPages}}
-
-{{#light-table table tableClassNames='table table-striped' height='auto' as |t|}}
-  {{t.head}}
-
-  {{#t.body canSelect=false rowComponent=(component 'account-history-entry') as |body|}}
-    {{#if (is-pending content)}}
-      {{#body.loader}}
-        {{fa-icon 'refresh' size=3 spin=true ariaLabel=(t 'loading')}}
-      {{/body.loader}}
-    {{/if}}
-
-    {{#if table.isEmpty}}
-      {{#body.no-data}}
-        {{t 'wallets.accounts.history.none'}}
-      {{/body.no-data}}
-    {{/if}}
-  {{/t.body}}
-{{/light-table}}
+{{#if history}}
+  {{#each history as |entry|}}
+    {{account-history-entry entry=entry}}
+  {{/each}}
+{{else}}
+  <div class="d-flex justify-content-center h-100">
+    <div class="no-history d-flex justify-content-center align-items-center col-xs-12 col-md-8">
+      <h1>{{t 'wallets.accounts.history.none'}}</h1>
+    </div>
+  </div>
+{{/if}}

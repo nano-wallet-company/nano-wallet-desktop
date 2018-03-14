@@ -50,12 +50,12 @@ module.exports = (environment) => {
       },
       data: {
         win32: {
-          url: 'https://s3-us-west-2.amazonaws.com/nano-apps/data-fef3905c198b24431bbc562115d768e6.zip',
-          integrity: 'sha512-roWSP19IqVIWkMk6Bd82esiWzhgidrNCbs2SyoDTeuN5kaVfumh580g1Q/olxrnniGrsykrqPeWJeS9cuaujhg==',
+          url: 'https://s3-us-west-2.amazonaws.com/nano-apps/data-5b4507be0d81113587603a82ad30adb3.zip',
+          integrity: 'sha512-qY5X3TrBmooul5WGyVtF4ohH24M7JqvMIllgFfRIuHsyU5kOgM47P+A8EcBu4KsHZYIaSxz68SPIN0NIco8KKg==',
         },
         darwin: {
-          url: 'https://s3-us-west-2.amazonaws.com/nano-apps/data-fef3905c198b24431bbc562115d768e6.zip',
-          integrity: 'sha512-roWSP19IqVIWkMk6Bd82esiWzhgidrNCbs2SyoDTeuN5kaVfumh580g1Q/olxrnniGrsykrqPeWJeS9cuaujhg==',
+          url: 'https://s3-us-west-2.amazonaws.com/nano-apps/data-5b4507be0d81113587603a82ad30adb3.zip',
+          integrity: 'sha512-qY5X3TrBmooul5WGyVtF4ohH24M7JqvMIllgFfRIuHsyU5kOgM47P+A8EcBu4KsHZYIaSxz68SPIN0NIco8KKg==',
         },
       },
     },

@@ -1,6 +1,6 @@
 import Component from '@ember/component';
-import { debounce } from '@ember/runloop';
 
+import { runTask, debounceTask, runDisposables } from 'ember-lifeline';
 import { on } from 'ember-decorators/object/evented';
 
 import { defineError } from 'ember-exex/error';
@@ -19,7 +19,8 @@ export default Component.extend({
 
   status: STATUS_DOWNLOADING,
   asset: null,
-  progress: 0,
+  value: 0,
+
   onDone: null,
 
   @on('init')
@@ -44,13 +45,18 @@ export default Component.extend({
     downloader.off('done', this, this.onDone);
   },
 
+  willDestroy(...args) {
+    runDisposables(this);
+    return this._super(...args);
+  },
+
   onError() {
     const asset = this.get('asset');
     throw new DownloadError({ params: { asset } });
   },
 
   onProgress(value) {
-    debounce(this, this.updateProgress, value, 250, true);
+    debounceTask(this, 'updateProgress', value, 250);
   },
 
   onVerify() {
@@ -62,17 +68,15 @@ export default Component.extend({
   },
 
   reset(status = STATUS_DOWNLOADING) {
-    if (!this.isDestroying) {
+    runTask(this, () => {
       this.setProperties({
         status,
-        progress: 1,
+        value: 1,
       });
-    }
+    });
   },
 
   updateProgress(value) {
-    if (!this.isDestroying) {
-      this.set('progress', value);
-    }
+    this.set('value', value);
   },
 });

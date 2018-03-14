@@ -50,7 +50,7 @@
         "inactive_supply": "0",
         "password_fanout": "1024",
         "io_threads": "8",
-        "work_threads": "2",
+        "work_threads": "8",
         "enable_voting": "true",
         "bootstrap_connections": "4",
         "bootstrap_connections_max": "16",

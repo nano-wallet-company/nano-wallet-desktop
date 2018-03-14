@@ -1,5 +1,7 @@
 import DS from 'ember-data';
 
+import { hash } from 'rsvp';
+
 import { service } from 'ember-decorators/service';
 
 export default DS.Adapter.extend({
@@ -12,8 +14,15 @@ export default DS.Adapter.extend({
   async findRecord(store, type, id, snapshot) {
     const rpc = this.get('rpc');
     const { wallet } = this.serialize(snapshot, { includeId: true });
-    const { accounts } = await rpc.accountList(id);
-    return { wallet, accounts };
+    const { representative, accounts } = await hash({
+      representative: rpc.walletRepresentative(wallet),
+      accounts: rpc.accountList(wallet),
+    });
+    return { wallet, representative, accounts };
+  },
+
+  async updateRecord(store, type, snapshot) {
+    return this.serialize(snapshot, { includeId: true });
   },
 
   createRecord() {

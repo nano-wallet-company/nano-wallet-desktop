@@ -12,6 +12,16 @@ export default Route.extend({
     },
   },
 
+  // eslint-disable-next-line consistent-return
+  beforeModel() {
+    const electron = this.get('electron');
+    const isNodeDownloaded = electron.isNodeDownloaded();
+    const isDataDownloaded = electron.isDataDownloaded();
+    if (isNodeDownloaded && isDataDownloaded) {
+      return this.transitionTo('setup.start');
+    }
+  },
+
   model({ asset }) {
     return this.get('electron').download(asset);
   },

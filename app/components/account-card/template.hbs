@@ -1,19 +1,19 @@
-{{#link-to 'wallets.accounts.index' account class="text-decoration-none"}}
+{{#link-to 'wallets.overview.accounts.history' account class="text-decoration-none"}}
   <div class="account-card-content">
     {{#if account.id}}
-      {{account-qrcode value=account.id}}
+      {{#liquid-if hideHistory class="hide-qr"}}
+        {{qr-code text=account.id width=170 height=170}}
+      {{/liquid-if}}
       <p class="balance">
         <sup>
           <img src="images/nano-icon.svg" alt="{{t 'NANO'}}">
         </sup>
-        {{format-amount account.balance precision=2}}
+        {{format-amount account.balance}}
         <br>
-        <sub>+{{format-amount account.pending precision=2}}</sub>
+        <sub>+{{format-amount account.pending}}</sub>
       </p>
       <p class="account-id">
-        {{account.id}} {{!--
-        <span>xrb_17oqj</span>4rpads4o6ud448yymzk9jot8yzmzyeuteq3bj38cwjpt4rrgxhfx
-        <span>fr1</span> --}}
+        {{account-address value=account.id}}
       </p>
     {{else}}
       {{fa-icon "spinner" size=5 spin=true ariaLabel=(t 'loading')}}

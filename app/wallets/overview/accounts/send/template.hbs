@@ -1,0 +1,3 @@
+<h1 class="text-center">{{t 'send'}}</h1>
+
+{{account-send accounts=accounts block=model onChange=(route-action 'changeSource') onSubmit=(route-action 'sendAmount')}}

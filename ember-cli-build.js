@@ -33,6 +33,21 @@ module.exports = (defaults) => {
         },
       ],
     },
+
+    nodeAssets: {
+      'slick-carousel': {
+        vendor: {
+          srcDir: 'slick',
+          destDir: 'slick-carousel',
+          include: ['slick.js', 'slick.css', 'slick-theme.css'],
+        },
+        public: {
+          srcDir: 'slick',
+          destDir: 'assets',
+          include: ['ajax-loader.gif', 'fonts/*'],
+        },
+      },
+    },
   });
 
   // Use `app.import` to add additional libraries to the generated
@@ -47,6 +62,9 @@ module.exports = (defaults) => {
   // modules that you would like to import into your application
   // please specify an object with the list of modules as keys
   // along with the exports of each module as its value.
+  app.import('vendor/slick-carousel/slick.js');
+  app.import('vendor/slick-carousel/slick.css');
+  app.import('vendor/slick-carousel/slick-theme.css');
 
   return app.toTree();
 };

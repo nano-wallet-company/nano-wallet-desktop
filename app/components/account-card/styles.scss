@@ -1,3 +1,7 @@
+a {
+  outline: none;
+}
+
 .account-card-content {
   align-items: center;
   background-color: white;
@@ -15,6 +19,16 @@
     transform: scale(1.10) !important;
   }
 
+  img.qr-code {
+    display: block;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  i {
+    color: $blue;
+  }
+
   sup > img {
     display: inline-block;
   }
@@ -23,7 +37,7 @@
     color: $dark-purple;
     font-size: 20px;
     line-height: 1;
-    margin-top: 20px;
+    margin: 10px 0;
     text-align: center;
   }
 
@@ -40,19 +54,12 @@
     background-color: $dark-purple;
     color: white;
     display: block;
-    font-size: 12px;
+    font-size: 1.4vh;
     height: 60px;
     margin: 0;
-    padding: 10px;
     overflow-wrap: break-word;
+    padding: 10px;
+    text-align: center;
     width: 100%;
-  }
-
-  .account-id span:first-child {
-    color: $light-blue;
-  }
-
-  .account-id span:last-child {
-    color: $orange;
   }
 }

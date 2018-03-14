@@ -29,17 +29,29 @@ const {
   BrowserWindow,
   ipcMain,
 } = require('electron');
-const protocolServe = require('electron-protocol-serve');
+
+if (typeof process.env.ELECTRON_IS_DEV === 'undefined') {
+  const env = process.env.NODE_ENV || process.env.EMBER_ENV;
+  if (env === 'development') {
+    process.env.ELECTRON_IS_DEV = 1;
+  }
+}
+
+const isDev = require('electron-is-dev');
 const log = require('electron-log');
 const debug = require('electron-debug');
-const isDev = require('electron-is-dev');
 const unhandled = require('electron-unhandled');
 const contextMenu = require('electron-context-menu');
+const protocolServe = require('electron-protocol-serve');
 const { download } = require('electron-dl');
 const { appReady } = require('electron-util');
 const { default: installExtension, EMBER_INSPECTOR } = require('electron-devtools-installer');
 
+const { productName: tabbingIdentifier } = require('../package');
+
 let mainWindow = null;
+
+log.transports.rendererConsole.level = 'info';
 
 // Handle an unhandled error in the main thread
 //
@@ -120,7 +132,13 @@ ipcMain.on('download-start', ({ sender }, url, integrity) => {
     }
   }, { wait: 250, immediate: true });
 
-  downloadAsset(sender, url, integrity, onProgress)
+  // sender.webContents.session.once('will-download', (event, item) => {
+  //   if (!sender.isDestroyed()) {
+  //     sender.once('close', () => item.pause());
+  //   }
+  // });
+
+  return downloadAsset(sender, url, integrity, onProgress)
     .then(() => {
       if (!sender.isDestroyed()) {
         sender.send('download-done');
@@ -134,14 +152,13 @@ ipcMain.on('download-start', ({ sender }, url, integrity) => {
     });
 });
 
-const config = loadJsonFile.sync(path.join(__dirname, 'config.json'));
-
 ipcMain.on('node-start', ({ sender }) => {
   const cwd = path.resolve(app.getPath('userData'));
   const cmd = path.join(cwd, toExecutableName('rai_node'));
   const child = spawn(cmd, ['--daemon', '--data_path', cwd], {
     cwd,
     windowsHide: true,
+    stdio: ['ignore', 'pipe', 'pipe'],
   });
 
   child.on('error', (err) => {
@@ -154,7 +171,13 @@ ipcMain.on('node-start', ({ sender }) => {
   child.stdout.on('data', data => log.info('[node]', data.toString()));
   child.stderr.on('data', data => log.error('[node]', data.toString()));
 
-  const { port, address: host } = config.rpc;
+  const {
+    rpc: {
+      port,
+      address: host,
+    },
+  } = loadJsonFile.sync(path.join(cwd, 'config.json'));
+
   const proxy = httpProxy.createProxyServer({
     target: { host, port },
     xfwd: true,
@@ -188,7 +211,7 @@ ipcMain.on('node-start', ({ sender }) => {
     child.kill();
   });
 
-  child.once('exit', () => {
+  child.once('close', () => {
     log.info('[node]', 'Node exited');
     server.close();
   });
@@ -220,16 +243,26 @@ ipcMain.on('node-start', ({ sender }) => {
 });
 
 const run = async () => {
+  const dataPath = path.resolve(app.getPath('userData'));
+  const configPath = path.join(dataPath, 'config.json');
+  let config = {};
+  try {
+    config = await loadJsonFile(configPath);
+  } catch (err) {
+    config = await loadJsonFile(path.join(__dirname, 'config.json'));
+  }
+
   config.rpc.port = await getPort({ port: config.rpc.port });
   config.node.peering_port = await getPort({ port: config.node.peering_port });
-  config.node.io_threads = os.cpus().length;
+
+  const cpuCount = os.cpus().length;
+  config.node.io_threads = cpuCount;
+  config.node.work_threads = cpuCount;
 
   const authorizationToken = crypto.randomBytes(20).toString('hex');
   global.authorizationToken = authorizationToken;
   config.rpc.authorization_token = authorizationToken;
 
-  const dataPath = path.resolve(app.getPath('userData'));
-  const configPath = path.join(dataPath, 'config.json');
   log.info('Writing node configuration:', configPath);
   await writeJsonFile(configPath, config, {
     replacer(key, value) {
@@ -280,8 +313,19 @@ const run = async () => {
   Menu.setApplicationMenu(menu);
 
   mainWindow = new BrowserWindow({
-    width: 1024,
+    tabbingIdentifier,
+    width: 1366,
     height: 768,
+    minWidth: 240,
+    minHeight: 320,
+    // frame: false,
+    center: true,
+    darkTheme: true,
+    transparent: true,
+    scrollBounce: true,
+    // vibrancy: 'dark',
+    titleBarStyle: 'hiddenInset',
+    backgroundColor: '#000034',
   });
 
   contextMenu({

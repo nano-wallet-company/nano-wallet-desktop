@@ -1,0 +1,21 @@
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <a href="#" class="arrow" {{action (route-action 'hideHistory')}}>
+          {{fa-icon "chevron-up"}}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{{#liquid-if (not hideHistory) class="hide-history"}}
+  <section>
+    <div class="container-fluid">
+      <div class="row history-item-list">
+        {{account-history history=model.history}}
+      </div>
+    </div>
+  </section>
+{{/liquid-if}}

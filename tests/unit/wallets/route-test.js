@@ -8,7 +8,9 @@ describe('Unit | Route | wallets', () => {
     needs: [
       'service:intl',
       'service:session',
+      'service:flashMessages',
       'service:electron',
+      'service:rpc',
     ],
   });
 

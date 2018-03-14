@@ -1,3 +1,5 @@
+{{notification-center}}
+
 <div class="row mx-0">
   <section class="setup float-left info d-none d-sm-flex col-sm-6 col-md-7 align-items-end justify-content-end">
     <div class="col-12 col-md-8 w-70">
@@ -20,6 +22,7 @@
         <h5 class="font-weight-light d-block d-sm-none">{{t 'login.lead'}}</h5>
 
         {{wallet-unlock wallet=model onSubmit=(route-action 'unlockWallet')}}
+
         {{#bs-button type="secondary" block=true class="mt-2 btn-lg" onClick=(route-action 'setupWallet')}}
           {{t 'login.setupWallet'}}
         {{/bs-button}}

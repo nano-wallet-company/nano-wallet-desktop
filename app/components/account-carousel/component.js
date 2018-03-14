@@ -1,6 +1,7 @@
 import Component from '@ember/component';
-import { run, debounce, scheduleOnce } from '@ember/runloop';
-import { sort } from '@ember/object/computed';
+import { scheduleOnce } from '@ember/runloop';
+
+import { runTask, debounceTask, runDisposables } from 'ember-lifeline';
 
 import { computed, observes } from 'ember-decorators/object';
 import { on } from 'ember-decorators/object/evented';
@@ -9,24 +10,21 @@ export default Component.extend({
   accounts: null,
 
   currentSlide: 0,
-  sortedAccounts: sort('accounts', 'sortBy'),
-
-  @computed()
-  get sortBy() {
-    return ['modifiedTimestamp'];
-  },
 
   slickInstance: null,
 
   @on('didInsertElement')
   addChangeListener() {
     this.$().on('afterChange', (event, slick, currentSlide) => {
-      run(() => {
-        if (!this.isDestroying) {
-          this.set('currentSlide', currentSlide);
-        }
+      runTask(this, () => {
+        this.set('currentSlide', currentSlide);
       });
     });
+  },
+
+  willDestroy(...args) {
+    runDisposables(this);
+    return this._super(...args);
   },
 
   @on('didInsertElement')
@@ -43,10 +41,12 @@ export default Component.extend({
         initialSlide,
         adaptiveHeight: true,
         centerPadding: '10px',
+        slidesToShow: 4,
+        slidesToScroll: 4,
         dots: true,
         infinite: false,
-        mobileFirst: true,
         speed: 250,
+        arrows: true,
       });
     }
 
@@ -72,37 +72,42 @@ export default Component.extend({
     return this.slickInstance;
   },
 
-  @observes('sortedAccounts.@each')
-  sortedAccountsDidChange() {
-    debounce(this, this.refreshSlider, 1000, true);
+  @observes('accounts.@each.id')
+  accountsDidChange() {
+    debounceTask(this, 'refreshSlider', 1000, true);
   },
 
   @computed()
   get breakpoints() {
     return [
       {
-        breakpoint: 1200,
-        settings: {
-          slidesToShow: 4,
-        },
-      },
-      {
-        breakpoint: 992,
+        breakpoint: 1500,
         settings: {
           slidesToShow: 3,
+          slidesToScroll: 3,
         },
       },
       {
-        breakpoint: 768,
+        breakpoint: 1200,
         settings: {
           slidesToShow: 2,
+          slidesToScroll: 2,
         },
       },
       {
-        breakpoint: 576,
+        breakpoint: 780,
         settings: {
           slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 430,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
           arrows: false,
+          draggable: true,
         },
       },
     ];
