@@ -8,8 +8,8 @@
   z-index: 10;
   border-radius: 80px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
-  background-color: #538DCA;
-  color:white;
+  background-color: $light-blue;
+  color:$white;
   cursor: pointer;
   margin: 20 auto 0;
   transition: all 1s ease-in-out;
@@ -92,7 +92,7 @@
       height: 50px;
       border: 0;
       box-shadow: none;
-      color: #495057;
+      color: $dark-purple;
       font-size: 0.95rem;
       line-height: 1.05rem;
       padding: 0 0.75rem;
@@ -102,12 +102,12 @@
       width: 100%;
       height: 60px;
       border-radius: 33px;
-      background-color: #50E3C2;
+      background-color: $dark-blue;
       border: 0;
     }
 
     .invalid-feedback {
-      color: lightsalmon;
+      color: $red;
     }
   }
 }

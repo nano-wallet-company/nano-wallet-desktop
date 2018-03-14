@@ -10,7 +10,7 @@
 }
 
 .history-item {
-  background: #fff;
+  background: $white;
   border-radius: 5px;
   margin-bottom: 10px;
   padding: 20px 0;
@@ -20,11 +20,11 @@
   }
 
   .send {
-    color: #538DCA;
+    color: $light-blue;
   }
 
   .receive {
-    color: #EDA63F;
+    color: $orange;
   }
 
   i {
@@ -36,7 +36,7 @@
 .arrow:hover {
   align-items: center;
   border-radius: 100%;
-  color: #fff;
+  color: $white;
   display: flex;
   height: 25px;
   justify-content: center;
