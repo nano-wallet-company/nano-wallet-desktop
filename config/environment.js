@@ -47,6 +47,10 @@ module.exports = (environment) => {
           url: 'https://s3-us-west-2.amazonaws.com/nano-apps/node-darwin-67f9568651d44b2273c2d70130a30e4a.zip',
           integrity: 'sha512-8H57O2I93uTD0LzDD62O8WJYsfz6IJIs9JDceIAhaxDJvzADiw4D0W+Ex1agHAU4JpI9fn4eglF3624SYyDGqQ==',
         },
+        linux: {
+          url: 'https://s3-us-west-2.amazonaws.com/nano-apps/node-linux-13b4401e4f04533e84a4cfc13ad0de18.zip',
+          integrity: 'sha512-M07tRr5K+OSWsv4c1eDFSgnxXpdo95usQ6iuguxykdydD2xQBfeTbCs9u/dRaZU7KEWg29hPmvGCnk1BHCj1Eg==',
+        },
       },
       data: {
         win32: {
@@ -54,6 +58,10 @@ module.exports = (environment) => {
           integrity: 'sha512-qY5X3TrBmooul5WGyVtF4ohH24M7JqvMIllgFfRIuHsyU5kOgM47P+A8EcBu4KsHZYIaSxz68SPIN0NIco8KKg==',
         },
         darwin: {
+          url: 'https://s3-us-west-2.amazonaws.com/nano-apps/data-5b4507be0d81113587603a82ad30adb3.zip',
+          integrity: 'sha512-qY5X3TrBmooul5WGyVtF4ohH24M7JqvMIllgFfRIuHsyU5kOgM47P+A8EcBu4KsHZYIaSxz68SPIN0NIco8KKg==',
+        },
+        linux: {
           url: 'https://s3-us-west-2.amazonaws.com/nano-apps/data-5b4507be0d81113587603a82ad30adb3.zip',
           integrity: 'sha512-qY5X3TrBmooul5WGyVtF4ohH24M7JqvMIllgFfRIuHsyU5kOgM47P+A8EcBu4KsHZYIaSxz68SPIN0NIco8KKg==',
         },
