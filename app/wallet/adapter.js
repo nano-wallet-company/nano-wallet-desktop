@@ -21,6 +21,10 @@ export default DS.Adapter.extend({
     return { wallet, representative, accounts };
   },
 
+  async updateRecord(store, type, snapshot) {
+    return this.serialize(snapshot, { includeId: true });
+  },
+
   createRecord() {
     return this.get('rpc').walletCreate();
   },
