@@ -45,7 +45,7 @@ export default Helper.extend({
 
     let { minimumIntegerDigits } = currencyFormats[currency] || {};
     if (!minimumIntegerDigits) {
-      minimumIntegerDigits = Math.min(21, product.precision(true) - decimalPlaces);
+      minimumIntegerDigits = Math.max(1, Math.min(21, product.precision(true) - decimalPlaces));
     }
 
     const amount = this.get('intl').formatNumber(product, {
