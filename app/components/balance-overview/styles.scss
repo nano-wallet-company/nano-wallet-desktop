@@ -40,3 +40,16 @@
   letter-spacing: 1.33px;
   margin: 0;
 }
+
+@media (max-height: 730px) {
+  .pending {
+    display: none;
+  }
+}
+
+@media (max-height: 638px) {
+  .currency-tabs,
+  .balance {
+    display: none;
+  }
+}
