@@ -12,6 +12,8 @@ const spdy = require('spdy');
 const helmet = require('helmet');
 const connect = require('connect');
 const getPort = require('get-port');
+const waitPort = require('wait-port');
+const exitHook = require('exit-hook');
 const httpProxy = require('http-proxy');
 const selfsigned = require('selfsigned');
 const debounceFn = require('debounce-fn');
@@ -126,9 +128,9 @@ const downloadAsset = async (sender, url, integrity, onProgress) => {
 };
 
 ipcMain.on('download-start', ({ sender }, url, integrity) => {
-  const onProgress = debounceFn((progress) => {
+  const onProgress = debounceFn((progress = 0) => {
     if (!sender.isDestroyed()) {
-      sender.send('download-progress', progress || 0);
+      sender.send('download-progress', progress);
     }
   }, { wait: 250, immediate: true });
 
@@ -171,12 +173,9 @@ ipcMain.on('node-start', ({ sender }) => {
   child.stdout.on('data', data => log.info('[node]', data.toString()));
   child.stderr.on('data', data => log.error('[node]', data.toString()));
 
-  const {
-    rpc: {
-      port,
-      address: host,
-    },
-  } = loadJsonFile.sync(path.join(cwd, 'config.json'));
+  const { rpc } = loadJsonFile.sync(path.join(cwd, 'config.json'));
+  const host = rpc.address;
+  const port = parseInt(rpc.port, 10);
 
   const proxy = httpProxy.createProxyServer({
     target: { host, port },
@@ -216,10 +215,13 @@ ipcMain.on('node-start', ({ sender }) => {
     server.close();
   });
 
-  mainWindow.once('close', () => {
+  const onExit = () => {
     server.close();
     child.kill();
-  });
+  };
+
+  mainWindow.once('close', onExit);
+  exitHook(onExit);
 
   Object.defineProperty(global, 'isNodeStarted', {
     get() {
@@ -227,19 +229,25 @@ ipcMain.on('node-start', ({ sender }) => {
     },
   });
 
-  log.info('[proxy] Starting server');
-  server.listen(17076, '::1', function Server(err) {
-    if (err) {
-      log.error('[proxy]', 'Error starting server:', err);
-      return err;
-    }
+  waitPort({ host, port })
+    .then(() => {
+      log.info('[proxy] Starting server');
+      server.listen(17076, '::1', function Server(err) {
+        if (err) {
+          log.error('[proxy]', 'Error starting server:', err);
+          return err;
+        }
 
-    const { port: listenPort } = this.address();
-    log.info('[proxy]', `Server listening on port ${listenPort}`);
-    if (!sender.isDestroyed()) {
-      sender.send('node-ready');
-    }
-  });
+        const { port: listenPort } = this.address();
+        log.info('[proxy]', `Server listening on port ${listenPort}`);
+        if (!sender.isDestroyed()) {
+          sender.send('node-ready');
+        }
+      });
+    })
+    .catch((err) => {
+      child.emit('error', err);
+    });
 });
 
 const run = async () => {
@@ -252,8 +260,9 @@ const run = async () => {
     config = await loadJsonFile(path.join(__dirname, 'config.json'));
   }
 
-  config.rpc.port = await getPort({ port: config.rpc.port });
-  config.node.peering_port = await getPort({ port: config.node.peering_port });
+  const host = config.rpc.address;
+  config.rpc.port = await getPort({ host, port: config.rpc.port });
+  config.node.peering_port = await getPort({ host, port: config.node.peering_port });
 
   const cpuCount = os.cpus().length;
   config.node.io_threads = cpuCount;
@@ -265,6 +274,7 @@ const run = async () => {
 
   log.info('Writing node configuration:', configPath);
   await writeJsonFile(configPath, config, {
+    mode: 0o600,
     replacer(key, value) {
       return typeof value === 'number' ? String(value) : value;
     },
@@ -323,6 +333,8 @@ const run = async () => {
     darkTheme: true,
     transparent: true,
     scrollBounce: true,
+    experimentalFeatures: true,
+    experimentalCanvasFeatures: true,
     // vibrancy: 'dark',
     titleBarStyle: 'hiddenInset',
     backgroundColor: '#000034',
