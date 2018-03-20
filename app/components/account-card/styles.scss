@@ -1,5 +1,7 @@
-a {
+button {
+  border: 0;
   outline: none;
+  background-color: transparent;
 
   &.active .account-card-content {
     transform: scale(1.10) !important;
@@ -54,18 +56,26 @@ a {
     font-size: 14px;
   }
 
-  .copy-btn {
-    background-color: $dark-purple;
-    border: 0;
-    color: white;
-    display: block;
-    font-size: 0.7rem;
-    height: 60px;
-    margin: 0;
-    outline: none;
-    overflow-wrap: break-word;
-    padding: 10px;
-    text-align: center;
+  .address {
+    cursor: pointer;
     width: 100%;
+    overflow-wrap: break-word;
+    background-color: $dark-purple;
+    color: white;
+    text-align: center;
+  }
+
+  .copy-btn {
+    border: 0;
+    outline: none;
+    cursor: pointer;
+    background-color: $dark-purple;
+    font-size: 0.7rem;
+    color: white;
+    margin: 0;
+    padding: 10px;
+    height: 60px;
+    width: 100%;
+    overflow-wrap: break-word;
   }
 }

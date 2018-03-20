@@ -32,6 +32,8 @@ verifying: 'Verifying {asset}...'
 extracting: 'Extracting {asset}...'
 starting: 'Starting node'
 currency: '{amount}'
+copyValue: 'Copy {value}...'
+addressCopied: 'Address copied: {address}'
 status:
   state: 'Status'
   online: 'Online'
@@ -94,10 +96,10 @@ wallets:
     passwordsDontMatch: "Passwords don't match!"
   logout:
     title: 'Confirm Logout'
-    lead: 'Are you absolutely sure you wish to logout?'
+    lead: 'Are you sure you wish to logout?'
     warning: >
-      <strong>Warning</strong>: Logging out will forget your wallet and you will be unable to
-      retreive it again if you don't have your wallet seed!
+      <strong>Warning</strong>: If you logout and later don't remember your password you will
+      have to reimport your wallet using your seed!
 setup:
   lead: "Let's get your wallet set up."
   instructions: >

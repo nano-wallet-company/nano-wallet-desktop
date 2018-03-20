@@ -31,9 +31,9 @@
   },
   "nodemonConfig": {
     "events": {
-      "start": "notify -t 'ember-electron' -m 'Starting Electron app...' -i ember-electron/icons/notification.png",
-      "restart": "notify -t 'ember-electron' -m 'Restarting Electron app...' -i ember-electron/icons/notification.png",
-      "crash": "notify -t 'ember-electron' -m 'Electron app has crashed!' -s Funk -i ember-electron/icons/notification.png"
+      "start": "yarn notify -t 'ember-electron' -m 'Starting Electron app...' -i ember-electron/icons/notification.png",
+      "restart": "yarn notify -t 'ember-electron' -m 'Restarting Electron app...' -i ember-electron/icons/notification.png",
+      "crash": "yarn notify -t 'ember-electron' -m 'Electron app has crashed!' -s Funk -i ember-electron/icons/notification.png"
     }
   },
   "build": {
@@ -112,7 +112,7 @@
     "ember-changeset": "^1.5.0-beta.0",
     "ember-changeset-validations": "^1.2.11",
     "ember-chrome-devtools": "^0.2.0",
-    "ember-cli": "^3.0.0",
+    "ember-cli": "^3.0.1",
     "ember-cli-app-version": "^3.1.3",
     "ember-cli-babel": "^6.12.0",
     "ember-cli-build-notifications": "^0.2.0",
@@ -174,7 +174,7 @@
     "ember-source": "^3.0.0",
     "ember-truth-helpers": "^2.0.0",
     "ember-web-app": "^2.3.0",
-    "ember-window-mock": "^0.3.0",
+    "ember-window-mock": "^0.4.0",
     "eslint": "^4.19.0",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-babel": "^4.1.2",

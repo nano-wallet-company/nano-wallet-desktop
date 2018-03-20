@@ -1,9 +1,9 @@
-{{#link-to 'wallets.overview.accounts.history' account class="text-decoration-none"}}
+{{#link-to 'wallets.overview.accounts.history' account tagName='button' disabled=(not account.id)}}
   <div class="account-card-content">
     {{#if account.id}}
-      {{#liquid-if hideHistory class="hide-qr"}}
+      {{#if hideHistory}}
         {{qr-code text=account.id width=170 height=170}}
-      {{/liquid-if}}
+      {{/if}}
       <p class="balance">
         <sup>
           <img src="images/nano-icon.svg" alt="{{t 'NANO'}}">
@@ -12,9 +12,12 @@
         <br>
         <sub>+{{format-amount account.pending}}</sub>
       </p>
-      {{#copy-button clipboardText=account.id}}
-        {{account-address value=account.id}}
-      {{/copy-button}}
+      <div role="button" class="address" {{action (optional) bubbles=false}}>
+        {{bs-tooltip fade=true delayShow=1000 placement='bottom' title=(t 'copyValue' value=(concat (slice 0 9 account.id)))}}
+        {{#copy-button tagName='div' buttonType=null clipboardText=account.id success=(action 'copyAddress' (concat (slice 0 9 account.id) '...' (slice 59 64 account.id)))}}
+          {{account-address value=account.id}}
+        {{/copy-button}}
+      </div>
     {{else}}
       {{fa-icon "spinner" size=5 spin=true ariaLabel=(t 'loading')}}
     {{/if}}
