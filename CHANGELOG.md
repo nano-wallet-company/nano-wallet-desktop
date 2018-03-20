@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.0.0-beta.6"></a>
+# [1.0.0-beta.6](https://github.com/nanocurrency/nano-desktop/compare/v1.0.0-beta.5...v1.0.0-beta.6) (2018-03-20)
+
+
+### Bug Fixes
+
+* **account-address:** stop cutting out first character in the middle ([f6881e8](https://github.com/nanocurrency/nano-desktop/commit/f6881e8)), closes [#8](https://github.com/nanocurrency/nano-desktop/issues/8)
+* **account-carousel:** properly show account card states as they load ([fc9083b](https://github.com/nanocurrency/nano-desktop/commit/fc9083b)), closes [#12](https://github.com/nanocurrency/nano-desktop/issues/12)
+* **electron:** wait for node to become available before ready ([c129b9e](https://github.com/nanocurrency/nano-desktop/commit/c129b9e)), closes [#10](https://github.com/nanocurrency/nano-desktop/issues/10)
+* **format-amount:** integer component must be at least 1 digit ([f384a2b](https://github.com/nanocurrency/nano-desktop/commit/f384a2b)), closes [#7](https://github.com/nanocurrency/nano-desktop/issues/7)
+* **history:** fix history element spacing ([431a725](https://github.com/nanocurrency/nano-desktop/commit/431a725))
+* **navbar-toggle:** fix mobile navbar toggle ([e8ae93a](https://github.com/nanocurrency/nano-desktop/commit/e8ae93a))
+* **wallet-overview:** add media queries for small heights ([ad9e321](https://github.com/nanocurrency/nano-desktop/commit/ad9e321))
+
+
+### Features
+
+* **account-card:** add notification when account address copied ([ae90ba2](https://github.com/nanocurrency/nano-desktop/commit/ae90ba2)), closes [#9](https://github.com/nanocurrency/nano-desktop/issues/9)
+* **account-card:** copy account address when clicked ([d32cf48](https://github.com/nanocurrency/nano-desktop/commit/d32cf48))
+* **wallet-settings:** truncate representative address ([e17ff4f](https://github.com/nanocurrency/nano-desktop/commit/e17ff4f))
+
+
+
 <a name="1.0.0-beta.5"></a>
 # [1.0.0-beta.5](https://github.com/nanocurrency/nano-desktop/compare/v1.0.0-beta.4...v1.0.0-beta.5) (2018-03-14)
 
