@@ -10,7 +10,10 @@
   box-shadow: -1px 1px 3px rgba(0,0,0,0.3);
   border: 0;
   border-radius: 0;
+  overflow: hidden;
+  white-space: nowrap;
   text-align: center;
+  text-overflow: ellipsis;
   transform: translateX(100%);
   animation: slide-in 3s ease-in-out;
   animation-fill-mode: forwards;

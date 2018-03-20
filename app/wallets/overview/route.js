@@ -24,7 +24,7 @@ export default Route.extend(AuthenticatedRouteMixin, {
   async afterModel(wallet) {
     const accounts = await get(wallet, 'accounts');
     if (isEmpty(accounts)) {
-      return this.store.createRecord('account', { wallet }).save();
+      await this.store.createRecord('account', { wallet }).save();
     }
 
     return wallet;

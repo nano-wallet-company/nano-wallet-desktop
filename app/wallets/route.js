@@ -3,7 +3,6 @@ import { get } from '@ember/object';
 import { tryInvoke } from '@ember/utils';
 
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
-import { debounceTask, runDisposables } from 'ember-lifeline';
 import { action } from 'ember-decorators/object';
 import { service } from 'ember-decorators/service';
 
@@ -34,23 +33,14 @@ export default Route.extend(AuthenticatedRouteMixin, {
     tryInvoke(poller, 'resume');
   },
 
-  willDestroy(...args) {
-    runDisposables(this);
-    return this._super(...args);
-  },
-
   @action
-  createAccount(wallet) {
-    return debounceTask(this, 'addAccount', wallet, 1000, true);
-  },
-
-  async addAccount(wallet) {
-    const account = this.store.createRecord('account', { wallet });
+  async createAccount(wallet) {
+    const account = this.store.createRecord('account');
+    account.set('wallet', wallet);
     await account.save();
 
     const message = this.get('intl').t('wallets.overview.created');
     this.get('flashMessages').success(message);
-    return this.transitionTo('wallets.overview', wallet.reload());
   },
 
   @action

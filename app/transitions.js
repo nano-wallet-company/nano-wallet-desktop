@@ -6,17 +6,17 @@ export default function () {
     // this makes our rule apply when the liquid-if transitions to the
     // true state.
     this.toValue(false),
-    this.use('fade', { duration: 400 }),
-    this.reverse('fade', { duration: 400 }),
+    this.use('fade', { duration: 250 }),
+    this.reverse('fade', { duration: 250 }),
   );
   this.transition(
-    this.hasClass('balance'),
+    this.hasClass('hide-balance'),
 
     // this makes our rule apply when the liquid-if transitions to the
     // true state.
     this.toValue(false),
-    this.use('fade', { duration: 400 }),
-    this.reverse('fade', { duration: 250 }),
+    this.use('toUp', { duration: 300 }),
+    this.reverse('toUp', { duration: 300 }),
   );
   this.transition(
     this.hasClass('hide-qr'),

@@ -1,5 +1,4 @@
 import DS from 'ember-data';
-import { assign } from '@ember/polyfills';
 
 import { service } from 'ember-decorators/service';
 
@@ -10,17 +9,20 @@ export default DS.Adapter.extend({
     return true;
   },
 
-  async findRecord(store, type, id, snapshot) {
+  async findRecord(store, type, id) {
     const info = await this.get('rpc').accountInfo(id);
-    const data = this.serialize(snapshot, { includeId: true });
-    return assign(data, info);
+    info.account = id;
+    return info;
   },
 
   async createRecord(store, type, snapshot) {
-    const { wallet } = this.serialize(snapshot, { includeId: true });
+    const { wallet } = this.serialize(snapshot);
     const { account } = await this.get('rpc').accountCreate(wallet);
-    const info = await this.get('rpc').accountInfo(account);
-    return assign({ account }, { wallet }, info);
+    return { account, wallet };
+  },
+
+  updateRecord(store, type, snapshot) {
+    return snapshot;
   },
 
   async deleteRecord(store, type, snapshot) {

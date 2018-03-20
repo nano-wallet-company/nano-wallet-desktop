@@ -1,7 +1,7 @@
 import Component from '@ember/component';
-import { scheduleOnce } from '@ember/runloop';
 
-import { runTask, debounceTask, runDisposables } from 'ember-lifeline';
+import { task, waitForQueue } from 'ember-concurrency';
+import { runTask, runDisposables } from 'ember-lifeline';
 
 import { computed, observes } from 'ember-decorators/object';
 import { on } from 'ember-decorators/object/evented';
@@ -29,11 +29,13 @@ export default Component.extend({
 
   @on('didInsertElement')
   attachSlider() {
-    scheduleOnce('afterRender', this, this.setupSlider);
+    return this.get('setupSlider').perform();
   },
 
-  setupSlider() {
+  setupSlider: task(function* setupSlider() {
     if (!this.slickInstance && !this.isDestroying) {
+      yield waitForQueue('afterRender');
+
       const responsive = this.get('breakpoints');
       const initialSlide = this.get('currentSlide');
       this.slickInstance = this.$().slick({
@@ -50,31 +52,31 @@ export default Component.extend({
       });
     }
 
-    return this.slickInstance;
-  },
+    yield this.slickInstance;
+  }).keepLatest(),
 
   @on('willDestroyElement')
   detachSlider() {
-    if (this.slickInstance) {
-      if (!this.isDestroyed) {
-        this.$().slick('unslick');
-      }
+    return this.get('teardownSlider').perform();
+  },
 
+  teardownSlider: task(function* teardownSlider() {
+    if (this.slickInstance && !this.isDestroyed) {
+      this.$().slick('unslick');
       this.slickInstance = null;
     }
 
-    return this.slickInstance;
-  },
+    yield this.slickInstance;
+  }).keepLatest(),
 
-  refreshSlider() {
-    this.detachSlider();
-    this.attachSlider();
-    return this.slickInstance;
-  },
+  refreshSlider: task(function* refreshSlider() {
+    yield this.get('teardownSlider').perform();
+    yield this.get('setupSlider').perform();
+  }).keepLatest(),
 
-  @observes('accounts.@each.id')
+  @observes('accounts.@each')
   accountsDidChange() {
-    debounceTask(this, 'refreshSlider', 1000, true);
+    return this.get('refreshSlider').perform();
   },
 
   @computed()
