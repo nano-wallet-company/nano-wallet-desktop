@@ -1,11 +1,4 @@
 {{#bs-form model=(changeset (hash representative=representative) ChangeRepresentativeValidations) onSubmit=(action onChangeRepresentative wallet) as |form|}}
-  <div class="form-group">
-    <label>{{t 'wallet'}}</label>
-    <p translate='no'>
-      <code>{{wallet.id}}</code>
-    </p>
-  </div>
-
   {{#form.element controlType="text" label='Representative' property='representative'
       maxlength=64 required=true pattern="^xrb_[13](?![lv])[a-z1-9]{59}$" as |el|}}
     {{el.control class="text-truncate text-monospace"}}

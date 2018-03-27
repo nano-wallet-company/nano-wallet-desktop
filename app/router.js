@@ -23,6 +23,7 @@ Router.map(function routerMap() {
       this.route('accounts', { path: '/:account_id' }, function accountsRoute() {
         this.route('send');
         this.route('history');
+        this.route('settings');
       });
     });
     this.route('send');

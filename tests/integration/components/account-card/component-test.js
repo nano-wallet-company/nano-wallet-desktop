@@ -23,12 +23,13 @@ describe('Integration | Component | account-card', () => {
     //   {{/account-card}}
     // `);
 
-    const account = {
+    const store = this.container.lookup('service:store');
+    const account = store.createRecord('account', {
       id: '1',
       wallet: '1',
       balance: '1000000000000000000000000000000',
       pending: '0',
-    };
+    });
 
     this.set('account', account);
     this.render(hbs`{{account-card account=account}}`);
