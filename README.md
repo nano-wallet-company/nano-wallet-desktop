@@ -32,12 +32,12 @@ Make use of the many generators for code, try `npx ember help generate` for more
 ### Running Tests
 
 * `yarn test`
-* `yarn test -- --server`
+* `yarn test --server`
 
 ### Linting
 
 * `yarn run lint:js`
-* `yarn run lint:js -- --fix`
+* `yarn run lint:js --fix`
 
 ### Building
 
