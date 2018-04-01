@@ -10,6 +10,7 @@ button {
 }
 
 .account-card-content {
+  position: relative;
   align-items: center;
   background-color: white;
   border-radius: 10px;
@@ -24,9 +25,14 @@ button {
   &:hover,
   &.active {
     transform: scale(1.10) !important;
+
+    .settings {
+      display: block
+    }
   }
 
   .settings {
+    display: none;
     outline: none;
     position: absolute;
     top: 5px;

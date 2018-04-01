@@ -2,9 +2,9 @@
   <div class="account-card-content">
     {{#if account.id}}
       {{#if hideHistory}}
-        {{#link-to 'wallets.overview.accounts.settings' account bubbles=false class='settings' title=(t 'accountSettings')}}
-          {{bs-tooltip fade=true delayShow=500 placement='top' title=(t 'accountSettings')}}
-          {{fa-icon 'cog' ariaLabel=(t 'accountSettings')}}
+        {{#link-to 'wallets.overview.accounts.settings' account bubbles=false class='settings' title=(t 'editAccountSettings')}}
+          {{bs-tooltip fade=true delayShow=500 placement='top' title=(t 'editAccountSettings')}}
+          {{fa-icon 'cog' ariaLabel=(t 'editAccountSettings')}}
         {{/link-to}}
         {{qr-code text=account.id width=170 height=170}}
       {{/if}}

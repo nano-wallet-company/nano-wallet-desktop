@@ -29,7 +29,7 @@
       <li class="nav-item">
         <a href="#" class="nav-link">
           {{t 'settings'}}
-          {{#bs-popover placement="bottom" triggerEvents='focus' title=(t 'settings')}}
+          {{#bs-popover placement="bottom" triggerEvents='click focus' title=(t 'walletSettings')}}
             {{wallet-settings wallet=wallet representative=wallet.representative onChangeRepresentative=(action onChangeRepresentative) onChangePassword=(action onChangePassword)}}
           {{/bs-popover}}
         </a>

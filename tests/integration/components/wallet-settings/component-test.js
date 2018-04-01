@@ -23,11 +23,11 @@ describe('Integration | Component | wallet settings', () => {
     //   {{/wallet-settings}}
     // `);
 
-    const wallet = {
+    const store = this.container.lookup('service:store');
+    const wallet = store.createRecord('wallet', {
       id: '1',
       balance: '1000000000000000000000000000000',
-      accounts: ['1'],
-    };
+    });
 
     const onChangePassword = () => false;
     const onChangeRepresentative = () => false;

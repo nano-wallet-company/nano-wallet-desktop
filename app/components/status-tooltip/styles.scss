@@ -1,6 +1,7 @@
 & {
   cursor: pointer;
   transition: opacity 0.3s;
+  will-change: opacity;
 
   &:hover {
     opacity: 0.8;
