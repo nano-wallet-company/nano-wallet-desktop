@@ -6,5 +6,6 @@ export default Component.extend({
   inputId: null,
   label: null,
   placeholder: null,
+  readonly: false,
   reveal: false,
 });

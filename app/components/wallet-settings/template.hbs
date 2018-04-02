@@ -1,6 +1,6 @@
 {{#bs-form model=(changeset (hash seed=seed representative=representative) ChangeRepresentativeValidations) onSubmit=(action onChangeRepresentative wallet) as |form|}}
   {{#form.element label=(t 'seed') property="seed" as |el|}}
-    {{password-toggle inputId=el.id label=(t 'seed') value=el.value placeholder=(t 'unknown')}}
+    {{password-toggle inputId=el.id label=(t 'seed') value=el.value placeholder=(t 'unknown') readonly=true}}
   {{/form.element}}
 
   {{#form.element controlType="text" label='Representative' property='representative'
