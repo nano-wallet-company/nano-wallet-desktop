@@ -27,12 +27,9 @@
         </a>
       </li>
       <li class="nav-item">
-        <a href="#" class="nav-link">
+        {{#link-to 'wallets.overview.settings' wallet class="nav-link"}}
           {{t 'settings'}}
-          {{#bs-popover placement="bottom" triggerEvents='click focus' title=(t 'walletSettings')}}
-            {{wallet-settings wallet=wallet representative=wallet.representative onChangeRepresentative=(action onChangeRepresentative) onChangePassword=(action onChangePassword)}}
-          {{/bs-popover}}
-        </a>
+        {{/link-to}}
       </li>
       <li class="nav-item">
         {{#link-to 'wallets.logout' wallet class="nav-link"}}

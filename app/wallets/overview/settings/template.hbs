@@ -1,0 +1,10 @@
+{{#bs-modal onHide=(route-action 'cancel') as |modal|}}
+  {{#modal.header}}
+    <h4 class="modal-title">
+      {{t 'walletSettings'}}
+    </h4>
+  {{/modal.header}}
+  {{#modal.body}}
+    {{wallet-settings wallet=model representative=model.representative onChangeRepresentative=(route-action 'changeRepresentative') onChangePassword=(route-action 'changePassword')}}
+  {{/modal.body}}
+{{/bs-modal}}

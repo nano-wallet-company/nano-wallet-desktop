@@ -1,7 +1,9 @@
-{{navigation-bar wallet=model onChangeRepresentative=(route-action 'changeRepresentative') onCreateAccount=(route-action 'createAccount') onChangePassword=(route-action 'changePassword')}}
+{{navigation-bar wallet=model onCreateAccount=(route-action 'createAccount')}}
 
 <main role="main">
   {{notification-center}}
 
   {{outlet}}
+
+  {{outlet 'walletSettings'}}
 </main>

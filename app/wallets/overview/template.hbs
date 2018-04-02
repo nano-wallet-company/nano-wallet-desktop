@@ -1,6 +1,6 @@
-{{#liquid-if hideHistory class="hide-balance"}}
+{{#if hideHistory}}
   {{balance-overview wallet=model}}
-{{/liquid-if}}
+{{/if}}
 
 {{wallet-overview wallet=model accounts=sortedAccounts hideHistory=hideHistory createAccount=(route-action 'createAccount') page=page perPage=perPage}}
 
