@@ -1,0 +1,28 @@
+image: Visual Studio 2017
+
+platform:
+  - x64
+
+cache:
+  - node_modules
+  - '%APPDATA%\npm-cache'
+  - '%USERPROFILE%\.electron'
+
+init:
+  - git config --global core.autocrlf input
+
+install:
+  - ps: Install-Product node 9 x64
+  - yarn
+
+build_script:
+  - yarn ember electron:make -e production -p win32 -a x64
+
+after_build:
+- cmd: 7z a electron-out.zip %APPVEYOR_BUILD_FOLDER%\electron-out
+
+artifacts:
+- path: electron-out.zip
+  name: electron-out
+
+test: off
