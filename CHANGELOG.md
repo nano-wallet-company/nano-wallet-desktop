@@ -2,6 +2,34 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.0.0-beta.7"></a>
+# [1.0.0-beta.7](https://github.com/nanocurrency/nano-desktop/compare/v1.0.0-beta.6...v1.0.0-beta.7) (2018-04-11)
+
+
+### Bug Fixes
+
+* **status-tooltip:** don't start polling until component in viewport ([d274a54](https://github.com/nanocurrency/nano-desktop/commit/d274a54))
+
+
+### Features
+
+* **account-send:** add send max button ([18facbe](https://github.com/nanocurrency/nano-desktop/commit/18facbe))
+* **app:** fade in main content on launch ([6139053](https://github.com/nanocurrency/nano-desktop/commit/6139053))
+* **balance-overview:** add EUR to convertable currencies ([72116f3](https://github.com/nanocurrency/nano-desktop/commit/72116f3))
+* **balance-overview:** routable currency conversion ([05c4fea](https://github.com/nanocurrency/nano-desktop/commit/05c4fea))
+* **format-amount:** allow disabling decimal separators ([c0bcff5](https://github.com/nanocurrency/nano-desktop/commit/c0bcff5))
+* **password-toggle:** allow configurable readonly ([49fe4c6](https://github.com/nanocurrency/nano-desktop/commit/49fe4c6))
+* **settings:** add ability to label accounts ([f8fd082](https://github.com/nanocurrency/nano-desktop/commit/f8fd082))
+* **wallet-overview:** routable current account ([f313d10](https://github.com/nanocurrency/nano-desktop/commit/f313d10))
+* **wallet-settings:** save seed during setup and display in settings ([b817737](https://github.com/nanocurrency/nano-desktop/commit/b817737))
+
+
+### Performance Improvements
+
+* **wallets:** use a modal for wallet settings and smooth transitions ([39cad40](https://github.com/nanocurrency/nano-desktop/commit/39cad40))
+
+
+
 <a name="1.0.0-beta.6"></a>
 # [1.0.0-beta.6](https://github.com/nanocurrency/nano-desktop/compare/v1.0.0-beta.5...v1.0.0-beta.6) (2018-03-20)
 
