@@ -14,6 +14,4 @@ services:
       - /app/electron-out
       - /app/node_modules
       - /app/tmp
-    env:
-     - JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_151.jdk/Contents/Home
     env_file: .env
