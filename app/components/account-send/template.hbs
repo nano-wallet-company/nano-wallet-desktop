@@ -3,7 +3,12 @@
     {{#form.element controlType="power-select" label=(t 'wallets.accounts.send.source')
         required=true options=accounts property='source' onChange=(action onChange) as |el|}}
       {{#el.control searchField="id" searchPlaceholder=(t 'wallets.accounts.send.search') as |item|}}
-        <div>{{account-address value=item.id truncate=25}} ({{format-amount (if item.amount item.amount item.balance)}})</div>
+        {{#with (or (get item.content 'content') item) as |content|}}
+          <div>
+            {{account-label account=content truncate=30}}
+            {{format-amount content.balance}} {{t 'NANO'}}
+          </div>
+        {{/with}}
       {{/el.control}}
     {{/form.element}}
 
@@ -11,10 +16,30 @@
         autocomplete='on' minlength=64 maxlength=64 required=true pattern="^xrb_[13](?![lv])[a-z1-9]{59}$"
         placeholder=(t 'wallets.accounts.send.placeholder')}}
 
-    {{form.element controlType="text" label=(t 'wallets.accounts.send.amount')
-        model=(changeset (hash amount=null) ChangeAmountValidations) property='amount'
-        required=true minlength=1 pattern="^\d*\.?\d+$"
-        onChange=(action 'changeAmount' model)}}
+    {{#with (format-amount (or (get model.source.balance 'content') model.source.balance) useGrouping=false) as |max|}}
+      {{#form.element
+          min=0
+          max=max
+          step="1"
+          controlType="number"
+          label=(t 'wallets.accounts.send.amount')
+          model=(changeset (hash amount=null) ChangeAmountValidations)
+          property='amount'
+          required=true minlength=1
+          onChange=(action 'changeAmount' model) as |el|}}
+        <div class="input-group">
+          {{el.control lang="en-US"}}
+          <div class="input-group-append">
+            <button type="button" class="btn btn-outline-secondary"
+                title={{t 'totalAvailableBalance'}}
+                disabled={{if (not model.source) 'disabled'}}
+                {{action (mut el.value) max}}>
+              {{t 'max'}}
+            </button>
+          </div>
+        </div>
+      {{/form.element}}
+    {{/with}}
 
     <div role="group" class="d-flex justify-content-center">
       {{#bs-button disabled=model.isInvalid size="lg" type="none" icon="fa fa-paper-plane" buttonType="submit" class="text-light"}}
