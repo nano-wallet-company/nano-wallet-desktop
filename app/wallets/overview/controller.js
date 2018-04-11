@@ -4,6 +4,10 @@ import { computed } from 'ember-decorators/object';
 import { sort } from '@ember/object/computed';
 
 export default Controller.extend({
+  queryParams: ['slide', 'currency'],
+  slide: 0,
+  currency: 'NANO',
+
   hideHistory: true,
   expand: false,
   shrink: false,

@@ -39,17 +39,12 @@ describe('Integration | Component | wallet overview', () => {
       }),
     ];
 
-    const page = 1;
-    const perPage = 10;
-
-    const createAccount = () => false;
+    const onChangeSlide = () => false;
 
     this.setProperties({
       wallet,
       accounts,
-      page,
-      perPage,
-      createAccount,
+      onChangeSlide,
     });
 
     this.render(hbs`{{wallet-overview wallet=wallet accounts=accounts page=page perPage=perPage createAccount=createAccount}}`);

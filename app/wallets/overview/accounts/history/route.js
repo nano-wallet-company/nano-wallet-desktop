@@ -2,7 +2,7 @@ import Route from '@ember/routing/route';
 import { get, set } from '@ember/object';
 import { action } from 'ember-decorators/object';
 
-import { hash } from 'rsvp';
+import { hash } from 'ember-concurrency';
 
 export default Route.extend({
   async model() {
