@@ -23,14 +23,16 @@ describe('Integration | Component | balance-overview', () => {
     //   {{/balance-overview}}
     // `);
 
-    const wallet = {
+    const store = this.container.lookup('service:store');
+    const wallet = store.createRecord('wallet', {
       id: '1',
       balance: '1000000000000000000000000000000',
-      accounts: ['1'],
-    };
+    });
 
-    this.set('wallet', wallet);
-    this.render(hbs`{{balance-overview wallet=wallet}}`);
+    const onChangeCurrency = () => false;
+
+    this.setProperties({ wallet, onChangeCurrency });
+    this.render(hbs`{{balance-overview wallet=wallet onChangeCurrency=onChangeCurrency}}`);
     expect(this.$()).to.have.length(1);
   });
 });

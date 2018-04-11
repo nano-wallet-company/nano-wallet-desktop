@@ -23,6 +23,7 @@ export default Helper.extend({
 
   compute([value = 0], params = {}) {
     const {
+      useGrouping = true,
       unit = Symbol.keyFor(DEFAULT_UNIT),
       currency = Symbol.keyFor(DEFAULT_CURRENCY),
       exchangeRate = DEFAULT_EXCHANGE_RATE,
@@ -49,6 +50,7 @@ export default Helper.extend({
     }
 
     const amount = this.get('intl').formatNumber(product, {
+      useGrouping,
       minimumIntegerDigits,
       maximumFractionDigits,
     });

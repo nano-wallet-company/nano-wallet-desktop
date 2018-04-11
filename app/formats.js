@@ -14,18 +14,6 @@ export default {
     },
   },
   number: {
-    EUR: {
-      style: 'currency',
-      currency: 'EUR',
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    },
-    USD: {
-      style: 'currency',
-      currency: 'USD',
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    },
     NANO: {
       style: 'currency',
       currency: 'NANO',
@@ -34,6 +22,18 @@ export default {
       style: 'currency',
       currency: 'BTC',
       maximumFractionDigits: 8,
+    },
+    USD: {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    },
+    EUR: {
+      style: 'currency',
+      currency: 'EUR',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
     },
   },
 };

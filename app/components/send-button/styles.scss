@@ -98,12 +98,33 @@
       padding: 0 0.75rem;
     }
 
-    button {
+    .ember-power-select-trigger {
+      display: flex;
+      align-items: center;
+      font-size: 0.8rem;
+      line-height: 0.9rem;
+
+      .ember-power-select-selected-item {
+        margin: 0;
+      }
+    }
+
+    button[type='submit'] {
       width: 100%;
       height: 60px;
       border-radius: 33px;
       background-color: $dark-blue;
       border: 0;
+    }
+
+    .btn-outline-secondary {
+      border-color: $white;
+      color: $white;
+      text-transform: uppercase;
+
+      &:enabled:hover {
+        background-color: $orange;
+      }
     }
 
     .invalid-feedback {

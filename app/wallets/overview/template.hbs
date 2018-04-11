@@ -1,8 +1,8 @@
-{{#liquid-if hideHistory class="hide-balance"}}
-  {{balance-overview wallet=model}}
-{{/liquid-if}}
+{{#if hideHistory}}
+  {{balance-overview wallet=model currency=currency onChangeCurrency=(route-action 'changeCurrency')}}
+{{/if}}
 
-{{wallet-overview wallet=model accounts=sortedAccounts hideHistory=hideHistory createAccount=(route-action 'createAccount') page=page perPage=perPage}}
+{{wallet-overview wallet=model accounts=sortedAccounts hideHistory=hideHistory createAccount=(route-action 'createAccount') currentSlide=slide onChangeSlide=(route-action 'changeSlide')}}
 
 {{liquid-outlet class="history"}}
 

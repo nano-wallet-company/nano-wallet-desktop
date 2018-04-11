@@ -1,0 +1,6 @@
+<input id={{inputId}} type={{if reveal 'text' 'password'}} class="form-control {{if reveal 'text-truncate'}}" value={{value}} aria-label={{label}} placeholder={{placeholder}} readonly={{if readonly 'readonly'}}>
+<div class="input-group-append">
+  <button type="button" class="btn btn-outline-secondary" {{action (toggle 'reveal' this)}}>
+    {{fa-icon (if reveal 'eye-slash' 'eye') ariaLabel=(t 'reveal')}}
+  </button>
+</div>

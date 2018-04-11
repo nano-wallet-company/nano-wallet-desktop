@@ -15,8 +15,7 @@
   text-align: center;
   text-overflow: ellipsis;
   transform: translateX(100%);
-  animation: slide-in 3s ease-in-out;
-  animation-fill-mode: forwards;
+  animation: 3s ease-in-out forwards slide-in;
   will-change: transform;
 
   @keyframes slide-in {

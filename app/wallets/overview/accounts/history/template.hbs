@@ -2,9 +2,9 @@
   <div class="container">
     <div class="row">
       <div class="col">
-        <a href="#" class="toggle-history-arrow" {{action (route-action 'hideHistory')}}>
+        {{#link-to 'wallets.overview' model.wallet class="toggle-history-arrow"}}
           {{fa-icon "chevron-up"}}
-        </a>
+        {{/link-to}}
       </div>
     </div>
   </div>

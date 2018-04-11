@@ -1,13 +1,24 @@
 import AjaxService from 'ember-ajax/services/ajax';
 import { get } from '@ember/object';
 
+import { task } from 'ember-concurrency';
+import { retryable, ExponentialBackoffPolicy } from 'ember-concurrency-retryable';
+import { defineError } from 'ember-exex/error';
+
 import { service } from 'ember-decorators/service';
 import { computed, readOnly } from 'ember-decorators/object';
 import { alias } from 'ember-decorators/object/computed';
 
-import { task } from 'ember-concurrency';
+export const AjaxError = defineError({
+  name: 'AjaxError',
+  message: 'AJAX error',
+});
 
-import retryWithBackoff from 'ember-backoff/retry-with-backoff';
+export const backoffPolicy = new ExponentialBackoffPolicy({
+  minDelay: 100,
+  maxDelay: 10 * 1000, // 10s
+  reasons: [AjaxError],
+});
 
 export default AjaxService.extend({
   @service session: null,
@@ -37,19 +48,19 @@ export default AjaxService.extend({
     return headers;
   },
 
-  requestTask: task(function* requestTask(fn, ...args) {
-    const promise = fn.apply(this, args);
+  requestTask: retryable(task(function* requestTask(fn) {
+    const promise = fn.call(this);
     try {
       return yield promise;
+    } catch (err) {
+      throw new AjaxError().withPreviousError(err);
     } finally {
       promise.xhr.abort();
     }
-  }).enqueue().maxConcurrency(10),
+  }), backoffPolicy).enqueue().maxConcurrency(20),
 
   request(...args) {
-    const originalFn = this._super;
-    return retryWithBackoff(() => { // eslint-disable-line arrow-body-style
-      return this.get('requestTask').perform(originalFn, ...args);
-    }, 10, 250);
+    const fn = this._super.bind(this, ...args);
+    return this.get('requestTask').perform(fn);
   },
 });

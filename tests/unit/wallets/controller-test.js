@@ -6,7 +6,6 @@ describe('Unit | Controller | wallets', () => {
   setupTest('controller:wallets', {
     // Specify the other units that are required for this test.
     needs: [
-      'service:pollboy',
       'service:flashMessages',
       'service:rpc',
     ],

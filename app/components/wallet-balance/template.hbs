@@ -1,0 +1,5 @@
+{{#if exchangeRate}}
+  {{format-amount amount currency=currency exchangeRate=exchangeRate}}
+{{else}}
+  {{fa-icon "spinner" spin=true ariaLabel=(t 'loading')}}
+{{/if}}

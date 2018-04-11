@@ -19,22 +19,24 @@ Router.map(function routerMap() {
   });
 
   this.route('wallets', { path: '/:wallet_id' }, function walletsRoute() {
+    this.route('send');
+    this.route('logout');
+
     this.route('overview', function overviewRoute() {
+      this.route('settings');
       this.route('accounts', { path: '/:account_id' }, function accountsRoute() {
         this.route('send');
         this.route('history');
+        this.route('settings');
       });
     });
-    this.route('send');
-    this.route('settings', function settingsRoute() {
-      this.route('password');
-    });
-    this.route('logout');
+
     this.route('accounts', { path: '/:account_id' }, function accountsRoute() {
       this.route('send');
       this.route('history');
     });
   });
+
   this.route('login');
   this.route('logout');
   this.route('error');

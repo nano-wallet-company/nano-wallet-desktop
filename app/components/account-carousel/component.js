@@ -1,7 +1,7 @@
 import Component from '@ember/component';
 
 import { task, waitForQueue } from 'ember-concurrency';
-import { runTask, runDisposables } from 'ember-lifeline';
+import { runTask, scheduleTask, runDisposables } from 'ember-lifeline';
 
 import { computed, observes } from 'ember-decorators/object';
 import { on } from 'ember-decorators/object/evented';
@@ -9,9 +9,16 @@ import { on } from 'ember-decorators/object/evented';
 export default Component.extend({
   accounts: null,
 
+  onChangeSlide: null,
+
   currentSlide: 0,
 
   slickInstance: null,
+
+  willDestroy(...args) {
+    runDisposables(this);
+    return this._super(...args);
+  },
 
   @on('didInsertElement')
   addChangeListener() {
@@ -22,9 +29,12 @@ export default Component.extend({
     });
   },
 
-  willDestroy(...args) {
-    runDisposables(this);
-    return this._super(...args);
+  @observes('currentSlide')
+  currentSlideDidChange() {
+    return scheduleTask(this, 'actions', () => {
+      const currentSlide = this.get('currentSlide');
+      return this.get('onChangeSlide')(currentSlide);
+    });
   },
 
   @on('didInsertElement')
@@ -47,12 +57,13 @@ export default Component.extend({
         slidesToScroll: 4,
         dots: true,
         infinite: false,
-        speed: 250,
+        speed: 200,
         arrows: true,
+        respondTo: 'min',
       });
     }
 
-    yield this.slickInstance;
+    return yield this.slickInstance;
   }).keepLatest(),
 
   @on('willDestroyElement')
@@ -62,16 +73,17 @@ export default Component.extend({
 
   teardownSlider: task(function* teardownSlider() {
     if (this.slickInstance && !this.isDestroyed) {
-      this.$().slick('unslick');
+      this.slickInstance.slick('unslick');
       this.slickInstance = null;
     }
 
-    yield this.slickInstance;
+    return yield this.slickInstance;
   }).keepLatest(),
 
   refreshSlider: task(function* refreshSlider() {
     yield this.get('teardownSlider').perform();
     yield this.get('setupSlider').perform();
+    return yield this.slickInstance;
   }).keepLatest(),
 
   @observes('accounts.@each')
@@ -86,14 +98,14 @@ export default Component.extend({
         breakpoint: 1500,
         settings: {
           slidesToShow: 3,
-          slidesToScroll: 3,
+          slidesToScroll: 1,
         },
       },
       {
         breakpoint: 1200,
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 2,
+          slidesToScroll: 1,
         },
       },
       {

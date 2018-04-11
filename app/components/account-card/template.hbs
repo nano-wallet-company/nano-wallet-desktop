@@ -2,6 +2,10 @@
   <div class="account-card-content">
     {{#if account.id}}
       {{#if hideHistory}}
+        {{#link-to 'wallets.overview.accounts.settings' account bubbles=false class='settings' title=(t 'editAccountSettings')}}
+          {{bs-tooltip fade=true delayShow=500 placement='top' title=(t 'editAccountSettings')}}
+          {{fa-icon 'cog' ariaLabel=(t 'editAccountSettings')}}
+        {{/link-to}}
         {{qr-code text=account.id width=170 height=170}}
       {{/if}}
       <p class="balance">
@@ -12,10 +16,10 @@
         <br>
         <sub>+{{format-amount account.pending}}</sub>
       </p>
-      <div role="button" class="address" {{action (optional) bubbles=false}}>
-        {{bs-tooltip fade=true delayShow=1000 placement='bottom' title=(t 'copyValue' value=(concat (slice 0 9 account.id)))}}
-        {{#copy-button tagName='div' buttonType=null clipboardText=account.id success=(action 'copyAddress' (concat (slice 0 9 account.id) '...' (slice 59 64 account.id)))}}
-          {{account-address value=account.id}}
+      <div role="button" class="label" {{action (optional) bubbles=false}}>
+        {{bs-tooltip fade=true delayShow=1000 placement='bottom' title=(t 'copyAddress')}}
+        {{#copy-button tagName='div' class="d-flex flex-column justify-content-center" buttonType=null clipboardText=account.id success=(action 'copyAddress' (concat (slice 0 9 account.id) '...' (slice 59 64 account.id)))}}
+          {{account-label class="flex-row w-100 align-self-center" account=account}}
         {{/copy-button}}
       </div>
     {{else}}

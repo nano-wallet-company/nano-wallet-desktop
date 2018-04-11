@@ -27,10 +27,9 @@ export default Route.extend(AuthenticatedRouteMixin, {
   },
 
   setupController(controller, model) {
-    this._super(controller, model);
-
     const poller = get(controller, 'poller');
     tryInvoke(poller, 'resume');
+    return this._super(controller, model);
   },
 
   @action

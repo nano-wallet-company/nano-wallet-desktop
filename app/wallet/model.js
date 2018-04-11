@@ -18,6 +18,7 @@ const sumAccountsProperty = dependentKey =>
 export default DS.Model.extend({
   @hasMany('account', { async: true }) accounts: null,
 
+  @attr seed: null,
   @attr representative: null,
 
   balance: sumAccountsProperty('balance'),

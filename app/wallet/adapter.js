@@ -1,6 +1,6 @@
 import DS from 'ember-data';
 
-import { hash } from 'rsvp';
+import { hash } from 'ember-concurrency';
 
 import { service } from 'ember-decorators/service';
 

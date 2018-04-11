@@ -1,16 +1,10 @@
 import Route from '@ember/routing/route';
-import { get } from '@ember/object';
+import { get, set } from '@ember/object';
 import { action } from 'ember-decorators/object';
 
-import { hash } from 'rsvp';
+import { hash } from 'ember-concurrency';
 
 export default Route.extend({
-  beforeModel() {
-    this.controllerFor('wallets.overview').set('hideHistory', false);
-    const hideHistory = this.controllerFor('wallets.overview').get('hideHistory');
-    this.controllerFor('wallets.overview.accounts.history').set('hideHistory', hideHistory);
-  },
-
   async model() {
     const wallet = this.modelFor('wallets');
     const account = this.modelFor('wallets.overview.accounts');
@@ -26,10 +20,21 @@ export default Route.extend({
     });
   },
 
+  setupController(controller, model) {
+    const overviewController = this.controllerFor('wallets.overview');
+    set(overviewController, 'hideHistory', false);
+    set(controller, 'hideHistory', false);
+    return this._super(controller, model);
+  },
+
+  deactivate() {
+    const overviewController = this.controllerFor('wallets.overview');
+    set(overviewController, 'hideHistory', true);
+    set(this.controller, 'hideHistory', true);
+  },
+
   @action
   hideHistory() {
-    this.controllerFor(this.routeName).set('hideHistory', true);
-    this.controllerFor('wallets.overview').set('hideHistory', true);
     return this.transitionTo('wallets.overview');
   },
 });

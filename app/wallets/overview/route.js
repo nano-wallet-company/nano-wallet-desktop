@@ -31,6 +31,16 @@ export default Route.extend(AuthenticatedRouteMixin, {
   },
 
   @action
+  changeSlide(slide) {
+    return this.transitionTo({ queryParams: { slide } });
+  },
+
+  @action
+  changeCurrency(currency) {
+    return this.transitionTo({ queryParams: { currency } });
+  },
+
+  @action
   toggleButton() {
     const walletOverviewController = this.controllerFor('wallets.overview');
     const { expand, shrink, firstTime } = getProperties(walletOverviewController, [

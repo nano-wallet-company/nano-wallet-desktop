@@ -4,18 +4,23 @@
       <div class="col">
         <ul class="nav justify-content-center currency-tabs">
           <li class="nav-item">
-            <a class="nav-link {{if (eq currency 'NANO') 'active'}}" href="#" {{action (mut currency) 'NANO' on='click'}}>
+            <a class="nav-link {{if (eq currency 'NANO') 'active'}}" href="#" {{action onChangeCurrency 'NANO' on='click'}}>
               {{t 'NANO'}}
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link {{if (eq currency 'BTC') 'active'}}" href="#" {{action (mut currency) 'BTC' on='click'}}>
+            <a class="nav-link {{if (eq currency 'BTC') 'active'}}" href="#" {{action onChangeCurrency 'BTC' on='click'}}>
               {{t 'BTC'}}
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link {{if (eq currency 'USD') 'active'}}" href="#" {{action (mut currency) 'USD' on='click'}}>
+            <a class="nav-link {{if (eq currency 'USD') 'active'}}" href="#" {{action onChangeCurrency 'USD' on='click'}}>
               {{t 'USD'}}
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {{if (eq currency 'EUR') 'active'}}" href="#" {{action onChangeCurrency 'EUR' on='click'}}>
+              {{t 'EUR'}}
             </a>
           </li>
         </ul>
@@ -25,21 +30,13 @@
       <div class="col">
         <div class="text-center">
           <h1 class="balance">
-            {{#if (is-fulfilled exchangeRate)}}
-              {{format-amount wallet.balance currency=currency exchangeRate=(or (await exchangeRate) 1)}}
-            {{else}}
-              {{fa-icon "spinner" spin=true ariaLabel=(t 'loading')}}
-            {{/if}}
+            {{wallet-balance amount=wallet.balance currency=currency exchangeRate=exchangeRate}}
           </h1>
           <p class="pending">
             {{t 'balancePending'}}
             <br>
             <span>
-              {{#if (is-fulfilled exchangeRate)}}
-                {{format-amount wallet.pending currency=currency exchangeRate=(or (await exchangeRate) 1)}}
-              {{else}}
-                {{fa-icon "spinner" spin=true ariaLabel=(t 'loading')}}
-              {{/if}}
+              {{wallet-balance amount=wallet.pending currency=currency exchangeRate=exchangeRate}}
             </span>
           </p>
         </div>
