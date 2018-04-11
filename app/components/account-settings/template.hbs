@@ -1,5 +1,5 @@
 {{#with (changeset (hash label=settings.label) ChangeAccountSettingsValidations) as |model|}}
-  {{#bs-modal onHide=(action (optional onCancel)) as |modal|}}
+  {{#bs-modal position='center' onHide=(action (optional onCancel)) as |modal|}}
     {{#modal.header}}
       <h4 class="modal-title">
         {{t 'accountSettings'}}

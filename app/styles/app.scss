@@ -60,6 +60,12 @@ code {
   word-break: break-word;
 }
 
+.modal-header {
+  button {
+    outline: none;
+  }
+}
+
 #nprogress .spinner {
   top: inherit;
   bottom: 1em;

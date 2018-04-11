@@ -3,8 +3,8 @@ import { beforeEach, describe, it } from 'mocha';
 import { setupComponentTest } from 'ember-mocha';
 import hbs from 'htmlbars-inline-precompile';
 
-describe('Integration | Component | balance-overview', () => {
-  setupComponentTest('balance-overview', {
+describe('Integration | Component | wallet-balance', () => {
+  setupComponentTest('wallet-balance', {
     integration: true,
   });
 
@@ -18,21 +18,12 @@ describe('Integration | Component | balance-overview', () => {
     // Handle any actions with this.on('myAction', function(val) { ... });
     // Template block usage:
     // this.render(hbs`
-    //   {{#balance-overview}}
+    //   {{#wallet-balance}}
     //     template content
-    //   {{/balance-overview}}
+    //   {{/wallet-balance}}
     // `);
 
-    const store = this.container.lookup('service:store');
-    const wallet = store.createRecord('wallet', {
-      id: '1',
-      balance: '1000000000000000000000000000000',
-    });
-
-    const onChangeCurrency = () => false;
-
-    this.setProperties({ wallet, onChangeCurrency });
-    this.render(hbs`{{balance-overview wallet=wallet onChangeCurrency=onChangeCurrency}}`);
+    this.render(hbs`{{wallet-balance}}`);
     expect(this.$()).to.have.length(1);
   });
 });
