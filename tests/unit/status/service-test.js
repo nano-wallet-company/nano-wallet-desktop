@@ -5,7 +5,7 @@ import { setupTest } from 'ember-mocha';
 describe('Unit | Service | status', () => {
   setupTest('service:status', {
     // Specify the other units that are required for this test.
-    needs: ['service:pollboy', 'service:rpc'],
+    needs: ['service:rpc'],
   });
 
   // Replace this with your real tests.

@@ -2,60 +2,59 @@ import ObjectProxy from '@ember/object/proxy';
 import PromiseProxyMixin from '@ember/object/promise-proxy-mixin';
 import { set } from '@ember/object';
 
+import {
+  runTask,
+  runDisposables,
+  pollTask,
+  cancelPoll,
+} from 'ember-lifeline';
+
 import { service } from 'ember-decorators/service';
-import { on } from 'ember-decorators/object/evented';
 
-import { hash } from 'rsvp';
+import { hash } from 'ember-concurrency';
 
-const STATUS_POLL_INTERVAL = 10000; // 10s
+export const STATUS_POLL_INTERVAL = 10 * 1000; // 10s
 
 const Service = ObjectProxy.extend(PromiseProxyMixin, {
-  @service pollboy: null,
   @service rpc: null,
 
-  poller: null,
+  pollToken: null,
 
-  @on('init')
-  setupPoller() {
-    const pollboy = this.get('pollboy');
-    this.poller = pollboy.add(this, this.onPoll, STATUS_POLL_INTERVAL);
-    this.poller.pause();
+  willDestroy(...args) {
+    runDisposables(this);
+    return this._super(...args);
   },
 
   pausePolling() {
-    const poller = this.get('poller');
-    if (poller) {
-      poller.pause();
+    const pollToken = this.get('pollToken');
+    if (pollToken) {
+      cancelPoll(pollToken);
     }
+
+    return pollToken;
   },
 
   resumePolling() {
-    const poller = this.get('poller');
-    if (poller) {
-      poller.resume();
-    }
+    this.pausePolling();
+
+    const pollToken = pollTask(this, 'onPoll');
+    this.set('pollToken', pollToken);
+    return pollToken;
   },
 
-  willDestroy(...args) {
-    this._super(...args);
+  onPoll(next) {
+    return runTask(this, () => {
+      const rpc = this.get('rpc');
+      const blocks = rpc.blockCount();
+      const peers = rpc.peers().then(p => Object.keys(p));
+      const promise = hash({
+        blocks,
+        peers,
+      });
 
-    const poller = this.get('poller');
-    if (poller) {
-      this.get('pollboy').remove(poller);
-    }
-  },
-
-  onPoll() {
-    const rpc = this.get('rpc');
-    const blocks = rpc.blockCount();
-    const peers = rpc.peers().then(p => Object.keys(p));
-    const promise = hash({
-      blocks,
-      peers,
+      set(this, 'promise', promise);
+      return runTask(this, next, STATUS_POLL_INTERVAL);
     });
-
-    set(this, 'promise', promise);
-    return promise;
   },
 });
 

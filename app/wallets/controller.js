@@ -1,48 +1,42 @@
 import Controller from '@ember/controller';
 import { get } from '@ember/object';
 
-import { runTask, runDisposables } from 'ember-lifeline';
+import { runTask, runDisposables, pollTask } from 'ember-lifeline';
 import { service } from 'ember-decorators/service';
 import { on } from 'ember-decorators/object/evented';
 
-const WALLET_POLL_INTERVAL = 5000; // 5s
+const WALLET_POLL_INTERVAL = 5 * 1000; // 5s
 
 export default Controller.extend({
-  @service pollboy: null,
   @service flashMessages: null,
   @service rpc: null,
 
-  poller: null,
-
-  @on('init')
-  setupPoller() {
-    const pollboy = this.get('pollboy');
-    this.poller = pollboy.add(this, this.onPoll, WALLET_POLL_INTERVAL);
-    this.poller.pause();
-  },
+  pollToken: null,
 
   willDestroy(...args) {
-    const poller = this.get('poller');
-    if (poller) {
-      this.get('pollboy').remove(poller);
-    }
-
     runDisposables(this);
     return this._super(...args);
   },
 
-  async onPoll() {
-    return runTask(this, () => {
+  @on('init')
+  setupPoller() {
+    const pollToken = pollTask(this, 'onPoll');
+    this.set('pollToken', pollToken);
+    return pollToken;
+  },
+
+  onPoll(next) {
+    return runTask(this, async () => {
       const model = this.get('model');
       if (model) {
         const isNew = get(model, 'isNew');
         if (!isNew) {
           const wallet = get(model, 'id');
-          return this.updateBalances(wallet);
+          await this.updateBalances(wallet);
         }
       }
 
-      return true;
+      return runTask(this, next, WALLET_POLL_INTERVAL);
     });
   },
 
@@ -56,6 +50,6 @@ export default Controller.extend({
       type: 'account',
     }));
 
-    return this.store.push({ data });
+    return this.get('store').push({ data });
   },
 });

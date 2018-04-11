@@ -1,7 +1,7 @@
 import Route from '@ember/routing/route';
 import { get } from '@ember/object';
 
-import { hash } from 'rsvp';
+import { hash } from 'ember-concurrency';
 import { action } from 'ember-decorators/object';
 import { service } from 'ember-decorators/service';
 
