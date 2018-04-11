@@ -35,31 +35,31 @@ module.exports = (environment) => {
 
     assets: {
       node: {
-        win32: {
-          url: 'https://s3-us-west-2.amazonaws.com/nano-apps/node-win32-d674353de23b4513908cf46d90cb89a7.zip',
-          integrity: 'sha512-XsUQBv2ziUdJgJyTeNzN4P54gasoS8T3x5fIMWeZkgpksndiM64XXrgoKPZAZEEwXHOrUlD3xc3rxMwanuohvg==',
-        },
         darwin: {
-          url: 'https://s3-us-west-2.amazonaws.com/nano-apps/node-darwin-67f9568651d44b2273c2d70130a30e4a.zip',
-          integrity: 'sha512-8H57O2I93uTD0LzDD62O8WJYsfz6IJIs9JDceIAhaxDJvzADiw4D0W+Ex1agHAU4JpI9fn4eglF3624SYyDGqQ==',
+          url: 'https://s3-us-west-2.amazonaws.com/nano-apps/node-darwin-b14cc99b57f79c4d613090f66914dc9a.zip',
+          integrity: 'sha512-zo1+rTcj8ynGjH/MAcW9Yow0Oa6epU4MLWuZqAOHWflcFEcOcX7ey7LRImCXoLCf/X13IhnD7n+aJZ63yzVBig==',
         },
         linux: {
-          url: 'https://s3-us-west-2.amazonaws.com/nano-apps/node-linux-13b4401e4f04533e84a4cfc13ad0de18.zip',
-          integrity: 'sha512-M07tRr5K+OSWsv4c1eDFSgnxXpdo95usQ6iuguxykdydD2xQBfeTbCs9u/dRaZU7KEWg29hPmvGCnk1BHCj1Eg==',
+          url: 'https://s3-us-west-2.amazonaws.com/nano-apps/node-linux-4e79b60fd4303ca47cb9cbb5f57f6b65.zip',
+          integrity: 'sha512-g19HD8vjI1YN6BMJcI0RnvaAKwz23AKBNzxYeB4sEEAT3geni9U8iCY62u5IERC7Ju1PTxSbrkNFWBg/MQrOew==',
+        },
+        win32: {
+          url: 'https://s3-us-west-2.amazonaws.com/nano-apps/node-win32-ac5fc2593111b7513a573ecdd4f9a4fc.zip',
+          integrity: 'sha512-2aWD9eV9KQ+/xtc/hQhSN/B56PzR0bcTycxkLgo+zJ6WGn70jqM3tjsNDbh2c4NSKLPV8ZrJdUyEJLZ6leZ8bQ==',
         },
       },
       data: {
-        win32: {
-          url: 'https://s3-us-west-2.amazonaws.com/nano-apps/data-54f9e2bdcacd1a21dc1ca9654acd65cf.zip',
-          integrity: 'sha512-3WzjqLnkBHyUkfRSur0REPiOQdNYcp8rdcLLzcXWu7YLSP3vLGOoIZItb0MpqJBkZOEPj+vWA3Q2lkWQRZLhLw==',
-        },
         darwin: {
-          url: 'https://s3-us-west-2.amazonaws.com/nano-apps/data-54f9e2bdcacd1a21dc1ca9654acd65cf.zip',
-          integrity: 'sha512-3WzjqLnkBHyUkfRSur0REPiOQdNYcp8rdcLLzcXWu7YLSP3vLGOoIZItb0MpqJBkZOEPj+vWA3Q2lkWQRZLhLw==',
+          url: 'https://s3-us-west-2.amazonaws.com/nano-apps/data-cd87939e4f21ef9d797326dc7cbe0f28.zip',
+          integrity: 'sha512-ei5rhb4DcVXrRZdQHHAjkqQxa/ednzA6JEImqKpRWTbe0CpqM0o7g5MssVY+InEfcV2EMd5la9VpEjB1HwCNhg==',
         },
         linux: {
-          url: 'https://s3-us-west-2.amazonaws.com/nano-apps/data-54f9e2bdcacd1a21dc1ca9654acd65cf.zip',
-          integrity: 'sha512-3WzjqLnkBHyUkfRSur0REPiOQdNYcp8rdcLLzcXWu7YLSP3vLGOoIZItb0MpqJBkZOEPj+vWA3Q2lkWQRZLhLw==',
+          url: 'https://s3-us-west-2.amazonaws.com/nano-apps/data-cd87939e4f21ef9d797326dc7cbe0f28.zip',
+          integrity: 'sha512-ei5rhb4DcVXrRZdQHHAjkqQxa/ednzA6JEImqKpRWTbe0CpqM0o7g5MssVY+InEfcV2EMd5la9VpEjB1HwCNhg==',
+        },
+        win32: {
+          url: 'https://s3-us-west-2.amazonaws.com/nano-apps/data-cd87939e4f21ef9d797326dc7cbe0f28.zip',
+          integrity: 'sha512-ei5rhb4DcVXrRZdQHHAjkqQxa/ednzA6JEImqKpRWTbe0CpqM0o7g5MssVY+InEfcV2EMd5la9VpEjB1HwCNhg==',
         },
       },
     },
