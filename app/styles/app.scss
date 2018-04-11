@@ -22,6 +22,7 @@ body {
 main {
   height: calc(100vh - 100px);
   display: flex;
+  overflow: hidden;
   flex-direction: column;
   justify-content: space-evenly;
   will-change: opacity;
