@@ -47,7 +47,7 @@ describe('Integration | Component | wallet overview', () => {
       onChangeSlide,
     });
 
-    this.render(hbs`{{wallet-overview wallet=wallet accounts=accounts page=page perPage=perPage createAccount=createAccount}}`);
+    this.render(hbs`{{wallet-overview wallet=wallet accounts=accounts onChangeSlide=onChangeSlide}}`);
     expect(this.$()).to.have.length(1);
   });
 });
