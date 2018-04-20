@@ -1,5 +1,5 @@
 FROM node:9.11.1
-LABEL maintainer="Nano <desktop@nano.org>"
+LABEL maintainer="Nano Wallet Company <desktop@nanowalletcompany.com>"
 
 RUN curl -fsSL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 RUN curl -fsSL https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -

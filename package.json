@@ -4,7 +4,7 @@
   "productName": "Nano Desktop",
   "description": "The official Nano wallet for desktop and web",
   "license": "BSD-2-Clause",
-  "author": "Nano <team@nano.org>",
+  "author": "Nano Wallet Company <desktop@nanowalletcompany.com>",
   "directories": {
     "doc": "doc",
     "test": "tests"
