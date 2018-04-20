@@ -1,0 +1,120 @@
+product: 'Nano Desktop'
+cancel: 'Отмена'
+done: 'Сделано'
+loading: 'Загрузка...'
+previous: 'Предыдущий'
+next: 'Следующий'
+current: '(текущий)'
+import: 'Импорт'
+password: 'Пароль'
+confirmPassword: 'Подтвердить пароль'
+overview: 'Обзор'
+send: 'Отослать'
+max: 'MAX'
+totalAvailableBalance: 'Весь доступный баланс'
+receive: 'Получить'
+close: 'Закрыть'
+settings: 'Настройки'
+logout: 'Выйти'
+history: 'История'
+save: 'Сохранить'
+delete: 'Удалить'
+seed: 'Seed'
+mnemonic: 'Мнемоник'
+reveal: 'Востановить'
+type: 'Тип'
+amount: 'Количество'
+wallet: 'Кошелек'
+account: 'Аккаунт'
+balance: 'Баланс'
+pending: 'В ожидание'
+node: 'нода'
+data: 'данные'
+downloading: 'Загрузка {asset}...'
+verifying: 'Проверка {asset}...'
+extracting: 'Извлечение {asset}...'
+starting: 'Запуск ноды'
+currency: '{amount}'
+copyAddress: 'Скопировать адрес'
+addressCopied: 'Адрес скопирован: {address}'
+status:
+  state: 'Статус'
+  online: 'Онлайн'
+  connecting: 'Соединение'
+  count: 'Количество блоков'
+  unchecked: 'Непроверенные блоки'
+  peers: 'Пиры'
+balancePending: 'Баланс в ожидании'
+NANO: 'NANO'
+BTC: 'BTC'
+USD: 'USD'
+EUR: 'EUR'
+walletSettings: 'Настройки кошелька'
+editAccountSettings: 'Изменить настройки аккаунта'
+accountSettings: 'Настройки аккаунта'
+accountSettingsSaved: 'Настройки аккаунта сохранены!'
+unknown: '(неизвестно)'
+label: 'Название'
+login:
+  lead: 'Войдите для разблокировки Вашего кошелька.'
+  instructions: 'Вы можете войти, чтобы продолжить использовать текущий кошелек, разблокировав его. Кроме того, вы можете создать новый кошелек.'
+  setupWallet: 'Создать новый кошелек'
+wallets:
+  unlock:
+    unlockWallet: 'Разблокировать кошелек'
+    invalidPassword: 'Неправильный пароль!'
+  backup:
+    title: 'Сохраните Seed'
+    lead: "Вот Ваш новый легко распознаваемый мнемонический seed для нового кошелька:"
+    copy: 'Скопировать Seed'
+    copied: 'Seed скопирован в буффер обмена!'
+    download: 'Скачать'
+    help: >
+      Для большей надёжности запишите свой seed на лист бумаги, который сохраните в надёжном месте, на случай утери своего seed.
+    confirm: "Вы уверены, что записали свой мнемоник?"
+  import:
+    title: 'Импортировать кошелек'
+    copied: 'Seed скопирован в буффер обмена!'
+    help:
+      seed: "Ваш 64-значный heх seed"
+      mnemonic: "Ваш BIP39 мнемомник кошелька"
+  password:
+    title: 'Пароль на кошелек'
+    submit: 'Установить пароль'
+  accounts:
+    cannotDelete: 'Невозможно удалить акаунт с балансом!'
+    send:
+      source: 'Исходный аккаунт'
+      search: 'Поиск аккаунта'
+      destination: 'Принимающий аккаунт'
+      placeholder: 'Адрес (т.е. xrb_...)'
+      amount: 'Количество (NANO)'
+      insufficient: 'Количество больше чем общий баланс аккаунта'
+    history:
+      none: 'Нет еще истории'
+  overview:
+    none: 'Нет аккаунтов в кошельке.'
+    create: 'Создать аккаунт'
+    created: 'Новый аккаунт создан!'
+  settings:
+    changeRepresentative: 'Изменить представителя'
+    changePassword: 'Изменить пароль'
+    representativeChanged: 'Представитель кошелька изменен!'
+    representativeChangeFailed: 'Замена представителя неудалась!'
+    passwordChanged: 'Пароль изменен!'
+    passwordsDontMatch: "Пароли не совпадают!"
+  logout:
+    title: 'Подтвердить выход'
+    lead: 'Вы уверены, что хотите выйти?'
+    warning: >
+      <strong>Внимание</strong>: Если Вы выйдите и позже не сможете вспомнить пароль, то Вам нужно будет 
+      сделать реимпорт кошелька используя Ваш seed!
+setup:
+  lead: "Давайте создадим Ваш кошелек."
+  instructions: >
+    Перед началом использования Nano Desktop, Вы должны создать новый кошешелек или импортировать данные кошелька используя seed.
+  create: 'Создать новый кошелек'
+  or: 'или'
+  import: 'Импортировать кошелек'
+  
+  
