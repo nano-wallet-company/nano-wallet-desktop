@@ -18,11 +18,6 @@ export default Route.extend({
   },
 
   @action
-  saveWallet(wallet) {
-    return wallet.save();
-  },
-
-  @action
   async changeSeed(model, changeset) {
     const wallet = get(model, 'id');
     const seed = get(changeset, 'seed');
