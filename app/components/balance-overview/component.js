@@ -62,17 +62,19 @@ export default Component.extend(InViewportMixin, {
 
   @observes('currency')
   async updateExchangeRate() {
-    const currency = this.get('currency');
-    if (currency === Symbol.keyFor(DEFAULT_CURRENCY)) {
-      this.set('exchangeRate', DEFAULT_EXCHANGE_RATE);
-      return DEFAULT_EXCHANGE_RATE;
-    }
+    return runTask(this, async () => {
+      const currency = this.get('currency');
+      if (currency === Symbol.keyFor(DEFAULT_CURRENCY)) {
+        this.set('exchangeRate', DEFAULT_EXCHANGE_RATE);
+        return DEFAULT_EXCHANGE_RATE;
+      }
 
-    this.set('exchangeRate', null);
+      this.set('exchangeRate', null);
 
-    const exchangeRate = await this.get('exchangeRateTask').perform(currency);
-    this.set('exchangeRate', exchangeRate);
-    return exchangeRate;
+      const exchangeRate = await this.get('exchangeRateTask').perform(currency);
+      this.set('exchangeRate', exchangeRate);
+      return exchangeRate;
+    });
   },
 
   onPoll(next) {

@@ -29,6 +29,18 @@ module.exports = (environment) => {
       // when it is created
     },
 
+    contentSecurityPolicy: {
+      'default-src': ["'none'"],
+      'script-src': ["'self'"],
+      'font-src': ["'self'"],
+      'connect-src': ["'self'", 'https://api.coinmarketcap.com'],
+      'img-src': ["'self'", 'data:'],
+      'style-src': ["'self'"],
+      'media-src': ["'self'"],
+    },
+
+    contentSecurityPolicyMeta: true,
+
     'ember-service-worker': {
       enabled: environment === 'production',
     },
@@ -65,12 +77,16 @@ module.exports = (environment) => {
     },
   };
 
+  ENV.contentSecurityPolicy['script-src'].push("'unsafe-inline'", "'unsafe-eval'");
+  ENV.contentSecurityPolicy['style-src'].push("'unsafe-inline'");
+
   if (environment === 'development') {
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
     ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
+    ENV.contentSecurityPolicy['connect-src'].push('http://localhost:5555', 'http://localhost:55000');
   }
 
   if (environment === 'test') {
@@ -88,6 +104,10 @@ module.exports = (environment) => {
 
   if (environment === 'production') {
     // here you can enable a production-specific feature
+  }
+
+  if (process.env.EMBER_CLI_ELECTRON) {
+    ENV.contentSecurityPolicy['connect-src'].push('https://localhost:17076');
   }
 
   return ENV;

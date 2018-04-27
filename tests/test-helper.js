@@ -1,11 +1,9 @@
-import { setApplication } from '@ember/test-helpers';
 import { beforeEach, afterEach } from 'mocha';
+import { setResolver } from 'ember-mocha';
 import { enable, disable } from 'ember-concurrency-retryable';
+import resolver from './helpers/resolver';
 
-import Application from '../app';
-import config from '../config/environment';
-
-setApplication(Application.create(config.APP));
+setResolver(resolver);
 
 beforeEach(() => enable());
 afterEach(() => disable());

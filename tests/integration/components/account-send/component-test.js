@@ -23,22 +23,22 @@ describe('Integration | Component | account send', () => {
     //   {{/account-send}}
     // `);
 
-    const accounts = [
-      {
-        id: '1',
-        wallet: '1',
-        balance: '1000000000000000000000000000000',
-        pending: '0',
-      },
-    ];
+    const store = this.container.lookup('service:store');
 
-    const block = {
+    const source = store.createRecord('account', {
       id: '1',
       wallet: '1',
-      source: '1',
-      destination: '2',
-      amount: '1000000000000000000000000000000',
-    };
+      balance: '1000000000000000000000000000000',
+      pending: '0',
+    });
+
+    const accounts = [source];
+
+    const block = store.createRecord('block', {
+      source,
+      id: '1',
+      wallet: '1',
+    });
 
     const onChange = () => false;
     const onSubmit = () => false;

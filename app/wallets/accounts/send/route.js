@@ -1,19 +1,8 @@
 import Route from '@ember/routing/route';
 
-import { service } from 'ember-decorators/service';
-import { computed, action } from 'ember-decorators/object';
+import { action } from 'ember-decorators/object';
 
 export default Route.extend({
-  @service intl: null,
-
-  @computed('intl.locale')
-  get breadCrumb() {
-    return {
-      title: this.get('intl').t('send'),
-      path: 'wallets.accounts.send',
-    };
-  },
-
   model() {
     const wallet = this.modelFor('wallets');
     const source = this.modelFor('wallets.accounts');

@@ -23,8 +23,16 @@ export default function () {
     http://www.ember-cli-mirage.com/docs/v0.3.x/shorthands/
   */
 
+  // Postman
+  this.passthrough('http://localhost:5555');
+
+  // Live network
   this.passthrough('http://localhost:7076');
+
+  // Test network
   this.passthrough('http://localhost:55000');
+
+  // Electron proxy
   this.passthrough('https://localhost:17076/**');
 
   this.namespace = 'rpc';
