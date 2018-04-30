@@ -5,7 +5,7 @@ const { extensions: defaultExtensions } = require('broccoli-asset-rev/lib/defaul
 module.exports = (defaults) => {
   const app = new EmberApp(defaults, {
     fingerprint: {
-      extensions: defaultExtensions.concat(['svg', 'webmanifest']),
+      extensions: defaultExtensions.concat(['svg', 'xml', 'webmanifest']),
     },
 
     'ember-cli-babel': {
@@ -13,6 +13,7 @@ module.exports = (defaults) => {
     },
 
     'ember-service-worker': {
+      enabled: EmberApp.env() === 'production',
       versionStrategy: 'every-build',
       registrationStrategy: 'async',
     },

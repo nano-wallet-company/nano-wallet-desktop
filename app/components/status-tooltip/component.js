@@ -13,8 +13,7 @@ export default Component.extend(InViewportMixin, {
     this.get('status').resumePolling();
   },
 
-  @on('willDestroyElement')
-  @on('didExitViewport')
+  @on('didExitViewport', 'willDestroyElement')
   stopPolling() {
     this.get('status').pausePolling();
   },

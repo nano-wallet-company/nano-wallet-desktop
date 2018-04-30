@@ -35,7 +35,6 @@ export default Component.extend(InViewportMixin, {
     return this._super(...args);
   },
 
-  @on('init')
   @on('didEnterViewport')
   resumePolling() {
     this.pausePolling();
@@ -45,7 +44,7 @@ export default Component.extend(InViewportMixin, {
     return pollToken;
   },
 
-  @on('didExitViewport')
+  @on('didExitViewport', 'willDestroyElement')
   pausePolling() {
     const pollToken = this.get('pollToken');
     if (pollToken) {

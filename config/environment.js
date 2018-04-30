@@ -31,18 +31,18 @@ module.exports = (environment) => {
 
     contentSecurityPolicy: {
       'default-src': ["'none'"],
-      'script-src': ["'self'"],
+      'script-src': ["'self'", "'unsafe-eval'"],
       'font-src': ["'self'"],
       'connect-src': ["'self'", 'https://api.coinmarketcap.com'],
       'img-src': ["'self'", 'data:'],
-      'style-src': ["'self'"],
+      'style-src': ["'self'", "'unsafe-inline'"],
       'media-src': ["'self'"],
     },
 
     contentSecurityPolicyMeta: true,
 
-    'ember-service-worker': {
-      enabled: environment === 'production',
+    viewportConfig: {
+      viewportSpy: true,
     },
 
     assets: {
@@ -77,16 +77,13 @@ module.exports = (environment) => {
     },
   };
 
-  ENV.contentSecurityPolicy['script-src'].push("'unsafe-inline'", "'unsafe-eval'");
-  ENV.contentSecurityPolicy['style-src'].push("'unsafe-inline'");
-
   if (environment === 'development') {
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
     ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
-    ENV.contentSecurityPolicy['connect-src'].push('http://localhost:5555', 'http://localhost:55000');
+    ENV.contentSecurityPolicy['connect-src'].push('http://localhost:55000');
   }
 
   if (environment === 'test') {
@@ -100,6 +97,8 @@ module.exports = (environment) => {
 
     ENV.APP.rootElement = '#ember-testing';
     ENV.APP.autoboot = false;
+
+    ENV.contentSecurityPolicy['script-src'].push("'sha256-37u63EBe1EibDZ3vZNr6mxLepqlY1CQw+4N89HrzP9s='");
   }
 
   if (environment === 'production') {
