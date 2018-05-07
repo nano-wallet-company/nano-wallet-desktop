@@ -39,17 +39,20 @@
   "build": {
     "appId": "org.nano.wallet"
   },
-  "config": {
-    "forge": "./ember-electron/electron-forge-config.js",
-    "commitizen": {
-      "path": "@commitlint/prompt"
-    }
-  },
   "lint-staged": {
     "*.js": [
       "eslint --fix",
       "git add"
     ]
+  },
+  "commitlint": {
+    "extends": ["@commitlint/config-conventional"]
+  },
+  "config": {
+    "forge": "./ember-electron/electron-forge-config.js",
+    "commitizen": {
+      "path": "@commitlint/prompt"
+    }
   },
   "dependencies": {
     "connect": "^3.6.6",
@@ -57,23 +60,23 @@
     "electron-compile": "^6.4.2",
     "electron-context-menu": "^0.9.1",
     "electron-debug": "^1.5.0",
-    "electron-devtools-installer": "^2.2.3",
+    "electron-devtools-installer": "^2.2.4",
     "electron-dl": "^1.11.0",
     "electron-is-dev": "^0.3.0",
     "electron-log": "^2.2.14",
     "electron-protocol-serve": "^1.3.0",
     "electron-squirrel-startup": "^1.0.0",
     "electron-unhandled": "^1.1.0",
-    "electron-util": "^0.8.1",
+    "electron-util": "^0.8.2",
     "exit-hook": "^2.0.0",
     "extract-zip": "^1.6.6",
     "get-port": "^3.2.0",
     "helmet": "^3.12.0",
     "http-proxy": "^1.17.0",
-    "load-json-file": "^4.0.0",
+    "load-json-file": "^5.0.0",
     "normalize-newline": "^3.0.0",
     "path-exists": "^3.0.0",
-    "selfsigned": "^1.10.2",
+    "selfsigned": "^1.10.3",
     "spdy": "^3.4.7",
     "ssri": "^6.0.0",
     "to-executable-name": "^2.0.0",
@@ -81,7 +84,7 @@
     "write-json-file": "^2.3.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "^6.1.3",
+    "@commitlint/cli": "^6.2.0",
     "@commitlint/config-conventional": "^6.1.3",
     "@commitlint/prompt": "^6.1.3",
     "@ember-decorators/babel-transforms": "^2.0.1",
@@ -90,19 +93,18 @@
     "babel-plugin-transform-async-to-generator": "^6.24.1",
     "bignumber.js": "^7.0.1",
     "bip39": "^2.5.0",
-    "bootstrap": "^4.1.0",
+    "bootstrap": "^4.1.1",
     "broccoli-asset-rev": "^2.7.0",
     "broccoli-funnel": "^2.0.1",
     "broccoli-merge-trees": "^3.0.0",
     "coinmarketcap": "^0.2.0",
     "commitizen": "^2.9.6",
-    "corber": "^1.2.6",
+    "corber": "^1.2.7",
     "cordova": "^8.0.0",
-    "cz-conventional-changelog": "^2.1.0",
     "devtron": "^1.4.0",
     "downloadjs": "^1.4.7",
-    "electron-forge": "^5.2.0",
-    "electron-prebuilt-compile": "1.8.4",
+    "electron-forge": "^5.2.1",
+    "electron-prebuilt-compile": "2.0.0",
     "ember-ajax": "^3.1.0",
     "ember-bootstrap": "^1.2.2",
     "ember-bootstrap-changeset-validations": "^1.0.0",
@@ -111,7 +113,7 @@
     "ember-changeset": "^1.5.0-beta.0",
     "ember-changeset-validations": "^1.2.11",
     "ember-chrome-devtools": "^0.2.0",
-    "ember-cli": "^3.1.2",
+    "ember-cli": "^3.1.4",
     "ember-cli-app-version": "^3.2.0",
     "ember-cli-autoprefixer": "^0.8.1",
     "ember-cli-babel": "^6.12.0",
@@ -140,7 +142,7 @@
     "ember-cli-uglify": "^2.1.0",
     "ember-component-css": "^0.6.3",
     "ember-composable-helpers": "^2.1.0",
-    "ember-concurrency": "^0.8.18",
+    "ember-concurrency": "^0.8.19",
     "ember-concurrency-retryable": "^0.4.0",
     "ember-config-service": "^0.2.0",
     "ember-data": "^3.1.1",
@@ -150,8 +152,8 @@
     "ember-export-application-global": "^2.0.0",
     "ember-font-awesome": "^4.0.0-rc.3",
     "ember-host-manager": "^0.1.1",
-    "ember-in-viewport": "^3.0.2",
-    "ember-intl": "^2.33.1",
+    "ember-in-viewport": "^3.0.3",
+    "ember-intl": "^2.33.2",
     "ember-lifeline": "^3.0.3",
     "ember-load": "^0.0.12",
     "ember-load-initializers": "^1.1.0",
@@ -159,7 +161,7 @@
     "ember-math-helpers": "^2.4.1",
     "ember-mocha": "^0.13.1",
     "ember-parachute": "^0.3.7",
-    "ember-power-select": "^2.0.0-beta.5",
+    "ember-power-select": "^2.0.0",
     "ember-power-select-blockless": "^0.3.1",
     "ember-promise-helpers": "^1.0.6",
     "ember-qrcode-shim": "^0.2.0",
@@ -185,12 +187,12 @@
     "eslint-plugin-import": "^2.11.0",
     "eslint-plugin-mocha": "^5.0.0",
     "husky": "^0.14.3",
-    "lint-staged": "^7.0.5",
+    "lint-staged": "^7.1.0",
     "liquid-fire": "^0.29.2",
     "loader.js": "^4.7.0",
     "node-notifier-cli": "^1.1.2",
-    "nodemon": "^1.17.3",
-    "npm-run-all": "^4.1.2",
+    "nodemon": "^1.17.4",
+    "npm-run-all": "^4.1.3",
     "rimraf": "^2.6.2",
     "slick-carousel": "^1.8.1",
     "standard-version": "^4.3.0"
