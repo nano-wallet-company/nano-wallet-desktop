@@ -1,7 +1,7 @@
-import DS from 'ember-data';
+import { Adapter } from 'ember-data';
 import { service } from 'ember-decorators/service';
 
-export default DS.Adapter.extend({
+export default Adapter.extend({
   @service rpc: null,
 
   shouldReloadRecord() {

@@ -1,8 +1,8 @@
-import DS from 'ember-data';
+import { JSONSerializer } from 'ember-data';
 
 import { underscore } from '@ember/string';
 
-export default DS.JSONSerializer.extend({
+export default JSONSerializer.extend({
   primaryKey: 'account',
 
   keyForAttribute(attr) {

@@ -1,4 +1,4 @@
-import DS from 'ember-data';
+import { Model } from 'ember-data';
 import { A } from '@ember/array';
 import { computed } from '@ember/object';
 
@@ -15,7 +15,7 @@ const sumAccountsProperty = dependentKey =>
     },
   });
 
-export default DS.Model.extend({
+export default Model.extend({
   @hasMany('account', { async: true }) accounts: null,
 
   @attr seed: null,

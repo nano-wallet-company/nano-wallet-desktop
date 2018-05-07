@@ -46,7 +46,9 @@
     ]
   },
   "commitlint": {
-    "extends": ["@commitlint/config-conventional"]
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
   },
   "config": {
     "forge": "./ember-electron/electron-forge-config.js",
@@ -183,6 +185,7 @@
     "eslint-plugin-chai-expect": "^1.1.1",
     "eslint-plugin-chai-friendly": "^0.4.1",
     "eslint-plugin-ember": "^5.1.0",
+    "eslint-plugin-ember-suave": "^1.0.0",
     "eslint-plugin-hbs": "^0.1.1",
     "eslint-plugin-import": "^2.11.0",
     "eslint-plugin-mocha": "^5.0.0",

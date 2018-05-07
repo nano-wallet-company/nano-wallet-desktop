@@ -1,8 +1,8 @@
-import DS from 'ember-data';
+import { Transform } from 'ember-data';
 
 import BigNumber from 'npm:bignumber.js';
 
-export default DS.Transform.extend({
+export default Transform.extend({
   deserialize(serialized = 0) {
     return BigNumber(serialized);
   },
