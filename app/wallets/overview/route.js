@@ -5,13 +5,11 @@ import { isEmpty } from '@ember/utils';
 import { action } from 'ember-decorators/object';
 import { service } from 'ember-decorators/service';
 
-import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
-
-export default Route.extend(AuthenticatedRouteMixin, {
+export default Route.extend({
   @service intl: null,
   @service flashMessages: null,
 
-  beforeModel() {
+  beforeModel(...args) {
     const walletOverviewController = this.controllerFor('wallets.overview');
     setProperties(walletOverviewController, {
       hideHistory: true,
@@ -19,6 +17,8 @@ export default Route.extend(AuthenticatedRouteMixin, {
       shrink: false,
       active: false,
     });
+
+    return this._super(...args);
   },
 
   async afterModel(wallet) {

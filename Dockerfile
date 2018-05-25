@@ -1,5 +1,5 @@
-FROM node:10.0.0-stretch
-LABEL maintainer="Nano Wallet Company <desktop@nanowalletcompany.com>"
+FROM node:10.2.1-stretch
+LABEL maintainer="Nano <desktop@nano.org>"
 
 ENV DEBIAN_FRONTEND=noninteractive
 

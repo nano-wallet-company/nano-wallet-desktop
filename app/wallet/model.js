@@ -1,10 +1,12 @@
-import { Model } from 'ember-data';
+import DS from 'ember-data';
 import { A } from '@ember/array';
 import { computed } from '@ember/object';
 
 import { attr, hasMany } from 'ember-decorators/data';
 
 import sumAmounts from '../utils/sum-amounts';
+
+const { Model } = DS;
 
 const sumAccountsProperty = dependentKey =>
   computed(`accounts.@each.${dependentKey}`, {

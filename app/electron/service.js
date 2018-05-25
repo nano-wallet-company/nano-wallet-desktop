@@ -1,11 +1,11 @@
 import Service from '@ember/service';
 import Evented from '@ember/object/evented';
-import { get } from '@ember/object';
+import { get, computed } from '@ember/object';
 
 import { Promise } from 'rsvp';
 import { defineError } from 'ember-exex/error';
+import { DisposableMixin } from 'ember-lifeline';
 import { service } from 'ember-decorators/service';
-import { computed } from 'ember-decorators/object';
 import { on } from 'ember-decorators/object/evented';
 
 import isElectron from '../utils/is-electron';
@@ -28,21 +28,24 @@ const NodeError = defineError({
   extends: ElectronError,
 });
 
-export default Service.extend(Evented, {
+export default Service.extend(Evented, DisposableMixin, {
+  @service intl: null,
   @service config: null,
 
   remote: null,
   ipcRenderer: null,
 
-  @computed
-  get isElectron() {
-    return isElectron();
-  },
+  isElectron: computed({
+    get() {
+      return isElectron();
+    },
+  }).volatile(),
 
-  @computed
-  get platform() {
-    return getPlatform();
-  },
+  platform: computed({
+    get() {
+      return getPlatform();
+    },
+  }).volatile(),
 
   @on('init')
   setup() {
@@ -51,11 +54,27 @@ export default Service.extend(Evented, {
       const { remote, ipcRenderer } = requireNode('electron');
       this.remote = remote;
       this.ipcRenderer = ipcRenderer;
-      this.ipcRenderer.on('node-error', this.onNodeError.bind(this));
-      this.ipcRenderer.on('download-error', this.onDownloadError.bind(this));
-      this.ipcRenderer.on('download-progress', this.onDownloadProgress.bind(this));
-      this.ipcRenderer.on('download-verify', this.onDownloadVerify.bind(this));
-      this.ipcRenderer.on('download-extract', this.onDownloadExtract.bind(this));
+
+      const onNodeError = this.onNodeError.bind(this);
+      const onNodeExit = this.onNodeExit.bind(this);
+      const onDownloadError = this.onDownloadError.bind(this);
+      const onDownloadProgress = this.onDownloadProgress.bind(this);
+      const onDownloadVerify = this.onDownloadVerify.bind(this);
+      const onDownloadExtract = this.onDownloadExtract.bind(this);
+      ipcRenderer.on('node-error', onNodeError);
+      ipcRenderer.on('node-exit', onNodeExit);
+      ipcRenderer.on('download-error', onDownloadError);
+      ipcRenderer.on('download-progress', onDownloadProgress);
+      ipcRenderer.on('download-verify', onDownloadVerify);
+      ipcRenderer.on('download-extract', onDownloadExtract);
+      this.registerDisposable(() => {
+        ipcRenderer.removeListener('node-error', onNodeError);
+        ipcRenderer.removeListener('node-exit', onNodeExit);
+        ipcRenderer.removeListener('download-error', onDownloadError);
+        ipcRenderer.removeListener('download-progress', onDownloadProgress);
+        ipcRenderer.removeListener('download-verify', onDownloadVerify);
+        ipcRenderer.removeListener('download-extract', onDownloadExtract);
+      });
     }
   },
 
@@ -63,21 +82,36 @@ export default Service.extend(Evented, {
     return (this.get('isElectron') && this.remote.getGlobal(key)) || defaultValue;
   },
 
-  isNodeDownloaded() {
-    return this.getRemoteGlobal('isNodeDownloaded', false);
-  },
+  locale: computed('remote', 'intl.locale', {
+    get() {
+      const defaultLocale = this.get('intl.locale');
+      return this.getRemoteGlobal('locale', defaultLocale);
+    },
+  }).volatile(),
 
-  isDataDownloaded() {
-    return this.getRemoteGlobal('isDataDownloaded', false);
-  },
+  isNodeDownloaded: computed('remote', {
+    get() {
+      return this.getRemoteGlobal('isNodeDownloaded', false);
+    },
+  }).volatile(),
 
-  isNodeStarted() {
-    return this.getRemoteGlobal('isNodeStarted', false);
-  },
+  isDataDownloaded: computed('remote', {
+    get() {
+      return this.getRemoteGlobal('isDataDownloaded', false);
+    },
+  }).volatile(),
 
-  authorizationToken() {
-    return this.getRemoteGlobal('authorizationToken', false);
-  },
+  isNodeStarted: computed('remote', {
+    get() {
+      return this.getRemoteGlobal('isNodeStarted', false);
+    },
+  }).volatile(),
+
+  authorizationToken: computed('remote', {
+    get() {
+      return this.getRemoteGlobal('authorizationToken', null);
+    },
+  }).volatile(),
 
   download(asset) {
     return new Promise((resolve) => {
@@ -86,7 +120,7 @@ export default Service.extend(Evented, {
       const ipcRenderer = this.get('ipcRenderer');
       const { url, integrity } = get(config, `assets.${asset}.${platform}`);
       ipcRenderer.once('download-progress', () => resolve(this));
-      ipcRenderer.once('download-done', this.onDownloadFinished.bind(this));
+      ipcRenderer.once('download-done', this.onDownloadDone.bind(this));
       ipcRenderer.send('download-start', url, integrity);
     });
   },
@@ -99,8 +133,17 @@ export default Service.extend(Evented, {
     });
   },
 
+  relaunch() {
+    const ipcRenderer = this.get('ipcRenderer');
+    return ipcRenderer.sendSync('relaunch');
+  },
+
   onNodeError(event, err) {
     this.trigger('error', new NodeError(err));
+  },
+
+  onNodeExit() {
+    this.trigger('exit');
   },
 
   onDownloadError(event, err) {
@@ -119,7 +162,7 @@ export default Service.extend(Evented, {
     this.trigger('verify');
   },
 
-  onDownloadFinished() {
+  onDownloadDone() {
     this.trigger('done');
   },
 });

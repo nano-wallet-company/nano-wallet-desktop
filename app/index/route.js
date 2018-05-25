@@ -1,35 +1,39 @@
 import Route from '@ember/routing/route';
 import { get } from '@ember/object';
 
+import Configuration from 'ember-simple-auth/configuration';
+
 import { service } from 'ember-decorators/service';
+
+const { authenticationRoute } = Configuration;
 
 export default Route.extend({
   @service session: null,
   @service electron: null,
 
-  beforeModel() {
+  beforeModel(...args) {
     const electron = this.get('electron');
     const isElectron = get(electron, 'isElectron');
     if (isElectron) {
-      const isNodeStarted = electron.isNodeStarted();
+      const isNodeStarted = get(electron, 'isNodeStarted');
       if (!isNodeStarted) {
         return this.transitionTo('start');
       }
     }
 
-    return true;
+    return this._super(...args);
   },
 
   afterModel() {
     const session = this.get('session');
     const wallet = get(session, 'data.wallet');
-    const isAuthenticated = get(session, 'isAuthenticated');
     if (!wallet) {
       return this.transitionTo('setup');
     }
 
+    const isAuthenticated = get(session, 'isAuthenticated');
     if (wallet && !isAuthenticated) {
-      return this.transitionTo('login');
+      return this.transitionTo(authenticationRoute);
     }
 
     return this.transitionTo('wallets', wallet);

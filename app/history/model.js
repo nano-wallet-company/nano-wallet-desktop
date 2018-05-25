@@ -1,6 +1,8 @@
-import { Model } from 'ember-data';
+import DS from 'ember-data';
 
 import { attr, belongsTo } from 'ember-decorators/data';
+
+const { Model } = DS;
 
 export default Model.extend({
   @belongsTo('account', { async: true }) source: null,

@@ -1,4 +1,5 @@
 import Route from '@ember/routing/route';
+import { get } from '@ember/object';
 
 import { service } from 'ember-decorators/service';
 import { action } from 'ember-decorators/object';
@@ -12,14 +13,15 @@ export default Route.extend({
     },
   },
 
-  // eslint-disable-next-line consistent-return
-  beforeModel() {
+  beforeModel(...args) {
     const electron = this.get('electron');
-    const isNodeDownloaded = electron.isNodeDownloaded();
-    const isDataDownloaded = electron.isDataDownloaded();
+    const isNodeDownloaded = get(electron, 'isNodeDownloaded');
+    const isDataDownloaded = get(electron, 'isDataDownloaded');
     if (isNodeDownloaded && isDataDownloaded) {
       return this.transitionTo('setup.start');
     }
+
+    return this._super(...args);
   },
 
   model({ asset }) {

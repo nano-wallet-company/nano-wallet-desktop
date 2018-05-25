@@ -10,6 +10,7 @@ import getTimestamp from '../utils/get-timestamp';
 export const actions = {
   VERSION: 'version',
   WALLET_CREATE: 'wallet_create',
+  WALLET_LOCK: 'wallet_lock',
   WALLET_LOCKED: 'wallet_locked',
   WALLET_BALANCES: 'wallet_balances',
   WALLET_BALANCE_TOTAL: 'wallet_balance_total',
@@ -96,6 +97,11 @@ export default Service.extend({
 
   walletCreate() {
     return this.call(actions.WALLET_CREATE);
+  },
+
+  async walletLock(wallet) {
+    const { locked } = await this.call(actions.WALLET_LOCK, { wallet });
+    return locked === '1';
   },
 
   async walletLocked(wallet) {

@@ -4,10 +4,10 @@
 
 @import "ember-power-select";
 
-html, body {
+body {
   border-radius: 10px;
-  -webkit-app-region: drag;
   overflow: hidden;
+  -webkit-app-region: drag;
 }
 
 @import "colors";
