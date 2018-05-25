@@ -2,5 +2,5 @@
   wallet=model
   type=type
   onChange=(route-action 'changeType')
-  onSubmit=(action (queue (route-action 'saveWallet') (route-action 'changeSeed')))
+  onSubmit=(action (route-action 'changeSeed'))
   onCancel=(route-action 'cancel')}}

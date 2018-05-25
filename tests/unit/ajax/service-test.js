@@ -6,6 +6,7 @@ describe('Unit | Service | ajax', () => {
   setupTest('service:ajax', {
     // Specify the other units that are required for this test.
     needs: [
+      'service:intl',
       'service:session',
       'service:hostManager',
       'service:electron',

@@ -9,6 +9,20 @@ import generateSeed from '../../utils/generate-seed';
 
 export default Route.extend({
   @service rpc: null,
+  @service electron: null,
+
+  beforeModel(...args) {
+    const electron = this.get('electron');
+    const isElectron = get(electron, 'isElectron');
+    if (isElectron) {
+      const isNodeStarted = get(electron, 'isNodeStarted');
+      if (!isNodeStarted) {
+        return this.transitionTo('setup.start');
+      }
+    }
+
+    return this._super(...args);
+  },
 
   model() {
     const wallet = this.modelFor('setup').save();

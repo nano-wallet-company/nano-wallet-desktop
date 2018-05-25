@@ -1,5 +1,7 @@
 import DS from 'ember-data';
 
-export default DS.JSONSerializer.extend({
+const { JSONSerializer } = DS;
+
+export default JSONSerializer.extend({
   primaryKey: 'hash',
 });

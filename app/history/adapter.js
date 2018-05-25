@@ -2,7 +2,9 @@ import DS from 'ember-data';
 
 import { service } from 'ember-decorators/service';
 
-export default DS.Adapter.extend({
+const { Adapter } = DS;
+
+export default Adapter.extend({
   @service rpc: null,
 
   query(store, type, { account, count = 10 }) {

@@ -8,22 +8,23 @@ export default Route.extend({
   @service session: null,
   @service electron: null,
 
-  // eslint-disable-next-line consistent-return
-  beforeModel() {
+  beforeModel(...args) {
+    const electron = this.get('electron');
+    const isElectron = get(electron, 'isElectron');
+    if (isElectron) {
+      const isNodeStarted = get(electron, 'isNodeStarted');
+      if (!isNodeStarted) {
+        return this.transitionTo('setup.start');
+      }
+    }
+
     const session = this.get('session');
     const isAuthenticated = get(session, 'isAuthenticated');
     if (isAuthenticated) {
       return session.invalidate();
     }
 
-    const electron = this.get('electron');
-    const isElectron = get(electron, 'isElectron');
-    if (isElectron) {
-      const isNodeStarted = electron.isNodeStarted();
-      if (!isNodeStarted) {
-        return this.transitionTo('setup.start');
-      }
-    }
+    return this._super(...args);
   },
 
   @action

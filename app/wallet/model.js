@@ -6,6 +6,8 @@ import { attr, hasMany } from 'ember-decorators/data';
 
 import sumAmounts from '../utils/sum-amounts';
 
+const { Model } = DS;
+
 const sumAccountsProperty = dependentKey =>
   computed(`accounts.@each.${dependentKey}`, {
     get() {
@@ -15,7 +17,7 @@ const sumAccountsProperty = dependentKey =>
     },
   });
 
-export default DS.Model.extend({
+export default Model.extend({
   @hasMany('account', { async: true }) accounts: null,
 
   @attr seed: null,

@@ -13,17 +13,17 @@ export default Route.extend(AuthenticatedRouteMixin, {
   @service rpc: null,
   @service flashMessages: null,
 
-  beforeModel() {
+  beforeModel(...args) {
     const electron = this.get('electron');
     const isElectron = get(electron, 'isElectron');
     if (isElectron) {
-      const isNodeStarted = electron.isNodeStarted();
+      const isNodeStarted = get(electron, 'isNodeStarted');
       if (!isNodeStarted) {
         return this.transitionTo('start');
       }
     }
 
-    return true;
+    return this._super(...args);
   },
 
   setupController(controller, model) {

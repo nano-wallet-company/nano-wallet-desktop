@@ -1,10 +1,10 @@
 import DS from 'ember-data';
-
 import { hash } from 'ember-concurrency';
-
 import { service } from 'ember-decorators/service';
 
-export default DS.Adapter.extend({
+const { Adapter } = DS;
+
+export default Adapter.extend({
   @service rpc: null,
 
   shouldReloadRecord() {
