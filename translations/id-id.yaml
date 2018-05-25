@@ -65,20 +65,20 @@ wallets:
     invalidPassword: 'Kata Sandi Salah!'
   backup:
     title: 'Cadangkan Benih'
-    lead: "Ini adalah cara baru Anda mengenali mnemonik benih untuk dompet baru Anda:"
+    lead: 'Ini adalah cara baru Anda mengenali mnemonik benih untuk dompet baru Anda:'
     copy: 'Salin Benih'
     copied: 'Benih Tersalin kedalam papan klip!'
     download: 'Unduh'
     help: >
-      Patuhi praktik terbaik dengan menulis secara fisik mnemonik benih Anda di selembar kertas dan 
+      Patuhi praktik terbaik dengan menulis secara fisik mnemonik benih Anda di selembar kertas dan
       menyimpannya di lokasi yang aman untuk pengambilan yang aman jika nanti Anda kehilangan benih Anda.
-    confirm: "Apakah Anda yakin Anda telah menulis mnemonik Anda?"
+    confirm: 'Apakah Anda yakin Anda telah menulis mnemonik Anda?'
   import:
     title: 'Impor Dompet'
     copied: 'Benih Tersalin kedalam papan klip!'
     help:
-      seed: "64 hex karakter wallet anda."
-      mnemonic: "BIP39 mnemonik wallet anda."
+      seed: '64 hex karakter wallet anda.'
+      mnemonic: 'BIP39 mnemonik wallet anda.'
   password:
     title: 'Kata Sandi Dompet'
     submit: 'Atur Kata Sandi'
@@ -103,17 +103,17 @@ wallets:
     representativeChanged: 'Perwakilan Dompet berhasil diubah!'
     representativeChangeFailed: 'Perwakilan Dompet gagal diubah!'
     passwordChanged: 'Kata Sandi berhasil diubah!'
-    passwordsDontMatch: "Kata sandi tidak cocok!"
+    passwordsDontMatch: 'Kata sandi tidak cocok!'
   logout:
     title: 'Konfirmasi Keluar'
     lead: 'Apakah anda yakin akan keluar?'
     warning: >
-      <strong>Peringatan</strong>: Jika Anda logout dan kemudian tidak ingat kata sandi Anda, 
+      <strong>Peringatan</strong>: Jika Anda logout dan kemudian tidak ingat kata sandi Anda,
       Anda harus mengimpor ulang dompet Anda menggunakan benih Anda!
 setup:
-  lead: "Ayo siapkan dompet anda."
+  lead: 'Ayo siapkan dompet anda.'
   instructions: >
-    Untuk mulai menggunakan Nano Desktop, Anda harus terlebih dahulu membuat dompet baru 
+    Untuk mulai menggunakan Nano Desktop, Anda harus terlebih dahulu membuat dompet baru
     atau mengimpor data dompet Anda menggunakan benih.
   create: 'Buat Dompet Baru'
   or: 'atau'

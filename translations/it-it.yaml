@@ -65,32 +65,32 @@ wallets:
     invalidPassword: 'Password Errata!'
   backup:
     title: 'Backup del Seed'
-    lead: "Ecco il tuo nuovo mnemonic seed per il tuo wallet, facile da riconoscere:"
+    lead: 'Ecco il tuo nuovo mnemonic seed per il tuo wallet, facile da riconoscere:'
     copy: 'Copia Seed'
     copied: 'Seed copiato sulla clipboard!'
     download: 'Download'
     help: >
       Ti suggeriamo di scrivere fisicamente il tuo seed mnemonic su almeno un foglio di carta e
-      conservare tale foglo in un luogo sicuro, in modo da consentirne il recupero nel caso di necessità.
-    confirm: "Sei sicuro di aver manualmente scritto il tuo mnemonic?"
+      conservare tale foglo in un luogo sicuro, in modo da consentirne il recupero nel caso di necessitï¿½.
+    confirm: 'Sei sicuro di aver manualmente scritto il tuo mnemonic?'
   import:
     title: 'Importa Wallet'
     copied: 'Seed copiato sulla clipboard!'
     help:
       seed: "L'hex seed da 64 caratteri del tuo wallet."
-      mnemonic: "Il mnemonic BIP39 del tuo wallet."
+      mnemonic: 'Il mnemonic BIP39 del tuo wallet.'
   password:
     title: 'Password del wallet'
     submit: 'Imposta Password'
   accounts:
-    cannotDelete: 'Non è possibile cancellare un account con un saldo presente!'
+    cannotDelete: 'Non ï¿½ possibile cancellare un account con un saldo presente!'
     send:
       source: 'Account di provenienza'
       search: 'Cerca account'
       destination: 'Account di destinazione'
       placeholder: 'Indirizzo (e.g. xrb_...)'
       amount: 'Somma (NANO)'
-      insufficient: 'La somma supera il saldo totale dell'account'
+      insufficient: "La somma supera il saldo totale dell'account"
     history:
       none: 'Nessun storico presente'
   overview:
@@ -103,15 +103,15 @@ wallets:
     representativeChanged: 'Representative del Wallet cambiato!'
     representativeChangeFailed: 'Modifica del Representative fallita!'
     passwordChanged: 'Password modificata!'
-    passwordsDontMatch: "Le Password non corrispondono!"
+    passwordsDontMatch: 'Le Password non corrispondono!'
   logout:
     title: 'Conferma Logout'
     lead: 'Sei sicuro di voler eseguire il logout?'
     warning: >
-      <strong>Attenzione</strong>: Se esegui il logout e successivamente non ricordi la password, 
+      <strong>Attenzione</strong>: Se esegui il logout e successivamente non ricordi la password,
       dovrai re-importare il tuo wallet usando il seed!
 setup:
-  lead: "Impostiamo il tuo wallet."
+  lead: 'Impostiamo il tuo wallet.'
   instructions: >
     Per iniziare ad usare Nano Desktop, dovrai prima creare un nuovo wallet o importare un wallet
     usando il seed.

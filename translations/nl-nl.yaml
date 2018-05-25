@@ -32,7 +32,7 @@ node: 'node'
 data: 'data'
 downloading: '{asset} aan het downloaden...'
 verifying: '{asset} aan het verifiëren...'
-extracting: 'asset} aan het uitpakken...'
+extracting: '{asset} aan het uitpakken...'
 starting: 'Opstarten van de node'
 currency: '{amount}'
 copyAddress: 'Kopieer adres'
@@ -65,20 +65,20 @@ wallets:
     invalidPassword: 'Ongeldig wachtwoord!'
   backup:
     title: 'Back-up Seed'
-    lead: "Hier is jouw nieuw, makkelijk te onthouden seed mnemonic voor jouw nieuwe portemonnee:"
+    lead: 'Hier is jouw nieuw, makkelijk te onthouden seed mnemonic voor jouw nieuwe portemonnee:'
     copy: 'Kopieer Seed'
     copied: 'Seed gekopieerd naar klipbord!'
     download: 'Download'
     help: >
       Houd u aan de beste richtlijnen door fysiek uw seed mnemonic op te schrijven op een stuk papier
       en het ergens op een veilige locatie op te bergen, moest u later uw seed vergeten of zijn kwijtgespeeld.
-    confirm: "Bent u zeker dat u uw mnemonic heeft opgeschreven?"
+    confirm: 'Bent u zeker dat u uw mnemonic heeft opgeschreven?'
   import:
     title: 'Importeer Portemonnee'
     copied: 'Seed gekopieerd naar klipbord'
     help:
-      seed: "64 karakter hexidecimaal seed van jouw portemonnee."
-      mnemonic: "BIP39 mnemonic van jouw portemonnee."
+      seed: '64 karakter hexidecimaal seed van jouw portemonnee.'
+      mnemonic: 'BIP39 mnemonic van jouw portemonnee.'
   password:
     title: 'Portemonnee Wachtwoord'
     submit: 'Stel wachtwoord in'
@@ -103,14 +103,14 @@ wallets:
     representativeChanged: 'Portemonnee Vertegenwoordiger veranderd!'
     representativeChangeFailed: 'Vertegenwoordiger veranderen is gefaald!'
     passwordChanged: 'Wachtwoord veranderd!'
-    passwordsDontMatch: "Wachtwoorden komen niet overeen!"
+    passwordsDontMatch: 'Wachtwoorden komen niet overeen!'
   logout:
     title: 'Bevestig Afmelden'
     lead: 'Bent u zeker dat u wilt afmelden?'
     warning: >
       <strong>Pas op</strong>: Indien u zich afmeld en later uw wachtwoord vergeet, zal u uw portemonnee moeten herimporteren gebruik makende van uw seed! I
 setup:
-  lead: "Laten we starten met het opzetten van uw portemonnee."
+  lead: 'Laten we starten met het opzetten van uw portemonnee.'
   instructions: >
     Om Nano Desktop te kunnen gebruiken, moet u eerst een nieuwe portemonnee aanmaken ofwel uw bestaande portemonnee importeren gebruik makende van uw seed.
   create: 'Maak nieuwe portemonnee aan'

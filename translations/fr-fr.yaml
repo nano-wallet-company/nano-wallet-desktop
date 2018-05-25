@@ -35,8 +35,8 @@ verifying: 'Vérifiation {asset}...'
 extracting: 'Extraction {asset}...'
 starting: 'Lancement du noeud'
 currency: '{amount}'
-copyAddress: 'Copier l'adresse
-addressCopied: 'Adresse copiée : {address}'
+copyAddress: "Copier l'adresse"
+addressCopied: 'Adresse copiée: {address}'
 status:
   state: 'Statut'
   online: 'En ligne'
@@ -52,7 +52,7 @@ EUR: 'EUR'
 walletSettings: 'Paramètres du portefeuille'
 editAccountSettings: 'Modifier les paramètres du compte'
 accountSettings: 'Paramètres du compte'
-accountSettingsSaved: 'Les paramètres du compte ont été sauvegardés !'
+accountSettingsSaved: 'Les paramètres du compte ont été sauvegardés!'
 unknown: '(inconnu)'
 label: 'Étiquette'
 login:
@@ -62,22 +62,22 @@ login:
 wallets:
   unlock:
     unlockWallet: 'Déverouiller le portefeuille'
-    invalidPassword: 'Mot de passe incorrect !'
+    invalidPassword: 'Mot de passe incorrect!'
   backup:
     title: 'Sauvergarde de la seed'
-    lead: "Voici votre nouvelle seed mnémotechnique facile à reconnaître :"
+    lead: 'Voici votre nouvelle seed mnémotechnique facile à reconnaître:'
     copy: 'Copier la seed'
-    copied: 'Seed copiée dans le presse-papier !'
+    copied: 'Seed copiée dans le presse-papier!'
     download: 'Téléchargement'
     help: >
       Conformez vous aux meilleures pratiques en écrivant votre seed mnémotechnique sur une feuille de papier et en conservant celle-ci dans un endroit sûr pour une récupération sécurisée en cas de perte de la seed.
-    confirm: "Avez vous bien écrit votre seed mnémotechnique ?"
+    confirm: 'Avez vous bien écrit votre seed mnémotechnique?'
   import:
     title: 'Importer un portefeuille'
-    copied: 'Seed copiée dans le presse-papier !'
+    copied: 'Seed copiée dans le presse-papier!'
     help:
-      seed: "La seed de 64 caractères hexadécimaux de votre portefeuille"
-      mnemonic: "La phrase mnémotechnique BIP39 de votre portefeuille."
+      seed: 'La seed de 64 caractères hexadécimaux de votre portefeuille'
+      mnemonic: 'La phrase mnémotechnique BIP39 de votre portefeuille.'
   password:
     title: 'Mot de passe du portefeuille'
     submit: 'Définir le mot de passe'
@@ -91,25 +91,25 @@ wallets:
       amount: 'Montant (NANO)'
       insufficient: 'Le montant est plus important que le solde total du compte'
     history:
-      none: ' Aucun historique
+      none: 'Aucun historique'
   overview:
     none: 'Aucun compte dans le portefeuille.'
     create: 'Créer un compte'
-    created: 'Nouveau compte créé !'
+    created: 'Nouveau compte créé!'
   settings:
     changeRepresentative: 'Modification du représentant'
     changePassword: 'Modifier le mot de passe'
-    representativeChanged: 'Représentant modifié !'
-    representativeChangeFailed: 'Le changement de représentant a échoué !'
-    passwordChanged: 'Mot de passe modifié !'
-    passwordsDontMatch: "Les mots de passe ne concordent pas !"
+    representativeChanged: 'Représentant modifié!'
+    representativeChangeFailed: 'Le changement de représentant a échoué!'
+    passwordChanged: 'Mot de passe modifié!'
+    passwordsDontMatch: 'Les mots de passe ne concordent pas!'
   logout:
     title: 'Confirmer la déconnexion'
-    lead: 'Êtes-vous sûr de vouloir vous déconnecter ?'
+    lead: 'Êtes-vous sûr de vouloir vous déconnecter?'
     warning: >
-      <strong>Warning</strong>: Si vous vous déconnectez et que plus tard vous ne vous souvenez plus de votre mot de passe, vous devrez réimporter votre portefeuille à l'aide de votre seed !
+      <strong>Attention</strong>: Si vous vous déconnectez et que plus tard vous ne vous souvenez plus de votre mot de passe, vous devrez réimporter votre portefeuille à l'aide de votre seed!
 setup:
-  lead: "Configurons votre portefeuille."
+  lead: 'Configurons votre portefeuille.'
   instructions: >
     Pour commencer à utiliser l'application Nano, veuillez créer un nouveau portefeuille ou importer les données d'un portefeuille existant à l'aide d'une seed.
   create: 'Créer un nouveau portefeuille'

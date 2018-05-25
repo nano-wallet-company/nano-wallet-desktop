@@ -65,20 +65,20 @@ wallets:
     invalidPassword: 'Senha inválida!'
   backup:
     title: 'Cópia de segurança da semente'
-    lead: "Aqui está o seu novo mnemônico de sementes fácil de reconhecer para sua nova carteira:"
+    lead: 'Aqui está o seu novo mnemônico de sementes fácil de reconhecer para sua nova carteira:'
     copy: 'Copiar Semente'
     copied: 'Semente copiada para o clipboard'
     download: 'Baixar'
     help: >
       Siga as práticas recomendadas escrevendo fisicamente seu mnemônico de sementes em um pedaço de papel e
-      armazene em um local seguro para uma recuperação segura caso você perca sua semente mais tarde.
-    confirm: "Você tem certeza que escreveu o seu mnemônico?"
+      armazene em um local seguro para uma recuperação segura caso você perca sua semente mais tarde.
+    confirm: 'Você tem certeza que escreveu o seu mnemônico?'
   import:
     title: 'Importar Carteira'
     copied: 'Semente copiada para o clipboard'
     help:
-      seed: "Sua carteira tem sementes hexadecimais de 64 caracteres"
-      mnemonic: "Sua mnemônica da carteira BIP39"
+      seed: 'Sua carteira tem sementes hexadecimais de 64 caracteres'
+      mnemonic: 'Sua mnemônica da carteira BIP39'
   password:
     title: 'Senha da Carteira'
     submit: 'Estabelecer senha'
@@ -103,14 +103,14 @@ wallets:
     representativeChanged: 'Representante da carteira foi mudado!'
     representativeChangeFailed: 'A troca de representante falhou!'
     passwordChanged: 'Senha trocada!'
-    passwordsDontMatch: "Senhas não correspondem"
+    passwordsDontMatch: 'Senhas não correspondem'
   logout:
     title: 'Confirmar logout'
     lead: 'Você tem certeza que deseja realizar o logout?'
     warning: >
       <strong>Atenção</strong>: Se você realizar logout e depois não se lembrar de sua senha, você terá que reimportar sua carteira usando sua seed!
 setup:
-  lead: "Vamos configurar sua carteira!"
+  lead: 'Vamos configurar sua carteira!'
   instructions: >
     Para começar usar a carteira desktop da Nano você deve primeiramente criar uma nova carteira ou importar uma carteira existente usando uma semente.
   create: 'Criar nova carteira'
