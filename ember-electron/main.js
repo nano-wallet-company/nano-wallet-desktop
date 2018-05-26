@@ -7,6 +7,7 @@ const { promisify } = require('util');
 
 const electron = require('electron');
 const fs = require('graceful-fs');
+const del = require('del');
 const spawn = require('cross-spawn');
 const ssri = require('ssri');
 const spdy = require('spdy');
@@ -15,6 +16,7 @@ const helmet = require('helmet');
 const connect = require('connect');
 const locale2 = require('locale2');
 const username = require('username');
+const semver = require('semver');
 const cpFile = require('cp-file');
 const makeDir = require('make-dir');
 const getPort = require('get-port');
@@ -58,7 +60,7 @@ const { download } = require('electron-dl');
 const { appReady } = require('electron-util');
 const { default: installExtension, EMBER_INSPECTOR } = require('electron-devtools-installer');
 
-const { productName } = require('../package.json');
+const { version, productName } = require('../package');
 
 let mainWindow = null;
 
@@ -335,6 +337,12 @@ ipcMain.on('relaunch', () => {
 const run = async () => {
   const dataPath = path.resolve(app.getPath('userData'));
   const configPath = path.join(dataPath, 'config.json');
+  const nodePath = path.join(dataPath, toExecutableName('rai_node'));
+  const databasePath = path.join(dataPath, 'data.ldb');
+  if (semver.lte(version, '1.0.0-beta.8')) {
+    await del([configPath, nodePath, databasePath]);
+  }
+
   let config = {};
   try {
     config = await loadJsonFile(configPath);
@@ -400,14 +408,12 @@ const run = async () => {
     },
   });
 
-  const nodePath = path.join(dataPath, toExecutableName('rai_node'));
   Object.defineProperty(global, 'isNodeDownloaded', {
     get() {
       return pathExists.sync(nodePath);
     },
   });
 
-  const databasePath = path.join(dataPath, 'data.ldb');
   Object.defineProperty(global, 'isDataDownloaded', {
     get() {
       return pathExists.sync(databasePath);

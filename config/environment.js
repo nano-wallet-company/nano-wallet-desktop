@@ -49,16 +49,16 @@ module.exports = (environment) => {
     assets: {
       node: {
         darwin: {
-          url: 'https://s3-us-west-1.amazonaws.com/nano-wallet-desktop/node-darwin-c8d0b5c149f50b7939452cd232cb94c8.zip',
-          integrity: 'sha512-3AVLmOkD9HO9cnzDXMhg876tDbCv/Hr32HL9Mu3AoZgPQkNHuTSCr9rAkfNZIRLW/acJLlSsJCmB+/DEK1q73A==',
+          url: 'https://s3-us-west-1.amazonaws.com/nano-wallet-desktop/node-darwin-aa7f39f6b0076b0608b07415912f1c3e.zip',
+          integrity: 'sha512-dwnPh8B9SNQlyjKnggbTmc7Pu9HXvlnv99hoQpAwrNAsTX27XNqUYfl3BplpV9OFJ0djt9rlMxr9IcfrfKmkww==',
         },
         linux: {
-          url: 'https://s3-us-west-1.amazonaws.com/nano-wallet-desktop/node-linux-48ea65d2afdef202f1f82aa1e78529fe.zip',
-          integrity: 'sha512-omWo9SinujtvDXPCIjIaoVfx0c/nmEAgibLQWMXen1sJJycpOOaQCqOYyphYITgL42Pq/fu10hMnxhDxUZWm8A==',
+          url: 'https://s3-us-west-1.amazonaws.com/nano-wallet-desktop/node-linux-d88c89ce31509177bfafeaf98832f4de.zip',
+          integrity: 'sha512-XeUD0VML6NHf3idfgWOcuG7jxJPXzfJrm2fFXgiEUkrjFGwtLj1MMO2GB1sGjLK0P/v98ao1LHdRhkddqqddYA==',
         },
         win32: {
-          url: 'https://s3-us-west-1.amazonaws.com/nano-wallet-desktop/node-win32-e9793b8ab064b5de72100ca497a9286a.zip',
-          integrity: 'sha512-fFRh61vRVhmSqE+tVaQCnIjEV2TEwkNlll2IDsNLDLEI8LFPaP6KRDY5VVCj8jbFm+VJBseIIXhwd8Rcz6O/Ow==',
+          url: 'https://s3-us-west-1.amazonaws.com/nano-wallet-desktop/node-win32-35d221ee802e6428fba1aa144e82d1f5.zip',
+          integrity: 'sha512-o0Scn1GkPypJrTeGO9zOkcWRV0C/xnYp+vstjB+KKEGZ2LgYho1vqczz3ksQRkfMoIuoHghDJEXVl/3MBYfojw==',
         },
       },
       data: {

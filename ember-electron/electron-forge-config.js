@@ -1,6 +1,8 @@
 const path = require('path');
 
-const { productName, name: packageName } = require('../package');
+const semver = require('semver');
+
+const { version, productName, name: packageName } = require('../package');
 
 const [name] = packageName.split('/').slice(-1);
 const icon = path.join(__dirname, 'icons', 'app');
@@ -24,13 +26,20 @@ module.exports = {
   electronPackagerConfig: {
     icon,
     asar: true,
+    ignore: ['\\.xml$'],
     packageManager: 'yarn',
   },
   electronWinstallerConfig: {
     name,
+    noMsi: false,
     exe: `${productName}.exe`,
+    version: String(semver.coerce(version)),
+    setupExe: `${productName} ${version} Setup.exe`,
+    setupMsi: `${productName} ${version} Setup.msi`,
   },
-  electronInstallerDMG: {},
+  electronInstallerDMG: {
+    format: 'ULFO',
+  },
   electronInstallerDebian: {
     name,
   },

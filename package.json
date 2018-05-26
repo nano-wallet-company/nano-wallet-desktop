@@ -1,7 +1,7 @@
 {
   "name": "@nanocurrency/nano-desktop",
-  "version": "1.0.0-beta.7",
-  "productName": "Nano Desktop",
+  "version": "1.0.0.0",
+  "productName": "NanoDesktop",
   "description": "The official Nano wallet for desktop and web",
   "license": "BSD-2-Clause",
   "author": "Nano <desktop@nano.org>",
@@ -33,7 +33,7 @@
     }
   },
   "build": {
-    "appId": "org.nano.wallet"
+    "appId": "org.nano.desktop"
   },
   "lint-staged": {
     "*.js": [
@@ -57,6 +57,7 @@
     "cors": "^2.8.4",
     "cp-file": "^6.0.0",
     "debounce-fn": "^1.0.0",
+    "del": "^3.0.0",
     "electron-compile": "^6.4.2",
     "electron-context-menu": "^0.9.1",
     "electron-debug": "^1.5.0",
@@ -82,6 +83,7 @@
     "normalize-newline": "^3.0.0",
     "path-exists": "^3.0.0",
     "selfsigned": "^1.10.3",
+    "semver": "^5.5.0",
     "signal-exit": "^3.0.2",
     "spdy": "^3.4.7",
     "ssri": "^6.0.0",
@@ -125,7 +127,7 @@
     "ember-cli": "^3.1.4",
     "ember-cli-app-version": "^3.2.0",
     "ember-cli-autoprefixer": "^0.8.1",
-    "ember-cli-babel": "^6.12.0",
+    "ember-cli-babel": "^6.14.0",
     "ember-cli-build-notifications": "^0.3.0",
     "ember-cli-chai": "^0.5.0",
     "ember-cli-clipboard": "^0.9.0",
