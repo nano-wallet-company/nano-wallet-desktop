@@ -1,7 +1,7 @@
 {
-  "name": "@nanocurrency/nano-desktop",
+  "name": "nanodesktop",
   "version": "1.0.0.0",
-  "productName": "NanoDesktop",
+  "productName": "nanodesktop",
   "description": "The official Nano wallet for desktop and web",
   "license": "BSD-2-Clause",
   "author": "Nano <desktop@nano.org>",
