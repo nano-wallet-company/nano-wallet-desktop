@@ -2,9 +2,8 @@ const path = require('path');
 
 const semver = require('semver');
 
-const { version, productName, name: packageName } = require('../package');
+const { version, productName, name } = require('../package');
 
-const [name] = packageName.split('/').slice(-1);
 const icon = path.join(__dirname, 'icons', 'app');
 
 module.exports = {
