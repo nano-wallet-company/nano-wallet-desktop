@@ -1,68 +1,16 @@
 /* eslint-env node */
 /* eslint-disable no-console */
-const os = require('os');
-const path = require('path');
-const crypto = require('crypto');
-const { promisify } = require('util');
-
-const electron = require('electron');
-const fs = require('graceful-fs');
-const spawn = require('cross-spawn');
-const ssri = require('ssri');
-const spdy = require('spdy');
-const cors = require('cors');
-const helmet = require('helmet');
-const connect = require('connect');
-const locale2 = require('locale2');
-const username = require('username');
-const cpFile = require('cp-file');
-const makeDir = require('make-dir');
-const getPort = require('get-port');
-const waitPort = require('wait-port');
-const signalExit = require('signal-exit');
-const httpProxy = require('http-proxy');
-const selfsigned = require('selfsigned');
-const expressJwt = require('express-jwt');
-const jsonwebtoken = require('jsonwebtoken');
-const debounceFn = require('debounce-fn');
-const extractZip = require('extract-zip');
-const pathExists = require('path-exists');
-const loadJsonFile = require('load-json-file');
-const writeJsonFile = require('write-json-file');
-const writeFileAtomic = require('write-file-atomic');
-const normalizeNewline = require('normalize-newline');
-const toExecutableName = require('to-executable-name');
-
-const {
-  app,
-  ipcMain,
-  protocol,
-  BrowserWindow,
-} = electron;
-
 const env = process.env.NODE_ENV || process.env.EMBER_ENV || 'production';
-
 if (typeof process.env.ELECTRON_IS_DEV === 'undefined') {
   if (env === 'development') {
     process.env.ELECTRON_IS_DEV = 1;
   }
 }
 
-const isDev = require('electron-is-dev');
+const electron = require('electron');
 const log = require('electron-log');
-const debug = require('electron-debug');
 const unhandled = require('electron-unhandled');
-const contextMenu = require('electron-context-menu');
-const protocolServe = require('electron-protocol-serve');
-const { download } = require('electron-dl');
-const { appReady } = require('electron-util');
-const { default: installExtension, EMBER_INSPECTOR } = require('electron-devtools-installer');
-
-const { productName } = require('../package.json');
-
-let mainWindow = null;
-
-log.transports.rendererConsole.level = 'info';
+const { is, appReady } = require('electron-util');
 
 // Handle an unhandled error in the main thread
 //
@@ -85,6 +33,102 @@ unhandled({
   },
 });
 
+// https://github.com/electron-archive/grunt-electron-installer#handling-squirrel-events
+if (is.windows) {
+  // eslint-disable-next-line global-require
+  if (require('electron-squirrel-startup')) {
+    return;
+  }
+}
+
+const os = require('os');
+const path = require('path');
+const crypto = require('crypto');
+const { promisify } = require('util');
+
+const fs = require('graceful-fs');
+const del = require('del');
+const spawn = require('cross-spawn');
+const ssri = require('ssri');
+const spdy = require('spdy');
+const cors = require('cors');
+const helmet = require('helmet');
+const connect = require('connect');
+const locale2 = require('locale2');
+const username = require('username');
+const semver = require('semver');
+const cpFile = require('cp-file');
+const makeDir = require('make-dir');
+const getPort = require('get-port');
+const waitPort = require('wait-port');
+const signalExit = require('signal-exit');
+const httpProxy = require('http-proxy');
+const selfsigned = require('selfsigned');
+const expressJwt = require('express-jwt');
+const jsonwebtoken = require('jsonwebtoken');
+const debounceFn = require('debounce-fn');
+const extractZip = require('extract-zip');
+const pathExists = require('path-exists');
+const loadJsonFile = require('load-json-file');
+const writeJsonFile = require('write-json-file');
+const writeFileAtomic = require('write-file-atomic');
+const normalizeNewline = require('normalize-newline');
+const toExecutableName = require('to-executable-name');
+
+const debug = require('electron-debug');
+const contextMenu = require('electron-context-menu');
+const protocolServe = require('electron-protocol-serve');
+const { download } = require('electron-dl');
+const { default: installExtension, EMBER_INSPECTOR } = require('electron-devtools-installer');
+
+const {
+  version,
+  productName,
+  homepage,
+  author: { email },
+} = require('../package');
+
+const {
+  app,
+  shell,
+  ipcMain,
+  protocol,
+  Menu,
+  BrowserWindow,
+} = electron;
+
+let mainWindow = null;
+
+log.transports.file.level = 'info';
+log.transports.rendererConsole.level = 'info';
+
+global.locale = locale2 || null;
+global.isNodeDownloaded = false;
+global.isDataDownloaded = false;
+global.isNodeStarted = false;
+global.isQuitting = false;
+global.authorizationToken = null;
+
+app.on('before-quit', () => {
+  global.isQuitting = true;
+});
+
+app.on('quit', () => {
+  global.isQuitting = false;
+});
+
+app.on('window-all-closed', () => {
+  if (!is.macos) {
+    app.quit();
+  }
+});
+
+app.on('activate', () => {
+  if (mainWindow) {
+    mainWindow.show();
+  }
+});
+
 // Registering a protocol & schema to serve our Ember application
 protocol.registerStandardSchemes(['serve'], { secure: true });
 protocolServe({
@@ -101,18 +145,6 @@ protocolServe({
 //     submitURL: 'https://your-domain.com/url-to-submit',
 //     autoSubmit: true
 // });
-
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit();
-  }
-});
-
-global.locale = locale2 || null;
-global.isNodeDownloaded = false;
-global.isDataDownloaded = false;
-global.isNodeStarted = false;
-global.authorizationToken = null;
 
 const extract = promisify(extractZip);
 
@@ -196,8 +228,8 @@ ipcMain.on('node-start', ({ sender }) => {
 
   const removeExitHandler = signalExit(() => child.kill());
   child.once('exit', () => {
-    global.isNodeStarted = false;
     removeExitHandler();
+    global.isNodeStarted = false;
     log.error('[node]', 'Node exited');
     if (!sender.isDestroyed()) {
       sender.send('node-exit');
@@ -296,8 +328,8 @@ ipcMain.on('node-start', ({ sender }) => {
     child.kill();
   });
 
+  app.once('quit', () => server.close());
   child.once('close', () => server.close());
-  mainWindow.once('closed', () => server.close());
 
   Object.defineProperty(global, 'isNodeStarted', {
     get() {
@@ -332,9 +364,137 @@ ipcMain.on('relaunch', () => {
   app.exit();
 });
 
+const createWindow = () => {
+  const icon = path.join(process.resourcesPath, 'icon.png');
+  const { workAreaSize: { width, height } } = electron.screen.getPrimaryDisplay();
+  const win = new BrowserWindow({
+    icon,
+    show: false,
+    center: true,
+    darkTheme: true,
+    transparent: true,
+    scrollBounce: true,
+    titleBarStyle: 'hiddenInset',
+    backgroundColor: '#000034',
+    width: Math.min(width, 1366),
+    height: Math.min(height, 768),
+    minWidth: Math.min(width, 240),
+    minHeight: Math.min(width, 320),
+    title: productName,
+    tabbingIdentifier: productName,
+    webPreferences: {
+      webviewTag: false,
+    },
+  });
+
+  win.setAutoHideMenuBar(true);
+  win.setMenuBarVisibility(false);
+
+  const template = [
+    { role: 'editMenu' },
+    {
+      label: 'View',
+      submenu: [
+        { role: 'toggleFullScreen' },
+        { type: 'separator' },
+        { role: 'toggleDevTools' },
+      ],
+    },
+    { role: 'windowMenu' },
+    {
+      role: 'help',
+      submenu: [
+        {
+          label: 'Learn More',
+          click() {
+            return shell.openExternal(homepage);
+          },
+        },
+        {
+          label: 'Report Issue',
+          click() {
+            const subject = `${productName} Issue Report`;
+            const body = `Version: ${version}\r\nPlatform: ${process.platform}`;
+            const url = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            return shell.openExternal(url);
+          },
+        },
+        {
+          label: 'View Logs',
+          click() {
+            const { file } = log.transports.file;
+            return shell.showItemInFolder(file);
+          },
+        },
+      ],
+    },
+  ];
+
+  if (is.macos) {
+    template.unshift({
+      label: productName,
+      submenu: [
+        { role: 'about' },
+        { type: 'separator' },
+        { role: 'hide' },
+        { role: 'hideOthers' },
+        { type: 'separator' },
+        { role: 'quit' },
+      ],
+    });
+  }
+
+  const menu = Menu.buildFromTemplate(template);
+  Menu.setApplicationMenu(menu);
+
+  win.once('ready-to-show', () => win.show());
+
+  win.on('close', (event) => {
+    if (!global.isQuitting) {
+      event.preventDefault();
+      win.hide();
+    }
+  });
+
+  win.on('unresponsive', () => {
+    log.warn('Application has made the window unresponsive');
+  });
+
+  win.on('responsive', () => {
+    log.info('Main window has become responsive again');
+  });
+
+  const emberAppLocation = 'serve://dist';
+
+  // Load the ember application using our custom protocol/scheme
+  win.loadURL(emberAppLocation);
+
+  // If a loading operation goes wrong, we'll send Electron back to
+  // Ember App entry point
+  win.webContents.on('did-fail-load', () => {
+    if (!win.isDestroyed()) {
+      win.loadURL(emberAppLocation);
+    }
+  });
+
+  win.webContents.on('crashed', () => {
+    log.error('Application in the main window has crashed');
+  });
+
+  return win;
+};
+
 const run = async () => {
+  log.info('Starting application');
+
   const dataPath = path.resolve(app.getPath('userData'));
   const configPath = path.join(dataPath, 'config.json');
+  const nodePath = path.join(dataPath, toExecutableName('rai_node'));
+  const databasePath = path.join(dataPath, 'data.ldb');
+  if (!is.development && semver.lte(version, '1.0.0-beta.8')) {
+    await del([configPath, nodePath], { force: true });
+  }
+
   let config = {};
   try {
     config = await loadJsonFile(configPath);
@@ -394,91 +554,39 @@ const run = async () => {
     },
   });
 
+  await appReady;
+
   Object.defineProperty(global, 'locale', {
     get() {
       return app.getLocale() || locale2 || null;
     },
   });
 
-  const nodePath = path.join(dataPath, toExecutableName('rai_node'));
   Object.defineProperty(global, 'isNodeDownloaded', {
     get() {
       return pathExists.sync(nodePath);
     },
   });
 
-  const databasePath = path.join(dataPath, 'data.ldb');
   Object.defineProperty(global, 'isDataDownloaded', {
     get() {
       return pathExists.sync(databasePath);
     },
   });
 
-  await appReady;
-
-  const { width, height } = electron.screen.getPrimaryDisplay().workAreaSize;
-  mainWindow = new BrowserWindow({
-    width: Math.min(width, 1366),
-    height: Math.min(height, 768),
-    minWidth: Math.min(width, 240),
-    minHeight: Math.min(width, 320),
-    // frame: false,
-    center: true,
-    darkTheme: true,
-    transparent: true,
-    scrollBounce: true,
-    // experimentalFeatures: true,
-    // experimentalCanvasFeatures: true,
-    // vibrancy: 'dark',
-    titleBarStyle: 'hiddenInset',
-    backgroundColor: '#000034',
-    title: productName,
-    tabbingIdentifier: productName,
-    webPreferences: {
-      webviewTag: false,
-    },
-  });
-
-  mainWindow.setMenu(null);
-
-  contextMenu({
-    window: mainWindow,
-    showInspectElement: true,
-  });
-
-  if (isDev) {
+  if (is.development) {
     await installExtension(EMBER_INSPECTOR);
   }
 
-  const emberAppLocation = 'serve://dist';
-
-  // Load the ember application using our custom protocol/scheme
-  mainWindow.loadURL(emberAppLocation);
-
-  // If a loading operation goes wrong, we'll send Electron back to
-  // Ember App entry point
-  mainWindow.webContents.on('did-fail-load', () => {
-    mainWindow.loadURL(emberAppLocation);
-  });
-
-  mainWindow.webContents.on('crashed', () => {
-    log.error('Your Ember app (or other code) in the main window has crashed.');
-    log.error('This is a serious issue that needs to be handled and/or debugged.');
-  });
-
-  mainWindow.on('unresponsive', () => {
-    log.warn('Your Ember app (or other code) has made the window unresponsive.');
-  });
-
-  mainWindow.on('responsive', () => {
-    log.info('The main window has become responsive again.');
-  });
-
+  mainWindow = createWindow();
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
+
+  return mainWindow;
 };
 
 debug({ showDevTools: true });
+contextMenu();
 
-run();
+module.exports = run();

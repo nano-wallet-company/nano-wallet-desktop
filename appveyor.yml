@@ -3,22 +3,31 @@ image: Visual Studio 2017
 platform:
   - x64
 
+environment:
+  NODE_VERSION: 10.2.1
+  YARN_VERSION: 1.7.0
+
 cache:
-  - node_modules
-  - '%APPDATA%\npm-cache'
+  - node_modules -> yarn.lock
   - '%USERPROFILE%\.electron'
-  - '%LOCALAPPDATA%\electron\Cache'
-  - '%LOCALAPPDATA%\electron-builder\cache'
 
 init:
   - git config --global core.autocrlf input
 
 install:
-  - ps: Update-NodeJsInstallation 10.2.1 x64
-  - yarn
+  - ps: Update-NodeJsInstallation "$env:NODE_VERSION" x64
+  - ps: choco install yarn -iy --no-progress --version="$env:YARN_VERSION"
+  - node --version
+  - yarn --version
+  - yarn --frozen-lockfile --non-interactive
+
+before_build:
+  - ps: |
+      $env:PATH = "$env:PATH;C:\Program Files (x86)\WiX Toolset v3.11\bin"
+      [Environment]::SetEnvironmentVariable("Path", $env:PATH, [EnvironmentVariableTarget]::Machine)
 
 build_script:
-  - yarn ember electron:make -e production -p win32 -a x64
+  - yarn cross-env NODE_ENV=production ember electron:make -e production -p win32 -a x64
 
 after_build:
 - cmd: 7z a electron-out.zip %APPVEYOR_BUILD_FOLDER%\electron-out
