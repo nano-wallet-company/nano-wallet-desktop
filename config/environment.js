@@ -49,30 +49,30 @@ module.exports = (environment) => {
     assets: {
       node: {
         darwin: {
-          url: 'https://s3-us-west-1.amazonaws.com/nano-wallet-desktop/node-darwin-1f6026a20ef5b8acbdf36e0d794e9985.zip',
-          integrity: 'sha512-Ijsqk+L/LN7te/AZrbbMdhRTDwg/PE3MlN9edNGF7zftmA9ErdayyPuFvQITB1zXIgBcNaIv9Hq8YzLVrfcWQQ==',
+          url: 'https://s3-us-west-1.amazonaws.com/nano-wallet-desktop/node-darwin-c8d0b5c149f50b7939452cd232cb94c8.zip',
+          integrity: 'sha512-3AVLmOkD9HO9cnzDXMhg876tDbCv/Hr32HL9Mu3AoZgPQkNHuTSCr9rAkfNZIRLW/acJLlSsJCmB+/DEK1q73A==',
         },
         linux: {
-          url: 'https://s3-us-west-1.amazonaws.com/nano-wallet-desktop/node-linux-da82a3e34d263b48ebef22f5fd7ebf48.zip',
-          integrity: 'sha512-j8V4RDmxfiEjoo5vqdFHwPr8pmLNtdfWJrupz6tODZFMhQ2SSQjgRDowJAp4jIx5XK/U1a7bWksqEChqfiUzKA==',
+          url: 'https://s3-us-west-1.amazonaws.com/nano-wallet-desktop/node-linux-48ea65d2afdef202f1f82aa1e78529fe.zip',
+          integrity: 'sha512-omWo9SinujtvDXPCIjIaoVfx0c/nmEAgibLQWMXen1sJJycpOOaQCqOYyphYITgL42Pq/fu10hMnxhDxUZWm8A==',
         },
         win32: {
-          url: 'https://s3-us-west-1.amazonaws.com/nano-wallet-desktop/node-win32-d21a3efb23b3a4f6e0e90bbd8c307bd4.zip',
-          integrity: 'sha512-ggbwO/C5mbC3m4f5SdBnU4d+N8QjCr1B1u4Vni96SbDJ+DWMRoBeLO4+y8ElHx0WnZ8W8t7LRQdMuexwdADKHg==',
+          url: 'https://s3-us-west-1.amazonaws.com/nano-wallet-desktop/node-win32-e9793b8ab064b5de72100ca497a9286a.zip',
+          integrity: 'sha512-fFRh61vRVhmSqE+tVaQCnIjEV2TEwkNlll2IDsNLDLEI8LFPaP6KRDY5VVCj8jbFm+VJBseIIXhwd8Rcz6O/Ow==',
         },
       },
       data: {
         darwin: {
-          url: 'https://s3-us-west-1.amazonaws.com/nano-wallet-desktop/data-44628c1ba7fedb6032358f057d839a43.zip',
-          integrity: 'sha512-+JaLWUTv1tMS0/Uey5Q76A5K86L63mw23i7jBOacLFzcWCA7XWhQsNwPAW/VYWYhQZliGQdkQGOhIObU+frtWw==',
+          url: 'https://s3-us-west-1.amazonaws.com/nano-wallet-desktop/data-cc5cbc9d8ad52730c90240b6949de82f.zip',
+          integrity: 'sha512-Gve2h6kIPq8MXvPvHm1Lv4ZfDPRR/PjlzYQsMdEodEIl6l7IS4B3ALhOMNjGbUqCSlacM5cb9WMtgIVvWZrAdA==',
         },
         linux: {
-          url: 'https://s3-us-west-1.amazonaws.com/nano-wallet-desktop/data-44628c1ba7fedb6032358f057d839a43.zip',
-          integrity: 'sha512-+JaLWUTv1tMS0/Uey5Q76A5K86L63mw23i7jBOacLFzcWCA7XWhQsNwPAW/VYWYhQZliGQdkQGOhIObU+frtWw==',
+          url: 'https://s3-us-west-1.amazonaws.com/nano-wallet-desktop/data-cc5cbc9d8ad52730c90240b6949de82f.zip',
+          integrity: 'sha512-Gve2h6kIPq8MXvPvHm1Lv4ZfDPRR/PjlzYQsMdEodEIl6l7IS4B3ALhOMNjGbUqCSlacM5cb9WMtgIVvWZrAdA==',
         },
         win32: {
-          url: 'https://s3-us-west-1.amazonaws.com/nano-wallet-desktop/data-44628c1ba7fedb6032358f057d839a43.zip',
-          integrity: 'sha512-+JaLWUTv1tMS0/Uey5Q76A5K86L63mw23i7jBOacLFzcWCA7XWhQsNwPAW/VYWYhQZliGQdkQGOhIObU+frtWw==',
+          url: 'https://s3-us-west-1.amazonaws.com/nano-wallet-desktop/data-cc5cbc9d8ad52730c90240b6949de82f.zip',
+          integrity: 'sha512-Gve2h6kIPq8MXvPvHm1Lv4ZfDPRR/PjlzYQsMdEodEIl6l7IS4B3ALhOMNjGbUqCSlacM5cb9WMtgIVvWZrAdA==',
         },
       },
     },
