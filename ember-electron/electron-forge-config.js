@@ -6,6 +6,8 @@ const { version, productName, name } = require('../package');
 
 const icon = path.join(__dirname, 'icons', 'app');
 
+const productIdentifier = productName.split(' ').join('');
+
 module.exports = {
   make_targets: {
     win32: [
@@ -29,9 +31,9 @@ module.exports = {
     packageManager: 'yarn',
   },
   electronWinstallerConfig: {
-    name,
+    name: productIdentifier,
     noMsi: false,
-    exe: `${productName}.exe`,
+    exe: `${productIdentifier}.exe`,
     version: String(semver.coerce(version)),
     setupExe: `${productName} ${version} Setup.exe`,
     setupMsi: `${productName} ${version} Setup.msi`,
@@ -50,7 +52,7 @@ module.exports = {
     name: 'nano-desktop',
   },
   windowsStoreConfig: {
-    packageName: productName.split(' ').join(''),
+    packageName: productIdentifier,
     packageDisplayName: productName,
   },
 };
