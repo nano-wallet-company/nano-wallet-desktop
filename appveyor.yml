@@ -20,7 +20,6 @@ install:
   - node --version
   - yarn --version
   - yarn --frozen-lockfile --non-interactive
-  - yarn ember --version
 
 before_build:
   - ps: |

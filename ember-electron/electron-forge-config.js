@@ -4,10 +4,10 @@ const semver = require('semver');
 
 const { version, productName, name: packageName } = require('../package');
 
-const icon = path.join(__dirname, 'icons', 'app');
+const icon = path.join(__dirname, 'resources', 'icon');
 
 const [, name] = packageName.split('/');
-const productIdentifier = productName.split(' ').join('');
+const categories = ['P2P', 'Finance', 'Security'];
 
 module.exports = {
   make_targets: {
@@ -32,9 +32,8 @@ module.exports = {
     packageManager: 'yarn',
   },
   electronWinstallerConfig: {
-    name: productIdentifier,
-    title: productIdentifier,
-    exe: `${productIdentifier}.exe`,
+    name: productName,
+    exe: `${productName}.exe`,
     noMsi: false,
     version: String(semver.coerce(version)),
     setupExe: `${productName} ${version} Setup.exe`,
@@ -45,21 +44,19 @@ module.exports = {
   },
   electronInstallerDebian: {
     name,
+    categories,
     bin: name,
     arch: 'amd64',
-    genericName: 'Wallet',
-    section: 'cryptocurrency',
-    categories: ['P2P', 'Finance', 'Currency'],
   },
   electronInstallerRedhat: {
     name,
+    categories,
+    bin: name,
+    arch: 'x86_64',
+    compressionLevel: 9,
   },
   github_repository: {
     owner: 'nanocurrency',
     name: 'nano-desktop',
-  },
-  windowsStoreConfig: {
-    packageName: productIdentifier,
-    packageDisplayName: productName,
   },
 };
