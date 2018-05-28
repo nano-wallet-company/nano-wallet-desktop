@@ -110,23 +110,6 @@ module.exports = (environment) => {
     ENV.contentSecurityPolicy['script-src'].push("'sha256-bOpoN0CEbM1axa1+hv51a4JK31vrAOV7Cbze5rS9GJI='");
     ENV.contentSecurityPolicy['script-src'].push("'sha256-k8ysrhm1lqKyZpON3/YocPOUXAF4sGsu7JIycGDxCWw='");
     ENV.contentSecurityPolicy['connect-src'].push('https://localhost:17076');
-
-    if (environment === 'development') {
-      ENV.assets = {
-        node: {
-          darwin: {
-            url: 'https://devinus.ngrok.io/node-darwin-22b488fde2c435bfb67093c8d27539b7.zip',
-            integrity: 'sha512-HZ1M6HNTuWjvo6m4pZfPqEAm1Qu6ClctOjxUzhDE1enGtXetQ6TartjW4JQGRRTcWfFP204GErsuYKVI4X1ABA==',
-          },
-        },
-        data: {
-          darwin: {
-            url: 'https://devinus.ngrok.io/data-2141e1d269e843a7b7ebdd8f177c1011.zip',
-            integrity: 'sha512-nG9s2WsjgEuZzwiRxdCoOQljjJP1vi4Wuja+k3N/Z/1EEFCDSAdZWm63/tggrmdPJ89j6SuEspffKdrYiDDCEQ==',
-          },
-        },
-      };
-    }
   }
 
   return ENV;

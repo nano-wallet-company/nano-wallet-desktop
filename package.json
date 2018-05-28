@@ -5,11 +5,26 @@
   "genericName": "Wallet",
   "description": "The official Nano wallet for desktop and web",
   "license": "BSD-2-Clause",
-  "author": "Nano <desktop@nano.org>",
+  "author": {
+    "name": "Nano",
+    "email": "desktop@nano.org"
+  },
+  "homepage": "https://nano.org/",
   "copyright": "Copyright © 2018, Nano <team@nano.org>",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nanocurrency/nano-desktop.git"
+  },
+  "build": {
+    "appId": "org.nano.desktop",
+    "mac": {
+      "category": "public.app-category.finance"
+    },
+    "linux": {
+      "desktop": {
+        "Categories": "P2P;Finance;Security"
+      }
+    }
   },
   "scripts": {
     "build": "ember build",
@@ -62,7 +77,6 @@
     "electron-debug": "^1.5.0",
     "electron-devtools-installer": "^2.2.4",
     "electron-dl": "^1.12.0",
-    "electron-is-dev": "^0.3.0",
     "electron-log": "^2.2.14",
     "electron-protocol-serve": "^1.3.0",
     "electron-squirrel-startup": "^1.0.0",
@@ -126,7 +140,7 @@
     "ember-cli": "^3.1.4",
     "ember-cli-app-version": "^3.2.0",
     "ember-cli-autoprefixer": "^0.8.1",
-    "ember-cli-babel": "^6.14.0",
+    "ember-cli-babel": "^6.14.1",
     "ember-cli-build-notifications": "^0.3.0",
     "ember-cli-chai": "^0.5.0",
     "ember-cli-clipboard": "^0.9.0",

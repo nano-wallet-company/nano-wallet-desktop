@@ -7,20 +7,31 @@ const {
   productName,
   name: packageName,
   copyright: appCopyright,
+  build: {
+    appId: appBundleId,
+    mac: {
+      category: appCategoryType,
+    },
+    linux: {
+      desktop: {
+        Categories: linuxDesktopCategories,
+      },
+    },
+  },
 } = require('../package');
 
 const icon = path.join(__dirname, 'resources', 'icon');
 
 const [, name] = packageName.split('/');
-const categories = ['P2P', 'Finance', 'Security'];
+const categories = linuxDesktopCategories.split(';');
 
-const appVersion = String(semver.coerce(version));
-const buildNumber = process.env.CI_BUILD_ID
+const buildNumber = process.env.CI_JOB_ID
+  || process.env.CI_BUILD_ID
   || process.env.TRAVIS_BUILD_NUMBER
   || process.env.APPVEYOR_BUILD_VERSION
-  || '';
+  || '0';
 
-const buildVersion = `${appVersion}.${buildNumber}`;
+const buildVersion = `${version}+${buildNumber}`;
 
 const productIdentifier = productName.split(' ').join('');
 
@@ -42,16 +53,16 @@ module.exports = {
   },
   electronPackagerConfig: {
     icon,
-    appVersion,
     appCopyright,
     buildVersion,
+    appBundleId,
+    appCategoryType,
+    arch: 'x64',
     asar: true,
     overwrite: true,
     ignore: ['\\.xml$'],
     packageManager: 'yarn',
     executableName: productName,
-    appBundleId: 'org.nano.desktop',
-    appCategoryType: 'public.app-category.finance',
     win32metadata: {
       ProductName: productIdentifier,
       InternalName: productIdentifier,
@@ -60,9 +71,10 @@ module.exports = {
   },
   electronWinstallerConfig: {
     name: productIdentifier,
+    version: String(semver.coerce(version)),
     exe: `${productName}.exe`,
     noMsi: false,
-    version: appVersion,
+    setupIcon: `${icon}.ico`,
     setupExe: `${productName} ${version} Setup.exe`,
     setupMsi: `${productName} ${version} Setup.msi`,
   },
