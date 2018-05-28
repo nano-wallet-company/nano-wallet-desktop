@@ -1,13 +1,28 @@
 const path = require('path');
 
+const fs = require('graceful-fs');
 const semver = require('semver');
+const normalizeNewline = require('normalize-newline');
 
-const { version, productName, name: packageName } = require('../package');
+const {
+  version,
+  productName,
+  name: packageName,
+} = require('../package');
 
 const icon = path.join(__dirname, 'resources', 'icon');
 
 const [, name] = packageName.split('/');
 const categories = ['P2P', 'Finance', 'Security'];
+
+const licensePath = path.join(__dirname, '..', 'LICENSE');
+const [appCopyright] = normalizeNewline(fs.readFileSync(licensePath)).split('\n');
+
+const buildVersion = process.env.CI || process.env.CI_BUILD_ID
+  ? (process.env.CI_BUILD_ID
+    || process.env.TRAVIS_BUILD_NUMBER
+    || process.env.APPVEYOR_BUILD_VERSION)
+  : version;
 
 module.exports = {
   make_targets: {
@@ -27,6 +42,8 @@ module.exports = {
   },
   electronPackagerConfig: {
     icon,
+    appCopyright,
+    buildVersion,
     asar: true,
     ignore: ['\\.xml$'],
     packageManager: 'yarn',
