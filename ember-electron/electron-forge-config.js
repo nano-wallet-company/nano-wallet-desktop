@@ -1,13 +1,12 @@
 const path = require('path');
 
-const fs = require('graceful-fs');
 const semver = require('semver');
-const normalizeNewline = require('normalize-newline');
 
 const {
   version,
   productName,
   name: packageName,
+  copyright: appCopyright,
 } = require('../package');
 
 const icon = path.join(__dirname, 'resources', 'icon');
@@ -15,14 +14,15 @@ const icon = path.join(__dirname, 'resources', 'icon');
 const [, name] = packageName.split('/');
 const categories = ['P2P', 'Finance', 'Security'];
 
-const licensePath = path.join(__dirname, '..', 'LICENSE');
-const [appCopyright] = normalizeNewline(fs.readFileSync(licensePath)).split('\n');
+const appVersion = String(semver.coerce(version));
+const buildNumber = process.env.CI_BUILD_ID
+  || process.env.TRAVIS_BUILD_NUMBER
+  || process.env.APPVEYOR_BUILD_VERSION
+  || '';
 
-const buildVersion = process.env.CI || process.env.CI_BUILD_ID
-  ? (process.env.CI_BUILD_ID
-    || process.env.TRAVIS_BUILD_NUMBER
-    || process.env.APPVEYOR_BUILD_VERSION)
-  : version;
+const buildVersion = `${appVersion}.${buildNumber}`;
+
+const productIdentifier = productName.split(' ').join('');
 
 module.exports = {
   make_targets: {
@@ -42,17 +42,27 @@ module.exports = {
   },
   electronPackagerConfig: {
     icon,
+    appVersion,
     appCopyright,
     buildVersion,
     asar: true,
+    overwrite: true,
     ignore: ['\\.xml$'],
     packageManager: 'yarn',
+    executableName: productName,
+    appBundleId: 'org.nano.desktop',
+    appCategoryType: 'public.app-category.finance',
+    win32metadata: {
+      ProductName: productIdentifier,
+      InternalName: productIdentifier,
+      OriginalFilename: `${productName}.exe`,
+    },
   },
   electronWinstallerConfig: {
-    name: productName,
+    name: productIdentifier,
     exe: `${productName}.exe`,
     noMsi: false,
-    version: String(semver.coerce(version)),
+    version: appVersion,
     setupExe: `${productName} ${version} Setup.exe`,
     setupMsi: `${productName} ${version} Setup.msi`,
   },

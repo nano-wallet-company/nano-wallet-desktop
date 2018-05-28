@@ -6,6 +6,7 @@
   "description": "The official Nano wallet for desktop and web",
   "license": "BSD-2-Clause",
   "author": "Nano <desktop@nano.org>",
+  "copyright": "Copyright © 2018, Nano <team@nano.org>",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nanocurrency/nano-desktop.git"
@@ -32,9 +33,6 @@
       "restart": "yarn notify -t 'ember-electron' -m 'Restarting Electron app...' -i ember-electron/icons/notification.png",
       "crash": "yarn notify -t 'ember-electron' -m 'Electron app has crashed!' -s Funk -i ember-electron/icons/notification.png"
     }
-  },
-  "build": {
-    "appId": "org.nano.desktop"
   },
   "lint-staged": {
     "*.js": [
