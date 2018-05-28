@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.0.0-beta.8"></a>
+# [1.0.0-beta.8](https://github.com/nanocurrency/nano-desktop/compare/v1.0.0-beta.7...v1.0.0-beta.8) (2018-05-28)
+
+
+### Bug Fixes
+
+* **app:** disable overflow on app window ([725fa24](https://github.com/nanocurrency/nano-desktop/commit/725fa24))
+* **download-progress:** show correct status when updating ([bea00db](https://github.com/nanocurrency/nano-desktop/commit/bea00db))
+* **intl:** fix invalid YAML ([ebe5bb3](https://github.com/nanocurrency/nano-desktop/commit/ebe5bb3))
+* **intl:** normalize old locale variants ([2b349f2](https://github.com/nanocurrency/nano-desktop/commit/2b349f2))
+* **wallet-import:** save wallet seed during import ([f6f4b95](https://github.com/nanocurrency/nano-desktop/commit/f6f4b95))
+
+
+
 <a name="1.0.0-beta.7"></a>
 # [1.0.0-beta.7](https://github.com/nanocurrency/nano-desktop/compare/v1.0.0-beta.6...v1.0.0-beta.7) (2018-04-11)
 

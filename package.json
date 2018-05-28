@@ -1,6 +1,6 @@
 {
   "name": "@nanocurrency/nano-desktop",
-  "version": "1.0.0-beta.7",
+  "version": "1.0.0-beta.8",
   "productName": "Nano Desktop",
   "genericName": "Wallet",
   "description": "The official Nano wallet for desktop and web",
