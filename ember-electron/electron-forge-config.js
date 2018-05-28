@@ -2,10 +2,11 @@ const path = require('path');
 
 const semver = require('semver');
 
-const { version, productName, name } = require('../package');
+const { version, productName, name: packageName } = require('../package');
 
 const icon = path.join(__dirname, 'icons', 'app');
 
+const [, name] = packageName.split('/');
 const productIdentifier = productName.split(' ').join('');
 
 module.exports = {
@@ -32,8 +33,8 @@ module.exports = {
   },
   electronWinstallerConfig: {
     name: productIdentifier,
-    noMsi: false,
     exe: `${productIdentifier}.exe`,
+    noMsi: false,
     version: String(semver.coerce(version)),
     setupExe: `${productName} ${version} Setup.exe`,
     setupMsi: `${productName} ${version} Setup.msi`,
@@ -43,6 +44,7 @@ module.exports = {
   },
   electronInstallerDebian: {
     name,
+    bin: name,
   },
   electronInstallerRedhat: {
     name,
