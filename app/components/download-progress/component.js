@@ -34,24 +34,21 @@ export default Component.extend({
 
   @on('didInsertElement')
   addListeners() {
+    const downloader = this.get('downloader');
+    downloader.on('error', this, this.onError);
+    downloader.on('progress', this, this.onProgress);
+    downloader.on('verify', this, this.onVerify);
+    downloader.on('extract', this, this.onExtract);
+    downloader.on('done', this, this.reset);
+    downloader.on('done', this, this.onDone);
+
     registerDisposable(this, () => {
-      const downloader = this.get('downloader');
       downloader.off('error', this, this.onError);
       downloader.off('progress', this, this.onProgress);
       downloader.off('verify', this, this.onVerify);
       downloader.off('extract', this, this.onExtract);
       downloader.off('done', this, this.reset);
       downloader.off('done', this, this.onDone);
-    });
-
-    return runTask(this, () => {
-      const downloader = this.get('downloader');
-      downloader.on('error', this, this.onError);
-      downloader.on('progress', this, this.onProgress);
-      downloader.on('verify', this, this.onVerify);
-      downloader.on('extract', this, this.onExtract);
-      downloader.on('done', this, this.reset);
-      downloader.on('done', this, this.onDone);
     });
   },
 
