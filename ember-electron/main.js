@@ -99,6 +99,7 @@ const {
 
 let mainWindow = null;
 
+log.transports.file.level = 'info';
 log.transports.rendererConsole.level = 'info';
 
 global.locale = locale2 || null;
@@ -416,6 +417,13 @@ const createWindow = () => {
             const body = `Version: ${version}\r\nPlatform: ${process.platform}`;
             const url = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
             return shell.openExternal(url);
+          },
+        },
+        {
+          label: 'View Logs',
+          click() {
+            const { file } = log.transports.file;
+            return shell.showItemInFolder(file);
           },
         },
       ],

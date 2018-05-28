@@ -72,11 +72,8 @@ module.exports = {
   electronWinstallerConfig: {
     name: productIdentifier,
     version: String(semver.coerce(version)),
-    exe: `${productName}.exe`,
-    noMsi: false,
     setupIcon: `${icon}.ico`,
-    setupExe: `${productName} ${version} Setup.exe`,
-    setupMsi: `${productName} ${version} Setup.msi`,
+    loadingGif: path.join(__dirname, 'resources', 'install-spinner.gif'),
   },
   electronInstallerDMG: {
     format: 'ULFO',
