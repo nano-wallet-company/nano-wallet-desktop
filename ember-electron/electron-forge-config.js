@@ -33,6 +33,7 @@ module.exports = {
   },
   electronWinstallerConfig: {
     name: productIdentifier,
+    title: productIdentifier,
     exe: `${productIdentifier}.exe`,
     noMsi: false,
     version: String(semver.coerce(version)),
@@ -45,6 +46,10 @@ module.exports = {
   electronInstallerDebian: {
     name,
     bin: name,
+    arch: 'amd64',
+    genericName: 'Wallet',
+    section: 'cryptocurrency',
+    categories: ['P2P', 'Finance', 'Currency'],
   },
   electronInstallerRedhat: {
     name,
