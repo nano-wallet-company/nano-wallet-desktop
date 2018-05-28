@@ -10,7 +10,8 @@ import nprogress from 'nprogress';
 import { service } from 'ember-decorators/service';
 import { action } from 'ember-decorators/object';
 
-import guessLocale from '../utils/guess-locale';
+import guessLocale, { DEFAULT_LOCALE } from '../utils/guess-locale';
+import normalizeLocale from '../utils/normalize-locale';
 
 export default Route.extend(ApplicationRouteMixin, DisposableMixin, {
   @service router: null,
@@ -28,7 +29,7 @@ export default Route.extend(ApplicationRouteMixin, DisposableMixin, {
     }
 
     locale = locale || guessLocale();
-    this.get('intl').setLocale([locale]);
+    this.get('intl').setLocale([normalizeLocale(locale), DEFAULT_LOCALE]);
 
     if (isElectron) {
       electron.on('exit', () => tryInvoke(electron, 'relaunch'));
