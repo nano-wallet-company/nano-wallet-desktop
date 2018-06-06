@@ -1,12 +1,12 @@
 import Component from '@ember/component';
 
 import { task, waitForQueue } from 'ember-concurrency';
-import { runTask, scheduleTask, runDisposables } from 'ember-lifeline';
+import { ContextBoundTasksMixin } from 'ember-lifeline';
 
 import { computed, observes } from 'ember-decorators/object';
 import { on } from 'ember-decorators/object/evented';
 
-export default Component.extend({
+export default Component.extend(ContextBoundTasksMixin, {
   accounts: null,
 
   onChangeSlide: null,
@@ -15,15 +15,10 @@ export default Component.extend({
 
   slickInstance: null,
 
-  willDestroy(...args) {
-    runDisposables(this);
-    return this._super(...args);
-  },
-
   @on('didInsertElement')
   addChangeListener() {
     this.$().on('afterChange', (event, slick, currentSlide) => {
-      runTask(this, () => {
+      this.runTask(() => {
         this.set('currentSlide', currentSlide);
       });
     });
@@ -31,7 +26,7 @@ export default Component.extend({
 
   @observes('currentSlide')
   currentSlideDidChange() {
-    return scheduleTask(this, 'actions', () => {
+    return this.scheduleTask('actions', () => {
       const currentSlide = this.get('currentSlide');
       return this.get('onChangeSlide')(currentSlide);
     });
@@ -91,7 +86,7 @@ export default Component.extend({
     return this.get('refreshSlider').perform();
   },
 
-  @computed()
+  @computed
   get breakpoints() {
     return [
       {

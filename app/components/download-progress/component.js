@@ -1,11 +1,6 @@
 import Component from '@ember/component';
 
-import {
-  runTask,
-  debounceTask,
-  runDisposables,
-  registerDisposable,
-} from 'ember-lifeline';
+import { DisposableMixin, ContextBoundTasksMixin } from 'ember-lifeline';
 import { defineError } from 'ember-exex/error';
 import { on } from 'ember-decorators/object/evented';
 
@@ -18,7 +13,7 @@ export const DownloadError = defineError({
   message: 'Error downloading {asset}',
 });
 
-export default Component.extend({
+export default Component.extend(DisposableMixin, ContextBoundTasksMixin, {
   downloader: null,
 
   status: STATUS_DOWNLOADING,
@@ -27,29 +22,28 @@ export default Component.extend({
 
   onDone: null,
 
-  willDestroy(...args) {
-    runDisposables(this);
-    return this._super(...args);
-  },
-
   @on('didInsertElement')
   addListeners() {
     const downloader = this.get('downloader');
-    downloader.on('error', this, this.onError);
-    downloader.on('progress', this, this.onProgress);
-    downloader.on('verify', this, this.onVerify);
-    downloader.on('extract', this, this.onExtract);
-    downloader.on('done', this, this.reset);
-    downloader.on('done', this, this.onDone);
+    if (downloader) {
+      downloader.on('error', this, this.onError);
+      downloader.on('progress', this, this.onProgress);
+      downloader.on('verify', this, this.onVerify);
+      downloader.on('extract', this, this.onExtract);
+      downloader.on('done', this, this.reset);
+      downloader.on('done', this, this.onDone);
 
-    registerDisposable(this, () => {
-      downloader.off('error', this, this.onError);
-      downloader.off('progress', this, this.onProgress);
-      downloader.off('verify', this, this.onVerify);
-      downloader.off('extract', this, this.onExtract);
-      downloader.off('done', this, this.reset);
-      downloader.off('done', this, this.onDone);
-    });
+      this.registerDisposable(() => {
+        downloader.off('error', this, this.onError);
+        downloader.off('progress', this, this.onProgress);
+        downloader.off('verify', this, this.onVerify);
+        downloader.off('extract', this, this.onExtract);
+        downloader.off('done', this, this.reset);
+        downloader.off('done', this, this.onDone);
+      });
+    }
+
+    return this;
   },
 
   onError() {
@@ -58,7 +52,7 @@ export default Component.extend({
   },
 
   onProgress(value) {
-    return debounceTask(this, 'updateProgress', value, 250);
+    return this.debounceTask('updateProgress', value, 250);
   },
 
   onVerify() {
@@ -70,7 +64,7 @@ export default Component.extend({
   },
 
   reset(status = STATUS_DOWNLOADING) {
-    return runTask(this, () => {
+    return this.runTask(() => {
       this.setProperties({
         status,
         value: 1,
