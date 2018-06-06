@@ -1,7 +1,7 @@
 import Controller from '@ember/controller';
 
 import { computed } from 'ember-decorators/object';
-import { sort } from '@ember/object/computed';
+import { sort } from 'ember-decorators/object/computed';
 
 export default Controller.extend({
   queryParams: ['slide', 'currency'],
@@ -9,14 +9,11 @@ export default Controller.extend({
   currency: 'NANO',
 
   hideHistory: true,
-  expand: false,
-  shrink: false,
-  expanded: false,
-  firstTime: true,
+  isExpanded: false,
 
-  sortedAccounts: sort('model.accounts', 'sortBy'),
+  @sort('model.accounts', 'sortBy') sortedAccounts: null,
 
-  @computed()
+  @computed
   get sortBy() {
     // Fallback to sorting by `id` for stable sort.
     return ['modifiedTimestamp', 'id'];

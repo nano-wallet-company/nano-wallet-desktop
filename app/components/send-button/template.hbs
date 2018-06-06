@@ -8,12 +8,6 @@
   </div>
 </div>
 
-{{#if expand}}
-  {{#link-to 'wallets.overview' wallet class="nav-link"}}
-    {{fa-icon "times" click=(action onClose) ariaLabel=(t 'send')}}
-  {{/link-to}}
-{{else}}
-  {{#link-to 'wallets.send' wallet class="nav-link"}}
-    {{fa-icon "paper-plane" click=(action onOpen) ariaLabel=(t 'receive')}}
-  {{/link-to}}
-{{/if}}
+<button class="toggle" {{action (optional (if isExpanded onClose onOpen))}}>
+  {{fa-icon (if isExpanded 'times' 'paper-plane') ariaLabel=(if isExpanded (t 'close') (t 'send'))}}
+</button>

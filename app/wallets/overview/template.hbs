@@ -6,6 +6,8 @@
 
 {{liquid-outlet class="history"}}
 
-{{#send-button wallet=model accounts=sortedAccounts expand=expand shrink=shrink onOpen=(route-action 'toggleButton') onClose=(route-action 'toggleButton')}}
+{{#send-button wallet=model accounts=sortedAccounts isExpanded=isExpanded
+    onOpen=(action (queue (toggle 'isExpanded' this) (route-action 'openSend' model)))
+    onClose=(action (queue (toggle 'isExpanded' this) (route-action 'closeSend' model)))}}
   {{liquid-outlet "sendOutlet" class="send-outlet"}}
 {{/send-button}}
