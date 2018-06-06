@@ -1,5 +1,7 @@
 import { validateFormat } from 'ember-changeset-validations/validators';
 
-export default function validateSeed() {
-  return validateFormat({ regex: /^[a-fA-F0-9]{64}$/ });
+export const regex = /^[a-fA-F0-9]{64}$/;
+
+export default function validateSeed(options = {}) {
+  return validateFormat(Object.assign({}, options, { regex }));
 }

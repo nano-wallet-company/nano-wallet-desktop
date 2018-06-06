@@ -5,6 +5,7 @@ import { A } from '@ember/array';
 import { service } from 'ember-decorators/service';
 
 import { defineError } from 'ember-exex/error';
+import generateId from '../utils/generate-id';
 import getTimestamp from '../utils/get-timestamp';
 
 export const actions = {
@@ -21,10 +22,13 @@ export const actions = {
   ACCOUNT_INFO: 'account_info',
   ACCOUNT_LIST: 'account_list',
   ACCOUNT_HISTORY: 'account_history',
+  ACCOUNT_REPRESENTATIVE: 'account_representative',
+  ACCOUNT_REPRESENTATIVE_SET: 'account_representative_set',
   ACCOUNT_REMOVE: 'account_remove',
   SEND: 'send',
   PEERS: 'peers',
   BLOCK_COUNT: 'block_count',
+  BLOCK_CONFIRM: 'block_confirm',
   SEARCH_PENDING: 'search_pending',
   PASSWORD_CHANGE: 'password_change',
   PASSWORD_ENTER: 'password_enter',
@@ -137,15 +141,16 @@ export default Service.extend({
     return true;
   },
 
-  accountCreate(wallet) {
-    return this.call(actions.ACCOUNT_CREATE, { wallet });
+  accountCreate(wallet, work = true) {
+    return this.call(actions.ACCOUNT_CREATE, { wallet, work });
   },
 
-  async accountInfo(account, pending = true) {
+  async accountInfo(account, representative = true, pending = true) {
     let info = {};
     try {
       info = await this.call(actions.ACCOUNT_INFO, {
         account,
+        representative,
         pending,
       });
     } catch (err) {
@@ -162,6 +167,10 @@ export default Service.extend({
       }
 
       info.modified_timestamp = getTimestamp();
+      info.block_count = 0;
+      if (representative) {
+        info.representative = account;
+      }
     }
 
     return info;
@@ -181,16 +190,30 @@ export default Service.extend({
     return A(history);
   },
 
-  accountRemove(wallet, account) {
-    return this.call(actions.ACCOUNT_REMOVE, { wallet, account });
+  accountRepresentative(account) {
+    return this.call(actions.ACCOUNT_REPRESENTATIVE, { account });
   },
 
-  send(wallet, source, destination, amount) {
+  accountRepresentativeSet(wallet, account, representative) {
+    return this.call(actions.ACCOUNT_REPRESENTATIVE_SET, {
+      wallet,
+      account,
+      representative,
+    });
+  },
+
+  async accountRemove(wallet, account) {
+    const { removed } = await this.call(actions.ACCOUNT_REMOVE, { wallet, account });
+    return removed === '1';
+  },
+
+  send(wallet, source, destination, amount, id = generateId()) {
     return this.call(actions.SEND, {
       wallet,
       source,
       destination,
       amount,
+      id,
     });
   },
 
@@ -200,8 +223,20 @@ export default Service.extend({
     return peers || {};
   },
 
-  blockCount() {
-    return this.call(actions.BLOCK_COUNT);
+  async blockCount() {
+    const {
+      count = 0,
+      unchecked = 0,
+    } = await this.call(actions.BLOCK_COUNT);
+
+    return {
+      count: parseInt(count, 10),
+      unchecked: parseInt(unchecked, 10),
+    };
+  },
+
+  blockConfirm(hash) {
+    return this.call(actions.BLOCK_CONFIRM, { hash });
   },
 
   searchPending(wallet) {
