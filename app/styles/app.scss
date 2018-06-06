@@ -27,26 +27,13 @@ body {
 
 main {
   height: calc(100vh - 100px);
-  display: flex;
   overflow: hidden;
-  flex-direction: column;
-  justify-content: space-evenly;
   will-change: opacity;
   animation: 1s ease fade-in;
 
   hr {
     border-top: 1px solid $purple;
     width: 90%;
-  }
-
-
-  @keyframes fade-in {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
   }
 }
 
@@ -84,28 +71,24 @@ code {
   width: 100%;
   height: 100%;
   z-index: 10000;
-  will-change: transform;
+  animation: 1s ease fade-in;
 
   picture {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 12em;
-    height: 12em;
-    margin: -6em 0 0 -6em;
-    animation: 2s infinite loading;
+    width: 240px;
+    height: 240px;
+    margin: -120px 0 0 -120px;
+  }
+}
 
-    @keyframes loading {
-      0% {
-        transform: rotate(0deg);
-      }
-      50% {
-        transform: rotate(360deg);
-      }
-      100% {
-        transform: rotate(360deg);
-      }
-    }
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 

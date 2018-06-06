@@ -23,7 +23,7 @@ export default Route.extend({
   },
 
   afterModel() {
-    this.controllerFor('wallets.overview').set('expand', true);
+    this.controllerFor('wallets.overview').set('isExpanded', true);
   },
 
   @action

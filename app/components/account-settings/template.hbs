@@ -1,4 +1,4 @@
-{{#with (changeset (hash label=settings.label) ChangeAccountSettingsValidations) as |model|}}
+{{#with (changeset (hash label=settings.label representative=account.representative) ChangeAccountSettingsValidations) as |model|}}
   {{#bs-modal position='center' onHide=(action (optional onCancel)) as |modal|}}
     {{#modal.header}}
       <h4 class="modal-title">
@@ -6,15 +6,26 @@
       </h4>
     {{/modal.header}}
     {{#modal.body}}
-      {{#bs-form model=model onSubmit=(action (queue (action 'save' model) (action (optional onSave)))) as |form|}}
+      {{#bs-form model=model onSubmit=(action (queue (action 'save' model) (action (optional onSave))) account) as |form|}}
         <div class="form-group">
           <label>{{t 'account'}}</label>
           {{account-address class="form-control-plaintext" value=account.id truncate=true}}
         </div>
         {{form.element controlType="text" label=(t 'label') property="label"}}
+        {{#if hasOpenBlock}}
+          {{#form.element controlType="text" label='Representative' property='representative'
+              minlength=64 maxlength=65 required=true pattern="^(xrb|nano)(_|-)[13](?![lv])[a-z1-9]{59}$" as |el|}}
+            {{el.control class="text-truncate text-monospace"}}
+          {{/form.element}}
+        {{/if}}
       {{/bs-form}}
     {{/modal.body}}
     {{#modal.footer}}
+      {{!--
+      {{#bs-button onClick=(action 'remove' account) type="danger" class="mr-auto"}}
+        {{t 'delete'}}
+      {{/bs-button}}
+      --}}
       {{#bs-button onClick=(action modal.close) type="secondary"}}
         {{t 'cancel'}}
       {{/bs-button}}

@@ -1,10 +1,21 @@
 import Route from '@ember/routing/route';
 import { get, set } from '@ember/object';
-import { action } from 'ember-decorators/object';
 
+import KeyboardShortcuts from 'ember-keyboard-shortcuts/mixins/route';
 import { hash } from 'ember-concurrency';
+import { computed, action } from 'ember-decorators/object';
 
-export default Route.extend({
+export default Route.extend(KeyboardShortcuts, {
+  @computed
+  get keyboardShortcuts() {
+    return {
+      esc: {
+        action: 'hideHistory',
+        scoped: true,
+      },
+    };
+  },
+
   async model() {
     const wallet = this.modelFor('wallets');
     const account = this.modelFor('wallets.overview.accounts');

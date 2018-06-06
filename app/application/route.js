@@ -1,38 +1,56 @@
 import Route from '@ember/routing/route';
 import { get } from '@ember/object';
-import { tryInvoke } from '@ember/utils';
+import { A } from '@ember/array';
+
+import fetch from 'fetch';
+import nprogress from 'nprogress';
+import { all } from 'rsvp';
 
 import ApplicationRouteMixin from 'ember-simple-auth/mixins/application-route-mixin';
 import { DisposableMixin } from 'ember-lifeline';
-
-import nprogress from 'nprogress';
-
 import { service } from 'ember-decorators/service';
 import { action } from 'ember-decorators/object';
 
 import guessLocale, { DEFAULT_LOCALE } from '../utils/guess-locale';
 import normalizeLocale from '../utils/normalize-locale';
+import reload from '../utils/reload';
 
 export default Route.extend(ApplicationRouteMixin, DisposableMixin, {
-  @service router: null,
   @service intl: null,
+  @service config: null,
   @service settings: null,
   @service electron: null,
 
-  beforeModel(...args) {
+  async beforeModel(...args) {
     const electron = this.get('electron');
     const isElectron = get(electron, 'isElectron');
     const settings = this.get('settings');
-    let locale = get(settings, 'locale');
-    if (!locale && isElectron) {
-      locale = get(electron, 'locale');
+    let currentLocale = get(settings, 'locale');
+    if (!currentLocale && isElectron) {
+      currentLocale = get(electron, 'locale');
     }
 
-    locale = locale || guessLocale();
-    this.get('intl').setLocale([normalizeLocale(locale), DEFAULT_LOCALE]);
+    currentLocale = normalizeLocale(currentLocale || guessLocale());
+
+    const intl = this.get('intl');
+    const config = this.get('config');
+    const rootURL = get(config, 'rootURL');
+    const translations = A([currentLocale, DEFAULT_LOCALE]).uniq().map(async (key) => {
+      const response = await fetch(`${rootURL}translations/${key}.json`);
+      if (response.ok) {
+        const data = await response.json();
+        intl.addTranslations(key, data);
+      }
+
+      return key;
+    });
+
+    const locales = await all(translations);
+    intl.setLocale(locales);
 
     if (isElectron) {
-      electron.on('exit', () => tryInvoke(electron, 'relaunch'));
+      this.registerDisposable(() => electron.off('exit', reload));
+      electron.one('exit', reload);
     }
 
     return this._super(...args);

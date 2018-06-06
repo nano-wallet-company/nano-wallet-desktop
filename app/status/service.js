@@ -2,33 +2,21 @@ import ObjectProxy from '@ember/object/proxy';
 import PromiseProxyMixin from '@ember/object/promise-proxy-mixin';
 import { set } from '@ember/object';
 
-import {
-  runTask,
-  runDisposables,
-  pollTask,
-  cancelPoll,
-} from 'ember-lifeline';
-
+import { ContextBoundTasksMixin } from 'ember-lifeline';
 import { service } from 'ember-decorators/service';
-
 import { hash } from 'ember-concurrency';
 
 export const STATUS_POLL_INTERVAL = 10 * 1000; // 10s
 
-const Service = ObjectProxy.extend(PromiseProxyMixin, {
+const Service = ObjectProxy.extend(PromiseProxyMixin, ContextBoundTasksMixin, {
   @service rpc: null,
 
   pollToken: null,
 
-  willDestroy(...args) {
-    runDisposables(this);
-    return this._super(...args);
-  },
-
   pausePolling() {
     const pollToken = this.get('pollToken');
     if (pollToken) {
-      cancelPoll(pollToken);
+      this.cancelPoll(pollToken);
     }
 
     return pollToken;
@@ -37,13 +25,13 @@ const Service = ObjectProxy.extend(PromiseProxyMixin, {
   resumePolling() {
     this.pausePolling();
 
-    const pollToken = pollTask(this, 'onPoll');
+    const pollToken = this.pollTask('onPoll');
     this.set('pollToken', pollToken);
     return pollToken;
   },
 
   onPoll(next) {
-    return runTask(this, () => {
+    return this.runTask(() => {
       const rpc = this.get('rpc');
       const blocks = rpc.blockCount();
       const peers = rpc.peers().then(p => Object.keys(p));
@@ -53,7 +41,7 @@ const Service = ObjectProxy.extend(PromiseProxyMixin, {
       });
 
       set(this, 'promise', promise);
-      return runTask(this, next, STATUS_POLL_INTERVAL);
+      return this.runTask(next, STATUS_POLL_INTERVAL);
     });
   },
 });

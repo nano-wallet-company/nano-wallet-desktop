@@ -12,7 +12,7 @@ export default Component.extend({
 
   onChangeSlide: null,
 
-  @computed()
+  @computed
   get breakpoints() {
     return [
       {

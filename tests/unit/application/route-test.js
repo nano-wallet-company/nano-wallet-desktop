@@ -7,6 +7,7 @@ describe('Unit | Route | application', () => {
     // Specify the other units that are required for this test.
     needs: [
       'service:intl',
+      'service:config',
       'service:session',
       'service:settings',
       'service:electron',

@@ -1,32 +1,27 @@
 import Controller from '@ember/controller';
 import { get } from '@ember/object';
 
-import { runTask, runDisposables, pollTask } from 'ember-lifeline';
+import { ContextBoundTasksMixin } from 'ember-lifeline';
 import { service } from 'ember-decorators/service';
 import { on } from 'ember-decorators/object/evented';
 
 const WALLET_POLL_INTERVAL = 5 * 1000; // 5s
 
-export default Controller.extend({
+export default Controller.extend(ContextBoundTasksMixin, {
   @service flashMessages: null,
   @service rpc: null,
 
   pollToken: null,
 
-  willDestroy(...args) {
-    runDisposables(this);
-    return this._super(...args);
-  },
-
   @on('init')
   setupPoller() {
-    const pollToken = pollTask(this, 'onPoll');
+    const pollToken = this.pollTask('onPoll');
     this.set('pollToken', pollToken);
     return pollToken;
   },
 
   onPoll(next) {
-    return runTask(this, async () => {
+    return this.runTask(async () => {
       const model = this.get('model');
       if (model) {
         const isNew = get(model, 'isNew');
@@ -36,7 +31,7 @@ export default Controller.extend({
         }
       }
 
-      return runTask(this, next, WALLET_POLL_INTERVAL);
+      return this.runTask(next, WALLET_POLL_INTERVAL);
     });
   },
 

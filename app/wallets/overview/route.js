@@ -1,5 +1,5 @@
 import Route from '@ember/routing/route';
-import { get, getProperties, setProperties } from '@ember/object';
+import { get, setProperties } from '@ember/object';
 import { isEmpty } from '@ember/utils';
 
 import { action } from 'ember-decorators/object';
@@ -13,9 +13,7 @@ export default Route.extend({
     const walletOverviewController = this.controllerFor('wallets.overview');
     setProperties(walletOverviewController, {
       hideHistory: true,
-      expand: false,
-      shrink: false,
-      active: false,
+      isExpanded: false,
     });
 
     return this._super(...args);
@@ -41,20 +39,12 @@ export default Route.extend({
   },
 
   @action
-  toggleButton() {
-    const walletOverviewController = this.controllerFor('wallets.overview');
-    const { expand, shrink, firstTime } = getProperties(walletOverviewController, [
-      'expand',
-      'shrink',
-      'firstTime',
-    ]);
+  openSend(wallet) {
+    return this.transitionTo('wallets.send', wallet);
+  },
 
-    if (expand) {
-      setProperties(walletOverviewController, { expand: false, shrink: true });
-    } else if (firstTime) {
-      setProperties(walletOverviewController, { firstTime: false, expand: true });
-    } else {
-      setProperties(walletOverviewController, { expand: !expand, shrink: !shrink });
-    }
+  @action
+  closeSend(wallet) {
+    return this.transitionTo(this.routeName, wallet);
   },
 });

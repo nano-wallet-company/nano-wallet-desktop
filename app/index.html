@@ -18,8 +18,9 @@
   <body>
     <div class="ember-load-indicator">
       <picture>
-        <source type="image/svg+xml" srcset="{{rootURL}}images/brand-icon.svg">
-        <img width="192" height="192" src="{{rootURL}}assets/icons/icon-192.png" alt="{{content-for 'config.description'}}">
+        <source srcset="{{rootURL}}images/loading.webp" type="image/webp">
+        <source srcset="{{rootURL}}images/loading.gif" type="image/gif">
+        <img width="240" height="240" src="{{rootURL}}images/loading.gif" alt="{{content-for 'config.productName'}}">
       </picture>
     </div>
 

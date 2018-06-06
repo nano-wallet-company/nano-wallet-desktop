@@ -1,11 +1,16 @@
 import { expect } from 'chai';
 import { describe, it } from 'mocha';
-import validateMnemonic from '@nanocurrency/nano-desktop/validators/amount';
+import validateMnemonic from '@nanocurrency/nano-desktop/validators/mnemonic';
 
 describe('Unit | Validator | mnemonic', () => {
-  // Replace this with your real tests.
-  it('exists', () => {
-    const result = validateMnemonic();
-    expect(result).to.be.ok;
+  it('passes valid mnemonic', () => {
+    const validator = validateMnemonic();
+    const mnemonic = 'crunch lunar team fog aunt eye long believe record fly garment head grunt mountain maze lake mechanic scare utility angry entry limb inform neutral';
+    expect(validator('mnemonic', mnemonic)).to.be.true;
+  });
+
+  it('fails invalid mnemonic', () => {
+    const validator = validateMnemonic();
+    expect(validator('mnemonic', 'crunch lunar')).to.not.be.true;
   });
 });

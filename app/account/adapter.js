@@ -23,7 +23,13 @@ export default Adapter.extend({
     return { account, wallet };
   },
 
-  updateRecord(store, type, snapshot) {
+  async updateRecord(store, type, snapshot) {
+    const { representative: [, representative] = [] } = snapshot.changedAttributes();
+    if (representative) {
+      const { wallet, account } = this.serialize(snapshot, { includeId: true });
+      await this.get('rpc').accountRepresentativeSet(wallet, account, representative);
+    }
+
     return snapshot;
   },
 

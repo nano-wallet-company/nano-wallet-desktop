@@ -1,8 +1,6 @@
-import Ember from 'ember';
-
 import isElectron from '../utils/is-electron';
 
-const { Logger: logger } = Ember;
+const logger = console;
 
 function electronLog(level, ...args) {
   const fn = typeof logger[level] === 'function'

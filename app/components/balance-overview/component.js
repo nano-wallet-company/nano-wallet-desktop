@@ -1,13 +1,8 @@
 import Component from '@ember/component';
 
 import InViewportMixin from 'ember-in-viewport';
+import { ContextBoundTasksMixin } from 'ember-lifeline';
 import { storageFor } from 'ember-local-storage';
-import {
-  runTask,
-  runDisposables,
-  pollTask,
-  cancelPoll,
-} from 'ember-lifeline';
 import { task } from 'ember-concurrency';
 
 import { observes } from 'ember-decorators/object';
@@ -18,7 +13,7 @@ import getExchangeRate, { DEFAULT_CURRENCY, DEFAULT_EXCHANGE_RATE } from '../../
 
 export const EXCHANGE_RATE_POLL_INTERVAL = 5 * 60 * 1000;
 
-export default Component.extend(InViewportMixin, {
+export default Component.extend(InViewportMixin, ContextBoundTasksMixin, {
   settings: storageFor('settings', 'wallet'),
 
   @alias('settings.currency') currency: null,
@@ -30,16 +25,11 @@ export default Component.extend(InViewportMixin, {
 
   pollToken: null,
 
-  willDestroy(...args) {
-    runDisposables(this);
-    return this._super(...args);
-  },
-
   @on('didEnterViewport')
   resumePolling() {
     this.pausePolling();
 
-    const pollToken = pollTask(this, 'onPoll');
+    const pollToken = this.pollTask('onPoll');
     this.set('pollToken', pollToken);
     return pollToken;
   },
@@ -48,7 +38,7 @@ export default Component.extend(InViewportMixin, {
   pausePolling() {
     const pollToken = this.get('pollToken');
     if (pollToken) {
-      cancelPoll(pollToken);
+      this.cancelPoll(pollToken);
       return pollToken;
     }
 
@@ -61,7 +51,7 @@ export default Component.extend(InViewportMixin, {
 
   @observes('currency')
   async updateExchangeRate() {
-    return runTask(this, async () => {
+    return this.runTask(async () => {
       const currency = this.get('currency');
       if (currency === Symbol.keyFor(DEFAULT_CURRENCY)) {
         this.set('exchangeRate', DEFAULT_EXCHANGE_RATE);
@@ -77,9 +67,9 @@ export default Component.extend(InViewportMixin, {
   },
 
   onPoll(next) {
-    return runTask(this, async () => {
+    return this.runTask(async () => {
       await this.updateExchangeRate();
-      return runTask(this, next, EXCHANGE_RATE_POLL_INTERVAL);
+      return this.runTask(next, EXCHANGE_RATE_POLL_INTERVAL);
     });
   },
 });

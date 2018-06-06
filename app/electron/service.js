@@ -55,27 +55,27 @@ export default Service.extend(Evented, DisposableMixin, {
       this.remote = remote;
       this.ipcRenderer = ipcRenderer;
 
-      const onNodeError = this.onNodeError.bind(this);
       const onNodeExit = this.onNodeExit.bind(this);
-      const onDownloadError = this.onDownloadError.bind(this);
       const onDownloadProgress = this.onDownloadProgress.bind(this);
       const onDownloadVerify = this.onDownloadVerify.bind(this);
       const onDownloadExtract = this.onDownloadExtract.bind(this);
-      ipcRenderer.on('node-error', onNodeError);
-      ipcRenderer.on('node-exit', onNodeExit);
-      ipcRenderer.on('download-error', onDownloadError);
-      ipcRenderer.on('download-progress', onDownloadProgress);
-      ipcRenderer.on('download-verify', onDownloadVerify);
-      ipcRenderer.on('download-extract', onDownloadExtract);
+      const onDownloadDone = this.onDownloadDone.bind(this);
       this.registerDisposable(() => {
-        ipcRenderer.removeListener('node-error', onNodeError);
         ipcRenderer.removeListener('node-exit', onNodeExit);
-        ipcRenderer.removeListener('download-error', onDownloadError);
         ipcRenderer.removeListener('download-progress', onDownloadProgress);
         ipcRenderer.removeListener('download-verify', onDownloadVerify);
         ipcRenderer.removeListener('download-extract', onDownloadExtract);
+        ipcRenderer.removeListener('download-done', onDownloadDone);
       });
+
+      ipcRenderer.on('node-exit', onNodeExit);
+      ipcRenderer.on('download-progress', onDownloadProgress);
+      ipcRenderer.on('download-verify', onDownloadVerify);
+      ipcRenderer.on('download-extract', onDownloadExtract);
+      ipcRenderer.on('download-done', onDownloadDone);
     }
+
+    return this;
   },
 
   getRemoteGlobal(key, defaultValue) {
@@ -114,11 +114,12 @@ export default Service.extend(Evented, DisposableMixin, {
   }).volatile(),
 
   download(asset) {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       const config = this.get('config');
       const platform = this.get('platform');
       const ipcRenderer = this.get('ipcRenderer');
       const { url, integrity } = get(config, `assets.${asset}.${platform}`);
+      ipcRenderer.once('download-error', () => reject(new DownloadError()));
       ipcRenderer.once('download-progress', () => resolve(this));
       ipcRenderer.once('download-done', this.onDownloadDone.bind(this));
       ipcRenderer.send('download-start', url, integrity);
@@ -126,28 +127,16 @@ export default Service.extend(Evented, DisposableMixin, {
   },
 
   startNode() {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       const ipcRenderer = this.get('ipcRenderer');
+      ipcRenderer.once('node-error', () => reject(new NodeError()));
       ipcRenderer.once('node-ready', () => resolve(this));
       ipcRenderer.send('node-start');
     });
   },
 
-  relaunch() {
-    const ipcRenderer = this.get('ipcRenderer');
-    return ipcRenderer.sendSync('relaunch');
-  },
-
-  onNodeError(event, err) {
-    this.trigger('error', new NodeError(err));
-  },
-
   onNodeExit() {
     this.trigger('exit');
-  },
-
-  onDownloadError(event, err) {
-    this.trigger('error', new DownloadError(err));
   },
 
   onDownloadProgress(event, progress) {

@@ -1,7 +1,20 @@
-{{#fa-icon "signal" class=(if status.isFulfilled 'text-success')}}
+{{#fa-icon (if hasUncheckedBlocks 'refresh' 'signal')
+    spin=hasUncheckedBlocks
+    class=(if (not isPeerless) 'text-success')}}
   {{#bs-tooltip}}
     <ul class="m-0 list-unstyled">
-      <li><b>{{t 'status.state'}}:</b> {{if status.isFulfilled (t 'status.online') (t 'status.connecting')}}</li>
+      <li>
+        <b>{{t 'status.state'}}:</b>
+        {{#if status.isFulfilled}}
+          {{#if isPeerless}}
+            {{t 'status.connecting'}}
+          {{else}}
+            {{if hasUncheckedBlocks (t 'syncing') (t 'status.online')}}
+          {{/if}}
+        {{else}}
+          {{t 'status.connecting'}}
+        {{/if}}
+      </li>
       {{#if status.isFulfilled}}
         <li><b>{{t 'status.count'}}:</b> {{status.blocks.count}}</li>
         <li><b>{{t 'status.unchecked'}}:</b> {{status.blocks.unchecked}}</li>
