@@ -22,6 +22,7 @@ const icon = path.join(__dirname, 'resources', 'icon');
 
 const [, name] = packageName.split('/');
 const categories = linuxDesktopCategories.split(';');
+const productIdentifier = productName.split(' ').join('');
 
 const buildNumber = process.env.CI_JOB_ID
   || process.env.CI_BUILD_ID
@@ -58,13 +59,16 @@ module.exports = {
     overwrite: true,
     ignore: ['\\.xml$'],
     packageManager: 'yarn',
-    executableName: productName,
+    executableName: name,
     win32metadata: {
-      InternalName: productName.split(' ').join(''),
-      OriginalFilename: `${productName}.exe`,
+      InternalName: productIdentifier,
+      OriginalFilename: `${name}.exe`,
     },
   },
   electronWinstallerConfig: {
+    name,
+    exe: `${name}.exe`,
+    setupExe: `${productName} Setup.exe`,
     setupIcon: `${icon}.ico`,
     loadingGif: path.join(__dirname, 'resources', 'install-spinner.gif'),
   },
@@ -76,6 +80,9 @@ module.exports = {
     categories,
     bin: name,
     arch: 'amd64',
+    icon: {
+      scalable: `${icon}.svg`,
+    },
   },
   electronInstallerRedhat: {
     name,
@@ -83,6 +90,7 @@ module.exports = {
     bin: name,
     arch: 'x86_64',
     compressionLevel: 9,
+    icon: `${icon}.png`,
   },
   github_repository: {
     owner: 'nanocurrency',

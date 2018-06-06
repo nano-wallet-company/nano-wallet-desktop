@@ -106,6 +106,21 @@ const {
 
 let mainWindow = null;
 
+const shouldQuit = app.makeSingleInstance(() => {
+  if (mainWindow) {
+    if (mainWindow.isMinimized()) {
+      mainWindow.restore();
+    }
+
+    mainWindow.show();
+  }
+});
+
+if (shouldQuit) {
+  app.quit();
+  return;
+}
+
 log.transports.file.level = 'info';
 log.transports.rendererConsole.level = 'info';
 
@@ -118,10 +133,6 @@ global.authorizationToken = null;
 
 app.on('before-quit', () => {
   global.isQuitting = true;
-});
-
-app.on('quit', () => {
-  global.isQuitting = false;
 });
 
 app.on('window-all-closed', () => {
@@ -626,7 +637,7 @@ const createWindow = () => {
   win.once('ready-to-show', () => win.show());
 
   win.on('close', (event) => {
-    if (!global.isQuitting) {
+    if (is.macos && !global.isQuitting) {
       event.preventDefault();
       win.hide();
     }
