@@ -13,7 +13,7 @@
     {{/form.element}}
 
     {{form.element controlType="text" label=(t 'wallets.accounts.send.destination') property="destination"
-        autocomplete='on' minlength=64 maxlength=64 required=true pattern="^xrb_[13](?![lv])[a-z1-9]{59}$"
+        autocomplete='on' minlength=64 maxlength=65 required=true pattern="^(xrb|nano)(_|-)[13](?![lv])[a-z1-9]{59}$"
         placeholder=(t 'wallets.accounts.send.placeholder')}}
 
     {{#with (format-amount (or (get model.source.balance 'content') model.source.balance) useGrouping=false) as |max|}}
