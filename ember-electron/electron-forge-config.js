@@ -1,7 +1,5 @@
 const path = require('path');
 
-const semver = require('semver');
-
 const {
   version,
   productName,
@@ -33,8 +31,6 @@ const buildNumber = process.env.CI_JOB_ID
 
 const buildVersion = `${version}+${buildNumber}`;
 
-const productIdentifier = productName.split(' ').join('');
-
 module.exports = {
   make_targets: {
     win32: [
@@ -64,14 +60,11 @@ module.exports = {
     packageManager: 'yarn',
     executableName: productName,
     win32metadata: {
-      ProductName: productIdentifier,
-      InternalName: productIdentifier,
+      InternalName: productName.split(' ').join(''),
       OriginalFilename: `${productName}.exe`,
     },
   },
   electronWinstallerConfig: {
-    name: productIdentifier,
-    version: String(semver.coerce(version)),
     setupIcon: `${icon}.ico`,
     loadingGif: path.join(__dirname, 'resources', 'install-spinner.gif'),
   },

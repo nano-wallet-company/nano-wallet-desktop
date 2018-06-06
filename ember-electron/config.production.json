@@ -9,10 +9,10 @@
         "chain_request_limit": "16384"
     },
     "node": {
-        "version": "10",
+        "version": "11",
         "peering_port": "7075",
         "bootstrap_fraction_numerator": "1",
-        "receive_minimum": "1000000000000000000000000",
+        "receive_minimum": "1",
         "logging": {
             "version": "3",
             "ledger": "false",
@@ -47,7 +47,8 @@
             "xrb_1anrzcuwe64rwxzcco8dkhpyxpi8kd7zsjc1oeimpc3ppca4mrjtwnqposrs",
             "xrb_1hza3f7wiiqa7ig3jczyxj5yo86yegcmqk3criaz838j91sxcckpfhbhhra1"
         ],
-        "inactive_supply": "0",
+        "online_weight_minimum": "60000000000000000000000000000000000000",
+        "online_weight_quorom": "50",
         "password_fanout": "1024",
         "io_threads": "8",
         "work_threads": "8",
