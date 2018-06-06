@@ -2,6 +2,37 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.0.0-beta.9"></a>
+# [1.0.0-beta.9](https://github.com/nanocurrency/nano-desktop/compare/v1.0.0-beta.8...v1.0.0-beta.9) (2018-06-06)
+
+
+### Bug Fixes
+
+* **account-carousel:** cannot use [@guid](https://github.com/guid) key in Ember 3.2 ([fc2195d](https://github.com/nanocurrency/nano-desktop/commit/fc2195d))
+* **account-send:** allow using new nano_ prefix ([a59b414](https://github.com/nanocurrency/nano-desktop/commit/a59b414))
+* **app:** stop using flex layout for main element ([25970c6](https://github.com/nanocurrency/nano-desktop/commit/25970c6))
+* **generate-seed:** use 256-bit entropy when generating mnemonic ([b3b7cfe](https://github.com/nanocurrency/nano-desktop/commit/b3b7cfe))
+* **mirage:** passthrough translation sideloading ([99f53fd](https://github.com/nanocurrency/nano-desktop/commit/99f53fd))
+* **notification-center:** make notifications are visible in small widths ([d5f0710](https://github.com/nanocurrency/nano-desktop/commit/d5f0710))
+* **rpc:** forgot to add generateId utility ([27d03f7](https://github.com/nanocurrency/nano-desktop/commit/27d03f7))
+
+
+### Features
+
+* **account-settings:** allow changing account representative ([bf3601a](https://github.com/nanocurrency/nano-desktop/commit/bf3601a))
+* **app:** add new loading animations by exyoris ([a4ea611](https://github.com/nanocurrency/nano-desktop/commit/a4ea611))
+* **app:** begin using new loading animations ([7ee7e53](https://github.com/nanocurrency/nano-desktop/commit/7ee7e53))
+* **intl:** add Bulgarian (bg-bg) translation by exyoris ([aa7753d](https://github.com/nanocurrency/nano-desktop/commit/aa7753d))
+* **intl:** sideload translations ([80403fd](https://github.com/nanocurrency/nano-desktop/commit/80403fd))
+* **status-tooltip:** visually distinguish when syncing ([9f5b279](https://github.com/nanocurrency/nano-desktop/commit/9f5b279))
+
+
+### Performance Improvements
+
+* **send-button:** dramatically improve transition animation jank ([07eeef1](https://github.com/nanocurrency/nano-desktop/commit/07eeef1))
+
+
+
 <a name="1.0.0-beta.8"></a>
 # [1.0.0-beta.8](https://github.com/nanocurrency/nano-desktop/compare/v1.0.0-beta.7...v1.0.0-beta.8) (2018-05-28)
 
