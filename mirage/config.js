@@ -23,6 +23,9 @@ export default function () {
     http://www.ember-cli-mirage.com/docs/v0.3.x/shorthands/
   */
 
+  // ember-intl
+  this.passthrough('/translations/**');
+
   // Live network
   this.passthrough('http://localhost:7076');
 
