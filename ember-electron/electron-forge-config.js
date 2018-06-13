@@ -92,7 +92,7 @@ module.exports = {
   electronWinstallerConfig: {
     name,
     exe: `${name}.exe`,
-    setupExe: `${productName} Setup.exe`,
+    setupExe: `${productName} ${version} Setup.exe`,
     setupIcon: `${icon}.ico`,
     loadingGif: path.join(__dirname, 'resources', 'install-spinner.gif'),
   },
