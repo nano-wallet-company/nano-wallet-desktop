@@ -20,14 +20,16 @@
       {{#form.element
           min=0
           max=max
-          step="1"
+          step="any"
           controlType="number"
           label=(t 'wallets.accounts.send.amount')
           model=(changeset (hash amount=null) ChangeAmountValidations)
           property='amount'
-          required=true minlength=1
+          required=true
+          minlength=1
+          showValidationOn='change'
           onChange=(action 'changeAmount' model) as |el|}}
-        <div class="input-group">
+        <div class="input-group {{el.validation}}">
           {{el.control}}
           <div class="input-group-append">
             <button type="button" class="btn btn-outline-secondary"
