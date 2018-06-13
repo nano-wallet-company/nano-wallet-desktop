@@ -49,16 +49,16 @@ module.exports = (environment) => {
     assets: {
       node: {
         darwin: {
-          url: 'https://d31vj5w9sn4ozg.cloudfront.net/node-darwin-81cfb574fd7af3b4dd362ed641a137a8.zip',
-          integrity: 'sha512-4LOxmM1mQrjY47Ccy1FNR6B1c1HGWEufsyTnnruuHpzf0ccPpekUxz0vIwE5y+3670tD4H3so+6s15ZmXraUPA==',
+          url: 'https://d31vj5w9sn4ozg.cloudfront.net/node-darwin-b9ff8ecb9e24dc04abafa1f66316a6d6.zip',
+          integrity: 'sha512-iq0cprgQW34Z1XM/tjHMedgO2YL06V5e9B7TVtMpTi7hexWg04+Y/s0qXlKzBs+iCFW1md9B6xNSFnu5vYQURg==',
         },
         linux: {
-          url: 'https://d31vj5w9sn4ozg.cloudfront.net/node-linux-c98d8bba809d40207a1b5508440b9977.zip',
-          integrity: 'sha512-u3PQS3+RA0QjVm4XyosHELY/zrDJG7umXDyFfQH2HBE52L0diffoCfbBfaAIqrqgBgBlaJdRhkW+7J4IKj1yiQ==',
+          url: 'https://d31vj5w9sn4ozg.cloudfront.net/node-linux-35a24703de264fa835c5ceb93c87a821.zip',
+          integrity: 'sha512-lVtL5v67VcfbyoKAYdPWz4GR9rhDoRaUDM+xfYuPKcER160iU+KnOtlOF1a3lSZ4wXYtwzcYZIpKsR0u3yIGzA==',
         },
         win32: {
-          url: 'https://d31vj5w9sn4ozg.cloudfront.net/node-win32-9535791526eceec3562221fb3158b3a7.zip',
-          integrity: 'sha512-LlTC/iBW0s//K2w9/GaSQoyRE6jRu5PUZrX9SmeKWh6o/Us9zJw4wxDAO6uLM2wPV4lQ3K3NtQR2DNY58p33Qg==',
+          url: 'https://d31vj5w9sn4ozg.cloudfront.net/node-win32-5ae0fdc584ae22242cc73d605d467d0b.zip',
+          integrity: 'sha512-C4UIfeZ/roSIAWGtIIMmZ4wqVrV/Gqj3qyr9S6L90LbD6a52FHDdTg9dFCCIC1opeeX8yuh70ckOhJjdG9lU5g==',
         },
       },
       data: {
