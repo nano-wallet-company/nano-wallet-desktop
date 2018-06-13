@@ -18,7 +18,7 @@ const {
   },
 } = require('../package');
 
-const { arch } = process.arch;
+const { arch } = process;
 
 const icon = path.join(__dirname, 'resources', 'icon');
 
