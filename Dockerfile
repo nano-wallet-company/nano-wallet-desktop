@@ -1,4 +1,4 @@
-FROM node:10.3.0-stretch
+FROM node:10.4.1-stretch
 LABEL maintainer="Nano <desktop@nano.org>"
 
 ENV DEBIAN_FRONTEND=noninteractive

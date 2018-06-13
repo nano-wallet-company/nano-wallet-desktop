@@ -7,14 +7,11 @@ platform:
 
 environment:
   matrix:
-    - nodejs_version: 10.3.0
+    - nodejs_version: 10.4.1
       yarn_version: 1.7.0
 
 cache:
   - node_modules -> yarn.lock
-  - '%UserProfile%\.electron -> yarn.lock'
-  - '%ProgramData%\chocolatey\bin -> appveyor.yml'
-  - '%ProgramData%\chocolatey\lib -> appveyor.yml'
 
 init:
   - git config --global core.autocrlf input
@@ -23,13 +20,13 @@ install:
   - ps: |
       if ($isWindows) {
         Update-NodeJsInstallation $env:nodejs_version $env:PLATFORM
-        appveyor-retry choco install yarn -iy --no-progress --version $env:yarn_version
+        appveyor-retry choco install yarn -y --force --no-progress --ignore-dependencies --version $env:yarn_version
       }
   - ps: |
       if ($isLinux) {
         rm -rf "$env:NVM_DIR"
         curl -fsSL https://deb.nodesource.com/setup_10.x | sudo bash -
-        sudo apt-get install -y --no-install-recommends fakeroot rpm nodejs yarn="$env:yarn_version-1"
+        sudo apt-get install -y --no-install-recommends fakeroot rpm nodejs="$env:nodejs_version-1nodesource1" yarn="$env:yarn_version-1"
       }
   - node --version
   - yarn --version
