@@ -3076,8 +3076,8 @@ caniuse-api@^1.5.2:
     lodash.uniq "^4.5.0"
 
 caniuse-db@^1.0.30000529, caniuse-db@^1.0.30000634, caniuse-db@^1.0.30000639:
-  version "1.0.30000852"
-  resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30000852.tgz#c37a706048f8d81f87946a7c13f39ed636876659"
+  version "1.0.30000853"
+  resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30000853.tgz#32901a7d6b93a87d59f08aaee47ea8ff6ec90fdf"
 
 caniuse-lite@^1.0.30000792, caniuse-lite@^1.0.30000805, caniuse-lite@^1.0.30000844:
   version "1.0.30000852"
@@ -5491,7 +5491,7 @@ ember-bootstrap-power-select@^1.0.0-rc.1:
     fs-extra "^4.0.1"
     rsvp "^4.0.1"
 
-ember-bootstrap@kaliber5/ember-bootstrap#3970a79205f8e27b7b9ce7c399864af1d5d6cd0b:
+ember-bootstrap@kaliber5/ember-bootstrap#3970a79:
   version "1.2.2"
   resolved "https://codeload.github.com/kaliber5/ember-bootstrap/tar.gz/3970a79205f8e27b7b9ce7c399864af1d5d6cd0b"
   dependencies:

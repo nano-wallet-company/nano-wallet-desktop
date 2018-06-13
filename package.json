@@ -135,7 +135,7 @@
     "electron-forge": "^5.2.2",
     "electron-prebuilt-compile": "2.0.2",
     "ember-ajax": "^3.1.0",
-    "ember-bootstrap": "kaliber5/ember-bootstrap#2f94f1a",
+    "ember-bootstrap": "kaliber5/ember-bootstrap#3970a79",
     "ember-bootstrap-changeset-validations": "^1.0.0",
     "ember-bootstrap-power-select": "^1.0.0-rc.1",
     "ember-browserify": "^1.2.2",
