@@ -56,7 +56,6 @@ const connect = require('connect');
 const nanoid = require('nanoid');
 const locale2 = require('locale2');
 const username = require('username');
-const semver = require('semver');
 const cpFile = require('cp-file');
 const makeDir = require('make-dir');
 const getPort = require('get-port');
@@ -184,7 +183,7 @@ const generateCert = (commonName) => {
 };
 
 const downloadAsset = async (sender, url, integrity, onProgress) => {
-  const directory = path.resolve(app.getPath('temp'));
+  const directory = path.normalize(app.getPath('temp'));
   log.info('Downloading asset:', url);
 
   const dl = await download(sender, url, { directory, onProgress });
@@ -196,7 +195,7 @@ const downloadAsset = async (sender, url, integrity, onProgress) => {
   log.info('Verifying asset:', savePath, integrity);
   await ssri.checkStream(fs.createReadStream(savePath), integrity);
 
-  const dir = path.resolve(app.getPath('userData'));
+  const dir = path.normalize(app.getPath('userData'));
   if (!sender.isDestroyed()) {
     sender.send('download-extract');
   }
@@ -291,7 +290,7 @@ const forceKill = (child, timeout = 5000) => {
 };
 
 const startNode = async () => {
-  const dataPath = path.resolve(app.getPath('userData'));
+  const dataPath = path.normalize(app.getPath('userData'));
   const configPath = path.join(dataPath, 'config.json');
   const loopbackAddress = await getLoopbackAddress();
   let config = {};
@@ -456,7 +455,7 @@ const startNode = async () => {
     return next();
   });
 
-  const serverOptions = { cert: proxyCert, key: proxyKey };
+  const serverOptions = { cert: proxyCert, key: proxyKey, rejectUnauthorized: false };
   const server = spdy.createServer(serverOptions, connectApp);
   serverDestroy(server);
 
@@ -634,7 +633,7 @@ const createWindow = () => {
   const menu = Menu.buildFromTemplate(template);
   Menu.setApplicationMenu(menu);
 
-  win.once('ready-to-show', () => win.show());
+  // win.once('ready-to-show', () => win.show());
 
   win.on('close', (event) => {
     if (is.macos && !global.isQuitting) {
@@ -644,17 +643,22 @@ const createWindow = () => {
   });
 
   win.on('unresponsive', () => {
-    log.warn('Application has made the window unresponsive');
+    log.warn('Application window has become unresponsive:', win.getTitle());
   });
 
   win.on('responsive', () => {
-    log.info('Main window has become responsive again');
+    log.info('Application window has become responsive again:', win.getTitle());
   });
 
   const emberAppLocation = 'serve://dist';
 
   // Load the ember application using our custom protocol/scheme
   win.loadURL(emberAppLocation);
+
+  win.webContents.once('dom-ready', () => {
+    log.info('Application window ready to show:', win.getTitle());
+    win.show();
+  });
 
   // If a loading operation goes wrong, we'll send Electron back to
   // Ember App entry point
@@ -665,7 +669,7 @@ const createWindow = () => {
   });
 
   win.webContents.on('crashed', () => {
-    log.error('Application in the main window has crashed');
+    log.error('Application in window has crashed:', win.getTitle());
   });
 
   return win;
@@ -676,13 +680,25 @@ const run = async () => {
 
   await appReady;
 
-  const dataPath = path.resolve(app.getPath('userData'));
+  const dataPath = path.normalize(app.getPath('userData'));
   const configPath = path.join(dataPath, 'config.json');
+  if (!is.development) {
+    let nodeVersion = 11;
+    let config = { node: { version: nodeVersion } };
+    try {
+      config = await loadJsonFile(configPath);
+      nodeVersion = parseInt(config.node.version, 10);
+    } finally {
+      if (nodeVersion < 12) {
+        const outdatedAssets = ['config.json', toExecutableName('rai_node')];
+        log.info('Deleting outdated assets:', outdatedAssets.join(', '));
+        await del(outdatedAssets, { force: true, cwd: dataPath });
+      }
+    }
+  }
+
   const nodePath = path.join(dataPath, toExecutableName('rai_node'));
   const databasePath = path.join(dataPath, 'data.ldb');
-  if (!is.development && semver.lte(version, '1.0.0-beta.8')) {
-    await del([configPath, nodePath], { force: true });
-  }
 
   Object.defineProperty(global, 'locale', {
     get() {
