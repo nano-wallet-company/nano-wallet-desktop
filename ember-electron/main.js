@@ -302,9 +302,10 @@ const startNode = async () => {
     config.rpc.address = loopbackAddress;
   }
 
+  const tlsPath = path.join(dataPath, 'tls');
+  const dhParamPath = path.join(tlsPath, 'dh2048.pem');
   if (!config.rpc.secure) {
     log.info('Generating secure node RPC configuration...');
-    const tlsPath = path.join(dataPath, 'tls');
     const clientsPath = path.join(tlsPath, 'clients');
     await makeDir(clientsPath);
 
@@ -313,8 +314,6 @@ const startNode = async () => {
     const serverPems = generateCert('nano.org');
     await writeFileAtomic(serverCertPath, normalizeNewline(serverPems.cert), { mode: 0o600 });
     await writeFileAtomic(serverKeyPath, normalizeNewline(serverPems.private), { mode: 0o600 });
-
-    const dhParamPath = path.join(tlsPath, 'dh2048.pem');
     await cpFile(path.join(__dirname, 'tls', 'dh2048.pem'), dhParamPath);
 
     const clientCertPath = path.join(clientsPath, 'rpcuser1.cert.pem');
@@ -404,6 +403,7 @@ const startNode = async () => {
   const { client_certs_path: clientCertsPath } = config.rpc.secure;
   const cert = await fs.readFileAsync(path.join(clientCertsPath, 'rpcuser1.cert.pem'));
   const key = await fs.readFileAsync(path.join(clientCertsPath, 'rpcuser1.key.pem'));
+  const dhparam = await fs.readFileAsync(dhParamPath);
   const proxy = httpProxy.createProxyServer({
     target: {
       host,
@@ -412,7 +412,12 @@ const startNode = async () => {
       key,
       protocol: 'https:',
     },
+    ssl: {
+      dhparam,
+      secureProtocol: 'TLSv1_2_client_method',
+    },
     secure: false,
+    changeOrigin: true,
   });
 
   proxy.on('error', err => log.error('[proxy]', err));
@@ -455,7 +460,13 @@ const startNode = async () => {
     return next();
   });
 
-  const serverOptions = { cert: proxyCert, key: proxyKey, rejectUnauthorized: false };
+  const serverOptions = {
+    dhparam,
+    cert: proxyCert,
+    key: proxyKey,
+    secureProtocol: 'TLSv1_2_server_method',
+  };
+
   const server = spdy.createServer(serverOptions, connectApp);
   serverDestroy(server);
 
@@ -683,11 +694,13 @@ const run = async () => {
   const dataPath = path.normalize(app.getPath('userData'));
   const configPath = path.join(dataPath, 'config.json');
   if (!is.development) {
+    let config = {};
     let nodeVersion = 11;
-    let config = { node: { version: nodeVersion } };
     try {
       config = await loadJsonFile(configPath);
       nodeVersion = parseInt(config.node.version, 10);
+    } catch (e) {
+      // fallsthrough
     } finally {
       if (nodeVersion < 12) {
         const outdatedAssets = ['config.json', toExecutableName('rai_node')];
