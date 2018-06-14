@@ -129,7 +129,7 @@
     "commitizen": "^2.10.1",
     "corber": "^1.2.8",
     "cordova": "^8.0.0",
-    "cross-env": "^5.1.6",
+    "cross-env": "^5.2.0",
     "devtron": "^1.4.0",
     "downloadjs": "^1.4.7",
     "electron-forge": "^5.2.2",
