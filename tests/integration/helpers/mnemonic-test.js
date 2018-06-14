@@ -1,3 +1,4 @@
+import { find } from '@ember/test-helpers';
 import { expect } from 'chai';
 import { describe, it } from 'mocha';
 import { setupComponentTest } from 'ember-mocha';
@@ -22,6 +23,6 @@ describe('Integration | Helper | mnemonic', () => {
     this.render(hbs`{{mnemonic seed}}`);
 
     const expected = 'insane night team fog aunt eye long believe record fly garment health grunt mountain maze lake mechanic scare utility angry entry limb inhale stumble';
-    expect(this.$().text().trim()).to.equal(expected);
+    expect(find('*').textContent.trim()).to.equal(expected);
   });
 });

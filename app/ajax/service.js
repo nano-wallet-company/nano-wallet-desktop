@@ -2,7 +2,10 @@ import AjaxService from 'ember-ajax/services/ajax';
 import { get, computed } from '@ember/object';
 
 import { task } from 'ember-concurrency';
-import { retryable, ExponentialBackoffPolicy } from 'ember-concurrency-retryable';
+import {
+  retryable,
+  ExponentialBackoffPolicy,
+} from 'ember-concurrency-retryable';
 import { defineError } from 'ember-exex/error';
 
 import { service } from 'ember-decorators/service';

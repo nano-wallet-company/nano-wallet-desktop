@@ -9,7 +9,10 @@ import BigNumber from 'npm:bignumber.js';
 import formats from '../formats';
 
 import getConversion, { DEFAULT_UNIT } from '../utils/get-conversion';
-import { DEFAULT_CURRENCY, DEFAULT_EXCHANGE_RATE } from '../utils/get-exchange-rate';
+import {
+  DEFAULT_CURRENCY,
+  DEFAULT_EXCHANGE_RATE,
+} from '../utils/get-exchange-rate';
 
 const currencyFormats = formats.number || {};
 

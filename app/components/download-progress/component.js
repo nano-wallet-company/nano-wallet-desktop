@@ -1,6 +1,9 @@
 import Component from '@ember/component';
 
-import { DisposableMixin, ContextBoundTasksMixin } from 'ember-lifeline';
+import {
+  DisposableMixin,
+  ContextBoundTasksMixin,
+} from 'ember-lifeline';
 import { defineError } from 'ember-exex/error';
 import { on } from 'ember-decorators/object/evented';
 

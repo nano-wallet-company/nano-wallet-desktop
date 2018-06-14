@@ -1,5 +1,10 @@
 import { expect } from 'chai';
-import { describe, it, beforeEach, afterEach } from 'mocha';
+import {
+  describe,
+  it,
+  beforeEach,
+  afterEach,
+} from 'mocha';
 import { run } from '@ember/runloop';
 import Application from '@ember/application';
 import { initialize } from '@nanocurrency/nano-desktop/initializers/electron-log';

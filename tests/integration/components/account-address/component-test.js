@@ -1,3 +1,4 @@
+import { find } from '@ember/test-helpers';
 import { expect } from 'chai';
 import { describe, it } from 'mocha';
 import { setupComponentTest } from 'ember-mocha';
@@ -27,7 +28,7 @@ describe('Integration | Component | account-address', () => {
     this.set('value', value);
     this.render(hbs`{{account-address value=value}}`);
 
-    const address = this.$().text().trim();
+    const address = find('*').textContent.trim();
     expect(address).to.equal(value);
   });
 
