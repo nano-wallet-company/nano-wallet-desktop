@@ -67,19 +67,19 @@ wallets:
     invalidPassword: 'Väärä salasana!'
   backup:
     title: 'Palautuskoodin varmuuskopiointi'
-    lead: "Tässä on uuden lompakkosi helposti talteen kirjoitettava palautuskoodi:"
+    lead: 'Tässä on uuden lompakkosi helposti talteen kirjoitettava palautuskoodi:'
     copy: 'Kopioi palautuskoodi'
     copied: 'Palautuskoodi kopioitu leikepöydälle!'
     download: 'Lataa'
     help: >
       On erittäin suositeltavaa kirjoittaa palautuskoodi kynällä paperille ja säilöä se mahdollisimman turvalliseen paikkaan.
-    confirm: "Oletko varma, että olet kirjoittanut palautuskoodin ylös?"
+    confirm: 'Oletko varma, että olet kirjoittanut palautuskoodin ylös?'
   import:
     title: 'Tuo lompakko'
     copied: 'Palautuskoodi kopioitu leikepöydälle!'
     help:
-      seed: "Lompakkosi 64-merkkinen HEX-palautuskoodi."
-      mnemonic: "Lompakkosi helposti muistettava BIP39-palautuskoodi."
+      seed: 'Lompakkosi 64-merkkinen HEX-palautuskoodi.'
+      mnemonic: 'Lompakkosi helposti muistettava BIP39-palautuskoodi.'
   password:
     title: 'Lompakon salasana'
     submit: 'Aseta salasana'
@@ -104,14 +104,14 @@ wallets:
     representativeChanged: 'Lompakon edustaja vaihdettu!'
     representativeChangeFailed: 'Edustajan vaihtaminen epäonnistui!'
     passwordChanged: 'Salasana vaihdettu!'
-    passwordsDontMatch: "Salasanat eivät täsmää!"
+    passwordsDontMatch: 'Salasanat eivät täsmää!'
   logout:
     title: 'Vahvista uloskirjautuminen'
     lead: 'Oletko varma, että haluat kirjautua ulos?'
     warning: >
       <strong>Varoitus</strong>: Mikäli kirjaudut ulos ja unohdat salasanasi, sinun täytyy palauttaa lompakkosi käyttäen talteen kirjoittamaasi siemenkoodia!
 setup:
-  lead: "Aloitetaan lompakkosi käyttöönotto."
+  lead: 'Aloitetaan lompakkosi käyttöönotto.'
   instructions: >
     Nano Desktopin käytön aloittaaksesi, sinun täytyy ensin luoda uusi lompakko tai tuoda vanha lompakko siemenkoodilla.
   create: 'Luo uusi lompakko'
