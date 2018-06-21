@@ -45,38 +45,43 @@ const os = require('os');
 const net = require('net');
 const path = require('path');
 
-const del = require('del');
-const spawn = require('cross-spawn');
-const signalExit = require('signal-exit');
-const ssri = require('ssri');
 const spdy = require('spdy');
+const ssri = require('ssri');
 const cors = require('cors');
 const helmet = require('helmet');
 const connect = require('connect');
-const nanoid = require('nanoid');
-const locale2 = require('locale2');
-const username = require('username');
-const cpFile = require('cp-file');
-const makeDir = require('make-dir');
 const getPort = require('get-port');
 const waitPort = require('wait-port');
 const httpProxy = require('http-proxy');
 const selfsigned = require('selfsigned');
 const expressJwt = require('express-jwt');
 const serverDestroy = require('server-destroy');
+
+const nanoid = require('nanoid');
+const locale2 = require('locale2');
+const username = require('username');
 const debounceFn = require('debounce-fn');
+const progressStream = require('progress-stream');
+const normalizeNewline = require('normalize-newline');
+const toExecutableName = require('to-executable-name');
+
+const cpy = require('cpy');
+const del = require('del');
+const cpFile = require('cp-file');
+const makeDir = require('make-dir');
+const spawn = require('cross-spawn');
+const signalExit = require('signal-exit');
 const pathExists = require('path-exists');
 const loadJsonFile = require('load-json-file');
 const writeJsonFile = require('write-json-file');
-const normalizeNewline = require('normalize-newline');
-const toExecutableName = require('to-executable-name');
+
 const Promise = require('bluebird');
 const extractZip = Promise.promisify(require('extract-zip'));
 const writeFileAtomic = Promise.promisify(require('write-file-atomic'));
 const jsonwebtoken = Promise.promisifyAll(require('jsonwebtoken'));
 const fs = Promise.promisifyAll(require('graceful-fs'), {
   filter(name) {
-    return name === 'readFile';
+    return ['stat', 'readFile'].includes(name);
   },
 });
 
@@ -188,22 +193,34 @@ const downloadAsset = async (sender, url, integrity, onProgress) => {
 
   const dl = await download(sender, url, { directory, onProgress });
   const savePath = dl.getSavePath();
+  const { size } = await fs.statAsync(savePath);
+  const progress = progressStream({ length: size, time: 250 });
+  progress.on('progress', ({ percentage = 0 }) => onProgress(percentage / 100));
+
+  const readStream = fs.createReadStream(savePath).pipe(progress);
+  log.info('Verifying asset:', savePath, integrity);
   if (!sender.isDestroyed()) {
     sender.send('download-verify');
   }
 
-  log.info('Verifying asset:', savePath, integrity);
-  await ssri.checkStream(fs.createReadStream(savePath), integrity);
+  await ssri.checkStream(readStream, integrity);
 
-  const dir = path.normalize(app.getPath('userData'));
+  const name = path.basename(savePath, path.extname(savePath));
+  const extractDir = path.join(path.dirname(savePath), name);
+  log.info('Extracting asset:', savePath, '->', extractDir);
   if (!sender.isDestroyed()) {
     sender.send('download-extract');
   }
 
-  log.info('Extracting asset:', savePath, '->', dir);
-  await extractZip(savePath, { dir, defaultFileMode: 0o600 });
+  await extractZip(savePath, { dir: extractDir, defaultFileMode: 0o600 });
+  await del(savePath, { force: true });
 
-  log.info('Asset download done:', url);
+  const dataPath = path.normalize(app.getPath('userData'));
+  log.info('Moving asset:', extractDir, '->', dataPath);
+  await cpy('*', dataPath, { cwd: extractDir });
+  await del(extractDir, { force: true });
+
+  log.info('Downloaded asset ready:', name);
 };
 
 ipcMain.on('download-start', ({ sender }, url, integrity) => {
