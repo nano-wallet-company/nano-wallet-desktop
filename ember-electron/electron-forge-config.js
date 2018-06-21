@@ -18,6 +18,8 @@ const {
   },
 } = require('../package');
 
+const { arch } = process;
+
 const icon = path.join(__dirname, 'resources', 'icon');
 
 const [, name] = packageName.split('/');
@@ -31,6 +33,28 @@ const buildNumber = process.env.CI_JOB_ID
   || '0';
 
 const buildVersion = `${version}+${buildNumber}`;
+
+const unsupportedArch = (target, type) => {
+  throw new Error(`Unsupported architecture for ${target}: ${type}`);
+};
+
+const debianArch = (type) => {
+  const supported = {
+    x64: 'amd64',
+    x32: 'i386',
+  };
+
+  return supported[type] || unsupportedArch('deb', type);
+};
+
+const redhatArch = (type) => {
+  const supported = {
+    x64: 'x86_64',
+    x32: 'x86',
+  };
+
+  return supported[type] || unsupportedArch('rpm', type);
+};
 
 module.exports = {
   make_targets: {
@@ -49,12 +73,12 @@ module.exports = {
     ],
   },
   electronPackagerConfig: {
+    arch,
     icon,
     appCopyright,
     buildVersion,
     appBundleId,
     appCategoryType,
-    arch: 'x64',
     asar: true,
     overwrite: true,
     ignore: ['\\.xml$'],
@@ -68,7 +92,7 @@ module.exports = {
   electronWinstallerConfig: {
     name,
     exe: `${name}.exe`,
-    setupExe: `${productName} Setup.exe`,
+    setupExe: `${productName} ${version} Setup.exe`,
     setupIcon: `${icon}.ico`,
     loadingGif: path.join(__dirname, 'resources', 'install-spinner.gif'),
   },
@@ -79,7 +103,7 @@ module.exports = {
     name,
     categories,
     bin: name,
-    arch: 'amd64',
+    arch: debianArch(arch),
     icon: {
       scalable: `${icon}.svg`,
     },
@@ -88,12 +112,12 @@ module.exports = {
     name,
     categories,
     bin: name,
-    arch: 'x86_64',
+    arch: redhatArch(arch),
     compressionLevel: 9,
     icon: `${icon}.png`,
   },
   github_repository: {
-    owner: 'nanocurrency',
-    name: 'nano-desktop',
+    owner: 'nano-wallet-company',
+    name: 'nano-wallet-desktop',
   },
 };

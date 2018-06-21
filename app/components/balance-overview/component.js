@@ -9,7 +9,10 @@ import { observes } from 'ember-decorators/object';
 import { alias } from 'ember-decorators/object/computed';
 import { on } from 'ember-decorators/object/evented';
 
-import getExchangeRate, { DEFAULT_CURRENCY, DEFAULT_EXCHANGE_RATE } from '../../utils/get-exchange-rate';
+import getExchangeRate, {
+  DEFAULT_CURRENCY,
+  DEFAULT_EXCHANGE_RATE,
+} from '../../utils/get-exchange-rate';
 
 export const EXCHANGE_RATE_POLL_INTERVAL = 5 * 60 * 1000;
 

@@ -1,16 +1,26 @@
 import Component from '@ember/component';
+import { get } from '@ember/object';
 
 import InViewportMixin from 'ember-in-viewport';
 
 import { service } from 'ember-decorators/service';
+import { computed } from 'ember-decorators/object';
 import { on } from 'ember-decorators/object/evented';
 import { gt, lt } from 'ember-decorators/object/computed';
 
 export default Component.extend(InViewportMixin, {
   @service status: null,
 
-  @gt('status.blocks.unchecked', 0) hasUncheckedBlocks: false,
   @lt('status.peers.length', 1) isPeerless: false,
+  @gt('uncheckedPercentage', 0.01) isSyncing: false,
+
+  @computed('status.blocks.{count,unchecked}')
+  get uncheckedPercentage() {
+    const status = this.get('status');
+    const count = get(status, 'blocks.count') || 0;
+    const unchecked = get(status, 'blocks.unchecked') || 1;
+    return (unchecked / count) * 100;
+  },
 
   @on('didEnterViewport')
   startPolling() {

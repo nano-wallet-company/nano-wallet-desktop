@@ -1,6 +1,9 @@
 import Component from '@ember/component';
 
-import { DisposableMixin, ContextBoundTasksMixin } from 'ember-lifeline';
+import {
+  DisposableMixin,
+  ContextBoundTasksMixin,
+} from 'ember-lifeline';
 import { defineError } from 'ember-exex/error';
 import { on } from 'ember-decorators/object/evented';
 
@@ -20,27 +23,27 @@ export default Component.extend(DisposableMixin, ContextBoundTasksMixin, {
   asset: null,
   value: 0,
 
-  onDone: null,
+  onFinish: null,
 
   @on('didInsertElement')
   addListeners() {
     const downloader = this.get('downloader');
     if (downloader) {
-      downloader.on('error', this, this.onError);
-      downloader.on('progress', this, this.onProgress);
-      downloader.on('verify', this, this.onVerify);
-      downloader.on('extract', this, this.onExtract);
-      downloader.on('done', this, this.reset);
-      downloader.on('done', this, this.onDone);
-
       this.registerDisposable(() => {
         downloader.off('error', this, this.onError);
         downloader.off('progress', this, this.onProgress);
         downloader.off('verify', this, this.onVerify);
         downloader.off('extract', this, this.onExtract);
-        downloader.off('done', this, this.reset);
         downloader.off('done', this, this.onDone);
+        downloader.off('done', this, this.reset);
       });
+
+      downloader.on('error', this, this.onError);
+      downloader.on('progress', this, this.onProgress);
+      downloader.on('verify', this, this.onVerify);
+      downloader.on('extract', this, this.onExtract);
+      downloader.on('done', this, this.onDone);
+      downloader.on('done', this, this.reset);
     }
 
     return this;
@@ -52,7 +55,7 @@ export default Component.extend(DisposableMixin, ContextBoundTasksMixin, {
   },
 
   onProgress(value) {
-    return this.debounceTask('updateProgress', value, 250);
+    return this.debounceTask('updateProgress', value, 250, true);
   },
 
   onVerify() {
@@ -63,8 +66,19 @@ export default Component.extend(DisposableMixin, ContextBoundTasksMixin, {
     return this.reset(STATUS_EXTRACTING);
   },
 
+  onDone() {
+    return this.scheduleTask('actions', () => {
+      const onFinish = this.get('onFinish');
+      if (onFinish) {
+        return onFinish();
+      }
+
+      return true;
+    });
+  },
+
   reset(status = STATUS_DOWNLOADING) {
-    return this.runTask(() => {
+    return this.scheduleTask('routerTransitions', () => {
       this.setProperties({
         status,
         value: 1,

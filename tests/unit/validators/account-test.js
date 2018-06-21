@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { describe, it } from 'mocha';
-import validateAccount from '@nanocurrency/nano-desktop/validators/account';
+import validateAccount from '@nano-wallet-company/nano-wallet-desktop/validators/account';
 
 describe('Unit | Validator | account', () => {
   it('passes addresses with xrb_ prefix', () => {

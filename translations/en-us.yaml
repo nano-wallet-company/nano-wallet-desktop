@@ -1,4 +1,4 @@
-product: 'Nano Desktop'
+product: 'Nano Wallet Desktop'
 cancel: 'Cancel'
 done: 'Done'
 loading: 'Loading...'
@@ -39,6 +39,21 @@ starting: 'Starting node'
 currency: '{amount}'
 copyAddress: 'Copy address'
 addressCopied: 'Address copied: {address}'
+agree: 'Agree'
+disagree: 'Disagree'
+legal:
+  title: 'Terms and Conditions'
+  disclaimer: >
+    Your use of this Nano Wallet application is subject to your agreement to all terms and
+    conditions of the End User License Agreement and Privacy Policy linked below (collectively, the
+    "Terms and Conditions"). Please tap the links below and read all Terms and Conditions carefully.
+    By checking the boxes below and tapping "Agree," you acknowledge that you have read, understand
+    and agree to all of the Terms and Conditions, which are binding legal agreements. If you do not
+    understand or agree to any of the Terms and Conditions, you are not licensed or authorized to
+    use this application and should delete it from your device.
+  eula: 'End User License Agreement'
+  privacyPolicy: 'Privacy Policy'
+  cannotDisagree: 'You may not use the application unless you agree to the Terms and Conditions.'
 status:
   state: 'Status'
   online: 'Online'
@@ -115,7 +130,7 @@ wallets:
 setup:
   lead: "Let's get your wallet set up."
   instructions: >
-    To begin using Nano Desktop, you must first create a new wallet or import your wallet data
+    To begin using Nano Wallet Desktop, you must first create a new wallet or import your wallet data
     using a seed.
   create: 'Create New Wallet'
   or: 'or'

@@ -1,0 +1,19 @@
+{{#with (changeset (hash eula=false privacyPolicy=false) LegalAgreementsValidations) as |model|}}
+  {{#bs-form model=model onSubmit=(action onAgree) as |form|}}
+    {{#form.group}}
+      {{#let (component 'external-link' text=(t 'legal.eula') href=eulaLink) as |label|}}
+        {{form.element controlType="checkbox" label=label property='eula'}}
+      {{/let}}
+      {{#let (component 'external-link' text=(t 'legal.privacyPolicy') href=privacyPolicyLink) as |label|}}
+        {{form.element controlType="checkbox" label=label property='privacyPolicy'}}
+      {{/let}}
+    {{/form.group}}
+    <button type="button" {{action onDisagree}} class="btn btn-secondary btn-lg">
+      {{t 'disagree'}}
+    </button>
+    {{#bs-button buttonType="submit" disabled=(not (and model.eula model.privacyPolicy)) class="btn-lg" type="primary"}}
+      {{fa-icon 'thumbs-up'}}
+      {{t 'agree'}}
+    {{/bs-button}}
+  {{/bs-form}}
+{{/with}}

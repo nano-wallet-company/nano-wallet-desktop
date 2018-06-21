@@ -12,13 +12,9 @@ export default Route.extend({
     const isElectron = get(electron, 'isElectron');
     if (isElectron) {
       const isNodeDownloaded = get(electron, 'isNodeDownloaded');
-      if (!isNodeDownloaded) {
-        return this.transitionTo('setup.download', { queryParams: { asset: 'node' } });
-      }
-
       const isDataDownloaded = get(electron, 'isDataDownloaded');
-      if (!isDataDownloaded) {
-        return this.transitionTo('setup.download', { queryParams: { asset: 'data' } });
+      if (!isNodeDownloaded || !isDataDownloaded) {
+        return this.transitionTo('setup.start');
       }
     }
 
@@ -30,12 +26,6 @@ export default Route.extend({
   },
 
   afterModel() {
-    const session = this.get('session');
-    const isAuthenticated = get(session, 'isAuthenticated');
-    if (isAuthenticated) {
-      return session.invalidate();
-    }
-
     return this.transitionTo('index');
   },
 });

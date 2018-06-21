@@ -45,39 +45,43 @@ const os = require('os');
 const net = require('net');
 const path = require('path');
 
-const del = require('del');
-const spawn = require('cross-spawn');
-const signalExit = require('signal-exit');
-const ssri = require('ssri');
 const spdy = require('spdy');
+const ssri = require('ssri');
 const cors = require('cors');
 const helmet = require('helmet');
 const connect = require('connect');
-const nanoid = require('nanoid');
-const locale2 = require('locale2');
-const username = require('username');
-const semver = require('semver');
-const cpFile = require('cp-file');
-const makeDir = require('make-dir');
 const getPort = require('get-port');
 const waitPort = require('wait-port');
 const httpProxy = require('http-proxy');
 const selfsigned = require('selfsigned');
 const expressJwt = require('express-jwt');
 const serverDestroy = require('server-destroy');
+
+const nanoid = require('nanoid');
+const locale2 = require('locale2');
+const username = require('username');
 const debounceFn = require('debounce-fn');
+const progressStream = require('progress-stream');
+const normalizeNewline = require('normalize-newline');
+const toExecutableName = require('to-executable-name');
+
+const cpy = require('cpy');
+const del = require('del');
+const cpFile = require('cp-file');
+const makeDir = require('make-dir');
+const spawn = require('cross-spawn');
+const signalExit = require('signal-exit');
 const pathExists = require('path-exists');
 const loadJsonFile = require('load-json-file');
 const writeJsonFile = require('write-json-file');
-const normalizeNewline = require('normalize-newline');
-const toExecutableName = require('to-executable-name');
+
 const Promise = require('bluebird');
 const extractZip = Promise.promisify(require('extract-zip'));
 const writeFileAtomic = Promise.promisify(require('write-file-atomic'));
 const jsonwebtoken = Promise.promisifyAll(require('jsonwebtoken'));
 const fs = Promise.promisifyAll(require('graceful-fs'), {
   filter(name) {
-    return name === 'readFile';
+    return ['stat', 'readFile'].includes(name);
   },
 });
 
@@ -168,11 +172,11 @@ const generateCert = (commonName) => {
   const attrs = [
     { name: 'commonName', value: commonName },
     { name: 'countryName', value: 'US' },
-    { name: 'stateOrProvinceName', value: 'DE' },
-    { name: 'localityName', value: 'Wilmington' },
-    { name: 'organizationName', value: 'Nano Wallet Company, LLC' },
+    { name: 'stateOrProvinceName', value: 'Texas' },
+    { name: 'localityName', value: 'Austin' },
+    { name: 'organizationName', value: 'Nano Wallet Company LLC' },
     { name: 'organizationalUnitName', value: 'Desktop' },
-    { name: 'emailAddress', value: 'desktop@nano.org' },
+    { name: 'emailAddress', value: 'desktop@nanowalletcompany.com' },
   ];
 
   log.info('Generating TLS certificate:', commonName);
@@ -184,27 +188,39 @@ const generateCert = (commonName) => {
 };
 
 const downloadAsset = async (sender, url, integrity, onProgress) => {
-  const directory = path.resolve(app.getPath('temp'));
+  const directory = path.normalize(app.getPath('temp'));
   log.info('Downloading asset:', url);
 
   const dl = await download(sender, url, { directory, onProgress });
   const savePath = dl.getSavePath();
+  const { size } = await fs.statAsync(savePath);
+  const progress = progressStream({ length: size, time: 250 });
+  progress.on('progress', ({ percentage = 0 }) => onProgress(percentage / 100));
+
+  const readStream = fs.createReadStream(savePath).pipe(progress);
+  log.info('Verifying asset:', savePath, integrity);
   if (!sender.isDestroyed()) {
     sender.send('download-verify');
   }
 
-  log.info('Verifying asset:', savePath, integrity);
-  await ssri.checkStream(fs.createReadStream(savePath), integrity);
+  await ssri.checkStream(readStream, integrity);
 
-  const dir = path.resolve(app.getPath('userData'));
+  const name = path.basename(savePath, path.extname(savePath));
+  const extractDir = path.join(path.dirname(savePath), name);
+  log.info('Extracting asset:', savePath, '->', extractDir);
   if (!sender.isDestroyed()) {
     sender.send('download-extract');
   }
 
-  log.info('Extracting asset:', savePath, '->', dir);
-  await extractZip(savePath, { dir, defaultFileMode: 0o600 });
+  await extractZip(savePath, { dir: extractDir, defaultFileMode: 0o600 });
+  await del(savePath, { force: true });
 
-  log.info('Asset download done:', url);
+  const dataPath = path.normalize(app.getPath('userData'));
+  log.info('Moving asset:', extractDir, '->', dataPath);
+  await cpy('*', dataPath, { cwd: extractDir });
+  await del(extractDir, { force: true });
+
+  log.info('Downloaded asset ready:', name);
 };
 
 ipcMain.on('download-start', ({ sender }, url, integrity) => {
@@ -291,7 +307,7 @@ const forceKill = (child, timeout = 5000) => {
 };
 
 const startNode = async () => {
-  const dataPath = path.resolve(app.getPath('userData'));
+  const dataPath = path.normalize(app.getPath('userData'));
   const configPath = path.join(dataPath, 'config.json');
   const loopbackAddress = await getLoopbackAddress();
   let config = {};
@@ -303,28 +319,27 @@ const startNode = async () => {
     config.rpc.address = loopbackAddress;
   }
 
+  const tlsPath = path.join(dataPath, 'tls');
+  const dhParamPath = path.join(tlsPath, 'dh2048.pem');
   if (!config.rpc.secure) {
     log.info('Generating secure node RPC configuration...');
-    const tlsPath = path.join(dataPath, 'tls');
     const clientsPath = path.join(tlsPath, 'clients');
     await makeDir(clientsPath);
 
     const serverCertPath = path.join(tlsPath, 'server.cert.pem');
     const serverKeyPath = path.join(tlsPath, 'server.key.pem');
-    const serverPems = generateCert('nano.org');
+    const serverPems = generateCert('nanowalletcompany.com');
     await writeFileAtomic(serverCertPath, normalizeNewline(serverPems.cert), { mode: 0o600 });
     await writeFileAtomic(serverKeyPath, normalizeNewline(serverPems.private), { mode: 0o600 });
-
-    const dhParamPath = path.join(tlsPath, 'dh2048.pem');
     await cpFile(path.join(__dirname, 'tls', 'dh2048.pem'), dhParamPath);
 
     const clientCertPath = path.join(clientsPath, 'rpcuser1.cert.pem');
     const clientKeyPath = path.join(clientsPath, 'rpcuser1.key.pem');
-    const clientPems = generateCert('desktop.nano.org');
+    const clientPems = generateCert('desktop.nanowalletcompany.com');
     await writeFileAtomic(clientCertPath, normalizeNewline(clientPems.cert), { mode: 0o600 });
     await writeFileAtomic(clientKeyPath, normalizeNewline(clientPems.private), { mode: 0o600 });
 
-    const subjectHash = 'e6606929'; // openssl x509 -noout -subject_hash -in rpcuser1.cert.pem
+    const subjectHash = '3634213b'; // openssl x509 -noout -subject_hash -in rpcuser1.cert.pem
     const subjectHashPath = path.join(clientsPath, `${subjectHash}.0`);
     await cpFile(clientCertPath, subjectHashPath);
 
@@ -405,6 +420,7 @@ const startNode = async () => {
   const { client_certs_path: clientCertsPath } = config.rpc.secure;
   const cert = await fs.readFileAsync(path.join(clientCertsPath, 'rpcuser1.cert.pem'));
   const key = await fs.readFileAsync(path.join(clientCertsPath, 'rpcuser1.key.pem'));
+  const dhparam = await fs.readFileAsync(dhParamPath);
   const proxy = httpProxy.createProxyServer({
     target: {
       host,
@@ -413,17 +429,22 @@ const startNode = async () => {
       key,
       protocol: 'https:',
     },
+    ssl: {
+      dhparam,
+      secureProtocol: 'TLSv1_2_client_method',
+    },
     secure: false,
+    changeOrigin: true,
   });
 
   proxy.on('error', err => log.error('[proxy]', err));
 
-  const pems = generateCert('rpc.nano.org');
+  const pems = generateCert('rpc.nanowalletcompany.com');
   const proxyCert = normalizeNewline(pems.cert);
   const proxyKey = normalizeNewline(pems.private);
 
-  const issuer = 'https://rpc.nano.org/';
-  const audience = 'https://desktop.nano.org/';
+  const issuer = 'https://rpc.nanowalletcompany.com/';
+  const audience = 'https://desktop.nanowalletcompany.com/';
   const subject = await username();
   const jwtid = nanoid(32);
   const jwtOptions = {
@@ -456,7 +477,13 @@ const startNode = async () => {
     return next();
   });
 
-  const serverOptions = { cert: proxyCert, key: proxyKey };
+  const serverOptions = {
+    dhparam,
+    cert: proxyCert,
+    key: proxyKey,
+    secureProtocol: 'TLSv1_2_server_method',
+  };
+
   const server = spdy.createServer(serverOptions, connectApp);
   serverDestroy(server);
 
@@ -634,7 +661,7 @@ const createWindow = () => {
   const menu = Menu.buildFromTemplate(template);
   Menu.setApplicationMenu(menu);
 
-  win.once('ready-to-show', () => win.show());
+  // win.once('ready-to-show', () => win.show());
 
   win.on('close', (event) => {
     if (is.macos && !global.isQuitting) {
@@ -644,17 +671,22 @@ const createWindow = () => {
   });
 
   win.on('unresponsive', () => {
-    log.warn('Application has made the window unresponsive');
+    log.warn('Application window has become unresponsive:', win.getTitle());
   });
 
   win.on('responsive', () => {
-    log.info('Main window has become responsive again');
+    log.info('Application window has become responsive again:', win.getTitle());
   });
 
   const emberAppLocation = 'serve://dist';
 
   // Load the ember application using our custom protocol/scheme
   win.loadURL(emberAppLocation);
+
+  win.webContents.once('dom-ready', () => {
+    log.info('Application window ready to show:', win.getTitle());
+    win.show();
+  });
 
   // If a loading operation goes wrong, we'll send Electron back to
   // Ember App entry point
@@ -665,7 +697,7 @@ const createWindow = () => {
   });
 
   win.webContents.on('crashed', () => {
-    log.error('Application in the main window has crashed');
+    log.error('Application in window has crashed:', win.getTitle());
   });
 
   return win;
@@ -676,13 +708,27 @@ const run = async () => {
 
   await appReady;
 
-  const dataPath = path.resolve(app.getPath('userData'));
+  const dataPath = path.normalize(app.getPath('userData'));
   const configPath = path.join(dataPath, 'config.json');
+  if (!is.development) {
+    let config = {};
+    let nodeVersion = 11;
+    try {
+      config = await loadJsonFile(configPath);
+      nodeVersion = parseInt(config.node.version, 10);
+    } catch (e) {
+      // fallsthrough
+    } finally {
+      if (nodeVersion < 12) {
+        const outdatedAssets = ['config.json', toExecutableName('rai_node')];
+        log.info('Deleting outdated assets:', outdatedAssets.join(', '));
+        await del(outdatedAssets, { force: true, cwd: dataPath });
+      }
+    }
+  }
+
   const nodePath = path.join(dataPath, toExecutableName('rai_node'));
   const databasePath = path.join(dataPath, 'data.ldb');
-  if (!is.development && semver.lte(version, '1.0.0-beta.8')) {
-    await del([configPath, nodePath], { force: true });
-  }
 
   Object.defineProperty(global, 'locale', {
     get() {

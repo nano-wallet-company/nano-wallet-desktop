@@ -1,5 +1,5 @@
-{{#fa-icon (if hasUncheckedBlocks 'refresh' 'signal')
-    spin=hasUncheckedBlocks
+{{#fa-icon (if isSyncing 'refresh' 'signal')
+    spin=isSyncing
     class=(if (not isPeerless) 'text-success')}}
   {{#bs-tooltip}}
     <ul class="m-0 list-unstyled">
@@ -9,7 +9,7 @@
           {{#if isPeerless}}
             {{t 'status.connecting'}}
           {{else}}
-            {{if hasUncheckedBlocks (t 'syncing') (t 'status.online')}}
+            {{if isSyncing (t 'syncing') (t 'status.online')}}
           {{/if}}
         {{else}}
           {{t 'status.connecting'}}

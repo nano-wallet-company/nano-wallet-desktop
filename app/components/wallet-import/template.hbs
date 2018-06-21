@@ -1,4 +1,4 @@
-<h4 class="modal-title">{{t 'wallets.import.title'}}</h4>
+<h4>{{t 'wallets.import.title'}}</h4>
 {{#with (changeset (hash type=type seed=seed mnemonic=(mnemonic seed)) ImportWalletValidations) as |model|}}
   {{#bs-form model=model onSubmit=(action (queue (action 'convertMnemonic') (action 'saveWallet' wallet) (action onSubmit wallet) (action 'clearSeed'))) as |form|}}
     {{#form.group}}

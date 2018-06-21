@@ -9,6 +9,7 @@ const { authenticationRoute } = Configuration;
 
 export default Route.extend({
   @service session: null,
+  @service settings: null,
   @service electron: null,
 
   beforeModel(...args) {
@@ -19,6 +20,12 @@ export default Route.extend({
       if (!isNodeStarted) {
         return this.transitionTo('start');
       }
+    }
+
+    const settings = this.get('settings');
+    const acceptedTerms = get(settings, 'acceptedTerms');
+    if (!acceptedTerms) {
+      return this.transitionTo('setup.legal');
     }
 
     return this._super(...args);

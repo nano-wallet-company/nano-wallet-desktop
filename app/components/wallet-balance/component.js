@@ -1,6 +1,9 @@
 import Component from '@ember/component';
 
-import { DEFAULT_CURRENCY, DEFAULT_EXCHANGE_RATE } from '../../utils/get-exchange-rate';
+import {
+  DEFAULT_CURRENCY,
+  DEFAULT_EXCHANGE_RATE,
+} from '../../utils/get-exchange-rate';
 
 export default Component.extend({
   amount: 0,

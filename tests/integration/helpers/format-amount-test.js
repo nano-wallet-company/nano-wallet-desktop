@@ -1,21 +1,20 @@
 import { expect } from 'chai';
-
 import { beforeEach, it, describe } from 'mocha';
-
-import { setupComponentTest } from 'ember-mocha';
+import { setupRenderingTest } from 'ember-mocha';
+import { find, render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
 describe('helper:format-amount', () => {
-  setupComponentTest('format-amount', {
-    integration: true,
+  setupRenderingTest({
+    needs: ['service:intl'],
   });
 
   beforeEach(function () {
-    this.inject.service('intl');
-    this.get('intl').setLocale('en-us');
+    const intl = this.owner.lookup('service:intl');
+    intl.setLocale('en-us');
   });
 
-  it('renders', function () {
+  it('renders', async function () {
     // Set any properties with this.set('myProperty', 'value');
     // Handle any actions with this.on('myAction', function(val) { ... });
     // Template block usage:
@@ -26,43 +25,43 @@ describe('helper:format-amount', () => {
     // `);
 
     this.set('inputValue', '0');
-    this.render(hbs`{{format-amount inputValue}}`);
-    expect(this.$().text().trim()).to.equal('0');
+    await render(hbs`{{format-amount inputValue}}`);
+    expect(find('*').textContent.trim()).to.equal('0');
   });
 
-  it('handles integer values with no decimal component', function () {
+  it('handles integer values with no decimal component', async function () {
     this.set('inputValue', '1000000000000000000000000000000');
-    this.render(hbs`{{format-amount inputValue}}`);
-    expect(this.$().text().trim()).to.equal('1');
+    await render(hbs`{{format-amount inputValue}}`);
+    expect(find('*').textContent.trim()).to.equal('1');
   });
 
-  it('handles decimal values with no integer component', function () {
+  it('handles decimal values with no integer component', async function () {
     this.set('inputValue', '100000000000000000000000000000');
-    this.render(hbs`{{format-amount inputValue}}`);
-    expect(this.$().text().trim()).to.equal('0.1');
+    await render(hbs`{{format-amount inputValue}}`);
+    expect(find('*').textContent.trim()).to.equal('0.1');
   });
 
-  it('handles values with both an integer and decimal component', function () {
+  it('handles values with both an integer and decimal component', async function () {
     this.set('inputValue', '1100000000000000000000000000000');
-    this.render(hbs`{{format-amount inputValue}}`);
-    expect(this.$().text().trim()).to.equal('1.1');
+    await render(hbs`{{format-amount inputValue}}`);
+    expect(find('*').textContent.trim()).to.equal('1.1');
   });
 
-  it('handles large values with both an integer and decimal component', function () {
+  it('handles large values with both an integer and decimal component', async function () {
     this.set('inputValue', '1234012300000000000000000000000000');
-    this.render(hbs`{{format-amount inputValue}}`);
-    expect(this.$().text().trim()).to.equal('1,234.0123');
+    await render(hbs`{{format-amount inputValue}}`);
+    expect(find('*').textContent.trim()).to.equal('1,234.0123');
   });
 
-  it('ignores decimal values beyond the 20th decimal place', function () {
+  it('ignores decimal values beyond the 20th decimal place', async function () {
     this.set('inputValue', '1100000000000000000000000000001');
-    this.render(hbs`{{format-amount inputValue}}`);
-    expect(this.$().text().trim()).to.equal('1.1');
+    await render(hbs`{{format-amount inputValue}}`);
+    expect(find('*').textContent.trim()).to.equal('1.1');
   });
 
-  it('converts the value according to the exchange rate', function () {
+  it('converts the value according to the exchange rate', async function () {
     this.set('inputValue', '1100000000000000000000000000000');
-    this.render(hbs`{{format-amount inputValue exchangeRate=2}}`);
-    expect(this.$().text().trim()).to.equal('2.2');
+    await render(hbs`{{format-amount inputValue exchangeRate=2}}`);
+    expect(find('*').textContent.trim()).to.equal('2.2');
   });
 });
