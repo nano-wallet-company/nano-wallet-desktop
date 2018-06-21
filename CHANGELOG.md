@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.0.0-rc.1"></a>
+# [1.0.0-rc.1](https://github.com/nano-wallet-company/nano-wallet-desktop/compare/v1.0.0-beta.9...v1.0.0-rc.1) (2018-06-21)
+
+
+### Bug Fixes
+
+* **account-send:** show amount validation errors on change ([b8cdf44](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/b8cdf44))
+* **app:** remove modal-header class from non-modal components ([a586f33](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/a586f33))
+* **electron:** grab arch correctly during build ([660132c](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/660132c))
+* **electron:** specify secureProtocol for proxy and server ([7f57693](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/7f57693))
+* **electron:** use node configuration version to determine if outdated ([9ab7ba5](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/9ab7ba5))
+* **status-tooltip:** better syncing check algorithm ([7c2c072](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/7c2c072))
+
+
+### Features
+
+* **electron:** support multi-arch builds (theoretically) ([a99c0f8](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/a99c0f8))
+* **electron:** update progress while verifying assets ([bbbec69](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/bbbec69))
+* **legal:** add legal click-throughs ([ab92c6c](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/ab92c6c))
+* **start:** show loading animation while node is starting ([e5fa75d](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/e5fa75d))
+
+
+
 <a name="1.0.0-beta.9"></a>
 # [1.0.0-beta.9](https://github.com/nano-wallet-company/nano-wallet-desktop/compare/v1.0.0-beta.8...v1.0.0-beta.9) (2018-06-06)
 
