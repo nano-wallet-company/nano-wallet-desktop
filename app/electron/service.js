@@ -32,6 +32,7 @@ export default Service.extend(Evented, DisposableMixin, {
   @service intl: null,
   @service config: null,
 
+  shell: null,
   remote: null,
   ipcRenderer: null,
 
@@ -51,7 +52,8 @@ export default Service.extend(Evented, DisposableMixin, {
   setup() {
     if (isElectron()) {
       // eslint-disable-next-line no-undef
-      const { remote, ipcRenderer } = requireNode('electron');
+      const { shell, remote, ipcRenderer } = requireNode('electron');
+      this.shell = shell;
       this.remote = remote;
       this.ipcRenderer = ipcRenderer;
 
@@ -112,6 +114,10 @@ export default Service.extend(Evented, DisposableMixin, {
       return this.getRemoteGlobal('authorizationToken', null);
     },
   }).volatile(),
+
+  openExternal(...args) {
+    return this.shell.openExternal(...args);
+  },
 
   download(asset) {
     return new Promise((resolve, reject) => {

@@ -11,6 +11,7 @@ Router.map(function routerMap() {
   this.route('start');
 
   this.route('setup', function setupRoute() {
+    this.route('legal');
     this.route('download');
     this.route('start');
     this.route('import');

@@ -46,6 +46,11 @@ module.exports = (environment) => {
       viewportSpy: true,
     },
 
+    links: {
+      eula: 'http://nanowalletcompany.com/desktop-eula',
+      privacyPolicy: 'http://nanowalletcompany.com/desktop-privacy-policy',
+    },
+
     assets: {
       node: {
         darwin: {

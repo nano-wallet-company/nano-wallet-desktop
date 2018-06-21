@@ -1,14 +1,13 @@
 import { expect } from 'chai';
-import { it, describe } from 'mocha';
+import { describe, it } from 'mocha';
 import { setupTest } from 'ember-mocha';
 
-describe('Unit | Route | index', () => {
-  setupTest('route:index', {
+describe('Unit | Route | setup/legal', () => {
+  setupTest('route:setup/legal', {
     // Specify the other units that are required for this test.
     needs: [
-      'service:session',
+      'service:intl',
       'service:settings',
-      'service:electron',
     ],
   });
 
