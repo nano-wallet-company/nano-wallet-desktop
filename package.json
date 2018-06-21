@@ -67,20 +67,19 @@
     }
   },
   "dependencies": {
-    "async-retry": "^1.2.1",
-    "axios": "^0.18.0",
     "bluebird": "^3.5.1",
     "connect": "^3.6.6",
     "cors": "^2.8.4",
     "cp-file": "^6.0.0",
+    "cpy": "^7.0.1",
     "debounce-fn": "^1.0.0",
     "del": "^3.0.0",
     "electron-compile": "^6.4.2",
-    "electron-context-menu": "^0.9.1",
+    "electron-context-menu": "^0.10.0",
     "electron-debug": "^2.0.0",
     "electron-devtools-installer": "^2.2.4",
     "electron-dl": "^1.12.0",
-    "electron-log": "^2.2.14",
+    "electron-log": "^2.2.15",
     "electron-protocol-serve": "^1.3.0",
     "electron-squirrel-startup": "^1.0.0",
     "electron-unhandled": "^1.1.0",
@@ -100,6 +99,7 @@
     "node-forge": "^0.7.5",
     "normalize-newline": "^3.0.0",
     "path-exists": "^3.0.0",
+    "progress-stream": "^2.0.0",
     "selfsigned": "^1.10.3",
     "server-destroy": "^1.0.1",
     "signal-exit": "^3.0.2",
@@ -170,7 +170,7 @@
     "ember-cli-string-helpers": "^1.9.0",
     "ember-cli-template-lint": "^0.7.6",
     "ember-cli-uglify": "^2.1.0",
-    "ember-component-css": "^0.6.3",
+    "ember-component-css": "^0.6.4",
     "ember-composable-helpers": "^2.1.0",
     "ember-concurrency": "^0.8.19",
     "ember-concurrency-retryable": "^0.4.0",
@@ -205,7 +205,7 @@
     "ember-service-worker-asset-cache": "^0.6.2",
     "ember-service-worker-index": "^0.6.9",
     "ember-simple-auth": "^1.6.0",
-    "ember-source": "^3.2.0",
+    "ember-source": "^3.2.1",
     "ember-truth-helpers": "^2.0.0",
     "ember-web-app": "^2.3.0",
     "ember-window-mock": "^0.4.1",
@@ -231,6 +231,6 @@
     "standard-version": "^4.4.0"
   },
   "engines": {
-    "node": "^4.5 || 6.* || >= 7.*"
+    "node": ">= 8.11.3"
   }
 }
