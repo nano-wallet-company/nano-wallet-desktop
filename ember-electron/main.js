@@ -188,10 +188,9 @@ const generateCert = (commonName) => {
 };
 
 const downloadAsset = async (sender, url, integrity, onProgress) => {
-  const directory = path.normalize(app.getPath('temp'));
   log.info('Downloading asset:', url);
 
-  const dl = await download(sender, url, { directory, onProgress });
+  const dl = await download(sender, url, { onProgress });
   const savePath = dl.getSavePath();
   const { size } = await fs.statAsync(savePath);
   const progress = progressStream({ length: size, time: 250 });
