@@ -1,4 +1,4 @@
-product: 'Nano Desktop'
+product: 'Nano Wallet Desktop'
 cancel: 'Peruuta'
 done: 'Valmis'
 loading: 'Ladataan...'
@@ -113,7 +113,7 @@ wallets:
 setup:
   lead: 'Aloitetaan lompakkosi käyttöönotto.'
   instructions: >
-    Nano Desktopin käytön aloittaaksesi, sinun täytyy ensin luoda uusi lompakko tai tuoda vanha lompakko siemenkoodilla.
+    Nano Wallet Desktopin käytön aloittaaksesi, sinun täytyy ensin luoda uusi lompakko tai tuoda vanha lompakko siemenkoodilla.
   create: 'Luo uusi lompakko'
   or: 'tai'
   import: 'Tuo lompakko'

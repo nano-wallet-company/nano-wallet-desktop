@@ -1,22 +1,22 @@
 {
-  "name": "@nanocurrency/nano-desktop",
+  "name": "@nano-wallet-company/nano-wallet-desktop",
   "version": "1.0.0-beta.9",
-  "productName": "Nano Desktop",
+  "productName": "Nano Wallet Desktop",
   "genericName": "Wallet",
-  "description": "The official Nano wallet for desktop and web",
+  "description": "An ambitious Nano wallet for desktop and web.",
   "license": "BSD-2-Clause",
   "author": {
-    "name": "Nano",
-    "email": "desktop@nano.org"
+    "name": "Nano Wallet Company",
+    "email": "desktop@nanowalletcompany.com"
   },
-  "homepage": "https://nano.org/",
-  "copyright": "Copyright © 2018, Nano <team@nano.org>",
+  "homepage": "https://nanowalletcompany.com/",
+  "copyright": "Copyright © 2018, Nano Wallet Company <team@nanowalletcompany.com>",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nanocurrency/nano-desktop.git"
+    "url": "git+https://github.com/nano-wallet-company/nano-wallet-desktop.git"
   },
   "build": {
-    "appId": "org.nano.desktop",
+    "appId": "com.nanowalletcompany.desktop",
     "mac": {
       "category": "public.app-category.finance"
     },

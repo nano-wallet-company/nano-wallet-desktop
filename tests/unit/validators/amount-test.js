@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { describe, it } from 'mocha';
-import validateAmount from '@nanocurrency/nano-desktop/validators/amount';
+import validateAmount from '@nano-wallet-company/nano-wallet-desktop/validators/amount';
 
 describe('Unit | Validator | amount', () => {
   it('passes valid amounts', () => {

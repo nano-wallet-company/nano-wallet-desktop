@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { describe, it } from 'mocha';
-import validateMnemonic from '@nanocurrency/nano-desktop/validators/mnemonic';
+import validateMnemonic from '@nano-wallet-company/nano-wallet-desktop/validators/mnemonic';
 
 describe('Unit | Validator | mnemonic', () => {
   it('passes valid mnemonic', () => {

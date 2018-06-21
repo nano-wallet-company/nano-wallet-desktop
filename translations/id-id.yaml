@@ -1,4 +1,4 @@
-product: 'Nano Desktop'
+product: 'Nano Wallet Desktop'
 cancel: 'Batal'
 done: 'Selesai'
 loading: 'Mohon Menunggu...'
@@ -113,7 +113,7 @@ wallets:
 setup:
   lead: 'Ayo siapkan dompet anda.'
   instructions: >
-    Untuk mulai menggunakan Nano Desktop, Anda harus terlebih dahulu membuat dompet baru
+    Untuk mulai menggunakan Nano Wallet Desktop, Anda harus terlebih dahulu membuat dompet baru
     atau mengimpor data dompet Anda menggunakan benih.
   create: 'Buat Dompet Baru'
   or: 'atau'

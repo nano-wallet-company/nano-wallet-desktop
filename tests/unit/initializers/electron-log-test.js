@@ -7,7 +7,7 @@ import {
 } from 'mocha';
 import { run } from '@ember/runloop';
 import Application from '@ember/application';
-import { initialize } from '@nanocurrency/nano-desktop/initializers/electron-log';
+import { initialize } from '@nano-wallet-company/nano-wallet-desktop/initializers/electron-log';
 import destroyApp from '../../helpers/destroy-app';
 
 describe('Unit | Initializer | electron-log', () => {

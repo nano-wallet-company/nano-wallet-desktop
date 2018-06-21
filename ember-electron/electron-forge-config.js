@@ -117,7 +117,7 @@ module.exports = {
     icon: `${icon}.png`,
   },
   github_repository: {
-    owner: 'nanocurrency',
-    name: 'nano-desktop',
+    owner: 'nano-wallet-company',
+    name: 'nano-wallet-desktop',
   },
 };

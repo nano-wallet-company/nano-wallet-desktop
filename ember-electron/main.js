@@ -172,11 +172,11 @@ const generateCert = (commonName) => {
   const attrs = [
     { name: 'commonName', value: commonName },
     { name: 'countryName', value: 'US' },
-    { name: 'stateOrProvinceName', value: 'DE' },
-    { name: 'localityName', value: 'Wilmington' },
-    { name: 'organizationName', value: 'Nano Wallet Company, LLC' },
+    { name: 'stateOrProvinceName', value: 'Texas' },
+    { name: 'localityName', value: 'Austin' },
+    { name: 'organizationName', value: 'Nano Wallet Company LLC' },
     { name: 'organizationalUnitName', value: 'Desktop' },
-    { name: 'emailAddress', value: 'desktop@nano.org' },
+    { name: 'emailAddress', value: 'desktop@nanowalletcompany.com' },
   ];
 
   log.info('Generating TLS certificate:', commonName);
@@ -328,18 +328,18 @@ const startNode = async () => {
 
     const serverCertPath = path.join(tlsPath, 'server.cert.pem');
     const serverKeyPath = path.join(tlsPath, 'server.key.pem');
-    const serverPems = generateCert('nano.org');
+    const serverPems = generateCert('nanowalletcompany.com');
     await writeFileAtomic(serverCertPath, normalizeNewline(serverPems.cert), { mode: 0o600 });
     await writeFileAtomic(serverKeyPath, normalizeNewline(serverPems.private), { mode: 0o600 });
     await cpFile(path.join(__dirname, 'tls', 'dh2048.pem'), dhParamPath);
 
     const clientCertPath = path.join(clientsPath, 'rpcuser1.cert.pem');
     const clientKeyPath = path.join(clientsPath, 'rpcuser1.key.pem');
-    const clientPems = generateCert('desktop.nano.org');
+    const clientPems = generateCert('desktop.nanowalletcompany.com');
     await writeFileAtomic(clientCertPath, normalizeNewline(clientPems.cert), { mode: 0o600 });
     await writeFileAtomic(clientKeyPath, normalizeNewline(clientPems.private), { mode: 0o600 });
 
-    const subjectHash = 'e6606929'; // openssl x509 -noout -subject_hash -in rpcuser1.cert.pem
+    const subjectHash = '3634213b'; // openssl x509 -noout -subject_hash -in rpcuser1.cert.pem
     const subjectHashPath = path.join(clientsPath, `${subjectHash}.0`);
     await cpFile(clientCertPath, subjectHashPath);
 
@@ -439,12 +439,12 @@ const startNode = async () => {
 
   proxy.on('error', err => log.error('[proxy]', err));
 
-  const pems = generateCert('rpc.nano.org');
+  const pems = generateCert('rpc.nanowalletcompany.com');
   const proxyCert = normalizeNewline(pems.cert);
   const proxyKey = normalizeNewline(pems.private);
 
-  const issuer = 'https://rpc.nano.org/';
-  const audience = 'https://desktop.nano.org/';
+  const issuer = 'https://rpc.nanowalletcompany.com/';
+  const audience = 'https://desktop.nanowalletcompany.com/';
   const subject = await username();
   const jwtid = nanoid(32);
   const jwtOptions = {

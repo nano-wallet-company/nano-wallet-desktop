@@ -1,4 +1,4 @@
-product: 'Nano Desktop'
+product: 'Nano Wallet Desktop'
 cancel: 'Cancella'
 done: 'Fatto'
 loading: 'Caricamento...'
@@ -113,7 +113,7 @@ wallets:
 setup:
   lead: 'Impostiamo il tuo wallet.'
   instructions: >
-    Per iniziare ad usare Nano Desktop, dovrai prima creare un nuovo wallet o importare un wallet
+    Per iniziare ad usare Nano Wallet Desktop, dovrai prima creare un nuovo wallet o importare un wallet
     usando il seed.
   create: 'Crea un nuovo Wallet'
   or: 'o'

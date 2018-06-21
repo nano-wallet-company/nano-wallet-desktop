@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { describe, it } from 'mocha';
 import EmberObject from '@ember/object';
-import PaginationMixin from '@nanocurrency/nano-desktop/mixins/pagination';
+import PaginationMixin from '@nano-wallet-company/nano-wallet-desktop/mixins/pagination';
 
 describe('Unit | Mixin | pagination', () => {
   // Replace this with your real tests.

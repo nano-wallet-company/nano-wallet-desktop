@@ -1,6 +1,6 @@
-# Nano Desktop
+# Nano Wallet Desktop
 
-The official Nano wallet for desktop and web.
+An ambitious Nano wallet for desktop and web.
 
 This is an Ember application that can build into an [Electron](https://electronjs.org/) app.
 
@@ -15,8 +15,8 @@ You will need the following things properly installed on your computer.
 
 ## Installation
 
-* `git clone https://github.com/nanocurrency/nano-desktop.git`
-* `cd nano-desktop`
+* `git clone https://github.com/nano-wallet-company/nano-wallet-desktop.git`
+* `cd nano-wallet-desktop`
 * `yarn install`
 
 ## Running / Development
