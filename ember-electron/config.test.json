@@ -14,7 +14,7 @@
       "bootstrap_fraction_numerator": "1",
       "receive_minimum": "1",
       "logging": {
-          "version": "3",
+          "version": "4",
           "ledger": "false",
           "ledger_duplicate": "false",
           "vote": "false",
@@ -23,6 +23,7 @@
           "network_publish": "false",
           "network_packet": "false",
           "network_keepalive": "false",
+          "network_node_id_handshake": "false",
           "node_lifetime_tracing": "false",
           "insufficient_work": "true",
           "log_rpc": "true",
