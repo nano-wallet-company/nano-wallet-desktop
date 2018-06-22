@@ -8,14 +8,13 @@ import sumAmounts from '../utils/sum-amounts';
 
 const { Model } = DS;
 
-const sumAccountsProperty = dependentKey =>
-  computed(`accounts.@each.${dependentKey}`, {
-    get() {
-      const accounts = this.get('accounts');
-      const amounts = A(accounts).mapBy(dependentKey);
-      return sumAmounts(amounts);
-    },
-  });
+const sumAccountsProperty = dependentKey => computed(`accounts.@each.${dependentKey}`, {
+  get() {
+    const accounts = this.get('accounts');
+    const amounts = A(accounts).mapBy(dependentKey);
+    return sumAmounts(amounts);
+  },
+});
 
 export default Model.extend({
   @hasMany('account', { async: true }) accounts: null,
