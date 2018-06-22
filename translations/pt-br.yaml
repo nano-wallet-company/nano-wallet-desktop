@@ -19,7 +19,7 @@ logout: 'Logout'
 history: 'Histórico'
 save: 'Salvar'
 delete: 'Deletar'
-seed: 'Semente'
+seed: 'Seed'
 mnemonic: 'Mnemônico'
 reveal: 'Revelar'
 type: 'Tipo'
@@ -64,10 +64,10 @@ wallets:
     unlockWallet: 'Carteira desbloqueada'
     invalidPassword: 'Senha inválida!'
   backup:
-    title: 'Cópia de segurança da semente'
+    title: 'Cópia de segurança da seed'
     lead: 'Aqui está o seu novo mnemônico de sementes fácil de reconhecer para sua nova carteira:'
-    copy: 'Copiar Semente'
-    copied: 'Semente copiada para o clipboard'
+    copy: 'Copiar Seed'
+    copied: 'Seed copiada para o clipboard'
     download: 'Baixar'
     help: >
       Siga as práticas recomendadas escrevendo fisicamente seu mnemônico de sementes em um pedaço de papel e
@@ -75,10 +75,10 @@ wallets:
     confirm: 'Você tem certeza que escreveu o seu mnemônico?'
   import:
     title: 'Importar Carteira'
-    copied: 'Semente copiada para o clipboard'
+    copied: 'Seed copiada para o clipboard'
     help:
       seed: 'Sua carteira tem sementes hexadecimais de 64 caracteres'
-      mnemonic: 'Sua mnemônica da carteira BIP39'
+      mnemonic: 'Sua frase de segurança da carteira BIP39'
   password:
     title: 'Senha da Carteira'
     submit: 'Estabelecer senha'
@@ -100,9 +100,9 @@ wallets:
   settings:
     changeRepresentative: 'Mudar o representante'
     changePassword: 'Mudar Senha'
-    representativeChanged: 'Representante da carteira foi mudado!'
+    representativeChanged: 'A troca de representante da sua carteira foi efetuada!'
     representativeChangeFailed: 'A troca de representante falhou!'
-    passwordChanged: 'Senha trocada!'
+    passwordChanged: 'Sua senha foi alterada com sucesso!'
     passwordsDontMatch: 'Senhas não correspondem'
   logout:
     title: 'Confirmar logout'
@@ -112,7 +112,7 @@ wallets:
 setup:
   lead: 'Vamos configurar sua carteira!'
   instructions: >
-    Para começar usar a carteira desktop da Nano você deve primeiramente criar uma nova carteira ou importar uma carteira existente usando uma semente.
+    Para começar usar a carteira desktop da Nano você deve primeiramente criar uma nova carteira ou importar uma carteira existente usando uma seed.
   create: 'Criar nova carteira'
   or: 'ou'
   import: 'Importar carteira'
