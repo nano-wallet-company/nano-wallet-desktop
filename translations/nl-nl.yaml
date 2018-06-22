@@ -77,7 +77,7 @@ wallets:
     copied: 'Seed gekopieerd'
     help:
       seed: '64 character hex seed van jouw Wallet.'
-      ezelsbruggetje: 'BIP39 ezelsbruggetje van jouw Wallet.'
+      mnemonic: 'BIP39 ezelsbruggetje van jouw Wallet.'
   password:
     title: 'Wallet Wachtwoord'
     submit: 'Stel wachtwoord in'
