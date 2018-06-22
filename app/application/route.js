@@ -36,10 +36,14 @@ export default Route.extend(ApplicationRouteMixin, DisposableMixin, {
     const config = this.get('config');
     const rootURL = get(config, 'rootURL');
     const translations = A([currentLocale, DEFAULT_LOCALE]).uniq().map(async (key) => {
-      const response = await fetch(`${rootURL}translations/${key}.json`);
-      if (response.ok) {
-        const data = await response.json();
-        intl.addTranslations(key, data);
+      try {
+        const response = await fetch(`${rootURL}translations/${key}.json`);
+        if (response.ok) {
+          const data = await response.json();
+          intl.addTranslations(key, data);
+        }
+      } catch (e) {
+        // fallsthrough
       }
 
       return key;
