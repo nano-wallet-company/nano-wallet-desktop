@@ -54,30 +54,30 @@ module.exports = (environment) => {
     assets: {
       node: {
         darwin: {
-          url: 'https://d31vj5w9sn4ozg.cloudfront.net/node-darwin-279f85555acaed0389b7e57e3cb297c0.zip',
-          integrity: 'sha512-zHNdCliE54LS3pi+9kVMdPBcwrRn2+ZEKUQIUp4IdYxayPdK4PwPlrw77/C5n7Pktd4MznYSZwgENinqu8TwUg==',
+          url: 'https://d31vj5w9sn4ozg.cloudfront.net/node-darwin-698798436c7a12b50360bf7a36b8b17a.zip',
+          integrity: 'sha512-GJgZmjwe0L/Zd2ryDTo4MG63eJCsBFaQjEMun/42CaeLsPenSPnVcRWcND5GH5Vv9AZmhg/qZfRJJtNzJXVfaQ==',
         },
         linux: {
-          url: 'https://d31vj5w9sn4ozg.cloudfront.net/node-linux-f5b74a20953302efb20d69ca4286002e.zip',
-          integrity: 'sha512-PUxwhZCoxwgyiSDsyLTVtf8CN8o7eq52RQVGWkQYMP1UhVnxzB3av3b9fDWIQUMt4MX+m9NseZ0ih5tMTOdwmg==',
+          url: 'https://d31vj5w9sn4ozg.cloudfront.net/node-linux-14490c4f97d204d3edad4a370cb129fd.zip',
+          integrity: 'sha512-IIrRm6AUOd7HefOwNy4YVpUKLjaFM0KTrmaTZwYgmow5kiKVvtV+Qhs/k4Dv4eZWdBvygT2AxTdHVRtOsA7Fug==',
         },
         win32: {
-          url: 'https://d31vj5w9sn4ozg.cloudfront.net/node-win32-81fab5d322f815e380bbd05f5ea357f7.zip',
-          integrity: 'sha512-jPs+LYnMsYeetWHFchfjKm4aHD/djMoe4uBbVFtm3fDkflFSrIy7oOag+2SVpa8EAI9j/eDPLh3W7Ad5zJYyZw==',
+          url: 'https://d31vj5w9sn4ozg.cloudfront.net/node-win32-9a82e5347de383929b97b2a8ef88aa0a.zip',
+          integrity: 'sha512-rM48YIoRKvAmCouivBK9qqlQXSkpJWango0bs8esbVTulG/XvsXKWuGUDqFiyfPt24Mxo8kWxgwr0HIh80EXMw==',
         },
       },
       data: {
         darwin: {
-          url: 'https://d31vj5w9sn4ozg.cloudfront.net/data-625bfca3b2dab79aff91d8a7f413025b.zip',
-          integrity: 'sha512-G8JIbeWoqIAyXu436KW6GxmT8LND8ixIwTxp+Q+WYxtDwd9VJ/GhE0eCkE9SEIqc570x7S+nu8drOKZGblfAYw==',
+          url: 'https://d31vj5w9sn4ozg.cloudfront.net/data-f356607a83d34613c810cc68755114b8.zip',
+          integrity: 'sha512-dSCSDvr2NwMy3FmIVqlI1Q9gVNCrU3/e5//kTWKI4J/0XVEK9m/lDfQmGHr5pvqTgVBMdPD/5/9T2jzvNSaoYQ==',
         },
         linux: {
-          url: 'https://d31vj5w9sn4ozg.cloudfront.net/data-625bfca3b2dab79aff91d8a7f413025b.zip',
-          integrity: 'sha512-G8JIbeWoqIAyXu436KW6GxmT8LND8ixIwTxp+Q+WYxtDwd9VJ/GhE0eCkE9SEIqc570x7S+nu8drOKZGblfAYw==',
+          url: 'https://d31vj5w9sn4ozg.cloudfront.net/data-f356607a83d34613c810cc68755114b8.zip',
+          integrity: 'sha512-dSCSDvr2NwMy3FmIVqlI1Q9gVNCrU3/e5//kTWKI4J/0XVEK9m/lDfQmGHr5pvqTgVBMdPD/5/9T2jzvNSaoYQ==',
         },
         win32: {
-          url: 'https://d31vj5w9sn4ozg.cloudfront.net/data-625bfca3b2dab79aff91d8a7f413025b.zip',
-          integrity: 'sha512-G8JIbeWoqIAyXu436KW6GxmT8LND8ixIwTxp+Q+WYxtDwd9VJ/GhE0eCkE9SEIqc570x7S+nu8drOKZGblfAYw==',
+          url: 'https://d31vj5w9sn4ozg.cloudfront.net/data-f356607a83d34613c810cc68755114b8.zip',
+          integrity: 'sha512-dSCSDvr2NwMy3FmIVqlI1Q9gVNCrU3/e5//kTWKI4J/0XVEK9m/lDfQmGHr5pvqTgVBMdPD/5/9T2jzvNSaoYQ==',
         },
       },
     },
