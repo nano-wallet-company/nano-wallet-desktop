@@ -58,6 +58,7 @@ const expressJwt = require('express-jwt');
 const serverDestroy = require('server-destroy');
 
 const nanoid = require('nanoid');
+const semver = require('semver');
 const locale2 = require('locale2');
 const username = require('username');
 const debounceFn = require('debounce-fn');
@@ -86,6 +87,7 @@ const fs = Promise.promisifyAll(require('graceful-fs'), {
 });
 
 const debug = require('electron-debug');
+const Store = require('electron-store');
 const windowState = require('electron-window-state');
 const contextMenu = require('electron-context-menu');
 const protocolServe = require('electron-protocol-serve');
@@ -561,8 +563,12 @@ ipcMain.on('node-start', ({ sender }) => {
 });
 
 const createWindow = () => {
-  const { workAreaSize: { width: maxWidth, height: maxHeight } }
-    = electron.screen.getPrimaryDisplay();
+  const {
+    workAreaSize: {
+      width: maxWidth,
+      height: maxHeight,
+    },
+  } = electron.screen.getPrimaryDisplay();
 
   const mainWindowState = windowState({
     defaultWidth: Math.min(maxWidth, 1280),
@@ -707,24 +713,16 @@ const run = async () => {
 
   await appReady;
 
+  const store = new Store({ name: 'settings' });
   const dataPath = path.normalize(app.getPath('userData'));
-  const configPath = path.join(dataPath, 'config.json');
-  if (!is.development) {
-    let config = {};
-    let nodeVersion = 11;
-    try {
-      config = await loadJsonFile(configPath);
-      nodeVersion = parseInt(config.node.version, 10);
-    } catch (e) {
-      // fallsthrough
-    } finally {
-      if (nodeVersion < 12) {
-        const outdatedAssets = ['config.json', toExecutableName('rai_node')];
-        log.info('Deleting outdated assets:', outdatedAssets.join(', '));
-        await del(outdatedAssets, { force: true, cwd: dataPath });
-      }
-    }
+  const storeVersion = store.get('version');
+  if (!storeVersion || semver.gt(version, storeVersion)) {
+    const outdatedAssets = ['config.json', toExecutableName('rai_node')];
+    log.info('Deleting outdated assets:', outdatedAssets.join(', '));
+    await del(outdatedAssets, { force: true, cwd: dataPath });
   }
+
+  store.set('version', version);
 
   const nodePath = path.join(dataPath, toExecutableName('rai_node'));
   const databasePath = path.join(dataPath, 'data.ldb');
