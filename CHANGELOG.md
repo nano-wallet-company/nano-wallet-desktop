@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.0.0-rc.2"></a>
+# [1.0.0-rc.2](https://github.com/nano-wallet-company/nano-wallet-desktop/compare/v1.0.0-rc.1...v1.0.0-rc.2) (2018-06-22)
+
+
+### Bug Fixes
+
+* **electron:** downloads should go to the downloads directory ([97efe8a](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/97efe8a)), closes [#21](https://github.com/nano-wallet-company/nano-wallet-desktop/issues/21)
+* **intl:** ignore translations that fail to load ([2264ab0](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/2264ab0))
+
+
+
 <a name="1.0.0-rc.1"></a>
 # [1.0.0-rc.1](https://github.com/nano-wallet-company/nano-wallet-desktop/compare/v1.0.0-beta.9...v1.0.0-rc.1) (2018-06-21)
 
