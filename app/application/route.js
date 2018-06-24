@@ -35,7 +35,12 @@ export default Route.extend(ApplicationRouteMixin, DisposableMixin, {
     const intl = this.get('intl');
     const config = this.get('config');
     const rootURL = get(config, 'rootURL');
-    const translations = A([currentLocale, DEFAULT_LOCALE]).uniq().map(async (key) => {
+    const locales = [currentLocale, DEFAULT_LOCALE];
+    if (currentLocale.split('-').length < 2) {
+      locales.unshift(`${currentLocale}-${currentLocale}`);
+    }
+
+    const promises = A(locales).uniq().map(async (key) => {
       try {
         const response = await fetch(`${rootURL}translations/${key}.json`);
         if (response.ok) {
@@ -43,13 +48,14 @@ export default Route.extend(ApplicationRouteMixin, DisposableMixin, {
           intl.addTranslations(key, data);
         }
       } catch (e) {
-        // fallsthrough
+        return null;
       }
 
       return key;
     });
 
-    const locales = await all(translations);
+    await all(promises);
+
     intl.setLocale(locales);
 
     if (isElectron) {
