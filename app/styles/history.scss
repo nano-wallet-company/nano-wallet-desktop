@@ -7,6 +7,16 @@
   > div {
     width: 100%;
   }
+  &::-webkit-scrollbar {
+    width: 6px;
+    margin-right:2px;
+  }
+
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.5);
+  }
 }
 
 .history-item {
