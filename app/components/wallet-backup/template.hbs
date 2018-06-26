@@ -2,7 +2,7 @@
 <p class="lead">{{t 'wallets.backup.lead'}}</p>
 <p><code>{{mnemonic seed}}</code></p>
 <p>
-  {{#copy-button class="btn btn-sm btn-outline-danger" clipboardText=seed success=(action 'copySeed')}}
+  {{#copy-button class="btn btn-sm btn-outline-danger" clipboardText=seed success=(action 'copyMnemonic')}}
     {{fa-icon 'copy'}} {{t 'wallets.backup.copy'}}
   {{/copy-button}}
   {{#bs-button size='sm' type='outline-primary' class="ml-1" onClick=(action 'downloadMnemonic' (mnemonic seed))}}

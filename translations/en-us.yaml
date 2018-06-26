@@ -81,14 +81,15 @@ wallets:
     unlockWallet: 'Unlock Wallet'
     invalidPassword: 'Invalid password!'
   backup:
-    title: 'Backup Seed'
+    title: 'Backup Mnemonic'
     lead: "Here's your new easy to recognize seed mnemonic for your new wallet:"
-    copy: 'Copy Seed'
-    copied: 'Seed copied to clipboard!'
+    copy: 'Copy Mnemonic'
+    copied: 'Mnemonic copied to clipboard!'
     download: 'Download'
     help: >
       Adhere to best practices by physically writing your seed mnemonic on a piece of paper and
       storing it in a secure location for safe retrieval should you later lose your seed.
+      Your 64 character hex seed can be accessed later through settings.
     confirm: "Are you sure you've written down your mnemonic?"
   import:
     title: 'Import Wallet'
