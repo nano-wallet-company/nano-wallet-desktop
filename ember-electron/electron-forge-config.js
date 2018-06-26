@@ -34,6 +34,11 @@ const buildNumber = process.env.CI_JOB_ID
 
 const buildVersion = `${version}+${buildNumber}`;
 
+const osxSign = { entitlements: true };
+if (process.env.CSC_NAME) {
+  osxSign.identity = process.env.CSC_NAME;
+}
+
 const unsupportedArch = (target, type) => {
   throw new Error(`Unsupported architecture for ${target}: ${type}`);
 };
@@ -75,6 +80,7 @@ module.exports = {
   electronPackagerConfig: {
     arch,
     icon,
+    osxSign,
     appCopyright,
     buildVersion,
     appBundleId,

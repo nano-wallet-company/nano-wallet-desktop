@@ -1,13 +1,22 @@
 ---
+matrix:
+  include:
+  - os: linux
+    sudo: false
+    dist: trusty
+  - os: osx
+    osx_image: xcode9.4
+
 language: node_js
 node_js:
   - "10"
 
-sudo: false
-dist: trusty
-
 addons:
   chrome: stable
+  apt:
+    packages:
+    - fakeroot
+    - rpm
 
 cache:
   yarn: true
@@ -16,14 +25,52 @@ env:
   global:
     # See https://git.io/vdao3 for details.
     - JOBS=1
+    - FORCE_COLOR=1
 
 before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash
-  - export PATH=$HOME/.yarn/bin:$PATH
+  - export PATH="$HOME/.yarn/bin:$PATH"
 
 install:
-  - yarn install --non-interactive
+  - yarn install --frozen-lockfile --non-interactive
 
 script:
   - yarn lint:js
   - yarn test
+
+before_deploy:
+  - yarn cross-env NODE_ENV=production ember electron:build -e production
+  - |
+    if [ "$TRAVIS_OS_NAME" == "osx" ]; then
+      security create-keychain -p "$CSC_KEY_PASSWORD" codesign.keychain;
+      security default-keychain -s codesign.keychain;
+      security unlock-keychain -p "$CSC_KEY_PASSWORD" codesign.keychain;
+      echo "$CSC_LINK" | base64 -D - > "$TMPDIR/csc.p12";
+      security import "$TMPDIR/csc.p12" -P "$CSC_KEY_PASSWORD" -T /usr/bin/codesign;
+      rm -f "$TMPDIR/csc.p12";
+      security set-key-partition-list -S "apple-tool:,apple:" -s -k "$CSC_KEY_PASSWORD" codesign.keychain;
+      security find-identity;
+    fi
+  - yarn cross-env DEBUG=electron-osx-sign* NODE_ENV=production ember electron:package -e production --build-path electron-out/ember
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then security lock-keychain codesign.keychain; fi
+  - yarn cross-env NODE_ENV=production ember electron:make -e production --skip-package
+
+deploy:
+  - provider: script
+    skip_cleanup: true
+    script: find "$TRAVIS_BUILD_DIR/electron-out" -name "*.zip"
+    on:
+      all_branches: true
+
+# deploy:
+#   provider: releases
+#   api_key: "GITHUB OAUTH TOKEN"
+#   file_glob: true
+#   file:
+#     - "electron-out/make/*.zip"
+#     - "electron-out/make/*.dmg"
+#     - "electron-out/make/*/*.rpm"
+#     - "electron-out/make/*/*.deb"
+#   skip_cleanup: true
+#   on:
+#     tags: true
