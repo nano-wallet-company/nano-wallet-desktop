@@ -56,21 +56,17 @@ before_deploy:
   - yarn cross-env NODE_ENV=production ember electron:make -e production --skip-package
 
 deploy:
-  - provider: script
-    skip_cleanup: true
-    script: find "$TRAVIS_BUILD_DIR/electron-out" -name "*.zip"
-    on:
-      all_branches: true
-
-# deploy:
-#   provider: releases
-#   api_key: "GITHUB OAUTH TOKEN"
-#   file_glob: true
-#   file:
-#     - "electron-out/make/*.zip"
-#     - "electron-out/make/*.dmg"
-#     - "electron-out/make/*/*.rpm"
-#     - "electron-out/make/*/*.deb"
-#   skip_cleanup: true
-#   on:
-#     tags: true
+  provider: releases
+  api_key: $GITHUB_TOKEN
+  skip_cleanup: true
+  draft: true
+  prerelease: true
+  file_glob: true
+  file:
+    - "electron-out/make/*.zip"
+    - "electron-out/make/*.dmg"
+    - "electron-out/make/*/*.rpm"
+    - "electron-out/make/*/*.deb"
+  on:
+    repo: devinus/nano-wallet-desktop
+    branch: feat/code-signing
