@@ -34,10 +34,13 @@ const buildNumber = process.env.CI_JOB_ID
 
 const buildVersion = `${version}+${buildNumber}`;
 
-const osxSign = { entitlements: true };
-if (process.env.CSC_NAME) {
-  osxSign.identity = process.env.CSC_NAME;
-}
+const osxSign = {
+  identity: process.env.CSC_NAME || true,
+  entitlements: false,
+};
+
+const certificateFile = process.env.CSC_LINK || undefined;
+const certificatePassword = process.env.CSC_KEY_PASSWORD || undefined;
 
 const unsupportedArch = (target, type) => {
   throw new Error(`Unsupported architecture for ${target}: ${type}`);
@@ -97,6 +100,8 @@ module.exports = {
   },
   electronWinstallerConfig: {
     name,
+    certificateFile,
+    certificatePassword,
     exe: `${name}.exe`,
     setupExe: `${productName} ${version} Setup.exe`,
     setupIcon: `${icon}.ico`,

@@ -1,6 +1,4 @@
-image:
-  - Visual Studio 2017
-  - Ubuntu
+image: Visual Studio 2017
 
 platform:
   - x64
@@ -12,34 +10,50 @@ environment:
 
 cache:
   - node_modules -> yarn.lock
+  - '%USERPROFILE%\.electron -> yarn.lock'
 
 init:
   - git config --global core.autocrlf input
 
 install:
-  - ps: |
-      if ($isWindows) {
-        Update-NodeJsInstallation $env:nodejs_version $env:PLATFORM
-        appveyor-retry choco install yarn -y --force --no-progress --ignore-dependencies --version $env:yarn_version
-      }
-  - ps: |
-      if ($isLinux) {
-        rm -rf "$env:NVM_DIR"
-        curl -fsSL https://deb.nodesource.com/setup_10.x | sudo bash -
-        sudo apt-get install -y --no-install-recommends fakeroot rpm nodejs="$env:nodejs_version-1nodesource1" yarn="$env:yarn_version-1"
-      }
+  - ps: Update-NodeJsInstallation $env:nodejs_version $env:PLATFORM
+  - ps: appveyor-retry choco install yarn -y --force --no-progress --ignore-dependencies --version $env:yarn_version
   - node --version
   - yarn --version
   - yarn --frozen-lockfile --non-interactive
 
-build_script:
-  - yarn cross-env NODE_ENV=production ember electron:make -e production
+build: off
 
-after_build:
-- ps: 7z a -bd electron-out.zip "$env:APPVEYOR_BUILD_FOLDER/electron-out"
+test_script:
+  - yarn lint:js
+  - yarn test
+
+after_test:
+  - yarn cross-env NODE_ENV=production ember electron:build -e production
+  - ps: |
+      $path = Join-Path -Path "$env:TMP" -ChildPath csc.p12
+      [IO.File]::WriteAllBytes($path, [Convert]::FromBase64String($env:CSC_LINK))
+      Set-AppveyorBuildVariable -Name 'CSC_LINK' -Value $path
+  - yarn cross-env DEBUG='electron-windows-installer:*' NODE_ENV=production ember electron:package -e production --build-path electron-out/ember
+  - yarn cross-env DEBUG='electron-windows-installer:*' NODE_ENV=production ember electron:make -e production --skip-package
+  - ps: Remove-Item env:CSC_KEY_PASSWORD
+  - ps: Remove-Item -Path $env:CSC_LINK
+  - ps: Remove-Item env:CSC_LINK
+  - ps: Write-Host "CSC_LINK = $env:CSC_LINK"
 
 artifacts:
-- path: electron-out.zip
-  name: electron-out
+- path: electron-out\make\*.zip
+  name: zip
+- path: electron-out\make\squirrel.windows\$(PLATFORM)\*.exe
+  name: exe
 
-test: off
+deploy:
+  - provider: GitHub
+    auth_token: $(GITHUB_TOKEN)
+    artifact: zip, exe
+    release: 'Draft'
+    draft: true
+    prerelease: true
+    force_update: true
+    on:
+      branch: feat/code-signing
