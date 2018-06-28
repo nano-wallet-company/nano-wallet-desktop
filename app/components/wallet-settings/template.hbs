@@ -1,4 +1,4 @@
-{{#bs-form model=(changeset (hash seed=seed representative=representative) ChangeRepresentativeValidations) onSubmit=(action onChangeRepresentative wallet) as |form|}}
+{{!-- {{#bs-form model=(changeset (hash seed=seed representative=representative) ChangeRepresentativeValidations) onSubmit=(action onChangeRepresentative wallet) as |form|}}
   {{#form.element label=(t 'seed') property="seed" as |el|}}
     {{password-toggle inputId=el.id label=(t 'seed') value=el.value placeholder=(t 'unknown') readonly=true}}
   {{/form.element}}
@@ -19,4 +19,112 @@
   {{#bs-button buttonType="submit" type="danger" icon="fa fa-key" class="w-100"}}
     {{t 'wallets.settings.changePassword'}}
   {{/bs-button}}
-{{/wallet-password}}
+{{/wallet-password}} --}}
+
+<div class="card mb-2 {{if revealSeed 'border-danger' 'border-secondary'}}">
+  <div class="card-body p-3">
+    <div class="row">
+      <div class="col-auto pr-0">
+        <button type="button" class="btn btn-lg {{if revealSeed 'btn-outline-danger' 'btn-outline-secondary'}}" {{action (toggle 'revealSeed' this)}}>
+          {{fa-icon (if revealSeed 'unlock' 'lock') ariaLabel=(t 'reveal') size="lg" ariaHidden=false}}
+        </button>
+      </div>
+      <div class="col">
+        <h4>
+          {{t 'seed'}}
+        </h4>
+        {{#unless revealSeed}}
+          <h6 class="text-muted text-monospace {{unless revealSeed 'mb-0'}}">*******</h6>
+        {{/unless}}
+        {{#if revealSeed}}
+          {{#bs-form model=(changeset (hash seed=seed)) as |form|}}
+            {{#form.element property="seed" as |el|}}
+              {{!-- {{password-toggle inputId=el.id label=(t 'seed') value=el.value placeholder=(t 'unknown') readonly=true}} --}}
+              <input id={{el.id}} type="text" class="form-control text-monospace" value={{seed}} aria-label={{t 'seed'}}>
+              
+            {{/form.element}}
+            <div class="row">
+              <div class="col-auto pr-0">
+                {{qr-code text=seed width=170 height=170}}
+              </div>
+              <div class="col">
+                <div class="alert alert-danger">
+                  <h4 class="alert-heading">
+                    Warning!
+                  </h4>
+                  <hr>
+                  <p>
+                    Seed must be backed up yada yada
+                  </p>
+                </div>
+              </div>
+            </div>
+            
+          {{/bs-form}}
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card mb-2 {{if changeRep 'border-danger' 'border-secondary'}}">
+  <div class="card-body p-3">
+    <div class="row">
+      <div class="col-auto pr-0">
+        <button type="button" class="btn btn-lg {{if changeRep 'btn-outline-danger' 'btn-outline-secondary'}}" {{action (toggle 'changeRep' this)}}>
+          {{fa-icon (if changeRep 'unlock' 'lock') ariaLabel=(t 'reveal') size="lg" ariaHidden=false}}
+        </button>
+      </div>
+      <div class="col">
+        <h4>
+          Representative
+        </h4>
+
+        {{#unless changeRep}}
+          <h6 class="text-muted text-monospace {{unless changeRep 'mb-0'}}">{{representative}}</h6>
+        {{/unless}}
+        {{#if changeRep}}
+          {{!-- WARNING: Need translations for Representative --}}
+
+          {{#bs-form model=(changeset (hash representative=representative) ChangeRepresentativeValidations) onSubmit=(action onChangeRepresentative wallet) as |form|}}
+            {{#form.element controlType="text" invisibleLabel='Representative' property='representative'
+          minlength=64 maxlength=65 required=true pattern="^(xrb|nano)(_|-)[13](?![lv])[a-z1-9]{59}$" as |el|}}
+              {{el.control class="text-truncate text-monospace"}}
+            {{/form.element}}
+            {{#bs-button buttonType="submit" type="warning" icon="fa fa-cubes" class="w-100"}}
+              {{t 'wallets.settings.changeRepresentative'}}
+            {{/bs-button}}
+          {{/bs-form}}
+
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card mb-2 {{if changePass 'border-danger' 'border-secondary'}}">
+  <div class="card-body p-3">
+    <div class="row">
+      <div class="col-auto pr-0">
+        <button type="button" class="btn btn-lg {{if changePass 'btn-outline-danger' 'btn-outline-secondary'}}" {{action (toggle 'changePass' this)}}>
+          {{fa-icon (if changePass 'unlock' 'lock') ariaLabel=(t 'reveal') size="lg" ariaHidden=false}}
+        </button>
+      </div>
+      <div class="col">
+        <h4>
+          {{t 'password'}}
+        </h4>
+        {{#unless changePass}}
+          <h6 class="text-muted text-monospace {{unless changePass 'mb-0'}}">*******</h6>
+        {{/unless}}
+        {{#if changePass}}
+          {{#wallet-password wallet=wallet onSubmit=(action onChangePassword)}}
+            {{#bs-button buttonType="submit" type="danger" icon="fa fa-key" class="w-100"}}
+              {{t 'wallets.settings.changePassword'}}
+            {{/bs-button}}
+          {{/wallet-password}}
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</div>

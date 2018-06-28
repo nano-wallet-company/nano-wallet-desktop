@@ -21,4 +21,8 @@ export default Component.extend({
 
   onChangeRepresentative: null,
   onChangePassword: null,
+
+  revealSeed: null,
+  changeRep: null,
+  changePass: null,
 });
