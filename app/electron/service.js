@@ -91,12 +91,6 @@ export default Service.extend(Evented, DisposableMixin, {
     },
   }).volatile(),
 
-  isNodeDownloaded: computed('remote', {
-    get() {
-      return this.getRemoteGlobal('isNodeDownloaded', false);
-    },
-  }).volatile(),
-
   isDataDownloaded: computed('remote', {
     get() {
       return this.getRemoteGlobal('isDataDownloaded', false);
@@ -119,12 +113,12 @@ export default Service.extend(Evented, DisposableMixin, {
     return this.shell.openExternal(...args);
   },
 
-  download(asset) {
+  download(key) {
     return new Promise((resolve, reject) => {
       const config = this.get('config');
-      const platform = this.get('platform');
       const ipcRenderer = this.get('ipcRenderer');
-      const { url, integrity } = get(config, `assets.${asset}.${platform}`);
+      const assets = get(config, 'assets');
+      const { url, integrity } = get(assets, key);
       ipcRenderer.once('download-error', () => reject(new DownloadError()));
       ipcRenderer.once('download-progress', () => resolve(this));
       ipcRenderer.once('download-done', this.onDownloadDone.bind(this));

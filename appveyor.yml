@@ -34,12 +34,10 @@ after_test:
       $path = Join-Path -Path "$env:TMP" -ChildPath csc.p12
       [IO.File]::WriteAllBytes($path, [Convert]::FromBase64String($env:CSC_LINK))
       Set-AppveyorBuildVariable -Name 'CSC_LINK' -Value $path
-  - yarn cross-env DEBUG='electron-windows-installer:*' NODE_ENV=production ember electron:package -e production --build-path electron-out/ember
-  - yarn cross-env DEBUG='electron-windows-installer:*' NODE_ENV=production ember electron:make -e production --skip-package
+  - yarn cross-env NODE_ENV=production ember electron:package -e production --build-path electron-out/ember
+  - yarn cross-env NODE_ENV=production ember electron:make -e production --skip-package
   - ps: Remove-Item env:CSC_KEY_PASSWORD
   - ps: Remove-Item -Path $env:CSC_LINK
-  - ps: Remove-Item env:CSC_LINK
-  - ps: Write-Host "CSC_LINK = $env:CSC_LINK"
 
 artifacts:
 - path: electron-out\make\*.zip

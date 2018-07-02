@@ -1,4 +1,5 @@
 const path = require('path');
+const moment = require('moment');
 
 const {
   version,
@@ -26,12 +27,7 @@ const [, name] = packageName.split('/');
 const categories = linuxDesktopCategories.split(';');
 const productIdentifier = productName.split(' ').join('');
 
-const buildNumber = process.env.CI_JOB_ID
-  || process.env.CI_BUILD_ID
-  || process.env.TRAVIS_BUILD_NUMBER
-  || process.env.APPVEYOR_BUILD_VERSION
-  || '0';
-
+const buildNumber = moment().format('YYYYMMDDHHmmss');
 const buildVersion = `${version}+${buildNumber}`;
 
 const osxSign = {
@@ -88,9 +84,19 @@ module.exports = {
     buildVersion,
     appBundleId,
     appCategoryType,
-    asar: true,
+    ignore: [
+      '\\.xml$',
+      '\bordering.txt$',
+    ],
+    asar: {
+      ordering: path.join(__dirname, 'ordering.txt'),
+      unpackDir: path.join('ember-electron', 'resources'),
+    },
+    extendInfo: {
+      CFBundleDevelopmentRegion: 'en_US',
+      CSResourcesFileMapped: true,
+    },
     overwrite: true,
-    ignore: ['\\.xml$'],
     packageManager: 'yarn',
     executableName: name,
     win32metadata: {
