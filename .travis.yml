@@ -55,13 +55,14 @@ before_deploy:
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then security lock-keychain codesign.keychain; fi
   - yarn cross-env NODE_ENV=production ember electron:make -e production --skip-package
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew install jq; fi
-  - export PRODUCT_NAME="$(cat package.json | jq -r '.productName')"
-  - export TAG_VERSION="$(echo $TRAVIS_TAG | cut -c 2-)"
+  - export GITHUB_RELEASE="$(cat package.json | jq -r '.productName') $(echo $TRAVIS_TAG | cut -c 2-)"
 
 deploy:
   provider: releases
   api_key: $GITHUB_TOKEN
-  name: $PRODUCT_NAME $TAG_VERSION
+  name: $GITHUB_RELEASE
+  tag_name: $TRAVIS_TAG
+  target_commitish: $TRAVIS_COMMIT
   skip_cleanup: true
   overwrite: true
   draft: true
