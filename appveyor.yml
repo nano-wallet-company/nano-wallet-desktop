@@ -1,4 +1,4 @@
-image: Visual Studio 2017
+image: Visual Studio 2015
 
 platform:
   - x64
@@ -38,8 +38,11 @@ after_test:
   - yarn cross-env NODE_ENV=production ember electron:make -e production --skip-package
   - ps: Remove-Item env:CSC_KEY_PASSWORD
   - ps: Remove-Item -Path $env:CSC_LINK
+  - ps: 7z a -bd electron-out.zip electron-out
 
 artifacts:
+- path: electron-out.zip
+  name: electron-out
 - path: electron-out\make\*.zip
   name: zip
 - path: electron-out\make\squirrel.windows\$(PLATFORM)\*.exe
