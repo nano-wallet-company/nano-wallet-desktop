@@ -1,20 +1,20 @@
-<div class="card mb-2 {{if changeRep 'border-danger' 'border-secondary'}}">
-  <div class="card-header {{if changeRep 'bg-danger'}}" {{action (toggle 'changeRep' this)}} role="button">
+<div class="card mb-2 {{if items.changeRep 'border-danger' 'border-secondary'}}">
+  <div class="card-header {{if items.changeRep 'bg-danger'}}" {{action (action toggleItems 'changeRep')}} role="button">
     <div class="row align-items-center">
       <div class="col">
-        <p class="h4 {{if changeRep 'text-white mb-0'}}">
-          Representative
+        <p class="h4 {{if items.changeRep 'text-white mb-0'}}">
+          {{t 'representative'}}
         </p>
-        {{#unless changeRep}}
-          <h6 class="text-muted text-monospace {{unless changeRep 'mb-0'}}">{{representative}}</h6>
+        {{#unless items.changeRep}}
+          <h6 class="text-muted text-monospace {{unless items.changeRep 'mb-0'}}">{{representative}}</h6>
         {{/unless}}
       </div>
-      <div class="col-auto {{if changeRep 'text-white'}}">
-        {{fa-icon (if changeRep 'unlock' 'lock') ariaLabel=(t 'reveal') size="3" ariaHidden=false}}
+      <div class="col-auto {{if items.changeRep 'text-white'}}">
+        {{fa-icon (if items.changeRep 'unlock' 'lock') ariaLabel=(t 'reveal') size="3" ariaHidden=false}}
       </div>
     </div>
   </div>
-  {{#liquid-if changeRep}}
+  {{#liquid-if items.changeRep}}
     <div class="card-body p-3">
       {{#bs-form model=(changeset (hash representative=representative) ChangeRepresentativeValidations) onSubmit=(action onChangeRepresentative wallet) as |form|}}
         {{#form.element controlType="text" invisibleLabel='Representative' property='representative'
@@ -29,20 +29,20 @@
   {{/liquid-if}}
 </div>
 
-<div class="card mb-2 {{if revealSeed 'border-danger' 'border-secondary'}}">
-  <div class="card-header {{if revealSeed 'bg-danger'}}" {{action (toggle 'revealSeed' this)}} role="button">
+<div class="card mb-2 {{if items.revealSeed 'border-danger' 'border-secondary'}}">
+  <div class="card-header {{if items.revealSeed 'bg-danger'}}" {{action (action toggleItems 'revealSeed')}} role="button">
     <div class="row align-items-center">
       <div class="col">
-        <p class="h4 mb-0 {{if revealSeed 'text-white'}}">
+        <p class="h4 mb-0 {{if items.revealSeed 'text-white'}}">
           {{t 'seed'}}
         </p>
       </div>
-      <div class="col-auto {{if revealSeed 'text-white'}}">
-        {{fa-icon (if revealSeed 'unlock' 'lock') ariaLabel=(t 'reveal') size="3" ariaHidden=false}}
+      <div class="col-auto {{if items.revealSeed 'text-white'}}">
+        {{fa-icon (if items.revealSeed 'unlock' 'lock') ariaLabel=(t 'reveal') size="3" ariaHidden=false}}
       </div>
     </div>
   </div>
-  {{#liquid-if revealSeed}}
+  {{#liquid-if items.revealSeed}}
     <div class="card-body p-3">
       {{#bs-form model=(changeset (hash seed=seed)) as |form|}}
         {{#form.element property="seed" as |el|}}
@@ -56,11 +56,11 @@
           <div class="col">
             <div class="alert alert-danger">
               <h4 class="alert-heading">
-                Warning!
+                {{t 'warning'}}
               </h4>
               <hr>
-              <p>
-                Seed must be backed up yada yada
+              <p class="mb-0">
+                {{t 'wallets.settings.seedBestPractices'}}
               </p>
             </div>
           </div>
@@ -70,64 +70,20 @@
   {{/liquid-if}}
 </div>
 
-<div class="card mb-2 {{if revealMnemonic 'border-danger' 'border-secondary'}}">
-  <div class="card-header {{if revealMnemonic 'bg-danger'}}" {{action (toggle 'revealMnemonic' this)}} role="button">
+<div class="card mb-2 {{if items.changePass 'border-danger' 'border-secondary'}}">
+  <div class="card-header {{if items.changePass 'bg-danger'}}" {{action (action toggleItems 'changePass')}} role="button">
     <div class="row align-items-center">
       <div class="col">
-        <p class="h4 mb-0 {{if revealMnemonic 'text-white'}}">
-          Mnemonic Seed
-        </p>
-      </div>
-      <div class="col-auto {{if revealMnemonic 'text-white'}}">
-        {{fa-icon (if revealMnemonic 'unlock' 'lock') ariaLabel=(t 'reveal') size="3" ariaHidden=false}}
-      </div>
-    </div>
-  </div>
-  {{#liquid-if revealMnemonic}}
-    <div class="card-body">
-      <div class="alert alert-danger">
-        <p>
-          Seed must be backed up yada yada
-        </p>
-      </div>
-      <code class="text-center">
-        {{mnemonic seed}}
-      </code>
-      {{#bs-form}}
-        <div class="row">
-          <div class="col-6">
-            {{#copy-button class="btn btn-outline-danger w-100" clipboardText=(mnemonic seed) success=(action 'copyMnemonic')}}
-              {{fa-icon 'copy'}} {{t 'wallets.backup.copy'}}
-            {{/copy-button}}
-          </div>
-          <div class="col-6">
-            {{#bs-button onClick=(action 'downloadMnemonic' (mnemonic seed)) block=true type="outline-primary" icon="fa fa-download"}}
-              {{t 'wallets.backup.download'}}
-            {{/bs-button}}
-          </div>
-        </div>
-      {{/bs-form}}
-    </div>
-  {{/liquid-if}}
-</div>
-
-
-
-
-<div class="card mb-2 {{if changePass 'border-danger' 'border-secondary'}}">
-  <div class="card-header {{if changePass 'bg-danger'}}" {{action (toggle 'changePass' this)}} role="button">
-    <div class="row align-items-center">
-      <div class="col">
-        <p class="h4 mb-0 {{if changePass 'text-white'}}">
+        <p class="h4 mb-0 {{if items.changePass 'text-white'}}">
           {{t 'password'}}
         </p>
       </div>
-      <div class="col-auto {{if changePass 'text-white'}}">
-        {{fa-icon (if changePass 'unlock' 'lock') ariaLabel=(t 'reveal') size="3" ariaHidden=false}}
+      <div class="col-auto {{if items.changePass 'text-white'}}">
+        {{fa-icon (if items.changePass 'unlock' 'lock') ariaLabel=(t 'reveal') size="3" ariaHidden=false}}
       </div>
     </div>
   </div>
-  {{#liquid-if changePass}}
+  {{#liquid-if items.changePass}}
     <div class="card-body">
       {{#wallet-password wallet=wallet onSubmit=(action onChangePassword)}}
         {{#bs-button buttonType="submit" type="danger" icon="fa fa-key" class="w-100"}}
