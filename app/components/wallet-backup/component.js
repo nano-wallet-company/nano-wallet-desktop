@@ -28,7 +28,7 @@ export default Component.extend({
   hasConfirmed: false,
 
   @action
-  copyMnemonic() {
+  copySeed() {
     const message = this.get('intl').t('wallets.backup.copied');
     this.get('flashMessages').success(message);
   },
