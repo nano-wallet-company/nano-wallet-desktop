@@ -54,6 +54,7 @@ before_deploy:
   - yarn cross-env DEBUG=electron-osx-sign* NODE_ENV=production ember electron:package -e production --build-path electron-out/ember
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then security lock-keychain codesign.keychain; fi
   - yarn cross-env NODE_ENV=production ember electron:make -e production --skip-package
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew install jq; fi
   - export PRODUCT_NAME="$(cat package.json | jq -r '.productName')"
   - export TAG_VERSION="$(echo $TRAVIS_TAG | cut -c 2-)"
 
