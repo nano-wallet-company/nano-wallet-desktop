@@ -45,13 +45,20 @@ artifacts:
 - path: electron-out\make\squirrel.windows\$(PLATFORM)\*.exe
   name: exe
 
+before_deploy:
+  - ps: |
+      $package = Get-Content -Raw -Path package.json | ConvertFrom-Json
+      Set-AppveyorBuildVariable -Name 'PRODUCT_NAME' -Value $package.productName
+      Set-AppveyorBuildVariable -Name 'TAG_VERSION' -Value $env:APPVEYOR_REPO_TAG_NAME.Substring(1)
+
 deploy:
   - provider: GitHub
     auth_token: $(GITHUB_TOKEN)
+    tag: $(APPVEYOR_REPO_TAG_NAME)
+    release: $(PRODUCT_NAME) $(TAG_VERSION)
     artifact: zip, exe
-    release: 'Draft'
     draft: true
     prerelease: true
     force_update: true
     on:
-      branch: feat/code-signing
+      APPVEYOR_REPO_TAG: true

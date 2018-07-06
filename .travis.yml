@@ -32,8 +32,6 @@ before_install:
   - export PATH="$HOME/.yarn/bin:$PATH"
 
 install:
-  - export PRODUCT_NAME="$(cat package.json | jq '.productName')"
-  - echo $PRODUCT_NAME
   - yarn install --frozen-lockfile --non-interactive
 
 script:
@@ -56,11 +54,13 @@ before_deploy:
   - yarn cross-env DEBUG=electron-osx-sign* NODE_ENV=production ember electron:package -e production --build-path electron-out/ember
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then security lock-keychain codesign.keychain; fi
   - yarn cross-env NODE_ENV=production ember electron:make -e production --skip-package
+  - export PRODUCT_NAME="$(cat package.json | jq -r '.productName')"
+  - export TAG_VERSION="$(echo $TRAVIS_TAG | cut -c 2-)"
 
 deploy:
   provider: releases
   api_key: $GITHUB_TOKEN
-  name: $PRODUCT_NAME $TRAVIS_TAG
+  name: $PRODUCT_NAME $TAG_VERSION
   skip_cleanup: true
   overwrite: true
   draft: true
