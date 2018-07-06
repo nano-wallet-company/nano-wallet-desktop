@@ -93,7 +93,7 @@ module.exports = {
     ],
     asar: {
       // https://github.com/electron/asar/blob/v0.14.3/lib/asar.js#L80
-      ordering: path.join(__dirname, 'ordering.txt').replace('/', path.sep),
+      ordering: process.platform !== 'win32' ? path.join(__dirname, 'ordering.txt') : path.join(__dirname, 'ordering-win32.txt'),
       unpackDir: path.join('ember-electron', 'resources'),
     },
     extendInfo: {
@@ -115,6 +115,9 @@ module.exports = {
     setupExe: `${productName} ${version} Setup.exe`,
     setupIcon: `${icon}.ico`,
     loadingGif: path.join(__dirname, 'resources', 'install-spinner.gif'),
+  },
+  electronInstallerDMG: {
+    format: 'ULFO',
   },
   electronInstallerDebian: {
     name,

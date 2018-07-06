@@ -20,6 +20,8 @@ addons:
 
 cache:
   yarn: true
+  directories:
+    - "$HOME/Library/Caches/Homebrew"
 
 env:
   global:
