@@ -51,7 +51,7 @@ artifacts:
 before_deploy:
   - ps: |
       $package = Get-Content -Raw -Path package.json | ConvertFrom-Json
-      $release = "$($package.productName) $(env:APPVEYOR_REPO_TAG_NAME.Substring(1))"
+      $release = "$($package.productName) $($env:APPVEYOR_REPO_TAG_NAME.Substring(1))"
       Set-AppveyorBuildVariable -Name 'GITHUB_RELEASE' -Value $release
 
 deploy:
