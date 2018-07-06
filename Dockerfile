@@ -1,4 +1,4 @@
-FROM node:10.5.0-stretch
+FROM node:10.6.0-stretch
 LABEL maintainer="Nano Wallet Company <desktop@nanowalletcompany.com>"
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -23,7 +23,7 @@ WORKDIR /usr/src/app
 COPY --chown=app:app package.json .
 COPY --chown=app:app yarn.lock .
 
-RUN yarn install --frozen-lockfile --ignore-engines --non-interactive
+RUN yarn install --frozen-lockfile --non-interactive
 
 COPY --chown=app:app . .
 
