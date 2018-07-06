@@ -46,7 +46,7 @@
     <div class="card-body p-3">
       {{#bs-form model=(changeset (hash seed=seed)) as |form|}}
         {{#form.element property="seed" as |el|}}
-          <input id={{el.id}} type="text" class="form-control text-monospace" value={{seed}} aria-label={{t 'seed'}}>
+          <input id={{el.id}} type="text" readonly=true class="form-control text-monospace" value={{seed}} aria-label={{t 'seed'}}>
           
         {{/form.element}}
         <div class="row">
