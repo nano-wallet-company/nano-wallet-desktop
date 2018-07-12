@@ -1,4 +1,5 @@
 const path = require('path');
+const moment = require('moment');
 
 const {
   version,
@@ -26,13 +27,19 @@ const [, name] = packageName.split('/');
 const categories = linuxDesktopCategories.split(';');
 const productIdentifier = productName.split(' ').join('');
 
-const buildNumber = process.env.CI_JOB_ID
-  || process.env.CI_BUILD_ID
-  || process.env.TRAVIS_BUILD_NUMBER
-  || process.env.APPVEYOR_BUILD_VERSION
-  || '0';
-
+const buildNumber = moment().format('YYYYMMDDHHmmss');
 const buildVersion = `${version}+${buildNumber}`;
+
+const osxSign = {
+  identity: process.env.CSC_NAME || true,
+  entitlements: false,
+};
+
+const certificateFile = process.env.CSC_LINK || null;
+const certificatePassword = process.env.CSC_KEY_PASSWORD || null;
+const signWithParams = certificateFile && certificatePassword
+  ? `/a /ph /tr http://timestamp.digicert.com /td sha256 /fd sha256 /f "${path.resolve(certificateFile)}" /p "${certificatePassword}"`
+  : undefined;
 
 const unsupportedArch = (target, type) => {
   throw new Error(`Unsupported architecture for ${target}: ${type}`);
@@ -75,13 +82,24 @@ module.exports = {
   electronPackagerConfig: {
     arch,
     icon,
+    osxSign,
     appCopyright,
     buildVersion,
     appBundleId,
     appCategoryType,
-    asar: true,
+    ignore: [
+      '\\.xml$',
+      '\bordering.txt$',
+    ],
+    asar: {
+      ordering: path.join(__dirname, 'ordering.txt'),
+      unpackDir: path.join('ember-electron', 'resources'),
+    },
+    extendInfo: {
+      CFBundleDevelopmentRegion: 'en_US',
+      CSResourcesFileMapped: true,
+    },
     overwrite: true,
-    ignore: ['\\.xml$'],
     packageManager: 'yarn',
     executableName: name,
     win32metadata: {
@@ -91,6 +109,7 @@ module.exports = {
   },
   electronWinstallerConfig: {
     name,
+    signWithParams,
     exe: `${name}.exe`,
     setupExe: `${productName} ${version} Setup.exe`,
     setupIcon: `${icon}.ico`,

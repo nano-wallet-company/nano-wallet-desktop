@@ -11,9 +11,8 @@ export default Route.extend({
     const electron = this.get('electron');
     const isElectron = get(electron, 'isElectron');
     if (isElectron) {
-      const isNodeDownloaded = get(electron, 'isNodeDownloaded');
       const isDataDownloaded = get(electron, 'isDataDownloaded');
-      if (!isNodeDownloaded || !isDataDownloaded) {
+      if (!isDataDownloaded) {
         return this.transitionTo('setup.start');
       }
     }

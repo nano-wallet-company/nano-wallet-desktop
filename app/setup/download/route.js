@@ -12,17 +12,6 @@ export default Route.extend({
     },
   },
 
-  // beforeModel(...args) {
-  //   const electron = this.get('electron');
-  //   const isNodeDownloaded = get(electron, 'isNodeDownloaded');
-  //   const isDataDownloaded = get(electron, 'isDataDownloaded');
-  //   if (isNodeDownloaded && isDataDownloaded) {
-  //     return this.transitionTo('setup.start');
-  //   }
-
-  //   return this._super(...args);
-  // },
-
   model({ asset }) {
     return this.get('electron').download(asset);
   },

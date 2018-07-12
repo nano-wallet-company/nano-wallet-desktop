@@ -131,7 +131,6 @@ log.transports.file.level = 'info';
 log.transports.rendererConsole.level = 'info';
 
 global.locale = locale2 || null;
-global.isNodeDownloaded = false;
 global.isDataDownloaded = false;
 global.isNodeStarted = false;
 global.isQuitting = false;
@@ -169,6 +168,9 @@ protocolServe({
 //     submitURL: 'https://your-domain.com/url-to-submit',
 //     autoSubmit: true
 // });
+
+const basePath = is.development ? __dirname : path.join(process.resourcesPath, 'app.asar.unpacked', 'ember-electron');
+const resourcesPath = path.join(basePath, 'resources');
 
 const generateCert = (commonName) => {
   const attrs = [
@@ -375,7 +377,7 @@ const startNode = async () => {
     },
   });
 
-  const cmd = path.join(dataPath, toExecutableName('rai_node'));
+  const cmd = path.join(resourcesPath, toExecutableName('rai_node'));
   log.info('Starting node:', cmd);
 
   const child = spawn(cmd, ['--daemon', '--data_path', dataPath], {
@@ -582,7 +584,7 @@ const createWindow = () => {
     height,
   } = mainWindowState;
 
-  const icon = path.join(process.resourcesPath, 'icon.png');
+  const icon = path.join(resourcesPath, 'icon.png');
   const win = new BrowserWindow({
     icon,
     x,
@@ -717,15 +719,12 @@ const run = async () => {
   const dataPath = path.normalize(app.getPath('userData'));
   const storeVersion = store.get('version');
   if (!storeVersion || semver.gt(version, storeVersion)) {
-    const outdatedAssets = ['config.json', toExecutableName('rai_node')];
+    const outdatedAssets = ['config.json'];
     log.info('Deleting outdated assets:', outdatedAssets.join(', '));
     await del(outdatedAssets, { force: true, cwd: dataPath });
   }
 
   store.set('version', version);
-
-  const nodePath = path.join(dataPath, toExecutableName('rai_node'));
-  const databasePath = path.join(dataPath, 'data.ldb');
 
   Object.defineProperty(global, 'locale', {
     get() {
@@ -733,12 +732,7 @@ const run = async () => {
     },
   });
 
-  Object.defineProperty(global, 'isNodeDownloaded', {
-    get() {
-      return pathExists.sync(nodePath);
-    },
-  });
-
+  const databasePath = path.join(dataPath, 'data.ldb');
   Object.defineProperty(global, 'isDataDownloaded', {
     get() {
       return pathExists.sync(databasePath);

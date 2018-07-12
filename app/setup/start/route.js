@@ -10,11 +10,6 @@ export default Route.extend({
     const electron = this.get('electron');
     const isElectron = get(electron, 'isElectron');
     if (isElectron) {
-      const isNodeDownloaded = get(electron, 'isNodeDownloaded');
-      if (!isNodeDownloaded) {
-        return this.transitionTo('setup.download', { queryParams: { asset: 'node' } });
-      }
-
       const isDataDownloaded = get(electron, 'isDataDownloaded');
       if (!isDataDownloaded) {
         return this.transitionTo('setup.download', { queryParams: { asset: 'data' } });

@@ -10,9 +10,12 @@ module.exports = {
   ],
   browser_args: {
     Chrome: [
+      '--headless',
       '--no-sandbox',
       '--disable-gpu',
-      '--headless',
+      '--disable-dev-shm-usage',
+      '--disable-software-rasterizer',
+      '--mute-audio',
       '--remote-debugging-port=0',
       '--window-size=1440,900',
     ],
