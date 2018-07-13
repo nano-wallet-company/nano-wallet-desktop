@@ -6,6 +6,7 @@
       </h4>
     {{/modal.header}}
     {{#modal.body}}
+      {{! template-lint-disable no-unused-block-params }}
       {{#bs-form model=model onSubmit=(action (queue (action 'save' model) (action (optional onSave))) account) as |form|}}
         <div class="form-group">
           <label>{{t 'account'}}</label>
