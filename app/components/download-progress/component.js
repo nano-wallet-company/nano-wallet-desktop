@@ -1,11 +1,15 @@
 import Component from '@ember/component';
 
+import moment from 'moment';
+
 import {
   DisposableMixin,
   ContextBoundTasksMixin,
 } from 'ember-lifeline';
 import { defineError } from 'ember-exex/error';
 import { on } from 'ember-decorators/object/evented';
+
+import speedometer from 'npm:speedometer';
 
 export const STATUS_DOWNLOADING = 'downloading';
 export const STATUS_VERIFYING = 'verifying';
@@ -22,8 +26,16 @@ export default Component.extend(DisposableMixin, ContextBoundTasksMixin, {
   status: STATUS_DOWNLOADING,
   asset: null,
   value: 0,
+  eta: null,
+
+  speed: null,
 
   onFinish: null,
+
+  @on('init')
+  setupSpeedometer() {
+    this.speed = speedometer();
+  },
 
   @on('didInsertElement')
   addListeners() {
@@ -36,6 +48,7 @@ export default Component.extend(DisposableMixin, ContextBoundTasksMixin, {
         downloader.off('extract', this, this.onExtract);
         downloader.off('done', this, this.onDone);
         downloader.off('done', this, this.reset);
+        this.speed = null;
       });
 
       downloader.on('error', this, this.onError);
@@ -79,14 +92,17 @@ export default Component.extend(DisposableMixin, ContextBoundTasksMixin, {
 
   reset(status = STATUS_DOWNLOADING) {
     return this.scheduleTask('routerTransitions', () => {
-      this.setProperties({
-        status,
-        value: 1,
-      });
+      this.setupSpeedometer();
+      this.setProperties({ status, value: 0, eta: null });
     });
   },
 
   updateProgress(value) {
-    this.set('value', value);
+    const delta = value - this.get('value');
+    const speed = this.speed(delta);
+    const remaining = 1 - value;
+    const seconds = Math.round(remaining / speed);
+    const eta = moment().add(seconds, 'second').toDate();
+    this.setProperties({ value, eta });
   },
 });
