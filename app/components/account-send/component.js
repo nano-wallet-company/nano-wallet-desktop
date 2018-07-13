@@ -20,6 +20,7 @@ export default Component.extend({
 
   @action
   async changeAmount(model, amount, changeset) {
+    set(model, 'amount', null);
     set(changeset, 'amount', amount);
     await changeset.validate();
     if (get(changeset, 'isInvalid')) {

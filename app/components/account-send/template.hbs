@@ -1,14 +1,14 @@
-{{#with (changeset block SendValidations) as |model|}}
+{{#let (changeset block SendValidations) as |model|}}
   {{#bs-form model=model onSubmit=(action onSubmit) as |form|}}
     {{#form.element controlType="power-select" label=(t 'wallets.accounts.send.source')
         required=true options=accounts property='source' onChange=(action onChange) as |el|}}
       {{#el.control searchField="id" searchPlaceholder=(t 'wallets.accounts.send.search') as |item|}}
-        {{#with (or (get item.content 'content') item) as |content|}}
+        {{#let (or (get item.content 'content') item) as |content|}}
           <div>
             {{account-label account=content truncate=30}}
             {{format-amount content.balance}} {{t 'NANO'}}
           </div>
-        {{/with}}
+        {{/let}}
       {{/el.control}}
     {{/form.element}}
 
@@ -16,18 +16,19 @@
         autocomplete='on' minlength=64 maxlength=65 required=true pattern="^(xrb|nano)(_|-)[13](?![lv])[a-z1-9]{59}$"
         placeholder=(t 'wallets.accounts.send.placeholder')}}
 
-    {{#with (format-amount (or (get model.source.balance 'content') model.source.balance) useGrouping=false) as |max|}}
+    {{#let (changeset (hash amount=null) ChangeAmountValidations)
+           (format-amount (or (get model.source.balance 'content') model.source.balance) useGrouping=false)
+        as |childModel max|}}
       {{#form.element
           min=0
           max=max
           step="any"
           controlType="number"
           label=(t 'wallets.accounts.send.amount')
-          model=(changeset (hash amount=null) ChangeAmountValidations)
+          model=childModel
           property='amount'
           required=true
           minlength=1
-          showValidationOn='change'
           onChange=(action 'changeAmount' model) as |el|}}
         <div class="input-group {{el.validation}}">
           {{el.control}}
@@ -35,18 +36,24 @@
             <button type="button" class="btn btn-outline-secondary"
                 title={{t 'totalAvailableBalance'}}
                 disabled={{if (not model.source) 'disabled'}}
-                {{action (mut el.value) max}}>
+                onclick={{action 'changeAmount' model max childModel}}>
               {{t 'max'}}
             </button>
           </div>
         </div>
       {{/form.element}}
-    {{/with}}
+    {{/let}}
 
     <div role="group" class="d-flex justify-content-center">
-      {{#bs-button disabled=model.isInvalid size="lg" type="none" icon="fa fa-paper-plane" buttonType="submit" class="text-light"}}
-        {{t 'send'}}
+      {{#bs-button disabled=(or model.isInvalid block.isSaving) size="lg" type="none" buttonType="submit" class="text-light"}}
+        {{#if block.isSaving}}
+          {{fa-icon "cog" spin=true}}
+          {{t 'sending'}}
+        {{else}}
+          {{fa-icon "paper-plane"}}
+          {{t 'send'}}
+        {{/if}}
       {{/bs-button}}
     </div>
   {{/bs-form}}
-{{/with}}
+{{/let}}
