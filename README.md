@@ -25,7 +25,16 @@ You will need the following things properly installed on your computer.
 
 ## Running / Development
 
-* `yarn start`
+### Simple
+* `yarn electron:start`
+* The app will open in standalone electron session with developer tools
+
+### Standalone node
+* Make sure you have `rai_node` running with the following settings:
+  * `"rpc_enable: "true"`
+  * `"port": "55000"`
+  * `"enable_control": "true"`
+* Run `yarn start`
 * Visit the app at [http://localhost:4200](http://localhost:4200).
 * Visit the tests at [http://localhost:4200/tests](http://localhost:4200/tests).
 

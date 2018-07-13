@@ -2,10 +2,20 @@
   background-color: transparent;
   height: 50vh;
   max-height: 50vh;
-  overflow: scroll;
+  overflow: auto;
 
   > div {
     width: 100%;
+  }
+  &::-webkit-scrollbar {
+    width: 6px;
+    margin-right:2px;
+  }
+
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.5);
   }
 }
 
