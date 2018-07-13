@@ -89,7 +89,7 @@ wallets:
       source: 'Lähdetili'
       search: 'Hae tiliä'
       destination: 'Kohdetili'
-      placeholder: 'Osoite (esim. xrb_...)'
+      placeholder: 'Osoite (esim. nano_...)'
       amount: 'Määrä (NANO)'
       insufficient: 'Määrä on suurempi kuin tilin saldo'
     history:

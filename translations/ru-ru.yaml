@@ -87,7 +87,7 @@ wallets:
       source: 'Исходный аккаунт'
       search: 'Поиск аккаунта'
       destination: 'Принимающий аккаунт'
-      placeholder: 'Адрес (т.е. xrb_...)'
+      placeholder: 'Адрес (т.е. nano_...)'
       amount: 'Количество (NANO)'
       insufficient: 'Количество больше чем общий баланс аккаунта'
     history:

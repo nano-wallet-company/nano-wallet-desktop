@@ -88,7 +88,7 @@ wallets:
       source: 'Account di provenienza'
       search: 'Cerca account'
       destination: 'Account di destinazione'
-      placeholder: 'Indirizzo (e.g. xrb_...)'
+      placeholder: 'Indirizzo (e.g. nano_...)'
       amount: 'Somma (NANO)'
       insufficient: "La somma supera il saldo totale dell'account"
     history:

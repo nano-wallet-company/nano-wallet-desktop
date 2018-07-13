@@ -88,7 +88,7 @@ wallets:
       source: 'Akun Sumber'
       search: 'Cari Akun'
       destination: 'Akun Tujuan'
-      placeholder: 'Alamat (e.g. xrb_...)'
+      placeholder: 'Alamat (e.g. nano_...)'
       amount: 'Jumlah (NANO)'
       insufficient: 'Jumlah lebih besar dari saldo tersedia'
     history:

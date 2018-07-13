@@ -88,7 +88,7 @@ wallets:
       source: 'Профил'
       search: 'Търсене на профил'
       destination: 'Получател'
-      placeholder: 'Адрес (напр. xrb_...)'
+      placeholder: 'Адрес (напр. nano_...)'
       amount: 'Сума (NANO)'
       insufficient: 'Размерът на сумата е по-голям от наличното'
     history:

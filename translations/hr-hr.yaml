@@ -88,7 +88,7 @@ wallets:
       source: 'Izvorni Račun'
       search: 'Traži račun'
       destination: 'Odredišni Račun'
-      placeholder: 'Adresa (npr. xrb_...)'
+      placeholder: 'Adresa (npr. nano_...)'
       amount: 'Iznos (NANO)'
       insufficient: 'Iznos je veći od ukupnog salda računa'
     history:
