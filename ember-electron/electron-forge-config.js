@@ -37,7 +37,7 @@ const osxSign = {
 const certificateFile = process.env.CSC_LINK || null;
 const certificatePassword = process.env.CSC_KEY_PASSWORD || null;
 const signWithParams = certificateFile && certificatePassword
-  ? `/a /ph /tr http://timestamp.digicert.com /td sha256 /fd sha256 /f "${path.resolve(certificateFile)}" /p "${certificatePassword}"`
+  ? `/a /tr http://timestamp.digicert.com /td sha256 /fd sha256 /f "${path.resolve(certificateFile)}" /p "${certificatePassword}"`
   : undefined;
 
 const unsupportedArch = (target, type) => {
