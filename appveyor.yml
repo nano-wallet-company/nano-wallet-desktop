@@ -11,6 +11,7 @@ environment:
 cache:
   - node_modules -> yarn.lock
   - '%USERPROFILE%\.electron -> yarn.lock'
+  - '%USERPROFILE%\.electron-gyp -> yarn.lock'
 
 init:
   - git config --global core.autocrlf input
@@ -34,8 +35,7 @@ after_test:
       $path = Join-Path -Path "$env:TMP" -ChildPath csc.p12
       [IO.File]::WriteAllBytes($path, [Convert]::FromBase64String($env:CSC_LINK))
       Set-AppveyorBuildVariable -Name 'CSC_LINK' -Value $path
-  - yarn cross-env NODE_ENV=production ember electron:package -e production --build-path electron-out/ember
-  - yarn cross-env NODE_ENV=production ember electron:make -e production --skip-package
+  - yarn cross-env NODE_ENV=production ember electron:make -e production --build-path electron-out/ember
   - ps: Remove-Item env:CSC_KEY_PASSWORD
   - ps: Remove-Item -Path $env:CSC_LINK
   - ps: 7z a -bd electron-out.zip electron-out

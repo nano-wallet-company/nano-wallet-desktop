@@ -53,8 +53,8 @@ module.exports = (environment) => {
 
     assets: {
       data: {
-        url: 'https://d31vj5w9sn4ozg.cloudfront.net/data-f356607a83d34613c810cc68755114b8.zip',
-        integrity: 'sha512-dSCSDvr2NwMy3FmIVqlI1Q9gVNCrU3/e5//kTWKI4J/0XVEK9m/lDfQmGHr5pvqTgVBMdPD/5/9T2jzvNSaoYQ==',
+        url: 'https://dkl5m4kebds7n.cloudfront.net/data.tar.xz',
+        signature: 'https://dkl5m4kebds7n.cloudfront.net/data.tar.xz.sha256',
       },
     },
   };

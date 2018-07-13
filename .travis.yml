@@ -22,6 +22,8 @@ cache:
   yarn: true
   directories:
     - "$HOME/Library/Caches/Homebrew"
+    - "$HOME/.electron"
+    - "$HOME/.electron-gyp"
 
 env:
   global:
@@ -53,10 +55,12 @@ before_deploy:
       security set-key-partition-list -S "apple-tool:,apple:" -s -k "$CSC_KEY_PASSWORD" codesign.keychain;
       security find-identity;
     fi
-  - yarn cross-env DEBUG=electron-osx-sign* NODE_ENV=production ember electron:package -e production --build-path electron-out/ember
-  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then security lock-keychain codesign.keychain; fi
-  - yarn cross-env NODE_ENV=production ember electron:make -e production --skip-package
-  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew install jq; fi
+  - yarn cross-env NODE_ENV=production ember electron:make -e production --build-path electron-out/ember
+  - |
+    if [ "$TRAVIS_OS_NAME" == "osx" ]; then
+      security lock-keychain codesign.keychain;
+      brew install jq;
+    fi
   - export GITHUB_RELEASE="$(cat package.json | jq -r '.productName') $(echo $TRAVIS_TAG | cut -c 2-)"
 
 deploy:
