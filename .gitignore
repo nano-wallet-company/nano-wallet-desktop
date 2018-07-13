@@ -9,9 +9,9 @@
 /bower_components
 
 # misc
+*.env
 .config
 .DS_Store
-.env
 .git
 .local
 /.sass-cache

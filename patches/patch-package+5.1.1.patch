@@ -1,0 +1,14 @@
+patch-package
+--- a/node_modules/patch-package/dist/makePatch.js
++++ b/node_modules/patch-package/dist/makePatch.js
+@@ -48,8 +48,9 @@ function makePatch(packageName, appPath, packageManager, includePaths, excludePa
+         fs.writeFileSync(tmpRepoPackageJsonPath, JSON.stringify(resolveRelativeFileDependencies_1.resolveRelativeFileDependenciesInPackageJson(appPath, require(tmpRepoPackageJsonPath))));
+         if (packageManager === "yarn") {
+             fsExtra.copySync(path.join(appPath, "yarn.lock"), path.join(tmpRepo.name, "yarn.lock"));
++            fsExtra.copySync(path.join(appPath, ".yarnclean"), path.join(tmpRepo.name, ".yarnclean"));
+             console.info(chalk_1.green("☑"), "Building clean node_modules with yarn");
+-            tmpExec_1("yarn");
++            tmpExec_1("yarn", ["--frozen-lockfile", "--non-interactive"]);
+         }
+         else {
+             var lockFileName = packageManager === "npm-shrinkwrap"

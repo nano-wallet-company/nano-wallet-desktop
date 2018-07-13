@@ -87,7 +87,7 @@ wallets:
       source: '发送账户'
       search: '搜索账户'
       destination: '收款账户'
-      placeholder: '地址 (比如：xrb_...)'
+      placeholder: '地址 (比如：nano_...)'
       amount: '数量 (NANO)'
       insufficient: '输入数量超出账户余额'
     history:

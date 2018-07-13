@@ -1,4 +1,8 @@
 <h4>{{t status asset=(t asset)}}</h4>
 {{#bs-progress as |p|}}
-  {{p.bar value=value minValue=0 maxValue=1 striped=true animate=true}}
+  {{#p.bar value=value minValue=0 maxValue=1 striped=true animate=true showLabel=true}}
+    <span class="position-absolute w-100 d-flex justify-content-center">
+      {{t 'progress' value=value eta=(if eta (format-relative eta) null)}}
+    </span>
+  {{/p.bar}}
 {{/bs-progress}}

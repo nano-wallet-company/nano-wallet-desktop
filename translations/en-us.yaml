@@ -32,6 +32,13 @@ pending: 'Pending'
 node: 'node'
 data: 'data'
 syncing: 'Syncing'
+sending: 'Sending...'
+sent: 'Broadcasting send!'
+progress: >
+  {value, number, percent} {eta, select,
+    null {(estimating...)}
+    other {({eta})}
+  }
 downloading: 'Downloading {asset}...'
 verifying: 'Verifying {asset}...'
 extracting: 'Extracting {asset}...'
@@ -105,7 +112,7 @@ wallets:
       source: 'Source Account'
       search: 'Search for account'
       destination: 'Destination Account'
-      placeholder: 'Address (e.g. xrb_...)'
+      placeholder: 'Address (e.g. nano_...)'
       amount: 'Amount (NANO)'
       insufficient: 'Amount is greater than total account balance'
     history:

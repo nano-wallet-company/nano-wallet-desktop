@@ -1,4 +1,4 @@
-{{#with (changeset (hash label=settings.label representative=account.representative) ChangeAccountSettingsValidations) as |model|}}
+{{#let (changeset (hash label=settings.label representative=account.representative) ChangeAccountSettingsValidations) as |model|}}
   {{#bs-modal position='center' onHide=(action (optional onCancel)) as |modal|}}
     {{#modal.header}}
       <h4 class="modal-title">
@@ -6,6 +6,7 @@
       </h4>
     {{/modal.header}}
     {{#modal.body}}
+      {{! template-lint-disable no-unused-block-params }}
       {{#bs-form model=model onSubmit=(action (queue (action 'save' model) (action (optional onSave))) account) as |form|}}
         <div class="form-group">
           <label>{{t 'account'}}</label>
@@ -35,4 +36,4 @@
       {{/bs-button}}
     {{/modal.footer}}
   {{/bs-modal}}
-{{/with}}
+{{/let}}

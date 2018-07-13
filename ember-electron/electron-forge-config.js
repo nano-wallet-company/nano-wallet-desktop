@@ -1,5 +1,8 @@
 const path = require('path');
 
+const del = require('del');
+const moment = require('moment');
+
 const {
   version,
   productName,
@@ -18,21 +21,24 @@ const {
   },
 } = require('../package');
 
-const { arch } = process;
-
 const icon = path.join(__dirname, 'resources', 'icon');
 
 const [, name] = packageName.split('/');
 const categories = linuxDesktopCategories.split(';');
-const productIdentifier = productName.split(' ').join('');
 
-const buildNumber = process.env.CI_JOB_ID
-  || process.env.CI_BUILD_ID
-  || process.env.TRAVIS_BUILD_NUMBER
-  || process.env.APPVEYOR_BUILD_VERSION
-  || '0';
-
+const buildNumber = moment().format('YYYYMMDDHHmmss');
 const buildVersion = `${version}+${buildNumber}`;
+
+const osxSign = {
+  identity: process.env.CSC_NAME || true,
+  entitlements: false,
+};
+
+const certificateFile = process.env.CSC_LINK || null;
+const certificatePassword = process.env.CSC_KEY_PASSWORD || null;
+const signWithParams = certificateFile && certificatePassword
+  ? `/a /ph /tr http://timestamp.digicert.com /td sha256 /fd sha256 /f "${path.resolve(certificateFile)}" /p "${certificatePassword}"`
+  : undefined;
 
 const unsupportedArch = (target, type) => {
   throw new Error(`Unsupported architecture for ${target}: ${type}`);
@@ -73,46 +79,67 @@ module.exports = {
     ],
   },
   electronPackagerConfig: {
-    arch,
     icon,
+    osxSign,
     appCopyright,
     buildVersion,
     appBundleId,
     appCategoryType,
-    asar: true,
+    ignore: [
+      '\\.xml$',
+      '\\.node$',
+      '/\\.DS_Store$',
+      '/ember-electron/resources/ordering.txt$',
+    ],
+    asar: {
+      // https://github.com/electron/asar/blob/v0.14.3/lib/asar.js#L80
+      ordering: path.join(__dirname, 'resources', 'ordering.txt'),
+      unpackDir: '{ember-electron/resources,node_modules/**/binding-*}',
+    },
+    // extendInfo: {
+    //   CSResourcesFileMapped: true,
+    // },
     overwrite: true,
-    ignore: ['\\.xml$'],
     packageManager: 'yarn',
     executableName: name,
     win32metadata: {
-      InternalName: productIdentifier,
+      FileDescription: productName,
+      InternalName: name,
       OriginalFilename: `${name}.exe`,
+      ProductName: productName,
     },
+    afterPrune: [
+      (buildPath, electronVersion, platform, arch, callback) => {
+        const cwd = path.join(buildPath, 'node_modules', 'lzma-native');
+        return del(['{deps,build}', 'bin/**'], { cwd })
+          .then(() => callback(), err => callback(err));
+      },
+    ],
   },
   electronWinstallerConfig: {
     name,
+    signWithParams,
     exe: `${name}.exe`,
-    setupExe: `${productName} ${version} Setup.exe`,
     setupIcon: `${icon}.ico`,
     loadingGif: path.join(__dirname, 'resources', 'install-spinner.gif'),
   },
   electronInstallerDMG: {
-    format: 'ULFO',
   },
   electronInstallerDebian: {
     name,
     categories,
     bin: name,
-    arch: debianArch(arch),
+    arch: debianArch(process.arch),
     icon: {
       scalable: `${icon}.svg`,
+      '512x512': `${icon}.png`,
     },
   },
   electronInstallerRedhat: {
     name,
     categories,
     bin: name,
-    arch: redhatArch(arch),
+    arch: redhatArch(process.arch),
     compressionLevel: 9,
     icon: `${icon}.png`,
   },

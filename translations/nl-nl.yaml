@@ -87,7 +87,7 @@ wallets:
       source: 'Afkomst Account'
       search: 'Zoek naar Account'
       destination: 'Bestemming Account'
-      placeholder: 'Adres (bv. xrb_...)'
+      placeholder: 'Adres (bv. nano_...)'
       amount: 'Bedrag (NANO)'
       insufficient: 'Bedrag is groter dan het beschikbare saldo'
     history:

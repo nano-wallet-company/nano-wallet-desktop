@@ -3,8 +3,10 @@ import Evented from '@ember/object/evented';
 import { get, computed } from '@ember/object';
 
 import { Promise } from 'rsvp';
+
+import window from 'ember-window-mock';
 import { defineError } from 'ember-exex/error';
-import { DisposableMixin } from 'ember-lifeline';
+import { DisposableMixin, addEventListener } from 'ember-lifeline';
 import { service } from 'ember-decorators/service';
 import { on } from 'ember-decorators/object/evented';
 
@@ -57,24 +59,26 @@ export default Service.extend(Evented, DisposableMixin, {
       this.remote = remote;
       this.ipcRenderer = ipcRenderer;
 
-      const onNodeExit = this.onNodeExit.bind(this);
+      addEventListener(this, window, 'beforeunload', () => this.ipcRenderer.send('window-unloading'));
+
       const onDownloadProgress = this.onDownloadProgress.bind(this);
       const onDownloadVerify = this.onDownloadVerify.bind(this);
       const onDownloadExtract = this.onDownloadExtract.bind(this);
       const onDownloadDone = this.onDownloadDone.bind(this);
+      const onNodeExit = this.onNodeExit.bind(this);
       this.registerDisposable(() => {
-        ipcRenderer.removeListener('node-exit', onNodeExit);
         ipcRenderer.removeListener('download-progress', onDownloadProgress);
         ipcRenderer.removeListener('download-verify', onDownloadVerify);
         ipcRenderer.removeListener('download-extract', onDownloadExtract);
         ipcRenderer.removeListener('download-done', onDownloadDone);
+        ipcRenderer.removeListener('node-exit', onNodeExit);
       });
 
-      ipcRenderer.on('node-exit', onNodeExit);
       ipcRenderer.on('download-progress', onDownloadProgress);
       ipcRenderer.on('download-verify', onDownloadVerify);
       ipcRenderer.on('download-extract', onDownloadExtract);
       ipcRenderer.on('download-done', onDownloadDone);
+      ipcRenderer.on('node-exit', onNodeExit);
     }
 
     return this;
@@ -88,12 +92,6 @@ export default Service.extend(Evented, DisposableMixin, {
     get() {
       const defaultLocale = this.get('intl.locale');
       return this.getRemoteGlobal('locale', defaultLocale);
-    },
-  }).volatile(),
-
-  isNodeDownloaded: computed('remote', {
-    get() {
-      return this.getRemoteGlobal('isNodeDownloaded', false);
     },
   }).volatile(),
 
@@ -119,16 +117,16 @@ export default Service.extend(Evented, DisposableMixin, {
     return this.shell.openExternal(...args);
   },
 
-  download(asset) {
+  download(key) {
     return new Promise((resolve, reject) => {
       const config = this.get('config');
-      const platform = this.get('platform');
       const ipcRenderer = this.get('ipcRenderer');
-      const { url, integrity } = get(config, `assets.${asset}.${platform}`);
+      const assets = get(config, 'assets');
+      const { url } = get(assets, key);
       ipcRenderer.once('download-error', () => reject(new DownloadError()));
       ipcRenderer.once('download-progress', () => resolve(this));
       ipcRenderer.once('download-done', this.onDownloadDone.bind(this));
-      ipcRenderer.send('download-start', url, integrity);
+      ipcRenderer.send('download-start', url);
     });
   },
 
@@ -138,6 +136,14 @@ export default Service.extend(Evented, DisposableMixin, {
       ipcRenderer.once('node-error', () => reject(new NodeError()));
       ipcRenderer.once('node-ready', () => resolve(this));
       ipcRenderer.send('node-start');
+    });
+  },
+
+  onWillUnload() {
+    return this.runTask(() => {
+      const ipcRenderer = this.get('ipcRenderer');
+      ipcRenderer.send('will-unload');
+      this.trigger('unloading');
     });
   },
 

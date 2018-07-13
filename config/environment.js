@@ -47,38 +47,14 @@ module.exports = (environment) => {
     },
 
     links: {
-      eula: 'http://nanowalletcompany.com/desktop-eula',
-      privacyPolicy: 'http://nanowalletcompany.com/desktop-privacy-policy',
+      eula: 'https://nanowalletcompany.com/desktop-eula',
+      privacyPolicy: 'https://nanowalletcompany.com/desktop-privacy-policy',
     },
 
     assets: {
-      node: {
-        darwin: {
-          url: 'https://d31vj5w9sn4ozg.cloudfront.net/node-darwin-698798436c7a12b50360bf7a36b8b17a.zip',
-          integrity: 'sha512-GJgZmjwe0L/Zd2ryDTo4MG63eJCsBFaQjEMun/42CaeLsPenSPnVcRWcND5GH5Vv9AZmhg/qZfRJJtNzJXVfaQ==',
-        },
-        linux: {
-          url: 'https://d31vj5w9sn4ozg.cloudfront.net/node-linux-14490c4f97d204d3edad4a370cb129fd.zip',
-          integrity: 'sha512-IIrRm6AUOd7HefOwNy4YVpUKLjaFM0KTrmaTZwYgmow5kiKVvtV+Qhs/k4Dv4eZWdBvygT2AxTdHVRtOsA7Fug==',
-        },
-        win32: {
-          url: 'https://d31vj5w9sn4ozg.cloudfront.net/node-win32-9a82e5347de383929b97b2a8ef88aa0a.zip',
-          integrity: 'sha512-rM48YIoRKvAmCouivBK9qqlQXSkpJWango0bs8esbVTulG/XvsXKWuGUDqFiyfPt24Mxo8kWxgwr0HIh80EXMw==',
-        },
-      },
       data: {
-        darwin: {
-          url: 'https://d31vj5w9sn4ozg.cloudfront.net/data-f356607a83d34613c810cc68755114b8.zip',
-          integrity: 'sha512-dSCSDvr2NwMy3FmIVqlI1Q9gVNCrU3/e5//kTWKI4J/0XVEK9m/lDfQmGHr5pvqTgVBMdPD/5/9T2jzvNSaoYQ==',
-        },
-        linux: {
-          url: 'https://d31vj5w9sn4ozg.cloudfront.net/data-f356607a83d34613c810cc68755114b8.zip',
-          integrity: 'sha512-dSCSDvr2NwMy3FmIVqlI1Q9gVNCrU3/e5//kTWKI4J/0XVEK9m/lDfQmGHr5pvqTgVBMdPD/5/9T2jzvNSaoYQ==',
-        },
-        win32: {
-          url: 'https://d31vj5w9sn4ozg.cloudfront.net/data-f356607a83d34613c810cc68755114b8.zip',
-          integrity: 'sha512-dSCSDvr2NwMy3FmIVqlI1Q9gVNCrU3/e5//kTWKI4J/0XVEK9m/lDfQmGHr5pvqTgVBMdPD/5/9T2jzvNSaoYQ==',
-        },
+        url: 'https://dkl5m4kebds7n.cloudfront.net/data.tar.xz',
+        signature: 'https://dkl5m4kebds7n.cloudfront.net/data.tar.xz.sha256',
       },
     },
   };

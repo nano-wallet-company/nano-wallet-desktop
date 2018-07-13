@@ -3,6 +3,10 @@ __tests__
 test
 tests
 powered-test
+tests-node
+node-tests
+fastboot-tests
+integration-tests
 
 # asset directories
 docs
@@ -29,19 +33,39 @@ circle.yml
 codeship-services.yml
 codeship-steps.yml
 wercker.yml
-.tern-project
-.gitattributes
-.editorconfig
-.*ignore
-.eslintrc
-.jshintrc
-.flowconfig
-.documentup.json
-.yarn-metadata.json
-.travis.yml
+karma.conf.js
+codecov.yml
+zuul-es6.yml
+zuul-es5.yml
+
+# dotfiles
+.*
+
+# typings
+*.flow
+
+# lockfiles
+yarn.lock
+package-lock.json
+
+# logs
+yarn-error.log
 
 # misc
 *.md
+*.mkd
+*.mdown
+*.markdown
+README
+README.txt
+AUTHORS
+CHANGELOG
 
-# tmp
+# trash
+*~
+*.bak
 *.tmp
+
+# ignores
+!.bin
+!**/blueprints/**/*

@@ -1,19 +1,51 @@
 /* eslint-env node */
+const nodeSass = require('node-sass');
+
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 const { extensions: defaultExtensions } = require('broccoli-asset-rev/lib/default-options');
 
 module.exports = (defaults) => {
   const app = new EmberApp(defaults, {
+    sassOptions: {
+      nodeSass,
+    },
+
+    sourcemaps: {
+      enabled: true,
+      extensions: ['js'],
+    },
+
     fingerprint: {
-      extensions: defaultExtensions.concat(['svg', 'xml', 'webmanifest']),
+      extensions: defaultExtensions.concat([
+        'svg',
+        'webp',
+        'eot',
+        'otf',
+        'ttf',
+        'woff',
+        'woff2',
+        'xml',
+        'webmanifest',
+      ]),
     },
 
     'ember-cli-babel': {
       includePolyfill: true,
     },
 
+    'ember-cli-uglify': {
+      uglify: {
+        compress: {
+          keep_infinity: true,
+          reduce_funcs: false,
+          typeofs: false,
+          unused: false,
+        },
+      },
+    },
+
     'ember-service-worker': {
-      enabled: EmberApp.env() === 'production',
+      enabled: EmberApp.env() === 'production' && !process.env.EMBER_CLI_ELECTRON,
       versionStrategy: 'every-build',
       registrationStrategy: 'async',
     },

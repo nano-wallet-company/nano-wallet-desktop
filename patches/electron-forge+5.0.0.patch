@@ -1,0 +1,13 @@
+patch-package
+--- a/node_modules/electron-forge/dist/api/make.js
++++ b/node_modules/electron-forge/dist/api/make.js
+@@ -199,7 +199,8 @@ exports.default = (() => {
+       for (var _iterator2 = (0, _getIterator3.default)((0, _parseArchs2.default)(platform, arch, packageJSON.devDependencies['electron-prebuilt-compile'])), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+         const targetArch = _step2.value;
+
+-        const packageDir = _path2.default.resolve(outDir, `${appName}-${actualTargetPlatform}-${targetArch}`);
++        const targetName = appName.replace(/\s+/g, '-').toLowerCase();
++        const packageDir = _path2.default.resolve(outDir, `${targetName}-${actualTargetPlatform}-${targetArch}`);
+         if (!(yield _fsExtra2.default.pathExists(packageDir))) {
+           throw new Error(`Couldn't find packaged app at: ${packageDir}`);
+         }

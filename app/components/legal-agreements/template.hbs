@@ -1,4 +1,4 @@
-{{#with (changeset (hash eula=false privacyPolicy=false) LegalAgreementsValidations) as |model|}}
+{{#let (changeset (hash eula=false privacyPolicy=false) LegalAgreementsValidations) as |model|}}
   {{#bs-form model=model onSubmit=(action onAgree) as |form|}}
     {{#form.group}}
       {{#let (component 'external-link' text=(t 'legal.eula') href=eulaLink) as |label|}}
@@ -16,4 +16,4 @@
       {{t 'agree'}}
     {{/bs-button}}
   {{/bs-form}}
-{{/with}}
+{{/let}}

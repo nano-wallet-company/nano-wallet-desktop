@@ -87,7 +87,7 @@ wallets:
       source: 'Compte source'
       search: 'Recherche de comptes'
       destination: 'Compte de destination'
-      placeholder: 'Adresse (i.e. xrb_...)'
+      placeholder: 'Adresse (i.e. nano_...)'
       amount: 'Montant (NANO)'
       insufficient: 'Le montant est plus important que le solde total du compte'
     history:
