@@ -59,6 +59,7 @@ before_deploy:
   - |
     if [ "$TRAVIS_OS_NAME" == "osx" ]; then
       security lock-keychain codesign.keychain;
+      brew update;
       brew install jq;
     fi
   - export GITHUB_RELEASE="$(cat package.json | jq -r '.productName') $(echo $TRAVIS_TAG | cut -c 2-)"
