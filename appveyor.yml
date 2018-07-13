@@ -47,6 +47,8 @@ artifacts:
   name: zip
 - path: electron-out\make\squirrel.windows\$(PLATFORM)\*.exe
   name: exe
+- path: electron-out\make\squirrel.windows\$(PLATFORM)\*.nupkg
+  name: nupkg
 
 before_deploy:
   - ps: |
@@ -59,7 +61,7 @@ deploy:
     auth_token: $(GITHUB_TOKEN)
     tag: $(APPVEYOR_REPO_TAG_NAME)
     release: $(GITHUB_RELEASE)
-    artifact: zip, exe
+    artifact: zip, exe, nupkg
     draft: true
     prerelease: true
     force_update: true
