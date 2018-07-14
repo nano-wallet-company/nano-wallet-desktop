@@ -5,7 +5,7 @@ matrix:
     sudo: false
     dist: trusty
   - os: osx
-    osx_image: xcode6.4
+    osx_image: xcode8
 
 language: node_js
 node_js:
@@ -23,7 +23,6 @@ cache:
   directories:
     - "$HOME/Library/Caches/Homebrew"
     - "$HOME/.electron"
-    - "$HOME/.electron-gyp"
 
 env:
   global:
@@ -47,17 +46,13 @@ before_deploy:
   - |
     if [ "$TRAVIS_OS_NAME" == "osx" ]; then
       security create-keychain -p "$CSC_KEY_PASSWORD" codesign.keychain;
-      security set-keychain-settings -l -u -t 1800 codesign.keychain;
-      security show-keychain-info codesign.keychain;
       security default-keychain -s codesign.keychain;
       security unlock-keychain -p "$CSC_KEY_PASSWORD" codesign.keychain;
+      security set-keychain-settings -l -u -t 3600 codesign.keychain;
       echo "$CSC_LINK" | base64 -D - > "$TMPDIR/csc.p12";
-      security import "$TMPDIR/csc.p12" -P "$CSC_KEY_PASSWORD" -T /usr/bin/codesign;
+      security import "$TMPDIR/csc.p12" -k codesign.keychain -P "$CSC_KEY_PASSWORD" -T "$(which codesign)";
       rm -f "$TMPDIR/csc.p12";
-      if [ "$(sw_vers -productVersion | cut -d '.' -f1 -f2)" > "10.11" ]; then
-        security set-key-partition-list -s -S "apple-tool:,apple:" -k "$CSC_KEY_PASSWORD" codesign.keychain;
-      fi;
-      security find-identity;
+      security find-identity -v;
     fi
   - yarn cross-env NODE_ENV=production ember electron:make -e production --build-path electron-out/ember
   - |

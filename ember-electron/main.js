@@ -9,14 +9,6 @@ if (typeof process.env.ELECTRON_IS_DEV === 'undefined') {
   }
 }
 
-// https://github.com/electron-archive/grunt-electron-installer#handling-squirrel-events
-if (process.platform === 'win32') {
-  // eslint-disable-next-line global-require
-  if (require('electron-squirrel-startup')) {
-    return;
-  }
-}
-
 const log = require('electron-log');
 const unhandled = require('electron-unhandled');
 const { is, appReady } = require('electron-util');
@@ -45,9 +37,12 @@ unhandled({
   },
 });
 
-if (is.mac || is.windows) {
+// https://github.com/electron-archive/grunt-electron-installer#handling-squirrel-events
+if (process.platform === 'win32') {
   // eslint-disable-next-line global-require
-  require('update-electron-app')({ logger: log });
+  if (require('electron-squirrel-startup')) {
+    return;
+  }
 }
 
 const path = require('path');
@@ -64,6 +59,8 @@ const Store = require('electron-store');
 const contextMenu = require('electron-context-menu');
 const protocolServe = require('electron-protocol-serve');
 const { default: installExtension, EMBER_INSPECTOR } = require('electron-devtools-installer');
+
+const updateElectronApp = require('update-electron-app');
 
 const { createWindow } = require('./window');
 const { downloadStart, nodeStart } = require('./ipc');
@@ -143,6 +140,8 @@ const run = async () => {
   log.info('Starting application');
 
   await appReady;
+
+  updateElectronApp({ logger: log });
 
   const store = new Store({ name: 'settings' });
   if (!store.has('dataPath')) {
