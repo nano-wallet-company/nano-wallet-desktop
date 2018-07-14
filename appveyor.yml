@@ -10,7 +10,8 @@ environment:
 
 cache:
   - node_modules -> yarn.lock
-  - '%USERPROFILE%\.electron -> yarn.lock'
+  - '%USERPROFILE%\.electron -> package.json'
+  - '%TEMP%\chocolatey\yarn\%yarn_version%'
 
 init:
   - git config --global core.autocrlf input
@@ -31,7 +32,7 @@ test_script:
 after_test:
   - yarn cross-env NODE_ENV=production ember electron:build -e production
   - ps: |
-      $path = Join-Path -Path "$env:TMP" -ChildPath csc.p12
+      $path = Join-Path -Path "$env:TEMP" -ChildPath csc.p12
       [IO.File]::WriteAllBytes($path, [Convert]::FromBase64String($env:CSC_LINK))
       Set-AppveyorBuildVariable -Name 'CSC_LINK' -Value $path
   - yarn cross-env NODE_ENV=production ember electron:make -e production --build-path electron-out/ember
