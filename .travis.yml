@@ -47,19 +47,22 @@ before_deploy:
   - |
     if [ "$TRAVIS_OS_NAME" == "osx" ]; then
       security create-keychain -p "$CSC_KEY_PASSWORD" codesign.keychain;
+      security set-keychain-settings -l -u -t 1800 codesign.keychain;
+      security show-keychain-info codesign.keychain;
       security default-keychain -s codesign.keychain;
       security unlock-keychain -p "$CSC_KEY_PASSWORD" codesign.keychain;
       echo "$CSC_LINK" | base64 -D - > "$TMPDIR/csc.p12";
       security import "$TMPDIR/csc.p12" -P "$CSC_KEY_PASSWORD" -T /usr/bin/codesign;
       rm -f "$TMPDIR/csc.p12";
-      security set-key-partition-list -S "apple-tool:,apple:" -s -k "$CSC_KEY_PASSWORD" codesign.keychain;
+      if [ "$(sw_vers -productVersion | cut -d '.' -f1 -f2)" > "10.11" ]; then
+        security set-key-partition-list -s -S "apple-tool:,apple:" -k "$CSC_KEY_PASSWORD" codesign.keychain;
+      fi;
       security find-identity;
     fi
   - yarn cross-env NODE_ENV=production ember electron:make -e production --build-path electron-out/ember
   - |
     if [ "$TRAVIS_OS_NAME" == "osx" ]; then
-      security lock-keychain codesign.keychain;
-      brew update;
+      security delete-keychain codesign.keychain;
       brew install jq;
     fi
   - export GITHUB_RELEASE="$(cat package.json | jq -r '.productName') $(echo $TRAVIS_TAG | cut -c 2-)"
