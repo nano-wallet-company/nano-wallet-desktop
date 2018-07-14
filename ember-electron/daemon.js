@@ -221,8 +221,8 @@ const startDaemon = async () => {
     forceKill(child);
   });
 
-  app.once('before-quit', killHandler);
-  child.once('exit', () => app.removeListener('before-quit', killHandler));
+  app.once('will-quit', killHandler);
+  child.once('exit', () => app.removeListener('will-quit', killHandler));
 
   const { client_certs_path: clientCertsPath } = config.rpc.secure;
   const cert = await fs.readFileAsync(path.join(clientCertsPath, 'rpcuser1.cert.pem'));

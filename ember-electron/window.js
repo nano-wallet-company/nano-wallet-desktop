@@ -122,10 +122,8 @@ const createWindow = () => {
   const menu = Menu.buildFromTemplate(template);
   Menu.setApplicationMenu(menu);
 
-  // win.once('ready-to-show', () => win.show());
-
   win.on('close', (event) => {
-    if (is.macos && !global.isQuitting) {
+    if (is.macos && !global.isQuitting && !global.isUpdating) {
       event.preventDefault();
       win.hide();
     }
@@ -139,15 +137,15 @@ const createWindow = () => {
     log.info('Application window has become responsive again:', win.getTitle());
   });
 
+  win.once('ready-to-show', () => {
+    log.info('Application window ready to show:', win.getTitle());
+    win.show();
+  });
+
   const emberAppLocation = 'serve://dist';
 
   // Load the ember application using our custom protocol/scheme
   win.loadURL(emberAppLocation);
-
-  win.webContents.once('dom-ready', () => {
-    log.info('Application window ready to show:', win.getTitle());
-    win.show();
-  });
 
   // If a loading operation goes wrong, we'll send Electron back to
   // Ember App entry point

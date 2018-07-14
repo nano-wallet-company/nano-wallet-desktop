@@ -425,17 +425,15 @@
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@nodelib/fs.stat/-/fs.stat-1.1.0.tgz#50c1e2260ac0ed9439a181de3725a0168d59c48a"
 
-"@octokit/rest@^15.2.6":
-  version "15.9.4"
-  resolved "https://registry.yarnpkg.com/@octokit/rest/-/rest-15.9.4.tgz#c6cf0f483275d9c798b18419b7c9d417493bb70f"
+"@octokit/rest@^14.0.4":
+  version "14.0.9"
+  resolved "https://registry.yarnpkg.com/@octokit/rest/-/rest-14.0.9.tgz#d5e0a00dcb78901dd7b2ef852acfc0aea7c479ef"
   dependencies:
     before-after-hook "^1.1.0"
-    btoa-lite "^1.0.0"
     debug "^3.1.0"
-    http-proxy-agent "^2.1.0"
-    https-proxy-agent "^2.2.0"
+    is-array-buffer "^1.0.0"
+    is-stream "^1.1.0"
     lodash "^4.17.4"
-    node-fetch "^2.1.1"
     url-template "^2.0.8"
 
 "@paulcbetts/mime-db@~1.22.0":
@@ -718,12 +716,6 @@ after@0.8.1:
 after@0.8.2:
   version "0.8.2"
   resolved "https://registry.yarnpkg.com/after/-/after-0.8.2.tgz#fedb394f9f0e02aa9768e702bda23b505fae7e1f"
-
-agent-base@4, agent-base@^4.1.0:
-  version "4.2.1"
-  resolved "https://registry.yarnpkg.com/agent-base/-/agent-base-4.2.1.tgz#d89e5999f797875674c07d87f260fc41e83e8ca9"
-  dependencies:
-    es6-promisify "^5.0.0"
 
 ajv-keywords@^2.1.0:
   version "2.1.1"
@@ -3058,10 +3050,6 @@ bser@^2.0.0:
   dependencies:
     node-int64 "^0.4.0"
 
-btoa-lite@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/btoa-lite/-/btoa-lite-1.0.0.tgz#337766da15801210fdd956c22e9c6891ab9d0337"
-
 btoa@^1.1.2:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/btoa/-/btoa-1.2.1.tgz#01a9909f8b2c93f6bf680ba26131eb30f7fa3d73"
@@ -4707,7 +4695,7 @@ debounce-fn@^1.0.0:
   dependencies:
     mimic-fn "^1.1.0"
 
-debug@*, debug@3.1.0, debug@^3.0.0, debug@^3.0.1, debug@^3.1.0, debug@~3.1.0:
+debug@*, debug@^3.0.0, debug@^3.0.1, debug@^3.1.0, debug@~3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/debug/-/debug-3.1.0.tgz#5bb5a0672628b64149566ba16819e61518c67261"
   dependencies:
@@ -5305,11 +5293,11 @@ electron-forge-template-vue@^1.0.2:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/electron-forge-template-vue/-/electron-forge-template-vue-1.0.3.tgz#58a11ec972a0f0518e1306da7a573fbaf6b4ac50"
 
-electron-forge@^5.2.2, electron-forge@~5.0.0:
-  version "5.2.2"
-  resolved "https://registry.yarnpkg.com/electron-forge/-/electron-forge-5.2.2.tgz#5d901042061903517ba0a477c1a18189f757ee99"
+electron-forge@~5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/electron-forge/-/electron-forge-5.0.0.tgz#f009ab1066c244cdbd1ac536cdd405565aa0688e"
   dependencies:
-    "@octokit/rest" "^15.2.6"
+    "@octokit/rest" "^14.0.4"
     aws-sdk "^2.9.0"
     babel-register "^6.16.3"
     bluebird "^3.4.6"
@@ -5321,9 +5309,8 @@ electron-forge@^5.2.2, electron-forge@~5.0.0:
     electron-forge-template-react "^1.0.2"
     electron-forge-template-react-typescript "^1.0.3"
     electron-forge-template-vue "^1.0.2"
-    electron-packager "^11.0.0"
+    electron-packager "^10.1.0"
     electron-rebuild "^1.6.0"
-    exact-version "^1.0.1"
     form-data "^2.1.4"
     fs-extra "^5.0.0"
     glob "^7.1.1"
@@ -5332,11 +5319,11 @@ electron-forge@^5.2.2, electron-forge@~5.0.0:
     lodash.template "^4.4.0"
     log-symbols "^2.0.0"
     mime-types "^2.1.17"
-    node-fetch "^2.0.0"
+    node-fetch "^1.6.3"
     node-gyp "^3.4.0"
     nugget "^2.0.1"
     opn "^5.0.0"
-    ora "^2.0.0"
+    ora "^1.1.0"
     parse-author "^2.0.0"
     pify "^3.0.0"
     resolve-package "^1.0.1"
@@ -5465,9 +5452,9 @@ electron-osx-sign@^0.4.1:
     minimist "^1.2.0"
     plist "^2.1.0"
 
-electron-packager@^11.0.0, electron-packager@^11.2.0:
-  version "11.2.0"
-  resolved "https://registry.yarnpkg.com/electron-packager/-/electron-packager-11.2.0.tgz#facc17d2b92c10da1bfa1d7c5f58f13774571839"
+electron-packager@^10.1.0, electron-packager@^10.1.2:
+  version "10.1.2"
+  resolved "https://registry.yarnpkg.com/electron-packager/-/electron-packager-10.1.2.tgz#a2308d14f63c321a089294f322fe0d51190bfd7c"
   dependencies:
     asar "^0.14.0"
     debug "^3.0.0"
@@ -5482,11 +5469,11 @@ electron-packager@^11.0.0, electron-packager@^11.2.0:
     pify "^3.0.0"
     plist "^2.0.0"
     pruner "^0.0.7"
-    rcedit "^1.0.0"
+    rcedit "^0.9.0"
     resolve "^1.1.6"
     sanitize-filename "^1.6.0"
     semver "^5.3.0"
-    yargs-parser "^9.0.2"
+    yargs-parser "^8.0.0"
 
 electron-prebuilt-compile@2.0.4:
   version "2.0.4"
@@ -7481,8 +7468,8 @@ escodegen@1.8.x:
     source-map "~0.2.0"
 
 escodegen@^1.6.1:
-  version "1.10.0"
-  resolved "https://registry.yarnpkg.com/escodegen/-/escodegen-1.10.0.tgz#f647395de22519fbd0d928ffcf1d17e0dec2603e"
+  version "1.11.0"
+  resolved "https://registry.yarnpkg.com/escodegen/-/escodegen-1.11.0.tgz#b27a9389481d5bfd5bec76f7bb1eb3f8f4556589"
   dependencies:
     esprima "^3.1.3"
     estraverse "^4.2.0"
@@ -7808,10 +7795,6 @@ evp_bytestokey@^1.0.0, evp_bytestokey@^1.0.3:
   dependencies:
     md5.js "^1.3.4"
     safe-buffer "^5.1.1"
-
-exact-version@^1.0.1:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/exact-version/-/exact-version-1.0.2.tgz#2ac417243c00c5e42418e678c598dbd1393d1d89"
 
 exec-file-sync@^2.0.0:
   version "2.0.2"
@@ -9486,13 +9469,6 @@ http-parser-js@>=0.4.0:
   version "0.4.13"
   resolved "https://registry.yarnpkg.com/http-parser-js/-/http-parser-js-0.4.13.tgz#3bd6d6fde6e3172c9334c3b33b6c193d80fe1137"
 
-http-proxy-agent@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/http-proxy-agent/-/http-proxy-agent-2.1.0.tgz#e4821beef5b2142a2026bd73926fe537631c5405"
-  dependencies:
-    agent-base "4"
-    debug "3.1.0"
-
 http-proxy@^1.13.1, http-proxy@^1.17.0, http-proxy@^1.9.0:
   version "1.17.0"
   resolved "https://registry.yarnpkg.com/http-proxy/-/http-proxy-1.17.0.tgz#7ad38494658f84605e2f6db4436df410f4e5be9a"
@@ -9524,13 +9500,6 @@ https-browserify@^1.0.0:
 https-browserify@~0.0.0:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/https-browserify/-/https-browserify-0.0.1.tgz#3f91365cabe60b77ed0ebba24b454e3e09d95a82"
-
-https-proxy-agent@^2.2.0:
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/https-proxy-agent/-/https-proxy-agent-2.2.1.tgz#51552970fa04d723e04c56d04178c3f92592bbc0"
-  dependencies:
-    agent-base "^4.1.0"
-    debug "^3.1.0"
 
 humanize-plus@^1.8.1:
   version "1.8.2"
@@ -9903,6 +9872,10 @@ is-accessor-descriptor@^1.0.0:
   resolved "https://registry.yarnpkg.com/is-accessor-descriptor/-/is-accessor-descriptor-1.0.0.tgz#169c2f6d3df1f992618072365c9b0ea1f6878656"
   dependencies:
     kind-of "^6.0.0"
+
+is-array-buffer@^1.0.0:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/is-array-buffer/-/is-array-buffer-1.0.1.tgz#a4fac0cf325c1fad3f713e2b109eb241a907cf27"
 
 is-array@^1.0.1:
   version "1.0.1"
@@ -12044,9 +12017,9 @@ nan@^2.10.0, nan@^2.3.2, nan@^2.4.0, nan@^2.9.2:
   version "2.10.0"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.10.0.tgz#96d0cd610ebd58d4b4de9cc0c6828cda99c7548f"
 
-nanoid@^1.0.7:
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-1.0.7.tgz#23857a9514ae8efb7374221b923a2b92be3f74f2"
+nanoid@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-1.1.0.tgz#b18e806e1cdbfdbe030374d5cf08a48cbc80b474"
 
 nanomatch@^1.2.9:
   version "1.2.13"
@@ -12141,14 +12114,14 @@ node-fetch@1.6.3:
     encoding "^0.1.11"
     is-stream "^1.0.1"
 
-node-fetch@^1.3.3:
+node-fetch@^1.3.3, node-fetch@^1.6.3:
   version "1.7.3"
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-1.7.3.tgz#980f6f72d85211a5347c6b2bc18c5b84c3eb47ef"
   dependencies:
     encoding "^0.1.11"
     is-stream "^1.0.1"
 
-node-fetch@^2.0.0, node-fetch@^2.0.0-alpha.9, node-fetch@^2.1.1:
+node-fetch@^2.0.0-alpha.9:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.1.2.tgz#ab884e8e7e57e38a944753cec706f788d1768bb5"
 
@@ -12689,7 +12662,7 @@ ora@^0.2.0, ora@^0.2.3:
     cli-spinners "^0.1.2"
     object-assign "^4.0.1"
 
-ora@^1.2.0:
+ora@^1.1.0, ora@^1.2.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/ora/-/ora-1.4.0.tgz#884458215b3a5d4097592285f93321bb7a79e2e5"
   dependencies:
@@ -13792,9 +13765,9 @@ rc@^1.0.1, rc@^1.1.2, rc@^1.1.6, rc@^1.1.7, rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-rcedit@^1.0.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/rcedit/-/rcedit-1.1.0.tgz#ae21c28d4efdd78e95fcab7309a5dd084920b16a"
+rcedit@^0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/rcedit/-/rcedit-0.9.0.tgz#3910df57345399e2b0325f4a519007f89e55ef1c"
 
 read-all-stream@^3.0.0:
   version "3.1.0"
@@ -17046,7 +17019,7 @@ yargs-parser@^7.0.0:
   dependencies:
     camelcase "^4.1.0"
 
-yargs-parser@^8.1.0:
+yargs-parser@^8.0.0, yargs-parser@^8.1.0:
   version "8.1.0"
   resolved "https://registry.yarnpkg.com/yargs-parser/-/yargs-parser-8.1.0.tgz#f1376a33b6629a5d063782944da732631e966950"
   dependencies:

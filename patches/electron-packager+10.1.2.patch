@@ -1,15 +1,15 @@
 patch-package
 --- a/node_modules/electron-packager/common.js
 +++ b/node_modules/electron-packager/common.js
-@@ -71,7 +71,8 @@ function sanitizeAppName (name) {
+@@ -72,7 +72,8 @@ function sanitizeAppName (name) {
  }
- 
+
  function generateFinalBasename (opts) {
 -  return `${sanitizeAppName(opts.name)}-${opts.platform}-${opts.arch}`
 +  let targetName = sanitizeAppName(opts.name).replace(/\s+/g, '-').toLowerCase()
 +  return `${targetName}-${opts.platform}-${opts.arch}`
  }
- 
+
  function generateFinalPath (opts) {
 --- a/node_modules/electron-packager/prune.js
 +++ b/node_modules/electron-packager/prune.js
@@ -18,7 +18,7 @@ patch-package
        return `${packageManager} prune --production`
      case 'yarn':
 -      return `${packageManager} install --production --no-bin-links --no-lockfile`
-+      return `${packageManager} install --production --no-bin-links --frozen-lockfile --no-progress --non-interactive`
++      return `${packageManager} install --production --no-bin-links --frozen-lockfile --non-interactive`
    }
  }
- 
+

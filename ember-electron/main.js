@@ -65,12 +65,13 @@ const updateElectronApp = require('update-electron-app');
 const { createWindow } = require('./window');
 const { downloadStart, nodeStart } = require('./ipc');
 
-const { version } = require('../package');
+const { version, productName } = require('../package');
 
 const {
   app,
   ipcMain,
   protocol,
+  autoUpdater,
 } = electron;
 
 let mainWindow = null;
@@ -98,6 +99,7 @@ global.locale = null;
 global.isDataDownloaded = false;
 global.isNodeStarted = false;
 global.isQuitting = false;
+global.isUpdating = false;
 global.authorizationToken = null;
 
 app.on('before-quit', () => {
@@ -137,11 +139,22 @@ protocolServe({
 // });
 
 const run = async () => {
-  log.info('Starting application');
+  log.info(`Starting application: ${productName} ${version} (${environment})`);
 
   await appReady;
 
-  updateElectronApp({ logger: log });
+  autoUpdater.on('checking-for-update', () => {
+    global.isUpdating = false;
+  });
+
+  autoUpdater.on('update-downloaded', () => {
+    global.isUpdating = true;
+  });
+
+  updateElectronApp({
+    logger: log,
+    updateInterval: '1 hour',
+  });
 
   const store = new Store({ name: 'settings' });
   if (!store.has('dataPath')) {
