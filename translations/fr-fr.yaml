@@ -30,9 +30,9 @@ balance: 'Solde'
 pending: 'En attente'
 node: 'noeud'
 data: 'données'
-downloading: 'Téléchargement {asset}...'
-verifying: 'Vérifiation {asset}...'
-extracting: 'Extraction {asset}...'
+downloading: 'Téléchargement de {asset}...'
+verifying: 'Vérification de {asset}...'
+extracting: 'Extraction de {asset}...'
 starting: 'Lancement du noeud'
 currency: '{amount}'
 copyAddress: "Copier l'adresse"
@@ -70,7 +70,7 @@ wallets:
     copied: 'Seed copiée dans le presse-papier!'
     download: 'Téléchargement'
     help: >
-      Conformez vous aux meilleures pratiques en écrivant votre seed mnémotechnique sur une feuille de papier et en conservant celle-ci dans un endroit sûr pour une récupération sécurisée en cas de perte de la seed.
+      Conformez vous aux meilleures pratiques en écrivant votre seed mnémotechnique sur une feuille de papier, et en conservant celle-ci dans un endroit sûr pour une récupération sécurisée en cas de perte de vos données.
     confirm: 'Avez vous bien écrit votre seed mnémotechnique?'
   import:
     title: 'Importer un portefeuille'
@@ -99,10 +99,10 @@ wallets:
   settings:
     changeRepresentative: 'Modification du représentant'
     changePassword: 'Modifier le mot de passe'
-    representativeChanged: 'Représentant modifié!'
+    representativeChanged: 'Représentant modifié.'
     representativeChangeFailed: 'Le changement de représentant a échoué!'
-    passwordChanged: 'Mot de passe modifié!'
-    passwordsDontMatch: 'Les mots de passe ne concordent pas!'
+    passwordChanged: 'Mot de passe modifié.'
+    passwordsDontMatch: 'Les mots de passe ne concordent pas.'
   logout:
     title: 'Confirmer la déconnexion'
     lead: 'Êtes-vous sûr de vouloir vous déconnecter?'
@@ -111,7 +111,7 @@ wallets:
 setup:
   lead: 'Configurons votre portefeuille.'
   instructions: >
-    Pour commencer à utiliser l'application Nano, veuillez créer un nouveau portefeuille ou importer les données d'un portefeuille existant à l'aide d'une seed.
+    Pour commencer à utiliser l'application Nano, veuillez créer un nouveau portefeuille ou importer les données d'un portefeuille existant à l'aide d'une seed (clé de 64 caractères, ou phrase mnémotechnique).
   create: 'Créer un nouveau portefeuille'
   or: 'ou'
   import: 'Importer un portefeuille'
