@@ -2,6 +2,32 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.0.0"></a>
+# [1.0.0](https://github.com/nano-wallet-company/nano-wallet-desktop/compare/v1.0.0-rc.3...v1.0.0) (2018-07-15)
+
+
+### Bug Fixes
+
+* **account-send:** prevent wonkiness surrounding the send buttons ([1b4d394](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/1b4d394)), closes [#37](https://github.com/nano-wallet-company/nano-wallet-desktop/issues/37)
+* **electron:** properly restart after updates on mac ([43e4c6f](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/43e4c6f))
+* **intl:** ensure xx-xx form of locale added when xx form reported ([e6b1468](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/e6b1468)), closes [#40](https://github.com/nano-wallet-company/nano-wallet-desktop/issues/40)
+* **ui:** account view scroll issue [#26](https://github.com/nano-wallet-company/nano-wallet-desktop/issues/26) ([74637cd](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/74637cd))
+* **ui:** copy mnemonic in backup screen issue [#28](https://github.com/nano-wallet-company/nano-wallet-desktop/issues/28) ([336635d](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/336635d))
+* **ui:** fix [#44](https://github.com/nano-wallet-company/nano-wallet-desktop/issues/44) increase settings icon size ([fd29bb2](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/fd29bb2))
+* **ui:** further fix to account view scroll [#26](https://github.com/nano-wallet-company/nano-wallet-desktop/issues/26) (still needs styling) ([d8a1561](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/d8a1561))
+* **ui:** settings modal size increase [#43](https://github.com/nano-wallet-company/nano-wallet-desktop/issues/43) ([258f8f0](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/258f8f0))
+
+
+### Features
+
+* **account-address:** move to nano_ prefixed addresses ([beb83bd](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/beb83bd))
+* **account-send:** add notification on send ([a10f2f4](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/a10f2f4))
+* **download-progress:** show progress percent and ETA when possible ([cc8a093](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/cc8a093))
+* **electron:** code signing ([bd8c32f](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/bd8c32f))
+* **electron:** package rai_node executables within the repo itself ([d38073a](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/d38073a))
+
+
+
 <a name="1.0.0-rc.3"></a>
 # [1.0.0-rc.3](https://github.com/nano-wallet-company/nano-wallet-desktop/compare/v1.0.0-rc.2...v1.0.0-rc.3) (2018-06-22)
 
