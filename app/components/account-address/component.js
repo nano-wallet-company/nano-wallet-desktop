@@ -4,6 +4,8 @@ import { bool } from '@ember/object/computed';
 import { observes } from 'ember-decorators/object';
 import { on } from 'ember-decorators/object/evented';
 
+import toNanoPrefix from '../../utils/to-nano-prefix';
+
 export const MINIMUM_LENGTH = 65;
 
 export default Component.extend({
@@ -25,7 +27,7 @@ export default Component.extend({
   valueDidChange() {
     const value = this.get('value');
     if (value) {
-      const str = String(value).replace(/^xrb/, 'nano');
+      const str = toNanoPrefix(value);
       if (str.length >= MINIMUM_LENGTH) {
         const head = str.slice(0, 10);
         const body = str.slice(10, -5);

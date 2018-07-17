@@ -18,7 +18,7 @@
       </p>
       <div role="button" class="label" {{action (optional) bubbles=false}}>
         {{bs-tooltip fade=true delayShow=1000 placement='bottom' title=(t 'copyAddress')}}
-        {{#copy-button tagName='div' class="d-flex flex-column justify-content-center" buttonType=null clipboardText=account.id success=(action 'copyAddress' (concat (slice 0 9 account.id) '...' (slice 59 64 account.id)))}}
+        {{#copy-button tagName='div' class="d-flex flex-column justify-content-center" buttonType=null clipboardText=(to-nano-prefix account.id) success=(action 'copyAddress' (concat (slice 0 9 account.id) '...' (slice 59 64 account.id)))}}
           {{account-label class="flex-row w-100 align-self-center" account=account}}
         {{/copy-button}}
       </div>
