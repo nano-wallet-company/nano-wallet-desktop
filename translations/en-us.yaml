@@ -48,6 +48,8 @@ copyAddress: 'Copy address'
 addressCopied: 'Address copied: {address}'
 agree: 'Agree'
 disagree: 'Disagree'
+representative: 'Representative'
+warning: 'Warning'
 legal:
   title: 'Terms and Conditions'
   disclaimer: >
@@ -129,6 +131,10 @@ wallets:
     representativeChangeFailed: 'Representative change failed!'
     passwordChanged: 'Password changed!'
     passwordsDontMatch: "Passwords don't match!"
+    seedBestPractices: >
+      Adhere to best practices by writing your seed on a piece of paper and
+      storing it in a secure location for safe retrieval should you later lose your seed.
+      Your wallet cannot be recovered if you lose your seed.
   logout:
     title: 'Confirm Logout'
     lead: 'Are you sure you wish to logout?'
