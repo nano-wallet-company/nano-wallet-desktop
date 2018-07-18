@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.0.1"></a>
+## [1.0.1](https://github.com/nano-wallet-company/nano-wallet-desktop/compare/v1.0.0...v1.0.1) (2018-07-18)
+
+
+### Bug Fixes
+
+* **account-send:** locale aware amount validation ([7a71c45](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/7a71c45))
+* **electron:** disable drag/drop events ([9672baf](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/9672baf))
+
+
+
 <a name="1.0.0"></a>
 # [1.0.0](https://github.com/nano-wallet-company/nano-wallet-desktop/compare/v1.0.0-rc.3...v1.0.0) (2018-07-15)
 
