@@ -115,6 +115,7 @@ wallets:
       placeholder: 'Address (e.g. nano_...)'
       amount: 'Amount (NANO)'
       insufficient: 'Amount is greater than total account balance'
+      invalidAmount: 'Invalid amount'
     history:
       none: 'No history yet'
   overview:
