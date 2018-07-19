@@ -7,12 +7,14 @@ export const NANO = Symbol.for('NANO');
 export const BTC = Symbol.for('BTC');
 export const USD = Symbol.for('USD');
 export const EUR = Symbol.for('EUR');
+export const GBP = Symbol.for('GBP');
 
 export const CURRENCIES = new Set([
   NANO,
   BTC,
   USD,
   EUR,
+  GBP,
 ]);
 
 export const DEFAULT_CURRENCY = NANO;
