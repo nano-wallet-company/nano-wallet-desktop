@@ -23,6 +23,11 @@
               {{t 'EUR'}}
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link {{if (eq currency 'GBP') 'active'}}" href="#" {{action onChangeCurrency 'GBP' on='click'}}>
+              {{t 'GBP'}}
+            </a>
+          </li>
         </ul>
       </div>
     </div>

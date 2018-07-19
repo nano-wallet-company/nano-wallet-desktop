@@ -35,5 +35,11 @@ export default {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     },
+    GBP: {
+      style: 'currency',
+      currency: 'GBP',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    },
   },
 };
