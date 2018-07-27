@@ -1,0 +1,131 @@
+{
+  "product": "Nano Wallet Desktop",
+  "cancel": "Cancella",
+  "done": "Fatto",
+  "loading": "Caricamento...",
+  "previous": "Precedente",
+  "next": "Prossimo",
+  "current": "(corrente)",
+  "import": "Importa",
+  "password": "Password",
+  "confirmPassword": "Conferma Password",
+  "overview": "Panoramica",
+  "send": "Invia",
+  "max": "Massimo",
+  "totalAvailableBalance": "Saldo totale disponibile",
+  "receive": "Ricevi",
+  "close": "Chiudi",
+  "settings": "Impostazioni",
+  "logout": "Logout",
+  "history": "Storico",
+  "save": "Salva",
+  "delete": "Cancella",
+  "seed": "Seed",
+  "mnemonic": "Mnemonic",
+  "reveal": "Mostra",
+  "type": "Tipo",
+  "amount": "Somma",
+  "wallet": "Wallet",
+  "account": "Account",
+  "balance": "Saldo",
+  "pending": "Pending",
+  "node": "nodo",
+  "data": "data",
+  "downloading": "Downloading {asset}...",
+  "verifying": "Verifying {asset}...",
+  "extracting": "Extracting {asset}...",
+  "starting": "Inizializzando il nodo",
+  "currency": "{amount}",
+  "copyAddress": "Copia indirizzo",
+  "addressCopied": "Indirizzo copiato: {address}",
+  "status": {
+     "state": "Stato",
+     "online": "Online",
+     "connecting": "Connecting",
+     "count": "Block Count",
+     "unchecked": "Unchecked Blocks",
+     "peers": "Peers"
+  },
+  "balancePending": "Balance Pending",
+  "NANO": "NANO",
+  "BTC": "BTC",
+  "USD": "USD",
+  "EUR": "EUR",
+  "walletSettings": "Impostazioni Wallet",
+  "editAccountSettings": "Modifica impostazioni account",
+  "accountSettings": "Impostazioni account",
+  "accountSettingsSaved": "Impostazioni account salvate!",
+  "unknown": "(sconosciuto)",
+  "label": "Etichetta",
+  "login": {
+     "lead": "Esegui il login per sbloccare il tuo wallet.",
+     "instructions": "Puoi eseguire il login per sbloccare e continuare ad utilizzare il tuo wallet oppure puoi scegliere di creare un nuovo wallet.",
+     "setupWallet": "Crea un Nuovo Wallet"
+  },
+  "wallets": {
+     "unlock": {
+        "unlockWallet": "Sblocca Wallet",
+        "invalidPassword": "Password Errata!"
+     },
+     "backup": {
+        "title": "Backup del Seed",
+        "lead": "Ecco il tuo nuovo mnemonic seed per il tuo wallet, facile da riconoscere:",
+        "copy": "Copia Seed",
+        "copied": "Seed copiato sulla clipboard!",
+        "download": "Download",
+        "help": "Ti suggeriamo di scrivere fisicamente il tuo seed mnemonic su almeno un foglio di carta e conservare tale foglo in un luogo sicuro, in modo da consentirne il recupero nel caso di necessit�.\n",
+        "confirm": "Sei sicuro di aver manualmente scritto il tuo mnemonic?"
+     },
+     "import": {
+        "title": "Importa Wallet",
+        "copied": "Seed copiato sulla clipboard!",
+        "help": {
+           "seed": "L'hex seed da 64 caratteri del tuo wallet.",
+           "mnemonic": "Il mnemonic BIP39 del tuo wallet."
+        }
+     },
+     "password": {
+        "title": "Password del wallet",
+        "submit": "Imposta Password"
+     },
+     "accounts": {
+        "cannotDelete": "Non � possibile cancellare un account con un saldo presente!",
+        "send": {
+           "source": "Account di provenienza",
+           "search": "Cerca account",
+           "destination": "Account di destinazione",
+           "placeholder": "Indirizzo (e.g. nano_...)",
+           "amount": "Somma (NANO)",
+           "insufficient": "La somma supera il saldo totale dell'account"
+        },
+        "history": {
+           "none": "Nessun storico presente"
+        }
+     },
+     "overview": {
+        "none": "Nessun account nel wallet.",
+        "create": "Crea Account",
+        "created": "Nuovo account creato!"
+     },
+     "settings": {
+        "changeRepresentative": "Cambia Representative",
+        "changePassword": "Modifica Password",
+        "representativeChanged": "Representative del Wallet cambiato!",
+        "representativeChangeFailed": "Modifica del Representative fallita!",
+        "passwordChanged": "Password modificata!",
+        "passwordsDontMatch": "Le Password non corrispondono!"
+     },
+     "logout": {
+        "title": "Conferma Logout",
+        "lead": "Sei sicuro di voler eseguire il logout?",
+        "warning": "<strong>Attenzione</strong>: Se esegui il logout e successivamente non ricordi la password, dovrai re-importare il tuo wallet usando il seed!\n"
+     }
+  },
+  "setup": {
+     "lead": "Impostiamo il tuo wallet.",
+     "instructions": "Per iniziare ad usare Nano Wallet Desktop, dovrai prima creare un nuovo wallet o importare un wallet usando il seed.\n",
+     "create": "Crea un nuovo Wallet",
+     "or": "o",
+     "import": "Importa Wallet"
+  }
+}

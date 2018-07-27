@@ -1,0 +1,131 @@
+{
+  "product": "Nano Wallet Desktop",
+  "cancel": "Batal",
+  "done": "Selesai",
+  "loading": "Mohon Menunggu...",
+  "previous": "Sebelumnya",
+  "next": "Selanjutnya",
+  "current": "(saat ini)",
+  "import": "Impor",
+  "password": "Kata Sandi",
+  "confirmPassword": "Konfirmasi Kata Sandi",
+  "overview": "Ikhtisar",
+  "send": "Kirim",
+  "max": "maksimum",
+  "totalAvailableBalance": "Total Saldo Tersedia",
+  "receive": "Menerima",
+  "close": "Tutup",
+  "settings": "Pengaturan",
+  "logout": "Keluar",
+  "history": "Riwayat",
+  "save": "Simpan",
+  "delete": "Hapus",
+  "seed": "Benih",
+  "mnemonic": "Mnemonik",
+  "reveal": "Ungkapkan",
+  "type": "Tipe",
+  "amount": "Jumlah",
+  "wallet": "Dompet",
+  "account": "Akun",
+  "balance": "Saldo",
+  "pending": "Tertunda",
+  "node": "simpul",
+  "data": "data",
+  "downloading": "Mengunduh {asset}...",
+  "verifying": "Memverifikasi {asset}...",
+  "extracting": "Mengekstraksi {asset}...",
+  "starting": "Memulai simpul",
+  "currency": "{amount}",
+  "copyAddress": "Salin Alamat",
+  "addressCopied": "Alamat tersalin: {address}",
+  "status": {
+     "state": "Status",
+     "online": "Online",
+     "connecting": "Menyambungkan",
+     "count": "Jumlah Blok",
+     "unchecked": "Blok Belum Diperiksa",
+     "peers": "Teman Jaringan"
+  },
+  "balancePending": "Saldo Tertunda",
+  "NANO": "NANO",
+  "BTC": "BTC",
+  "USD": "USD",
+  "EUR": "EUR",
+  "walletSettings": "Pengaturan Dompet",
+  "editAccountSettings": "Ubah Pengaturan Dompet",
+  "accountSettings": "Pengaturan Akun",
+  "accountSettingsSaved": "Pengaturan Akun disimpan!",
+  "unknown": "(unknown)",
+  "label": "Label",
+  "login": {
+     "lead": "Masuk untuk membuka kunci dompet anda.",
+     "instructions": "Anda dapat masuk untuk terus menggunakan dompet Anda saat ini dengan membuka kuncinya. Sebagai alternatif, Anda dapat memilih untuk membuat dompet baru.",
+     "setupWallet": "Buat Dompet Baru"
+  },
+  "wallets": {
+     "unlock": {
+        "unlockWallet": "Buka Kunci Dompet",
+        "invalidPassword": "Kata Sandi Salah!"
+     },
+     "backup": {
+        "title": "Cadangkan Benih",
+        "lead": "Ini adalah cara baru Anda mengenali mnemonik benih untuk dompet baru Anda:",
+        "copy": "Salin Benih",
+        "copied": "Benih Tersalin kedalam papan klip!",
+        "download": "Unduh",
+        "help": "Patuhi praktik terbaik dengan menulis secara fisik mnemonik benih Anda di selembar kertas dan menyimpannya di lokasi yang aman untuk pengambilan yang aman jika nanti Anda kehilangan benih Anda.\n",
+        "confirm": "Apakah Anda yakin Anda telah menulis mnemonik Anda?"
+     },
+     "import": {
+        "title": "Impor Dompet",
+        "copied": "Benih Tersalin kedalam papan klip!",
+        "help": {
+           "seed": "64 hex karakter wallet anda.",
+           "mnemonic": "BIP39 mnemonik wallet anda."
+        }
+     },
+     "password": {
+        "title": "Kata Sandi Dompet",
+        "submit": "Atur Kata Sandi"
+     },
+     "accounts": {
+        "cannotDelete": "Tidak dapat menghapus akun dengan saldo!",
+        "send": {
+           "source": "Akun Sumber",
+           "search": "Cari Akun",
+           "destination": "Akun Tujuan",
+           "placeholder": "Alamat (e.g. nano_...)",
+           "amount": "Jumlah (NANO)",
+           "insufficient": "Jumlah lebih besar dari saldo tersedia"
+        },
+        "history": {
+           "none": "Belum ada riwayat"
+        }
+     },
+     "overview": {
+        "none": "Tidak ada akun di dompet.",
+        "create": "Buat akun",
+        "created": "Akun Baru berhasil dibuat!"
+     },
+     "settings": {
+        "changeRepresentative": "Ubah Perwakilan",
+        "changePassword": "Ubah kata sandi",
+        "representativeChanged": "Perwakilan Dompet berhasil diubah!",
+        "representativeChangeFailed": "Perwakilan Dompet gagal diubah!",
+        "passwordChanged": "Kata Sandi berhasil diubah!",
+        "passwordsDontMatch": "Kata sandi tidak cocok!"
+     },
+     "logout": {
+        "title": "Konfirmasi Keluar",
+        "lead": "Apakah anda yakin akan keluar?",
+        "warning": "<strong>Peringatan</strong>: Jika Anda logout dan kemudian tidak ingat kata sandi Anda, Anda harus mengimpor ulang dompet Anda menggunakan benih Anda!\n"
+     }
+  },
+  "setup": {
+     "lead": "Ayo siapkan dompet anda.",
+     "instructions": "Untuk mulai menggunakan Nano Wallet Desktop, Anda harus terlebih dahulu membuat dompet baru atau mengimpor data dompet Anda menggunakan benih.\n",
+     "create": "Buat Dompet Baru",
+     "or": "atau",
+     "import": "Impor Dompet"
+  }
+}
