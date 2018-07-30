@@ -3,17 +3,14 @@ import { defineError } from 'ember-exex/error';
 import coinmarketcap from 'npm:coinmarketcap';
 import BigNumber from 'npm:bignumber.js';
 
-export const NANO = Symbol.for('NANO');
-export const BTC = Symbol.for('BTC');
-export const USD = Symbol.for('USD');
-export const EUR = Symbol.for('EUR');
+import { fiatCurrencies, cryptoCurrencies } from './currencies';
 
-export const CURRENCIES = new Set([
-  NANO,
-  BTC,
-  USD,
-  EUR,
-]);
+const allCurrencies = fiatCurrencies.concat(cryptoCurrencies);
+
+export const FIATCURRENCIES = new Set(fiatCurrencies);
+export const CRYPTOCURRENCIES = new Set(cryptoCurrencies);
+export const CURRENCIES = new Set(allCurrencies);
+export const NANO = Symbol.for('NANO');
 
 export const DEFAULT_CURRENCY = NANO;
 export const DEFAULT_EXCHANGE_RATE = 1;

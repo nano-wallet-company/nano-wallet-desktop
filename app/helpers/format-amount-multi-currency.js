@@ -6,15 +6,7 @@ import { observes } from 'ember-decorators/object';
 
 import BigNumber from 'npm:bignumber.js';
 
-import formats from '../formats';
-
 import getConversion, { DEFAULT_UNIT } from '../utils/get-conversion';
-import {
-  DEFAULT_CURRENCY,
-  DEFAULT_EXCHANGE_RATE,
-} from '../utils/get-exchange-rate';
-
-const currencyFormats = formats.number || {};
 
 export default Helper.extend({
   @service intl: null,
@@ -25,12 +17,10 @@ export default Helper.extend({
   },
 
   compute([value = 0], params = {}) {
-    const {
-      useGrouping = true,
-      unit = Symbol.keyFor(DEFAULT_UNIT),
-      currency = Symbol.keyFor(DEFAULT_CURRENCY),
-      exchangeRate = DEFAULT_EXCHANGE_RATE,
-    } = params;
+    const { currency } = params;
+    const unit = Symbol.keyFor(DEFAULT_UNIT);
+
+    const { decimals, rate } = currency;
 
     const valueType = typeOf(value);
     if (!(value instanceof BigNumber) && (valueType !== 'string' && valueType !== 'number')) {
@@ -39,22 +29,11 @@ export default Helper.extend({
 
     const divisor = getConversion(Symbol.for(unit));
     const quotient = BigNumber(value).dividedBy(divisor);
-    const product = BigNumber(quotient).times(exchangeRate);
-    const decimalPlaces = product.decimalPlaces();
+    const product = BigNumber(quotient).times(rate);
 
-    let { maximumFractionDigits = 2 } = currencyFormats[currency] || {};
-    if (!maximumFractionDigits) {
-      maximumFractionDigits = Math.min(20, decimalPlaces);
-    }
-
-    let { minimumIntegerDigits } = currencyFormats[currency] || {};
-    if (!minimumIntegerDigits) {
-      minimumIntegerDigits = Math.max(1, Math.min(21, product.precision(true) - decimalPlaces));
-    }
+    const maximumFractionDigits = decimals || 2;
 
     const amount = this.get('intl').formatNumber(product, {
-      useGrouping,
-      minimumIntegerDigits,
       maximumFractionDigits,
     });
 

@@ -34,6 +34,9 @@ data: 'data'
 syncing: 'Syncing'
 sending: 'Sending...'
 sent: 'Broadcasting send!'
+currencies: 'Currencies'
+fiat: 'FIAT'
+crypto: 'Crypto'
 progress: >
   {value, number, percent} {eta, select,
     null {(estimating...)}

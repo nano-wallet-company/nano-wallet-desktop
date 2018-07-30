@@ -5,21 +5,18 @@ import { ContextBoundTasksMixin } from 'ember-lifeline';
 import { storageFor } from 'ember-local-storage';
 import { task } from 'ember-concurrency';
 
-import { observes } from 'ember-decorators/object';
 import { alias } from 'ember-decorators/object/computed';
 import { on } from 'ember-decorators/object/evented';
+import { tryInvoke } from '@ember/utils';
 
-import getExchangeRate, {
-  DEFAULT_CURRENCY,
-  DEFAULT_EXCHANGE_RATE,
-} from '../../utils/get-exchange-rate';
+import getExchangeRate from '../../utils/get-exchange-rate';
 
-export const EXCHANGE_RATE_POLL_INTERVAL = 5 * 60 * 1000;
+export const EXCHANGE_RATE_POLL_INTERVAL = 5 * 60 * 1000; // 300 seconds / 5 minutes
 
 export default Component.extend(InViewportMixin, ContextBoundTasksMixin, {
   settings: storageFor('settings', 'wallet'),
 
-  @alias('settings.currency') currency: null,
+  @alias('settings.currencies') currencies: null,
 
   wallet: null,
   exchangeRate: null,
@@ -48,30 +45,32 @@ export default Component.extend(InViewportMixin, ContextBoundTasksMixin, {
     return null;
   },
 
-  exchangeRateTask: task(function* exchangeRateTask(currency = Symbol.keyFor(DEFAULT_CURRENCY)) {
-    return yield getExchangeRate(Symbol.for(currency));
-  }).keepLatest(),
+  exchangeRateTask: task(
+    function* exchangeRateTask(currencyCode) {
+      return yield getExchangeRate(Symbol.for(currencyCode));
+    },
+  ).keepLatest(),
 
-  @observes('currency')
-  async updateExchangeRate() {
+  async updateExchangeRates() {
     return this.runTask(async () => {
-      const currency = this.get('currency');
-      if (currency === Symbol.keyFor(DEFAULT_CURRENCY)) {
-        this.set('exchangeRate', DEFAULT_EXCHANGE_RATE);
-        return DEFAULT_EXCHANGE_RATE;
+      const settings = this.get('settings');
+      const currencies = this.get('currencies');
+      const updatedRates = [];
+
+      for (let i = 0; i < currencies.length; i += 1) {
+        const currencyCode = currencies[i].code;
+        const item = currencies[i];
+        /* eslint-disable-next-line */
+        item.rate = await this.get('exchangeRateTask').perform(currencyCode);
+        updatedRates.push(item);
       }
-
-      this.set('exchangeRate', null);
-
-      const exchangeRate = await this.get('exchangeRateTask').perform(currency);
-      this.set('exchangeRate', exchangeRate);
-      return exchangeRate;
+      await tryInvoke(settings, 'setProperties', [{ currencies: updatedRates }]);
     });
   },
 
   onPoll(next) {
     return this.runTask(async () => {
-      await this.updateExchangeRate();
+      await this.updateExchangeRates();
       return this.runTask(next, EXCHANGE_RATE_POLL_INTERVAL);
     });
   },

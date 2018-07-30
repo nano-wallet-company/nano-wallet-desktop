@@ -34,11 +34,6 @@ export default Route.extend({
   },
 
   @action
-  changeCurrency(currency) {
-    return this.transitionTo({ queryParams: { currency } });
-  },
-
-  @action
   openSend(wallet) {
     return this.transitionTo('wallets.send', wallet);
   },
