@@ -30,7 +30,7 @@ export default Component.extend({
     }
 
     const intl = this.get('intl');
-    const number = BigNumber(intl.formatNumber(amount));
+    const number = BigNumber(intl.formatNumber(amount, { useGrouping: false }));
     if (number.isNaN() || number.isNegative()) {
       changeset.pushErrors('amount', intl.t('wallets.accounts.send.invalidAmount'));
       return false;
