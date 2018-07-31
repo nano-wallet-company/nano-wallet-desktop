@@ -13,6 +13,7 @@
 .config
 .DS_Store
 .git
+.idea
 .local
 /.sass-cache
 /connect.lock
