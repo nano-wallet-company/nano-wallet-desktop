@@ -46,19 +46,19 @@
     "agree": "Agree",
     "disagree": "Disagree",
     "legal": {
-       "title": "Terms and Conditions",
-       "disclaimer": "Your use of this Nano Wallet application is subject to your agreement to all terms and conditions of the End User License Agreement and Privacy Policy linked below (collectively, the \"Terms and Conditions\"). Please tap the links below and read all Terms and Conditions carefully. By checking the boxes below and tapping \"Agree,\" you acknowledge that you have read, understand and agree to all of the Terms and Conditions, which are binding legal agreements. If you do not understand or agree to any of the Terms and Conditions, you are not licensed or authorized to use this application and should delete it from your device.\n",
-       "eula": "End User License Agreement",
-       "privacyPolicy": "Privacy Policy",
-       "cannotDisagree": "You may not use the application unless you agree to the Terms and Conditions."
+        "title": "Terms and Conditions",
+        "disclaimer": "Your use of this Nano Wallet application is subject to your agreement to all terms and conditions of the End User License Agreement and Privacy Policy linked below (collectively, the \"Terms and Conditions\"). Please tap the links below and read all Terms and Conditions carefully. By checking the boxes below and tapping \"Agree,\" you acknowledge that you have read, understand and agree to all of the Terms and Conditions, which are binding legal agreements. If you do not understand or agree to any of the Terms and Conditions, you are not licensed or authorized to use this application and should delete it from your device.\n",
+        "eula": "End User License Agreement",
+        "privacyPolicy": "Privacy Policy",
+        "cannotDisagree": "You may not use the application unless you agree to the Terms and Conditions."
     },
     "status": {
-       "state": "Status",
-       "online": "Online",
-       "connecting": "Connecting",
-       "count": "Block Count",
-       "unchecked": "Unchecked Blocks",
-       "peers": "Peers"
+        "state": "Status",
+        "online": "Online",
+        "connecting": "Connecting",
+        "count": "Block Count",
+        "unchecked": "Unchecked Blocks",
+        "peers": "Peers"
     },
     "balancePending": "Balance Pending",
     "NANO": "NANO",
@@ -72,75 +72,75 @@
     "unknown": "(unknown)",
     "label": "Label",
     "login": {
-       "lead": "Login to unlock your wallet.",
-       "instructions": "You can login to continue using your current wallet by unlocking it. Alternatively, you may choose to create a new wallet.",
-       "setupWallet": "Create New Wallet"
+        "lead": "Login to unlock your wallet.",
+        "instructions": "You can login to continue using your current wallet by unlocking it. Alternatively, you may choose to create a new wallet.",
+        "setupWallet": "Create New Wallet"
     },
     "wallets": {
-       "unlock": {
-          "unlockWallet": "Unlock Wallet",
-          "invalidPassword": "Invalid password!"
-       },
-       "backup": {
-          "title": "Backup Seed",
-          "lead": "Here's your new easy to recognize seed mnemonic for your new wallet:",
-          "copy": "Copy Seed",
-          "copied": "Seed copied to clipboard!",
-          "download": "Download",
-          "help": "Adhere to best practices by physically writing your seed mnemonic on a piece of paper and storing it in a secure location for safe retrieval should you later lose your seed.\n",
-          "confirm": "Are you sure you've written down your mnemonic?"
-       },
-       "import": {
-          "title": "Import Wallet",
-          "copied": "Seed copied to clipboard!",
-          "help": {
-             "seed": "Your wallet's 64 character hex seed.",
-             "mnemonic": "Your wallet's BIP39 mnemonic."
-          }
-       },
-       "password": {
-          "title": "Wallet Password",
-          "submit": "Set Password"
-       },
-       "accounts": {
-          "cannotDelete": "Cannot delete an account with a balance!",
-          "send": {
-             "source": "Source Account",
-             "search": "Search for account",
-             "destination": "Destination Account",
-             "placeholder": "Address (e.g. nano_...)",
-             "amount": "Amount (NANO)",
-             "insufficient": "Amount is greater than total account balance",
-             "invalidAmount": "Invalid amount"
-          },
-          "history": {
-             "none": "No history yet"
-          }
-       },
-       "overview": {
-          "none": "No accounts in wallet.",
-          "create": "Create Account",
-          "created": "New account created!"
-       },
-       "settings": {
-          "changeRepresentative": "Change Representative",
-          "changePassword": "Change Password",
-          "representativeChanged": "Wallet representative changed!",
-          "representativeChangeFailed": "Representative change failed!",
-          "passwordChanged": "Password changed!",
-          "passwordsDontMatch": "Passwords don't match!"
-       },
-       "logout": {
-          "title": "Confirm Logout",
-          "lead": "Are you sure you wish to logout?",
-          "warning": "<strong>Warning</strong>: If you logout and later don't remember your password you will have to reimport your wallet using your seed!\n"
-       }
+        "unlock": {
+            "unlockWallet": "Unlock Wallet",
+            "invalidPassword": "Invalid password!"
+        },
+        "backup": {
+            "title": "Backup Seed",
+            "lead": "Here's your new easy to recognize seed mnemonic for your new wallet:",
+            "copy": "Copy Seed",
+            "copied": "Seed copied to clipboard!",
+            "download": "Download",
+            "help": "Adhere to best practices by physically writing your seed mnemonic on a piece of paper and storing it in a secure location for safe retrieval should you later lose your seed.\n",
+            "confirm": "Are you sure you've written down your mnemonic?"
+        },
+        "import": {
+            "title": "Import Wallet",
+            "copied": "Seed copied to clipboard!",
+            "help": {
+                "seed": "Your wallet's 64 character hex seed.",
+                "mnemonic": "Your wallet's BIP39 mnemonic."
+            }
+        },
+        "password": {
+            "title": "Wallet Password",
+            "submit": "Set Password"
+        },
+        "accounts": {
+            "cannotDelete": "Cannot delete an account with a balance!",
+            "send": {
+                "source": "Source Account",
+                "search": "Search for account",
+                "destination": "Destination Account",
+                "placeholder": "Address (e.g. nano_...)",
+                "amount": "Amount (NANO)",
+                "insufficient": "Amount is greater than total account balance",
+                "invalidAmount": "Invalid amount"
+            },
+            "history": {
+                "none": "No history yet"
+            }
+        },
+        "overview": {
+            "none": "No accounts in wallet.",
+            "create": "Create Account",
+            "created": "New account created!"
+        },
+        "settings": {
+            "changeRepresentative": "Change Representative",
+            "changePassword": "Change Password",
+            "representativeChanged": "Wallet representative changed!",
+            "representativeChangeFailed": "Representative change failed!",
+            "passwordChanged": "Password changed!",
+            "passwordsDontMatch": "Passwords don't match!"
+        },
+        "logout": {
+            "title": "Confirm Logout",
+            "lead": "Are you sure you wish to logout?",
+            "warning": "<strong>Warning</strong>: If you logout and later don't remember your password you will have to reimport your wallet using your seed!\n"
+        }
     },
     "setup": {
-       "lead": "Let's get your wallet set up.",
-       "instructions": "To begin using Nano Wallet Desktop, you must first create a new wallet or import your wallet data using a seed.\n",
-       "create": "Create New Wallet",
-       "or": "or",
-       "import": "Import Wallet"
+        "lead": "Let's get your wallet set up.",
+        "instructions": "To begin using Nano Wallet Desktop, you must first create a new wallet or import your wallet data using a seed.\n",
+        "create": "Create New Wallet",
+        "or": "or",
+        "import": "Import Wallet"
     }
- }
+}
