@@ -59,6 +59,13 @@ login:
   lead: 'Esegui il login per sbloccare il tuo wallet.'
   instructions: 'Puoi eseguire il login per sbloccare e continuare ad utilizzare il tuo wallet oppure puoi scegliere di creare un nuovo wallet.'
   setupWallet: 'Crea un Nuovo Wallet'
+  createWallet:
+    title: 'Conferma Crea nuovo portafoglio'
+    lead: 'Sei sicuro di voler creare un nuovo portafoglio?'
+    warning: >
+      <strong>Avvertimento</strong>: Questo cancellerà il tuo portafoglio esistente,
+      assicurati che non contenga più fondi o che tu abbia una copia di backup verificata del seme!
+    create: 'Creare'
 wallets:
   unlock:
     unlockWallet: 'Sblocca Wallet'

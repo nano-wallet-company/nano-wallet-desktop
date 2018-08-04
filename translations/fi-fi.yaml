@@ -61,6 +61,13 @@ login:
   lead: 'Kirjaudu sisään avataksesi lompakon lukitus.'
   instructions: 'Voit jatkaa lompakkosi käyttöä kirjautumalla sisään ja avaamalla sen lukituksen. Vaihtoehtoisesti voit luoda uuden lompakon.'
   setupWallet: 'Luo uusi lompakko'
+  createWallet:
+    title: 'Vahvista Luo uusi lompakko'
+    lead: 'Haluatko varmasti luoda uuden lompakon?'
+    warning: >
+      <strong>Varoitus</strong>: Tämä poistaa olemassa olevan lompakon,
+      varmista, ettei se enää sisällä varoja tai että sinulla on varmennettu varmuuskopio siemenistä!
+    create: 'Luoda'
 wallets:
   unlock:
     unlockWallet: 'Avaa lompakon lukitus'

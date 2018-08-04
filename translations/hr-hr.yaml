@@ -59,6 +59,13 @@ login:
   lead: 'Prijavite se kako bi otključali novčanik.'
   instructions: 'Možete se prijaviti da biste otključali i nastavili upotrebljavati svoj trenutni novčanik. Alternativno, možete odabrati izradu novog novčanika.'
   setupWallet: 'Napravi Novi Novčanik'
+  createWallet:
+    title: 'Potvrdi Izrada novog novčanika'
+    lead: 'Jeste li sigurni da želite stvoriti novi novčanik?'
+    warning: >
+      <strong>Upozorenje</strong>: Time ćete izbrisati postojeći wallet,
+      pobrinite se da više ne sadrži sredstva ili da imate ovjerenu sigurnosnu kopiju sjemena!
+    create: 'Stvori'
 wallets:
   unlock:
     unlockWallet: 'Otključaj Novčanik'

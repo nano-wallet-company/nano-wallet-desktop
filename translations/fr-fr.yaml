@@ -59,6 +59,13 @@ login:
   lead: 'Veuillez vous connecter pour déverouiller votre portefeuille.'
   instructions: 'Vous pouvez vous connecter afin de continuer à utiliser votre portefeuille actuel en le déverouillant. Sinon, vous pouvez choisir de créer un nouveau portefeuille.'
   setupWallet: 'Créer un nouveau portefeuille'
+  createWallet:
+    title: 'Confirmer Créer un nouveau portefeuille'
+    lead: 'Êtes-vous sûr de vouloir créer un nouveau portefeuille?'
+    warning: >
+      <strong>Attention</strong>: Cela supprimera votre portefeuille existant,
+      assurez-vous qu'il ne contient plus de fonds ou que vous avez une copie de sauvegarde vérifiée de la graine!
+    create: 'Créer'
 wallets:
   unlock:
     unlockWallet: 'Déverouiller le portefeuille'

@@ -55,6 +55,6 @@ export default Route.extend(UnauthenticatedRouteMixin, {
 
   @action
   setupWallet() {
-    return this.transitionTo('setup');
+    return this.transitionTo('login.create');
   },
 });

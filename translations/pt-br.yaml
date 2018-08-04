@@ -59,6 +59,13 @@ login:
   lead: 'Faça o login para desbloquear sua carteira.'
   instructions: 'Você pode fazer o login para continuar usando sua carteira atual, desbloqueando-a. Alternativamente, você pode optar por criar uma nova carteira.'
   setupWallet: 'Criar Nova Carteira'
+  createWallet:
+    title: 'Confirme Criar Nova Carteira'
+    lead: 'Tem certeza de que deseja criar uma nova carteira?'
+    warning: >
+      <strong>Atenção</strong>: Isso excluirá sua carteira existente,
+      verifique se ele não contém fundos ou se você tem uma cópia de backup verificada da semente!
+    create: 'Crio'
 wallets:
   unlock:
     unlockWallet: 'Carteira desbloqueada'

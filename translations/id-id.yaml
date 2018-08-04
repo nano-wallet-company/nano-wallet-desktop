@@ -59,6 +59,13 @@ login:
   lead: 'Masuk untuk membuka kunci dompet anda.'
   instructions: 'Anda dapat masuk untuk terus menggunakan dompet Anda saat ini dengan membuka kuncinya. Sebagai alternatif, Anda dapat memilih untuk membuat dompet baru.'
   setupWallet: 'Buat Dompet Baru'
+  createWallet:
+    title: 'Konfirmasi Buat Dompet Baru'
+    lead: 'Anda yakin ingin membuat dompet baru?'
+    warning: >
+      <strong>Peringatan</strong>: Ini akan menghapus dompet Anda yang ada,
+      pastikan itu tidak mengandung dana lagi atau Anda memiliki salinan cadangan benih yang terverifikasi!
+    create: 'Membuat'
 wallets:
   unlock:
     unlockWallet: 'Buka Kunci Dompet'

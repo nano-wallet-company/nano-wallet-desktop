@@ -83,6 +83,13 @@ login:
   lead: 'Login to unlock your wallet.'
   instructions: 'You can login to continue using your current wallet by unlocking it. Alternatively, you may choose to create a new wallet.'
   setupWallet: 'Create New Wallet'
+  createWallet:
+    title: 'Confirm Create New Wallet'
+    lead: 'Are you sure you wish to create new wallet?'
+    warning: >
+      <strong>Warning</strong>: This will delete your existing wallet,
+      make sure it doesn't contain funds anymore or that you have a verified backup copy of the seed!
+    create: 'Create'
 wallets:
   unlock:
     unlockWallet: 'Unlock Wallet'

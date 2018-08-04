@@ -59,6 +59,13 @@ login:
   lead: 'Login om je Wallet te ontgrendelen'
   instructions: 'Je kan inloggen om gebruik te maken van je Wallet door deze te ontgrendelen. Of je kan ervoor kiezen om een nieuwe Wallet aan te maken.'
   setupWallet: 'Maak een nieuwe Wallet aan'
+  createWallet:
+    title: 'Bevestig Nieuwe portemonnee maken'
+    lead: 'Weet je zeker dat je een nieuwe portefeuille wilt maken?'
+    warning: >
+      <strong>Waarschuwing</strong>: Hiermee wordt je bestaande portemonnee verwijderd,
+      zorg ervoor dat het geen geld meer bevat of dat je een geverifieerde back-up kopie van het zaad hebt!
+    create: 'Creëren'
 wallets:
   unlock:
     unlockWallet: 'Ontgrendel Wallet'

@@ -33,7 +33,10 @@ Router.map(function routerMap() {
     });
   });
 
-  this.route('login');
+  this.route('login', function loginRoute() {
+    this.route('create');
+  });
+
   this.route('logout');
   this.route('error');
 });

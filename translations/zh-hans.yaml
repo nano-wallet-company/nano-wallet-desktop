@@ -59,6 +59,13 @@ login:
   lead: '登陆以解锁你的钱包.'
   instructions: '你可以通过解锁来登陆并使用你当前的钱包，或者你可以选择创建新的钱包'
   setupWallet: '创建新钱包'
+  createWallet:
+    title: '確認創建新錢包'
+    lead: '你確定要創建新錢包嗎？'
+    warning: >
+      <strong>警告</strong>: 這將刪除您現有的錢包，
+      確保它不再包含資金，或者您有經過驗證的種子備份副本！
+    create: '創建'
 wallets:
   unlock:
     unlockWallet: '解锁钱包'
