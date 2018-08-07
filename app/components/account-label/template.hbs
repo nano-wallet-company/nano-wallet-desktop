@@ -1,7 +1,7 @@
 {{#if settings.label}}
   <big>{{settings.label}}</big>
   <br>
-  {{account-address value=account.id truncate=true}}
+  {{account-address value=(to-nano-prefix account.id) truncate=true}}
 {{else}}
-  {{account-address value=account.id truncate=truncate}}
+  {{account-address value=(to-nano-prefix account.id) truncate=truncate}}
 {{/if}}
