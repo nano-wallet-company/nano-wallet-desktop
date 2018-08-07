@@ -24,6 +24,17 @@ export default Component.extend(ContextBoundTasksMixin, {
     });
   },
 
+  @on('didInsertElement')
+  horizontalScrollListener() {
+    const slick = this.$();
+    slick.on('wheel', (e) => {
+      e.preventDefault();
+      if (e.originalEvent.deltaY < 0) {
+        slick.slick('slickNext');
+      } else { slick.slick('slickPrev'); }
+    });
+  },
+
   @observes('currentSlide')
   currentSlideDidChange() {
     return this.scheduleTask('actions', () => {
@@ -49,7 +60,7 @@ export default Component.extend(ContextBoundTasksMixin, {
         adaptiveHeight: true,
         centerPadding: '10px',
         slidesToShow: 4,
-        slidesToScroll: 4,
+        slidesToScroll: 1,
         dots: true,
         infinite: false,
         speed: 200,
