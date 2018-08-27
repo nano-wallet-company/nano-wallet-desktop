@@ -3,7 +3,7 @@ import Helper from '@ember/component/helper';
 import { service } from 'ember-decorators/service';
 import { observes } from 'ember-decorators/object';
 
-import formatAmount from '../utils/format-amount';
+import unformatAmount from '../utils/unformat-amount';
 
 export default Helper.extend({
   @service intl: null,
@@ -15,7 +15,6 @@ export default Helper.extend({
 
   compute([value = 0], params = {}) {
     const intl = this.get('intl');
-    const amount = formatAmount(intl, value, params);
-    return intl.t('currency', { amount });
+    return unformatAmount(intl, value, params);
   },
 });

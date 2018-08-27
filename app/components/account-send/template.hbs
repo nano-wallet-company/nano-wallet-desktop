@@ -16,19 +16,20 @@
         autocomplete='on' minlength=64 maxlength=65 required=true pattern="^(xrb|nano)(_|-)[13](?![lv])[a-z1-9]{59}$"
         placeholder=(t 'wallets.accounts.send.placeholder')}}
 
-    {{#let (changeset (hash amount=null) ChangeAmountValidations)
+    {{#let (changeset (hash intl=intl block=block amount=null) ChangeAmountValidations)
            (format-amount (or (get model.source.balance 'content') model.source.balance) useGrouping=false)
         as |childModel max|}}
       {{#form.element
           min=0
           max=max
           step="any"
-          controlType="number"
+          controlType="text"
           label=(t 'wallets.accounts.send.amount')
           model=childModel
           property='amount'
           required=true
           minlength=1
+          showValidationOn='change'
           onChange=(action 'changeAmount' model) as |el|}}
         <div class="input-group {{el.validation}}">
           {{el.control}}

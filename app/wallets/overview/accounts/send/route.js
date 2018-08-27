@@ -39,10 +39,15 @@ export default Route.extend({
   async sendAmount(changeset) {
     const intl = this.get('intl');
     const flashMessages = this.get('flashMessages');
-    const block = await changeset.save();
-    const source = await get(block, 'source');
-    const wallet = await get(source, 'wallet');
-    flashMessages.success(intl.t('sent'));
-    return this.transitionTo('wallets.overview', wallet.reload());
+    try {
+      const block = await changeset.save();
+      const source = await get(block, 'source');
+      const wallet = await get(source, 'wallet');
+      flashMessages.success(intl.t('sent'));
+      return this.transitionTo('wallets.overview', wallet.reload());
+    } catch (err) {
+      flashMessages.danger(err.message);
+      throw err;
+    }
   },
 });
