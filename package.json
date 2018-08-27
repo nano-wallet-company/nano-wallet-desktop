@@ -1,6 +1,6 @@
 {
   "name": "@nano-wallet-company/nano-wallet-desktop",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "productName": "Nano Wallet Desktop",
   "genericName": "Wallet",
   "description": "An ambitious Nano wallet for desktop and web.",

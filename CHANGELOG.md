@@ -2,6 +2,32 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.1.0"></a>
+# [1.1.0](https://github.com/nano-wallet-company/nano-wallet-desktop/compare/v1.0.1...v1.1.0) (2018-08-27)
+
+
+### Bug Fixes
+
+* **electron:** disable download badge ([e773ac3](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/e773ac3))
+* **electron:** only log RPC requests during development ([91b8ca2](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/91b8ca2))
+* **electron:** remove old node logs when upgrading to next version ([2c98ff3](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/2c98ff3))
+* **intl:** fix ru-ru YAML formatting ([88747d4](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/88747d4))
+* **nano-prefix:** added new helper for xrb -> nano conversion ([6fa7edf](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/6fa7edf))
+
+
+### Features
+
+* **carousel:** horizontal mouse scroll ([e548d7c](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/e548d7c))
+* **electron:** show native progress when extracting/verifying assets ([f568456](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/f568456))
+* **electron:** upgrade the node to V15.2 ([dca1d6b](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/dca1d6b))
+
+
+### Performance Improvements
+
+* **electron:** reduce default node resource maximums ([eaf30f0](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/eaf30f0))
+
+
+
 <a name="1.0.1"></a>
 ## [1.0.1](https://github.com/nano-wallet-company/nano-wallet-desktop/compare/v1.0.0...v1.0.1) (2018-07-18)
 
