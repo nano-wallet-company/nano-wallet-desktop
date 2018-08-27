@@ -6,10 +6,11 @@
         "port": "7076",
         "enable_control": "true",
         "frontier_request_limit": "16384",
-        "chain_request_limit": "16384"
+        "chain_request_limit": "16384",
+        "max_json_depth": "20"
     },
     "node": {
-        "version": "12",
+        "version": "14",
         "peering_port": "7075",
         "bootstrap_fraction_numerator": "1",
         "receive_minimum": "1",
@@ -51,17 +52,16 @@
         "online_weight_minimum": "60000000000000000000000000000000000000",
         "online_weight_quorum": "50",
         "password_fanout": "1024",
-        "io_threads": "8",
-        "work_threads": "8",
+        "io_threads": "4",
+        "work_threads": "4",
         "enable_voting": "true",
         "bootstrap_connections": "4",
-        "bootstrap_connections_max": "64",
+        "bootstrap_connections_max": "16",
         "callback_address": "",
         "callback_port": "0",
         "callback_target": "",
         "lmdb_max_dbs": "128",
-        "state_block_parse_canary": "89F1C0AC4C5AD23964AB880571E3EA67FDC41BD11AB20E67F0A29CF94CD4E24A",
-        "state_block_generate_canary": "B6DC4D64801BEC7D81DAA086A5733D251E8CBA0E9226FD6173D97C0569EC2998"
+        "generate_hash_votes_at": "1535760000"
     },
     "opencl_enable": "false",
     "opencl": {
