@@ -1,12 +1,12 @@
 import Component from '@ember/component';
 
 import { task, waitForQueue } from 'ember-concurrency';
-import { ContextBoundTasksMixin } from 'ember-lifeline';
+import { ContextBoundTasksMixin, ContextBoundEventListenersMixin } from 'ember-lifeline';
 
 import { computed, observes } from 'ember-decorators/object';
 import { on } from 'ember-decorators/object/evented';
 
-export default Component.extend(ContextBoundTasksMixin, {
+export default Component.extend(ContextBoundTasksMixin, ContextBoundEventListenersMixin, {
   accounts: null,
 
   onChangeSlide: null,
@@ -25,13 +25,18 @@ export default Component.extend(ContextBoundTasksMixin, {
   },
 
   @on('didInsertElement')
-  horizontalScrollListener() {
-    const slick = this.$();
-    slick.on('wheel', (e) => {
-      e.preventDefault();
-      if (e.originalEvent.deltaY < 0) {
-        slick.slick('slickNext');
-      } else { slick.slick('slickPrev'); }
+  addWheelListener() {
+    this.addEventListener('wheel', (event) => {
+      event.preventDefault();
+
+      const slickInstance = this.get('slickInstance');
+      if (slickInstance) {
+        if (event.deltaY < 0) {
+          slickInstance.slick('slickNext');
+        } else {
+          slickInstance.slick('slickPrev');
+        }
+      }
     });
   },
 
