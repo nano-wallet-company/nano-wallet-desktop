@@ -27,7 +27,7 @@
             "network_node_id_handshake": "false",
             "node_lifetime_tracing": "false",
             "insufficient_work": "true",
-            "log_rpc": "true",
+            "log_rpc": "false",
             "bulk_pull": "false",
             "work_generation_time": "true",
             "log_to_cerr": "false",

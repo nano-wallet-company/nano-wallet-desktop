@@ -168,6 +168,7 @@ const startDaemon = async () => {
   const peeringPort = await getPort({ host, port: [config.node.peering_port] });
   config.rpc.port = port;
   config.node.peering_port = peeringPort;
+  config.node.logging.log_rpc = is.development;
 
   const cpuCount = os.cpus().length;
   config.node.io_threads = Math.max(4, Math.ceil(cpuCount / 2));
