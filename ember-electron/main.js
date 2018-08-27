@@ -122,12 +122,13 @@ ipcMain.on('download-start', downloadStart);
 ipcMain.on('node-start', nodeStart);
 
 // Registering a protocol & schema to serve our Ember application
-protocol.registerStandardSchemes(['serve'], { secure: true });
-protocolServe({
+const protocolServeName = protocolServe({
   app,
   protocol,
   cwd: path.join(__dirname || path.resolve(path.dirname('')), '..', 'ember'),
 });
+
+protocol.registerStandardSchemes([protocolServeName], { secure: true });
 
 // Uncomment the lines below to enable Electron's crash reporter
 // For more information, see http://electron.atom.io/docs/api/crash-reporter/
@@ -170,7 +171,7 @@ const run = async () => {
 
   const storeVersion = store.get('version');
   if (!storeVersion || semver.gt(version, storeVersion)) {
-    const outdatedAssets = ['config.json'];
+    const outdatedAssets = ['config.json', 'log'];
     log.info('Deleting outdated assets:', outdatedAssets.join(', '));
     await del(outdatedAssets, { force: true, cwd: dataPath });
   }
