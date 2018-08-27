@@ -1,11 +1,14 @@
 import Route from '@ember/routing/route';
 import { get, set } from '@ember/object';
 
-import KeyboardShortcuts from 'ember-keyboard-shortcuts/mixins/route';
 import { hash } from 'ember-concurrency';
 import { computed, action } from 'ember-decorators/object';
+import {
+  bindKeyboardShortcuts,
+  unbindKeyboardShortcuts,
+} from 'ember-keyboard-shortcuts';
 
-export default Route.extend(KeyboardShortcuts, {
+export default Route.extend({
   @computed
   get keyboardShortcuts() {
     return {
@@ -14,6 +17,10 @@ export default Route.extend(KeyboardShortcuts, {
         scoped: true,
       },
     };
+  },
+
+  activate() {
+    return bindKeyboardShortcuts(this);
   },
 
   async model() {
@@ -42,6 +49,7 @@ export default Route.extend(KeyboardShortcuts, {
     const overviewController = this.controllerFor('wallets.overview');
     set(overviewController, 'hideHistory', true);
     set(this.controller, 'hideHistory', true);
+    return unbindKeyboardShortcuts(this);
   },
 
   @action

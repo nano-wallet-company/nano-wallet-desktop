@@ -6,6 +6,12 @@ const { extensions: defaultExtensions } = require('broccoli-asset-rev/lib/defaul
 
 module.exports = (defaults) => {
   const app = new EmberApp(defaults, {
+    babel: {
+      plugins: [
+        ['transform-class-properties', { spec: true }],
+      ],
+    },
+
     sassOptions: {
       nodeSass,
     },

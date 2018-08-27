@@ -5,8 +5,8 @@ platform:
 
 environment:
   matrix:
-    - nodejs_version: 10.6.0
-      yarn_version: 1.7.0
+    - nodejs_version: 10.9.0
+      yarn_version: 1.9.4
 
 cache:
   - node_modules -> yarn.lock
@@ -38,17 +38,16 @@ after_test:
   - yarn cross-env NODE_ENV=production ember electron:make -e production --build-path electron-out/ember
   - ps: Remove-Item env:CSC_KEY_PASSWORD
   - ps: Remove-Item -Path $env:CSC_LINK
-  - ps: 7z a -bd electron-out.zip electron-out
 
 artifacts:
-- path: electron-out.zip
-  name: electron-out
 - path: electron-out\make\*.zip
   name: zip
 - path: electron-out\make\squirrel.windows\$(PLATFORM)\*.exe
   name: exe
 - path: electron-out\make\squirrel.windows\$(PLATFORM)\*.nupkg
   name: nupkg
+- path: electron-out\make\squirrel.windows\$(PLATFORM)\RELEASES
+  name: releases
 
 before_deploy:
   - ps: |
@@ -61,7 +60,7 @@ deploy:
     auth_token: $(GITHUB_TOKEN)
     tag: $(APPVEYOR_REPO_TAG_NAME)
     release: $(GITHUB_RELEASE)
-    artifact: zip, exe, nupkg
+    artifact: zip, exe, nupkg, releases
     draft: true
     prerelease: true
     force_update: true

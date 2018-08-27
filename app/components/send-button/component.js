@@ -1,9 +1,14 @@
 import Component from '@ember/component';
 
-import KeyboardShortcuts from 'ember-keyboard-shortcuts/mixins/component';
+import { DisposableMixin } from 'ember-lifeline';
 import { computed, action } from 'ember-decorators/object';
+import { on } from 'ember-decorators/object/evented';
+import {
+  bindKeyboardShortcuts,
+  unbindKeyboardShortcuts,
+} from 'ember-keyboard-shortcuts';
 
-export default Component.extend(KeyboardShortcuts, {
+export default Component.extend(DisposableMixin, {
   classNameBindings: ['isExpanded:expand'],
 
   wallet: null,
@@ -21,6 +26,12 @@ export default Component.extend(KeyboardShortcuts, {
         scoped: true,
       },
     };
+  },
+
+  @on('didInsertElement')
+  setupKeyboardShortcuts() {
+    this.registerDisposable(() => unbindKeyboardShortcuts(this));
+    return bindKeyboardShortcuts(this);
   },
 
   @action
