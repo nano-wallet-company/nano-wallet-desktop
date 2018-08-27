@@ -58,7 +58,7 @@ const verifyAsset = async (url, savePath, onProgress) => {
   await pump(fs.createReadStream(savePath), progress, verifier);
 
   const publicKey = await fs.readFileAsync(path.join(__dirname, 'assets.pem'));
-  const signature = Buffer.from(headers[SIGNATURE_HEADER], 'base64');
+  const signature = Buffer.from(String(headers[SIGNATURE_HEADER]).trim(), 'base64');
   return verifier.verify(publicKey, signature);
 };
 
@@ -83,7 +83,12 @@ const extractAsset = async (savePath, extractDir, onProgress) => {
 const downloadAsset = async (sender, url, onStarted, onProgress) => {
   log.info('Downloading asset:', url);
 
-  const dl = await download(sender, url, { onStarted, onProgress });
+  const dl = await download(sender, url, {
+    onStarted,
+    onProgress,
+    showBadge: false,
+  });
+
   if (!sender.isDestroyed()) {
     sender.send('download-verify');
   }
