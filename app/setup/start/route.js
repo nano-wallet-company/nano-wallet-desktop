@@ -1,10 +1,10 @@
 import Route from '@ember/routing/route';
 import { get } from '@ember/object';
 
-import { service } from 'ember-decorators/service';
+import { service } from '@ember-decorators/service';
 
-export default Route.extend({
-  @service electron: null,
+export default class SetupStartRoute extends Route {
+  @service electron = null;
 
   beforeModel(...args) {
     const electron = this.get('electron');
@@ -16,14 +16,14 @@ export default Route.extend({
       }
     }
 
-    return this._super(...args);
-  },
+    return super.beforeModel(...args);
+  }
 
   model() {
     return this.get('electron').startNode();
-  },
+  }
 
   afterModel() {
     return this.transitionTo('setup.index');
-  },
-});
+  }
+}

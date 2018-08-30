@@ -1,19 +1,23 @@
 import Component from '@ember/component';
 
-import { task, waitForQueue } from 'ember-concurrency';
+import { waitForQueue } from 'ember-concurrency';
+import { keepLatestTask } from 'ember-concurrency-decorators';
 import { ContextBoundTasksMixin, ContextBoundEventListenersMixin } from 'ember-lifeline';
 
-import { computed, observes } from 'ember-decorators/object';
-import { on } from 'ember-decorators/object/evented';
+import { on, observes } from '@ember-decorators/object';
+import { argument } from '@ember-decorators/argument';
 
-export default Component.extend(ContextBoundTasksMixin, ContextBoundEventListenersMixin, {
-  accounts: null,
+export default class AccountCarouselComponent extends Component.extend(
+  ContextBoundTasksMixin,
+  ContextBoundEventListenersMixin,
+) {
+  @argument accounts = null;
 
-  onChangeSlide: null,
+  @argument currentSlide = 0;
 
-  currentSlide: 0,
+  @argument onChangeSlide = null;
 
-  slickInstance: null,
+  slickInstance = null;
 
   @on('didInsertElement')
   addChangeListener() {
@@ -22,7 +26,7 @@ export default Component.extend(ContextBoundTasksMixin, ContextBoundEventListene
         this.set('currentSlide', currentSlide);
       });
     });
-  },
+  }
 
   @on('didInsertElement')
   addWheelListener() {
@@ -38,7 +42,7 @@ export default Component.extend(ContextBoundTasksMixin, ContextBoundEventListene
         }
       }
     });
-  },
+  }
 
   @observes('currentSlide')
   currentSlideDidChange() {
@@ -46,14 +50,10 @@ export default Component.extend(ContextBoundTasksMixin, ContextBoundEventListene
       const currentSlide = this.get('currentSlide');
       return this.get('onChangeSlide')(currentSlide);
     });
-  },
+  }
 
-  @on('didInsertElement')
-  attachSlider() {
-    return this.get('setupSlider').perform();
-  },
-
-  setupSlider: task(function* setupSlider() {
+  @keepLatestTask
+  setupSlider = function* setupSliderTask() {
     if (!this.slickInstance && !this.isDestroying) {
       yield waitForQueue('afterRender');
 
@@ -75,34 +75,40 @@ export default Component.extend(ContextBoundTasksMixin, ContextBoundEventListene
     }
 
     return yield this.slickInstance;
-  }).keepLatest(),
+  }
 
-  @on('willDestroyElement')
-  detachSlider() {
-    return this.get('teardownSlider').perform();
-  },
+  @on('didInsertElement')
+  attachSlider() {
+    return this.get('setupSlider').perform();
+  }
 
-  teardownSlider: task(function* teardownSlider() {
+  @keepLatestTask
+  teardownSlider = function* teardownSliderTask() {
     if (this.slickInstance && !this.isDestroyed) {
       this.slickInstance.slick('unslick');
       this.slickInstance = null;
     }
 
     return yield this.slickInstance;
-  }).keepLatest(),
+  }
 
-  refreshSlider: task(function* refreshSlider() {
+  @on('willDestroyElement')
+  detachSlider() {
+    return this.get('teardownSlider').perform();
+  }
+
+  @keepLatestTask
+  refreshSlider = function* refreshSlideTask() {
     yield this.get('teardownSlider').perform();
     yield this.get('setupSlider').perform();
     return yield this.slickInstance;
-  }).keepLatest(),
+  }
 
   @observes('accounts.@each')
   accountsDidChange() {
     return this.get('refreshSlider').perform();
-  },
+  }
 
-  @computed
   get breakpoints() {
     return [
       {
@@ -136,5 +142,5 @@ export default Component.extend(ContextBoundTasksMixin, ContextBoundEventListene
         },
       },
     ];
-  },
-});
+  }
+}

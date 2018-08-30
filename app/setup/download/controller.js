@@ -1,6 +1,7 @@
 import Controller from '@ember/controller';
 
-export default Controller.extend({
-  queryParams: ['asset'],
-  asset: 'data',
-});
+export default class SetupDownloadController extends Controller {
+  queryParams = ['asset']
+
+  asset = 'data'
+}

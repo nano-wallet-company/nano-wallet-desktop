@@ -1,3 +1,3 @@
-export default function toNanoPrefix(value) {
+export default function toNanoPrefix(value = '') {
   return String(value).replace(/^xrb/, 'nano');
 }

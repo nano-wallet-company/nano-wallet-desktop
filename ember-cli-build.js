@@ -6,9 +6,14 @@ const { extensions: defaultExtensions } = require('broccoli-asset-rev/lib/defaul
 
 module.exports = (defaults) => {
   const app = new EmberApp(defaults, {
+    '@ember-decorators/babel-transforms': {
+      disable: true,
+    },
+
     babel: {
       plugins: [
-        ['transform-class-properties', { spec: true }],
+        ['@babel/plugin-proposal-decorators', { legacy: true }],
+        ['@babel/plugin-proposal-class-properties', { loose: true }],
       ],
     },
 

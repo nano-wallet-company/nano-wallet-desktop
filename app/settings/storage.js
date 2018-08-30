@@ -1,13 +1,9 @@
 import StorageObject from 'ember-local-storage/local/object';
 
-const Storage = StorageObject.extend();
-
-Storage.reopenClass({
-  initialState() {
+export default class SettingsStorage extends StorageObject {
+  static initialState() {
     return {
       acceptedTerms: false,
     };
-  },
-});
-
-export default Storage;
+  }
+}

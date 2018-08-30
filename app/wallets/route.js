@@ -3,15 +3,21 @@ import { get } from '@ember/object';
 import { tryInvoke } from '@ember/utils';
 
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
-import { action } from 'ember-decorators/object';
-import { service } from 'ember-decorators/service';
+import { action } from '@ember-decorators/object';
+import { service } from '@ember-decorators/service';
 
-export default Route.extend(AuthenticatedRouteMixin, {
-  @service intl: null,
-  @service session: null,
-  @service electron: null,
-  @service rpc: null,
-  @service flashMessages: null,
+export default class WalletsRoute extends Route.extend(
+  AuthenticatedRouteMixin,
+) {
+  @service intl = null;
+
+  @service session = null;
+
+  @service electron = null;
+
+  @service rpc = null;
+
+  @service flashMessages = null;
 
   beforeModel(...args) {
     const electron = this.get('electron');
@@ -23,14 +29,14 @@ export default Route.extend(AuthenticatedRouteMixin, {
       }
     }
 
-    return this._super(...args);
-  },
+    return super.beforeModel(...args);
+  }
 
   setupController(controller, model) {
     const poller = get(controller, 'poller');
     tryInvoke(poller, 'resume');
-    return this._super(controller, model);
-  },
+    return super.setupController(controller, model);
+  }
 
   @action
   async createAccount(wallet) {
@@ -40,7 +46,7 @@ export default Route.extend(AuthenticatedRouteMixin, {
 
     const message = this.get('intl').t('wallets.overview.created');
     this.get('flashMessages').success(message);
-  },
+  }
 
   @action
   async changeRepresentative(model, changeset) {
@@ -58,7 +64,7 @@ export default Route.extend(AuthenticatedRouteMixin, {
     const message = this.get('intl').t('wallets.settings.representativeChanged');
     flashMessages.success(message);
     return this.transitionTo('wallets.overview');
-  },
+  }
 
   @action
   async changePassword(model, changeset) {
@@ -72,5 +78,5 @@ export default Route.extend(AuthenticatedRouteMixin, {
     const message = this.get('intl').t('wallets.settings.passwordChanged');
     flashMessages.success(message);
     return this.transitionTo('wallets.overview');
-  },
-});
+  }
+}

@@ -1,30 +1,34 @@
 import Component from '@ember/component';
 import { get, set } from '@ember/object';
 import { tryInvoke } from '@ember/utils';
-
-import { storageFor } from 'ember-local-storage';
-
-import { service } from 'ember-decorators/service';
-import { action } from 'ember-decorators/object';
+import { service } from '@ember-decorators/service';
+import { action } from '@ember-decorators/object';
+import { argument } from '@ember-decorators/argument';
 
 import bip39 from 'npm:bip39';
 
+import { storage } from '../../decorators';
+
 import ImportWalletValidations from '../../validations/import-wallet';
 
-export default Component.extend({
-  @service intl: null,
+export default class WalletImportComponent extends Component {
+  @service intl = null;
 
-  ImportWalletValidations,
+  @storage('wallet') settings = null;
 
-  settings: storageFor('settings', 'wallet'),
+  ImportWalletValidations = ImportWalletValidations;
 
-  type: 'seed',
-  wallet: null,
-  seed: null,
+  @argument type = 'seed';
 
-  onChange: null,
-  onCancel: null,
-  onSubmit: null,
+  @argument wallet = null;
+
+  @argument seed = null;
+
+  @argument onChange = null;
+
+  @argument onCancel = null;
+
+  @argument onSubmit = null;
 
   @action
   convertMnemonic(changeset) {
@@ -34,7 +38,7 @@ export default Component.extend({
       const seed = bip39.mnemonicToEntropy(mnemonic);
       set(changeset, 'seed', seed);
     }
-  },
+  }
 
   @action
   async saveWallet(model, changeset) {
@@ -46,11 +50,11 @@ export default Component.extend({
     const createdAt = new Date().toISOString();
     tryInvoke(settings, 'setProperties', [{ seed, createdAt }]);
     return wallet;
-  },
+  }
 
   @action
   clearSeed(changeset) {
     set(changeset, 'seed', null);
     tryInvoke(changeset, 'destroy');
-  },
-});
+  }
+}

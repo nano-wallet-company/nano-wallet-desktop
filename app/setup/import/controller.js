@@ -1,6 +1,7 @@
 import Controller from '@ember/controller';
 
-export default Controller.extend({
-  queryParams: ['type'],
-  type: 'seed',
-});
+export default class SetupImportController extends Controller {
+  queryParams = ['type'];
+
+  type = 'seed';
+}

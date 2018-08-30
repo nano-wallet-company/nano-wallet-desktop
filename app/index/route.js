@@ -3,14 +3,16 @@ import { get } from '@ember/object';
 
 import Configuration from 'ember-simple-auth/configuration';
 
-import { service } from 'ember-decorators/service';
+import { service } from '@ember-decorators/service';
 
 const { authenticationRoute } = Configuration;
 
-export default Route.extend({
-  @service session: null,
-  @service settings: null,
-  @service electron: null,
+export default class IndexRoute extends Route {
+  @service session = null;
+
+  @service settings = null;
+
+  @service electron = null;
 
   beforeModel(...args) {
     const electron = this.get('electron');
@@ -28,8 +30,8 @@ export default Route.extend({
       return this.transitionTo('setup.legal');
     }
 
-    return this._super(...args);
-  },
+    return super.beforeModel(...args);
+  }
 
   afterModel() {
     const session = this.get('session');
@@ -44,5 +46,5 @@ export default Route.extend({
     }
 
     return this.transitionTo('wallets', wallet);
-  },
-});
+  }
+}

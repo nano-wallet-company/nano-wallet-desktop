@@ -1,12 +1,13 @@
 import Route from '@ember/routing/route';
 import { get, set } from '@ember/object';
 
-import { service } from 'ember-decorators/service';
-import { action } from 'ember-decorators/object';
+import { service } from '@ember-decorators/service';
+import { action } from '@ember-decorators/object';
 
-export default Route.extend({
-  @service rpc: null,
-  @service session: null,
+export default class SetupPasswordRoute extends Route {
+  @service rpc = null;
+
+  @service session = null;
 
   @action
   async changePassword(model, changeset) {
@@ -17,5 +18,5 @@ export default Route.extend({
 
     set(session, 'data.wallet', wallet);
     return session.authenticate('authenticator:wallet', { wallet, password });
-  },
-});
+  }
+}

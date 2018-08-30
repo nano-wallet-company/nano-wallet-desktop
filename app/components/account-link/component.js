@@ -1,7 +1,11 @@
 import Component from '@ember/component';
 
-export default Component.extend({
-  classNames: ['text-truncate'],
+import { classNames } from '@ember-decorators/component';
+import { argument } from '@ember-decorators/argument';
 
-  value: null,
-});
+@classNames('text-truncate')
+class AccountLinkComponent extends Component {
+  @argument value = null;
+}
+
+export default AccountLinkComponent;

@@ -1,14 +1,13 @@
 import Service from '@ember/service';
 import Evented from '@ember/object/evented';
-import { get, computed } from '@ember/object';
+import { get } from '@ember/object';
 
 import { Promise } from 'rsvp';
 
 import window from 'ember-window-mock';
 import { defineError } from 'ember-exex/error';
 import { DisposableMixin, addEventListener } from 'ember-lifeline';
-import { service } from 'ember-decorators/service';
-import { on } from 'ember-decorators/object/evented';
+import { service } from '@ember-decorators/service';
 
 import isElectron from '../utils/is-electron';
 import getPlatform from '../utils/get-platform';
@@ -30,29 +29,24 @@ const NodeError = defineError({
   extends: ElectronError,
 });
 
-export default Service.extend(Evented, DisposableMixin, {
-  @service intl: null,
-  @service config: null,
+export default class ElectronService extends Service.extend(
+  Evented,
+  DisposableMixin,
+) {
+  @service intl = null;
 
-  shell: null,
-  remote: null,
-  ipcRenderer: null,
+  @service config = null;
 
-  isElectron: computed({
-    get() {
-      return isElectron();
-    },
-  }).volatile(),
+  shell = null;
 
-  platform: computed({
-    get() {
-      return getPlatform();
-    },
-  }).volatile(),
+  remote = null;
 
-  @on('init')
-  setup() {
-    if (isElectron()) {
+  ipcRenderer = null;
+
+  constructor(...args) {
+    super(...args);
+
+    if (this.isElectron) {
       // eslint-disable-next-line no-undef
       const { shell, remote, ipcRenderer } = requireNode('electron');
       this.shell = shell;
@@ -80,42 +74,40 @@ export default Service.extend(Evented, DisposableMixin, {
       ipcRenderer.on('download-done', onDownloadDone);
       ipcRenderer.on('node-exit', onNodeExit);
     }
+  }
 
-    return this;
-  },
+  get isElectron() {
+    return isElectron();
+  }
+
+  get platform() {
+    return getPlatform();
+  }
 
   getRemoteGlobal(key, defaultValue) {
     return (this.get('isElectron') && this.remote.getGlobal(key)) || defaultValue;
-  },
+  }
 
-  locale: computed('remote', 'intl.locale', {
-    get() {
-      const defaultLocale = this.get('intl.locale');
-      return this.getRemoteGlobal('locale', defaultLocale);
-    },
-  }).volatile(),
+  get locale() {
+    const defaultLocale = this.get('intl.locale');
+    return this.getRemoteGlobal('locale', defaultLocale);
+  }
 
-  isDataDownloaded: computed('remote', {
-    get() {
-      return this.getRemoteGlobal('isDataDownloaded', false);
-    },
-  }).volatile(),
+  get isDataDownloaded() {
+    return this.getRemoteGlobal('isDataDownloaded', false);
+  }
 
-  isNodeStarted: computed('remote', {
-    get() {
-      return this.getRemoteGlobal('isNodeStarted', false);
-    },
-  }).volatile(),
+  get isNodeStarted() {
+    return this.getRemoteGlobal('isNodeStarted', false);
+  }
 
-  authorizationToken: computed('remote', {
-    get() {
-      return this.getRemoteGlobal('authorizationToken', null);
-    },
-  }).volatile(),
+  get authorizationToken() {
+    return this.getRemoteGlobal('authorizationToken', null);
+  }
 
   openExternal(...args) {
     return this.shell.openExternal(...args);
-  },
+  }
 
   download(key) {
     return new Promise((resolve, reject) => {
@@ -128,7 +120,7 @@ export default Service.extend(Evented, DisposableMixin, {
       ipcRenderer.once('download-done', this.onDownloadDone.bind(this));
       ipcRenderer.send('download-start', url);
     });
-  },
+  }
 
   startNode() {
     return new Promise((resolve, reject) => {
@@ -137,7 +129,7 @@ export default Service.extend(Evented, DisposableMixin, {
       ipcRenderer.once('node-ready', () => resolve(this));
       ipcRenderer.send('node-start');
     });
-  },
+  }
 
   onWillUnload() {
     return this.runTask(() => {
@@ -145,25 +137,25 @@ export default Service.extend(Evented, DisposableMixin, {
       ipcRenderer.send('will-unload');
       this.trigger('unloading');
     });
-  },
+  }
 
   onNodeExit() {
     this.trigger('exit');
-  },
+  }
 
   onDownloadProgress(event, progress) {
     this.trigger('progress', parseFloat(progress));
-  },
+  }
 
   onDownloadExtract() {
     this.trigger('extract');
-  },
+  }
 
   onDownloadVerify() {
     this.trigger('verify');
-  },
+  }
 
   onDownloadDone() {
     this.trigger('done');
-  },
-});
+  }
+}

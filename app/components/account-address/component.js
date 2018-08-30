@@ -1,28 +1,33 @@
 import Component from '@ember/component';
-import { bool } from '@ember/object/computed';
 
-import { observes } from 'ember-decorators/object';
-import { on } from 'ember-decorators/object/evented';
+import { on, observes } from '@ember-decorators/object';
+import { bool } from '@ember-decorators/object/computed';
+import { tagName, attribute } from '@ember-decorators/component';
+import { argument } from '@ember-decorators/argument';
 
 import toNanoPrefix from '../../utils/to-nano-prefix';
 
 export const MINIMUM_LENGTH = 65;
 
-export default Component.extend({
-  tagName: 'span',
-  isVisible: bool('value'),
+@tagName('span')
+class AccountAddressComponent extends Component {
+  @bool('value') isVisible = false;
 
-  value: null,
-  truncate: 0,
+  @attribute title = null;
 
-  attributeBindings: ['title', 'translate'],
-  translate: false,
+  @attribute translate = false;
 
-  head: null,
-  body: null,
-  tail: null,
+  @argument value = null;
 
-  @on('init')
+  @argument truncate = 0;
+
+  head = null;
+
+  body = null;
+
+  tail = null;
+
+  @on('didInsertElement')
   @observes('value')
   valueDidChange() {
     const value = this.get('value');
@@ -35,5 +40,7 @@ export default Component.extend({
         this.setProperties({ head, body, tail });
       }
     }
-  },
-});
+  }
+}
+
+export default AccountAddressComponent;

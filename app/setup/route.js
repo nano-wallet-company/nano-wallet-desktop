@@ -1,7 +1,7 @@
 import Route from '@ember/routing/route';
 
-export default Route.extend({
+export default class SetupRoute extends Route {
   model() {
     return this.store.createRecord('wallet');
-  },
-});
+  }
+}

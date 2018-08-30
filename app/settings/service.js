@@ -1,13 +1,9 @@
 import ObjectProxy from '@ember/object/proxy';
 
-import { storageFor } from 'ember-local-storage';
+import { storage } from '../decorators';
 
-const Service = ObjectProxy.extend({
-  content: storageFor('settings'),
-});
+export default class SettingsService extends ObjectProxy {
+  @storage({ key: 'settings' }) content = null;
 
-Service.reopenClass({
-  isServiceFactory: true,
-});
-
-export default Service;
+  static isServiceFactory = true;
+}
