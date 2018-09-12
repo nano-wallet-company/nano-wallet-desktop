@@ -7,10 +7,14 @@
   "license": "BSD-2-Clause",
   "author": {
     "name": "Nano Wallet Company",
-    "email": "desktop@nanowalletcompany.com"
+    "email": "team@nanowalletcompany.com"
   },
   "homepage": "https://nanowalletcompany.com/",
-  "copyright": "Copyright © 2018, Nano Wallet Company <team@nanowalletcompany.com>",
+  "copyright": "Copyright © 2018, Nano Wallet Company",
+  "bugs": {
+    "url": "https://github.com/nano-wallet-company/nano-wallet-desktop/issues",
+    "email": "support@nanowalletcompany.com"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nano-wallet-company/nano-wallet-desktop.git"
@@ -68,6 +72,7 @@
     }
   },
   "dependencies": {
+    "about-window": "^1.12.1",
     "bluebird": "^3.5.2",
     "connect": "^3.6.6",
     "cors": "^2.8.4",
@@ -87,7 +92,7 @@
     "electron-store": "^2.0.0",
     "electron-unhandled": "^1.1.0",
     "electron-util": "^0.9.1",
-    "electron-window-state": "^5.0.0",
+    "electron-window-state": "^5.0.1",
     "express-jwt": "^5.3.1",
     "extract-zip": "^1.6.7",
     "get-port": "^4.0.0",

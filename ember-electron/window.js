@@ -3,13 +3,14 @@ const path = require('path');
 const electron = require('electron');
 const log = require('electron-log');
 const windowState = require('electron-window-state');
+const { default: aboutWindow } = require('about-window');
 const { is } = require('electron-util');
 
 const {
   version,
   productName,
-  homepage,
-  author: { email },
+  copyright,
+  bugs,
 } = require('../package');
 
 const {
@@ -58,12 +59,32 @@ const createWindow = () => {
     tabbingIdentifier: productName,
     webPreferences: {
       webviewTag: false,
+      disableBlinkFeatures: 'Auxclick',
     },
   });
 
   win.setAutoHideMenuBar(true);
   win.setMenuBarVisibility(false);
   mainWindowState.manage(win);
+
+  const aboutMenu = {
+    label: `About ${productName}`,
+    click() {
+      return aboutWindow({
+        copyright,
+        icon_path: icon,
+        open_devtools: false,
+        use_version_info: false,
+        win_options: {
+          webPreferences: {
+            devTools: false,
+            webviewTag: false,
+            disableBlinkFeatures: 'Auxclick',
+          },
+        },
+      });
+    },
+  };
 
   const template = [
     { role: 'editMenu' },
@@ -78,22 +99,23 @@ const createWindow = () => {
     { role: 'windowMenu' },
     {
       role: 'help',
-      submenu: [
-        {
-          label: 'Learn More',
-          click() {
-            return shell.openExternal(homepage);
-          },
-        },
+      submenu: [].concat(is.macos ? [] : aboutMenu, [
         {
           label: 'Report Issue',
           click() {
-            const subject = `${productName} Issue Report`;
+            return shell.openExternal(bugs.url);
+          },
+        },
+        {
+          label: 'Request Help',
+          click() {
+            const subject = `${productName} Support Request`;
             const body = `Version: ${version}\r\nPlatform: ${process.platform}`;
-            const url = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            const url = `mailto:${bugs.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
             return shell.openExternal(url);
           },
         },
+        { type: 'separator' },
         {
           label: 'View Logs',
           click() {
@@ -101,7 +123,14 @@ const createWindow = () => {
             return shell.showItemInFolder(file);
           },
         },
-      ],
+        {
+          label: 'Open Data Folder',
+          click() {
+            const dataPath = path.normalize(global.dataPath);
+            return shell.showItemInFolder(dataPath);
+          },
+        },
+      ]),
     },
   ];
 
@@ -109,7 +138,7 @@ const createWindow = () => {
     template.unshift({
       label: productName,
       submenu: [
-        { role: 'about' },
+        aboutMenu,
         { type: 'separator' },
         { role: 'hide' },
         { role: 'hideOthers' },
