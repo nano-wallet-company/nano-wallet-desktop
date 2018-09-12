@@ -1,6 +1,4 @@
 /* eslint-env node */
-const nodeSass = require('node-sass');
-
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 const { extensions: defaultExtensions } = require('broccoli-asset-rev/lib/default-options');
 
@@ -14,11 +12,9 @@ module.exports = (defaults) => {
       plugins: [
         ['@babel/plugin-proposal-decorators', { legacy: true }],
         ['@babel/plugin-proposal-class-properties', { loose: true }],
+        ['@babel/plugin-syntax-async-generators'],
+        ['@babel/plugin-proposal-function-bind'],
       ],
-    },
-
-    sassOptions: {
-      nodeSass,
     },
 
     sourcemaps: {

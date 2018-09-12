@@ -9,7 +9,7 @@ matrix:
 
 language: node_js
 node_js:
-  - 10.9.0
+  - 10.10.0
 
 addons:
   chrome: stable
