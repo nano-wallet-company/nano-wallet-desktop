@@ -19,8 +19,6 @@ const fs = Promise.promisifyAll(require('graceful-fs'), {
   },
 });
 
-const { app } = require('electron');
-
 const log = require('electron-log');
 const { download } = require('electron-dl');
 
@@ -109,7 +107,7 @@ const downloadAsset = async (sender, url, onStarted, onProgress) => {
   await extractAsset(savePath, extractDir, onProgress);
   await del(savePath, { force: true });
 
-  const dataPath = path.normalize(app.getPath('userData'));
+  const dataPath = path.normalize(global.dataPath);
   await cpy('*', dataPath, { cwd: extractDir });
   await del(extractDir, { force: true });
 
