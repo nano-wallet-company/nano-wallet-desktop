@@ -21,12 +21,7 @@ module.exports = {
     browser: true,
   },
   rules: {
-    'no-underscore-dangle': ['error', {
-      allow: ['_super'],
-      allowAfterThis: false,
-      allowAfterSuper: false,
-      enforceInMethodNames: false,
-    }],
+    'class-methods-use-this': 'off',
     'import/extensions': 'off',
     'import/no-extraneous-dependencies': 'off',
     'import/no-unresolved': 'off',

@@ -1,15 +1,15 @@
 import DS from 'ember-data';
 import { hash } from 'ember-concurrency';
-import { service } from 'ember-decorators/service';
+import { service } from '@ember-decorators/service';
 
 const { Adapter } = DS;
 
-export default Adapter.extend({
-  @service rpc: null,
+export default class WalletAdapter extends Adapter {
+  @service rpc = null;
 
   shouldReloadRecord() {
     return true;
-  },
+  }
 
   async findRecord(store, type, id, snapshot) {
     const rpc = this.get('rpc');
@@ -19,13 +19,13 @@ export default Adapter.extend({
       accounts: rpc.accountList(wallet),
     });
     return { wallet, representative, accounts };
-  },
+  }
 
   async updateRecord(store, type, snapshot) {
     return this.serialize(snapshot, { includeId: true });
-  },
+  }
 
   createRecord() {
     return this.get('rpc').walletCreate();
-  },
-});
+  }
+}

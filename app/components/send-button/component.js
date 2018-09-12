@@ -1,24 +1,25 @@
 import Component from '@ember/component';
 
 import { DisposableMixin } from 'ember-lifeline';
-import { computed, action } from 'ember-decorators/object';
-import { on } from 'ember-decorators/object/evented';
+import { on, action } from '@ember-decorators/object';
+import { className } from '@ember-decorators/component';
+import { argument } from '@ember-decorators/argument';
 import {
   bindKeyboardShortcuts,
   unbindKeyboardShortcuts,
 } from 'ember-keyboard-shortcuts';
 
-export default Component.extend(DisposableMixin, {
-  classNameBindings: ['isExpanded:expand'],
+export default class SendButtonComponent extends Component.extend(
+  DisposableMixin,
+) {
+  @className('expand') isExpanded = false;
 
-  wallet: null,
+  @argument wallet = null;
 
-  isExpanded: false,
+  @argument onOpen = null;
 
-  onOpen: null,
-  onClose: null,
+  @argument onClose = null;
 
-  @computed
   get keyboardShortcuts() {
     return {
       esc: {
@@ -26,13 +27,13 @@ export default Component.extend(DisposableMixin, {
         scoped: true,
       },
     };
-  },
+  }
 
   @on('didInsertElement')
   setupKeyboardShortcuts() {
     this.registerDisposable(() => unbindKeyboardShortcuts(this));
     return bindKeyboardShortcuts(this);
-  },
+  }
 
   @action
   cancel() {
@@ -46,5 +47,5 @@ export default Component.extend(DisposableMixin, {
     }
 
     return false;
-  },
-});
+  }
+}

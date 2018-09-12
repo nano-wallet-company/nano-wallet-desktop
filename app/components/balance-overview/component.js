@@ -2,12 +2,13 @@ import Component from '@ember/component';
 
 import InViewportMixin from 'ember-in-viewport';
 import { ContextBoundTasksMixin } from 'ember-lifeline';
-import { storageFor } from 'ember-local-storage';
-import { task } from 'ember-concurrency';
 
-import { observes } from 'ember-decorators/object';
-import { alias } from 'ember-decorators/object/computed';
-import { on } from 'ember-decorators/object/evented';
+import { on, observes } from '@ember-decorators/object';
+import { alias } from '@ember-decorators/object/computed';
+import { argument } from '@ember-decorators/argument';
+import { keepLatestTask } from 'ember-concurrency-decorators';
+
+import { storage } from '../../decorators';
 
 import getExchangeRate, {
   DEFAULT_CURRENCY,
@@ -16,17 +17,21 @@ import getExchangeRate, {
 
 export const EXCHANGE_RATE_POLL_INTERVAL = 5 * 60 * 1000;
 
-export default Component.extend(InViewportMixin, ContextBoundTasksMixin, {
-  settings: storageFor('settings', 'wallet'),
+export default class BalanceOverviewComponent extends Component.extend(
+  InViewportMixin,
+  ContextBoundTasksMixin,
+) {
+  @storage('wallet') settings = null;
 
-  @alias('settings.currency') currency: null,
+  @alias('settings.currency') currency = null;
 
-  wallet: null,
-  exchangeRate: null,
+  @argument wallet = null;
 
-  onChangeCurrency: null,
+  @argument exchangeRate = null;
 
-  pollToken: null,
+  @argument onChangeCurrency = null;
+
+  pollToken = null;
 
   @on('didEnterViewport')
   resumePolling() {
@@ -35,7 +40,7 @@ export default Component.extend(InViewportMixin, ContextBoundTasksMixin, {
     const pollToken = this.pollTask('onPoll');
     this.set('pollToken', pollToken);
     return pollToken;
-  },
+  }
 
   @on('didExitViewport', 'willDestroyElement')
   pausePolling() {
@@ -46,11 +51,12 @@ export default Component.extend(InViewportMixin, ContextBoundTasksMixin, {
     }
 
     return null;
-  },
+  }
 
-  exchangeRateTask: task(function* exchangeRateTask(currency = Symbol.keyFor(DEFAULT_CURRENCY)) {
+  @keepLatestTask
+  exchangeRateTask = function* exchangeRateTask(currency = Symbol.keyFor(DEFAULT_CURRENCY)) {
     return yield getExchangeRate(Symbol.for(currency));
-  }).keepLatest(),
+  }
 
   @observes('currency')
   async updateExchangeRate() {
@@ -67,12 +73,12 @@ export default Component.extend(InViewportMixin, ContextBoundTasksMixin, {
       this.set('exchangeRate', exchangeRate);
       return exchangeRate;
     });
-  },
+  }
 
   onPoll(next) {
     return this.runTask(async () => {
       await this.updateExchangeRate();
       return this.runTask(next, EXCHANGE_RATE_POLL_INTERVAL);
     });
-  },
-});
+  }
+}

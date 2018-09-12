@@ -2,25 +2,28 @@ import Component from '@ember/component';
 import { get, set } from '@ember/object';
 import { tryInvoke } from '@ember/utils';
 
-import { storageFor } from 'ember-local-storage';
+import { action } from '@ember-decorators/object';
+import { gt } from '@ember-decorators/object/computed';
+import { argument } from '@ember-decorators/argument';
 
-import { action } from 'ember-decorators/object';
-import { gt } from 'ember-decorators/object/computed';
+import { storage } from '../../decorators';
 
 import ChangeAccountSettingsValidations from '../../validations/change-account-settings';
 
 import fromAmount from '../../utils/from-amount';
 
-export default Component.extend({
-  ChangeAccountSettingsValidations,
+export default class AccountSettingsComponent extends Component {
+  @storage('account') settings = null;
 
-  settings: storageFor('settings', 'account'),
+  ChangeAccountSettingsValidations = ChangeAccountSettingsValidations;
 
-  account: null,
-  onSave: null,
-  onCancel: null,
+  @argument account = null;
 
-  @gt('account.blockCount', 0) hasOpenBlock: false,
+  @argument onSave = null;
+
+  @argument onCancel = null;
+
+  @gt('account.blockCount', 0) hasOpenBlock = false;
 
   @action
   async remove(account) {
@@ -33,7 +36,7 @@ export default Component.extend({
 
     await account.destroyRecord();
     return false;
-  },
+  }
 
   @action
   async save(changeset, account) {
@@ -50,5 +53,5 @@ export default Component.extend({
     }
 
     return false;
-  },
-});
+  }
+}

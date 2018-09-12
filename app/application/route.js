@@ -8,18 +8,24 @@ import { all } from 'rsvp';
 
 import ApplicationRouteMixin from 'ember-simple-auth/mixins/application-route-mixin';
 import { DisposableMixin } from 'ember-lifeline';
-import { service } from 'ember-decorators/service';
-import { action } from 'ember-decorators/object';
+import { service } from '@ember-decorators/service';
+import { action } from '@ember-decorators/object';
 
 import guessLocale, { DEFAULT_LOCALE } from '../utils/guess-locale';
 import normalizeLocale from '../utils/normalize-locale';
 import reload from '../utils/reload';
 
-export default Route.extend(ApplicationRouteMixin, DisposableMixin, {
-  @service intl: null,
-  @service config: null,
-  @service settings: null,
-  @service electron: null,
+export default class ApplicationRoute extends Route.extend(
+  ApplicationRouteMixin,
+  DisposableMixin,
+) {
+  @service intl = null;
+
+  @service config = null;
+
+  @service settings = null;
+
+  @service electron = null;
 
   async beforeModel(...args) {
     const electron = this.get('electron');
@@ -63,13 +69,13 @@ export default Route.extend(ApplicationRouteMixin, DisposableMixin, {
       electron.one('exit', reload);
     }
 
-    return this._super(...args);
-  },
+    return super.beforeModel(...args);
+  }
 
   @action
   loading(transition) {
     nprogress.start();
     transition.finally(() => nprogress.done());
     return true;
-  },
-});
+  }
+}

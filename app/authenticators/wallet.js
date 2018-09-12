@@ -1,7 +1,7 @@
 import { get } from '@ember/object';
 
 import Base from 'ember-simple-auth/authenticators/base';
-import { service } from 'ember-decorators/service';
+import { service } from '@ember-decorators/service';
 import { defineError } from 'ember-exex/error';
 
 export const AuthenticatorError = defineError({
@@ -45,9 +45,10 @@ export const WalletLockedError = defineError({
   extends: RestoreError,
 });
 
-export default Base.extend({
-  @service rpc: null,
-  @service electron: null,
+export default class WalletAuthenticator extends Base {
+  @service rpc = null;
+
+  @service electron = null;
 
   async authenticate({ wallet, password }) {
     try {
@@ -57,7 +58,7 @@ export default Base.extend({
     }
 
     return { wallet };
-  },
+  }
 
   async invalidate({ wallet }) {
     if (!wallet) {
@@ -70,7 +71,7 @@ export default Base.extend({
     }
 
     return true;
-  },
+  }
 
   async restore(data) {
     const { wallet } = data;
@@ -93,5 +94,5 @@ export default Base.extend({
     }
 
     return data;
-  },
-});
+  }
+}

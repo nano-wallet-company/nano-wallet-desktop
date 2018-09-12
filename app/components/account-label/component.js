@@ -1,10 +1,13 @@
 import Component from '@ember/component';
 
-import { storageFor } from 'ember-local-storage';
+import { argument } from '@ember-decorators/argument';
 
-export default Component.extend({
-  settings: storageFor('settings', 'account'),
+import { storage } from '../../decorators';
 
-  account: null,
-  truncate: false,
-});
+export default class AccountLabelComponent extends Component {
+  @storage('account') settings = null;
+
+  @argument account = null;
+
+  @argument truncate = false;
+}

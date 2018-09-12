@@ -1,6 +1,9 @@
 import Component from '@ember/component';
 
-export default Component.extend({
-  account: null,
-  onDelete: null,
-});
+import { argument } from '@ember-decorators/argument';
+
+export default class AccountOverviewComponent extends Component {
+  @argument account = null;
+
+  @argument onDelete = null;
+}

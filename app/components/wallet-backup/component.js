@@ -1,43 +1,48 @@
 import Component from '@ember/component';
 import { tryInvoke } from '@ember/utils';
 
-import { service } from 'ember-decorators/service';
-import { action } from 'ember-decorators/object';
+import { service } from '@ember-decorators/service';
+import { action } from '@ember-decorators/object';
+import { classNames } from '@ember-decorators/component';
+import { argument } from '@ember-decorators/argument';
 
 import { reject } from 'rsvp';
 
-import { storageFor } from 'ember-local-storage';
-
 import downloadjs from 'npm:downloadjs';
 
-export default Component.extend({
-  @service intl: null,
-  @service flashMessages: null,
+import { storage } from '../../decorators';
 
-  settings: storageFor('settings', 'wallet'),
+@classNames('import')
+class WalletBackupComponent extends Component {
+  @service intl = null;
 
-  classNames: ['import'],
+  @service flashMessages = null;
 
-  wallet: null,
-  seed: null,
+  @storage('wallet') settings = null;
 
-  onCancel: null,
-  onDone: null,
+  @argument wallet = null;
 
-  needsConfirm: false,
-  hasConfirmed: false,
+  @argument seed = null;
+
+  @argument onCancel = null;
+
+  @argument onDone = null;
+
+  needsConfirm = false;
+
+  hasConfirmed = false;
 
   @action
   copySeed() {
     const message = this.get('intl').t('wallets.backup.copied');
     this.get('flashMessages').success(message);
-  },
+  }
 
   @action
   downloadMnemonic(mnemonic) {
     const fileName = String(mnemonic).split(' ').slice(0, 2).join('-');
     downloadjs(mnemonic, fileName, 'text/plain');
-  },
+  }
 
   @action
   confirmDone(wallet, seed) {
@@ -59,5 +64,7 @@ export default Component.extend({
     this.set('seed', null);
 
     return wallet;
-  },
-});
+  }
+}
+
+export default WalletBackupComponent;

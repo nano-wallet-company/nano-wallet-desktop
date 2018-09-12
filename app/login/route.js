@@ -3,16 +3,21 @@ import { get } from '@ember/object';
 
 import UnauthenticatedRouteMixin from 'ember-simple-auth/mixins/unauthenticated-route-mixin';
 
-import { service } from 'ember-decorators/service';
-import { action } from 'ember-decorators/object';
+import { service } from '@ember-decorators/service';
+import { action } from '@ember-decorators/object';
 
 import { AuthenticateError } from '../authenticators/wallet';
 
-export default Route.extend(UnauthenticatedRouteMixin, {
-  @service intl: null,
-  @service session: null,
-  @service electron: null,
-  @service flashMessages: null,
+export default class LoginRoute extends Route.extend(
+  UnauthenticatedRouteMixin,
+) {
+  @service intl = null;
+
+  @service session = null;
+
+  @service electron = null;
+
+  @service flashMessages = null;
 
   beforeModel(...args) {
     const electron = this.get('electron');
@@ -24,8 +29,8 @@ export default Route.extend(UnauthenticatedRouteMixin, {
       }
     }
 
-    return this._super(...args);
-  },
+    return super.beforeModel(...args);
+  }
 
   model() {
     const wallet = this.get('session.data.wallet');
@@ -34,7 +39,7 @@ export default Route.extend(UnauthenticatedRouteMixin, {
     }
 
     return wallet;
-  },
+  }
 
   @action
   async unlockWallet(changeset) {
@@ -51,10 +56,10 @@ export default Route.extend(UnauthenticatedRouteMixin, {
       this.get('flashMessages').danger(message);
       throw err;
     }
-  },
+  }
 
   @action
   setupWallet() {
     return this.transitionTo('setup');
-  },
-});
+  }
+}

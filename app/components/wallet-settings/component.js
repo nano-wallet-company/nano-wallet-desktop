@@ -1,24 +1,26 @@
 import Component from '@ember/component';
 
-import { storageFor } from 'ember-local-storage';
+import { readOnly } from '@ember-decorators/object/computed';
+import { argument } from '@ember-decorators/argument';
 
-import { readOnly } from 'ember-decorators/object';
-import { alias } from 'ember-decorators/object/computed';
+import { storage } from '../../decorators';
 
 import ChangeRepresentativeValidations from '../../validations/change-representative';
 
-export default Component.extend({
-  ChangeRepresentativeValidations,
+export default class WalletSettingsComponent extends Component {
+  @storage('wallet') settings = null;
 
-  settings: storageFor('settings', 'wallet'),
+  ChangeRepresentativeValidations = ChangeRepresentativeValidations;
 
-  @readOnly
-  @alias('settings.seed') seed: null,
+  @readOnly('settings.seed') seed = null;
 
-  wallet: null,
-  password: null,
-  representative: null,
+  @argument wallet = null;
 
-  onChangeRepresentative: null,
-  onChangePassword: null,
-});
+  @argument password = null;
+
+  @argument representative = null;
+
+  @argument onChangeRepresentative = null;
+
+  @argument onChangePassword = null;
+}

@@ -1,5 +1,7 @@
 import Component from '@ember/component';
 
-export default Component.extend({
-  history: null,
-});
+import { argument } from '@ember-decorators/argument';
+
+export default class AccountHistoryComponent extends Component {
+  @argument history = null;
+}

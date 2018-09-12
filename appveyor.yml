@@ -5,20 +5,17 @@ platform:
 
 environment:
   matrix:
-    - nodejs_version: 10.9.0
-      yarn_version: 1.9.4
+    - nodejs_version: 10.10.0
 
 cache:
   - node_modules -> yarn.lock
   - '%USERPROFILE%\.electron -> package.json'
-  - '%TEMP%\chocolatey\yarn\%yarn_version%'
 
 init:
   - git config --global core.autocrlf input
 
 install:
   - ps: Update-NodeJsInstallation $env:nodejs_version $env:PLATFORM
-  - ps: appveyor-retry choco install yarn -y --force --no-progress --ignore-dependencies --version $env:yarn_version
   - node --version
   - yarn --version
   - yarn --frozen-lockfile --non-interactive

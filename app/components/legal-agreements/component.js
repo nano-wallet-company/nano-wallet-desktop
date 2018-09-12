@@ -1,22 +1,27 @@
 import Component from '@ember/component';
 
-import { service } from 'ember-decorators/service';
-import { alias } from 'ember-decorators/object/computed';
+import { service } from '@ember-decorators/service';
+import { alias } from '@ember-decorators/object/computed';
+import { argument } from '@ember-decorators/argument';
 
 import LegalAgreementsValidations from '../../validations/legal-agreements';
 
-export default Component.extend({
-  @service config: null,
-  @service settings: null,
+export default class LegalAgreementsComponent extends Component {
+  @service config = null;
 
-  LegalAgreementsValidations,
+  @service settings = null;
 
-  eula: false,
-  privacyPolicy: false,
+  LegalAgreementsValidations = LegalAgreementsValidations;
 
-  onAgree: null,
-  onDisagree: null,
+  @argument eula = false;
 
-  @alias('config.links.eula') eulaLink: null,
-  @alias('config.links.privacyPolicy') privacyPolicyLink: null,
-});
+  @argument privacyPolicy = false;
+
+  @argument onAgree = null;
+
+  @argument onDisagree = null;
+
+  @alias('config.links.eula') eulaLink = null;
+
+  @alias('config.links.privacyPolicy') privacyPolicyLink = null;
+}

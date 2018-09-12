@@ -1,15 +1,17 @@
 import Component from '@ember/component';
 
-import { service } from 'ember-decorators/service';
-import { action } from 'ember-decorators/object';
+import { service } from '@ember-decorators/service';
+import { action } from '@ember-decorators/object';
+import { argument } from '@ember-decorators/argument';
 
 import toNanoPrefix from '../../utils/to-nano-prefix';
 
-export default Component.extend({
-  @service intl: null,
-  @service flashMessages: null,
+export default class AccountCardComponent extends Component {
+  @service intl = null;
 
-  account: null,
+  @service flashMessages = null;
+
+  @argument account = null;
 
   @action
   copyAddress(value) {
@@ -18,5 +20,5 @@ export default Component.extend({
     const address = toNanoPrefix(value);
     flashMessages.success(intl.t('addressCopied', { address }));
     return true;
-  },
-});
+  }
+}

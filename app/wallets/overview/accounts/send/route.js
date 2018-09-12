@@ -1,19 +1,20 @@
 import Route from '@ember/routing/route';
 import { get } from '@ember/object';
 
-import { service } from 'ember-decorators/service';
-import { action } from 'ember-decorators/object';
+import { service } from '@ember-decorators/service';
+import { action } from '@ember-decorators/object';
 
-export default Route.extend({
-  @service intl: null,
-  @service flashMessages: null,
+export default class WalletsOverviewAccountsRoute extends Route {
+  @service intl = null;
+
+  @service flashMessages = null;
 
   renderTemplate() {
     this.render('wallets.overview.accounts.send', {
       into: 'wallets.overview',
       outlet: 'sendOutlet',
     });
-  },
+  }
 
   model() {
     const wallet = this.modelFor('wallets');
@@ -24,16 +25,16 @@ export default Route.extend({
       destination: null,
       amount: null,
     });
-  },
+  }
 
   afterModel() {
     this.controllerFor('wallets.overview').set('isExpanded', true);
-  },
+  }
 
   @action
   changeSource(source) {
     return this.transitionTo(this.routeName, source);
-  },
+  }
 
   @action
   async sendAmount(changeset) {
@@ -49,5 +50,5 @@ export default Route.extend({
       flashMessages.danger(err.message);
       throw err;
     }
-  },
-});
+  }
+}
