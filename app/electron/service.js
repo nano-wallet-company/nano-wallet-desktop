@@ -55,11 +55,11 @@ export default class ElectronService extends Service.extend(
 
       addEventListener(this, window, 'beforeunload', () => this.ipcRenderer.send('window-unloading'));
 
-      const onDownloadProgress = this.onDownloadProgress.bind(this);
-      const onDownloadVerify = this.onDownloadVerify.bind(this);
-      const onDownloadExtract = this.onDownloadExtract.bind(this);
-      const onDownloadDone = this.onDownloadDone.bind(this);
-      const onNodeExit = this.onNodeExit.bind(this);
+      const onDownloadProgress = ::this.onDownloadProgress;
+      const onDownloadVerify = ::this.onDownloadVerify;
+      const onDownloadExtract = ::this.onDownloadExtract;
+      const onDownloadDone = ::this.onDownloadDone;
+      const onNodeExit = ::this.onNodeExit;
       this.registerDisposable(() => {
         ipcRenderer.removeListener('download-progress', onDownloadProgress);
         ipcRenderer.removeListener('download-verify', onDownloadVerify);
@@ -117,7 +117,7 @@ export default class ElectronService extends Service.extend(
       const { url } = get(assets, key);
       ipcRenderer.once('download-error', () => reject(new DownloadError()));
       ipcRenderer.once('download-progress', () => resolve(this));
-      ipcRenderer.once('download-done', this.onDownloadDone.bind(this));
+      ipcRenderer.once('download-done', ::this.onDownloadDone);
       ipcRenderer.send('download-start', url);
     });
   }
