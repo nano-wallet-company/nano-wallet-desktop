@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.2.0"></a>
+# [1.2.0](https://github.com/nano-wallet-company/nano-wallet-desktop/compare/v1.1.0...v1.2.0) (2018-09-12)
+
+
+### Bug Fixes
+
+* **appveyor:** build environment now includes yarn@1.9.4 ([97ff0b1](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/97ff0b1))
+
+
+### Features
+
+* **electron:** add consistent cross-platform about dialog ([cea3f4b](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/cea3f4b))
+* **electron:** upgrade the node to V16 :zap: ([53d1f58](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/53d1f58))
+
+
+
 <a name="1.1.0"></a>
 # [1.1.0](https://github.com/nano-wallet-company/nano-wallet-desktop/compare/v1.0.1...v1.1.0) (2018-08-27)
 
