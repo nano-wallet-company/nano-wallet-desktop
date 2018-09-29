@@ -9,7 +9,7 @@ jobs:
       sudo: false
       dist: trusty
     - os: osx
-      osx_image: xcode8
+      osx_image: xcode6.4
 
 addons:
   chrome: stable
