@@ -11,7 +11,7 @@ if (typeof process.env.ELECTRON_IS_DEV === 'undefined') {
 
 const log = require('electron-log');
 const unhandled = require('electron-unhandled');
-const { is, appReady } = require('electron-util');
+const { is, appLaunchTimestamp } = require('electron-util');
 
 log.transports.file.level = 'info';
 log.transports.rendererConsole.level = 'info';
@@ -76,7 +76,13 @@ const {
 
 let mainWindow = null;
 
-const shouldQuit = app.makeSingleInstance(() => {
+const shouldQuit = !app.requestSingleInstanceLock();
+if (shouldQuit) {
+  app.quit();
+  return;
+}
+
+app.on('second-instance', () => {
   if (mainWindow) {
     if (mainWindow.isMinimized()) {
       mainWindow.restore();
@@ -85,11 +91,6 @@ const shouldQuit = app.makeSingleInstance(() => {
     mainWindow.show();
   }
 });
-
-if (shouldQuit) {
-  app.quit();
-  return;
-}
 
 const basePath = is.development ? __dirname : path.join(process.resourcesPath, 'app.asar.unpacked', 'ember-electron');
 global.environment = environment;
@@ -142,7 +143,7 @@ protocol.registerStandardSchemes([protocolServeName], { secure: true });
 const run = async () => {
   log.info(`Starting application: ${productName} ${version} (${environment})`);
 
-  await appReady;
+  await app.whenReady();
 
   autoUpdater.on('checking-for-update', () => {
     global.isUpdating = false;
@@ -154,7 +155,7 @@ const run = async () => {
 
   updateElectronApp({
     logger: log,
-    updateInterval: '1 hour',
+    updateInterval: '30 minutes',
   });
 
   const store = new Store({ name: 'settings' });
@@ -164,7 +165,7 @@ const run = async () => {
 
   let dataPath = path.normalize(store.get('dataPath'));
   if (!path.isAbsolute(dataPath)) {
-    dataPath = path.relative(app.getPath('userData'), dataPath);
+    dataPath = path.resolve(path.relative(app.getPath('userData'), dataPath));
   }
 
   await makeDir(dataPath);
@@ -203,7 +204,39 @@ const run = async () => {
     await installExtension(EMBER_INSPECTOR);
   }
 
-  mainWindow = createWindow();
+  mainWindow = await createWindow();
+
+  mainWindow.on('unresponsive', () => {
+    log.warn('Application window has become unresponsive:', mainWindow.getTitle());
+  });
+
+  mainWindow.on('responsive', () => {
+    log.info('Application window has become responsive again:', mainWindow.getTitle());
+  });
+
+  mainWindow.once('ready-to-show', () => {
+    const elapsed = Date.now() - appLaunchTimestamp;
+    log.info(`Application window ready to show (took ${elapsed}ms):`, mainWindow.getTitle());
+    mainWindow.show();
+  });
+
+  const emberAppLocation = 'serve://dist';
+
+  // Load the ember application using our custom protocol/scheme
+  mainWindow.loadURL(emberAppLocation);
+
+  // If a loading operation goes wrong, we'll send Electron back to
+  // Ember App entry point
+  mainWindow.webContents.on('did-fail-load', () => {
+    if (!mainWindow.isDestroyed()) {
+      mainWindow.loadURL(emberAppLocation);
+    }
+  });
+
+  mainWindow.webContents.on('crashed', () => {
+    log.error('Application in window has crashed:', mainWindow.getTitle());
+  });
+
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
