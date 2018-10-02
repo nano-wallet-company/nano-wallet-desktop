@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.3.0"></a>
+# [1.3.0](https://github.com/nano-wallet-company/nano-wallet-desktop/compare/v1.2.1...v1.3.0) (2018-10-02)
+
+
+### Features
+
+* **electron:** upgrade the node to V16.1 ([5a18e3a](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/5a18e3a))
+* **package:** upgrade dependencies, including Electron 3 ([b4fda52](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/b4fda52))
+
+
+
 <a name="1.2.1"></a>
 ## [1.2.1](https://github.com/nano-wallet-company/nano-wallet-desktop/compare/v1.2.0...v1.2.1) (2018-09-12)
 
