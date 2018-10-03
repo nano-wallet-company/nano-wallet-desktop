@@ -15,7 +15,7 @@ This is an Ember application that can build into an [Electron](https://electronj
 You will need the following things properly installed on your computer.
 
 * [Git](https://git-scm.com/)
-* [Node.js](https://nodejs.org/)
+* [Node.js](https://nodejs.org/) (>=10.2)
 * [Yarn](https://yarnpkg.com/)
 * [Google Chrome](https://google.com/chrome/)
 
