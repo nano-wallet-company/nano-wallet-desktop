@@ -1,8 +1,10 @@
-# Nano Wallet Desktop
+# Mikron Wallet
 
 [![Travis CI Status](https://travis-ci.org/nano-wallet-company/nano-wallet-desktop.svg?branch=master)](https://travis-ci.org/nano-wallet-company/nano-wallet-desktop) [![AppVeyor Status](https://ci.appveyor.com/api/projects/status/917e9ui37nwt4i00/branch/master?svg=true)](https://ci.appveyor.com/project/devinus/nano-wallet-desktop/branch/master)
 
-An ambitious Nano wallet for desktop and web.
+The primary [Mikron](https://mikron.io) wallet; a cross-platform, nice-looking wallet implementation.
+
+It is based on Nano Company Wallet (https://nanowalletcompany.com).
 
 [![Screenshot](public/images/screenshot.png)](public/images/screenshot.png)
 
