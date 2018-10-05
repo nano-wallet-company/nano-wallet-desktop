@@ -15,7 +15,7 @@
         {{form.element controlType="text" label=(t 'label') property="label"}}
         {{#if hasOpenBlock}}
           {{#form.element controlType="text" label='Representative' property='representative'
-              minlength=64 maxlength=65 required=true pattern="^(xrb|nano)(_|-)[13](?![lv])[a-z1-9]{59}$" as |el|}}
+              minlength=64 maxlength=65 required=true pattern="^(mik|xrb)(_|-)[13](?![lv])[a-z1-9]{59}$" as |el|}}
             {{el.control class="text-truncate text-monospace"}}
           {{/form.element}}
         {{/if}}
