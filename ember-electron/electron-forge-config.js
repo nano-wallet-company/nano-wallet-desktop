@@ -144,7 +144,7 @@ module.exports = {
     icon: `${icon}.png`,
   },
   github_repository: {
-    owner: 'mikron.io',
+    owner: 'mikroncoin',
     name: 'mikron_wallet',
   },
 };

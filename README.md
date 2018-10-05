@@ -32,7 +32,7 @@ You will need the following things properly installed on your computer.
 * The app will open in standalone electron session with developer tools
 
 ### Standalone node
-* Make sure you have `rai_node` running with the following settings:
+* Make sure you have `mikron_node` running with the following settings:
   * `"rpc_enable: "true"`
   * `"port": "55000"`
   * `"enable_control": "true"`

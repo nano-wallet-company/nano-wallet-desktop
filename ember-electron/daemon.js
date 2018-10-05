@@ -185,7 +185,7 @@ const startDaemon = async () => {
     },
   });
 
-  const cmd = path.join(global.resourcesPath, toExecutableName('rai_node'));
+  const cmd = path.join(global.resourcesPath, toExecutableName('mikron_node'));
   log.info('Starting node:', cmd);
 
   const child = crossSpawn(cmd, ['--daemon', '--data_path', dataPath], {
