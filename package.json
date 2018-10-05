@@ -1,5 +1,5 @@
 {
-  "name": "@nano-wallet-company/nano-wallet-desktop",
+  "name": "@mikron.io/mikron_wallet",
   "version": "1.3.0",
   "productName": "Nano Wallet Desktop",
   "genericName": "Wallet",
@@ -12,12 +12,12 @@
   "homepage": "https://nanowalletcompany.com/",
   "copyright": "Copyright © 2018, Nano Wallet Company",
   "bugs": {
-    "url": "https://github.com/nano-wallet-company/nano-wallet-desktop/issues",
+    "url": "https://github.com/mikroncoin/mikron_wallet/issues",
     "email": "support@nanowalletcompany.com"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nano-wallet-company/nano-wallet-desktop.git"
+    "url": "git+https://github.com/mikroncoin/mikron_wallet.git"
   },
   "build": {
     "appId": "com.nanowalletcompany.desktop",

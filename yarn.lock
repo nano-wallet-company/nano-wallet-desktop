@@ -14857,7 +14857,7 @@ npmlog@^2.0.3:
     are-we-there-yet "~1.1.2"
     gauge "~1.2.5"
 
-"nprogress@github:alexlafroscia/nprogress#allow-alternate-scheduler":
+nprogress@alexlafroscia/nprogress#allow-alternate-scheduler:
   version "0.2.0"
   resolved "https://codeload.github.com/alexlafroscia/nprogress/tar.gz/af37323172b98441d02aa02447f795f5766419b0"
 

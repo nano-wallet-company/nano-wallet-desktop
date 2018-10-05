@@ -5,7 +5,7 @@ import { bool } from '@ember-decorators/object/computed';
 import { tagName, attribute } from '@ember-decorators/component';
 import { argument } from '@ember-decorators/argument';
 
-import toNanoPrefix from '../../utils/to-nano-prefix';
+import toMikPrefix from '../../utils/to-mik-prefix';
 
 export const MINIMUM_LENGTH = 65;
 
@@ -32,7 +32,7 @@ class AccountAddressComponent extends Component {
   valueDidChange() {
     const value = this.get('value');
     if (value) {
-      const str = toNanoPrefix(value);
+      const str = toMikPrefix(value);
       if (str.length >= MINIMUM_LENGTH) {
         const head = str.slice(0, 10);
         const body = str.slice(10, -5);

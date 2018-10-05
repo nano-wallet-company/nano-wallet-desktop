@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { describe, it } from 'mocha';
-import isElectron from '@nano-wallet-company/nano-wallet-desktop/utils/is-electron';
+import isElectron from '@mikron.io/mikron_wallet/utils/is-electron';
 
 describe('Unit | Utility | is electron', () => {
   // Replace this with your real tests.

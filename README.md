@@ -1,6 +1,6 @@
 # Mikron Wallet
 
-[![Travis CI Status](https://travis-ci.org/nano-wallet-company/nano-wallet-desktop.svg?branch=master)](https://travis-ci.org/nano-wallet-company/nano-wallet-desktop) [![AppVeyor Status](https://ci.appveyor.com/api/projects/status/917e9ui37nwt4i00/branch/master?svg=true)](https://ci.appveyor.com/project/devinus/nano-wallet-desktop/branch/master)
+[![Travis CI Status](https://travis-ci.org/mikroncoin/mikron_wallet.svg?branch=master)](https://travis-ci.org/mikroncoin/mikron_wallet) [![AppVeyor Status](https://ci.appveyor.com/api/projects/status/917e9ui37nwt4i00/branch/master?svg=true)](https://ci.appveyor.com/project/devinus/mikron_wallet/branch/master)
 
 The primary [Mikron](https://mikron.io) wallet; a cross-platform, nice-looking wallet implementation.
 
@@ -21,8 +21,8 @@ You will need the following things properly installed on your computer.
 
 ## Installation
 
-* `git clone https://github.com/nano-wallet-company/nano-wallet-desktop.git`
-* `cd nano-wallet-desktop`
+* `git clone https://github.com/mikroncoin/mikron_wallet.git`
+* `cd mikron_wallet`
 * `yarn install`
 
 ## Running / Development

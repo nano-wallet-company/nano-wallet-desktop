@@ -144,7 +144,7 @@ module.exports = {
     icon: `${icon}.png`,
   },
   github_repository: {
-    owner: 'nano-wallet-company',
-    name: 'nano-wallet-desktop',
+    owner: 'mikron.io',
+    name: 'mikron_wallet',
   },
 };

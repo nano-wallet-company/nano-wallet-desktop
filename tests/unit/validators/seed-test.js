@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { describe, it } from 'mocha';
-import validateSeed from '@nano-wallet-company/nano-wallet-desktop/validators/seed';
+import validateSeed from '@mikron.io/mikron_wallet/validators/seed';
 
 describe('Unit | Validator | seed', () => {
   it('passes valid seed', () => {

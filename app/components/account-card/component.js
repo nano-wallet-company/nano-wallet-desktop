@@ -4,7 +4,7 @@ import { service } from '@ember-decorators/service';
 import { action } from '@ember-decorators/object';
 import { argument } from '@ember-decorators/argument';
 
-import toNanoPrefix from '../../utils/to-nano-prefix';
+import toMikPrefix from '../../utils/to-mik-prefix';
 
 export default class AccountCardComponent extends Component {
   @service intl = null;
@@ -17,7 +17,7 @@ export default class AccountCardComponent extends Component {
   copyAddress(value) {
     const intl = this.get('intl');
     const flashMessages = this.get('flashMessages');
-    const address = toNanoPrefix(value);
+    const address = toMikPrefix(value);
     flashMessages.success(intl.t('addressCopied', { address }));
     return true;
   }

@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { describe, it } from 'mocha';
-import toAmount from '@nano-wallet-company/nano-wallet-desktop/utils/to-amount';
+import toAmount from '@mikron.io/mikron_wallet/utils/to-amount';
 
 describe('Unit | Utility | to amount', () => {
   // Replace this with your real tests.
