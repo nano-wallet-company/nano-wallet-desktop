@@ -1,4 +1,4 @@
-product: 'Nano Wallet Desktop'
+product: 'Mikron Wallet'
 cancel: 'Annuleer'
 done: 'Klaar'
 loading: 'Laden...'
@@ -111,7 +111,7 @@ wallets:
 setup:
   lead: 'Laten we starten met het opzetten van je Wallet.'
   instructions: >
-    Om Nano Wallet Desktop te kunnen gebruiken, moet je eerst een nieuwe Wallet aanmaken, of een bestaande Wallet importeren met je seed.
+    Om Mikron Wallet te kunnen gebruiken, moet je eerst een nieuwe Wallet aanmaken, of een bestaande Wallet importeren met je seed.
   create: 'Maak nieuwe Wallet aan'
   or: 'of'
   import: 'Importeer een Wallet'

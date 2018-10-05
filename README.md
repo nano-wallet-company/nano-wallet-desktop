@@ -4,7 +4,7 @@
 
 The primary [Mikron](https://mikron.io) wallet; a cross-platform, nice-looking wallet implementation.
 
-It is based on Nano Company Wallet (https://nanowalletcompany.com).
+It is based on Nano Company Desktop Wallet (https://nanowalletcompany.com).
 
 [![Screenshot](public/images/screenshot.png)](public/images/screenshot.png)
 

@@ -1,26 +1,26 @@
 {
   "name": "@mikron.io/mikron_wallet",
   "version": "1.3.0",
-  "productName": "Nano Wallet Desktop",
+  "productName": "Mikron Wallet",
   "genericName": "Wallet",
-  "description": "An ambitious Nano wallet for desktop and web.",
+  "description": "The primary, multi-platform Mikron Wallet.",
   "license": "BSD-2-Clause",
   "author": {
-    "name": "Nano Wallet Company",
-    "email": "team@nanowalletcompany.com"
+    "name": "Mikron Coin",
+    "email": "info@mikron.io"
   },
-  "homepage": "https://nanowalletcompany.com/",
-  "copyright": "Copyright © 2018, Nano Wallet Company",
+  "homepage": "https://mikron.io/",
+  "copyright": "Copyright © 2018, Mikron Coin",
   "bugs": {
     "url": "https://github.com/mikroncoin/mikron_wallet/issues",
-    "email": "support@nanowalletcompany.com"
+    "email": "info@mikron.io"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mikroncoin/mikron_wallet.git"
   },
   "build": {
-    "appId": "com.nanowalletcompany.desktop",
+    "appId": "io.mikron.wallet",
     "mac": {
       "category": "public.app-category.finance"
     },

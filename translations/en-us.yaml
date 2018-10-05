@@ -1,4 +1,4 @@
-product: 'Nano Wallet Desktop'
+product: 'Mikron Wallet'
 cancel: 'Cancel'
 done: 'Done'
 loading: 'Loading...'
@@ -51,7 +51,7 @@ disagree: 'Disagree'
 legal:
   title: 'Terms and Conditions'
   disclaimer: >
-    Your use of this Nano Wallet application is subject to your agreement to all terms and
+    Your use of this Mikron Wallet application is subject to your agreement to all terms and
     conditions of the End User License Agreement and Privacy Policy linked below (collectively, the
     "Terms and Conditions"). Please tap the links below and read all Terms and Conditions carefully.
     By checking the boxes below and tapping "Agree," you acknowledge that you have read, understand
@@ -137,7 +137,7 @@ wallets:
 setup:
   lead: "Let's get your wallet set up."
   instructions: >
-    To begin using Nano Wallet Desktop, you must first create a new wallet or import your wallet data
+    To begin using Mikron Wallet, you must first create a new wallet or import your wallet data
     using a seed.
   create: 'Create New Wallet'
   or: 'or'

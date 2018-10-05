@@ -44,9 +44,9 @@ const generateCert = (commonName) => {
     { name: 'countryName', value: 'US' },
     { name: 'stateOrProvinceName', value: 'Texas' },
     { name: 'localityName', value: 'Austin' },
-    { name: 'organizationName', value: 'Nano Wallet Company LLC' },
-    { name: 'organizationalUnitName', value: 'Desktop' },
-    { name: 'emailAddress', value: 'desktop@nanowalletcompany.com' },
+    { name: 'organizationName', value: 'Mikron Coin' },
+    { name: 'organizationalUnitName', value: 'Crypto' },
+    { name: 'emailAddress', value: 'info@mikron.io' },
   ];
 
   log.info('Generating TLS certificate:', commonName);
@@ -136,14 +136,14 @@ const startDaemon = async () => {
 
     const serverCertPath = path.join(tlsPath, 'server.cert.pem');
     const serverKeyPath = path.join(tlsPath, 'server.key.pem');
-    const serverPems = generateCert('nanowalletcompany.com');
+    const serverPems = generateCert('mikron.io');
     await writeFileAtomic(serverCertPath, normalizeNewline(serverPems.cert), { mode: 0o600 });
     await writeFileAtomic(serverKeyPath, normalizeNewline(serverPems.private), { mode: 0o600 });
     await cpFile(path.join(__dirname, 'tls', 'dh2048.pem'), dhParamPath);
 
     const clientCertPath = path.join(clientsPath, 'rpcuser1.cert.pem');
     const clientKeyPath = path.join(clientsPath, 'rpcuser1.key.pem');
-    const clientPems = generateCert('desktop.nanowalletcompany.com');
+    const clientPems = generateCert('wallet.mikron.io');
     await writeFileAtomic(clientCertPath, normalizeNewline(clientPems.cert), { mode: 0o600 });
     await writeFileAtomic(clientKeyPath, normalizeNewline(clientPems.private), { mode: 0o600 });
 
@@ -250,12 +250,12 @@ const startDaemon = async () => {
 
   proxy.on('error', err => log.error('[proxy]', err));
 
-  const pems = generateCert('rpc.nanowalletcompany.com');
+  const pems = generateCert('rpc.mikron.io');
   const proxyCert = normalizeNewline(pems.cert);
   const proxyKey = normalizeNewline(pems.private);
 
-  const issuer = 'https://rpc.nanowalletcompany.com/';
-  const audience = 'https://desktop.nanowalletcompany.com/';
+  const issuer = 'https://rpc.mikron.io/';
+  const audience = 'https://wallet.mikron.io/';
   const subject = await username();
   const jwtid = await nanoid(32);
   const jwtOptions = {

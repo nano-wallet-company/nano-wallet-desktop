@@ -1,4 +1,4 @@
-product: 'Nano Wallet Desktop'
+product: 'Mikron Wallet'
 cancel: 'Otkaži'
 done: 'Gotovo'
 loading: 'Učitavanje...'
@@ -113,7 +113,7 @@ wallets:
 setup:
   lead: 'Idemo postaviti vaš novčanik.'
   instructions: >
-    Kako bi mogli početi koristiti Nano Wallet Desktop, prvo morate napraviti novi novčanik ili uvesti podatke
+    Kako bi mogli početi koristiti Mikron Wallet, prvo morate napraviti novi novčanik ili uvesti podatke
     od svog novčanika koristeći seed.
   create: 'Napravi Novi Novčanik'
   or: 'ili'

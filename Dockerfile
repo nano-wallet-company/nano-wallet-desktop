@@ -1,5 +1,5 @@
 FROM node:10.11.0-stretch
-LABEL maintainer="Nano Wallet Company <team@nanowalletcompany.com>"
+LABEL maintainer="Mikron.io <info@mikron.io>"
 
 ENV DEBIAN_FRONTEND=noninteractive
 
