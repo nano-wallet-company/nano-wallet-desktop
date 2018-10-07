@@ -10,10 +10,13 @@ export default class SetupStartRoute extends Route {
     const electron = this.get('electron');
     const isElectron = get(electron, 'isElectron');
     if (isElectron) {
+      // Disable data download, not implemented for Mikron
+      /*
       const isDataDownloaded = get(electron, 'isDataDownloaded');
       if (!isDataDownloaded) {
         return this.transitionTo('setup.download', { queryParams: { asset: 'data' } });
       }
+      */
     }
 
     return super.beforeModel(...args);
