@@ -59,6 +59,11 @@ Make use of the many generators for code, try `npx ember help generate` for more
 * `yarn run build` (development)
 * `yarn run build --environment production` (production)
 
+### Build installer
+
+* `yarn   cross-env NODE_ENV=production ember electron:build -e production`
+* `yarn   cross-env NODE_ENV=production ember electron:make -e production --build-path electron-out/ember`
+
 ### Using Docker Compose
 
 You can optionally develop and test using [Docker Compose](https://docs.docker.com/compose/).
