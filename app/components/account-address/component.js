@@ -7,7 +7,7 @@ import { argument } from '@ember-decorators/argument';
 
 import toMikPrefix from '../../utils/to-mik-prefix';
 
-export const MINIMUM_LENGTH = 65;
+export const MINIMUM_LENGTH = 64;
 
 @tagName('span')
 class AccountAddressComponent extends Component {
