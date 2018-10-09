@@ -1,4 +1,4 @@
-product: 'Nano桌面客户端'
+product: 'Mikron桌面客户端'
 cancel: '取消'
 done: '完成'
 loading: '加载中…'
@@ -111,7 +111,7 @@ wallets:
 setup:
   lead: '让我们来对你的钱包进行相关设置。'
   instructions: >
-    使用nano桌面客户端时，你需要首先创建一个新的钱包，或者用种子导入你的钱包数据
+    使用mikron桌面客户端时，你需要首先创建一个新的钱包，或者用种子导入你的钱包数据
   create: '创建新钱包'
   or: '或者'
   import: '导入钱包'
