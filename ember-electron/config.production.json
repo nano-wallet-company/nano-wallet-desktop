@@ -3,7 +3,7 @@
     "rpc_enable": "true",
     "rpc": {
         "address": "::1",
-        "port": "54300",
+        "port": "54350",
         "enable_control": "true",
         "frontier_request_limit": "16384",
         "chain_request_limit": "16384",
@@ -11,7 +11,7 @@
     },
     "node": {
         "version": "12",
-        "peering_port": "54200",
+        "peering_port": "54250",
         "bootstrap_fraction_numerator": "1",
         "receive_minimum": "1",
         "logging": {
