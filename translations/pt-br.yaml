@@ -45,7 +45,7 @@ status:
   unchecked: 'Blocos não verificados'
   peers: 'Peers'
 balancePending: 'Saldo pendente'
-NANO: 'NANO'
+MIKRON: 'MIKRON'
 BTC: 'BTC'
 USD: 'USD'
 EUR: 'EUR'
@@ -88,8 +88,8 @@ wallets:
       source: 'Conta de Origem'
       search: 'Pesquisar por Conta'
       destination: 'Conta do destinatário'
-      placeholder: 'Endereço (e.x. nano_...)'
-      amount: 'Quantidade (NANO)'
+      placeholder: 'Endereço (e.x. mik_...)'
+      amount: 'Quantidade (MIKRON)'
       insufficient: 'O valor é maior que o saldo total da conta'
     history:
       none: 'Sem histórico ainda'
@@ -112,7 +112,7 @@ wallets:
 setup:
   lead: 'Vamos configurar sua carteira!'
   instructions: >
-    Para começar usar a carteira desktop da Nano você deve primeiramente criar uma nova carteira ou importar uma carteira existente usando uma seed.
+    Para começar usar a carteira desktop você deve primeiramente criar uma nova carteira ou importar uma carteira existente usando uma seed.
   create: 'Criar nova carteira'
   or: 'ou'
   import: 'Importar carteira'

@@ -7,7 +7,7 @@ export default class WalletsOverviewController extends Controller {
 
   slide = 0;
 
-  currency = 'NANO';
+  currency = 'MIKRON';
 
   hideHistory = true;
 

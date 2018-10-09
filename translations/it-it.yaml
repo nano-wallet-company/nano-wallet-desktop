@@ -45,7 +45,7 @@ status:
   unchecked: 'Unchecked Blocks'
   peers: 'Peers'
 balancePending: 'Balance Pending'
-NANO: 'NANO'
+MIKRON: 'MIKRON'
 BTC: 'BTC'
 USD: 'USD'
 EUR: 'EUR'
@@ -88,8 +88,8 @@ wallets:
       source: 'Account di provenienza'
       search: 'Cerca account'
       destination: 'Account di destinazione'
-      placeholder: 'Indirizzo (e.g. nano_...)'
-      amount: 'Somma (NANO)'
+      placeholder: 'Indirizzo (e.g. mik_...)'
+      amount: 'Somma (MIKRON)'
       insufficient: "La somma supera il saldo totale dell'account"
     history:
       none: 'Nessun storico presente'

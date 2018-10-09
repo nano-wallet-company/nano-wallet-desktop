@@ -14,9 +14,9 @@ export default {
     },
   },
   number: {
-    NANO: {
+    MIKRON: {
       style: 'currency',
-      currency: 'NANO',
+      currency: 'MIKRON',
     },
     BTC: {
       style: 'currency',

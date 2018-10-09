@@ -45,7 +45,7 @@ status:
   unchecked: 'Blocs non vérifiés'
   peers: 'Pairs'
 balancePending: 'Solde en attente'
-NANO: 'NANO'
+MIKRON: 'MIKRON'
 BTC: 'BTC'
 USD: 'USD'
 EUR: 'EUR'
@@ -87,8 +87,8 @@ wallets:
       source: 'Compte source'
       search: 'Recherche de comptes'
       destination: 'Compte de destination'
-      placeholder: 'Adresse (i.e. nano_...)'
-      amount: 'Montant (NANO)'
+      placeholder: 'Adresse (i.e. mik_...)'
+      amount: 'Montant (MIKRON)'
       insufficient: 'Le montant est plus important que le solde total du compte'
     history:
       none: 'Aucun historique'
@@ -111,7 +111,7 @@ wallets:
 setup:
   lead: 'Configurons votre portefeuille.'
   instructions: >
-    Pour commencer à utiliser l'application Nano, veuillez créer un nouveau portefeuille ou importer les données d'un portefeuille existant à l'aide d'une seed (clé de 64 caractères, ou phrase mnémotechnique).
+    Pour commencer à utiliser l'application, veuillez créer un nouveau portefeuille ou importer les données d'un portefeuille existant à l'aide d'une seed (clé de 64 caractères, ou phrase mnémotechnique).
   create: 'Créer un nouveau portefeuille'
   or: 'ou'
   import: 'Importer un portefeuille'
