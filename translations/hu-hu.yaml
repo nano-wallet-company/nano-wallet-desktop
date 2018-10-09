@@ -5,49 +5,49 @@ loading: 'Tölt...'
 previous: 'Előző'
 next: 'Következő'
 current: '(kiválasztott)'
-import: 'Importálás'
+import: 'Importál'
 password: 'Jelszó'
-confirmPassword: 'Jelszó megerősítése'
-toggleNavigation: 'Toggle navigation'
-overview: 'Overview'
-send: 'Send'
+confirmPassword: 'Jelszó megerősítés'
+toggleNavigation: 'Navigáció kapcsolás'
+overview: 'Áttekintés'
+send: 'Küldés'
 max: 'Max'
 totalAvailableBalance: 'Teljes elérhető egyenleg'
-receive: 'Receive'
-close: 'Close'
-settings: 'Settings'
-logout: 'Logout'
-history: 'History'
-save: 'Save'
-delete: 'Delete'
-seed: 'Seed'
-mnemonic: 'Mnemonic'
-reveal: 'Reveal'
-type: 'Type'
-amount: 'Amount'
-wallet: 'Wallet'
-account: 'Account'
+receive: 'Fogadás'
+close: 'Bezár'
+settings: 'Beállítások'
+logout: 'Kijelentkezés'
+history: 'Történet'
+save: 'Ment'
+delete: 'Töröl'
+seed: 'Irmag'
+mnemonic: 'Emlékeztető'
+reveal: 'Megmutat'
+type: 'Típus'
+amount: 'Összeg'
+wallet: 'Tárca'
+account: 'Számla'
 balance: 'Egyenleg'
-pending: 'Pending'
-node: 'node'
-data: 'data'
-syncing: 'Syncing'
-sending: 'Sending...'
-sent: 'Broadcasting send!'
+pending: 'Függő'
+node: 'csomópont'
+data: 'adat'
+syncing: 'Szinkronizál...'
+sending: 'Küld...'
+sent: 'Küldés szétküldve!'
 progress: >
   {value, number, percent} {eta, select,
     null {(estimating...)}
     other {({eta})}
   }
-downloading: 'Downloading {asset}...'
-verifying: 'Verifying {asset}...'
-extracting: 'Extracting {asset}...'
-starting: 'Starting node'
+downloading: 'Letöltés {asset}...'
+verifying: 'Ellenőrzés {asset}...'
+extracting: 'Kibontás {asset}...'
+starting: 'Csomópont indítása'
 currency: '{amount}'
-copyAddress: 'Copy address'
-addressCopied: 'Address copied: {address}'
-agree: 'Agree'
-disagree: 'Disagree'
+copyAddress: 'Számla cím másolás'
+addressCopied: 'Számla cím másolva: {address}'
+agree: 'Elfogad'
+disagree: 'Elutasít'
 legal:
   title: 'Terms and Conditions'
   disclaimer: >
@@ -62,83 +62,82 @@ legal:
   privacyPolicy: 'Privacy Policy'
   cannotDisagree: 'You may not use the application unless you agree to the Terms and Conditions.'
 status:
-  state: 'Status'
-  online: 'Online'
-  connecting: 'Connecting'
-  count: 'Block Count'
-  unchecked: 'Unchecked Blocks'
-  peers: 'Peers'
+  state: 'Státusz'
+  online: 'online'
+  connecting: 'kapcsolódás'
+  count: 'blokk szám'
+  unchecked: 'ellenőrizetlen blokkok'
+  peers: 'kapcsolatok'
 balancePending: 'Függő Egyenleg'
 MIKRON: 'MIKRON'
 BTC: 'BTC'
 USD: 'USD'
 EUR: 'EUR'
-walletSettings: 'Wallet Settings'
-editAccountSettings: 'Edit account settings'
-accountSettings: 'Account Settings'
-accountSettingsSaved: 'Account settings saved!'
-unknown: '(unknown)'
-label: 'Label'
+walletSettings: 'Tárca Beállítások'
+editAccountSettings: 'Számla beállítások szerkesztése'
+accountSettings: 'Számla Beállítások'
+accountSettingsSaved: 'Számla beállítások mentve!'
+unknown: '(ismeretlen)'
+label: 'Címke'
 login:
-  lead: 'Login to unlock your wallet.'
-  instructions: 'You can login to continue using your current wallet by unlocking it. Alternatively, you may choose to create a new wallet.'
-  setupWallet: 'Create New Wallet'
+  lead: 'Jelentkezz be a tárca feloldásához.'
+  instructions: 'A folytatáshoz jelentkezz be a tárca feloldásához.  Vagy készíthetsz egy új tárcát.'
+  setupWallet: 'Új Tárca Készítés'
 wallets:
   unlock:
-    unlockWallet: 'Unlock Wallet'
-    invalidPassword: 'Invalid password!'
+    unlockWallet: 'Tárca Feloldás'
+    invalidPassword: 'Érvénytelen jelszó!'
   backup:
-    title: 'Backup Seed'
-    lead: "Here's your new easy to recognize seed mnemonic for your new wallet:"
-    copy: 'Copy Seed'
-    copied: 'Seed copied to clipboard!'
-    download: 'Download'
+    title: 'Irmag mentése'
+    lead: "Könnyen kezelhető emlékeztető a tárca 'írmaghoz':"
+    copy: 'Irmag másolása'
+    copied: 'Irmag másolva!'
+    download: 'Letölt'
     help: >
-      Adhere to best practices by physically writing your seed mnemonic on a piece of paper and
-      storing it in a secure location for safe retrieval should you later lose your seed.
-    confirm: "Are you sure you've written down your mnemonic?"
+      Erősen ajánlott az emlékeztetőt papíra lejegyezni, és biztonságos helyen tárolni.
+      A digitális változat elvesztése esetén a tárca onnan visszaállítható.  Ellenkező esetben a tárca tartalma elvész!
+    confirm: "Biztosan lejegyezted az emlékeztetőt?"
   import:
-    title: 'Import Wallet'
-    copied: 'Seed copied to clipboard!'
+    title: 'Tárca Importálás'
+    copied: 'Irmag a másolólapra másolva!'
     help:
-      seed: "Your wallet's 64 character hex seed."
-      mnemonic: "Your wallet's BIP39 mnemonic."
+      seed: "A tárcádhoz tartozó 'írmag' -- 64 karakteres hexa sztring.  Kezeld óvatosan, ezen keresztül hozzá lehet férni a tárcához!"
+      mnemonic: "A tárcádhoz tartozó BIP39 emlékeztető."
   password:
-    title: 'Wallet Password'
-    submit: 'Set Password'
+    title: 'Tárca Jelszó'
+    submit: 'Jelszó Beállítás'
   accounts:
-    cannotDelete: 'Cannot delete an account with a balance!'
+    cannotDelete: 'Nem lehet törölni egyenleggel rendelkező számlát!'
     send:
-      source: 'Source Account'
-      search: 'Search for account'
-      destination: 'Destination Account'
-      placeholder: 'Address (e.g. mik_...)'
-      amount: 'Amount (MIKRON)'
-      insufficient: 'Amount is greater than total account balance'
+      source: 'Forrás számla'
+      search: 'Számla keresés'
+      destination: 'Cél számla'
+      placeholder: 'Cím (pl. mik_...)'
+      amount: 'Összeg (MIKRON)'
+      insufficient: 'Az összeg nagyobb, mint a számla egyenlege'
     history:
-      none: 'No history yet'
+      none: 'Nincs még számla történet'
   overview:
-    none: 'No accounts in wallet.'
-    create: 'Create Account'
-    created: 'New account created!'
+    none: 'Nincs a tárcában számla.'
+    create: 'Új számla létrehozása'
+    created: 'Új számla létrehozva!'
   settings:
-    changeRepresentative: 'Change Representative'
-    changePassword: 'Change Password'
-    representativeChanged: 'Wallet representative changed!'
-    representativeChangeFailed: 'Representative change failed!'
-    passwordChanged: 'Password changed!'
-    passwordsDontMatch: "Passwords don't match!"
+    changeRepresentative: 'Képviselő Változtatása'
+    changePassword: 'Jelszó Változtatása'
+    representativeChanged: 'Képviselő megváltoztatva!'
+    representativeChangeFailed: 'Nem sikerült a képviselőt megváltoztatni!'
+    passwordChanged: 'Jelszó megváltzotatva!'
+    passwordsDontMatch: "A két jelszó eltér!"
   logout:
-    title: 'Confirm Logout'
-    lead: 'Are you sure you wish to logout?'
+    title: 'Kijelentkezés Megerősítése'
+    lead: 'Biztosan ki akarsz jelentkezni?'
     warning: >
-      <strong>Warning</strong>: If you logout and later don't remember your password you will
-      have to reimport your wallet using your seed!
+      <strong>Figyelmeztetés</strong>: Ha kijelentkezel, és később nem emlékszel a jelszavadra,
+      a tárcát csak írmagból lehet visszaállítani!
 setup:
-  lead: "Let's get your wallet set up."
+  lead: "Számla beállítása."
   instructions: >
-    To begin using Mikron Wallet, you must first create a new wallet or import your wallet data
-    using a seed.
-  create: 'Create New Wallet'
-  or: 'or'
-  import: 'Import Wallet'
+    A Mikron Tárcád használatához először létre kell hozni egy új tárcát, vagy importálni kell egy meglévőt (elmentett írmag segítségével).
+  create: 'Új Tárca Létrehozás'
+  or: 'vagy'
+  import: 'Tárca Importálás'
