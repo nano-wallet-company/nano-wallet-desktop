@@ -122,6 +122,7 @@ wallets:
     create: 'Create Account'
     created: 'New account created!'
   settings:
+    representative: 'Representative Account'
     changeRepresentative: 'Change Representative'
     changePassword: 'Change Password'
     representativeChanged: 'Wallet representative changed!'

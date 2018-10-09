@@ -20,7 +20,7 @@ logout: 'Kijelentkezés'
 history: 'Történet'
 save: 'Ment'
 delete: 'Töröl'
-seed: 'Irmag'
+seed: 'Írmag'
 mnemonic: 'Emlékeztető'
 reveal: 'Megmutat'
 type: 'Típus'
@@ -31,7 +31,7 @@ balance: 'Egyenleg'
 pending: 'Függő'
 node: 'csomópont'
 data: 'adat'
-syncing: 'Szinkronizál...'
+syncing: 'folyamatos szinkronizálás'
 sending: 'Küld...'
 sent: 'Küldés szétküldve!'
 progress: >
@@ -88,10 +88,10 @@ wallets:
     unlockWallet: 'Tárca Feloldás'
     invalidPassword: 'Érvénytelen jelszó!'
   backup:
-    title: 'Irmag mentése'
+    title: 'Írmag mentése'
     lead: "Könnyen kezelhető emlékeztető a tárca 'írmaghoz':"
-    copy: 'Irmag másolása'
-    copied: 'Irmag másolva!'
+    copy: 'Írmag másolása'
+    copied: 'Írmag másolva!'
     download: 'Letölt'
     help: >
       Erősen ajánlott az emlékeztetőt papíra lejegyezni, és biztonságos helyen tárolni.
@@ -99,7 +99,7 @@ wallets:
     confirm: "Biztosan lejegyezted az emlékeztetőt?"
   import:
     title: 'Tárca Importálás'
-    copied: 'Irmag a másolólapra másolva!'
+    copied: 'Írmag a másolólapra másolva!'
     help:
       seed: "A tárcádhoz tartozó 'írmag' -- 64 karakteres hexa sztring.  Kezeld óvatosan, ezen keresztül hozzá lehet férni a tárcához!"
       mnemonic: "A tárcádhoz tartozó BIP39 emlékeztető."
@@ -122,6 +122,7 @@ wallets:
     create: 'Új számla létrehozása'
     created: 'Új számla létrehozva!'
   settings:
+    representative: 'Képviselő számla'
     changeRepresentative: 'Képviselő Változtatása'
     changePassword: 'Jelszó Változtatása'
     representativeChanged: 'Képviselő megváltoztatva!'
