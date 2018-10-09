@@ -38,7 +38,7 @@
     "lint:js": "eslint .",
     "lint:hbs": "ember-template-lint .",
     "precommit": "lint-staged",
-    "commitmsg": "commitlint -e $GIT_PARAMS",
+    "commitmsg": "commitlint -env GIT_PARAMS",
     "cz": "git-cz",
     "release": "standard-version",
     "electron:dev": "nodemon -L -w ember-electron -x 'yarn run-s clean electron:start'",
