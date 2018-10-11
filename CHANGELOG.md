@@ -2,13 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+
+
+* Update mikron_node.exe to new v0.3, statically linked to OpenSSL.
+
 <a name="0.1.5"></a>
 ## [0.1.5](https://github.com/mikroncoin/mikron_wallet/compare/v0.1.4...v0.1.5) (2018-10-11)
-
-
-
-<a name="0.1.4"></a>
-## [0.1.4](https://github.com/mikroncoin/mikron_wallet/compare/v0.1.3...v0.1.4) (2018-10-11)
 
 * Address slow startup by delayed UPnP scan, node v0.3
 
