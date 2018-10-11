@@ -90,7 +90,7 @@ module.exports = (environment) => {
   if (process.env.EMBER_CLI_ELECTRON) {
     ENV.contentSecurityPolicy['script-src'].push("'sha256-bOpoN0CEbM1axa1+hv51a4JK31vrAOV7Cbze5rS9GJI='");
     ENV.contentSecurityPolicy['script-src'].push("'sha256-k8ysrhm1lqKyZpON3/YocPOUXAF4sGsu7JIycGDxCWw='");
-    ENV.contentSecurityPolicy['connect-src'].push('https://localhost:17076');
+    ENV.contentSecurityPolicy['connect-src'].push('https://localhost:17043');
   }
 
   return ENV;

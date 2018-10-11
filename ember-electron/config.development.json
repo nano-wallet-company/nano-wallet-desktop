@@ -39,6 +39,7 @@
         "preconfigured_peers": [
             "betanode.mikron.io",
             "betanode2.mikron.io",
+            "betanode3.mikron.io",
             "::ffff:127.0.0.1"
         ],
         "preconfigured_representatives": [

@@ -335,7 +335,7 @@ const startDaemon = async () => {
   log.info(`Generating JWT token for ${subject}...`);
   global.authorizationToken = await jsonwebtoken.signAsync(tokenPayload, proxyKey, signOptions);
 
-  const proxyPort = 17076;
+  const proxyPort = 17043;
   return new Promise((resolve, reject) => {
     log.info(`Proxy server starting on ${loopbackAddress}:${proxyPort}`);
     server.listen(proxyPort, loopbackAddress, function Server(err) {

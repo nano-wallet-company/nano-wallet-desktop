@@ -28,7 +28,7 @@ module.exports = (/* environment */) => ({
 
   // Electron
   dist: {
-    rpcHost: 'https://localhost:17076',
+    rpcHost: 'https://localhost:17043',
     rpcNamespace: 'rpc',
   },
 });

@@ -27,13 +27,13 @@ export default function () {
   this.passthrough('/translations/**');
 
   // Live network
-  this.passthrough('http://localhost:7076');
+  this.passthrough('http://localhost:7043');
 
   // Test network
   this.passthrough('http://localhost:55000');
 
   // Electron proxy
-  this.passthrough('https://localhost:17076/**');
+  this.passthrough('https://localhost:17043/**');
 
   this.namespace = 'rpc';
 
