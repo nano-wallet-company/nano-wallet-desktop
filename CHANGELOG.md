@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file. See [standa
 <a name="0.1.4"></a>
 ## [0.1.4](https://github.com/mikroncoin/mikron_wallet/compare/v0.1.3...v0.1.4) (2018-10-11)
 
-
+* Address slow startup by delayed UPnP scan, node v0.3
 
 <a name="0.1.3"></a>
 ## [0.1.3](https://github.com/mikroncoin/mikron_wallet/compare/v0.1.2...v0.1.3) (2018-10-09)
