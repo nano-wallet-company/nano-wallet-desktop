@@ -40,7 +40,7 @@
         "preconfigured_representatives": [
             "xrb_3e3j5tkog48pnny9dmfzj1r16pg8t1e76dz5tmac6iq689wyjfpiij4txtdo"
         ],
-        "online_weight_minimum": "60000000000000000000000000000000000000",
+        "online_weight_minimum": "600000000000000000",
         "online_weight_quorum": "50",
         "password_fanout": "1024",
         "io_threads": "4",

@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file. See [standa
 <a name="0.1.6"></a>
 ## [0.1.6](https://github.com/mikroncoin/mikron_wallet/compare/v0.1.5...v0.1.6) (2018-10-11)
 
-
+* Update mikron_node.exe to new v0.3, statically linked to OpenSSL.
 
 <a name="0.1.5"></a>
 ## [0.1.5](https://github.com/mikroncoin/mikron_wallet/compare/v0.1.4...v0.1.5) (2018-10-11)
