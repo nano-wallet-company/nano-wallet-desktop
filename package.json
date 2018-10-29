@@ -1,6 +1,6 @@
 {
   "name": "@mikron.io/mikron_wallet",
-  "version": "0.1.6",
+  "version": "0.4.0",
   "productName": "Mikron Wallet",
   "genericName": "Wallet",
   "description": "The primary, multi-platform Mikron Wallet.",
