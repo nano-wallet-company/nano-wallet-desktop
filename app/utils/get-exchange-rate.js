@@ -10,10 +10,8 @@ export const EUR = Symbol.for('EUR');
 
 export const CURRENCIES = new Set([
   MIKRON,
-  BTC,
-  USD,
-  EUR,
 ]);
+//  BTC, USD, EUR,
 
 export const DEFAULT_CURRENCY = MIKRON;
 export const DEFAULT_EXCHANGE_RATE = 1;
