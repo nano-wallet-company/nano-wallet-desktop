@@ -3,7 +3,7 @@
     "rpc_enable": "true",
     "rpc": {
         "address": "::1",
-        "port": "54350",
+        "port": "7043",
         "enable_control": "true",
         "frontier_request_limit": "16384",
         "chain_request_limit": "16384",
@@ -11,7 +11,7 @@
     },
     "node": {
         "version": "12",
-        "peering_port": "54250",
+        "peering_port": "7042",
         "bootstrap_fraction_numerator": "1",
         "receive_minimum": "1",
         "logging": {
@@ -37,15 +37,14 @@
         },
         "work_peers": "",
         "preconfigured_peers": [
-            "betanode.mikron.io",
-            "betanode2.mikron.io",
-            "betanode3.mikron.io",
-            "::ffff:127.0.0.1"
+            "::ffff:127.0.0.1",
+            "node.mikron.io",
+            "node2.mikron.io",
+            "node3.mikron.io"
         ],
         "preconfigured_representatives": [
-            "mik_1afp8rucpo6rqwxnw113dq5abto3f5jt1b5a1urky9kcnij655i6m3yn5i6p",
-            "mik_3f6moz8dj6nsw3idkhy8deh5g4jnhymqtk5quu5nwnda79kamud76m3ppmi4",
-            "mik_3wo84rzsy5nj5c14hdr6a6n7gz5rrjjf171bdqsfpe3bena5u6wxe3izxrq8"
+            "mik_317ntk3fs3666tuzrdsx755rruhw935apyquan95uc18po55i1s53sew45tb",
+            "mik_39wmnmapst5wujyja9ydkkbmeirqz6ytcxg3aoj9ri8bttx4mxiz3pn8rqfc"
         ],
         "online_weight_minimum": "600000000000000000",
         "online_weight_quorum": "50",
