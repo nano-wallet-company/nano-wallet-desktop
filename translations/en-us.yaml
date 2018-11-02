@@ -82,7 +82,7 @@ label: 'Label'
 login:
   lead: 'Login to unlock your wallet.'
   instructions: 'You can login to continue using your current wallet by unlocking it. Alternatively, you may choose to create a new wallet.'
-  setupWallet: 'Create New Wallet'
+  setupWallet: 'Create/Import Wallet'
 wallets:
   unlock:
     unlockWallet: 'Unlock Wallet'
@@ -117,16 +117,18 @@ wallets:
       insufficient: 'Amount is greater than total account balance'
     history:
       none: 'No history yet'
+    settings:
+      representative: 'Representative Account'
   overview:
     none: 'No accounts in wallet.'
     create: 'Create Account'
     created: 'New account created!'
   settings:
-    representative: 'Representative Account'
-    changeRepresentative: 'Change Representative'
+    defaultRepresentative: 'Default Representative Account'
+    changeDefaultRepresentative: 'Change Default Representative'
+    defaultRepresentativeChanged: 'Wallet default representative changed!'
+    defaultRepresentativeChangeFailed: 'Default representative change failed!'
     changePassword: 'Change Password'
-    representativeChanged: 'Wallet representative changed!'
-    representativeChangeFailed: 'Representative change failed!'
     passwordChanged: 'Password changed!'
     passwordsDontMatch: "Passwords don't match!"
   logout:

@@ -56,12 +56,12 @@ export default class WalletsRoute extends Route.extend(
     try {
       await this.get('rpc').walletRepresentativeSet(wallet, representative);
     } catch (err) {
-      const failureMessage = this.get('intl').t('wallets.settings.representativeChangeFailed');
+      const failureMessage = this.get('intl').t('wallets.settings.defaultRepresentativeChangeFailed');
       flashMessages.danger(failureMessage);
       throw err;
     }
 
-    const message = this.get('intl').t('wallets.settings.representativeChanged');
+    const message = this.get('intl').t('wallets.settings.defaultRepresentativeChanged');
     flashMessages.success(message);
     return this.transitionTo('wallets.overview');
   }

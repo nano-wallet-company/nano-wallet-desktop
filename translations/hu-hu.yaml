@@ -82,7 +82,7 @@ label: 'Címke'
 login:
   lead: 'Jelentkezz be a tárca feloldásához.'
   instructions: 'A folytatáshoz jelentkezz be a tárca feloldásához.  Vagy készíthetsz egy új tárcát.'
-  setupWallet: 'Új Tárca Készítés'
+  setupWallet: 'Tárca Készítés/Importálás'
 wallets:
   unlock:
     unlockWallet: 'Tárca Feloldás'
@@ -117,16 +117,18 @@ wallets:
       insufficient: 'Az összeg nagyobb, mint a számla egyenlege'
     history:
       none: 'Nincs még számla történet'
+    settings:
+      representative: 'Képviselő számla'
   overview:
     none: 'Nincs a tárcában számla.'
     create: 'Új számla létrehozása'
     created: 'Új számla létrehozva!'
   settings:
-    representative: 'Képviselő számla'
-    changeRepresentative: 'Képviselő Változtatása'
+    defaultRepresentative: 'Tárca alapértelmezett képviselője'
+    changeDefaultRepresentative: 'Alapértelmezett Képviselő Változtatása'
+    defaultRepresentativeChanged: 'Alapértelmezett képviselő megváltoztatva!'
+    defaultRepresentativeChangeFailed: 'Nem sikerült az alapértelmezett képviselőt megváltoztatni!'
     changePassword: 'Jelszó Változtatása'
-    representativeChanged: 'Képviselő megváltoztatva!'
-    representativeChangeFailed: 'Nem sikerült a képviselőt megváltoztatni!'
     passwordChanged: 'Jelszó megváltzotatva!'
     passwordsDontMatch: "A két jelszó eltér!"
   logout:
