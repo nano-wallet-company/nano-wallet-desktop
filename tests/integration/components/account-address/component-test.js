@@ -40,7 +40,7 @@ describe('Integration | Component | account-address', () => {
 
     const [head, body, tail] = parts.map(el => el.innerText.trim());
     expect(head).to.equal('mik_3arg3a');
-    expect(body).to.equal('asgtigae3xckabaaewkx3bzsh7nwz7jkmjos79ihyaxwphhm6q');
+    expect(body).to.equal('sgtigae3xckabaaewkx3bzsh7nwz7jkmjos79ihyaxwphhm6q');
     expect(tail).to.equal('gjps4');
   });
 });
