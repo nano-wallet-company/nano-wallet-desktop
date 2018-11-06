@@ -26,7 +26,7 @@ describe('Integration | Component | account history entry', () => {
     const entry = {
       id: '1',
       type: 'receive',
-      amount: '1000000000000000000000000000000',
+      amount: '10000000000',
       source: '1',
       account: '2',
     };

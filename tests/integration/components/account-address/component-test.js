@@ -22,7 +22,7 @@ describe('Integration | Component | account-address', () => {
   });
 
   it('displays the full address', async function () {
-    const value = 'nano_3arg3asgtigae3xckabaaewkx3bzsh7nwz7jkmjos79ihyaxwphhm6qgjps4';
+    const value = 'mik_3arg3asgtigae3xckabaaewkx3bzsh7nwz7jkmjos79ihyaxwphhm6qgjps4';
     this.set('value', value);
     await render(hbs`{{account-address value=value}}`);
 
@@ -31,7 +31,7 @@ describe('Integration | Component | account-address', () => {
   });
 
   it('visually separates the first 9 and last 5 characters', async function () {
-    const value = 'nano_3arg3asgtigae3xckabaaewkx3bzsh7nwz7jkmjos79ihyaxwphhm6qgjps4';
+    const value = 'mik_3arg3asgtigae3xckabaaewkx3bzsh7nwz7jkmjos79ihyaxwphhm6qgjps4';
     this.set('value', value);
     await render(hbs`{{account-address value=value}}`);
 
@@ -39,17 +39,8 @@ describe('Integration | Component | account-address', () => {
     expect(parts).to.have.length(3);
 
     const [head, body, tail] = parts.map(el => el.innerText.trim());
-    expect(head).to.equal('nano_3arg3');
+    expect(head).to.equal('mik_3arg3a');
     expect(body).to.equal('asgtigae3xckabaaewkx3bzsh7nwz7jkmjos79ihyaxwphhm6q');
     expect(tail).to.equal('gjps4');
-  });
-
-  it('converts xrb_ to nano_ addresses', async function () {
-    const value = 'xrb_3arg3asgtigae3xckabaaewkx3bzsh7nwz7jkmjos79ihyaxwphhm6qgjps4';
-    this.set('value', value);
-    await render(hbs`{{account-address value=value}}`);
-
-    const address = this.element.textContent.trim();
-    expect(address).to.equal('nano_3arg3asgtigae3xckabaaewkx3bzsh7nwz7jkmjos79ihyaxwphhm6qgjps4');
   });
 });

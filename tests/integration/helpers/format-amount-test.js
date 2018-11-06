@@ -30,37 +30,37 @@ describe('helper:format-amount', () => {
   });
 
   it('handles integer values with no decimal component', async function () {
-    this.set('inputValue', '1000000000000000000000000000000');
+    this.set('inputValue', '10000000000');
     await render(hbs`{{format-amount inputValue}}`);
     expect(find('*').textContent.trim()).to.equal('1');
   });
 
   it('handles decimal values with no integer component', async function () {
-    this.set('inputValue', '100000000000000000000000000000');
+    this.set('inputValue', '1000000000');
     await render(hbs`{{format-amount inputValue}}`);
     expect(find('*').textContent.trim()).to.equal('0.1');
   });
 
   it('handles values with both an integer and decimal component', async function () {
-    this.set('inputValue', '1100000000000000000000000000000');
+    this.set('inputValue', '11000000000');
     await render(hbs`{{format-amount inputValue}}`);
     expect(find('*').textContent.trim()).to.equal('1.1');
   });
 
   it('handles large values with both an integer and decimal component', async function () {
-    this.set('inputValue', '1234012300000000000000000000000000');
+    this.set('inputValue', '12340123000000');
     await render(hbs`{{format-amount inputValue}}`);
     expect(find('*').textContent.trim()).to.equal('1,234.0123');
   });
 
-  it('ignores decimal values beyond the 20th decimal place', async function () {
-    this.set('inputValue', '1100000000000000000000000000001');
+  it('handle decimal values at the 10th decimal place', async function () {
+    this.set('inputValue', '11000000001');
     await render(hbs`{{format-amount inputValue}}`);
-    expect(find('*').textContent.trim()).to.equal('1.1');
+    expect(find('*').textContent.trim()).to.equal('1.1000000001');
   });
 
   it('converts the value according to the exchange rate', async function () {
-    this.set('inputValue', '1100000000000000000000000000000');
+    this.set('inputValue', '11000000000');
     await render(hbs`{{format-amount inputValue exchangeRate=2}}`);
     expect(find('*').textContent.trim()).to.equal('2.2');
   });

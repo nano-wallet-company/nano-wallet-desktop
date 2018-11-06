@@ -26,7 +26,7 @@ describe('Integration | Component | wallet settings', () => {
     const store = this.container.lookup('service:store');
     const wallet = store.createRecord('wallet', {
       id: '1',
-      balance: '1000000000000000000000000000000',
+      balance: '10000000000',
     });
 
     const onChangePassword = () => false;

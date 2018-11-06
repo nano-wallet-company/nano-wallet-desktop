@@ -25,7 +25,7 @@ describe('Integration | Component | wallet overview', () => {
 
     const wallet = {
       id: '1',
-      balance: '1000000000000000000000000000000',
+      balance: '10000000000',
       accounts: ['1'],
     };
 
@@ -34,7 +34,7 @@ describe('Integration | Component | wallet overview', () => {
       store.createRecord('account', {
         id: '1',
         wallet: '1',
-        balance: '1000000000000000000000000000000',
+        balance: '10000000000',
         pending: '0',
       }),
     ];

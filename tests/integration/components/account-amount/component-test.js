@@ -23,7 +23,7 @@ describe('Integration | Component | account amount', () => {
     //   {{/account-amount}}
     // `);
 
-    const value = '1000000000000000000000000000000';
+    const value = '10000000000';
     this.set('value', value);
     this.render(hbs`{{account-amount value=value}}`);
     expect(this.$()).to.have.length(1);

@@ -25,14 +25,14 @@ describe('Integration | Component | account history', () => {
 
     const wallet = {
       id: '1',
-      balance: '1000000000000000000000000000000',
+      balance: '10000000000',
       accounts: ['1'],
     };
 
     const account = {
       id: '1',
       wallet: '1',
-      balance: '1000000000000000000000000000000',
+      balance: '10000000000',
       pending: '0',
     };
 
@@ -40,7 +40,7 @@ describe('Integration | Component | account history', () => {
       {
         id: '1',
         type: 'receive',
-        amount: '1000000000000000000000000000000',
+        amount: '10000000000',
         source: '1',
         account: '2',
       },
