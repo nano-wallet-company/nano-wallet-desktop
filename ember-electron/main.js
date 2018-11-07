@@ -147,10 +147,17 @@ const run = async () => {
 
   autoUpdater.on('checking-for-update', () => {
     global.isUpdating = false;
+    log.info('autoUpdater: checking for update...');
   });
 
   autoUpdater.on('update-downloaded', () => {
     global.isUpdating = true;
+    log.info('autoUpdater: update downloaded');
+  });
+
+  autoUpdater.on('error', (err) => {
+    log.error('autoUpdater: Error: ', err.message);
+    log.error('autoUpdater: ', err.stack);
   });
 
   updateElectronApp({
