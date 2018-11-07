@@ -1,6 +1,6 @@
 # Mikron Wallet
 
-[![Travis CI Status](https://travis-ci.org/mikroncoin/mikron_wallet.svg?branch=master)](https://travis-ci.org/mikroncoin/mikron_wallet) [![AppVeyor Status](https://ci.appveyor.com/api/projects/status/917e9ui37nwt4i00/branch/master?svg=true)](https://ci.appveyor.com/project/devinus/mikron_wallet/branch/master)
+[![Travis CI Status](https://travis-ci.org/mikroncoin/mikron_wallet.svg?branch=master)](https://travis-ci.org/mikroncoin/mikron_wallet) [![AppVeyor Status](https://ci.appveyor.com/api/projects/status/917e9ui37nwt4i00/branch/master?svg=true)](https://ci.appveyor.com/project/mikroncoin/mikron_wallet/branch/master)
 
 The primary [Mikron](https://mikron.io) wallet; a cross-platform, nice-looking wallet implementation.
 
