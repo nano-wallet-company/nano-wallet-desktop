@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.7"></a>
+## [0.5.7](https://github.com/mikroncoin/mikron_wallet/compare/v0.5.6...v0.5.7) (2018-11-09)
+
+
+### Bug Fixes
+
+* **transalation:** Remove no-longer-supported translations, except ([f937a71](https://github.com/mikroncoin/mikron_wallet/commit/f937a71))
+* **ui:** Change loader icon. ([855e3cf](https://github.com/mikroncoin/mikron_wallet/commit/855e3cf))
+
+
+
 <a name="0.5.6"></a>
 ## [0.5.6](https://github.com/mikroncoin/mikron_wallet/compare/v0.5.5...v0.5.6) (2018-11-07)
 
