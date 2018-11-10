@@ -128,7 +128,8 @@ const startDaemon = async () => {
   }
 
   const tlsPath = path.join(dataPath, 'tls');
-  const dhParamPath = path.join(tlsPath, 'dh2048.pem');
+  const pemFileName = 'dh2048.pem';
+  const dhParamPath = path.join(tlsPath, pemFileName);
   if (!config.rpc.secure) {
     log.info('Generating secure node RPC configuration...');
     const clientsPath = path.join(tlsPath, 'clients');
@@ -139,7 +140,14 @@ const startDaemon = async () => {
     const serverPems = generateCert('nanowalletcompany.com');
     await writeFileAtomic(serverCertPath, normalizeNewline(serverPems.cert), { mode: 0o600 });
     await writeFileAtomic(serverKeyPath, normalizeNewline(serverPems.private), { mode: 0o600 });
-    await cpFile(path.join(__dirname, 'tls', 'dh2048.pem'), dhParamPath);
+    try {
+      fs.accessSync(dhParamPath, fs.constants.F_OK);
+      log.info(`Deleting previous file... ${pemFileName}`);
+      fs.unlinkSync(dhParamPath);
+    } catch (err) {
+      // file does not exist, OK
+    }
+    await cpFile(path.join(__dirname, 'tls', pemFileName), dhParamPath);
 
     const clientCertPath = path.join(clientsPath, 'rpcuser1.cert.pem');
     const clientKeyPath = path.join(clientsPath, 'rpcuser1.key.pem');
