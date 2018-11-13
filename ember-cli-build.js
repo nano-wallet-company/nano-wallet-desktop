@@ -1,13 +1,12 @@
 /* eslint-env node */
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
+const json = require('rollup-plugin-json');
+const nodeGlobals = require('rollup-plugin-node-globals');
+const nodeBuiltins = require('rollup-plugin-node-builtins');
 const { extensions: defaultExtensions } = require('broccoli-asset-rev/lib/default-options');
 
 module.exports = (defaults) => {
   const app = new EmberApp(defaults, {
-    '@ember-decorators/babel-transforms': {
-      disable: true,
-    },
-
     babel: {
       plugins: [
         ['@babel/plugin-proposal-decorators', { legacy: true }],
@@ -105,6 +104,69 @@ module.exports = (defaults) => {
   app.import('vendor/slick-carousel/slick.js');
   app.import('vendor/slick-carousel/slick.css');
   app.import('vendor/slick-carousel/slick-theme.css');
+
+  app.import('node_modules/coinmarketcap/lib/index.js', {
+    using: [
+      {
+        transformation: 'cjs',
+        as: 'coinmarketcap',
+        plugins: [
+          nodeBuiltins(),
+        ],
+      },
+    ],
+  });
+
+  app.import('node_modules/bignumber.js/bignumber.js', {
+    using: [
+      { transformation: 'amd', as: 'bignumber.js' },
+    ],
+  });
+
+  app.import('node_modules/bip39/index.js', {
+    using: [
+      {
+        transformation: 'cjs',
+        as: 'bip39',
+        plugins: [
+          json(),
+          nodeGlobals(),
+          nodeBuiltins(),
+        ],
+      },
+    ],
+  });
+
+  app.import('node_modules/locale2/index.js', {
+    using: [
+      { transformation: 'cjs', as: 'locale2' },
+    ],
+  });
+
+  app.import('node_modules/nanoid/index.browser.js', {
+    using: [
+      {
+        transformation: 'cjs',
+        as: 'nanoid',
+        plugins: [
+          nodeGlobals(),
+          nodeBuiltins(),
+        ],
+      },
+    ],
+  });
+
+  app.import('node_modules/speedometer/index.js', {
+    using: [
+      { transformation: 'cjs', as: 'speedometer' },
+    ],
+  });
+
+  app.import('node_modules/downloadjs/download.js', {
+    using: [
+      { transformation: 'amd', as: 'downloadjs' },
+    ],
+  });
 
   return app.toTree();
 };

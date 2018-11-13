@@ -1,7 +1,7 @@
 import { defineError } from 'ember-exex/error';
 
-import coinmarketcap from 'npm:coinmarketcap';
-import BigNumber from 'npm:bignumber.js';
+import coinmarketcap from 'coinmarketcap';
+import BigNumber from 'bignumber.js';
 
 export const NANO = Symbol.for('NANO');
 export const BTC = Symbol.for('BTC');

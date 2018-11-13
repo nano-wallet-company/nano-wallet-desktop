@@ -1,6 +1,6 @@
 import Component from '@ember/component';
 
-import { readOnly } from '@ember-decorators/object/computed';
+import { overridableReads } from '@ember-decorators/object/computed';
 import { argument } from '@ember-decorators/argument';
 
 import { storage } from '../../decorators';
@@ -12,7 +12,7 @@ export default class WalletSettingsComponent extends Component {
 
   ChangeRepresentativeValidations = ChangeRepresentativeValidations;
 
-  @readOnly('settings.seed') seed = null;
+  @overridableReads('settings.seed') seed = null;
 
   @argument wallet = null;
 

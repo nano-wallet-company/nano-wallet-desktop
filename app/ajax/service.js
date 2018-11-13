@@ -9,7 +9,7 @@ import {
 import { defineError } from 'ember-exex/error';
 
 import { service } from '@ember-decorators/service';
-import { readOnly } from '@ember-decorators/object/computed';
+import { overridableReads } from '@ember-decorators/object/computed';
 
 export const AjaxError = defineError({
   name: 'AjaxError',
@@ -40,9 +40,9 @@ export default class ApplicationAjaxService extends AjaxService.extend({
 
   @service electron = null;
 
-  @readOnly('hostManager.host.rpcHost') host = null;
+  @overridableReads('hostManager.host.rpcHost') host = null;
 
-  @readOnly('hostManager.host.rpcNamespace') namespace = null;
+  @overridableReads('hostManager.host.rpcNamespace') namespace = null;
 
   contentType = 'application/json'
 

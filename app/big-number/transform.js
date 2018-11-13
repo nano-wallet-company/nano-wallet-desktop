@@ -1,6 +1,6 @@
 import DS from 'ember-data';
 
-import BigNumber from 'npm:bignumber.js';
+import BigNumber from 'bignumber.js';
 
 const { Transform } = DS;
 

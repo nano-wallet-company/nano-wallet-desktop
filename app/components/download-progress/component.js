@@ -9,7 +9,7 @@ import {
 import { on } from '@ember-decorators/object';
 import { argument } from '@ember-decorators/argument';
 
-import speedometer from 'npm:speedometer';
+import speedometer from 'speedometer';
 
 export const STATUS_DOWNLOADING = 'downloading';
 export const STATUS_VERIFYING = 'verifying';

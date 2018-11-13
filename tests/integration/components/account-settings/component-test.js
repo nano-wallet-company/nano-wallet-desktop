@@ -24,9 +24,14 @@ describe('Integration | Component | account-settings', () => {
     // `);
 
     const store = this.container.lookup('service:store');
-    const account = store.createRecord('account', {
+    const wallet = store.createRecord('wallet', {
       id: '1',
-      wallet: '1',
+      balance: '1000000000000000000000000000000',
+    });
+
+    const account = store.createRecord('account', {
+      wallet,
+      id: '1',
       balance: '1000000000000000000000000000000',
       pending: '0',
     });

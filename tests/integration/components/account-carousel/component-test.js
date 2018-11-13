@@ -24,10 +24,15 @@ describe('Integration | Component | account-carousel', () => {
     // `);
 
     const store = this.container.lookup('service:store');
+    const wallet = store.createRecord('wallet', {
+      id: '1',
+      balance: '1000000000000000000000000000000',
+    });
+
     const accounts = [
       store.createRecord('account', {
+        wallet,
         id: '1',
-        wallet: '1',
         balance: '1000000000000000000000000000000',
         pending: '0',
       }),

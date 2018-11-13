@@ -23,21 +23,20 @@ describe('Integration | Component | wallet overview', () => {
     //   {{/wallet-overview}}
     // `);
 
-    const wallet = {
-      id: '1',
-      balance: '1000000000000000000000000000000',
-      accounts: ['1'],
-    };
-
     const store = this.container.lookup('service:store');
     const accounts = [
       store.createRecord('account', {
         id: '1',
-        wallet: '1',
         balance: '1000000000000000000000000000000',
         pending: '0',
       }),
     ];
+
+    const wallet = store.createRecord('wallet', {
+      accounts,
+      id: '1',
+      balance: '1000000000000000000000000000000',
+    });
 
     const onChangeSlide = () => false;
 

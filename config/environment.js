@@ -53,8 +53,8 @@ module.exports = (environment) => {
 
     assets: {
       data: {
-        url: 'https://dkl5m4kebds7n.cloudfront.net/data.tar.xz',
-        signature: 'https://dkl5m4kebds7n.cloudfront.net/data.tar.xz.sha256',
+        url: 'https://snapshots.nano.org/data.tar.xz',
+        signature: 'https://snapshots.nano.org/data.tar.xz.sha256',
       },
     },
   };

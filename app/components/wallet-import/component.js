@@ -5,7 +5,7 @@ import { service } from '@ember-decorators/service';
 import { action } from '@ember-decorators/object';
 import { argument } from '@ember-decorators/argument';
 
-import bip39 from 'npm:bip39';
+import bip39 from 'bip39';
 
 import { storage } from '../../decorators';
 

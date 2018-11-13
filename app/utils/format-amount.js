@@ -1,7 +1,7 @@
 import { get } from '@ember/object';
 import { typeOf } from '@ember/utils';
 
-import BigNumber from 'npm:bignumber.js';
+import BigNumber from 'bignumber.js';
 
 import formats from '../formats';
 

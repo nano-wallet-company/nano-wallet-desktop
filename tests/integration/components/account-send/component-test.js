@@ -24,10 +24,14 @@ describe('Integration | Component | account send', () => {
     // `);
 
     const store = this.container.lookup('service:store');
+    const wallet = store.createRecord('wallet', {
+      id: '1',
+      balance: '1000000000000000000000000000000',
+    });
 
     const source = store.createRecord('account', {
+      wallet,
       id: '1',
-      wallet: '1',
       balance: '1000000000000000000000000000000',
       pending: '0',
     });
@@ -35,9 +39,9 @@ describe('Integration | Component | account send', () => {
     const accounts = [source];
 
     const block = store.createRecord('block', {
+      wallet,
       source,
       id: '1',
-      wallet: '1',
     });
 
     const onChange = () => false;

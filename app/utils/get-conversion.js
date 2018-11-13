@@ -1,6 +1,6 @@
 import { defineError } from 'ember-exex/error';
 
-import BigNumber from 'npm:bignumber.js';
+import BigNumber from 'bignumber.js';
 
 const base10 = BigNumber(10);
 

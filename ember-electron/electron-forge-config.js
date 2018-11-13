@@ -34,11 +34,8 @@ const osxSign = {
   entitlements: false,
 };
 
-const certificateFile = process.env.CSC_LINK || null;
-const certificatePassword = process.env.CSC_KEY_PASSWORD || null;
-const signWithParams = certificateFile && certificatePassword
-  ? `/a /ph /tr http://timestamp.digicert.com /td sha256 /fd sha256 /f "${path.resolve(certificateFile)}" /p "${certificatePassword}"`
-  : undefined;
+const certificateFile = process.env.CSC_LINK || undefined;
+const certificatePassword = process.env.CSC_KEY_PASSWORD || undefined;
 
 const unsupportedArch = (target, type) => {
   throw new Error(`Unsupported architecture for ${target}: ${type}`);
@@ -118,7 +115,8 @@ module.exports = {
   },
   electronWinstallerConfig: {
     name,
-    signWithParams,
+    certificateFile,
+    certificatePassword,
     exe: `${name}.exe`,
     setupIcon: `${icon}.ico`,
     loadingGif: path.join(__dirname, 'resources', 'install-spinner.gif'),

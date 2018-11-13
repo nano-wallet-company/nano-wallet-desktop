@@ -18,5 +18,6 @@ module.exports = {
     'chai-expect/no-inner-compare': 'error',
     'chai-expect/missing-assertion': 'error',
     'chai-expect/terminating-properties': 'error',
+    'ember/no-restricted-resolver-tests': 'off',
   },
 };

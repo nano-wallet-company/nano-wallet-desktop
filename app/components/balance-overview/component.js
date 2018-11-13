@@ -1,12 +1,12 @@
 import Component from '@ember/component';
 
 import InViewportMixin from 'ember-in-viewport';
+import { keepLatestTask } from 'ember-concurrency-decorators';
 import { ContextBoundTasksMixin } from 'ember-lifeline';
 
 import { on, observes } from '@ember-decorators/object';
 import { alias } from '@ember-decorators/object/computed';
 import { argument } from '@ember-decorators/argument';
-import { keepLatestTask } from 'ember-concurrency-decorators';
 
 import { storage } from '../../decorators';
 

@@ -8,7 +8,7 @@ import { argument } from '@ember-decorators/argument';
 
 import { reject } from 'rsvp';
 
-import downloadjs from 'npm:downloadjs';
+import downloadjs from 'downloadjs';
 
 import { storage } from '../../decorators';
 

@@ -153,10 +153,12 @@ const run = async () => {
     global.isUpdating = true;
   });
 
-  updateElectronApp({
-    logger: log,
-    updateInterval: '30 minutes',
-  });
+  if (!is.development) {
+    updateElectronApp({
+      logger: log,
+      updateInterval: '30 minutes',
+    });
+  }
 
   const store = new Store({ name: 'settings' });
   if (!store.has('dataPath')) {

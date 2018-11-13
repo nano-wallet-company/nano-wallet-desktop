@@ -1,4 +1,4 @@
-import bip39 from 'npm:bip39';
+import bip39 from 'bip39';
 
 export default function generateSeed() {
   const mnemonic = bip39.generateMnemonic(256);
