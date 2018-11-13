@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.9"></a>
+## [0.5.9](https://github.com/mikroncoin/mikron_wallet/compare/v0.5.8...v0.5.9) (2018-11-13)
+
+
+### Bug Fixes
+
+* **ui:** Change spinner for installer. ([63b9c1d](https://github.com/mikroncoin/mikron_wallet/commit/63b9c1d))
+* **ui:** Fix links to EULA and PrivPolicy. ([c140b6b](https://github.com/mikroncoin/mikron_wallet/commit/c140b6b))
+
+
+
 <a name="0.5.8"></a>
 ## [0.5.8](https://github.com/mikroncoin/mikron_wallet/compare/v0.5.7...v0.5.8) (2018-11-10)
 
