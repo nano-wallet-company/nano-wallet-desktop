@@ -49,20 +49,24 @@ addressCopied: 'Számla cím másolva: {address}'
 agree: 'Elfogad'
 disagree: 'Elutasít'
 legal:
-  title: 'Terms and Conditions'
+  title: 'Felhasználási feltételek'
   disclaimer: >
-    Your use of this Mikron Wallet application is subject to your agreement to all terms and
-    conditions of the End User License Agreement and Privacy Policy linked below (collectively, the
-    "Terms and Conditions"). Please tap the links below and read all Terms and Conditions carefully.
-    By checking the boxes below and tapping "Agree," you acknowledge that you have read, understand
-    and agree to all of the Terms and Conditions, which are binding legal agreements. If you do not
-    understand or agree to any of the Terms and Conditions, you are not licensed or authorized to
-    use this application and should delete it from your device.
-  eula: 'End User License Agreement'
-  privacyPolicy: 'Privacy Policy'
+    A Mikron Wallet szoftver és annak szolgáltatásainak használata előtt figyelmesen olvassa el a
+    Felhasználási feltételeket és az Adatvédelmi tájékoztatót.  A Mikron Wallet használatával vagy
+    egyenleg készítésével vállalja, hogy betartja ezeket a felhasználási feltételeket.
+    Ha nem ért egyet az alábbi felhasználási feltételekkel, ne használja a Mikron Wallet szoftvert.
+    Az alábbi mezők kitöltésével, valamint a Mikron Wallet és a Mikron Wallet-en keresztül nyújtott
+    szolgáltatások használatával Ön megerősíti, hogy elolvasta ezeket a felhasználási feltételeket,
+    és elfogadta azok tartalmát és teljes felelősséget vállal azok betartására.  Ön azt is
+    elfogadja, hogy Ön teljes mértékben képes és kompetens elfogadni és betartani ezeket a
+    felhasználási feltételeket.  Amennyiben Ön nem érti vagy nem fogadja el a jelen szoftver
+    felhasználási feltételeit vagy adatvédelmi tájékoztatóját, úgy nem jogosult a Mikron Wallet
+    szoftver használatára.
+  eula: 'Felhasználási feltételek'
+  privacyPolicy: 'Adatvédelem'
   eulaLink: 'https://mikron.io'
   privacyPolicyLink: 'https://mikron.io'
-  cannotDisagree: 'You may not use the application unless you agree to the Terms and Conditions.'
+  cannotDisagree: 'Amennyiben Ön nem érti vagy nem fogadja el a jelen szoftver felhasználási feltételeit vagy adatvédelmi tájékoztatóját, úgy nem jogosult a szoftver használatára.'
 status:
   state: 'Státusz'
   online: 'online'

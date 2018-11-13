@@ -47,8 +47,8 @@ module.exports = (environment) => {
     },
 
     links: {
-      eula: 'https://nanowalletcompany.com/desktop-eula',
-      privacyPolicy: 'https://nanowalletcompany.com/desktop-privacy-policy',
+      eula: 'https://mikron.io/en',
+      privacyPolicy: 'https://mikron.io/en',
     },
 
     assets: {
