@@ -3,7 +3,7 @@ import { get } from '@ember/object';
 import { tryInvoke } from '@ember/utils';
 
 import { service } from '@ember-decorators/service';
-import { tagName, attribute } from '@ember-decorators/component';
+import { tagName } from '@ember-decorators/component'; // attribute
 import { argument } from '@ember-decorators/argument';
 
 import window from 'ember-window-mock';
@@ -12,7 +12,7 @@ import window from 'ember-window-mock';
 class ExternalLinkComponent extends Component {
   @service electron = null;
 
-  @attribute href = null;
+  @argument href = null;
 
   @argument text = null;
 

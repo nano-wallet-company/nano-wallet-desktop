@@ -60,6 +60,8 @@ legal:
     use this application and should delete it from your device.
   eula: 'End User License Agreement'
   privacyPolicy: 'Privacy Policy'
+  eulaLink: 'https://mikron.io'
+  privacyPolicyLink: 'https://mikron.io'
   cannotDisagree: 'You may not use the application unless you agree to the Terms and Conditions.'
 status:
   state: 'Státusz'
