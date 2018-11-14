@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.9.0"></a>
+# [0.9.0](https://github.com/mikroncoin/mikron_wallet/compare/v0.5.9...v0.9.0) (2018-11-14)
+
+
+### Bug Fixes
+
+* **ui:** Update Eula and PrivPolicy links. ([e101609](https://github.com/mikroncoin/mikron_wallet/commit/e101609))
+
+
+
 <a name="0.5.9"></a>
 ## [0.5.9](https://github.com/mikroncoin/mikron_wallet/compare/v0.5.8...v0.5.9) (2018-11-13)
 
