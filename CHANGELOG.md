@@ -7,6 +7,11 @@ All notable changes to this project will be documented in this file. See [standa
 
 
 
+<a name="1.0.0"></a>
+# [1.0.0](https://github.com/mikroncoin/mikron_wallet/compare/v0.9.0...v1.0.0) (2018-11-14)
+
+
+
 <a name="0.9.0"></a>
 # [0.9.0](https://github.com/mikroncoin/mikron_wallet/compare/v0.5.9...v0.9.0) (2018-11-14)
 
