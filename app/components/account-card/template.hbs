@@ -9,10 +9,8 @@
         {{qr-code text=account.id width=170 height=170}}
       {{/if}}
       <p class="balance">
-        <sup>
-          <img src="{{root-url "images/logo.svg"}}" alt="{{t 'MIKRON'}}">
-        </sup>
         {{format-amount account.balance}}
+        {{t 'MIKRON'}}
         <br>
         <sub>+{{format-amount account.pending}}</sub>
       </p>
