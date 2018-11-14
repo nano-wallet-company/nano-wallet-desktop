@@ -64,8 +64,8 @@ legal:
     szoftver használatára.
   eula: 'Felhasználási feltételek'
   privacyPolicy: 'Adatvédelem'
-  eulaLink: 'https://mikron.io'
-  privacyPolicyLink: 'https://mikron.io'
+  eulaLink: 'https://mikron.io/wallet/legal/eula'
+  privacyPolicyLink: 'https://mikron.io/wallet/legal/privacypolicy'
   cannotDisagree: 'Amennyiben Ön nem érti vagy nem fogadja el a jelen szoftver felhasználási feltételeit vagy adatvédelmi tájékoztatóját, úgy nem jogosult a szoftver használatára.'
 status:
   state: 'Státusz'
