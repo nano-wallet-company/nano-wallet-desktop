@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.0.1"></a>
+## [1.0.1](https://github.com/mikroncoin/mikron_wallet/compare/v1.0.0...v1.0.1) (2018-11-15)
+
+
+### Features
+
+* **node:** Upgrade to v0.9. ([2f8c818](https://github.com/mikroncoin/mikron_wallet/commit/2f8c818))
+
+
+
 <a name="1.0.0"></a>
 # [1.0.0](https://github.com/mikroncoin/mikron_wallet/compare/v0.9.0...v1.0.0) (2018-11-14)
 
