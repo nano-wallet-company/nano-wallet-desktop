@@ -1,12 +1,9 @@
 const debounceFn = require('debounce-fn');
 
-const electron = require('electron');
 const log = require('electron-log');
 
 const { downloadAsset } = require('./assets');
 const { startDaemon } = require('./daemon');
-
-const { ipcMain } = electron;
 
 const downloadStart = ({ sender }, url) => {
   const window = sender.getOwnerBrowserWindow();
@@ -20,13 +17,7 @@ const downloadStart = ({ sender }, url) => {
     }
   }, { wait: 250, immediate: true });
 
-  const onStarted = (item) => {
-    const cancelDownload = () => item.cancel();
-    ipcMain.once('window-unloading', cancelDownload);
-    item.once('done', () => ipcMain.removeListener('window-unloading', cancelDownload));
-  };
-
-  return downloadAsset(sender, url, onStarted, onProgress)
+  return downloadAsset(url, onProgress)
     .then(() => {
       if (!window.isDestroyed()) {
         window.setProgressBar(-1);

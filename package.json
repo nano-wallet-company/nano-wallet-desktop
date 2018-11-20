@@ -82,6 +82,7 @@
     "cross-spawn": "^6.0.5",
     "debounce-fn": "^1.0.0",
     "del": "^3.0.0",
+    "duplexify": "^3.6.1",
     "electron-compile": "^6.4.3",
     "electron-context-menu": "^0.10.0",
     "electron-debug": "^2.0.0",
@@ -112,6 +113,7 @@
     "path-exists": "^3.0.0",
     "progress-stream": "^2.0.0",
     "pump": "^3.0.0",
+    "pumpify": "^1.5.1",
     "selfsigned": "^1.10.3",
     "semver": "^5.5.1",
     "server-destroy": "^1.0.1",
@@ -119,6 +121,7 @@
     "spdy": "^3.4.7",
     "tar-fs": "^1.16.3",
     "tar-stream": "^1.6.2",
+    "through2": "^3.0.0",
     "to-executable-name": "^2.0.0",
     "update-electron-app": "^1.3.0",
     "username": "^4.0.0",
@@ -255,7 +258,8 @@
     "rimraf": "^2.6.2",
     "sass": "^1.14.1",
     "slick-carousel": "^1.8.1",
-    "standard-version": "^4.4.0"
+    "standard-version": "^4.4.0",
+    "which": "^1.3.1"
   },
   "engines": {
     "node": ">= 10.2.0"
