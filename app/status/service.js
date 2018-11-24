@@ -12,7 +12,7 @@ export default class StatusService extends ObjectProxy.extend(
   PromiseProxyMixin,
   ContextBoundTasksMixin,
 ) {
-  @service rpc = null;
+  @service rpc;
 
   static isServiceFactory = true;
 

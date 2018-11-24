@@ -5,25 +5,25 @@ import { attr, hasMany, belongsTo } from '@ember-decorators/data';
 const { Model } = DS;
 
 export default class AccountModel extends Model {
-  @belongsTo({ async: true }) wallet = null;
+  @belongsTo({ async: true }) wallet;
 
-  @belongsTo('block', { async: true, inverse: null }) frontier = null;
+  @belongsTo('block', { async: true, inverse: null }) frontier;
 
-  @belongsTo('block', { async: true, inverse: null }) openBlock = null;
+  @belongsTo('block', { async: true, inverse: null }) openBlock;
 
-  @belongsTo('block', { async: true, inverse: null }) representativeBlock = null;
+  @belongsTo('block', { async: true, inverse: null }) representativeBlock;
 
-  @hasMany({ async: true, inverse: 'source' }) blocks = null;
+  @hasMany({ async: true, inverse: 'source' }) blocks;
 
-  @hasMany({ async: true, inverse: 'source' }) history = null;
+  @hasMany({ async: true, inverse: 'source' }) history;
 
-  @attr('big-number', { defaultValue: 0 }) balance = null;
+  @attr('big-number', { defaultValue: 0 }) balance;
 
-  @attr('big-number', { defaultValue: 0 }) pending = null;
+  @attr('big-number', { defaultValue: 0 }) pending;
 
-  @attr('string') representative = null;
+  @attr('string') representative;
 
-  @attr('number') blockCount = null;
+  @attr('number', { defaultValue: 0 }) blockCount;
 
-  @attr('timestamp', { defaultValue: () => new Date() }) modifiedTimestamp = null;
+  @attr('timestamp', { defaultValue: () => new Date() }) modifiedTimestamp;
 }

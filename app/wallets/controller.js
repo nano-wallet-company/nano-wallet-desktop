@@ -9,9 +9,9 @@ const WALLET_POLL_INTERVAL = 5 * 1000; // 5s
 export default class WalletsController extends Controller.extend(
   ContextBoundTasksMixin,
 ) {
-  @service flashMessages = null;
+  @service flashMessages;
 
-  @service rpc = null;
+  @service rpc;
 
   pollToken = null;
 

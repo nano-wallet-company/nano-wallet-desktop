@@ -1,27 +1,26 @@
 import Component from '@ember/component';
 
 import { service } from '@ember-decorators/service';
-import { argument } from '@ember-decorators/argument';
 import { overridableReads } from '@ember-decorators/object/computed';
 
 import LegalAgreementsValidations from '../../validations/legal-agreements';
 
 export default class LegalAgreementsComponent extends Component {
-  @service config = null;
+  @service config;
 
-  @service settings = null;
+  @service settings;
 
   LegalAgreementsValidations = LegalAgreementsValidations;
 
-  @argument eula = false;
+  eula = false;
 
-  @argument privacyPolicy = false;
+  privacyPolicy = false;
 
-  @argument onAgree = null;
+  onAgree = null;
 
-  @argument onDisagree = null;
+  onDisagree = null;
 
-  @overridableReads('config.links.eula') eulaLink = null;
+  @overridableReads('config.links.eula') eulaLink;
 
-  @overridableReads('config.links.privacyPolicy') privacyPolicyLink = null;
+  @overridableReads('config.links.privacyPolicy') privacyPolicyLink;
 }

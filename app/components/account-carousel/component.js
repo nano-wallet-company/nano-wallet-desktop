@@ -5,17 +5,16 @@ import { keepLatestTask } from 'ember-concurrency-decorators';
 import { ContextBoundTasksMixin, ContextBoundEventListenersMixin } from 'ember-lifeline';
 
 import { on, observes } from '@ember-decorators/object';
-import { argument } from '@ember-decorators/argument';
 
 export default class AccountCarouselComponent extends Component.extend(
   ContextBoundTasksMixin,
   ContextBoundEventListenersMixin,
 ) {
-  @argument accounts = null;
+  accounts = null;
 
-  @argument currentSlide = 0;
+  currentSlide = 0;
 
-  @argument onChangeSlide = null;
+  onChangeSlide = null;
 
   slickInstance = null;
 
@@ -53,7 +52,7 @@ export default class AccountCarouselComponent extends Component.extend(
   }
 
   @keepLatestTask
-  setupSlider = function* setupSliderTask() {
+  * setupSlider() {
     if (!this.slickInstance && !this.isDestroying) {
       yield waitForQueue('afterRender');
 
@@ -83,7 +82,7 @@ export default class AccountCarouselComponent extends Component.extend(
   }
 
   @keepLatestTask
-  teardownSlider = function* teardownSliderTask() {
+  * teardownSlider() {
     if (this.slickInstance && !this.isDestroyed) {
       this.slickInstance.slick('unslick');
       this.slickInstance = null;
@@ -98,7 +97,7 @@ export default class AccountCarouselComponent extends Component.extend(
   }
 
   @keepLatestTask
-  refreshSlider = function* refreshSlideTask() {
+  * refreshSlider() {
     yield this.get('teardownSlider').perform();
     yield this.get('setupSlider').perform();
     return yield this.slickInstance;

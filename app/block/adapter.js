@@ -4,7 +4,7 @@ import { service } from '@ember-decorators/service';
 const { Adapter } = DS;
 
 export default class BlockAdapter extends Adapter {
-  @service rpc = null;
+  @service rpc;
 
   shouldReloadRecord() {
     return true;

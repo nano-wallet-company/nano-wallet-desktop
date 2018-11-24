@@ -19,13 +19,13 @@ export default class ApplicationRoute extends Route.extend(
   ApplicationRouteMixin,
   DisposableMixin,
 ) {
-  @service intl = null;
+  @service intl;
 
-  @service config = null;
+  @service config;
 
-  @service settings = null;
+  @service settings;
 
-  @service electron = null;
+  @service electron;
 
   async beforeModel(...args) {
     const electron = this.get('electron');

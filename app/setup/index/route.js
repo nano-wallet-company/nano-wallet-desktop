@@ -5,9 +5,9 @@ import { action } from '@ember-decorators/object';
 import { service } from '@ember-decorators/service';
 
 export default class SetupIndexRoute extends Route {
-  @service session = null;
+  @service session;
 
-  @service electron = null;
+  @service electron;
 
   beforeModel(...args) {
     const electron = this.get('electron');

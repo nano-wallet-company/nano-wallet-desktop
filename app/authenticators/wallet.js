@@ -46,9 +46,9 @@ export const WalletLockedError = defineError({
 });
 
 export default class WalletAuthenticator extends Base {
-  @service rpc = null;
+  @service rpc;
 
-  @service electron = null;
+  @service electron;
 
   async authenticate({ wallet, password }) {
     try {

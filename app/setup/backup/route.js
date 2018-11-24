@@ -8,9 +8,9 @@ import { service } from '@ember-decorators/service';
 import generateSeed from '../../utils/generate-seed';
 
 export default class SetupBackupRoute extends Route {
-  @service rpc = null;
+  @service rpc;
 
-  @service electron = null;
+  @service electron;
 
   beforeModel(...args) {
     const electron = this.get('electron');

@@ -6,7 +6,7 @@ import { observes } from '@ember-decorators/object';
 import unformatAmount from '../utils/unformat-amount';
 
 export default class UnformatAmountHelper extends Helper {
-  @service intl = null;
+  @service intl;
 
   @observes('intl.{locale,formats.number.decimal}')
   onLocaleChange() {

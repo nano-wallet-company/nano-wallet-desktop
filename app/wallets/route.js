@@ -9,15 +9,15 @@ import { service } from '@ember-decorators/service';
 export default class WalletsRoute extends Route.extend(
   AuthenticatedRouteMixin,
 ) {
-  @service intl = null;
+  @service intl;
 
-  @service session = null;
+  @service session;
 
-  @service electron = null;
+  @service electron;
 
-  @service rpc = null;
+  @service rpc;
 
-  @service flashMessages = null;
+  @service flashMessages;
 
   beforeModel(...args) {
     const electron = this.get('electron');

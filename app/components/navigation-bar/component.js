@@ -1,18 +1,17 @@
 import Component from '@ember/component';
 
 import { action } from '@ember-decorators/object';
-import { argument } from '@ember-decorators/argument';
 
 export default class NavigationBarComponent extends Component {
-  @argument wallet = null;
+  wallet = null;
 
-  @argument show = false;
+  show = false;
 
-  @argument onCreateAccount = null;
+  onCreateAccount = null;
 
-  @argument onChangeRepresentative = null;
+  onChangeRepresentative = null;
 
-  @argument onChangePassword = null;
+  onChangePassword = null;
 
   @action
   toggleShow() {

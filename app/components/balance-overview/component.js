@@ -6,7 +6,6 @@ import { ContextBoundTasksMixin } from 'ember-lifeline';
 
 import { on, observes } from '@ember-decorators/object';
 import { alias } from '@ember-decorators/object/computed';
-import { argument } from '@ember-decorators/argument';
 
 import { storage } from '../../decorators';
 
@@ -21,15 +20,15 @@ export default class BalanceOverviewComponent extends Component.extend(
   InViewportMixin,
   ContextBoundTasksMixin,
 ) {
-  @storage('wallet') settings = null;
+  @storage('wallet') settings;
 
-  @alias('settings.currency') currency = null;
+  @alias('settings.currency') currency;
 
-  @argument wallet = null;
+  wallet = null;
 
-  @argument exchangeRate = null;
+  exchangeRate = null;
 
-  @argument onChangeCurrency = null;
+  onChangeCurrency = null;
 
   pollToken = null;
 
@@ -54,7 +53,7 @@ export default class BalanceOverviewComponent extends Component.extend(
   }
 
   @keepLatestTask
-  exchangeRateTask = function* exchangeRateTask(currency = Symbol.keyFor(DEFAULT_CURRENCY)) {
+  * exchangeRateTask(currency = Symbol.keyFor(DEFAULT_CURRENCY)) {
     return yield getExchangeRate(Symbol.for(currency));
   }
 

@@ -33,9 +33,9 @@ export default class ElectronService extends Service.extend(
   Evented,
   DisposableMixin,
 ) {
-  @service intl = null;
+  @service intl;
 
-  @service config = null;
+  @service config;
 
   shell = null;
 

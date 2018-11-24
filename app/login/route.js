@@ -11,13 +11,13 @@ import { AuthenticateError } from '../authenticators/wallet';
 export default class LoginRoute extends Route.extend(
   UnauthenticatedRouteMixin,
 ) {
-  @service intl = null;
+  @service intl;
 
-  @service session = null;
+  @service session;
 
-  @service electron = null;
+  @service electron;
 
-  @service flashMessages = null;
+  @service flashMessages;
 
   beforeModel(...args) {
     const electron = this.get('electron');

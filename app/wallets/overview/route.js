@@ -6,9 +6,9 @@ import { action } from '@ember-decorators/object';
 import { service } from '@ember-decorators/service';
 
 export default class WalletsOverviewRoute extends Route {
-  @service intl = null;
+  @service intl;
 
-  @service flashMessages = null;
+  @service flashMessages;
 
   beforeModel(...args) {
     const walletOverviewController = this.controllerFor('wallets.overview');

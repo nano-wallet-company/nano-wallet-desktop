@@ -1,17 +1,16 @@
 import Component from '@ember/component';
 
 import { classNames } from '@ember-decorators/component';
-import { argument } from '@ember-decorators/argument';
 
 @classNames('input-group')
 class PasswordToggleComponent extends Component {
-  @argument inputId = null;
+  inputId = null;
 
-  @argument label = null;
+  label = null;
 
-  @argument placeholder = null;
+  placeholder = null;
 
-  @argument readonly = false;
+  readonly = false;
 
   reveal = false;
 }

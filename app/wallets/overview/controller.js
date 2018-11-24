@@ -13,7 +13,7 @@ export default class WalletsOverviewController extends Controller {
 
   isExpanded = false;
 
-  @sort('model.accounts', 'sortBy') sortedAccounts = null;
+  @sort('model.accounts', 'sortBy') sortedAccounts;
 
   get sortBy() {
     // Fallback to sorting by `id` for stable sort.

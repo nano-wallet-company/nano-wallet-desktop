@@ -1,13 +1,11 @@
 import Component from '@ember/component';
 
-import { argument } from '@ember-decorators/argument';
-
 import { storage } from '../../decorators';
 
 export default class AccountLabelComponent extends Component {
-  @storage('account') settings = null;
+  @storage('account') settings;
 
-  @argument account = null;
+  account = null;
 
-  @argument truncate = false;
+  truncate = false;
 }

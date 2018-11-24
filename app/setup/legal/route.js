@@ -7,9 +7,9 @@ import { action } from '@ember-decorators/object';
 import alert from '../../utils/alert';
 
 export default class SetupLegalRoute extends Route {
-  @service intl = null;
+  @service intl;
 
-  @service settings = null;
+  @service settings;
 
   @action
   agree() {

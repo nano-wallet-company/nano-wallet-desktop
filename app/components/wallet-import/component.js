@@ -3,7 +3,6 @@ import { get, set } from '@ember/object';
 import { tryInvoke } from '@ember/utils';
 import { service } from '@ember-decorators/service';
 import { action } from '@ember-decorators/object';
-import { argument } from '@ember-decorators/argument';
 
 import bip39 from 'bip39';
 
@@ -12,23 +11,23 @@ import { storage } from '../../decorators';
 import ImportWalletValidations from '../../validations/import-wallet';
 
 export default class WalletImportComponent extends Component {
-  @service intl = null;
+  @service intl;
 
-  @storage('wallet') settings = null;
+  @storage('wallet') settings;
 
   ImportWalletValidations = ImportWalletValidations;
 
-  @argument type = 'seed';
+  type = 'seed';
 
-  @argument wallet = null;
+  wallet = null;
 
-  @argument seed = null;
+  seed = null;
 
-  @argument onChange = null;
+  onChange = null;
 
-  @argument onCancel = null;
+  onCancel = null;
 
-  @argument onSubmit = null;
+  onSubmit = null;
 
   @action
   convertMnemonic(changeset) {

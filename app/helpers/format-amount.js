@@ -6,7 +6,7 @@ import { observes } from '@ember-decorators/object';
 import formatAmount from '../utils/format-amount';
 
 export default class FormatAmountHelper extends Helper {
-  @service intl = null;
+  @service intl;
 
   @observes('intl.{locale,formats.number.decimal}')
   onLocaleChange() {

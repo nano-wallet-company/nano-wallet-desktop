@@ -42,6 +42,34 @@ module.exports = (environment) => {
 
     contentSecurityPolicyMeta: true,
 
+    fontawesome: {
+      icons: {
+        'free-solid-svg-icons': [
+          'check',
+          'chevron-up',
+          'cog',
+          'copy',
+          'download',
+          'envelope-open',
+          'exclamation-triangle',
+          'eye-slash',
+          'eye',
+          'paper-plane',
+          'plus-square',
+          'sign-out-alt',
+          'signal',
+          'spinner',
+          'sync',
+          'thumbs-up',
+          'times',
+          'upload',
+        ],
+        'free-regular-svg-icons': [
+          'question-circle',
+        ],
+      },
+    },
+
     viewportConfig: {
       viewportSpy: true,
     },

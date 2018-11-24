@@ -8,7 +8,7 @@ import { service } from '@ember-decorators/service';
 const { authenticationRoute } = Configuration;
 
 export default class LogoutRoute extends Route {
-  @service session = null;
+  @service session;
 
   beforeModel() {
     const session = this.get('session');

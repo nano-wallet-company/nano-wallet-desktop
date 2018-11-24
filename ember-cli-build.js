@@ -8,16 +8,15 @@ const { extensions: defaultExtensions } = require('broccoli-asset-rev/lib/defaul
 module.exports = (defaults) => {
   const app = new EmberApp(defaults, {
     babel: {
+      sourceMaps: 'inline',
       plugins: [
-        ['@babel/plugin-proposal-decorators', { legacy: true }],
-        ['@babel/plugin-proposal-class-properties', { loose: true }],
-        ['@babel/plugin-syntax-async-generators'],
-        ['@babel/plugin-proposal-function-bind'],
+        '@babel/plugin-proposal-function-bind',
+        '@babel/plugin-proposal-throw-expressions',
       ],
     },
 
     sourcemaps: {
-      enabled: true,
+      enabled: EmberApp.env() !== 'production',
       extensions: ['js'],
     },
 

@@ -5,11 +5,11 @@ import { attr, belongsTo } from '@ember-decorators/data';
 const { Model } = DS;
 
 export default class BlockModel extends Model {
-  @belongsTo({ async: true, inverse: null }) wallet = null;
+  @belongsTo({ async: true, inverse: null }) wallet;
 
-  @belongsTo('account', { async: true, inverse: 'blocks' }) source = null;
+  @belongsTo('account', { async: true, inverse: 'blocks' }) source;
 
-  @attr() destination = null;
+  @attr() destination;
 
-  @attr('big-number') amount = null;
+  @attr('big-number', { defaultValue: 0 }) amount;
 }

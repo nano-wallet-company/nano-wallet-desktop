@@ -3,18 +3,17 @@ import { set } from '@ember/object';
 import { tryInvoke } from '@ember/utils';
 
 import { action } from '@ember-decorators/object';
-import { argument } from '@ember-decorators/argument';
 
 import UnlockWalletValidations from '../../validations/unlock-wallet';
 
 export default class WalletUnlockComponent extends Component {
   UnlockWalletValidations = UnlockWalletValidations;
 
-  @argument wallet = null;
+  wallet = null;
 
-  @argument password = null;
+  password = null;
 
-  @argument onSubmit = null;
+  onSubmit = null;
 
   @action
   clearPassword(changeset) {

@@ -2,16 +2,15 @@ import Component from '@ember/component';
 
 import { service } from '@ember-decorators/service';
 import { action } from '@ember-decorators/object';
-import { argument } from '@ember-decorators/argument';
 
 import toNanoPrefix from '../../utils/to-nano-prefix';
 
 export default class AccountCardComponent extends Component {
-  @service intl = null;
+  @service intl;
 
-  @service flashMessages = null;
+  @service flashMessages;
 
-  @argument account = null;
+  account = null;
 
   @action
   copyAddress(value) {

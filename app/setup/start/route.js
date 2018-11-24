@@ -4,7 +4,7 @@ import { get } from '@ember/object';
 import { service } from '@ember-decorators/service';
 
 export default class SetupStartRoute extends Route {
-  @service electron = null;
+  @service electron;
 
   beforeModel(...args) {
     const electron = this.get('electron');

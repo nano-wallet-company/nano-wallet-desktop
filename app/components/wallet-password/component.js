@@ -4,7 +4,6 @@ import { get, setProperties } from '@ember/object';
 import { defineError } from 'ember-exex/error';
 import { action } from '@ember-decorators/object';
 import { service } from '@ember-decorators/service';
-import { argument } from '@ember-decorators/argument';
 
 import ChangePasswordValidations from '../../validations/change-password';
 
@@ -14,19 +13,19 @@ export const PasswordConfirmationError = defineError({
 });
 
 export default class WalletPasswordComponent extends Component {
-  @service intl = null;
+  @service intl;
 
-  @service flashMessages = null;
+  @service flashMessages;
 
   ChangePasswordValidations = ChangePasswordValidations;
 
-  @argument wallet = null;
+  wallet = null;
 
-  @argument password = null;
+  password = null;
 
-  @argument passwordConfirm = null;
+  passwordConfirm = null;
 
-  @argument onSubmit = null;
+  onSubmit = null;
 
   @action
   confirmPassword(changeset) {

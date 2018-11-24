@@ -1,0 +1,17 @@
+diff --git a/node_modules/ember-concurrency-decorators/addon/index.js b/node_modules/ember-concurrency-decorators/addon/index.js
+index aa71fda..db299fa 100644
+--- a/node_modules/ember-concurrency-decorators/addon/index.js
++++ b/node_modules/ember-concurrency-decorators/addon/index.js
+@@ -115,10 +115,10 @@ const applyOptions = (options, task) =>
+  * @private
+  */
+ const createDecorator = (propertyCreator, baseOptions = {}) =>
+-  computedDecoratorWithParams((target, key, desc, [userOptions]) =>
++  computedDecoratorWithParams(({ descriptor }, [userOptions]) =>
+     applyOptions(
+       Object.assign({}, baseOptions, userOptions),
+-      propertyCreator(desc)
++      propertyCreator(descriptor)
+     )
+   );
+ 

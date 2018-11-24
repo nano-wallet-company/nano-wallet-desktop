@@ -7,6 +7,9 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 2019,
     sourceType: 'module',
+    ecmaFeatures: {
+      impliedStrict: true,
+    },
   },
   plugins: [
     'babel',
@@ -27,5 +30,10 @@ module.exports = {
     'import/no-unresolved': 'off',
     'hbs/check-hbs-template-literals': 'error',
     'ember-suave/no-const-outside-module-scope': 'off',
+    'generator-star-spacing': ['error', {
+      before: false,
+      after: true,
+      method: { before: true, after: true },
+    }]
   },
 };

@@ -10,11 +10,11 @@ import { gt, lt } from '@ember-decorators/object/computed';
 export default class StatusTooltipComponent extends Component.extend(
   InViewportMixin,
 ) {
-  @service status = null;
+  @service status;
 
-  @lt('status.peers.length', 1) isPeerless = false;
+  @lt('status.peers.length', 1) isPeerless;
 
-  @gt('uncheckedPercentage', 0.01) isSyncing = false;
+  @gt('uncheckedPercentage', 0.01) isSyncing;
 
   @computed('status.blocks.{count,unchecked}')
   get uncheckedPercentage() {

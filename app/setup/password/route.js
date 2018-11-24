@@ -5,9 +5,9 @@ import { service } from '@ember-decorators/service';
 import { action } from '@ember-decorators/object';
 
 export default class SetupPasswordRoute extends Route {
-  @service rpc = null;
+  @service rpc;
 
-  @service session = null;
+  @service session;
 
   @action
   async changePassword(model, changeset) {

@@ -76,7 +76,7 @@ export const RepresentativeChangeError = defineError({
 });
 
 export default class RPCService extends Service {
-  @service ajax = null;
+  @service ajax;
 
   async call(action, params = {}) {
     const data = assign({ action }, params);

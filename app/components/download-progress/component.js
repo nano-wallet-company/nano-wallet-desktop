@@ -7,7 +7,6 @@ import {
   ContextBoundTasksMixin,
 } from 'ember-lifeline';
 import { on } from '@ember-decorators/object';
-import { argument } from '@ember-decorators/argument';
 
 import speedometer from 'speedometer';
 
@@ -19,13 +18,13 @@ export default class DownloadProgressComponent extends Component.extend(
   DisposableMixin,
   ContextBoundTasksMixin,
 ) {
-  @argument downloader = null;
+  downloader = null;
 
-  @argument asset = 'data';
+  asset = 'data';
 
-  @argument onFinish = null;
+  onFinish = null;
 
-  @argument onError = null;
+  onError = null;
 
   status = STATUS_DOWNLOADING;
 

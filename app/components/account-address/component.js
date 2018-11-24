@@ -3,7 +3,6 @@ import Component from '@ember/component';
 import { on, observes } from '@ember-decorators/object';
 import { bool } from '@ember-decorators/object/computed';
 import { tagName, attribute } from '@ember-decorators/component';
-import { argument } from '@ember-decorators/argument';
 
 import toNanoPrefix from '../../utils/to-nano-prefix';
 
@@ -11,15 +10,15 @@ export const MINIMUM_LENGTH = 65;
 
 @tagName('span')
 class AccountAddressComponent extends Component {
-  @bool('value') isVisible = false;
+  @bool('value') isVisible;
 
   @attribute title = null;
 
   @attribute translate = false;
 
-  @argument value = null;
+  value = null;
 
-  @argument truncate = 0;
+  truncate = 0;
 
   head = null;
 
@@ -28,6 +27,10 @@ class AccountAddressComponent extends Component {
   tail = null;
 
   @on('didInsertElement')
+  setupParts() {
+    this.valueDidChange();
+  }
+
   @observes('value')
   valueDidChange() {
     const value = this.get('value');

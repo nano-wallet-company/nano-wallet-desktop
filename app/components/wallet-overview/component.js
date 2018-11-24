@@ -1,18 +1,17 @@
 import Component from '@ember/component';
 
 import { service } from '@ember-decorators/service';
-import { argument } from '@ember-decorators/argument';
 
 export default class WalletOverviewComponent extends Component {
-  @service intl = null;
+  @service intl;
 
-  @argument wallet = null;
+  wallet = null;
 
-  @argument accounts = null;
+  accounts = null;
 
-  @argument currentSlide = 0;
+  currentSlide = 0;
 
-  @argument onChangeSlide = null;
+  onChangeSlide = null;
 
   get breakpoints() {
     return [

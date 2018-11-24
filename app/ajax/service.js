@@ -34,15 +34,15 @@ export default class ApplicationAjaxService extends AjaxService.extend({
     }
   }), backoffPolicy).enqueue().maxConcurrency(20),
 }) {
-  @service session = null;
+  @service session;
 
-  @service hostManager = null;
+  @service hostManager;
 
-  @service electron = null;
+  @service electron;
 
-  @overridableReads('hostManager.host.rpcHost') host = null;
+  @overridableReads('hostManager.host.rpcHost') host;
 
-  @overridableReads('hostManager.host.rpcNamespace') namespace = null;
+  @overridableReads('hostManager.host.rpcNamespace') namespace;
 
   contentType = 'application/json'
 

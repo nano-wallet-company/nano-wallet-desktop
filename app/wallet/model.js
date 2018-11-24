@@ -9,25 +9,25 @@ import sumAmounts from '../utils/sum-amounts';
 
 const { Model } = DS;
 
-const sumAccounts = computedDecorator((target, key, desc) => {
-  const { value = 0 } = desc;
+const sumAccounts = computedDecorator((desc) => {
+  const { key } = desc;
   return computed(`accounts.@each.${key}`, {
     get() {
       const accounts = this.get('accounts');
       const amounts = A(accounts).mapBy(key);
-      return sumAmounts(amounts, value);
+      return sumAmounts(amounts, 0);
     },
   });
 });
 
 export default class WalletModel extends Model {
-  @hasMany('account', { async: true }) accounts = null;
+  @hasMany('account', { async: true }) accounts;
 
-  @attr seed = null;
+  @attr seed;
 
-  @attr representative = null;
+  @attr representative;
 
-  @sumAccounts balance = 0;
+  @sumAccounts balance;
 
-  @sumAccounts pending = 0;
+  @sumAccounts pending;
 }

@@ -1,26 +1,25 @@
 import Component from '@ember/component';
 
 import { overridableReads } from '@ember-decorators/object/computed';
-import { argument } from '@ember-decorators/argument';
 
 import { storage } from '../../decorators';
 
 import ChangeRepresentativeValidations from '../../validations/change-representative';
 
 export default class WalletSettingsComponent extends Component {
-  @storage('wallet') settings = null;
+  @storage('wallet') settings;
 
   ChangeRepresentativeValidations = ChangeRepresentativeValidations;
 
-  @overridableReads('settings.seed') seed = null;
+  @overridableReads('settings.seed') seed;
 
-  @argument wallet = null;
+  wallet = null;
 
-  @argument password = null;
+  password = null;
 
-  @argument representative = null;
+  representative = null;
 
-  @argument onChangeRepresentative = null;
+  onChangeRepresentative = null;
 
-  @argument onChangePassword = null;
+  onChangePassword = null;
 }

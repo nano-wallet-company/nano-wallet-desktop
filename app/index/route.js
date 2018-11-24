@@ -8,11 +8,11 @@ import { service } from '@ember-decorators/service';
 const { authenticationRoute } = Configuration;
 
 export default class IndexRoute extends Route {
-  @service session = null;
+  @service session;
 
-  @service settings = null;
+  @service settings;
 
-  @service electron = null;
+  @service electron;
 
   beforeModel(...args) {
     const electron = this.get('electron');

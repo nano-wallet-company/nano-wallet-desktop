@@ -5,7 +5,7 @@ import { service } from '@ember-decorators/service';
 const { Adapter } = DS;
 
 export default class WalletAdapter extends Adapter {
-  @service rpc = null;
+  @service rpc;
 
   shouldReloadRecord() {
     return true;

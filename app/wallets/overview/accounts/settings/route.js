@@ -4,9 +4,9 @@ import { service } from '@ember-decorators/service';
 import { action } from '@ember-decorators/object';
 
 export default class WalletsOverviewAccountsSettingsRoute extends Route {
-  @service intl = null;
+  @service intl;
 
-  @service flashMessages = null;
+  @service flashMessages;
 
   @action
   save() {

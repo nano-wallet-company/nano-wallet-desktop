@@ -4,7 +4,6 @@ import { tryInvoke } from '@ember/utils';
 
 import { action } from '@ember-decorators/object';
 import { gt } from '@ember-decorators/object/computed';
-import { argument } from '@ember-decorators/argument';
 
 import { storage } from '../../decorators';
 
@@ -13,17 +12,17 @@ import ChangeAccountSettingsValidations from '../../validations/change-account-s
 import fromAmount from '../../utils/from-amount';
 
 export default class AccountSettingsComponent extends Component {
-  @storage('account') settings = null;
+  @storage('account') settings;
 
   ChangeAccountSettingsValidations = ChangeAccountSettingsValidations;
 
-  @argument account = null;
+  account = null;
 
-  @argument onSave = null;
+  onSave = null;
 
-  @argument onCancel = null;
+  onCancel = null;
 
-  @gt('account.blockCount', 0) hasOpenBlock = false;
+  @gt('account.blockCount', 0) hasOpenBlock;
 
   @action
   async remove(account) {

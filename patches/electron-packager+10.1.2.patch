@@ -1,4 +1,5 @@
-patch-package
+diff --git a/node_modules/electron-packager/common.js b/node_modules/electron-packager/common.js
+index b619db9..b36ffe9 100644
 --- a/node_modules/electron-packager/common.js
 +++ b/node_modules/electron-packager/common.js
 @@ -72,7 +72,8 @@ function sanitizeAppName (name) {
@@ -11,6 +12,8 @@ patch-package
  }
 
  function generateFinalPath (opts) {
+diff --git a/node_modules/electron-packager/prune.js b/node_modules/electron-packager/prune.js
+index e9484b3..b1175a4 100644
 --- a/node_modules/electron-packager/prune.js
 +++ b/node_modules/electron-packager/prune.js
 @@ -12,7 +12,7 @@ function pruneCommand (packageManager) {
@@ -18,7 +21,7 @@ patch-package
        return `${packageManager} prune --production`
      case 'yarn':
 -      return `${packageManager} install --production --no-bin-links --no-lockfile`
-+      return `${packageManager} install --production --no-bin-links --frozen-lockfile --non-interactive`
++      return `${packageManager} install --production --no-bin-links --frozen-lockfile`
    }
  }
 

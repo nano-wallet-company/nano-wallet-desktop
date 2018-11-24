@@ -4,7 +4,6 @@ import { tryInvoke } from '@ember/utils';
 import { service } from '@ember-decorators/service';
 import { action } from '@ember-decorators/object';
 import { classNames } from '@ember-decorators/component';
-import { argument } from '@ember-decorators/argument';
 
 import { reject } from 'rsvp';
 
@@ -14,19 +13,19 @@ import { storage } from '../../decorators';
 
 @classNames('import')
 class WalletBackupComponent extends Component {
-  @service intl = null;
+  @service intl;
 
-  @service flashMessages = null;
+  @service flashMessages;
 
-  @storage('wallet') settings = null;
+  @storage('wallet') settings;
 
-  @argument wallet = null;
+  wallet = null;
 
-  @argument seed = null;
+  seed = null;
 
-  @argument onCancel = null;
+  onCancel = null;
 
-  @argument onDone = null;
+  onDone = null;
 
   needsConfirm = false;
 

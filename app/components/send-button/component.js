@@ -3,7 +3,6 @@ import Component from '@ember/component';
 import { DisposableMixin } from 'ember-lifeline';
 import { on, action } from '@ember-decorators/object';
 import { className } from '@ember-decorators/component';
-import { argument } from '@ember-decorators/argument';
 import {
   bindKeyboardShortcuts,
   unbindKeyboardShortcuts,
@@ -14,11 +13,11 @@ export default class SendButtonComponent extends Component.extend(
 ) {
   @className('expand') isExpanded = false;
 
-  @argument wallet = null;
+  wallet = null;
 
-  @argument onOpen = null;
+  onOpen = null;
 
-  @argument onClose = null;
+  onClose = null;
 
   get keyboardShortcuts() {
     return {

@@ -5,9 +5,9 @@ import { service } from '@ember-decorators/service';
 import { action } from '@ember-decorators/object';
 
 export default class WalletsOverviewAccountsRoute extends Route {
-  @service intl = null;
+  @service intl;
 
-  @service flashMessages = null;
+  @service flashMessages;
 
   renderTemplate() {
     this.render('wallets.overview.accounts.send', {

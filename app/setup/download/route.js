@@ -4,7 +4,7 @@ import { service } from '@ember-decorators/service';
 import { action } from '@ember-decorators/object';
 
 export default class SetupDownloadRoute extends Route {
-  @service electron = null;
+  @service electron;
 
   queryParams = {
     asset: {
