@@ -111,7 +111,7 @@ module.exports = {
       OriginalFilename: `${name}.exe`,
       ProductName: productName,
     },
-    afterPrune: [
+    afterCopy: [
       (buildPath, electronVersion, platform, arch, callback) => {
         const cwd = path.join(buildPath, 'node_modules', 'lzma-native');
         return del(['{deps,build}', 'bin/**'], { cwd })

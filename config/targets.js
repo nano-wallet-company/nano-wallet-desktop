@@ -12,7 +12,8 @@ if (isElectron) {
   browsers.push('last 2 Chrome versions');
 
   const isCI = !!process.env.CI;
-  if (!isCI) {
+  const isProduction = process.env.EMBER_ENV === 'production';
+  if (isCI || isProduction) {
     browsers.push(
       'last 2 Safari versions',
       'last 2 Firefox versions',
