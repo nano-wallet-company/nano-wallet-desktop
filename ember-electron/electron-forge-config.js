@@ -5,6 +5,7 @@ const moment = require('moment');
 
 const {
   version,
+  homepage,
   productName,
   name: packageName,
   copyright: appCopyright,
@@ -34,8 +35,11 @@ const osxSign = {
   entitlements: false,
 };
 
-const certificateFile = process.env.CSC_LINK || undefined;
-const certificatePassword = process.env.CSC_KEY_PASSWORD || undefined;
+const certificateFile = process.env.CSC_FILE ? path.resolve(process.env.CSC_FILE) : null;
+const certificatePassword = process.env.CSC_KEY_PASSWORD || null;
+const signWithParams = certificateFile && certificatePassword
+  ? `/a /f "${certificateFile}" /p "${certificatePassword}" /fd sha256 /tr http://timestamp.digicert.com /td sha256`
+  : undefined;
 
 const unsupportedArch = (target, type) => {
   throw new Error(`Unsupported architecture for ${target}: ${type}`);
@@ -96,9 +100,11 @@ module.exports = {
     // extendInfo: {
     //   CSResourcesFileMapped: true,
     // },
+    prune: false,
     overwrite: true,
     packageManager: 'yarn',
     executableName: name,
+    darwinDarkModeSupport: true,
     win32metadata: {
       FileDescription: productName,
       InternalName: name,
@@ -115,13 +121,20 @@ module.exports = {
   },
   electronWinstallerConfig: {
     name,
-    certificateFile,
-    certificatePassword,
+    signWithParams,
     exe: `${name}.exe`,
+    iconUrl: `${homepage}/icon.ico`,
     setupIcon: `${icon}.ico`,
     loadingGif: path.join(__dirname, 'resources', 'install-spinner.gif'),
   },
   electronInstallerDMG: {
+    icon: `${icon}.icns`,
+    format: 'ULFO',
+    additionalDMGOptions: {
+      'code-sign': {
+        'signing-identity': process.env.CSC_NAME || undefined,
+      },
+    },
   },
   electronInstallerDebian: {
     name,

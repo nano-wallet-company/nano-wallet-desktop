@@ -116,7 +116,7 @@ const downloadAsset = async (sender, url, onStarted, onProgress) => {
     sender.send('download-extract');
   }
 
-  const assetName = path.basename(savePath, '.tar.br');
+  const assetName = path.basename(savePath, '.tar.xz');
   const extractDir = path.join(path.dirname(savePath), productName, assetName);
   await makeDir(extractDir);
   await extractAsset(savePath, extractDir, onProgress);

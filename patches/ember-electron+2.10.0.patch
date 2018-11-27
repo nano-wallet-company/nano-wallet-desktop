@@ -1,0 +1,25 @@
+diff --git a/node_modules/ember-electron/lib/tasks/assemble.js b/node_modules/ember-electron/lib/tasks/assemble.js
+index 12241f1..4fc1d4c 100644
+--- a/node_modules/ember-electron/lib/tasks/assemble.js
++++ b/node_modules/ember-electron/lib/tasks/assemble.js
+@@ -65,7 +65,7 @@ class AssembleTask extends Task {
+
+   pruneCommand() {
+     if (shouldUseYarn(this.project.root)) {
+-      return 'yarn install --production --no-bin-links';
++      return 'yarn install --production --no-bin-links --frozen-lockfile';
+     } else {
+       return 'npm install --production --no-bin-links';
+     }
+diff --git a/node_modules/ember-electron/lib/utils/assemble-tree.js b/node_modules/ember-electron/lib/utils/assemble-tree.js
+index 086b5cb..78f4188 100644
+--- a/node_modules/ember-electron/lib/utils/assemble-tree.js
++++ b/node_modules/ember-electron/lib/utils/assemble-tree.js
+@@ -84,6 +84,7 @@ this addon once you removed the {{welcome-page}} template tag.
+       include: [
+         'npm-shrinkwrap.json',
+         'yarn.lock',
++        '.yarnclean',
+       ],
+     }),
+
