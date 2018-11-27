@@ -1216,13 +1216,14 @@
     universal-user-agent "^2.0.1"
     url-template "^2.0.8"
 
-"@octokit/request@2.1.1":
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/@octokit/request/-/request-2.1.1.tgz#2c6c6356f2bced33fb6352df8d44f9f50e076e76"
-  integrity sha512-N0I01iWwbogadLyCbVJ048hDMet3uGrB93VeJgB+jeuugRUr1DXncEu2tpiWgSk1azGDFPe5RTRvfx4Uadf+Fw==
+"@octokit/request@2.1.2":
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/@octokit/request/-/request-2.1.2.tgz#a506e06cb3fd73617bd82710047cf3ee7e657835"
+  integrity sha512-RtC+7Np9hWWYfnXyT1qwBR6Y9uMArq2yY475o4sFp4qis5hAgOUEZMWknR+dfDpRRXoFOPSAAIjc900Gs7qI6Q==
   dependencies:
     "@octokit/endpoint" "^3.0.0"
     is-plain-object "^2.0.4"
+    node-fetch "^2.3.0"
     universal-user-agent "^2.0.1"
 
 "@octokit/rest@^14.0.4":
@@ -1238,11 +1239,11 @@
     url-template "^2.0.8"
 
 "@octokit/rest@^16.0.1":
-  version "16.0.1"
-  resolved "https://registry.yarnpkg.com/@octokit/rest/-/rest-16.0.1.tgz#053c1a80aca11c096ad6e09626ba5a18576c1aa0"
-  integrity sha512-4Vbn3TtKADUOSk9usbfJ6XsEErt9h6Thms6EejI/MWMeVqdY5a3NevbAp7rVSXBl2xYIw3erPLkeFpGg+RmkoQ==
+  version "16.0.3"
+  resolved "https://registry.yarnpkg.com/@octokit/rest/-/rest-16.0.3.tgz#22d76ef7fa4bccc464a5b6dc1af433459d3cfa04"
+  integrity sha512-OOm7JmQZfA8J6motwkl/KeMcqhCKZNZqxMSr3lUaOSAD1TY4BRzm83pQ8db0gd7vcQMb/snz9GxLUBvqT/H7Gg==
   dependencies:
-    "@octokit/request" "2.1.1"
+    "@octokit/request" "2.1.2"
     before-after-hook "^1.2.0"
     btoa-lite "^1.0.0"
     lodash.get "^4.4.2"
@@ -16449,6 +16450,11 @@ parse-ms@^1.0.0:
   resolved "https://registry.yarnpkg.com/parse-ms/-/parse-ms-1.0.1.tgz#56346d4749d78f23430ca0c713850aef91aa361d"
   integrity sha1-VjRtR0nXjyNDDKDHE4UK75GqNh0=
 
+parse-ms@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/parse-ms/-/parse-ms-2.0.0.tgz#7b3640295100caf3fa0100ccceb56635b62f9d62"
+  integrity sha512-AddiXFSLLCqj+tCRJ9MrUtHZB4DWojO3tk0NVZ+g5MaMQHF2+p2ktqxuoXyPFLljz/aUK0Nfhd/uGWnhXVXEyA==
+
 parse-passwd@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/parse-passwd/-/parse-passwd-1.0.0.tgz#6d5b934a456993b23d37f40a382d6f1666a8e5c6"
@@ -17149,6 +17155,13 @@ pretty-ms@^3.1.0:
   integrity sha512-ZypexbfVUGTFxb0v+m1bUyy92DHe5SyYlnyY0msyms5zd3RwyvNgyxZZsXXgoyzlxjx5MiqtXUdhUfvQbe0A2Q==
   dependencies:
     parse-ms "^1.0.0"
+
+pretty-ms@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/pretty-ms/-/pretty-ms-4.0.0.tgz#31baf41b94fd02227098aaa03bd62608eb0d6e92"
+  integrity sha512-qG66ahoLCwpLXD09ZPHSCbUWYTqdosB7SMP4OffgTgL2PBKXMuUsrk5Bwg8q4qPkjTXsKBMr+YK3Ltd/6F9s/Q==
+  dependencies:
+    parse-ms "^2.0.0"
 
 printf@^0.5.1:
   version "0.5.1"

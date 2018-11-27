@@ -114,6 +114,7 @@
     "node-forge": "^0.7.6",
     "normalize-newline": "^3.0.0",
     "path-exists": "^3.0.0",
+    "pretty-ms": "^4.0.0",
     "progress-stream": "^2.0.0",
     "pump": "^3.0.0",
     "selfsigned": "^1.10.4",

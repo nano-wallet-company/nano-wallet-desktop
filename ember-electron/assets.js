@@ -2,6 +2,8 @@ const path = require('path');
 const crypto = require('crypto');
 
 const got = require('got');
+const prettyMs = require('pretty-ms');
+
 const lzma = require('lzma-native');
 const tar = require('tar-fs');
 const tarStream = require('tar-stream');
@@ -50,6 +52,8 @@ const verifyAsset = async (url, savePath, onProgress) => {
   }
 
   log.info('Verifying asset:', savePath);
+
+  const start = Date.now();
   const verifier = crypto.createVerify('SHA256');
   const { size } = await fs.statAsync(savePath);
   const progress = createProgressStream(size, onProgress);
@@ -57,18 +61,22 @@ const verifyAsset = async (url, savePath, onProgress) => {
 
   const publicKey = await fs.readFileAsync(path.join(__dirname, 'assets.pem'));
   const signature = Buffer.from(String(headers[SIGNATURE_HEADER]).trim(), 'base64');
-  return verifier.verify(publicKey, signature);
+  const verified = verifier.verify(publicKey, signature);
+  const elapsed = Date.now() - start;
+  log.info('Asset verified:', savePath, `(took ${prettyMs(elapsed)})`);
+  return verified;
 };
 
 const extractAsset = async (savePath, extractDir, onProgress) => {
   log.info('Extracting asset:', savePath);
 
+  const start = Date.now();
   const extract = tarStream.extract();
   const { size } = await fs.statAsync(savePath);
-  return pump(
+  const result = await pump(
     fs.createReadStream(savePath),
     createProgressStream(size, onProgress),
-    lzma.createDecompressor({ flags: lzma.CONCATENATED }),
+    lzma.createDecompressor(),
     tar.extract(extractDir, {
       fs,
       extract,
@@ -76,22 +84,29 @@ const extractAsset = async (savePath, extractDir, onProgress) => {
       dmode: 0o700,
     }),
   );
+
+  const elapsed = Date.now() - start;
+  log.info('Asset extracted:', savePath, `(took ${prettyMs(elapsed)})`);
+  return result;
 };
 
 const downloadAsset = async (sender, url, onStarted, onProgress) => {
   log.info('Downloading asset:', url);
 
+  const start = Date.now();
   const dl = await download(sender, url, {
     onStarted,
     onProgress,
     showBadge: false,
   });
 
+  const elapsed = Date.now() - start;
+  const savePath = dl.getSavePath();
+  log.info('Asset downloaded:', savePath, `(took ${prettyMs(elapsed)})`);
   if (!sender.isDestroyed()) {
     sender.send('download-verify');
   }
 
-  const savePath = dl.getSavePath();
   const verified = await verifyAsset(url, savePath, onProgress);
   if (!verified) {
     throw new Error('Verification failed');
@@ -101,7 +116,7 @@ const downloadAsset = async (sender, url, onStarted, onProgress) => {
     sender.send('download-extract');
   }
 
-  const assetName = path.basename(savePath, '.tar.xz');
+  const assetName = path.basename(savePath, '.tar.br');
   const extractDir = path.join(path.dirname(savePath), productName, assetName);
   await makeDir(extractDir);
   await extractAsset(savePath, extractDir, onProgress);

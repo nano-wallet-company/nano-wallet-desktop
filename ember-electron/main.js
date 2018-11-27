@@ -52,6 +52,7 @@ const semver = require('semver');
 const locale2 = require('locale2');
 const makeDir = require('make-dir');
 const pathExists = require('path-exists');
+const prettyMs = require('pretty-ms');
 
 const electron = require('electron');
 const debug = require('electron-debug');
@@ -218,7 +219,7 @@ const run = async () => {
 
   mainWindow.once('ready-to-show', () => {
     const elapsed = Date.now() - appLaunchTimestamp;
-    log.info(`Application window ready to show (took ${elapsed}ms):`, mainWindow.getTitle());
+    log.info(`Application window ready to show (took ${prettyMs(elapsed)}):`, mainWindow.getTitle());
     mainWindow.show();
   });
 
