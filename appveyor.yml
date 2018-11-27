@@ -27,11 +27,10 @@ test_script:
   - yarn test
 
 after_test:
+  - yarn cross-env NODE_ENV=production ember electron:build -e production
   - ps: |
       $path = "$Env:PATH;C:\Program Files (x86)\Windows Kits\10\App Certification Kit"
       Set-AppveyorBuildVariable -Name 'PATH' -Value $path
-  - yarn cross-env NODE_ENV=production ember electron:build -e production
-  - ps: |
       $cscFile = Join-Path -Path "$Env:TMP" -ChildPath csc.p12
       [IO.File]::WriteAllBytes($cscFile, [Convert]::FromBase64String($Env:CSC_LINK))
       Set-AppveyorBuildVariable -Name 'CSC_FILE' -Value $cscFile

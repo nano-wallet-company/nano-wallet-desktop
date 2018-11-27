@@ -10,7 +10,6 @@ module.exports = (defaults) => {
       sourceMaps: isProduction ? false : 'inline',
       plugins: [
         '@babel/plugin-proposal-function-bind',
-        '@babel/plugin-proposal-throw-expressions',
       ],
     },
 
