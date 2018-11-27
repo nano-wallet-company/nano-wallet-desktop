@@ -1,14 +1,15 @@
 import { warn } from '@ember/debug';
 import { helper } from '@ember/component/helper';
 
-const name = '-assert-implicit-component-helper-argument';
+function helperFn(params) {
+  const [node, error] = params;
+  warn(error);
+  return node;
+}
 
-const helperFn = {
-  [name](params) {
-    const [node, error] = params;
-    warn(error);
-    return node;
-  },
-}[name];
+// https://github.com/emberjs/ember.js/issues/17154
+Object.defineProperty(helperFn, 'name', {
+  value: '-assert-implicit-component-helper-argument',
+});
 
 export default helper(helperFn);
