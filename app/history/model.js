@@ -11,5 +11,7 @@ export default class HistoryModel extends Model {
 
   @attr account = null;
 
+  @attr balance = null;
+
   @attr('big-number') amount = null;
 }
