@@ -1,21 +1,34 @@
 <div class="col-lg-10 col-11 history-item send d-flex justify-content-around align-items-center">
   <div class="row w-100">
-    <div class="col-12 col-sm-2 justify-content-center d-flex">
+    <div class="col-12 col-sm-1 justify-content-center d-flex">
       {{#if (eq entry.type 'send')}}
         {{fa-icon "paper-plane" class="send" ariaLabel=(t 'send')}}
       {{else}}
         {{fa-icon "envelope-open" class="receive" ariaLabel=(t 'receive')}}
       {{/if}}
     </div>
-    <div class="col-12 col-sm-5 justify-content-center d-flex">
+    <div class="col-12 col-sm-2 justify-content-center d-flex">
       <p>
+        {{#if (eq entry.type 'send')}}
+          -
+        {{else}}
+          +
+        {{/if}}
         {{format-amount entry.amount}}
         <sub>
           {{t 'MIKRON_short'}}
         </sub>
       </p>
     </div>
-    <div class="col-12 col-sm-5 justify-content-center d-flex">
+    <div class="col-12 col-sm-2 justify-content-center d-flex">
+      <p>
+        {{format-amount entry.balance}}
+        <sub>
+          {{t 'MIKRON_short'}}
+        </sub>
+      </p>
+    </div>
+    <div class="col-12 col-sm-7 justify-content-center d-flex">
       <p class="text-truncate">
         {{account-address value=entry.account truncate=25}}
       </p>
