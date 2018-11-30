@@ -7,6 +7,7 @@ const {
 } = require('../package');
 
 module.exports = (environment) => {
+  const isElectron = !!process.env.EMBER_CLI_ELECTRON;
   const ENV = {
     title,
     version,
@@ -15,6 +16,7 @@ module.exports = (environment) => {
     environment,
     rootURL: '',
     locationType: 'hash',
+    exportApplicationGlobal: 'App',
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
@@ -85,6 +87,11 @@ module.exports = (environment) => {
         signature: 'https://snapshots.nano.org/data.tar.xz.sha256',
       },
     },
+
+    rpc: {
+      host: 'http://localhost:55000',
+      namespace: null,
+    },
   };
 
   if (environment === 'development') {
@@ -109,16 +116,22 @@ module.exports = (environment) => {
     ENV.APP.autoboot = false;
 
     ENV.contentSecurityPolicy['script-src'].push("'sha256-37u63EBe1EibDZ3vZNr6mxLepqlY1CQw+4N89HrzP9s='");
+
+    ENV.rpc.host = '';
+    ENV.rpc.namespace = 'rpc';
   }
 
   if (environment === 'production') {
     // here you can enable a production-specific feature
   }
 
-  if (process.env.EMBER_CLI_ELECTRON) {
+  if (isElectron) {
     ENV.contentSecurityPolicy['script-src'].push("'sha256-bOpoN0CEbM1axa1+hv51a4JK31vrAOV7Cbze5rS9GJI='");
     ENV.contentSecurityPolicy['script-src'].push("'sha256-k8ysrhm1lqKyZpON3/YocPOUXAF4sGsu7JIycGDxCWw='");
     ENV.contentSecurityPolicy['connect-src'].push('https://localhost:17076');
+
+    ENV.rpc.host = 'https://localhost:17076';
+    ENV.rpc.namespace = 'rpc';
   }
 
   return ENV;

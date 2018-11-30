@@ -3,10 +3,10 @@ import { defineError } from 'ember-exex/error';
 import coinmarketcap from 'coinmarketcap';
 import BigNumber from 'bignumber.js';
 
-export const NANO = Symbol.for('NANO');
-export const BTC = Symbol.for('BTC');
-export const USD = Symbol.for('USD');
-export const EUR = Symbol.for('EUR');
+export const NANO = 'NANO';
+export const BTC = 'BTC';
+export const USD = 'USD';
+export const EUR = 'EUR';
 
 export const CURRENCIES = new Set([
   NANO,
@@ -44,8 +44,8 @@ export default async function getExchangeRate(currency = DEFAULT_CURRENCY) {
     throw new InvalidCurrencyError({ params: { currency } });
   }
 
-  const asset = Symbol.keyFor(DEFAULT_CURRENCY);
-  const convert = Symbol.keyFor(currency).toLowerCase();
+  const asset = DEFAULT_CURRENCY;
+  const convert = String(currency).toLowerCase();
   let ticker;
   try {
     ticker = await coinmarketcap.tickerByAsset(asset, { convert });

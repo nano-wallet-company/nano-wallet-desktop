@@ -17,8 +17,8 @@ export default function formatAmount(intl, value, options = {}) {
   const {
     locale = get(intl, 'locale'),
     useGrouping = true,
-    unit = Symbol.keyFor(DEFAULT_UNIT),
-    currency = Symbol.keyFor(DEFAULT_CURRENCY),
+    unit = DEFAULT_UNIT,
+    currency = DEFAULT_CURRENCY,
     exchangeRate = DEFAULT_EXCHANGE_RATE,
   } = options;
 
@@ -27,7 +27,7 @@ export default function formatAmount(intl, value, options = {}) {
     return '0';
   }
 
-  const divisor = getConversion(Symbol.for(unit));
+  const divisor = getConversion(unit);
   const quotient = BigNumber(value).dividedBy(divisor);
   const product = BigNumber(quotient).times(exchangeRate);
   const decimalPlaces = product.decimalPlaces();

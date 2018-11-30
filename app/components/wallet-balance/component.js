@@ -8,7 +8,7 @@ import {
 export default class WalletBalanceComponent extends Component {
   amount = 0;
 
-  currency = Symbol.keyFor(DEFAULT_CURRENCY);
+  currency = DEFAULT_CURRENCY;
 
   exchangeRate = DEFAULT_EXCHANGE_RATE;
 }

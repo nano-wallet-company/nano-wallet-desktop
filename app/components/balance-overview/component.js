@@ -53,15 +53,15 @@ export default class BalanceOverviewComponent extends Component.extend(
   }
 
   @keepLatestTask
-  * exchangeRateTask(currency = Symbol.keyFor(DEFAULT_CURRENCY)) {
-    return yield getExchangeRate(Symbol.for(currency));
+  * exchangeRateTask(currency = DEFAULT_CURRENCY) {
+    return yield getExchangeRate(currency);
   }
 
   @observes('currency')
   async updateExchangeRate() {
     return this.runTask(async () => {
       const currency = this.get('currency');
-      if (currency === Symbol.keyFor(DEFAULT_CURRENCY)) {
+      if (currency === DEFAULT_CURRENCY) {
         this.set('exchangeRate', DEFAULT_EXCHANGE_RATE);
         return DEFAULT_EXCHANGE_RATE;
       }
