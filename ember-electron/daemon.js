@@ -41,12 +41,12 @@ const { app } = electron;
 const generateCert = (commonName) => {
   const attrs = [
     { name: 'commonName', value: commonName },
-    { name: 'countryName', value: 'US' },
-    { name: 'stateOrProvinceName', value: 'Texas' },
-    { name: 'localityName', value: 'Austin' },
-    { name: 'organizationName', value: 'Nano Wallet Company LLC' },
-    { name: 'organizationalUnitName', value: 'Desktop' },
-    { name: 'emailAddress', value: 'desktop@nanowalletcompany.com' },
+    { name: 'countryName', value: 'Hungary' },
+    { name: 'stateOrProvinceName', value: '' },
+    { name: 'localityName', value: 'Budapest' },
+    { name: 'organizationName', value: 'Mikron.IO' },
+    { name: 'organizationalUnitName', value: 'Tech' },
+    { name: 'emailAddress', value: 'info@mikron.io' },
   ];
 
   log.info('Generating TLS certificate:', commonName);
@@ -137,7 +137,7 @@ const startDaemon = async () => {
 
     const serverCertPath = path.join(tlsPath, 'server.cert.pem');
     const serverKeyPath = path.join(tlsPath, 'server.key.pem');
-    const serverPems = generateCert('nanowalletcompany.com');
+    const serverPems = generateCert('mikron.io');
     await writeFileAtomic(serverCertPath, normalizeNewline(serverPems.cert), { mode: 0o600 });
     await writeFileAtomic(serverKeyPath, normalizeNewline(serverPems.private), { mode: 0o600 });
     try {
@@ -151,11 +151,11 @@ const startDaemon = async () => {
 
     const clientCertPath = path.join(clientsPath, 'rpcuser1.cert.pem');
     const clientKeyPath = path.join(clientsPath, 'rpcuser1.key.pem');
-    const clientPems = generateCert('desktop.nanowalletcompany.com');
+    const clientPems = generateCert('desktop.mikron.io');
     await writeFileAtomic(clientCertPath, normalizeNewline(clientPems.cert), { mode: 0o600 });
     await writeFileAtomic(clientKeyPath, normalizeNewline(clientPems.private), { mode: 0o600 });
 
-    const subjectHash = '3634213b'; // openssl x509 -noout -subject_hash -in rpcuser1.cert.pem
+    const subjectHash = 'f575a4f0'; // openssl x509 -noout -subject_hash -in rpcuser1.cert.pem
     const subjectHashPath = path.join(clientsPath, `${subjectHash}.0`);
     await cpFile(clientCertPath, subjectHashPath);
 
@@ -258,12 +258,12 @@ const startDaemon = async () => {
 
   proxy.on('error', err => log.error('[proxy]', err));
 
-  const pems = generateCert('rpc.nanowalletcompany.com');
+  const pems = generateCert('rpc.mikron.io');
   const proxyCert = normalizeNewline(pems.cert);
   const proxyKey = normalizeNewline(pems.private);
 
-  const issuer = 'https://rpc.nanowalletcompany.com/';
-  const audience = 'https://desktop.nanowalletcompany.com/';
+  const issuer = 'https://rpc.mikron.io/';
+  const audience = 'https://desktop.mikron.io/';
   const subject = await username();
   const jwtid = await nanoid(32);
   const jwtOptions = {
