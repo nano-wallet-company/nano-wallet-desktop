@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.0.3"></a>
+## [1.0.3](https://github.com/mikroncoin/mikron_wallet/compare/v1.0.2...v1.0.3) (2018-12-01)
+
+
+### Bug Fixes
+
+* **node:** SSL connection issue on Windows with non-ASCII characters in user ([047ee0d](https://github.com/mikroncoin/mikron_wallet/commit/047ee0d))
+* **ui:** Adjust MIKRON sign (Mikron, MIK). ([01decd7](https://github.com/mikroncoin/mikron_wallet/commit/01decd7))
+
+
+### Features
+
+* **cert:** Update SSL certificate properties, Issue [#13](https://github.com/mikroncoin/mikron_wallet/issues/13). ([8747d7b](https://github.com/mikroncoin/mikron_wallet/commit/8747d7b))
+* **ui:** Display new balance in history. Squashed commit of the following: ([7d7a36c](https://github.com/mikroncoin/mikron_wallet/commit/7d7a36c))
+
+
+
 <a name="1.0.2"></a>
 ## [1.0.2](https://github.com/mikroncoin/mikron_wallet/compare/v1.0.1...v1.0.2) (2018-11-21)
 
