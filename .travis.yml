@@ -14,19 +14,12 @@ jobs:
 addons:
   chrome: stable
   apt:
-    update: true
-    sources:
-      - sourceline: deb https://dl.yarnpkg.com/debian/ stable main
-        key_url: https://dl.yarnpkg.com/debian/pubkey.gpg
     packages:
-      - yarn
       - jq
       - fakeroot
       - rpm
   homebrew:
-    update: true
     packages:
-      - yarn
       - jq
 
 cache:
