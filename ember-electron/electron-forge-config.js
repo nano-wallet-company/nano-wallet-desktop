@@ -1,6 +1,6 @@
 const path = require('path');
 
-const moment = require('moment');
+const del = require('del');
 
 const {
   version,
@@ -26,7 +26,7 @@ const icon = path.join(__dirname, 'resources', 'icon');
 const [, name] = packageName.split('/');
 const categories = linuxDesktopCategories.split(';');
 
-const buildNumber = moment().format('YYYYMMDDHHmmss');
+const buildNumber = new Date().toISOString().split('.')[0].replace(/[^\d]/g, '');
 const buildVersion = `${version}+${buildNumber}`;
 
 const osxSign = {
@@ -108,6 +108,26 @@ module.exports = {
       OriginalFilename: `${name}.exe`,
       ProductName: productName,
     },
+    afterPrune: [
+      async (buildPath, electronVersion, platform, arch, callback) => {
+        const cwd = path.join(buildPath, 'node_modules');
+        const patterns = [
+          '**/{bin,man}',
+          'nan/tools',
+          'nan/*.{tgz,h}',
+          'lzma-native/{build,deps,src}',
+          'lzma-native/*.{gyp,sh,xz}',
+        ];
+
+        try {
+          await del(patterns, { cwd });
+        } catch (err) {
+          return callback(err);
+        }
+
+        return callback();
+      },
+    ],
   },
   electronWinstallerConfig: {
     name,

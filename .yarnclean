@@ -68,5 +68,6 @@ CHANGELOG
 
 # ignores
 !.bin
+!**/*.def
 !**/changelog/**/*
 !**/blueprints/**/*
