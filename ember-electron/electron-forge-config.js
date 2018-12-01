@@ -93,9 +93,8 @@ module.exports = {
       '/ember-electron/resources/ordering.txt$',
     ],
     asar: {
-      // https://github.com/electron/asar/blob/v0.14.3/lib/asar.js#L80
       ordering: path.join(__dirname, 'resources', 'ordering.txt'),
-      unpackDir: '{ember-electron/resources,node_modules/**/binding-*}',
+      unpackDir: '{ember-electron/resources,node_modules/7zip,node_modules/**/binding-*}',
     },
     // extendInfo: {
     //   CSResourcesFileMapped: true,
@@ -112,8 +111,16 @@ module.exports = {
     },
     afterPrune: [
       (buildPath, electronVersion, platform, arch, callback) => {
-        const cwd = path.join(buildPath, 'node_modules', 'lzma-native');
-        return del(['{deps,build}', 'bin/**'], { cwd })
+        const cwd = path.join(buildPath, 'node_modules');
+        const patterns = [
+          '**/{bin,man}',
+          'nan/tools',
+          'nan/*.{tgz,h}',
+          'lzma-native/{build,deps,src}',
+          'lzma-native/*.{gyp,sh,xz}',
+        ];
+
+        return del(patterns, { cwd })
           .then(() => callback(), err => callback(err));
       },
     ],

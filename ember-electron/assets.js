@@ -21,10 +21,13 @@ const fs = Promise.promisifyAll(require('graceful-fs'), {
   },
 });
 
+const electron = require('electron');
 const log = require('electron-log');
 const { download } = require('electron-dl');
 
 const { version, productName } = require('../package');
+
+const { app } = electron;
 
 const USER_AGENT = `${productName.replace(/\s+/g, '')}/${version}`;
 const SIGNATURE_HEADER = 'x-amz-meta-signature';
@@ -43,7 +46,6 @@ const verifyAsset = async (url, savePath, onProgress) => {
     encoding: null,
     headers: {
       'user-agent': USER_AGENT,
-      'accept-encoding': 'gzip, deflate',
     },
   });
 
@@ -93,15 +95,22 @@ const extractAsset = async (savePath, extractDir, onProgress) => {
 const downloadAsset = async (sender, url, onStarted, onProgress) => {
   log.info('Downloading asset:', url);
 
-  const start = Date.now();
+  const directory = path.join(app.getPath('downloads'), productName);
+  await del(directory, { force: true });
+  await makeDir(directory, { fs });
+
+  const { webContents: { session } } = sender;
+  session.setUserAgent(USER_AGENT);
+
   const dl = await download(sender, url, {
+    directory,
     onStarted,
     onProgress,
     showBadge: false,
   });
 
-  const elapsed = Date.now() - start;
   const savePath = dl.getSavePath();
+  const elapsed = Date.now() - dl.getStartTime();
   log.info('Asset downloaded:', savePath, `(took ${prettyMs(elapsed)})`);
   if (!sender.isDestroyed()) {
     sender.send('download-verify');
@@ -116,15 +125,16 @@ const downloadAsset = async (sender, url, onStarted, onProgress) => {
     sender.send('download-extract');
   }
 
-  const assetName = path.basename(savePath, '.tar.xz');
-  const extractDir = path.join(path.dirname(savePath), productName, assetName);
-  await makeDir(extractDir);
+  const basename = path.basename(savePath, path.extname(savePath));
+  const { name } = path.parse(basename);
+  const extractDir = path.join(directory, name);
+  await makeDir(extractDir, { fs });
   await extractAsset(savePath, extractDir, onProgress);
   await del(savePath, { force: true });
 
   const dataPath = path.normalize(global.dataPath);
   await cpy('*', dataPath, { cwd: extractDir });
-  await del(extractDir, { force: true });
+  await del(directory, { force: true });
 
   log.info('Asset ready:', savePath, '->', dataPath);
 };

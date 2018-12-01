@@ -1,13 +1,18 @@
 /* eslint-env node */
-const environment = process.env.NODE_ENV || process.env.EMBER_ENV || 'production';
+const environment = process.env.ELECTRON_ENV || process.env.EMBER_ENV || process.env.NODE_ENV || 'production';
 process.env.NODE_ENV = environment;
 process.env.EMBER_ENV = environment;
+process.env.ELECTRON_ENV = environment;
 
 if (typeof process.env.ELECTRON_IS_DEV === 'undefined') {
   if (environment === 'development') {
     process.env.ELECTRON_IS_DEV = 1;
   }
 }
+
+const Promise = require('bluebird');
+
+global.Promise = Promise;
 
 const log = require('electron-log');
 const unhandled = require('electron-unhandled');
@@ -47,6 +52,7 @@ if (process.platform === 'win32') {
 
 const path = require('path');
 
+const fs = require('graceful-fs');
 const del = require('del');
 const semver = require('semver');
 const locale2 = require('locale2');
@@ -171,7 +177,7 @@ const run = async () => {
     dataPath = path.resolve(path.relative(app.getPath('userData'), dataPath));
   }
 
-  await makeDir(dataPath);
+  await makeDir(dataPath, { fs });
 
   const storeVersion = store.get('version');
   if (!storeVersion || semver.gt(version, storeVersion)) {

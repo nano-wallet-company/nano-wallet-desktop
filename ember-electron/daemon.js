@@ -132,7 +132,7 @@ const startDaemon = async () => {
   if (!config.rpc.secure) {
     log.info('Generating secure node RPC configuration...');
     const clientsPath = path.join(tlsPath, 'clients');
-    await makeDir(clientsPath);
+    await makeDir(clientsPath, { fs });
 
     const serverCertPath = path.join(tlsPath, 'server.cert.pem');
     const serverKeyPath = path.join(tlsPath, 'server.key.pem');
@@ -171,8 +171,8 @@ const startDaemon = async () => {
   config.node.logging.log_rpc = is.development;
 
   const cpuCount = os.cpus().length;
-  config.node.io_threads = Math.max(4, Math.ceil(cpuCount / 2));
-  config.node.work_threads = Math.min(4, config.node.io_threads);
+  config.node.io_threads = Math.max(2, Math.ceil(cpuCount / 2));
+  config.node.work_threads = Math.min(2, config.node.io_threads);
   config.node.bootstrap_connections = Math.max(4, config.node.io_threads);
   config.node.bootstrap_connections_max = Math.min(64, config.node.bootstrap_connections * 4);
 
