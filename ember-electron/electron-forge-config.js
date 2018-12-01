@@ -1,6 +1,5 @@
 const path = require('path');
 
-const del = require('del');
 const moment = require('moment');
 
 const {
@@ -109,21 +108,6 @@ module.exports = {
       OriginalFilename: `${name}.exe`,
       ProductName: productName,
     },
-    afterPrune: [
-      (buildPath, electronVersion, platform, arch, callback) => {
-        const cwd = path.join(buildPath, 'node_modules');
-        const patterns = [
-          '**/{bin,man}',
-          'nan/tools',
-          'nan/*.{tgz,h}',
-          'lzma-native/{build,deps,src}',
-          'lzma-native/*.{gyp,sh,xz}',
-        ];
-
-        return del(patterns, { cwd })
-          .then(() => callback(), err => callback(err));
-      },
-    ],
   },
   electronWinstallerConfig: {
     name,
