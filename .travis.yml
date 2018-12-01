@@ -23,9 +23,10 @@ addons:
       - jq
 
 cache:
-  yarn: true
   directories:
+    - "$HOME/.cache/yarn"
     - "$HOME/.cache/electron"
+    - "$HOME/Library/Caches/Yarn"
     - "$HOME/Library/Caches/electron"
 
 env:
