@@ -2,6 +2,36 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.4.0"></a>
+# [1.4.0](https://github.com/nano-wallet-company/nano-wallet-desktop/compare/v1.3.1...v1.4.0) (2018-12-01)
+
+
+### Bug Fixes
+
+* **ajax:** stop using ember-host-manager ([9f66e1e](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/9f66e1e))
+* **app:** use polyfilled assign ([ff34486](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/ff34486))
+* **electron:** downgrade electron-{forge,packager} ([e4c6f22](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/e4c6f22))
+* **electron:** patch asar to normalize win32 paths ([cc9f65d](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/cc9f65d))
+* **electron:** remote afterCopy hook ([0081ad6](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/0081ad6))
+* **electron:** use new code signed node binaries ([97449af](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/97449af))
+* **package:** match package author name to cert common name ([07a84b6](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/07a84b6))
+
+
+### Features
+
+* **electron:** add benchmark timing to setup logging ([23f427a](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/23f427a))
+* **electron:** upgrade darwin node to use OpenSSL 1.1.1a ([5ff6a6a](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/5ff6a6a))
+* **electron:** upgrade the node to V16.3 ([527c28a](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/527c28a))
+* **electron:** use new electron-forge and electron-package ([ed2db80](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/ed2db80))
+* **package:** use ember-auto-import ([3beb16e](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/3beb16e))
+
+
+### Performance Improvements
+
+* **electron:** regenerate asar ordering files ([e39ae0f](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/e39ae0f))
+
+
+
 <a name="1.3.1"></a>
 ## [1.3.1](https://github.com/nano-wallet-company/nano-wallet-desktop/compare/v1.3.0...v1.3.1) (2018-10-14)
 
