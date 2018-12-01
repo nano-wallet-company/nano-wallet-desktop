@@ -17,6 +17,10 @@ init:
 
 install:
   - ps: Update-NodeJsInstallation $Env:nodejs_version $Env:PLATFORM
+  - ps: |
+      $msiPath = Join-Path -Path "$Env:TMP" -ChildPath yarn.msi
+      Start-FileDownload 'https://yarnpkg.com/latest.msi' -FileName $msiPath
+      Start-Process msiexec -ArgumentList @('/i', $msiPath, '/quiet', '/norestart') -Wait -NoNewWindow
   - node --version
   - yarn --version
   - yarn --frozen-lockfile --non-interactive
