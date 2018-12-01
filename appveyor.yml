@@ -9,7 +9,8 @@ environment:
 
 cache:
   - node_modules -> yarn.lock
-  - '%USERPROFILE%\.electron -> package.json'
+  - '%LOCALAPPDATA%\Yarn\Cache -> yarn.lock'
+  - '%LOCALAPPDATA%\electron\Cache -> yarn.lock'
 
 init:
   - git config --global core.autocrlf input
