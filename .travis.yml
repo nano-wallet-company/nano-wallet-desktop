@@ -1,7 +1,7 @@
 ---
 language: node_js
 node_js:
-  - 10.13.0
+  - 10.14.1
 
 jobs:
   include:
@@ -43,7 +43,7 @@ script:
   - yarn test
 
 before_deploy:
-  - yarn cross-env NODE_ENV=production ember electron:build -e production
+  - yarn cross-env NODE_ENV=production ember electron:build -e production --output-path electron-out/ember
   - |
     if [ "$TRAVIS_OS_NAME" == "osx" ]; then
       security create-keychain -p "$CSC_KEY_PASSWORD" codesign.keychain;

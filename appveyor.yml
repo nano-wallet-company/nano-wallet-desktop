@@ -5,7 +5,7 @@ platform:
 
 environment:
   matrix:
-    - nodejs_version: 10.13.0
+    - nodejs_version: 10.14.1
 
 cache:
   - node_modules -> yarn.lock
@@ -27,7 +27,7 @@ test_script:
   - yarn test
 
 after_test:
-  - yarn cross-env NODE_ENV=production ember electron:build -e production
+  - yarn cross-env NODE_ENV=production ember electron:build -e production --output-path electron-out/ember
   - ps: |
       $path = "$Env:PATH;C:\Program Files (x86)\Windows Kits\10\App Certification Kit"
       Set-AppveyorBuildVariable -Name 'PATH' -Value $path
