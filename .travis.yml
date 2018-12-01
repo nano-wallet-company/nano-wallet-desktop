@@ -14,26 +14,33 @@ jobs:
 addons:
   chrome: stable
   apt:
+    update: true
+    sources:
+      - sourceline: deb https://dl.yarnpkg.com/debian/ stable main
+        key_url: https://dl.yarnpkg.com/debian/pubkey.gpg
     packages:
-    - fakeroot
-    - rpm
+      - yarn
+      - jq
+      - fakeroot
+      - rpm
+  homebrew:
+    update: true
+    packages:
+      - yarn
+      - jq
 
 cache:
   directories:
-    - "$HOME/.electron"
     - "$HOME/.cache/yarn"
-    - "$HOME/Library/Caches/Yarn/v1"
-    - "$HOME/Library/Caches/Homebrew"
+    - "$HOME/.cache/electron"
+    - "$HOME/Library/Caches/Yarn"
+    - "$HOME/Library/Caches/electron"
 
 env:
   global:
     # See https://git.io/vdao3 for details.
     - JOBS=1
     - FORCE_COLOR=1
-
-before_install:
-  - curl -o- -L https://yarnpkg.com/install.sh | bash
-  - export PATH="$HOME/.yarn/bin:$PATH"
 
 install:
   - yarn install --frozen-lockfile --non-interactive
@@ -60,7 +67,6 @@ before_deploy:
   - |
     if [ "$TRAVIS_OS_NAME" == "osx" ]; then
       security delete-keychain codesign.keychain;
-      HOMEBREW_NO_AUTO_UPDATE=1 rvm-exec system brew install jq;
     fi
   - export GITHUB_RELEASE="$(cat package.json | jq -r '.productName') $(echo $TRAVIS_TAG | cut -c 2-)"
 
