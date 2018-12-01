@@ -17,10 +17,7 @@ init:
 
 install:
   - ps: Update-NodeJsInstallation $Env:nodejs_version $Env:PLATFORM
-  - ps: |
-      $msiPath = Join-Path -Path "$Env:TMP" -ChildPath yarn.msi
-      Start-FileDownload 'https://yarnpkg.com/latest.msi' -FileName $msiPath
-      Start-Process msiexec -ArgumentList @('/i', $msiPath, '/quiet', '/norestart') -Wait -NoNewWindow
+  - appveyor-retry choco install -y --no-progress yarn
   - node --version
   - yarn --version
   - yarn --frozen-lockfile --non-interactive
@@ -35,8 +32,7 @@ after_test:
   - yarn cross-env NODE_ENV=production ember electron:build -e production --output-path electron-out/ember
   - ps: |
       if (Test-Path Env:CSC_LINK) {
-        $path = "$Env:PATH;C:\Program Files (x86)\Windows Kits\10\App Certification Kit"
-        Set-AppveyorBuildVariable -Name 'PATH' -Value $path
+        Add-Path 'C:\Program Files (x86)\Windows Kits\10\App Certification Kit'
         $cscFile = Join-Path -Path "$Env:TMP" -ChildPath csc.p12
         [IO.File]::WriteAllBytes($cscFile, [Convert]::FromBase64String($Env:CSC_LINK))
         Set-AppveyorBuildVariable -Name 'CSC_FILE' -Value $cscFile
