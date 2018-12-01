@@ -6257,7 +6257,7 @@ dep-graph@1.1.0:
   dependencies:
     underscore "1.2.1"
 
-depd@~1.1.2:
+depd@1.1.2, depd@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/depd/-/depd-1.1.2.tgz#9bcd52e14c097763e749b274c4346ed2e560b5a9"
   integrity sha1-m81S4UwJd2PnSbJ0xDRu0uVgtak=
@@ -14028,6 +14028,13 @@ mktemp@~0.4.0:
   resolved "https://registry.yarnpkg.com/mktemp/-/mktemp-0.4.0.tgz#6d0515611c8a8c84e484aa2000129b98e981ff0b"
   integrity sha1-bQUVYRyKjITkhKogABKbmOmB/ws=
 
+mocha-appveyor-reporter@^0.4.2:
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/mocha-appveyor-reporter/-/mocha-appveyor-reporter-0.4.2.tgz#feb1dcc77ca0bd11cbda3fd72e5ff187d1e4758d"
+  integrity sha512-toYTeM5GI4DPghD0Fh17wCDEXvrUZLB5zUkBUORUxxAf/XxJPZmyMVw0Xaue3gFjdTE4eR4IOZO1wloR2Cfniw==
+  dependencies:
+    request-json "^0.6.4"
+
 mocha@^2.5.3:
   version "2.5.3"
   resolved "https://registry.yarnpkg.com/mocha/-/mocha-2.5.3.tgz#161be5bdeb496771eb9b35745050b622b5aefc58"
@@ -16660,6 +16667,14 @@ repeating@^2.0.0:
   dependencies:
     is-finite "^1.0.0"
 
+request-json@^0.6.4:
+  version "0.6.4"
+  resolved "https://registry.yarnpkg.com/request-json/-/request-json-0.6.4.tgz#9eff076f105a445d5996d921b58b757ce5300a21"
+  integrity sha512-bLlMqD0RFG63ErZ/jS0wvKsIJyM2qq5j7Bw4+nubiDysCeinLrUPUmBXLmcflEYm5IO9tGlKJfRhzeDIUB8sjQ==
+  dependencies:
+    depd "1.1.2"
+    request "2.88.0"
+
 request-progress@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/request-progress/-/request-progress-2.0.1.tgz#5d36bb57961c673aa5b788dbc8141fdf23b44e08"
@@ -16711,7 +16726,7 @@ request@2.81.0:
     tunnel-agent "^0.6.0"
     uuid "^3.0.0"
 
-request@^2.45.0, request@^2.55.0, request@^2.74.0, request@^2.79.0, request@^2.81.0, request@^2.87.0, request@^2.88.0:
+request@2.88.0, request@^2.45.0, request@^2.55.0, request@^2.74.0, request@^2.79.0, request@^2.81.0, request@^2.87.0, request@^2.88.0:
   version "2.88.0"
   resolved "https://registry.yarnpkg.com/request/-/request-2.88.0.tgz#9c2fca4f7d35b592efe57c7f0a55e81052124fef"
   integrity sha512-NAqBSrijGLZdM0WZNsInLJpkJokL72XYjUpnB0iwsRgxh7dB6COrHnTBNwN0E+lHDAJzu7kLAkDeY08z2/A0hg==
