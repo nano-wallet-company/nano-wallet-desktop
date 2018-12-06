@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.0.4"></a>
+## [1.0.4](https://github.com/mikroncoin/mikron_wallet/compare/v1.0.3...v1.0.4) (2018-12-06)
+
+
+### Bug Fixes
+
+* **node:** Issue [#15](https://github.com/mikroncoin/mikron_wallet/issues/15), Node v1.0.4, Fix crash on Win32. ([22178ef](https://github.com/mikroncoin/mikron_wallet/commit/22178ef))
+
+
+
 <a name="1.0.3"></a>
 ## [1.0.3](https://github.com/mikroncoin/mikron_wallet/compare/v1.0.2...v1.0.3) (2018-12-01)
 
