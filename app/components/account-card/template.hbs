@@ -6,7 +6,7 @@
           {{bs-tooltip fade=true delayShow=500 placement='top' title=(t 'editAccountSettings')}}
           {{fa-icon 'cog' size='2' ariaLabel=(t 'editAccountSettings')}}
         {{/link-to}}
-        {{qr-code text=account.id width=170 height=170}}
+        {{qr-code text=(to-nano-prefix account.id) width=170 height=170}}
       {{/if}}
       <p class="balance">
         <sup>
