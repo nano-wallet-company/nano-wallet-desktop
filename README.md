@@ -49,13 +49,13 @@ Make use of the many generators for code, try `npx ember help generate` for more
 
 ### Linting
 
-* `yarn run lint:js`
-* `yarn run lint:js --fix`
+* `yarn lint:js`
+* `yarn lint:js --fix`
 
 ### Building
 
-* `yarn run build` (development)
-* `yarn run build --environment production` (production)
+* `yarn build` (development)
+* `yarn build --environment production` (production)
 
 ### Using Docker Compose
 

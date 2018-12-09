@@ -1,5 +1,4 @@
-FROM node:10.14.0
-LABEL maintainer="Nano Wallet Company <team@nanowalletcompany.com>"
+FROM node:10.14.1
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -16,16 +15,18 @@ RUN echo "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main" 
 RUN apt-get update -q
 RUN apt-get install -qy --no-install-recommends google-chrome-stable
 
-RUN useradd -s /bin/bash -mb /usr/src app
-USER app
+RUN mkdir -p /usr/src/app
+RUN chown -R node:node /usr/src/app
+USER node
 WORKDIR /usr/src/app
 
-COPY --chown=app:app package.json .
-COPY --chown=app:app yarn.lock .
+COPY --chown=node:node package.json .
+COPY --chown=node:node yarn.lock .
+COPY --chown=node:node .yarnclean .
 
 RUN yarn install --frozen-lockfile --non-interactive
 
-COPY --chown=app:app . .
+COPY --chown=node:node . .
 
 EXPOSE 4200 7020 7357 9222
 CMD ["yarn", "start"]
