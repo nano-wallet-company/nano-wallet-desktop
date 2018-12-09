@@ -2,7 +2,7 @@ import Service from '@ember/service';
 import { assign } from '@ember/polyfills';
 import { A } from '@ember/array';
 
-import { service } from 'ember-decorators/service';
+import { service } from '@ember-decorators/service';
 
 import { defineError } from 'ember-exex/error';
 import generateId from '../utils/generate-id';
@@ -75,8 +75,8 @@ export const RepresentativeChangeError = defineError({
   extends: RPCError,
 });
 
-export default Service.extend({
-  @service ajax: null,
+export default class RPCService extends Service {
+  @service ajax;
 
   async call(action, params = {}) {
     const data = assign({ action }, params);
@@ -93,44 +93,44 @@ export default Service.extend({
     }
 
     return resp;
-  },
+  }
 
   version() {
     return this.call(actions.VERSION);
-  },
+  }
 
   walletCreate() {
     return this.call(actions.WALLET_CREATE);
-  },
+  }
 
   async walletLock(wallet) {
     const { locked } = await this.call(actions.WALLET_LOCK, { wallet });
     return locked === '1';
-  },
+  }
 
   async walletLocked(wallet) {
     const { locked } = await this.call(actions.WALLET_LOCKED, { wallet });
     return locked === '1';
-  },
+  }
 
   walletBalanceTotal(wallet) {
     return this.call(actions.WALLET_BALANCE_TOTAL, { wallet });
-  },
+  }
 
   async walletBalances(wallet) {
     const { balances } = await this.call(actions.WALLET_BALANCES, { wallet });
     return balances;
-  },
+  }
 
   async walletChangeSeed(wallet, seed) {
     const { success } = await this.call(actions.WALLET_CHANGE_SEED, { wallet, seed });
     return success === '';
-  },
+  }
 
   async walletRepresentative(wallet) {
     const { representative } = await this.call(actions.WALLET_REPRESENTATIVE, { wallet });
     return representative;
-  },
+  }
 
   async walletRepresentativeSet(wallet, representative) {
     const { set } = await this.call(actions.WALLET_REPRESENTATIVE_SET, { wallet, representative });
@@ -139,11 +139,11 @@ export default Service.extend({
     }
 
     return true;
-  },
+  }
 
   accountCreate(wallet, work = true) {
     return this.call(actions.ACCOUNT_CREATE, { wallet, work });
-  },
+  }
 
   async accountInfo(account, representative = true, pending = true) {
     let info = {};
@@ -174,12 +174,12 @@ export default Service.extend({
     }
 
     return info;
-  },
+  }
 
   async accountList(wallet) {
     const { accounts } = await this.call(actions.ACCOUNT_LIST, { wallet });
     return accounts;
-  },
+  }
 
   async accountHistory(account, count = 1) {
     const { history } = await this.call(actions.ACCOUNT_HISTORY, {
@@ -188,11 +188,11 @@ export default Service.extend({
     });
 
     return A(history);
-  },
+  }
 
   accountRepresentative(account) {
     return this.call(actions.ACCOUNT_REPRESENTATIVE, { account });
-  },
+  }
 
   accountRepresentativeSet(wallet, account, representative) {
     return this.call(actions.ACCOUNT_REPRESENTATIVE_SET, {
@@ -200,12 +200,12 @@ export default Service.extend({
       account,
       representative,
     });
-  },
+  }
 
   async accountRemove(wallet, account) {
     const { removed } = await this.call(actions.ACCOUNT_REMOVE, { wallet, account });
     return removed === '1';
-  },
+  }
 
   send(wallet, source, destination, amount, id = generateId()) {
     return this.call(actions.SEND, {
@@ -215,13 +215,13 @@ export default Service.extend({
       amount,
       id,
     });
-  },
+  }
 
   async peers() {
     // When there are no peers, the RPC replies with an empty string.
     const { peers } = await this.call(actions.PEERS);
     return peers || {};
-  },
+  }
 
   async blockCount() {
     const {
@@ -233,15 +233,15 @@ export default Service.extend({
       count: parseInt(count, 10),
       unchecked: parseInt(unchecked, 10),
     };
-  },
+  }
 
   blockConfirm(hash) {
     return this.call(actions.BLOCK_CONFIRM, { hash });
-  },
+  }
 
   searchPending(wallet) {
     return this.call(actions.SEARCH_PENDING, { wallet });
-  },
+  }
 
   async passwordChange(wallet, password) {
     const { changed } = await this.call(actions.PASSWORD_CHANGE, { wallet, password });
@@ -250,7 +250,7 @@ export default Service.extend({
     }
 
     return true;
-  },
+  }
 
   async passwordEnter(wallet, password) {
     const { valid } = await this.call(actions.PASSWORD_ENTER, { wallet, password });
@@ -259,7 +259,7 @@ export default Service.extend({
     }
 
     return true;
-  },
+  }
 
   async passwordValid(wallet, password) {
     const { valid } = await this.call(actions.PASSWORD_VALID, { wallet, password });
@@ -268,5 +268,5 @@ export default Service.extend({
     }
 
     return true;
-  },
-});
+  }
+}

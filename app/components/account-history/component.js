@@ -1,5 +1,5 @@
 import Component from '@ember/component';
 
-export default Component.extend({
-  history: null,
-});
+export default class AccountHistoryComponent extends Component {
+  history = null;
+}

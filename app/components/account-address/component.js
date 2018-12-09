@@ -1,31 +1,41 @@
 import Component from '@ember/component';
-import { bool } from '@ember/object/computed';
 
-import { observes } from 'ember-decorators/object';
-import { on } from 'ember-decorators/object/evented';
+import { on, observes } from '@ember-decorators/object';
+import { bool } from '@ember-decorators/object/computed';
+import { tagName, attribute } from '@ember-decorators/component';
+
+import toNanoPrefix from '../../utils/to-nano-prefix';
 
 export const MINIMUM_LENGTH = 65;
 
-export default Component.extend({
-  tagName: 'span',
-  isVisible: bool('value'),
+@tagName('span')
+class AccountAddressComponent extends Component {
+  @bool('value') isVisible;
 
-  value: null,
-  truncate: 0,
+  @attribute title = null;
 
-  attributeBindings: ['title', 'translate'],
-  translate: false,
+  @attribute translate = false;
 
-  head: null,
-  body: null,
-  tail: null,
+  value = null;
 
-  @on('init')
+  truncate = 0;
+
+  head = null;
+
+  body = null;
+
+  tail = null;
+
+  @on('didInsertElement')
+  setupParts() {
+    this.valueDidChange();
+  }
+
   @observes('value')
   valueDidChange() {
     const value = this.get('value');
     if (value) {
-      const str = String(value).replace(/^xrb/, 'nano');
+      const str = toNanoPrefix(value);
       if (str.length >= MINIMUM_LENGTH) {
         const head = str.slice(0, 10);
         const body = str.slice(10, -5);
@@ -33,5 +43,7 @@ export default Component.extend({
         this.setProperties({ head, body, tail });
       }
     }
-  },
-});
+  }
+}
+
+export default AccountAddressComponent;

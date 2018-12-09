@@ -1,7 +1,10 @@
 import Component from '@ember/component';
 
-export default Component.extend({
-  classNames: ['text-truncate'],
+import { classNames } from '@ember-decorators/component';
 
-  value: null,
-});
+@classNames('text-truncate')
+class AccountAmountCompoennt extends Component {
+  value = null;
+}
+
+export default AccountAmountCompoennt;

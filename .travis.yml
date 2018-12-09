@@ -1,29 +1,33 @@
 ---
-matrix:
-  include:
-  - os: linux
-    sudo: false
-    dist: trusty
-  - os: osx
-    osx_image: xcode6.4
-
 language: node_js
 node_js:
-  - 10.6.0
+  - 10.14.1
+
+jobs:
+  include:
+    - os: linux
+      sudo: false
+      dist: trusty
+    - os: osx
+      osx_image: xcode7.3
 
 addons:
   chrome: stable
   apt:
     packages:
-    - fakeroot
-    - rpm
+      - jq
+      - fakeroot
+      - rpm
+  homebrew:
+    packages:
+      - jq
 
 cache:
   directories:
-    - "$HOME/.electron"
     - "$HOME/.cache/yarn"
-    - "$HOME/Library/Caches/Yarn/v1"
-    - "$HOME/Library/Caches/Homebrew"
+    - "$HOME/.cache/electron"
+    - "$HOME/Library/Caches/Yarn"
+    - "$HOME/Library/Caches/electron"
 
 env:
   global:
@@ -43,7 +47,7 @@ script:
   - yarn test
 
 before_deploy:
-  - yarn cross-env NODE_ENV=production ember electron:build -e production
+  - yarn cross-env NODE_ENV=production ember electron:build -e production --output-path electron-out/ember
   - |
     if [ "$TRAVIS_OS_NAME" == "osx" ]; then
       security create-keychain -p "$CSC_KEY_PASSWORD" codesign.keychain;
@@ -60,7 +64,6 @@ before_deploy:
   - |
     if [ "$TRAVIS_OS_NAME" == "osx" ]; then
       security delete-keychain codesign.keychain;
-      HOMEBREW_NO_AUTO_UPDATE=1 rvm-exec system brew install jq;
     fi
   - export GITHUB_RELEASE="$(cat package.json | jq -r '.productName') $(echo $TRAVIS_TAG | cut -c 2-)"
 

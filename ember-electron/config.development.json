@@ -6,10 +6,11 @@
         "port": "55000",
         "enable_control": "true",
         "frontier_request_limit": "16384",
-        "chain_request_limit": "16384"
+        "chain_request_limit": "16384",
+        "max_json_depth": "20"
     },
     "node": {
-        "version": "12",
+        "version": "14",
         "peering_port": "54000",
         "bootstrap_fraction_numerator": "1",
         "receive_minimum": "1",
@@ -35,24 +36,29 @@
             "flush": "true"
         },
         "work_peers": "",
-        "preconfigured_peers": "",
+        "preconfigured_peers": [
+            "rai-beta.raiblocks.net"
+        ],
         "preconfigured_representatives": [
-            "xrb_3e3j5tkog48pnny9dmfzj1r16pg8t1e76dz5tmac6iq689wyjfpiij4txtdo"
+            "xrb_3betaz86ypbygpqbookmzpnmd5jhh4efmd8arr9a3n4bdmj1zgnzad7xpmfp",
+            "xrb_1beta1ayfkpj1tfbhi3e9ihkocjkqi6ms5e4xrbmbybqnkza1e5jrake8wai",
+            "xrb_1beta3kp4j9tn7pko3apyyzbrx789jpc98ep3ufqazanbcxiyyoxmxhjtbfn",
+            "xrb_1beta4nkzb3g6b1a1qhae89earmz3gk3kfrp3f8hyztm8qyjkeyz9kajfutq",
+            "xrb_1beta5zm6rq4ghp6c9n99j8fz3am8e44dewae5ea7addsjtfo8umsafmr1r7"
         ],
         "online_weight_minimum": "60000000000000000000000000000000000000",
         "online_weight_quorum": "50",
         "password_fanout": "1024",
-        "io_threads": "8",
-        "work_threads": "8",
+        "io_threads": "4",
+        "work_threads": "4",
         "enable_voting": "true",
         "bootstrap_connections": "4",
-        "bootstrap_connections_max": "64",
+        "bootstrap_connections_max": "16",
         "callback_address": "",
         "callback_port": "0",
         "callback_target": "",
         "lmdb_max_dbs": "128",
-        "state_block_parse_canary": "000000000000000049B43AE0FE7F000030973AE0FE7F000038973AE0FE7F0000",
-        "state_block_generate_canary": "30973AE0FE7F000038973AE0FE7F0000B75FD476FF7F000038973AE0FE7F0000"
+        "generate_hash_votes_at": "0"
     },
     "opencl_enable": "false",
     "opencl": {

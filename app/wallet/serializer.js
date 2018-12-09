@@ -2,6 +2,6 @@ import DS from 'ember-data';
 
 const { JSONSerializer } = DS;
 
-export default JSONSerializer.extend({
-  primaryKey: 'wallet',
-});
+export default class WalletSerializer extends JSONSerializer {
+  primaryKey = 'wallet';
+}

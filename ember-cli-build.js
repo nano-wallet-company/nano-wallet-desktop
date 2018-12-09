@@ -1,18 +1,16 @@
 /* eslint-env node */
-const nodeSass = require('node-sass');
-
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 const { extensions: defaultExtensions } = require('broccoli-asset-rev/lib/default-options');
 
 module.exports = (defaults) => {
+  const isProduction = EmberApp.env() === 'production';
+  const isElectron = !!process.env.EMBER_CLI_ELECTRON;
   const app = new EmberApp(defaults, {
-    sassOptions: {
-      nodeSass,
-    },
-
-    sourcemaps: {
-      enabled: true,
-      extensions: ['js'],
+    babel: {
+      sourceMaps: isProduction ? false : 'inline',
+      plugins: [
+        '@babel/plugin-proposal-function-bind',
+      ],
     },
 
     fingerprint: {
@@ -45,7 +43,7 @@ module.exports = (defaults) => {
     },
 
     'ember-service-worker': {
-      enabled: EmberApp.env() === 'production' && !process.env.EMBER_CLI_ELECTRON,
+      enabled: isProduction && !isElectron,
       versionStrategy: 'every-build',
       registrationStrategy: 'async',
     },

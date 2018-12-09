@@ -1,21 +1,21 @@
 import Route from '@ember/routing/route';
 import { get } from '@ember/object';
 
-import { service } from 'ember-decorators/service';
-import { action } from 'ember-decorators/object';
+import { service } from '@ember-decorators/service';
+import { action } from '@ember-decorators/object';
 
-export default Route.extend({
-  @service rpc: null,
+export default class SetupImportRoute extends Route {
+  @service rpc;
 
   @action
   cancel() {
     return this.transitionTo('setup');
-  },
+  }
 
   @action
   changeType(type) {
     return this.transitionTo({ queryParams: { type } });
-  },
+  }
 
   @action
   async changeSeed(model, changeset) {
@@ -23,5 +23,5 @@ export default Route.extend({
     const seed = get(changeset, 'seed');
     await this.get('rpc').walletChangeSeed(wallet, seed);
     return this.transitionTo('setup.password', wallet);
-  },
-});
+  }
+}

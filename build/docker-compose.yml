@@ -5,7 +5,7 @@ services:
       context: ..
       dockerfile: ./build/Dockerfile
       args:
-        - YARN_VERSION=${YARN_VERSION:-1.7.0-1}
+        - YARN_VERSION=${YARN_VERSION:-1.10.1-1}
         - NODE_ENV=${NODE_ENV:-production}
         - EMBER_ENV=${EMBER_ENV:-production}
         - ELECTRON_PLATFORM=${ELECTRON_PLATFORM:-linux}

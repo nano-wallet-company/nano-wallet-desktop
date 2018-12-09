@@ -1,0 +1,69 @@
+diff --git a/node_modules/ember-electron/lib/tasks/assemble.js b/node_modules/ember-electron/lib/tasks/assemble.js
+index 12241f1..028f851 100644
+--- a/node_modules/ember-electron/lib/tasks/assemble.js
++++ b/node_modules/ember-electron/lib/tasks/assemble.js
+@@ -34,7 +34,7 @@ class AssembleTask extends Task {
+       assemblePromise = buildTask.run(options);
+     }
+
+-    return assemblePromise.then(() => this.installDependencies(ui, outputPath));
++    return assemblePromise;
+   }
+
+   assemble({ buildPath, outputPath, platform }) {
+@@ -62,28 +62,6 @@ class AssembleTask extends Task {
+         throw err;
+       });
+   }
+-
+-  pruneCommand() {
+-    if (shouldUseYarn(this.project.root)) {
+-      return 'yarn install --production --no-bin-links';
+-    } else {
+-      return 'npm install --production --no-bin-links';
+-    }
+-  }
+-
+-  installDependencies(ui, path) {
+-    ui.startProgress('installing production dependencies');
+-
+-    let [command, ...args] = this.pruneCommand().split(' ');
+-
+-    return execa(
+-      command,
+-      args,
+-      { cwd: path }
+-    ).catch().then(() => {
+-      ui.stopProgress();
+-    });
+-  }
+ }
+
+ module.exports = AssembleTask;
+diff --git a/node_modules/ember-electron/lib/tasks/package.js b/node_modules/ember-electron/lib/tasks/package.js
+index be5978d..30e5208 100644
+--- a/node_modules/ember-electron/lib/tasks/package.js
++++ b/node_modules/ember-electron/lib/tasks/package.js
+@@ -1,9 +1,11 @@
+ 'use strict';
+
++const path = require('path');
+ const chalk = require('chalk');
+ const childProcess = require('child_process');
+ const { resolve } = require('rsvp');
+ const quickTemp = require('quick-temp');
++const symlinkOrCopySync = require('symlink-or-copy').sync;
+ const Task = require('ember-cli/lib/models/task');
+ const AssembleTask = require('./assemble');
+ const { setupForgeEnv } = require('../utils/yarn-or-npm');
+@@ -52,6 +54,10 @@ class PackageTask extends Task {
+         options.arch = arch;
+       }
+
++      const source = path.join(this.project.root, 'node_modules');
++      const target = path.join(projectPath, 'node_modules');
++      symlinkOrCopySync(source, target);
++
+       return forgePackage(options);
+     }).finally(() => {
+       quickTemp.remove(this, '-tmpPath');

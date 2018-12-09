@@ -1,37 +1,38 @@
 {{#let (changeset block SendValidations) as |model|}}
   {{#bs-form model=model onSubmit=(action onSubmit) as |form|}}
-    {{#form.element controlType="power-select" label=(t 'wallets.accounts.send.source')
+    {{#component form.element controlType="power-select" label=(t 'wallets.accounts.send.source')
         required=true options=accounts property='source' onChange=(action onChange) as |el|}}
-      {{#el.control searchField="id" searchPlaceholder=(t 'wallets.accounts.send.search') as |item|}}
-        {{#let (or (get item.content 'content') item) as |content|}}
+      {{#component el.control searchField="id" searchPlaceholder=(t 'wallets.accounts.send.search') as |item|}}
+        {{#let (or (get item 'content.content') item) as |content|}}
           <div>
             {{account-label account=content truncate=30}}
-            {{format-amount content.balance}} {{t 'NANO'}}
+            {{format-amount (get content 'balance')}} {{t 'NANO'}}
           </div>
         {{/let}}
-      {{/el.control}}
-    {{/form.element}}
+      {{/component}}
+    {{/component}}
 
-    {{form.element controlType="text" label=(t 'wallets.accounts.send.destination') property="destination"
+    {{component form.element controlType="text" label=(t 'wallets.accounts.send.destination') property="destination"
         autocomplete='on' minlength=64 maxlength=65 required=true pattern="^(xrb|nano)(_|-)[13](?![lv])[a-z1-9]{59}$"
         placeholder=(t 'wallets.accounts.send.placeholder')}}
 
-    {{#let (changeset (hash amount=null) ChangeAmountValidations)
-           (format-amount (or (get model.source.balance 'content') model.source.balance) useGrouping=false)
+    {{#let (changeset (hash intl=intl block=block amount=null) ChangeAmountValidations)
+           (format-amount (or (get model 'source.balance.content') (get model 'source.balance')) useGrouping=false)
         as |childModel max|}}
-      {{#form.element
+      {{#component form.element
           min=0
           max=max
           step="any"
-          controlType="number"
+          controlType="text"
           label=(t 'wallets.accounts.send.amount')
           model=childModel
           property='amount'
           required=true
           minlength=1
+          showValidationOn='change'
           onChange=(action 'changeAmount' model) as |el|}}
-        <div class="input-group {{el.validation}}">
-          {{el.control}}
+        <div class="input-group {{get el 'validation'}}">
+          {{component el.control}}
           <div class="input-group-append">
             <button type="button" class="btn btn-outline-secondary"
                 title={{t 'totalAvailableBalance'}}
@@ -41,7 +42,7 @@
             </button>
           </div>
         </div>
-      {{/form.element}}
+      {{/component}}
     {{/let}}
 
     <div role="group" class="d-flex justify-content-center">

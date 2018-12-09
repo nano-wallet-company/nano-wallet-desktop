@@ -1,10 +1,10 @@
 const path = require('path');
 
 const del = require('del');
-const moment = require('moment');
 
 const {
   version,
+  homepage,
   productName,
   name: packageName,
   copyright: appCopyright,
@@ -26,7 +26,7 @@ const icon = path.join(__dirname, 'resources', 'icon');
 const [, name] = packageName.split('/');
 const categories = linuxDesktopCategories.split(';');
 
-const buildNumber = moment().format('YYYYMMDDHHmmss');
+const buildNumber = new Date().toISOString().split('.')[0].replace(/[^\d]/g, '');
 const buildVersion = `${version}+${buildNumber}`;
 
 const osxSign = {
@@ -34,10 +34,10 @@ const osxSign = {
   entitlements: false,
 };
 
-const certificateFile = process.env.CSC_LINK || null;
+const certificateFile = process.env.CSC_FILE ? path.resolve(process.env.CSC_FILE) : null;
 const certificatePassword = process.env.CSC_KEY_PASSWORD || null;
 const signWithParams = certificateFile && certificatePassword
-  ? `/a /ph /tr http://timestamp.digicert.com /td sha256 /fd sha256 /f "${path.resolve(certificateFile)}" /p "${certificatePassword}"`
+  ? `/a /f "${certificateFile}" /p "${certificatePassword}" /fd sha256 /tr http://timestamp.digicert.com /td sha256`
   : undefined;
 
 const unsupportedArch = (target, type) => {
@@ -92,9 +92,8 @@ module.exports = {
       '/ember-electron/resources/ordering.txt$',
     ],
     asar: {
-      // https://github.com/electron/asar/blob/v0.14.3/lib/asar.js#L80
       ordering: path.join(__dirname, 'resources', 'ordering.txt'),
-      unpackDir: '{ember-electron/resources,node_modules/**/binding-*}',
+      unpackDir: '{ember-electron/resources,node_modules/7zip,node_modules/**/binding-*}',
     },
     // extendInfo: {
     //   CSResourcesFileMapped: true,
@@ -102,6 +101,7 @@ module.exports = {
     overwrite: true,
     packageManager: 'yarn',
     executableName: name,
+    darwinDarkModeSupport: true,
     win32metadata: {
       FileDescription: productName,
       InternalName: name,
@@ -109,10 +109,23 @@ module.exports = {
       ProductName: productName,
     },
     afterPrune: [
-      (buildPath, electronVersion, platform, arch, callback) => {
-        const cwd = path.join(buildPath, 'node_modules', 'lzma-native');
-        return del(['{deps,build}', 'bin/**'], { cwd })
-          .then(() => callback(), err => callback(err));
+      async (buildPath, electronVersion, platform, arch, callback) => {
+        const cwd = path.join(buildPath, 'node_modules');
+        const patterns = [
+          '**/{bin,man}',
+          'nan/tools',
+          'nan/*.{tgz,h}',
+          'lzma-native/{build,deps,src}',
+          'lzma-native/*.{gyp,sh,xz}',
+        ];
+
+        try {
+          await del(patterns, { cwd });
+        } catch (err) {
+          return callback(err);
+        }
+
+        return callback();
       },
     ],
   },
@@ -120,10 +133,18 @@ module.exports = {
     name,
     signWithParams,
     exe: `${name}.exe`,
+    iconUrl: `${homepage}/icon.ico`,
     setupIcon: `${icon}.ico`,
     loadingGif: path.join(__dirname, 'resources', 'install-spinner.gif'),
   },
   electronInstallerDMG: {
+    icon: `${icon}.icns`,
+    format: 'ULFO',
+    additionalDMGOptions: {
+      'code-sign': {
+        'signing-identity': process.env.CSC_NAME || undefined,
+      },
+    },
   },
   electronInstallerDebian: {
     name,

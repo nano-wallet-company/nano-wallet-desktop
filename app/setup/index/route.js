@@ -1,12 +1,13 @@
 import Route from '@ember/routing/route';
 import { get } from '@ember/object';
-import { action } from 'ember-decorators/object';
+import { action } from '@ember-decorators/object';
 
-import { service } from 'ember-decorators/service';
+import { service } from '@ember-decorators/service';
 
-export default Route.extend({
-  @service session: null,
-  @service electron: null,
+export default class SetupIndexRoute extends Route {
+  @service session;
+
+  @service electron;
 
   beforeModel(...args) {
     const electron = this.get('electron');
@@ -24,16 +25,16 @@ export default Route.extend({
       return session.invalidate();
     }
 
-    return this._super(...args);
-  },
+    return super.beforeModel(...args);
+  }
 
   @action
   createWallet() {
     return this.transitionTo('setup.backup');
-  },
+  }
 
   @action
   importWallet() {
     return this.transitionTo('setup.import');
-  },
-});
+  }
+}

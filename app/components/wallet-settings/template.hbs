@@ -1,12 +1,12 @@
 {{#bs-form model=(changeset (hash seed=seed representative=representative) ChangeRepresentativeValidations) onSubmit=(action onChangeRepresentative wallet) as |form|}}
-  {{#form.element label=(t 'seed') property="seed" as |el|}}
+  {{#component form.element label=(t 'seed') property="seed" as |el|}}
     {{password-toggle inputId=el.id label=(t 'seed') value=el.value placeholder=(t 'unknown') readonly=true}}
-  {{/form.element}}
+  {{/component}}
 
-  {{#form.element controlType="text" label='Representative' property='representative'
+  {{#component form.element controlType="text" label='Representative' property='representative'
       minlength=64 maxlength=65 required=true pattern="^(xrb|nano)(_|-)[13](?![lv])[a-z1-9]{59}$" as |el|}}
-    {{el.control class="text-truncate text-monospace"}}
-  {{/form.element}}
+    {{component el.control class="text-truncate text-monospace"}}
+  {{/component}}
 
   {{#bs-button buttonType="submit" type="warning" icon="fa fa-cubes" class="w-100"}}
     {{t 'wallets.settings.changeRepresentative'}}

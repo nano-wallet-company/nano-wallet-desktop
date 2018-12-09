@@ -2,8 +2,8 @@ import Component from '@ember/component';
 import { get, setProperties } from '@ember/object';
 
 import { defineError } from 'ember-exex/error';
-import { action } from 'ember-decorators/object';
-import { service } from 'ember-decorators/service';
+import { action } from '@ember-decorators/object';
+import { service } from '@ember-decorators/service';
 
 import ChangePasswordValidations from '../../validations/change-password';
 
@@ -12,17 +12,20 @@ export const PasswordConfirmationError = defineError({
   message: 'Password confirmation does not match password',
 });
 
-export default Component.extend({
-  ChangePasswordValidations,
+export default class WalletPasswordComponent extends Component {
+  @service intl;
 
-  @service intl: null,
-  @service flashMessages: null,
+  @service flashMessages;
 
-  wallet: null,
-  password: null,
-  passwordConfirm: null,
+  ChangePasswordValidations = ChangePasswordValidations;
 
-  onSubmit: null,
+  wallet = null;
+
+  password = null;
+
+  passwordConfirm = null;
+
+  onSubmit = null;
 
   @action
   confirmPassword(changeset) {
@@ -36,7 +39,7 @@ export default Component.extend({
     }
 
     return true;
-  },
+  }
 
   @action
   clearPassword(changeset) {
@@ -44,5 +47,5 @@ export default Component.extend({
       password: null,
       passwordConfirm: null,
     });
-  },
-});
+  }
+}

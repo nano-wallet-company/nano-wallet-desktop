@@ -1,27 +1,27 @@
 {{#let (changeset (hash label=settings.label representative=account.representative) ChangeAccountSettingsValidations) as |model|}}
   {{#bs-modal position='center' onHide=(action (optional onCancel)) as |modal|}}
-    {{#modal.header}}
+    {{#component modal.header}}
       <h4 class="modal-title">
         {{t 'accountSettings'}}
       </h4>
-    {{/modal.header}}
-    {{#modal.body}}
+    {{/component}}
+    {{#component modal.body}}
       {{! template-lint-disable no-unused-block-params }}
       {{#bs-form model=model onSubmit=(action (queue (action 'save' model) (action (optional onSave))) account) as |form|}}
         <div class="form-group">
           <label>{{t 'account'}}</label>
           {{account-address class="form-control-plaintext" value=account.id truncate=true}}
         </div>
-        {{form.element controlType="text" label=(t 'label') property="label"}}
+        {{component form.element controlType="text" label=(t 'label') property="label"}}
         {{#if hasOpenBlock}}
-          {{#form.element controlType="text" label='Representative' property='representative'
+          {{#component form.element controlType="text" label='Representative' property='representative'
               minlength=64 maxlength=65 required=true pattern="^(xrb|nano)(_|-)[13](?![lv])[a-z1-9]{59}$" as |el|}}
-            {{el.control class="text-truncate text-monospace"}}
-          {{/form.element}}
+            {{component el.control class="text-truncate text-monospace"}}
+          {{/component}}
         {{/if}}
       {{/bs-form}}
-    {{/modal.body}}
-    {{#modal.footer}}
+    {{/component}}
+    {{#component modal.footer}}
       {{!--
       {{#bs-button onClick=(action 'remove' account) type="danger" class="mr-auto"}}
         {{t 'delete'}}
@@ -34,6 +34,6 @@
         {{fa-icon 'check'}}
         {{t 'save'}}
       {{/bs-button}}
-    {{/modal.footer}}
+    {{/component}}
   {{/bs-modal}}
 {{/let}}

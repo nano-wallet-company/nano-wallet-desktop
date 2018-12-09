@@ -1,15 +1,15 @@
 import { defineError } from 'ember-exex/error';
 
-import BigNumber from 'npm:bignumber.js';
+import BigNumber from 'bignumber.js';
 
 const base10 = BigNumber(10);
 
-const Gxrb = Symbol.for('Gxrb');
-const Mxrb = Symbol.for('Mxrb');
-const kxrb = Symbol.for('kxrb');
-const xrb = Symbol.for('xrb');
-const mxrb = Symbol.for('mxrb');
-const uxrb = Symbol.for('uxrb');
+export const Gxrb = 'Gxrb';
+export const Mxrb = 'Mxrb';
+export const kxrb = 'kxrb';
+export const xrb = 'xrb';
+export const mxrb = 'mxrb';
+export const uxrb = 'uxrb';
 
 export const UNITS = new Set([
   Gxrb,

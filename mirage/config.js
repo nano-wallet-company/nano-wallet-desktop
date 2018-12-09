@@ -35,6 +35,8 @@ export default function () {
   // Electron proxy
   this.passthrough('https://localhost:17076/**');
 
+  this.passthrough('https://api.coinmarketcap.com/**');
+
   this.namespace = 'rpc';
 
   this.post('/', (schema, request) => {

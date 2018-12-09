@@ -9,7 +9,7 @@ import: 'Импорт'
 password: 'Пароль'
 confirmPassword: 'Подтвердить пароль'
 overview: 'Обзор'
-send: 'Отослать'
+send: 'ОТПРАВИТЬ'
 max: 'MAX'
 totalAvailableBalance: 'Весь доступный баланс'
 receive: 'Получить'
@@ -107,7 +107,7 @@ wallets:
     changeRepresentative: 'Изменить представителя'
     changePassword: 'Изменить пароль'
     representativeChanged: 'Представитель кошелька изменен!'
-    representativeChangeFailed: 'Замена представителя неудалась!'
+    representativeChangeFailed: 'Замена представителя не удалась!'
     passwordChanged: 'Пароль изменен!'
     passwordsDontMatch: 'Пароли не совпадают!'
   logout:
@@ -119,7 +119,7 @@ wallets:
 setup:
   lead: 'Давайте создадим Ваш кошелек.'
   instructions: >
-    Перед началом использования Nano Wallet Desktop, Вы должны создать новый кошешелек или импортировать данные кошелька используя seed.
+    Перед началом использования Nano Wallet Desktop, Вы должны создать новый кошелек или импортировать данных кошелька используя seed.
   create: 'Создать новый кошелек'
   or: 'или'
   import: 'Импортировать кошелек'

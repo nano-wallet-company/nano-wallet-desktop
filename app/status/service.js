@@ -3,15 +3,20 @@ import PromiseProxyMixin from '@ember/object/promise-proxy-mixin';
 import { set } from '@ember/object';
 
 import { ContextBoundTasksMixin } from 'ember-lifeline';
-import { service } from 'ember-decorators/service';
+import { service } from '@ember-decorators/service';
 import { hash } from 'ember-concurrency';
 
 export const STATUS_POLL_INTERVAL = 10 * 1000; // 10s
 
-const Service = ObjectProxy.extend(PromiseProxyMixin, ContextBoundTasksMixin, {
-  @service rpc: null,
+export default class StatusService extends ObjectProxy.extend(
+  PromiseProxyMixin,
+  ContextBoundTasksMixin,
+) {
+  @service rpc;
 
-  pollToken: null,
+  static isServiceFactory = true;
+
+  pollToken = null;
 
   pausePolling() {
     const pollToken = this.get('pollToken');
@@ -20,7 +25,7 @@ const Service = ObjectProxy.extend(PromiseProxyMixin, ContextBoundTasksMixin, {
     }
 
     return pollToken;
-  },
+  }
 
   resumePolling() {
     this.pausePolling();
@@ -28,7 +33,7 @@ const Service = ObjectProxy.extend(PromiseProxyMixin, ContextBoundTasksMixin, {
     const pollToken = this.pollTask('onPoll');
     this.set('pollToken', pollToken);
     return pollToken;
-  },
+  }
 
   onPoll(next) {
     return this.runTask(() => {
@@ -43,11 +48,5 @@ const Service = ObjectProxy.extend(PromiseProxyMixin, ContextBoundTasksMixin, {
       set(this, 'promise', promise);
       return this.runTask(next, STATUS_POLL_INTERVAL);
     });
-  },
-});
-
-Service.reopenClass({
-  isServiceFactory: true,
-});
-
-export default Service;
+  }
+}

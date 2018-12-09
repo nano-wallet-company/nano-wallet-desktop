@@ -1,12 +1,14 @@
 import Route from '@ember/routing/route';
 import { get, set } from '@ember/object';
 
-import KeyboardShortcuts from 'ember-keyboard-shortcuts/mixins/route';
 import { hash } from 'ember-concurrency';
-import { computed, action } from 'ember-decorators/object';
+import { action } from '@ember-decorators/object';
+import {
+  bindKeyboardShortcuts,
+  unbindKeyboardShortcuts,
+} from 'ember-keyboard-shortcuts';
 
-export default Route.extend(KeyboardShortcuts, {
-  @computed
+export default class WalletsOverviewAccountsHistoryRoute extends Route {
   get keyboardShortcuts() {
     return {
       esc: {
@@ -14,7 +16,11 @@ export default Route.extend(KeyboardShortcuts, {
         scoped: true,
       },
     };
-  },
+  }
+
+  activate() {
+    return bindKeyboardShortcuts(this);
+  }
 
   async model() {
     const wallet = this.modelFor('wallets');
@@ -29,23 +35,24 @@ export default Route.extend(KeyboardShortcuts, {
       account,
       history,
     });
-  },
+  }
 
   setupController(controller, model) {
     const overviewController = this.controllerFor('wallets.overview');
     set(overviewController, 'hideHistory', false);
     set(controller, 'hideHistory', false);
-    return this._super(controller, model);
-  },
+    return super.setupController(controller, model);
+  }
 
   deactivate() {
     const overviewController = this.controllerFor('wallets.overview');
     set(overviewController, 'hideHistory', true);
     set(this.controller, 'hideHistory', true);
-  },
+    return unbindKeyboardShortcuts(this);
+  }
 
   @action
   hideHistory() {
     return this.transitionTo('wallets.overview');
-  },
-});
+  }
+}

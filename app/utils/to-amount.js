@@ -1,4 +1,4 @@
-import BigNumber from 'npm:bignumber.js';
+import BigNumber from 'bignumber.js';
 
 import getConversion, { DEFAULT_UNIT } from './get-conversion';
 

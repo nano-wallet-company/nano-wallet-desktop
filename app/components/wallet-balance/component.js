@@ -5,8 +5,10 @@ import {
   DEFAULT_EXCHANGE_RATE,
 } from '../../utils/get-exchange-rate';
 
-export default Component.extend({
-  amount: 0,
-  currency: Symbol.keyFor(DEFAULT_CURRENCY),
-  exchangeRate: DEFAULT_EXCHANGE_RATE,
-});
+export default class WalletBalanceComponent extends Component {
+  amount = 0;
+
+  currency = DEFAULT_CURRENCY;
+
+  exchangeRate = DEFAULT_EXCHANGE_RATE;
+}

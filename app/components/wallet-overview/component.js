@@ -1,18 +1,18 @@
 import Component from '@ember/component';
 
-import { service } from 'ember-decorators/service';
-import { computed } from 'ember-decorators/object';
+import { service } from '@ember-decorators/service';
 
-export default Component.extend({
-  @service intl: null,
+export default class WalletOverviewComponent extends Component {
+  @service intl;
 
-  wallet: null,
-  accounts: null,
-  currentSlide: 0,
+  wallet = null;
 
-  onChangeSlide: null,
+  accounts = null;
 
-  @computed
+  currentSlide = 0;
+
+  onChangeSlide = null;
+
   get breakpoints() {
     return [
       {
@@ -46,5 +46,5 @@ export default Component.extend({
         },
       },
     ];
-  },
-});
+  }
+}

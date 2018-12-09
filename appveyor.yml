@@ -1,27 +1,31 @@
-image: Visual Studio 2015
+image: Visual Studio 2017
 
 platform:
   - x64
 
 environment:
+  global:
+    JOBS: '1'
+    FORCE_COLOR: '1'
+    MOCHA_REPORTER: 'mocha-appveyor-reporter'
+    GYP_MSVS_VERSION: '2017'
   matrix:
-    - nodejs_version: 10.6.0
-      yarn_version: 1.7.0
+    - nodejs_version: '10.14.1'
 
 cache:
   - node_modules -> yarn.lock
-  - '%USERPROFILE%\.electron -> package.json'
-  - '%TEMP%\chocolatey\yarn\%yarn_version%'
+  - '%LOCALAPPDATA%\Yarn\Cache -> yarn.lock'
+  - '%LOCALAPPDATA%\electron\Cache -> yarn.lock'
 
 init:
   - git config --global core.autocrlf input
 
 install:
-  - ps: Update-NodeJsInstallation $env:nodejs_version $env:PLATFORM
-  - ps: appveyor-retry choco install yarn -y --force --no-progress --ignore-dependencies --version $env:yarn_version
+  - ps: Update-NodeJsInstallation $Env:nodejs_version $Env:PLATFORM
+  - appveyor-retry cinst yarn -iy --no-progress
   - node --version
   - yarn --version
-  - yarn --frozen-lockfile --non-interactive
+  - appveyor-retry yarn --frozen-lockfile --non-interactive
 
 build: off
 
@@ -30,29 +34,31 @@ test_script:
   - yarn test
 
 after_test:
-  - yarn cross-env NODE_ENV=production ember electron:build -e production
+  - yarn cross-env NODE_ENV=production ember electron:build -e production --output-path electron-out/ember
   - ps: |
-      $path = Join-Path -Path "$env:TEMP" -ChildPath csc.p12
-      [IO.File]::WriteAllBytes($path, [Convert]::FromBase64String($env:CSC_LINK))
-      Set-AppveyorBuildVariable -Name 'CSC_LINK' -Value $path
+      if (Test-Path Env:CSC_LINK) {
+        Add-Path 'C:\Program Files (x86)\Windows Kits\10\App Certification Kit'
+        $cscFile = Join-Path -Path "$Env:TMP" -ChildPath csc.p12
+        [IO.File]::WriteAllBytes($cscFile, [Convert]::FromBase64String($Env:CSC_LINK))
+        Set-AppveyorBuildVariable -Name 'CSC_FILE' -Value $cscFile
+      }
   - yarn cross-env NODE_ENV=production ember electron:make -e production --build-path electron-out/ember
-  - ps: Remove-Item -Path $env:CSC_LINK
-  - ps: 7z a -bd electron-out.zip electron-out
+  - ps: Remove-Item -Path $Env:CSC_FILE -ErrorAction Ignore
 
 artifacts:
-- path: electron-out.zip
-  name: electron-out
 - path: electron-out\make\*.zip
   name: zip
 - path: electron-out\make\squirrel.windows\$(PLATFORM)\*.exe
   name: exe
 - path: electron-out\make\squirrel.windows\$(PLATFORM)\*.nupkg
   name: nupkg
+- path: electron-out\make\squirrel.windows\$(PLATFORM)\RELEASES
+  name: releases
 
 before_deploy:
   - ps: |
       $package = Get-Content -Raw -Path package.json | ConvertFrom-Json
-      $release = "$($package.productName) $($env:APPVEYOR_REPO_TAG_NAME.Substring(1))"
+      $release = "$($package.productName) $($Env:APPVEYOR_REPO_TAG_NAME.Substring(1))"
       Set-AppveyorBuildVariable -Name 'GITHUB_RELEASE' -Value $release
 
 deploy:
@@ -60,7 +66,7 @@ deploy:
     auth_token: $(GITHUB_TOKEN)
     tag: $(APPVEYOR_REPO_TAG_NAME)
     release: $(GITHUB_RELEASE)
-    artifact: zip, exe, nupkg
+    artifact: zip, exe, nupkg, releases
     draft: true
     prerelease: true
     force_update: true

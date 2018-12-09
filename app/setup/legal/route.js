@@ -1,21 +1,22 @@
 import Route from '@ember/routing/route';
 import { set } from '@ember/object';
 
-import { service } from 'ember-decorators/service';
-import { action } from 'ember-decorators/object';
+import { service } from '@ember-decorators/service';
+import { action } from '@ember-decorators/object';
 
 import alert from '../../utils/alert';
 
-export default Route.extend({
-  @service intl: null,
-  @service settings: null,
+export default class SetupLegalRoute extends Route {
+  @service intl;
+
+  @service settings;
 
   @action
   agree() {
     const settings = this.get('settings');
     set(settings, 'acceptedTerms', true);
     return this.transitionTo('index');
-  },
+  }
 
   @action
   disagree() {
@@ -26,5 +27,5 @@ export default Route.extend({
     alert(message);
 
     return this.transitionTo('index');
-  },
-});
+  }
+}

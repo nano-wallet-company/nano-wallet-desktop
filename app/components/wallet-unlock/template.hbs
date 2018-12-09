@@ -1,6 +1,6 @@
 {{#bs-form model=(changeset (hash wallet=wallet password=password) UnlockWalletValidations)
     onSubmit=(action (queue (action onSubmit) (action 'clearPassword'))) as |form|}}
-  {{form.element controlType="password" label=(t 'password') property='password' required=true minlength=8}}
+  {{component form.element controlType="password" label=(t 'password') property='password' required=true minlength=8}}
 
   {{#bs-button block=true type="primary" class="btn-lg" buttonType="submit"}}
     {{t 'wallets.unlock.unlockWallet'}}

@@ -2,19 +2,18 @@ import Component from '@ember/component';
 import { get } from '@ember/object';
 import { tryInvoke } from '@ember/utils';
 
-import { service } from 'ember-decorators/service';
+import { service } from '@ember-decorators/service';
+import { tagName, attribute } from '@ember-decorators/component';
 
 import window from 'ember-window-mock';
 
-export default Component.extend({
-  @service electron: null,
+@tagName('a')
+class ExternalLinkComponent extends Component {
+  @service electron;
 
-  tagName: 'a',
+  @attribute href = null;
 
-  attributeBindings: ['href'],
-
-  href: null,
-  text: null,
+  text = null;
 
   click() {
     const { href, electron } = this.getProperties(['href', 'electron']);
@@ -26,5 +25,7 @@ export default Component.extend({
 
     tryInvoke(window, 'open', [href]);
     return false;
-  },
-});
+  }
+}
+
+export default ExternalLinkComponent;

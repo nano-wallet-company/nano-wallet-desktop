@@ -1,7 +1,10 @@
 import Component from '@ember/component';
 
-export default Component.extend({
-  classNames: ['row', 'no-gutters', 'justify-content-center'],
+import { classNames } from '@ember-decorators/component';
 
-  entry: null,
-});
+@classNames('row', 'no-gutters', 'justify-content-center')
+class AccountHistoryEntryComponent extends Component {
+  entry = null;
+}
+
+export default AccountHistoryEntryComponent;

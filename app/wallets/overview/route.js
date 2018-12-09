@@ -2,12 +2,13 @@ import Route from '@ember/routing/route';
 import { get, setProperties } from '@ember/object';
 import { isEmpty } from '@ember/utils';
 
-import { action } from 'ember-decorators/object';
-import { service } from 'ember-decorators/service';
+import { action } from '@ember-decorators/object';
+import { service } from '@ember-decorators/service';
 
-export default Route.extend({
-  @service intl: null,
-  @service flashMessages: null,
+export default class WalletsOverviewRoute extends Route {
+  @service intl;
+
+  @service flashMessages;
 
   beforeModel(...args) {
     const walletOverviewController = this.controllerFor('wallets.overview');
@@ -16,8 +17,8 @@ export default Route.extend({
       isExpanded: false,
     });
 
-    return this._super(...args);
-  },
+    return super.beforeModel(...args);
+  }
 
   async afterModel(wallet) {
     const accounts = await get(wallet, 'accounts');
@@ -26,25 +27,25 @@ export default Route.extend({
     }
 
     return wallet;
-  },
+  }
 
   @action
   changeSlide(slide) {
     return this.transitionTo({ queryParams: { slide } });
-  },
+  }
 
   @action
   changeCurrency(currency) {
     return this.transitionTo({ queryParams: { currency } });
-  },
+  }
 
   @action
   openSend(wallet) {
     return this.transitionTo('wallets.send', wallet);
-  },
+  }
 
   @action
   closeSend(wallet) {
     return this.transitionTo(this.routeName, wallet);
-  },
-});
+  }
+}

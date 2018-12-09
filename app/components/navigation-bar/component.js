@@ -1,16 +1,20 @@
 import Component from '@ember/component';
-import { action } from 'ember-decorators/object';
 
-export default Component.extend({
-  wallet: null,
-  show: false,
+import { action } from '@ember-decorators/object';
 
-  onCreateAccount: null,
-  onChangeRepresentative: null,
-  onChangePassword: null,
+export default class NavigationBarComponent extends Component {
+  wallet = null;
+
+  show = false;
+
+  onCreateAccount = null;
+
+  onChangeRepresentative = null;
+
+  onChangePassword = null;
 
   @action
   toggleShow() {
     this.toggleProperty('show');
-  },
-});
+  }
+}

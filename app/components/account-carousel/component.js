@@ -1,19 +1,22 @@
 import Component from '@ember/component';
 
-import { task, waitForQueue } from 'ember-concurrency';
-import { ContextBoundTasksMixin } from 'ember-lifeline';
+import { waitForQueue } from 'ember-concurrency';
+import { keepLatestTask } from 'ember-concurrency-decorators';
+import { ContextBoundTasksMixin, ContextBoundEventListenersMixin } from 'ember-lifeline';
 
-import { computed, observes } from 'ember-decorators/object';
-import { on } from 'ember-decorators/object/evented';
+import { on, observes } from '@ember-decorators/object';
 
-export default Component.extend(ContextBoundTasksMixin, {
-  accounts: null,
+export default class AccountCarouselComponent extends Component.extend(
+  ContextBoundTasksMixin,
+  ContextBoundEventListenersMixin,
+) {
+  accounts = null;
 
-  onChangeSlide: null,
+  currentSlide = 0;
 
-  currentSlide: 0,
+  onChangeSlide = null;
 
-  slickInstance: null,
+  slickInstance = null;
 
   @on('didInsertElement')
   addChangeListener() {
@@ -22,7 +25,23 @@ export default Component.extend(ContextBoundTasksMixin, {
         this.set('currentSlide', currentSlide);
       });
     });
-  },
+  }
+
+  @on('didInsertElement')
+  addWheelListener() {
+    this.addEventListener('wheel', (event) => {
+      event.preventDefault();
+
+      const slickInstance = this.get('slickInstance');
+      if (slickInstance) {
+        if (event.deltaY < 0) {
+          slickInstance.slick('slickNext');
+        } else {
+          slickInstance.slick('slickPrev');
+        }
+      }
+    });
+  }
 
   @observes('currentSlide')
   currentSlideDidChange() {
@@ -30,14 +49,10 @@ export default Component.extend(ContextBoundTasksMixin, {
       const currentSlide = this.get('currentSlide');
       return this.get('onChangeSlide')(currentSlide);
     });
-  },
+  }
 
-  @on('didInsertElement')
-  attachSlider() {
-    return this.get('setupSlider').perform();
-  },
-
-  setupSlider: task(function* setupSlider() {
+  @keepLatestTask
+  * setupSlider() {
     if (!this.slickInstance && !this.isDestroying) {
       yield waitForQueue('afterRender');
 
@@ -49,7 +64,7 @@ export default Component.extend(ContextBoundTasksMixin, {
         adaptiveHeight: true,
         centerPadding: '10px',
         slidesToShow: 4,
-        slidesToScroll: 4,
+        slidesToScroll: 1,
         dots: true,
         infinite: false,
         speed: 200,
@@ -59,34 +74,40 @@ export default Component.extend(ContextBoundTasksMixin, {
     }
 
     return yield this.slickInstance;
-  }).keepLatest(),
+  }
 
-  @on('willDestroyElement')
-  detachSlider() {
-    return this.get('teardownSlider').perform();
-  },
+  @on('didInsertElement')
+  attachSlider() {
+    return this.get('setupSlider').perform();
+  }
 
-  teardownSlider: task(function* teardownSlider() {
+  @keepLatestTask
+  * teardownSlider() {
     if (this.slickInstance && !this.isDestroyed) {
       this.slickInstance.slick('unslick');
       this.slickInstance = null;
     }
 
     return yield this.slickInstance;
-  }).keepLatest(),
+  }
 
-  refreshSlider: task(function* refreshSlider() {
+  @on('willDestroyElement')
+  detachSlider() {
+    return this.get('teardownSlider').perform();
+  }
+
+  @keepLatestTask
+  * refreshSlider() {
     yield this.get('teardownSlider').perform();
     yield this.get('setupSlider').perform();
     return yield this.slickInstance;
-  }).keepLatest(),
+  }
 
   @observes('accounts.@each')
   accountsDidChange() {
     return this.get('refreshSlider').perform();
-  },
+  }
 
-  @computed
   get breakpoints() {
     return [
       {
@@ -120,5 +141,5 @@ export default Component.extend(ContextBoundTasksMixin, {
         },
       },
     ];
-  },
-});
+  }
+}

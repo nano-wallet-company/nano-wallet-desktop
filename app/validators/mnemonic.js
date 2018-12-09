@@ -1,6 +1,6 @@
 import buildMessage from 'ember-changeset-validations/utils/validation-errors';
 
-import bip39 from 'npm:bip39';
+import bip39 from 'bip39';
 
 export default function validateMnemonic(options = {}) {
   return (key, newValue) => {

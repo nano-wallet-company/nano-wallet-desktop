@@ -4,7 +4,6 @@ const path = require('path');
 
 const spdy = require('spdy');
 const cors = require('cors');
-const nanoid = require('nanoid');
 const helmet = require('helmet');
 const cpFile = require('cp-file');
 const connect = require('connect');
@@ -12,6 +11,7 @@ const getPort = require('get-port');
 const makeDir = require('make-dir');
 const username = require('username');
 const waitPort = require('wait-port');
+const nanoid = require('nanoid/async');
 const httpProxy = require('http-proxy');
 const selfsigned = require('selfsigned');
 const crossSpawn = require('cross-spawn');
@@ -34,6 +34,7 @@ const fs = Promise.promisifyAll(require('graceful-fs'), {
 
 const electron = require('electron');
 const log = require('electron-log');
+const { is } = require('electron-util');
 
 const { app } = electron;
 
@@ -131,7 +132,7 @@ const startDaemon = async () => {
   if (!config.rpc.secure) {
     log.info('Generating secure node RPC configuration...');
     const clientsPath = path.join(tlsPath, 'clients');
-    await makeDir(clientsPath);
+    await makeDir(clientsPath, { fs });
 
     const serverCertPath = path.join(tlsPath, 'server.cert.pem');
     const serverKeyPath = path.join(tlsPath, 'server.key.pem');
@@ -153,7 +154,7 @@ const startDaemon = async () => {
     // https://github.com/cryptocode/notes/wiki/RPC-TLS
     config.rpc.secure = {
       enable: true,
-      verbose_logging: true,
+      verbose_logging: is.development,
       server_cert_path: serverCertPath,
       server_key_path: serverKeyPath,
       server_key_passphrase: '',
@@ -163,14 +164,17 @@ const startDaemon = async () => {
   }
 
   const host = config.rpc.address;
-  const port = await getPort({ host, port: config.rpc.port });
-  const peeringPort = await getPort({ host, port: config.node.peering_port });
+  const port = await getPort({ host, port: [config.rpc.port] });
+  const peeringPort = await getPort({ host, port: [config.node.peering_port] });
   config.rpc.port = port;
   config.node.peering_port = peeringPort;
+  config.node.logging.log_rpc = is.development;
 
   const cpuCount = os.cpus().length;
-  config.node.io_threads = cpuCount;
-  config.node.work_threads = cpuCount;
+  config.node.io_threads = Math.max(2, Math.ceil(cpuCount / 2));
+  config.node.work_threads = Math.min(2, config.node.io_threads);
+  config.node.bootstrap_connections = Math.max(4, config.node.io_threads);
+  config.node.bootstrap_connections_max = Math.min(64, config.node.bootstrap_connections * 4);
 
   const { version: configVersion } = config;
   log.info(`Writing node configuration version ${configVersion}:`, configPath);
@@ -253,7 +257,7 @@ const startDaemon = async () => {
   const issuer = 'https://rpc.nanowalletcompany.com/';
   const audience = 'https://desktop.nanowalletcompany.com/';
   const subject = await username();
-  const jwtid = nanoid(32);
+  const jwtid = await nanoid(32);
   const jwtOptions = {
     issuer,
     audience,

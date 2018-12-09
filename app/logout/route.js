@@ -3,12 +3,12 @@ import { get } from '@ember/object';
 
 import Configuration from 'ember-simple-auth/configuration';
 
-import { service } from 'ember-decorators/service';
+import { service } from '@ember-decorators/service';
 
 const { authenticationRoute } = Configuration;
 
-export default Route.extend({
-  @service session: null,
+export default class LogoutRoute extends Route {
+  @service session;
 
   beforeModel() {
     const session = this.get('session');
@@ -18,5 +18,5 @@ export default Route.extend({
     }
 
     return session.invalidate();
-  },
-});
+  }
+}

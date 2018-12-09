@@ -6,36 +6,33 @@ import {
   DisposableMixin,
   ContextBoundTasksMixin,
 } from 'ember-lifeline';
-import { defineError } from 'ember-exex/error';
-import { on } from 'ember-decorators/object/evented';
+import { on } from '@ember-decorators/object';
 
-import speedometer from 'npm:speedometer';
+import speedometer from 'speedometer';
 
 export const STATUS_DOWNLOADING = 'downloading';
 export const STATUS_VERIFYING = 'verifying';
 export const STATUS_EXTRACTING = 'extracting';
 
-export const DownloadError = defineError({
-  name: 'DownloadError',
-  message: 'Error downloading {asset}',
-});
+export default class DownloadProgressComponent extends Component.extend(
+  DisposableMixin,
+  ContextBoundTasksMixin,
+) {
+  downloader = null;
 
-export default Component.extend(DisposableMixin, ContextBoundTasksMixin, {
-  downloader: null,
+  asset = 'data';
 
-  status: STATUS_DOWNLOADING,
-  asset: null,
-  value: 0,
-  eta: null,
+  onFinish = null;
 
-  speed: null,
+  onError = null;
 
-  onFinish: null,
+  status = STATUS_DOWNLOADING;
 
-  @on('init')
-  setupSpeedometer() {
-    this.speed = speedometer();
-  },
+  value = 0;
+
+  eta = null;
+
+  speed = null;
 
   @on('didInsertElement')
   addListeners() {
@@ -60,24 +57,24 @@ export default Component.extend(DisposableMixin, ContextBoundTasksMixin, {
     }
 
     return this;
-  },
+  }
 
-  onError() {
-    const asset = this.get('asset');
-    throw new DownloadError({ params: { asset } });
-  },
+  @on('didInsertElement')
+  setupSpeedometer() {
+    this.speed = speedometer();
+  }
 
   onProgress(value) {
     return this.debounceTask('updateProgress', value, 250, true);
-  },
+  }
 
   onVerify() {
     return this.reset(STATUS_VERIFYING);
-  },
+  }
 
   onExtract() {
     return this.reset(STATUS_EXTRACTING);
-  },
+  }
 
   onDone() {
     return this.scheduleTask('actions', () => {
@@ -88,14 +85,14 @@ export default Component.extend(DisposableMixin, ContextBoundTasksMixin, {
 
       return true;
     });
-  },
+  }
 
   reset(status = STATUS_DOWNLOADING) {
     return this.scheduleTask('routerTransitions', () => {
       this.setupSpeedometer();
       this.setProperties({ status, value: 0, eta: null });
     });
-  },
+  }
 
   updateProgress(value) {
     const delta = value - this.get('value');
@@ -104,5 +101,5 @@ export default Component.extend(DisposableMixin, ContextBoundTasksMixin, {
     const seconds = Math.round(remaining / speed);
     const eta = moment().add(seconds, 'second').toDate();
     this.setProperties({ value, eta });
-  },
-});
+  }
+}

@@ -1,21 +1,22 @@
 import Controller from '@ember/controller';
 
-import { computed } from 'ember-decorators/object';
-import { sort } from 'ember-decorators/object/computed';
+import { sort } from '@ember-decorators/object/computed';
 
-export default Controller.extend({
-  queryParams: ['slide', 'currency'],
-  slide: 0,
-  currency: 'NANO',
+export default class WalletsOverviewController extends Controller {
+  queryParams = ['slide', 'currency'];
 
-  hideHistory: true,
-  isExpanded: false,
+  slide = 0;
 
-  @sort('model.accounts', 'sortBy') sortedAccounts: null,
+  currency = 'NANO';
 
-  @computed
+  hideHistory = true;
+
+  isExpanded = false;
+
+  @sort('model.accounts', 'sortBy') sortedAccounts;
+
   get sortBy() {
     // Fallback to sorting by `id` for stable sort.
     return ['modifiedTimestamp', 'id'];
-  },
-});
+  }
+}

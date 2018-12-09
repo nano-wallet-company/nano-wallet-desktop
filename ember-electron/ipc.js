@@ -9,7 +9,12 @@ const { startDaemon } = require('./daemon');
 const { ipcMain } = electron;
 
 const downloadStart = ({ sender }, url) => {
+  const window = sender.getOwnerBrowserWindow();
   const onProgress = debounceFn((progress = 0) => {
+    if (!window.isDestroyed()) {
+      window.setProgressBar(progress);
+    }
+
     if (!sender.isDestroyed()) {
       sender.send('download-progress', progress);
     }
@@ -23,12 +28,20 @@ const downloadStart = ({ sender }, url) => {
 
   return downloadAsset(sender, url, onStarted, onProgress)
     .then(() => {
+      if (!window.isDestroyed()) {
+        window.setProgressBar(-1);
+      }
+
       if (!sender.isDestroyed()) {
         sender.send('download-done');
       }
     })
     .catch((err) => {
       log.error('Error downloading asset:', err);
+      if (!window.isDestroyed()) {
+        window.setProgressBar(-1);
+      }
+
       if (!sender.isDestroyed()) {
         sender.send('download-error', err);
       }

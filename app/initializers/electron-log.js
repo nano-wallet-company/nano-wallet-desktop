@@ -1,11 +1,10 @@
+import console from 'console';
 import isElectron from '../utils/is-electron';
 
-const logger = console;
-
 function electronLog(level, ...args) {
-  const fn = typeof logger[level] === 'function'
-    ? logger[level].bind(logger)
-    : logger.log.bind(logger);
+  const fn = typeof console[level] === 'function'
+    ? ::console[level]
+    : ::console.log;
   return fn('<ELECTRON>', ...args);
 }
 

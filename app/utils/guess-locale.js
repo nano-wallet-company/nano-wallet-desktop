@@ -1,4 +1,4 @@
-import locale2 from 'npm:locale2';
+import locale2 from 'locale2';
 
 export const DEFAULT_LOCALE = 'en-us';
 
