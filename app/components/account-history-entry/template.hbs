@@ -7,6 +7,11 @@
         {{fa-icon "envelope-open" class="receive" ariaLabel=(t 'receive')}}
       {{/if}}
     </div>
+    <div class="col-12 col-sm-3 justify-content-center d-flex">
+      <p>
+        {{format-date entry.blockTime}}
+      </p>
+    </div>
     <div class="col-12 col-sm-2 justify-content-center d-flex">
       <p>
         {{#if (eq entry.type 'send')}}
@@ -28,7 +33,7 @@
         </sub>
       </p>
     </div>
-    <div class="col-12 col-sm-7 justify-content-center d-flex">
+    <div class="col-12 col-sm-4 justify-content-center d-flex">
       <p class="text-truncate">
         {{account-address value=entry.account truncate=25}}
       </p>
