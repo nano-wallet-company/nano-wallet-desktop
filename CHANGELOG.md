@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.0.5"></a>
+## [1.0.5](https://github.com/mikroncoin/mikron_wallet/compare/v1.0.4...v1.0.5) (2018-12-10)
+
+
+### Bug Fixes
+
+* **node:** Switch to static MSVC dep, fix startup issue [#20](https://github.com/mikroncoin/mikron_wallet/issues/20). ([70d9fb7](https://github.com/mikroncoin/mikron_wallet/commit/70d9fb7))
+* **ui:** Replace paperplane send icon with envelope (avoid confusion ([e671af9](https://github.com/mikroncoin/mikron_wallet/commit/e671af9))
+
+
+
 <a name="1.0.4"></a>
 ## [1.0.4](https://github.com/mikroncoin/mikron_wallet/compare/v1.0.3...v1.0.4) (2018-12-06)
 
