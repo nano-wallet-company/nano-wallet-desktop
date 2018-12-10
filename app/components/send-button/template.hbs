@@ -9,5 +9,5 @@
 </div>
 
 <button class="toggle" {{action (optional (if isExpanded onClose onOpen))}}>
-  {{fa-icon (if isExpanded 'times' 'paper-plane') ariaLabel=(if isExpanded (t 'close') (t 'send'))}}
+  {{fa-icon (if isExpanded 'times' 'envelope') ariaLabel=(if isExpanded (t 'close') (t 'send'))}}
 </button>
