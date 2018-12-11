@@ -1,0 +1,21 @@
+& {
+  position: absolute;
+  overflow: hidden;
+  right: 5px;
+  bottom: 0px;
+  z-index: 10;
+}
+
+p {
+	font-size: 12px;
+	font-weight: bold;
+	margin-bottom: 0px;
+}
+
+.lightbg {
+	color: $black;
+}
+
+.darkbg {
+	color: #f9b214;
+}

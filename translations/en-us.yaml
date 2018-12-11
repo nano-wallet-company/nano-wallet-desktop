@@ -148,3 +148,4 @@ setup:
   create: 'Create New Wallet'
   or: 'or'
   import: 'Import Wallet'
+version: 'v'
