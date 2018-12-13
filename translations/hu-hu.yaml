@@ -151,3 +151,4 @@ setup:
   create: 'Új Tárca Létrehozás'
   or: 'vagy'
   import: 'Tárca Importálás'
+version: 'v'
