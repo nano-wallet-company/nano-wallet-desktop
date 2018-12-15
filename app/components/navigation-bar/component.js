@@ -8,8 +8,6 @@ export default class NavigationBarComponent extends Component {
 
   @argument show = false;
 
-  @argument onCreateAccount = null;
-
   @argument onChangeRepresentative = null;
 
   @argument onChangePassword = null;

@@ -2,7 +2,7 @@
   {{balance-overview wallet=model currency=currency onChangeCurrency=(route-action 'changeCurrency')}}
 {{/if}}
 
-{{wallet-overview wallet=model accounts=sortedAccounts hideHistory=hideHistory createAccount=(route-action 'createAccount') currentSlide=slide onChangeSlide=(route-action 'changeSlide')}}
+{{wallet-overview wallet=model accounts=sortedAccounts hideHistory=hideHistory currentSlide=slide onChangeSlide=(route-action 'changeSlide')}}
 
 {{liquid-outlet class="history"}}
 
