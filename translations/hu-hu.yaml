@@ -130,9 +130,9 @@ wallets:
       title: 'Új számla létrehozása'
       lead: 'Biztosan szeretnél új számlát létrehozni?'
       body: >
-        <strong>Figyelmeztetés</strong>: Ez a művelet egy új MIKRON számlaszámot fog létrehozni, amit később nem fogsz tudni
-        törölni. Csak abban az esetben érdemes ezt megtenni, ha a jelenlegi(ek) mellett szeretnél másik MIKRON számlaszámmal
-        is rendelkezni. Biztosan folytatod?
+        <strong>Figyelmeztetés</strong>: Ez a művelet egy új MIKRON számlát fog létrehozni a tárcádban, amit később nem lehet
+        egyszerűen törölni. Csak akkor érdemes ezt megtenni, ha a jelenlegi(ek) mellett szeretnél egy újabb MIKRON számlát is.
+        Biztosan folytatod?
       createButton: 'Lérehozás'
   overview:
     none: 'Nincs a tárcában számla.'
