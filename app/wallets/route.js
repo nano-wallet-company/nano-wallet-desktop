@@ -39,16 +39,6 @@ export default class WalletsRoute extends Route.extend(
   }
 
   @action
-  async createAccount(wallet) {
-    const account = this.store.createRecord('account');
-    account.set('wallet', wallet);
-    await account.save();
-
-    const message = this.get('intl').t('wallets.overview.created');
-    this.get('flashMessages').success(message);
-  }
-
-  @action
   async changeRepresentative(model, changeset) {
     const flashMessages = this.get('flashMessages');
     const wallet = get(model, 'id');

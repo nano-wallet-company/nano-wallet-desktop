@@ -122,6 +122,14 @@ wallets:
       none: 'No history yet'
     settings:
       representative: 'Representative Account'
+    create:
+      title: 'Create Account'
+      lead: 'Are you sure to create a new account?'
+      body: >
+        <strong>Warning</strong>: If you proceed you will create a new MIKRON account within your wallet, that can't be
+        easily deleted later. You should only proceed if you need an additional MIKRON account number beside
+        your current one(s). Are you sure to proceed?
+      createButton: 'Create'
   overview:
     none: 'No accounts in wallet.'
     create: 'Create Account'
