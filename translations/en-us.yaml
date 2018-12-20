@@ -142,6 +142,8 @@ wallets:
     changePassword: 'Change Password'
     passwordChanged: 'Password changed!'
     passwordsDontMatch: "Passwords don't match!"
+    nodeId: 'Node Identifier (for Node Reward)'
+    setNodeId: 'Set Node ID'
   logout:
     title: 'Confirm Logout'
     lead: 'Are you sure you wish to logout?'
