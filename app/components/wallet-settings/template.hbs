@@ -1,8 +1,32 @@
-{{#bs-form model=(changeset (hash seed=seed representative=representative) ChangeRepresentativeValidations) onSubmit=(action onChangeRepresentative wallet) as |form|}}
+{{#bs-form model=(changeset (hash seed=seed mnemonic=(mnemonic seed) showMnemonic=showMnemonic representative=representative) ChangeRepresentativeValidations) onSubmit=(action onChangeRepresentative wallet) as |form|}}
   {{#form.element label=(t 'seed') property="seed" as |el|}}
     {{password-toggle inputId=el.id label=(t 'seed') value=el.value placeholder=(t 'unknown') readonly=true}}
   {{/form.element}}
 
+  {{#if showMnemonic}}
+    {{#form.element rows=4 controlType="textarea" property="mnemonic" label=(t 'mnemonic') autocomplete='off' readonly="readonly" as |el|}}
+      <div class="input-group">
+        {{el.control class="text-monospace"}}
+        <div class="input-group-append">
+          <button type="button" class="btn btn-outline-secondary" {{action (toggle 'showMnemonic' this)}}>
+            {{fa-icon 'eye-slash' ariaLabel=(t 'reveal')}}
+          </button>
+        </div>
+      </div>
+    {{/form.element}}    
+  {{else}}
+    {{#form.element label=(t 'mnemonic') property="mnemonic" as |el|}}
+      <div class="input-group">
+        <input id={{el.id}} type='password' class="form-control" value={{el.value}} aria-label={{t 'seed'}} placeholder={{t 'unknown'}} readonly="readonly">
+        <div class="input-group-append">
+          <button type="button" class="btn btn-outline-secondary" {{action (toggle 'showMnemonic' this)}}>
+            {{fa-icon 'eye' ariaLabel=(t 'reveal')}}
+          </button>
+        </div>
+      </div>
+    {{/form.element}}
+  {{/if}}
+  
   {{#form.element controlType="text" label=( t 'wallets.settings.defaultRepresentative') property='representative'
       minlength=64 maxlength=65 required=true pattern="^(mik|xrb)(_|-)[13](?![lv])[a-z1-9]{59}$" as |el|}}
     {{el.control class="text-truncate text-monospace"}}

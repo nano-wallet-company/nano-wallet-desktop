@@ -14,6 +14,8 @@ export default class WalletSettingsComponent extends Component {
 
   @readOnly('settings.seed') seed = null;
 
+  @argument showMnemonic = false;
+
   @argument wallet = null;
 
   @argument password = null;
