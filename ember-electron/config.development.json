@@ -10,12 +10,12 @@
         "max_json_depth": "20"
     },
     "node": {
-        "version": "14",
+        "version": "15",
         "peering_port": "54000",
         "bootstrap_fraction_numerator": "1",
         "receive_minimum": "1",
         "logging": {
-            "version": "4",
+            "version": "5",
             "ledger": "false",
             "ledger_duplicate": "false",
             "vote": "false",
@@ -30,6 +30,8 @@
             "log_rpc": "true",
             "bulk_pull": "false",
             "work_generation_time": "true",
+            "upnp_details": "false",
+            "timing": "false",
             "log_to_cerr": "false",
             "max_size": "16777216",
             "rotation_size": "4194304",
@@ -50,6 +52,7 @@
         "online_weight_quorum": "50",
         "password_fanout": "1024",
         "io_threads": "4",
+        "network_threads": "4",
         "work_threads": "4",
         "enable_voting": "true",
         "bootstrap_connections": "4",
@@ -58,7 +61,7 @@
         "callback_port": "0",
         "callback_target": "",
         "lmdb_max_dbs": "128",
-        "generate_hash_votes_at": "0"
+        "block_processor_batch_max_time": "5000"
     },
     "opencl_enable": "false",
     "opencl": {
