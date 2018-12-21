@@ -1,17 +1,17 @@
 FROM electronuserland/builder:wine-mono
 
-RUN curl -fsSL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
-RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+RUN apt-get update -q
+RUN apt-get install -qy apt-utils
+RUN apt-get install -qy tzdata fakeroot
 
-RUN apt-get update
-RUN apt-get install -y --no-install-recommends apt-utils
-RUN apt-get install -y --no-install-recommends tzdata fakeroot
-
+COPY .yarnclean .
+COPY patches/*.patch patches/
 COPY package.json .
 COPY yarn.lock .
-COPY .yarnclean .
 
 RUN yarn install --frozen-lockfile --non-interactive
+
+COPY . .
 
 ARG NODE_ENV
 ENV NODE_ENV ${NODE_ENV}

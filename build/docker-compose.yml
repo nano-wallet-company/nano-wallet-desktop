@@ -1,4 +1,4 @@
-version: '3'
+version: '3.6'
 services:
   app:
     build:
@@ -10,8 +10,9 @@ services:
         - ELECTRON_PLATFORM=${ELECTRON_PLATFORM:-linux}
         - ELECTRON_ARCH=${ELECTRON_ARCH:-x64}
     volumes:
-      - ..:/project
-      - /project/.config
+      - .:/project:cached
       - /project/dist
+      - /project/electron-out
       - /project/node_modules
-      - /project/tmp
+      - type: tmpfs
+        target: /project/tmp

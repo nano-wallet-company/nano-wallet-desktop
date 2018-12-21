@@ -1,4 +1,4 @@
-version: '3'
+version: '3.6'
 services:
   app:
     build: .
@@ -8,10 +8,10 @@ services:
       - 7357:7357
       - 9222:9222
     volumes:
-      - .:/app
-      - /app/.config
-      - /app/dist
-      - /app/electron-out
-      - /app/node_modules
-      - /app/tmp
+      - .:/project:cached
+      - /project/dist
+      - /project/electron-out
+      - /project/node_modules
+      - type: tmpfs
+        target: /project/tmp
     env_file: .env
