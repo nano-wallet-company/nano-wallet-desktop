@@ -2,6 +2,8 @@ const path = require('path');
 const crypto = require('crypto');
 
 const got = require('got');
+const prettyMs = require('pretty-ms');
+
 const lzma = require('lzma-native');
 const tar = require('tar-fs');
 const tarStream = require('tar-stream');
@@ -10,9 +12,6 @@ const progressStream = require('progress-stream');
 const del = require('del');
 const cpy = require('cpy');
 const makeDir = require('make-dir');
-
-const prettyMs = require('pretty-ms');
-const hasOwnProp = require('has-own-prop');
 
 const Promise = require('bluebird');
 const pump = Promise.promisify(require('pump'));
@@ -50,7 +49,7 @@ const verifyAsset = async (url, savePath, onProgress) => {
     },
   });
 
-  if (!hasOwnProp(headers, Symbol.keyFor(SIGNATURE_HEADER))) {
+  if (!headers[Symbol.keyFor(SIGNATURE_HEADER)]) {
     throw new Error('Signature header not found');
   }
 

@@ -104,7 +104,6 @@
     "get-port": "^4.0.0",
     "got": "^9.5.0",
     "graceful-fs": "^4.1.15",
-    "has-own-prop": "^1.0.1",
     "helmet": "^3.15.0",
     "http-proxy": "^1.17.0",
     "jsonwebtoken": "^8.4.0",
@@ -163,7 +162,7 @@
     "downloadjs": "^1.4.7",
     "electron-forge": "^5.2.3",
     "electron-installer-dmg": "^2.0.0",
-    "electron-packager": "^12.2.0",
+    "electron-packager": "~12.2.0",
     "electron-prebuilt-compile": "3.0.13",
     "ember-ajax": "^4.0.1",
     "ember-auto-import": "^1.2.19",
@@ -272,7 +271,7 @@
   "resolutions": {
     "electron-forge": "^5.2.3",
     "electron-installer-dmg": "^2.0.0",
-    "electron-packager": "^12.2.0"
+    "electron-packager": "~12.2.0"
   },
   "engines": {
     "node": ">= 10.2.0"
