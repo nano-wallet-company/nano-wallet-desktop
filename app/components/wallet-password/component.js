@@ -32,6 +32,8 @@ export default class WalletPasswordComponent extends Component {
     const flashMessages = this.get('flashMessages');
     const password = get(changeset, 'password');
     const passwordConfirm = get(changeset, 'passwordConfirm');
+
+    // eslint-disable-next-line security/detect-possible-timing-attacks
     if (password !== passwordConfirm) {
       const message = this.get('intl').t('wallets.settings.passwordsDontMatch');
       flashMessages.danger(message);

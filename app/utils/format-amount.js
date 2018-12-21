@@ -11,7 +11,7 @@ import {
   DEFAULT_EXCHANGE_RATE,
 } from './get-exchange-rate';
 
-const currencyFormats = formats.number || {};
+const currencyFormats = new Map(Object.entries(formats.number || {}));
 
 export default function formatAmount(intl, value, options = {}) {
   const {
@@ -32,12 +32,12 @@ export default function formatAmount(intl, value, options = {}) {
   const product = BigNumber(quotient).times(exchangeRate);
   const decimalPlaces = product.decimalPlaces();
 
-  let { maximumFractionDigits } = currencyFormats[currency] || {};
+  let { maximumFractionDigits } = currencyFormats.get(currency) || {};
   if (!maximumFractionDigits) {
     maximumFractionDigits = Math.min(20, Math.max(0, decimalPlaces));
   }
 
-  let { minimumIntegerDigits } = currencyFormats[currency] || {};
+  let { minimumIntegerDigits } = currencyFormats.get(currency) || {};
   if (!minimumIntegerDigits) {
     minimumIntegerDigits = Math.min(21, Math.max(1, product.precision(true) - decimalPlaces));
   }

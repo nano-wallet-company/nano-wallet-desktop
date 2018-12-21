@@ -11,7 +11,9 @@ export const xrb = 'xrb';
 export const mxrb = 'mxrb';
 export const uxrb = 'uxrb';
 
-export const UNITS = new Set([
+export const DEFAULT_UNIT = Mxrb;
+
+export const units = new Set([
   Gxrb,
   Mxrb,
   kxrb,
@@ -20,9 +22,7 @@ export const UNITS = new Set([
   uxrb,
 ]);
 
-export const DEFAULT_UNIT = Mxrb;
-
-export const CONVERSION_FACTORS = new Map([
+export const conversionFactors = new Map([
   [Gxrb, base10.pow(33)],
   [Mxrb, base10.pow(30)],
   [kxrb, base10.pow(27)],
@@ -38,9 +38,9 @@ export const InvalidUnitError = defineError({
 });
 
 export default function getConversion(unit = DEFAULT_UNIT) {
-  if (!UNITS.has(unit)) {
+  if (!units.has(unit)) {
     throw new InvalidUnitError({ params: { unit } });
   }
 
-  return CONVERSION_FACTORS.get(unit);
+  return conversionFactors.get(unit);
 }

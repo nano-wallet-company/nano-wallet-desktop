@@ -45,21 +45,21 @@ const unsupportedArch = (target, type) => {
 };
 
 const debianArch = (type) => {
-  const supported = {
-    x64: 'amd64',
-    x32: 'i386',
-  };
+  const supported = new Map([
+    ['x64', 'amd64'],
+    ['x32', 'i386'],
+  ]);
 
-  return supported[type] || unsupportedArch('deb', type);
+  return supported.get(type) || unsupportedArch('deb', type);
 };
 
 const redhatArch = (type) => {
-  const supported = {
-    x64: 'x86_64',
-    x32: 'x86',
-  };
+  const supported = new Map([
+    ['x64', 'x86_64'],
+    ['x32', 'x86'],
+  ]);
 
-  return supported[type] || unsupportedArch('rpm', type);
+  return supported.get(type) || unsupportedArch('rpm', type);
 };
 
 module.exports = {

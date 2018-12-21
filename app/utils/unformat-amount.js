@@ -2,7 +2,7 @@ import { get } from '@ember/object';
 
 import toAmount from './to-amount';
 
-const cache = Object.create(null);
+const cache = new Map();
 
 export class Unformatter {
   referencePattern = /^9([^\d])9$/;
@@ -32,10 +32,10 @@ export class Unformatter {
 export default function unformatAmount(intl, amount, options = {}) {
   const { locale = get(intl, 'locale') } = options;
   const cacheKey = JSON.stringify(locale);
-  if (!cache[cacheKey]) {
-    cache[cacheKey] = new Unformatter(intl, { locale });
+  if (!cache.has(cacheKey)) {
+    cache.set(cacheKey, new Unformatter(intl, { locale }));
   }
 
-  const value = cache[cacheKey].unformat(amount);
+  const value = cache.get(cacheKey).unformat(amount);
   return toAmount(value);
 }

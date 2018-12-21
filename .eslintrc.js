@@ -1,15 +1,9 @@
 module.exports = {
-  globals: {
-    server: true,
-  },
   root: true,
   parser: 'babel-eslint',
   parserOptions: {
     ecmaVersion: 2019,
     sourceType: 'module',
-    ecmaFeatures: {
-      impliedStrict: true,
-    },
   },
   plugins: [
     'babel',
@@ -19,6 +13,7 @@ module.exports = {
     'plugin:ember/recommended',
     'plugin:ember-suave/recommended',
     'airbnb-base',
+    'plugin:security/recommended',
   ],
   env: {
     browser: true,

@@ -2,8 +2,6 @@ const path = require('path');
 const crypto = require('crypto');
 
 const got = require('got');
-const prettyMs = require('pretty-ms');
-
 const lzma = require('lzma-native');
 const tar = require('tar-fs');
 const tarStream = require('tar-stream');
@@ -12,6 +10,9 @@ const progressStream = require('progress-stream');
 const del = require('del');
 const cpy = require('cpy');
 const makeDir = require('make-dir');
+
+const prettyMs = require('pretty-ms');
+const hasOwnProp = require('has-own-prop');
 
 const Promise = require('bluebird');
 const pump = Promise.promisify(require('pump'));
@@ -30,7 +31,7 @@ const { version, productName } = require('../package');
 const { app } = electron;
 
 const USER_AGENT = `${productName.replace(/\s+/g, '')}/${version}`;
-const SIGNATURE_HEADER = 'x-amz-meta-signature';
+const SIGNATURE_HEADER = Symbol.for('x-amz-meta-signature');
 
 const createProgressStream = (length, onProgress) => {
   const progress = progressStream({ length, time: 250 });
@@ -49,7 +50,7 @@ const verifyAsset = async (url, savePath, onProgress) => {
     },
   });
 
-  if (!headers[SIGNATURE_HEADER]) {
+  if (!hasOwnProp(headers, Symbol.keyFor(SIGNATURE_HEADER))) {
     throw new Error('Signature header not found');
   }
 
@@ -59,10 +60,12 @@ const verifyAsset = async (url, savePath, onProgress) => {
   const verifier = crypto.createVerify('SHA256');
   const { size } = await fs.statAsync(savePath);
   const progress = createProgressStream(size, onProgress);
+
+  // eslint-disable-next-line security/detect-non-literal-fs-filename
   await pump(fs.createReadStream(savePath), progress, verifier);
 
   const publicKey = await fs.readFileAsync(path.join(__dirname, 'assets.pem'));
-  const signature = Buffer.from(String(headers[SIGNATURE_HEADER]).trim(), 'base64');
+  const signature = Buffer.from(String(headers[Symbol.keyFor(SIGNATURE_HEADER)]).trim(), 'base64');
   const verified = verifier.verify(publicKey, signature);
   const elapsed = Date.now() - start;
   log.info('Asset verified:', savePath, `(took ${prettyMs(elapsed)})`);
@@ -76,6 +79,7 @@ const extractAsset = async (savePath, extractDir, onProgress) => {
   const extract = tarStream.extract();
   const { size } = await fs.statAsync(savePath);
   const result = await pump(
+    // eslint-disable-next-line security/detect-non-literal-fs-filename
     fs.createReadStream(savePath),
     createProgressStream(size, onProgress),
     lzma.createDecompressor(),
