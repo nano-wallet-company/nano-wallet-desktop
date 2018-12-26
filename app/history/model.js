@@ -5,11 +5,11 @@ import { attr, belongsTo } from '@ember-decorators/data';
 const { Model } = DS;
 
 export default class HistoryModel extends Model {
-  @belongsTo('account', { async: true }) source;
+  @belongsTo('account', { async: true, inverse: 'history' }) source;
 
-  @attr({ defaultValue: 'state' }) type;
+  @attr('string', { defaultValue: 'state' }) type;
 
-  @attr account;
+  @attr('string') account;
 
   @attr('big-number', { defaultValue: 0 }) amount;
 }

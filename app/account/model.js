@@ -5,17 +5,17 @@ import { attr, hasMany, belongsTo } from '@ember-decorators/data';
 const { Model } = DS;
 
 export default class AccountModel extends Model {
-  @belongsTo({ async: true }) wallet;
+  @belongsTo('wallet', { async: true }) wallet;
 
-  @belongsTo('block', { async: true, inverse: null }) frontier;
+  @belongsTo('frontier', { async: true }) frontier;
 
   @belongsTo('block', { async: true, inverse: null }) openBlock;
 
   @belongsTo('block', { async: true, inverse: null }) representativeBlock;
 
-  @hasMany({ async: true, inverse: 'source' }) blocks;
+  @hasMany('block', { async: true, inverse: 'source' }) blocks;
 
-  @hasMany({ async: true, inverse: 'source' }) history;
+  @hasMany('history', { async: true, inverse: 'source' }) history;
 
   @attr('big-number', { defaultValue: 0 }) balance;
 
@@ -24,6 +24,8 @@ export default class AccountModel extends Model {
   @attr('string') representative;
 
   @attr('number', { defaultValue: 0 }) blockCount;
+
+  @attr('number', { defaultValue: 0 }) weight;
 
   @attr('timestamp', { defaultValue: () => new Date() }) modifiedTimestamp;
 }

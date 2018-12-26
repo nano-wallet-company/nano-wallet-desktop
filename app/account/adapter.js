@@ -11,10 +11,10 @@ export default class AccountAdapter extends Adapter {
     return true;
   }
 
-  async findRecord(store, type, id) {
+  async findRecord(store, type, id, snapshot) {
     const info = await this.get('rpc').accountInfo(id);
-    info.account = id;
-    return info;
+    const { account } = this.serialize(snapshot, { includeId: true });
+    return Object.assign({}, info, { account });
   }
 
   async createRecord(store, type, snapshot) {

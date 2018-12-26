@@ -10,6 +10,12 @@ export default class BlockAdapter extends Adapter {
     return true;
   }
 
+  async findRecord(store, type, id, snapshot) {
+    const contents = await this.get('rpc').block(id);
+    const { block } = this.serialize(snapshot, { includeId: true });
+    return Object.assign({}, contents, { block });
+  }
+
   createRecord(store, type, snapshot) {
     const {
       wallet,

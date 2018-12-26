@@ -9,6 +9,7 @@ describe('Unit | Serializer | account', () => {
       'model:wallet',
       'model:block',
       'model:history',
+      'model:frontier',
       'serializer:account',
       'transform:big-number',
       'transform:timestamp',

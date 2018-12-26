@@ -23,9 +23,13 @@ const sumAccounts = computedDecorator((desc) => {
 export default class WalletModel extends Model {
   @hasMany('account', { async: true }) accounts;
 
-  @attr seed;
+  @hasMany('frontier', { async: true }) frontiers;
 
-  @attr representative;
+  @hasMany('block', { async: true }) blocks;
+
+  @attr('string') seed;
+
+  @attr('string') representative;
 
   @sumAccounts balance;
 

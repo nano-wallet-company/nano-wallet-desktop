@@ -8,6 +8,7 @@ describe('Unit | Serializer | block', () => {
     needs: [
       'model:wallet',
       'model:account',
+      'model:frontier',
       'serializer:block',
       'transform:big-number',
     ],
