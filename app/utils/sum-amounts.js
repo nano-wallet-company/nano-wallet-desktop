@@ -4,8 +4,6 @@ import { isPresent } from '@ember/utils';
 import BigNumber from 'bignumber.js';
 
 export default function sumAmounts(amounts, defaultValue = 0) {
-  return A(amounts)
-    .filter(isPresent)
-    .map(x => new BigNumber(String(x)))
-    .reduce((x, y) => y.plus(x), defaultValue);
+  const values = A(amounts).filter(isPresent);
+  return BigNumber.sum(defaultValue, ...values);
 }
