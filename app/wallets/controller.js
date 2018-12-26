@@ -1,5 +1,7 @@
 import Controller from '@ember/controller';
 import { get } from '@ember/object';
+import { A } from '@ember/array';
+import { isEmpty } from '@ember/utils';
 
 import { ContextBoundTasksMixin } from 'ember-lifeline';
 import { service } from '@ember-decorators/service';
@@ -24,11 +26,10 @@ export default class WalletsController extends Controller.extend(
 
   onPoll(next) {
     return this.runTask(async () => {
-      const model = this.get('model');
-      if (model) {
-        const isNew = get(model, 'isNew');
+      const wallet = this.get('model');
+      if (wallet) {
+        const isNew = get(wallet, 'isNew');
         if (!isNew) {
-          const wallet = get(model, 'id');
           await this.updateBalances(wallet);
         }
       }
@@ -38,15 +39,19 @@ export default class WalletsController extends Controller.extend(
   }
 
   async updateBalances(wallet) {
-    await this.get('rpc').searchPending(wallet);
+    const rpc = this.get('rpc');
+    await rpc.searchPending(get(wallet, 'id'));
 
-    const balances = await this.get('rpc').walletBalances(wallet);
-    const data = Object.entries(balances).map(([id, attributes]) => ({
-      id,
-      attributes,
-      type: 'account',
-    }));
+    const accounts = A(get(wallet, 'accounts')).map(acc => get(acc, 'id'));
+    if (!isEmpty(accounts)) {
+      const balances = await rpc.accountsBalances(accounts);
+      const data = Object.entries(balances).map(([id, attributes]) => ({
+        id,
+        attributes,
+        type: 'account',
+      }));
 
-    return this.get('store').push({ data });
+      this.get('store').push({ data });
+    }
   }
 }
