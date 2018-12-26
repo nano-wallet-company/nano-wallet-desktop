@@ -101,7 +101,7 @@ module.exports = {
     overwrite: true,
     packageManager: 'yarn',
     executableName: name,
-    darwinDarkModeSupport: true,
+    darwinDarkModeSupport: false,
     win32metadata: {
       FileDescription: productName,
       InternalName: name,
