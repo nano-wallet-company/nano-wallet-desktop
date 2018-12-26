@@ -9,30 +9,36 @@ import generateId from '../utils/generate-id';
 import getTimestamp from '../utils/get-timestamp';
 
 export const actions = {
-  VERSION: 'version',
-  WALLET_CREATE: 'wallet_create',
-  WALLET_LOCK: 'wallet_lock',
-  WALLET_LOCKED: 'wallet_locked',
-  WALLET_BALANCES: 'wallet_balances',
-  WALLET_BALANCE_TOTAL: 'wallet_balance_total',
-  WALLET_CHANGE_SEED: 'wallet_change_seed',
-  WALLET_REPRESENTATIVE: 'wallet_representative',
-  WALLET_REPRESENTATIVE_SET: 'wallet_representative_set',
   ACCOUNT_CREATE: 'account_create',
+  ACCOUNT_HISTORY: 'account_history',
   ACCOUNT_INFO: 'account_info',
   ACCOUNT_LIST: 'account_list',
-  ACCOUNT_HISTORY: 'account_history',
-  ACCOUNT_REPRESENTATIVE: 'account_representative',
-  ACCOUNT_REPRESENTATIVE_SET: 'account_representative_set',
   ACCOUNT_REMOVE: 'account_remove',
-  SEND: 'send',
-  PEERS: 'peers',
-  BLOCK_COUNT: 'block_count',
+  ACCOUNT_REPRESENTATIVE_SET: 'account_representative_set',
+  ACCOUNT_REPRESENTATIVE: 'account_representative',
+  ACCOUNTS_BALANCES: 'accounts_balances',
   BLOCK_CONFIRM: 'block_confirm',
-  SEARCH_PENDING: 'search_pending',
+  BLOCK_COUNT: 'block_count',
+  BLOCK: 'block',
+  BOOTSTRAP_LAZY: 'bootstrap_lazy',
   PASSWORD_CHANGE: 'password_change',
   PASSWORD_ENTER: 'password_enter',
   PASSWORD_VALID: 'password_valid',
+  PEERS: 'peers',
+  SEARCH_PENDING: 'search_pending',
+  SEND: 'send',
+  VERSION: 'version',
+  WALLET_BALANCE_TOTAL: 'wallet_balance_total',
+  WALLET_BALANCES: 'wallet_balances',
+  WALLET_CHANGE_SEED: 'wallet_change_seed',
+  WALLET_CREATE: 'wallet_create',
+  WALLET_FRONTIERS: 'wallet_frontiers',
+  WALLET_LEDGER: 'wallet_ledger',
+  WALLET_LOCK: 'wallet_lock',
+  WALLET_LOCKED: 'wallet_locked',
+  WALLET_PENDING: 'wallet_pending',
+  WALLET_REPRESENTATIVE_SET: 'wallet_representative_set',
+  WALLET_REPRESENTATIVE: 'wallet_representative',
 };
 
 export const errors = {
@@ -103,6 +109,17 @@ export default class RPCService extends Service {
     return this.call(actions.WALLET_CREATE);
   }
 
+  async walletLedger(wallet, representative = true, weight = true, pending = true) {
+    const accounts = await this.call(actions.WALLET_LEDGER, {
+      wallet,
+      representative,
+      weight,
+      pending,
+    });
+
+    return accounts;
+  }
+
   async walletLock(wallet) {
     const { locked } = await this.call(actions.WALLET_LOCK, { wallet });
     return locked === '1';
@@ -115,6 +132,22 @@ export default class RPCService extends Service {
 
   walletBalanceTotal(wallet) {
     return this.call(actions.WALLET_BALANCE_TOTAL, { wallet });
+  }
+
+  async walletFrontiers(wallet) {
+    const { frontiers } = await this.call(actions.WALLET_FRONTIERS, { wallet });
+    return frontiers;
+  }
+
+  async walletPending(wallet, count = 1, source = true, include_active = true) {
+    const { blocks } = await this.call(actions.WALLET_PENDING, {
+      wallet,
+      count,
+      source,
+      include_active,
+    });
+
+    return blocks;
   }
 
   async walletBalances(wallet) {
@@ -207,6 +240,11 @@ export default class RPCService extends Service {
     return removed === '1';
   }
 
+  async accountsBalances(accounts) {
+    const { balances } = await this.call(actions.ACCOUNTS_BALANCES, { accounts });
+    return balances;
+  }
+
   send(wallet, source, destination, amount, id = generateId()) {
     return this.call(actions.SEND, {
       wallet,
@@ -221,6 +259,11 @@ export default class RPCService extends Service {
     // When there are no peers, the RPC replies with an empty string.
     const { peers } = await this.call(actions.PEERS);
     return peers || {};
+  }
+
+  async block(hash) {
+    const { contents } = await this.call(actions.BLOCK, { hash });
+    return JSON.parse(contents);
   }
 
   async blockCount() {
@@ -268,5 +311,10 @@ export default class RPCService extends Service {
     }
 
     return true;
+  }
+
+  async bootstrapLazy(hash) {
+    const { started } = await this.call(actions.BOOTSTRAP_LAZY, { hash });
+    return started === '1';
   }
 }
