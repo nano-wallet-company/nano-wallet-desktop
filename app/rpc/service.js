@@ -155,7 +155,7 @@ export default class RPCService extends Service {
   }
 
   async nodeIdSet(wallet, index = 0) {
-    const nodeIdResp = await this.call(actions.NODE_ID_GET, { wallet, index });
+    const nodeIdResp = await this.call(actions.NODE_ID_SET, { wallet, index });
     return nodeIdResp.node_id;
   }
 
