@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.0.7"></a>
+## [1.0.7](https://github.com/mikroncoin/mikron_wallet/compare/v1.0.6...v1.0.7) (2018-12-30)
+
+
+### Bug Fixes
+
+* **ui:** Updated colors for sending button and form background to ([a0b0091](https://github.com/mikroncoin/mikron_wallet/commit/a0b0091))
+
+
+### Features
+
+* **node:** Node v1.0.7, NodeID handling RPC. ([00220b5](https://github.com/mikroncoin/mikron_wallet/commit/00220b5))
+* **ui:** Show NodeID. ([e495958](https://github.com/mikroncoin/mikron_wallet/commit/e495958))
+* **ui:** Show transaction date in history. ([d48b24d](https://github.com/mikroncoin/mikron_wallet/commit/d48b24d))
+
+
+
 <a name="1.0.6"></a>
 ## [1.0.6](https://github.com/mikroncoin/mikron_wallet/compare/v1.0.5...v1.0.6) (2018-12-10)
 
