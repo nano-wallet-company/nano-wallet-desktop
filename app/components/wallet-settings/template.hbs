@@ -27,6 +27,8 @@
     {{/form.element}}
   {{/if}}
   
+  <hr>
+
   {{#form.element controlType="text" label=( t 'wallets.settings.defaultRepresentative') property='representative'
       minlength=64 maxlength=65 required=true pattern="^(mik|xrb)(_|-)[13](?![lv])[a-z1-9]{59}$" as |el|}}
     {{el.control class="text-truncate text-monospace"}}
@@ -37,10 +39,18 @@
   {{/bs-button}}
 {{/bs-form}}
 
-<br>
+<hr>
 
 {{#wallet-password wallet=wallet onSubmit=(action onChangePassword)}}
   {{#bs-button buttonType="submit" type="danger" icon="fa fa-key" class="w-100"}}
     {{t 'wallets.settings.changePassword'}}
   {{/bs-button}}
 {{/wallet-password}}
+
+<hr>
+
+{{#bs-form model=(changeset (hash nodeId=nodeId)) as |form2|}}
+  {{#form2.element controlType="text" label=(t 'wallets.settings.nodeId') property="nodeId" readonly=true as |el|}}
+    {{el.control class="text-truncate text-monospace"}}
+  {{/form2.element}}
+{{/bs-form}}

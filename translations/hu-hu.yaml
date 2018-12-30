@@ -146,6 +146,8 @@ wallets:
     changePassword: 'Jelszó Változtatása'
     passwordChanged: 'Jelszó megváltzotatva!'
     passwordsDontMatch: "A két jelszó eltér!"
+    nodeId: 'Node azonosító (Node Díjazáshoz)'
+    setNodeId: 'Node azonosító beállítása'
   logout:
     title: 'Kijelentkezés Megerősítése'
     lead: 'Biztosan ki akarsz jelentkezni?'

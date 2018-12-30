@@ -27,6 +27,8 @@ export default class WalletModel extends Model {
 
   @attr representative = null;
 
+  @attr nodeId = null;
+
   @sumAccounts balance = 0;
 
   @sumAccounts pending = 0;

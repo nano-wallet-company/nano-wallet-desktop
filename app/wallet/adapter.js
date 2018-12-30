@@ -14,11 +14,17 @@ export default class WalletAdapter extends Adapter {
   async findRecord(store, type, id, snapshot) {
     const rpc = this.get('rpc');
     const { wallet } = this.serialize(snapshot, { includeId: true });
-    const { representative, accounts } = await hash({
+    const { representative, accounts, nodeId } = await hash({
       representative: rpc.walletRepresentative(wallet),
       accounts: rpc.accountList(wallet),
+      nodeId: rpc.nodeIdGet(),
     });
-    return { wallet, representative, accounts };
+    return {
+      wallet,
+      representative,
+      accounts,
+      nodeId,
+    };
   }
 
   async updateRecord(store, type, snapshot) {

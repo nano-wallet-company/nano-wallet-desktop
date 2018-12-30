@@ -33,6 +33,9 @@ export const actions = {
   PASSWORD_CHANGE: 'password_change',
   PASSWORD_ENTER: 'password_enter',
   PASSWORD_VALID: 'password_valid',
+  NODE_ID_GET: 'node_id_get',
+  NODE_ID_RESET: 'node_id_reset',
+  NODE_ID_SET: 'node_id_set',
 };
 
 export const errors = {
@@ -139,6 +142,21 @@ export default class RPCService extends Service {
     }
 
     return true;
+  }
+
+  async nodeIdGet() {
+    const nodeIdResp = await this.call(actions.NODE_ID_GET);
+    return nodeIdResp.node_id;
+  }
+
+  async nodeIdReset() {
+    const nodeIdResp = await this.call(actions.NODE_ID_RESET);
+    return nodeIdResp.node_id;
+  }
+
+  async nodeIdSet(wallet, index = 0) {
+    const nodeIdResp = await this.call(actions.NODE_ID_SET, { wallet, index });
+    return nodeIdResp.node_id;
   }
 
   accountCreate(wallet, work = true) {
