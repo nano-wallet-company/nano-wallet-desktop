@@ -65,7 +65,7 @@
       {{/bs-form}}
     </td>
     <td>
-      {{#bs-form model=(changeset (hash nodeId=nodeId)) onSubmit=(action onNodeIdSet wallet wallet)}}
+      {{#bs-form model=(changeset (hash nodeId=nodeId)) onSubmit=(action onNodeIdSet wallet)}}
         {{#bs-button buttonType="submit" type="warning" class="w-100"}}
           {{t 'wallets.settings.setNodeId'}}
         {{/bs-button}}

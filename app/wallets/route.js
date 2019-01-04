@@ -71,11 +71,11 @@ export default class WalletsRoute extends Route.extend(
   }
 
   @action
-  async nodeIdReset(changeset) {
+  async nodeIdReset(model) {
     const flashMessages = this.get('flashMessages');
     // const wallet = get(model, 'id');
     const nodeId = await this.get('rpc').nodeIdReset();
-    set(changeset, 'nodeId', nodeId);
+    set(model, 'nodeId', nodeId);
 
     const message = this.get('intl').t('wallets.settings.resetNodeIdMsg');
     flashMessages.success(message);
@@ -83,11 +83,11 @@ export default class WalletsRoute extends Route.extend(
   }
 
   @action
-  async nodeIdSet(model, changeset) {
+  async nodeIdSet(model) {
     const flashMessages = this.get('flashMessages');
     const wallet = get(model, 'id');
     const nodeId = await this.get('rpc').nodeIdSet(wallet, 0);
-    set(changeset, 'nodeId', nodeId);
+    set(model, 'nodeId', nodeId);
 
     const message = this.get('intl').t('wallets.settings.setNodeIdMsg');
     flashMessages.success(message);

@@ -31,9 +31,18 @@ describe('Integration | Component | wallet settings', () => {
 
     const onChangePassword = () => false;
     const onChangeRepresentative = () => false;
+    const onNodeIdReset = () => false;
+    const onNodeIdSet = () => false;
 
-    this.setProperties({ wallet, onChangePassword, onChangeRepresentative });
-    this.render(hbs`{{wallet-settings wallet=wallet onChangeRepresentative=onChangeRepresentative onChangePassword=onChangePassword}}`);
+    this.setProperties({
+      wallet, onChangePassword, onChangeRepresentative, onNodeIdReset, onNodeIdSet,
+    });
+    this.render(hbs`{{
+      wallet-settings
+      wallet=wallet
+      onChangeRepresentative=onChangeRepresentative onChangePassword=onChangePassword
+      onNodeIdReset=onNodeIdSet onNodeIdReset=onNodeIdSet
+    }}`);
     expect(this.$()).to.have.length(1);
   });
 });
