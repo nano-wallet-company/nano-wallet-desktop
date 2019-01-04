@@ -1,5 +1,5 @@
 import Route from '@ember/routing/route';
-import { get } from '@ember/object';
+import { get, set } from '@ember/object';
 import { tryInvoke } from '@ember/utils';
 
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
@@ -66,6 +66,30 @@ export default class WalletsRoute extends Route.extend(
 
     const flashMessages = this.get('flashMessages');
     const message = this.get('intl').t('wallets.settings.passwordChanged');
+    flashMessages.success(message);
+    return this.transitionTo('wallets.overview');
+  }
+
+  @action
+  async nodeIdReset(changeset) {
+    const flashMessages = this.get('flashMessages');
+    // const wallet = get(model, 'id');
+    const nodeId = await this.get('rpc').nodeIdReset();
+    set(changeset, 'nodeId', nodeId);
+
+    const message = this.get('intl').t('wallets.settings.resetNodeIdMsg');
+    flashMessages.success(message);
+    return this.transitionTo('wallets.overview');
+  }
+
+  @action
+  async nodeIdSet(model, changeset) {
+    const flashMessages = this.get('flashMessages');
+    const wallet = get(model, 'id');
+    const nodeId = await this.get('rpc').nodeIdSet(wallet, 0);
+    set(changeset, 'nodeId', nodeId);
+
+    const message = this.get('intl').t('wallets.settings.setNodeIdMsg');
     flashMessages.success(message);
     return this.transitionTo('wallets.overview');
   }

@@ -54,3 +54,30 @@
     {{el.control class="text-truncate text-monospace"}}
   {{/form2.element}}
 {{/bs-form}}
+
+<table>
+  <tr>
+    <td>
+      {{#bs-form model=(changeset (hash nodeId=nodeId)) onSubmit=(action onNodeIdReset wallet)}}
+        {{#bs-button buttonType="submit" type="warning" class="w-100"}}
+          {{t 'wallets.settings.resetNodeId'}}
+        {{/bs-button}}
+      {{/bs-form}}
+    </td>
+    <td>
+      {{#bs-form model=(changeset (hash nodeId=nodeId)) onSubmit=(action onNodeIdSet wallet wallet)}}
+        {{#bs-button buttonType="submit" type="warning" class="w-100"}}
+          {{t 'wallets.settings.setNodeId'}}
+        {{/bs-button}}
+      {{/bs-form}}
+    </td>
+  </tr>
+  <tr>
+    <td>
+      {{t 'wallets.settings.resetNodeIdHint'}}
+    </td>
+    <td>
+      {{t 'wallets.settings.setNodeIdHint'}}
+    </td>
+  </tr>
+</table>

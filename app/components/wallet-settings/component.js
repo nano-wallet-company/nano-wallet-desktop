@@ -27,4 +27,8 @@ export default class WalletSettingsComponent extends Component {
   @argument onChangeRepresentative = null;
 
   @argument onChangePassword = null;
+
+  @argument onNodeIdReset = null;
+
+  @argument onNodeIdSet = null;
 }

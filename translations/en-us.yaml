@@ -144,6 +144,11 @@ wallets:
     passwordsDontMatch: "Passwords don't match!"
     nodeId: 'Node Identifier (for Node Reward)'
     setNodeId: 'Set Node ID'
+    resetNodeId: 'Reset Node ID'
+    setNodeIdHint: 'Set the Node ID to your current (first) account.  Use this if you want to participate in the Node Reward program. PRIVACY WARNING: the account set as Node ID will be publicly visible!'
+    resetNodeIdHint: 'Set the Node ID to a new random value.  Use this if you do NOT want to participate in the Node Reward program.'
+    setNodeIdMsg: 'Node ID has been set'
+    resetNodeIdMsg: 'Node ID has been reset'
   logout:
     title: 'Confirm Logout'
     lead: 'Are you sure you wish to logout?'
