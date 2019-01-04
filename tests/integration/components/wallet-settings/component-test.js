@@ -40,8 +40,10 @@ describe('Integration | Component | wallet settings', () => {
     this.render(hbs`{{
       wallet-settings
       wallet=wallet
-      onChangeRepresentative=onChangeRepresentative onChangePassword=onChangePassword
-      onNodeIdReset=onNodeIdSet onNodeIdReset=onNodeIdSet
+      onChangeRepresentative=onChangeRepresentative
+      onChangePassword=onChangePassword
+      onNodeIdReset=onNodeIdReset
+      onNodeIdSet=onNodeIdSet
     }}`);
     expect(this.$()).to.have.length(1);
   });
