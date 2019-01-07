@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.0.8"></a>
+## [1.0.8](https://github.com/mikroncoin/mikron_wallet/compare/v1.0.7...v1.0.8) (2019-01-07)
+
+
+### Features
+
+* **ui:** Wallet Settings: Set/Reset NodeID. ([d442993](https://github.com/mikroncoin/mikron_wallet/commit/d442993))
+
+
+
 <a name="1.0.7"></a>
 ## [1.0.7](https://github.com/mikroncoin/mikron_wallet/compare/v1.0.6...v1.0.7) (2018-12-30)
 
