@@ -148,6 +148,11 @@ wallets:
     passwordsDontMatch: "A két jelszó eltér!"
     nodeId: 'Node azonosító (Node Díjazáshoz)'
     setNodeId: 'Node azonosító beállítása'
+    resetNodeId: 'Node azonosító törlése'
+    setNodeIdHint: 'Beállítja a Node azonosítót az aktuális (első) számlaszámra.  Akkor használd ezt, ha részt szeretnél venni a Node Díjazásban.  BIZONSÁGI FIGYELMEZTETÉS: a Node azonosítónak beállított számlaszám nyilvánosan látható lesz!'
+    resetNodeIdHint: 'Beállítja a Node azonosítót egy új véletlen-generált értékre.  Akkor használd ezt, ha NEM kívánsz részt venni a Node Díjazásban.'
+    setNodeIdMsg: 'A Node azonosító beállításra került'
+    resetNodeIdMsg: 'Node azonosító törölve'
   logout:
     title: 'Kijelentkezés Megerősítése'
     lead: 'Biztosan ki akarsz jelentkezni?'

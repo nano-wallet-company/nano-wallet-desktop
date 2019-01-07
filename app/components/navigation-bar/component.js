@@ -12,6 +12,10 @@ export default class NavigationBarComponent extends Component {
 
   @argument onChangePassword = null;
 
+  @argument onNodeIdReset = null;
+
+  @argument onNodeIdSet = null;
+
   @action
   toggleShow() {
     this.toggleProperty('show');
