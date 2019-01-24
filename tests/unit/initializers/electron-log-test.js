@@ -7,7 +7,7 @@ import {
 } from 'mocha';
 import { run } from '@ember/runloop';
 import Application from '@ember/application';
-import { initialize } from '@mikron.io/mikron_wallet/initializers/electron-log';
+import { initialize } from '@mikron.io/mikron-wallet/initializers/electron-log';
 import destroyApp from '../../helpers/destroy-app';
 
 describe('Unit | Initializer | electron-log', () => {

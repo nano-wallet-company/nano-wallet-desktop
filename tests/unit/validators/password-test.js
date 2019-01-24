@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { describe, it } from 'mocha';
-import validatePassword from '@mikron.io/mikron_wallet/validators/account';
+import validatePassword from '@mikron.io/mikron-wallet/validators/account';
 
 describe('Unit | Validator | password', () => {
   // Replace this with your real tests.

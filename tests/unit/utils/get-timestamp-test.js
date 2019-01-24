@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { describe, it } from 'mocha';
-import getTimestamp from '@mikron.io/mikron_wallet/utils/get-timestamp';
+import getTimestamp from '@mikron.io/mikron-wallet/utils/get-timestamp';
 
 describe('Unit | Utility | get-timestamp', () => {
   // Replace this with your real tests.

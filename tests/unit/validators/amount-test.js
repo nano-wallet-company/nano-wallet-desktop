@@ -1,8 +1,8 @@
 import { expect } from 'chai';
 import { describe, it } from 'mocha';
 
-import toAmount from '@mikron.io/mikron_wallet/utils/to-amount';
-import validateAmount from '@mikron.io/mikron_wallet/validators/amount';
+import toAmount from '@mikron.io/mikron-wallet/utils/to-amount';
+import validateAmount from '@mikron.io/mikron-wallet/validators/amount';
 
 describe('Unit | Validator | amount', () => {
   const intl = {

@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { describe, it } from 'mocha';
-import validateAccount from '@mikron.io/mikron_wallet/validators/account';
+import validateAccount from '@mikron.io/mikron-wallet/validators/account';
 
 describe('Unit | Validator | account', () => {
   it('passes addresses with xrb_ prefix', () => {

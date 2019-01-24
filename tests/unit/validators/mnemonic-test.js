@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { describe, it } from 'mocha';
-import validateMnemonic from '@mikron.io/mikron_wallet/validators/mnemonic';
+import validateMnemonic from '@mikron.io/mikron-wallet/validators/mnemonic';
 
 describe('Unit | Validator | mnemonic', () => {
   it('passes valid mnemonic', () => {

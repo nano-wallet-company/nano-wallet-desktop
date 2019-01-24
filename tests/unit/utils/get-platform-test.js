@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { describe, it } from 'mocha';
-import getPlatform from '@mikron.io/mikron_wallet/utils/get-platform';
+import getPlatform from '@mikron.io/mikron-wallet/utils/get-platform';
 
 describe('Unit | Utility | get platform', () => {
   // Replace this with your real tests.

@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { describe, it } from 'mocha';
-import toRaw from '@mikron.io/mikron_wallet/utils/to-raw';
+import toRaw from '@mikron.io/mikron-wallet/utils/to-raw';
 
 describe('Unit | Utility | to raw', () => {
   // Replace this with your real tests.

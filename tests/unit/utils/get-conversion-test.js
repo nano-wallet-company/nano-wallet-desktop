@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { describe, it } from 'mocha';
-import getConversion, { DEFAULT_UNIT } from '@mikron.io/mikron_wallet/utils/get-conversion';
+import getConversion, { DEFAULT_UNIT } from '@mikron.io/mikron-wallet/utils/get-conversion';
 
 describe('Unit | Utility | get conversion', () => {
   // Replace this with your real tests.
