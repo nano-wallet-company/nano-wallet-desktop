@@ -153,13 +153,17 @@ const run = async () => {
   await app.whenReady();
 
   if (!is.development) {
+    autoUpdater.on('error', (err) => {
+      log.error('Error updating:', err);
+    });
+
     autoUpdater.on('checking-for-update', () => {
       log.info('Checking for update:', productName, '>', version);
       global.isUpdating = false;
     });
 
     autoUpdater.on('update-available', () => {
-      log.info('Update available:', productName, '>', version);
+      log.info('Update available:', productName, '>', version, '(downloading...)');
     });
 
     autoUpdater.on('update-not-available', () => {
@@ -172,8 +176,12 @@ const run = async () => {
     });
 
     updateElectronApp({
-      logger: log,
       updateInterval: '30 minutes',
+      logger: {
+        log(...args) {
+          return log.debug('[update-electron-app]', ...args);
+        },
+      },
     });
   }
 
@@ -191,7 +199,7 @@ const run = async () => {
 
   const storeVersion = store.get('version');
   if (!storeVersion || semver.gt(version, storeVersion)) {
-    const outdatedAssets = ['config.json', 'log', 'tls'];
+    const outdatedAssets = ['config.json', 'log'];
     log.info('Deleting outdated assets:', outdatedAssets.join(', '));
     await del(outdatedAssets, { force: true, cwd: dataPath });
   }
