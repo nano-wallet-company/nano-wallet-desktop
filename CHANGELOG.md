@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.6.2"></a>
+## [1.6.2](https://github.com/nano-wallet-company/nano-wallet-desktop/compare/v1.6.1...v1.6.2) (2019-01-28)
+
+
+### Bug Fixes
+
+* **electron:** rename dh2048.pem to dhparam.pem ([e75e42c](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/e75e42c))
+
+
+
 <a name="1.6.1"></a>
 ## [1.6.1](https://github.com/nano-wallet-company/nano-wallet-desktop/compare/v1.6.0...v1.6.1) (2019-01-28)
 
