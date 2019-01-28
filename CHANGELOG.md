@@ -2,6 +2,35 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.6.0"></a>
+# [1.6.0](https://github.com/nano-wallet-company/nano-wallet-desktop/compare/v1.5.0...v1.6.0) (2019-01-28)
+
+
+### Bug Fixes
+
+* **appdmg:** patch to use err.code over err.exitCode ([7938afc](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/7938afc))
+* **download-progress:** only calculate ETA when seconds is finite number ([3e0cb2b](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/3e0cb2b))
+* **electron:** don't claim macOS dark mode support since we're frameless ([2f76606](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/2f76606))
+* **electron:** use simple timestamp to calculate download elapsed time ([75f29b7](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/75f29b7))
+
+
+### Features
+
+* **electron:** upgrade node to V17.1 ([19d70ab](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/19d70ab))
+* **electron:** upgrade to Electron 4 ([9539f22](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/9539f22))
+* **frontier:** add frontier to models ([14fe52a](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/14fe52a))
+* **rpc:** support mode RPC actions ([b70f3dc](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/b70f3dc))
+* **status-tooltip:** format numbers ([154f6b1](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/154f6b1)), closes [#86](https://github.com/nano-wallet-company/nano-wallet-desktop/issues/86)
+* **upgrade-settings:** add utility to upgrade settings ([e3bb9f5](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/e3bb9f5))
+* **wallets-controller:** use accounts_balances to update balances ([7fec6f2](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/7fec6f2))
+
+
+### Performance Improvements
+
+* **sum-amounts:** use BigNumber.sum to sum ([db15449](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/db15449))
+
+
+
 <a name="1.5.0"></a>
 # [1.5.0](https://github.com/nano-wallet-company/nano-wallet-desktop/compare/v1.4.0...v1.5.0) (2018-12-21)
 
