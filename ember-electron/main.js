@@ -191,7 +191,7 @@ const run = async () => {
 
   const storeVersion = store.get('version');
   if (!storeVersion || semver.gt(version, storeVersion)) {
-    const outdatedAssets = ['config.json', 'log'];
+    const outdatedAssets = ['config.json', 'log', 'tls'];
     log.info('Deleting outdated assets:', outdatedAssets.join(', '));
     await del(outdatedAssets, { force: true, cwd: dataPath });
   }

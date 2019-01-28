@@ -128,7 +128,7 @@ const startDaemon = async () => {
   }
 
   const tlsPath = path.join(dataPath, 'tls');
-  const dhParamPath = path.join(tlsPath, 'dh2048.pem');
+  const dhparamPath = path.join(tlsPath, 'dh2048.pem');
   if (!config.rpc.secure) {
     log.info('Generating secure node RPC configuration...');
     const clientsPath = path.join(tlsPath, 'clients');
@@ -137,9 +137,10 @@ const startDaemon = async () => {
     const serverCertPath = path.join(tlsPath, 'server.cert.pem');
     const serverKeyPath = path.join(tlsPath, 'server.key.pem');
     const serverPems = generateCert('nanowalletcompany.com');
+    const dhparam = await fs.readFileAsync(path.join(__dirname, 'tls', 'dh2048.pem'));
     await writeFileAtomic(serverCertPath, normalizeNewline(serverPems.cert), { mode: 0o600 });
     await writeFileAtomic(serverKeyPath, normalizeNewline(serverPems.private), { mode: 0o600 });
-    await cpFile(path.join(__dirname, 'tls', 'dh2048.pem'), dhParamPath);
+    await writeFileAtomic(dhparamPath, normalizeNewline(dhparam), { mode: 0o600 });
 
     const clientCertPath = path.join(clientsPath, 'rpcuser1.cert.pem');
     const clientKeyPath = path.join(clientsPath, 'rpcuser1.key.pem');
@@ -158,7 +159,7 @@ const startDaemon = async () => {
       server_cert_path: serverCertPath,
       server_key_path: serverKeyPath,
       server_key_passphrase: '',
-      server_dh_path: dhParamPath,
+      server_dh_path: dhparamPath,
       client_certs_path: clientsPath,
     };
   }
@@ -232,7 +233,7 @@ const startDaemon = async () => {
   const { client_certs_path: clientCertsPath } = config.rpc.secure;
   const cert = await fs.readFileAsync(path.join(clientCertsPath, 'rpcuser1.cert.pem'));
   const key = await fs.readFileAsync(path.join(clientCertsPath, 'rpcuser1.key.pem'));
-  const dhparam = await fs.readFileAsync(dhParamPath);
+  const dhparam = await fs.readFileAsync(dhparamPath);
   const proxy = httpProxy.createProxyServer({
     target: {
       host,
