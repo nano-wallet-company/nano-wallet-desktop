@@ -43,7 +43,10 @@ after_test:
         Set-AppveyorBuildVariable -Name 'CSC_FILE' -Value $cscFile
       }
   - yarn cross-env NODE_ENV=production ember electron:make -e production --build-path electron-out/ember
-  - ps: Remove-Item -Path $Env:CSC_FILE -ErrorAction Ignore
+  - ps: |
+      if (Test-Path Env:CSC_FILE) {
+        Remove-Item -Path $Env:CSC_FILE -ErrorAction Ignore
+      }
 
 artifacts:
 - path: electron-out\make\*.zip
