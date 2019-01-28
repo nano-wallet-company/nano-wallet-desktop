@@ -2,40 +2,27 @@
   -webkit-app-region: no-drag;
 }
 
-.slick-list {
-  height: auto !important;
+.swiper-container {
+  padding: 20px 0 10px 0;
 }
 
-.slick-slide {
-  align-items: center;
-  display: flex !important;
+.swiper-wrapper {
+  transform: translate3d(0);
+  will-change: transform;
+}
+
+.swiper-slide {
+  display: flex;
   height: 400px;
   justify-content: center;
 }
 
-.slick-prev,
-.slick-next {
-  height: 50px;
-  width: 50px;
-  z-index: 9;
+.swiper-slide-active {
+  .account-card-content {
+    transform: scale(1.10) !important;
+  }
 }
 
-.slick-prev:before,
-.slick-next:before {
-  font-size: 50px;
-}
-
-.slick-next {
-  right: 5px;
-  text-shadow: -1px 0 2px lightgray;
-}
-
-.slick-prev {
-  left: 5px;
-  text-shadow: 0 1px 2px lightgray;
-}
-
-.slick-dots li button:before,
-.slick-dots li.slick-active button:before {
-  color: $white;
+.swiper-pagination-bullet {
+  background: $white;
 }

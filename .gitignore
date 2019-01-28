@@ -9,11 +9,11 @@
 /bower_components
 
 # misc
-*.env
 .config
 .DS_Store
 .git
 .local
+/.env*
 /.sass-cache
 /connect.lock
 /coverage/*

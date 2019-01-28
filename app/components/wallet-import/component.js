@@ -1,8 +1,9 @@
 import Component from '@ember/component';
-import { get, set } from '@ember/object';
+import { get, set, setProperties } from '@ember/object';
 import { tryInvoke } from '@ember/utils';
-import { service } from '@ember-decorators/service';
-import { action } from '@ember-decorators/object';
+
+import { inject as service } from '@ember-decorators/service';
+import { on, action } from '@ember-decorators/object';
 
 import bip39 from 'bip39';
 
@@ -29,6 +30,11 @@ export default class WalletImportComponent extends Component {
 
   onSubmit = null;
 
+  @on('willDestroyElement')
+  clear() {
+    this.set('seed', null);
+  }
+
   @action
   convertMnemonic(changeset) {
     const type = this.get('type');
@@ -40,20 +46,23 @@ export default class WalletImportComponent extends Component {
   }
 
   @action
-  async saveWallet(model, changeset) {
+  async saveWallet(model) {
     const wallet = await model.save();
     this.set('wallet', wallet);
 
     const settings = this.get('settings');
-    const seed = get(changeset, 'seed');
     const createdAt = new Date().toISOString();
-    tryInvoke(settings, 'setProperties', [{ seed, createdAt }]);
+    tryInvoke(settings, 'setProperties', [{ createdAt }]);
     return wallet;
   }
 
   @action
-  clearSeed(changeset) {
-    set(changeset, 'seed', null);
+  destroyChangeset(changeset) {
+    setProperties(changeset, {
+      seed: null,
+      mnemonic: null,
+    });
+
     tryInvoke(changeset, 'destroy');
   }
 }

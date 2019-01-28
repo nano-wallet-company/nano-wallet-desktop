@@ -2,7 +2,11 @@
   // margin-top: -60px;
   transition: 0.4s;
 
-  .slick-slide {
+  .swiper-wrapper {
+    margin-bottom: 20px;
+  }
+
+  .swiper-slide {
     height: 200px;
 
     .account-card-content {

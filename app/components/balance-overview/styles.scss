@@ -41,13 +41,13 @@
   margin: 0;
 }
 
-@media (max-height: 730px) {
+@media (max-height: 767px) {
   .pending {
     display: none;
   }
 }
 
-@media (max-height: 638px) {
+@media (max-height: 700px) {
   .currency-tabs,
   .balance {
     display: none;

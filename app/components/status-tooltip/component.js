@@ -3,7 +3,7 @@ import { get } from '@ember/object';
 
 import InViewportMixin from 'ember-in-viewport';
 
-import { service } from '@ember-decorators/service';
+import { inject as service } from '@ember-decorators/service';
 import { on, computed } from '@ember-decorators/object';
 import { gt, lt } from '@ember-decorators/object/computed';
 

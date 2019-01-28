@@ -5,7 +5,7 @@ import { setupTest } from 'ember-mocha';
 describe('Unit | Route | wallets/overview/settings', () => {
   setupTest('route:wallets/overview/settings', {
     // Specify the other units that are required for this test.
-    // needs: ['controller:foo']
+    needs: ['service:rpc'],
   });
 
   it('exists', function () {

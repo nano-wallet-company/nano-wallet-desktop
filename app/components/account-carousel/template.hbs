@@ -1,6 +1,23 @@
-{{! template-lint-disable no-inline-styles }}
-{{#each accounts as |account|}}
-  <div style="display: none">
-    {{account-card hideHistory=hideHistory account=account}}
-  </div>
-{{/each}}
+{{#swiper-container
+    registerAs=swiperInstance
+    currentSlide=currentSlide
+    breakpoints=breakpoints
+    pagination=(hash clickable=true)
+    onChange=(action (optional onChangeSlide) currentSlide)
+    keyboard=true
+    mousewheel=true
+    navigation=true
+    roundLengths=true
+    centerInsufficientSlides=true
+    preventInteractionOnTransition=true
+    slideToClickedSlide=true
+    watchSlidesProgress=true
+    watchSlidesVisibility=true
+    normalizeSlideIndex=false
+    slidesPerView=4 as |container|}}
+  {{#each accounts as |account|}}
+    {{#component container.slide}}
+      {{account-card hideHistory=hideHistory account=account}}
+    {{/component}}
+  {{/each}}
+{{/swiper-container}}

@@ -12,7 +12,7 @@
 <br>
 <small class="text-muted">{{t 'wallets.backup.help'}}</small>
 <button type="button" {{action onCancel}} class="btn btn-secondary btn-lg">{{t 'cancel'}}</button>
-{{#bs-button onClick=(queue (action 'confirmDone' wallet seed) (action onDone wallet)) class="btn-lg" type="primary"}}
+{{#bs-button onClick=(queue (action 'confirmDone' wallet) (action onDone wallet)) class="btn-lg" type="primary"}}
   {{#bs-popover triggerElement="parentView"}}
     {{t 'wallets.backup.confirm'}}
   {{/bs-popover}}

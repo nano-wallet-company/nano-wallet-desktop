@@ -1,10 +1,9 @@
 import Route from '@ember/routing/route';
 import { get } from '@ember/object';
-import { tryInvoke } from '@ember/utils';
 
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 import { action } from '@ember-decorators/object';
-import { service } from '@ember-decorators/service';
+import { inject as service } from '@ember-decorators/service';
 
 export default class WalletsRoute extends Route.extend(
   AuthenticatedRouteMixin,
@@ -30,12 +29,6 @@ export default class WalletsRoute extends Route.extend(
     }
 
     return super.beforeModel(...args);
-  }
-
-  setupController(controller, model) {
-    const poller = get(controller, 'poller');
-    tryInvoke(poller, 'resume');
-    return super.setupController(controller, model);
   }
 
   @action

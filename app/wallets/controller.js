@@ -4,7 +4,7 @@ import { A } from '@ember/array';
 import { isEmpty } from '@ember/utils';
 
 import { ContextBoundTasksMixin } from 'ember-lifeline';
-import { service } from '@ember-decorators/service';
+import { inject as service } from '@ember-decorators/service';
 
 const WALLET_POLL_INTERVAL = 5 * 1000; // 5s
 

@@ -1,14 +1,11 @@
 import Component from '@ember/component';
 
-import { waitForQueue } from 'ember-concurrency';
-import { keepLatestTask } from 'ember-concurrency-decorators';
-import { ContextBoundTasksMixin, ContextBoundEventListenersMixin } from 'ember-lifeline';
+import { ContextBoundTasksMixin, runTask, runDisposables } from 'ember-lifeline';
 
 import { on, observes } from '@ember-decorators/object';
 
 export default class AccountCarouselComponent extends Component.extend(
   ContextBoundTasksMixin,
-  ContextBoundEventListenersMixin,
 ) {
   accounts = null;
 
@@ -16,130 +13,40 @@ export default class AccountCarouselComponent extends Component.extend(
 
   onChangeSlide = null;
 
-  slickInstance = null;
-
-  @on('didInsertElement')
-  addChangeListener() {
-    this.$().on('afterChange', (event, slick, currentSlide) => {
-      this.runTask(() => {
-        this.set('currentSlide', currentSlide);
-      });
-    });
-  }
-
-  @on('didInsertElement')
-  addWheelListener() {
-    this.addEventListener('wheel', (event) => {
-      event.preventDefault();
-
-      const slickInstance = this.get('slickInstance');
-      if (slickInstance) {
-        if (event.deltaY < 0) {
-          slickInstance.slick('slickNext');
-        } else {
-          slickInstance.slick('slickPrev');
-        }
-      }
-    });
-  }
-
-  @observes('currentSlide')
-  currentSlideDidChange() {
-    return this.scheduleTask('actions', () => {
-      const currentSlide = this.get('currentSlide');
-      return this.get('onChangeSlide')(currentSlide);
-    });
-  }
-
-  @keepLatestTask
-  * setupSlider() {
-    if (!this.slickInstance && !this.isDestroying) {
-      yield waitForQueue('afterRender');
-
-      const responsive = this.get('breakpoints');
-      const initialSlide = this.get('currentSlide');
-      this.slickInstance = this.$().slick({
-        responsive,
-        initialSlide,
-        adaptiveHeight: true,
-        centerPadding: '10px',
-        slidesToShow: 4,
-        slidesToScroll: 1,
-        dots: true,
-        infinite: false,
-        speed: 200,
-        arrows: true,
-        respondTo: 'min',
-      });
-    }
-
-    return yield this.slickInstance;
-  }
-
-  @on('didInsertElement')
-  attachSlider() {
-    return this.get('setupSlider').perform();
-  }
-
-  @keepLatestTask
-  * teardownSlider() {
-    if (this.slickInstance && !this.isDestroyed) {
-      this.slickInstance.slick('unslick');
-      this.slickInstance = null;
-    }
-
-    return yield this.slickInstance;
-  }
+  swiperInstance = null;
 
   @on('willDestroyElement')
-  detachSlider() {
-    return this.get('teardownSlider').perform();
+  destroySwiper() {
+    const swiperInstance = this.get('swiperInstance');
+    if (swiperInstance) {
+      runDisposables(swiperInstance);
+      this.set('swiperInstance', null);
+    }
   }
 
-  @keepLatestTask
-  * refreshSlider() {
-    yield this.get('teardownSlider').perform();
-    yield this.get('setupSlider').perform();
-    return yield this.slickInstance;
+  updateSwiper() {
+    const swiperInstance = this.get('swiperInstance');
+    if (swiperInstance) {
+      runTask(swiperInstance, 'forceUpdate');
+    }
   }
 
-  @observes('accounts.@each')
+  @observes('accounts.[]')
   accountsDidChange() {
-    return this.get('refreshSlider').perform();
+    return this.scheduleTask('actions', 'updateSwiper');
   }
 
   get breakpoints() {
-    return [
-      {
-        breakpoint: 1500,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 1,
-        },
+    return {
+      1500: {
+        slidesPerView: 3,
       },
-      {
-        breakpoint: 1200,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-        },
+      1200: {
+        slidesPerView: 2,
       },
-      {
-        breakpoint: 780,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
+      780: {
+        slidesPerView: 1,
       },
-      {
-        breakpoint: 430,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          arrows: false,
-          draggable: true,
-        },
-      },
-    ];
+    };
   }
 }

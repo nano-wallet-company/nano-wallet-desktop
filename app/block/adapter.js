@@ -1,5 +1,5 @@
 import DS from 'ember-data';
-import { service } from '@ember-decorators/service';
+import { inject as service } from '@ember-decorators/service';
 
 const { Adapter } = DS;
 

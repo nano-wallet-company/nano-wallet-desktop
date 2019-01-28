@@ -1,9 +1,10 @@
 import Component from '@ember/component';
 import { get, setProperties } from '@ember/object';
+import { tryInvoke } from '@ember/utils';
 
 import { defineError } from 'ember-exex/error';
-import { action } from '@ember-decorators/object';
-import { service } from '@ember-decorators/service';
+import { on, action } from '@ember-decorators/object';
+import { inject as service } from '@ember-decorators/service';
 
 import ChangePasswordValidations from '../../validations/change-password';
 
@@ -27,6 +28,14 @@ export default class WalletPasswordComponent extends Component {
 
   onSubmit = null;
 
+  @on('willDestroyElement')
+  clear() {
+    this.setProperties({
+      password: null,
+      passwordConfirm: null,
+    });
+  }
+
   @action
   confirmPassword(changeset) {
     const flashMessages = this.get('flashMessages');
@@ -44,10 +53,12 @@ export default class WalletPasswordComponent extends Component {
   }
 
   @action
-  clearPassword(changeset) {
+  destroyChangeset(changeset) {
     setProperties(changeset, {
       password: null,
       passwordConfirm: null,
     });
+
+    tryInvoke(changeset, 'destroy');
   }
 }

@@ -7,7 +7,7 @@ import { Promise } from 'rsvp';
 import window from 'ember-window-mock';
 import { defineError } from 'ember-exex/error';
 import { DisposableMixin, addEventListener } from 'ember-lifeline';
-import { service } from '@ember-decorators/service';
+import { inject as service } from '@ember-decorators/service';
 
 import isElectron from '../utils/is-electron';
 import getPlatform from '../utils/get-platform';

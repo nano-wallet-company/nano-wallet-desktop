@@ -2,7 +2,7 @@ import Service from '@ember/service';
 import { assign } from '@ember/polyfills';
 import { A } from '@ember/array';
 
-import { service } from '@ember-decorators/service';
+import { inject as service } from '@ember-decorators/service';
 
 import { defineError } from 'ember-exex/error';
 import generateId from '../utils/generate-id';
@@ -32,6 +32,7 @@ export const actions = {
   WALLET_BALANCES: 'wallet_balances',
   WALLET_CHANGE_SEED: 'wallet_change_seed',
   WALLET_CREATE: 'wallet_create',
+  WALLET_EXPORT: 'wallet_export',
   WALLET_FRONTIERS: 'wallet_frontiers',
   WALLET_LEDGER: 'wallet_ledger',
   WALLET_LOCK: 'wallet_lock',
@@ -39,9 +40,11 @@ export const actions = {
   WALLET_PENDING: 'wallet_pending',
   WALLET_REPRESENTATIVE_SET: 'wallet_representative_set',
   WALLET_REPRESENTATIVE: 'wallet_representative',
+  WALLET_SEED: 'wallet_seed',
 };
 
 export const errors = {
+  WALLET_LOCKED: 'Wallet is locked',
   WALLET_NOT_FOUND: 'Wallet not found',
   ACCOUNT_NOT_FOUND: 'Account not found',
 };
@@ -51,14 +54,20 @@ export const RPCError = defineError({
   message: 'RPC error',
 });
 
-export const WalletNotFound = defineError({
-  name: 'WalletNotFound',
+export const WalletLockedError = defineError({
+  name: 'WalletLockedError',
+  message: errors.WALLET_LOCKED,
+  extends: RPCError,
+});
+
+export const WalletNotFoundError = defineError({
+  name: 'WalletNotFoundError',
   message: errors.WALLET_NOT_FOUND,
   extends: RPCError,
 });
 
-export const AccountNotFound = defineError({
-  name: 'AccountNotFound',
+export const AccountNotFoundError = defineError({
+  name: 'AccountNotFoundError',
   message: errors.ACCOUNT_NOT_FOUND,
   extends: RPCError,
 });
@@ -89,10 +98,12 @@ export default class RPCService extends Service {
     const resp = await this.get('ajax').post('/', { data });
     if (typeof resp.error === 'string') {
       switch (resp.error) {
+        case errors.WALLET_LOCKED:
+          throw new WalletLockedError();
         case errors.WALLET_NOT_FOUND:
-          throw new WalletNotFound();
+          throw new WalletNotFoundError();
         case errors.ACCOUNT_NOT_FOUND:
-          throw new AccountNotFound();
+          throw new AccountNotFoundError();
         default:
           throw new RPCError(resp.error);
       }
@@ -107,6 +118,11 @@ export default class RPCService extends Service {
 
   walletCreate() {
     return this.call(actions.WALLET_CREATE);
+  }
+
+  async walletExport(wallet) {
+    const { json } = await this.call(actions.WALLET_EXPORT, { wallet });
+    return JSON.parse(json);
   }
 
   async walletLedger(wallet, representative = true, weight = true, pending = true) {
@@ -174,6 +190,11 @@ export default class RPCService extends Service {
     return true;
   }
 
+  async walletSeed(wallet) {
+    const { seed } = await this.call(actions.WALLET_SEED, { wallet });
+    return seed;
+  }
+
   accountCreate(wallet, work = true) {
     return this.call(actions.ACCOUNT_CREATE, { wallet, work });
   }
@@ -187,7 +208,7 @@ export default class RPCService extends Service {
         pending,
       });
     } catch (err) {
-      if (!(err instanceof AccountNotFound)) {
+      if (!(err instanceof AccountNotFoundError)) {
         throw err;
       }
 

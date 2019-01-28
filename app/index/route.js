@@ -3,7 +3,7 @@ import { get } from '@ember/object';
 
 import Configuration from 'ember-simple-auth/configuration';
 
-import { service } from '@ember-decorators/service';
+import { inject as service } from '@ember-decorators/service';
 
 const { authenticationRoute } = Configuration;
 

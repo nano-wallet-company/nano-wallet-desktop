@@ -1,3 +1,5 @@
 import Controller from '@ember/controller';
 
-export default class HistoryController extends Controller {}
+export default class WalletsOverviewAccountsHistoryController extends Controller {
+  hideHistory = false;
+}

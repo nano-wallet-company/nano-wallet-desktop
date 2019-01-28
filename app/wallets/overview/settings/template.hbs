@@ -5,6 +5,6 @@
     </h4>
   {{/component}}
   {{#component modal.body}}
-    {{wallet-settings wallet=model representative=model.representative onChangeRepresentative=(route-action 'changeRepresentative') onChangePassword=(route-action 'changePassword')}}
+    {{wallet-settings wallet=wallet seed=seed representative=wallet.representative onChangeRepresentative=(route-action 'changeRepresentative') onChangePassword=(route-action 'changePassword')}}
   {{/component}}
 {{/bs-modal}}

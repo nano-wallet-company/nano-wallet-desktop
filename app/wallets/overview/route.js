@@ -3,22 +3,12 @@ import { get, setProperties } from '@ember/object';
 import { isEmpty } from '@ember/utils';
 
 import { action } from '@ember-decorators/object';
-import { service } from '@ember-decorators/service';
+import { inject as service } from '@ember-decorators/service';
 
 export default class WalletsOverviewRoute extends Route {
   @service intl;
 
   @service flashMessages;
-
-  beforeModel(...args) {
-    const walletOverviewController = this.controllerFor('wallets.overview');
-    setProperties(walletOverviewController, {
-      hideHistory: true,
-      isExpanded: false,
-    });
-
-    return super.beforeModel(...args);
-  }
 
   async afterModel(wallet) {
     const accounts = await get(wallet, 'accounts');
@@ -29,8 +19,17 @@ export default class WalletsOverviewRoute extends Route {
     return wallet;
   }
 
+  setupController(controller, model) {
+    setProperties(controller, {
+      hideHistory: true,
+      isExpanded: false,
+    });
+
+    return super.setupController(controller, model);
+  }
+
   @action
-  changeSlide(slide) {
+  changeSlide(sortedAccounts, slide) {
     return this.transitionTo({ queryParams: { slide } });
   }
 

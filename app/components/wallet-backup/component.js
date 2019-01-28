@@ -1,8 +1,8 @@
 import Component from '@ember/component';
 import { tryInvoke } from '@ember/utils';
 
-import { service } from '@ember-decorators/service';
-import { action } from '@ember-decorators/object';
+import { inject as service } from '@ember-decorators/service';
+import { on, action } from '@ember-decorators/object';
 import { classNames } from '@ember-decorators/component';
 
 import { reject } from 'rsvp';
@@ -31,6 +31,11 @@ class WalletBackupComponent extends Component {
 
   hasConfirmed = false;
 
+  @on('willDestroyElement')
+  clear() {
+    this.set('seed', null);
+  }
+
   @action
   copySeed() {
     const message = this.get('intl').t('wallets.backup.copied');
@@ -44,7 +49,7 @@ class WalletBackupComponent extends Component {
   }
 
   @action
-  confirmDone(wallet, seed) {
+  confirmDone(wallet) {
     const needsConfirm = this.get('needsConfirm');
     if (needsConfirm) {
       this.toggleProperty('hasConfirmed');
@@ -58,9 +63,7 @@ class WalletBackupComponent extends Component {
 
     const settings = this.get('settings');
     const createdAt = new Date().toISOString();
-    tryInvoke(settings, 'setProperties', [{ seed, createdAt }]);
-
-    this.set('seed', null);
+    tryInvoke(settings, 'setProperties', [{ createdAt }]);
 
     return wallet;
   }

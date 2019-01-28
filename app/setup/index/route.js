@@ -2,7 +2,7 @@ import Route from '@ember/routing/route';
 import { get } from '@ember/object';
 import { action } from '@ember-decorators/object';
 
-import { service } from '@ember-decorators/service';
+import { inject as service } from '@ember-decorators/service';
 
 export default class SetupIndexRoute extends Route {
   @service session;

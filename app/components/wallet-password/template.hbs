@@ -1,5 +1,5 @@
 {{#bs-form model=(changeset (hash password=password passwordConfirm=passwordConfirm) ChangePasswordValidations)
-    onSubmit=(action (queue (action 'confirmPassword') (action onSubmit wallet) (action 'clearPassword'))) as |form|}}
+    onSubmit=(action (queue (action 'confirmPassword') (action onSubmit wallet) (action 'destroyChangeset'))) as |form|}}
   {{component form.element controlType="password" placeholder=(t 'password') property='password' required=true minlength=8}}
   {{component form.element controlType="password" placeholder=(t 'confirmPassword') property='passwordConfirm' required=true minlength=8}}
   {{yield form}}

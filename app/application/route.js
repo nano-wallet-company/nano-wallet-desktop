@@ -1,6 +1,6 @@
 import Route from '@ember/routing/route';
-import { get } from '@ember/object';
 import { A } from '@ember/array';
+import { get, getWithDefault } from '@ember/object';
 
 import fetch from 'fetch';
 import nprogress from 'nprogress';
@@ -8,9 +8,11 @@ import { all } from 'rsvp';
 
 import ApplicationRouteMixin from 'ember-simple-auth/mixins/application-route-mixin';
 import { DisposableMixin } from 'ember-lifeline';
-import { service } from '@ember-decorators/service';
+
+import { inject as service } from '@ember-decorators/service';
 import { action } from '@ember-decorators/object';
 
+import upgradeSettings from '../utils/upgrade-settings';
 import guessLocale, { DEFAULT_LOCALE } from '../utils/guess-locale';
 import normalizeLocale from '../utils/normalize-locale';
 import reload from '../utils/reload';
@@ -31,6 +33,11 @@ export default class ApplicationRoute extends Route.extend(
     const electron = this.get('electron');
     const isElectron = get(electron, 'isElectron');
     const settings = this.get('settings');
+    const version = getWithDefault(settings, 'version', 0);
+    if (version < 1) {
+      await upgradeSettings(settings);
+    }
+
     let currentLocale = get(settings, 'locale');
     if (!currentLocale && isElectron) {
       currentLocale = get(electron, 'locale');

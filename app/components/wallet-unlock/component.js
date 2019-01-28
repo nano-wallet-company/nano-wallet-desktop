@@ -2,7 +2,7 @@ import Component from '@ember/component';
 import { set } from '@ember/object';
 import { tryInvoke } from '@ember/utils';
 
-import { action } from '@ember-decorators/object';
+import { on, action } from '@ember-decorators/object';
 
 import UnlockWalletValidations from '../../validations/unlock-wallet';
 
@@ -15,8 +15,13 @@ export default class WalletUnlockComponent extends Component {
 
   onSubmit = null;
 
+  @on('willDestroyElement')
+  clear() {
+    this.set('password', null);
+  }
+
   @action
-  clearPassword(changeset) {
+  destroyChangeset(changeset) {
     set(changeset, 'password', null);
     tryInvoke(changeset, 'destroy');
   }

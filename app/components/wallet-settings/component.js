@@ -1,6 +1,6 @@
 import Component from '@ember/component';
 
-import { overridableReads } from '@ember-decorators/object/computed';
+import { on } from '@ember-decorators/object';
 
 import { storage } from '../../decorators';
 
@@ -11,9 +11,9 @@ export default class WalletSettingsComponent extends Component {
 
   ChangeRepresentativeValidations = ChangeRepresentativeValidations;
 
-  @overridableReads('settings.seed') seed;
-
   wallet = null;
+
+  seed = null;
 
   password = null;
 
@@ -22,4 +22,9 @@ export default class WalletSettingsComponent extends Component {
   onChangeRepresentative = null;
 
   onChangePassword = null;
+
+  @on('willDestroyElement')
+  clear() {
+    this.set('seed', null);
+  }
 }

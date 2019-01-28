@@ -22,6 +22,10 @@ export default class WalletsOverviewAccountsHistoryRoute extends Route {
     return bindKeyboardShortcuts(this);
   }
 
+  deactivate() {
+    return unbindKeyboardShortcuts(this);
+  }
+
   async model() {
     const wallet = this.modelFor('wallets');
     const account = this.modelFor('wallets.overview.accounts');
@@ -44,11 +48,12 @@ export default class WalletsOverviewAccountsHistoryRoute extends Route {
     return super.setupController(controller, model);
   }
 
-  deactivate() {
-    const overviewController = this.controllerFor('wallets.overview');
-    set(overviewController, 'hideHistory', true);
-    set(this.controller, 'hideHistory', true);
-    return unbindKeyboardShortcuts(this);
+  resetController(controller, isExiting) {
+    if (isExiting) {
+      const overviewController = this.controllerFor('wallets.overview');
+      set(overviewController, 'hideHistory', true);
+      set(controller, 'hideHistory', true);
+    }
   }
 
   @action

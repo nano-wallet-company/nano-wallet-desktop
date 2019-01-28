@@ -1,7 +1,7 @@
 import Route from '@ember/routing/route';
 import { get } from '@ember/object';
 
-import { service } from '@ember-decorators/service';
+import { inject as service } from '@ember-decorators/service';
 import { action } from '@ember-decorators/object';
 
 export default class WalletsOverviewAccountsRoute extends Route {

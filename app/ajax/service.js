@@ -8,8 +8,8 @@ import {
 } from 'ember-concurrency-retryable';
 import { defineError } from 'ember-exex/error';
 
-import { service } from '@ember-decorators/service';
-import { overridableReads } from '@ember-decorators/object/computed';
+import { inject as service } from '@ember-decorators/service';
+import { reads } from '@ember-decorators/object/computed';
 
 export const AjaxError = defineError({
   name: 'AjaxError',
@@ -40,9 +40,9 @@ export default class ApplicationAjaxService extends AjaxService.extend({
 
   @service electron;
 
-  @overridableReads('config.rpc.host') host;
+  @reads('config.rpc.host') host;
 
-  @overridableReads('config.rpc.namespace') namespace;
+  @reads('config.rpc.namespace') namespace;
 
   contentType = 'application/json'
 
