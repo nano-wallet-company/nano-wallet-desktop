@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.6.1"></a>
+## [1.6.1](https://github.com/nano-wallet-company/nano-wallet-desktop/compare/v1.6.0...v1.6.1) (2019-01-28)
+
+
+### Bug Fixes
+
+* **appdmg:** use `hdiutil detach -force` ([28e8748](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/28e8748))
+* **electron:** write dh2048.pem as u+rw ([b614651](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/b614651))
+
+
+### Features
+
+* **electron:** add extra loggin around auto updating ([c706604](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/c706604))
+
+
+
 <a name="1.6.0"></a>
 # [1.6.0](https://github.com/nano-wallet-company/nano-wallet-desktop/compare/v1.5.0...v1.6.0) (2019-01-28)
 
