@@ -152,15 +152,25 @@ const run = async () => {
 
   await app.whenReady();
 
-  autoUpdater.on('checking-for-update', () => {
-    global.isUpdating = false;
-  });
-
-  autoUpdater.on('update-downloaded', () => {
-    global.isUpdating = true;
-  });
-
   if (!is.development) {
+    autoUpdater.on('checking-for-update', () => {
+      log.info('Checking for update:', productName, '>', version);
+      global.isUpdating = false;
+    });
+
+    autoUpdater.on('update-available', () => {
+      log.info('Update available:', productName, '>', version);
+    });
+
+    autoUpdater.on('update-not-available', () => {
+      log.info('Update not available:', productName, '>', version);
+    });
+
+    autoUpdater.on('update-downloaded', (event, releaseNotes, releaseName) => {
+      log.info('Update downloaded:', productName, releaseName);
+      global.isUpdating = true;
+    });
+
     updateElectronApp({
       logger: log,
       updateInterval: '30 minutes',
