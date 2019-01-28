@@ -97,9 +97,11 @@ export default class DownloadProgressComponent extends Component.extend(
   updateProgress(value) {
     const delta = value - this.get('value');
     const speed = this.speed(delta);
-    const remaining = 1 - value;
+    const remaining = Math.max(0, 1 - value);
     const seconds = Math.round(remaining / speed);
-    const eta = moment().add(seconds, 'second').toDate();
+    const eta = Number.isFinite(seconds)
+      ? moment().add(seconds, 'second').toDate()
+      : null;
     this.setProperties({ value, eta });
   }
 }
