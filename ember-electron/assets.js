@@ -98,6 +98,7 @@ const extractAsset = async (savePath, extractDir, onProgress) => {
 const downloadAsset = async (sender, url, onStarted, onProgress) => {
   log.info('Downloading asset:', url);
 
+  const start = Date.now();
   const directory = path.join(app.getPath('downloads'), productName);
   await del(directory, { force: true });
   await makeDir(directory, { fs });
@@ -113,7 +114,7 @@ const downloadAsset = async (sender, url, onStarted, onProgress) => {
   });
 
   const savePath = dl.getSavePath();
-  const elapsed = Date.now() - dl.getStartTime();
+  const elapsed = Date.now() - start;
   log.info('Asset downloaded:', savePath, `(took ${prettyMs(elapsed)})`);
   if (!sender.isDestroyed()) {
     sender.send('download-verify');
