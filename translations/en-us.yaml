@@ -70,7 +70,7 @@ status:
   count: 'Block Count'
   unchecked: 'Unchecked Blocks'
   peers: 'Peers'
-balancePending: 'Balance Pending'
+balancePending: 'Balance Pending:'
 MIKRON: 'Mikron'
 MIKRON_short: 'MIK'
 BTC: 'BTC'

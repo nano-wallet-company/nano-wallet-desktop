@@ -74,7 +74,7 @@ status:
   count: 'blokk szám'
   unchecked: 'ellenőrizetlen blokkok'
   peers: 'kapcsolatok'
-balancePending: 'Függő Egyenleg'
+balancePending: 'Függő Egyenleg:'
 MIKRON: 'Mikron'
 MIKRON_short: 'MIK'
 BTC: 'BTC'
