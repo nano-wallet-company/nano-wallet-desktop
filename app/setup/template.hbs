@@ -1,5 +1,9 @@
 {{notification-center}}
 
+{{#bs-dropdown as |dd|}}
+  {{wallet-language onChangeLanguage=(route-action 'changeLanguage') dd=dd  styleClass='ddAbsolute'}}
+{{/bs-dropdown}}
+
 <div class="row mx-0">
   <section class="setup float-left info d-none d-sm-flex col-sm-6 col-md-7 align-items-end justify-content-end">
     <div class="col-12 col-md-11 col-lg-8">

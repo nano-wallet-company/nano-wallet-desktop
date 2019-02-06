@@ -6,6 +6,7 @@ describe('Unit | Route | login', () => {
   setupTest('route:login', {
     // Specify the other units that are required for this test.
     needs: [
+      'service:settings',
       'service:intl',
       'service:session',
       'service:electron',

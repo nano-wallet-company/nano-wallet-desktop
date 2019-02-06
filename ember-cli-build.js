@@ -34,6 +34,7 @@ module.exports = (defaults) => {
         'xml',
         'webmanifest',
       ]),
+      exclude: ['images/flags/'],
     },
 
     'ember-cli-babel': {

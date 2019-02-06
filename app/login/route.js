@@ -1,5 +1,5 @@
 import Route from '@ember/routing/route';
-import { get } from '@ember/object';
+import { get, set } from '@ember/object';
 
 import UnauthenticatedRouteMixin from 'ember-simple-auth/mixins/unauthenticated-route-mixin';
 
@@ -13,7 +13,11 @@ export default class LoginRoute extends Route.extend(
 ) {
   @service intl = null;
 
+  @service settings = null;
+
   @service session = null;
+
+  @service intl = null;
 
   @service electron = null;
 
@@ -61,5 +65,14 @@ export default class LoginRoute extends Route.extend(
   @action
   setupWallet() {
     return this.transitionTo('setup');
+  }
+
+  @action
+  async changeLanguage(language) {
+    const intl = this.get('intl');
+    intl.setLocale(language);
+    const settings = this.get('settings');
+    set(settings, 'locale', language);
+    return this.transitionTo('index');
   }
 }

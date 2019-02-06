@@ -6,6 +6,7 @@ describe('Unit | Route | wallets', () => {
   setupTest('route:wallets', {
     // Specify the other units that are required for this test.
     needs: [
+      'service:settings',
       'service:intl',
       'service:session',
       'service:flashMessages',

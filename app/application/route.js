@@ -1,5 +1,5 @@
 import Route from '@ember/routing/route';
-import { get } from '@ember/object';
+import { get, set } from '@ember/object';
 import { A } from '@ember/array';
 
 import fetch from 'fetch';
@@ -31,6 +31,8 @@ export default class ApplicationRoute extends Route.extend(
     const electron = this.get('electron');
     const isElectron = get(electron, 'isElectron');
     const settings = this.get('settings');
+
+    const availableLocales = ['hu-hu', 'en-us'];
     let currentLocale = get(settings, 'locale');
     if (!currentLocale && isElectron) {
       currentLocale = get(electron, 'locale');
@@ -46,7 +48,7 @@ export default class ApplicationRoute extends Route.extend(
       locales.unshift(`${currentLocale}-${currentLocale}`);
     }
 
-    const promises = A(locales).uniq().map(async (key) => {
+    const promises = A(availableLocales).uniq().map(async (key) => {
       try {
         const response = await fetch(`${rootURL}translations/${key}.json`);
         if (response.ok) {
@@ -62,7 +64,13 @@ export default class ApplicationRoute extends Route.extend(
 
     await all(promises);
 
-    intl.setLocale(locales);
+    set(settings, 'availableLocales', availableLocales);
+    currentLocale = get(settings, 'locale');
+    if (!currentLocale) {
+      intl.setLocale(locales);
+    } else {
+      intl.setLocale(currentLocale);
+    }
 
     if (isElectron) {
       this.registerDisposable(() => electron.off('exit', reload));

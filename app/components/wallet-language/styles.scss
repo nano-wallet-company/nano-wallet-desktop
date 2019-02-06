@@ -1,0 +1,17 @@
+.ddAbsolute {
+  position: absolute;
+  overflow: hidden;
+  right: 10px;
+  top: 10px;
+  z-index: 10;
+}
+
+a.ddAbsolute {
+  color: #666666;
+}
+
+a.disabled {
+  pointer-events: none;
+  cursor: default;
+  color: #212529;
+}

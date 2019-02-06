@@ -11,6 +11,10 @@ export default class WalletsRoute extends Route.extend(
 ) {
   @service intl = null;
 
+  @service intl = null;
+
+  @service settings = null;
+
   @service session = null;
 
   @service electron = null;
@@ -92,5 +96,14 @@ export default class WalletsRoute extends Route.extend(
     const message = this.get('intl').t('wallets.settings.setNodeIdMsg');
     flashMessages.success(message);
     return this.transitionTo('wallets.overview');
+  }
+
+  @action
+  async changeLanguage(language) {
+    const intl = this.get('intl');
+    intl.setLocale(language);
+    const settings = this.get('settings');
+    set(settings, 'locale', language);
+    return this.transitionTo('index');
   }
 }

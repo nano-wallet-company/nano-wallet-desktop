@@ -16,6 +16,8 @@ export default class NavigationBarComponent extends Component {
 
   @argument onNodeIdSet = null;
 
+  @argument onChangeLanguage = null;
+
   @action
   toggleShow() {
     this.toggleProperty('show');

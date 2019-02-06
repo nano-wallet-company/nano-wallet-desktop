@@ -15,3 +15,20 @@
   border: none;
   outline: none;
 }
+
+.dropdown-menu {
+  min-width: auto;
+  margin: 0.125rem 0 0 -7.5rem;
+}
+
+a.disabled {
+  pointer-events: none;
+  cursor: default;
+  color: #212529;
+}
+
+@media (max-width: 991px) {
+  .dropdown-menu {
+    margin: 0.125rem 0 0 0;
+  }
+}

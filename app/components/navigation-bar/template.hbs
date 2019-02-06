@@ -15,27 +15,30 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class=" {{if show 'in' 'collapse'}} navbar-collapse justify-content-end" id="navbarNavDropdown">
-    <ul class="navbar-nav {{if show 'mt-10'}}">
-      <li class="nav-item">
-        {{#link-to 'index' class="nav-link"}}
+    {{#bs-nav type="bar" class="navbar-nav" as |nav|}}
+      {{#nav.item}}
+        {{#nav.link-to 'index'}}
           {{t 'overview'}}
-        {{/link-to}}
-      </li>
-      <li class="nav-item">
-        {{#link-to 'wallets.overview.accounts.create' wallet class="nav-link"}}
+        {{/nav.link-to}}
+      {{/nav.item}}
+      {{#nav.item}}
+        {{#nav.link-to 'wallets.overview.accounts.create' wallet}}
           {{fa-icon "plus-square"}} {{t 'wallets.overview.create'}}
-        {{/link-to}}
-      </li>
-      <li class="nav-item">
-        {{#link-to 'wallets.overview.settings' wallet class="nav-link"}}
+        {{/nav.link-to}}
+      {{/nav.item}}
+      {{#nav.item}}
+        {{#nav.link-to 'wallets.overview.settings' wallet}}
           {{t 'settings'}}
-        {{/link-to}}
-      </li>
-      <li class="nav-item">
-        {{#link-to 'wallets.logout' wallet class="nav-link"}}
+        {{/nav.link-to}}
+      {{/nav.item}}
+      {{#nav.item}}
+        {{#nav.link-to 'wallets.logout' wallet}}
           {{t 'logout'}}
-        {{/link-to}}
-      </li>
-    </ul>
+        {{/nav.link-to}}
+      {{/nav.item}}
+      {{#nav.dropdown as |dd|}}
+        {{wallet-language onChangeLanguage=onChangeLanguage dd=dd styleClass=''}}
+      {{/nav.dropdown}}
+    {{/bs-nav}}
   </div>
 </nav>
