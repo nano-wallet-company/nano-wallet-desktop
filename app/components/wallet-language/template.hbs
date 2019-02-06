@@ -1,4 +1,4 @@
-{{#dd.toggle class=styleClass}}<img height="20" src="images/flags/{{currentLocale}}.png" alt="{{t 'product'}}"><span class="caret"></span>{{/dd.toggle}}
+{{#dd.toggle class=styleClass}}<img height="12" src="images/flags/{{currentLocale}}.png" alt="{{t (concat 'language.' currentLocale)}}"><span class="caret"></span>{{/dd.toggle}}
 {{#dd.menu as |ddm|}}
   {{#ddm.item}}
     <a class="dropdown-item disabled" href="#">{{t 'language.change'}}</a>
@@ -6,7 +6,10 @@
   {{ddm.divider}}
   {{#each locales as |localeChoice|}}
     {{#ddm.item}}
-      <a class="dropdown-item" href="#" {{action onChangeLanguage localeChoice on='click'}}>{{t (concat 'language.' localeChoice)}}</a>
+      <a class="dropdown-item" href="#" {{action onChangeLanguage localeChoice on='click'}}>
+        <img height="12" src="images/flags/{{localeChoice}}.png" alt="{{t (concat 'language.' localeChoice)}}">
+        {{t (concat 'language.' localeChoice)}}
+      </a>
     {{/ddm.item}}
   {{/each}}
 {{/dd.menu}}
