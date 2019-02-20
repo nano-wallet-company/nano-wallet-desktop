@@ -3,7 +3,7 @@
     {{#component form.element controlType="power-select" label=(t 'wallets.accounts.send.source')
         required=true options=accounts property='source' onChange=(action onChange) as |el|}}
       {{#component el.control searchField="id" searchPlaceholder=(t 'wallets.accounts.send.search') as |item|}}
-        {{#let (or (get item 'content.content') item) as |content|}}
+        {{#let (or (get item 'content') item) as |content|}}
           <div>
             {{account-label account=content truncate=30}}
             {{format-amount (get content 'balance')}} {{t 'NANO'}}
@@ -17,7 +17,7 @@
         placeholder=(t 'wallets.accounts.send.placeholder')}}
 
     {{#let (changeset (hash intl=intl block=block amount=null) ChangeAmountValidations)
-           (format-amount (or (get model 'source.balance.content') (get model 'source.balance')) useGrouping=false)
+           (format-amount (or (get model 'source.content.balance') (get model 'source.balance')) useGrouping=false)
         as |childModel max|}}
       {{#component form.element
           min=0
