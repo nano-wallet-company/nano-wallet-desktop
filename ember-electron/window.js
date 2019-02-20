@@ -50,6 +50,7 @@ const createWindow = async () => {
     backgroundColor: '#000034',
     webPreferences: {
       webviewTag: false,
+      nodeIntegration: true,
       disableBlinkFeatures: 'Auxclick',
     },
   });
