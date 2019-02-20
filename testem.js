@@ -1,5 +1,9 @@
 /* eslint-env node */
+const jobs = process.env.JOBS || -1;
+const parallel = process.env.EMBER_EXAM_SPLIT_COUNT || jobs;
+
 module.exports = {
+  parallel,
   test_page: 'tests/index.html?hidepassed',
   disable_watching: true,
   launch_in_ci: [

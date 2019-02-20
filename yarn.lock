@@ -4785,7 +4785,7 @@ cli-table2@^0.2.0:
   optionalDependencies:
     colors "^1.1.2"
 
-cli-table3@^0.5.0:
+cli-table3@^0.5.0, cli-table3@^0.5.1:
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/cli-table3/-/cli-table3-0.5.1.tgz#0252372d94dfc40dbd8df06005f48f31f656f202"
   integrity sha512-7Qg2Jrep1S/+Q3EceiZtQcDPWxhAvBw+ERf1162v4sikJrvojMHFqXt8QIVha8UlH9rgU0BeWPytZ9/TzYqlUw==
@@ -8223,6 +8223,19 @@ ember-electron@^2.10.0:
     tree-kill "^1.1.0"
     tree-sync "^1.2.2"
     yarn-or-npm "^2.0.4"
+
+ember-exam@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/ember-exam/-/ember-exam-2.0.3.tgz#74ebcdbbb5658c7420e8960bd04d1e291f728c9f"
+  integrity sha512-FLuDRkpUXQqjd7A3siPbPcMmUmUZlm1lumWatC/3mxph3kV+c2FIfft83CJKjkhK5i7j7jRPa49LimreC6UmbQ==
+  dependencies:
+    chalk "^2.1.0"
+    cli-table3 "^0.5.1"
+    debug "^4.1.0"
+    ember-cli-babel "^7.4.0"
+    execa "^1.0.0"
+    fs-extra "^7.0.1"
+    rimraf "^2.6.2"
 
 ember-exex@^0.2.0:
   version "0.2.0"
@@ -14733,7 +14746,7 @@ npmlog@^2.0.3:
     are-we-there-yet "~1.1.2"
     gauge "~1.2.5"
 
-"nprogress@github:alexlafroscia/nprogress#allow-alternate-scheduler":
+nprogress@alexlafroscia/nprogress#allow-alternate-scheduler:
   version "0.2.0"
   resolved "https://codeload.github.com/alexlafroscia/nprogress/tar.gz/af37323172b98441d02aa02447f795f5766419b0"
 
