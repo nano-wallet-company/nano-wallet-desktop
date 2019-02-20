@@ -94,6 +94,10 @@ module.exports = (environment) => {
     },
   };
 
+  ENV['ember-cli-mirage'] = {
+    excludeFilesFromBuild: true,
+  };
+
   if (environment === 'development') {
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
