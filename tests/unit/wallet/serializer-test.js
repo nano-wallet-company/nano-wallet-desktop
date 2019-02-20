@@ -7,6 +7,7 @@ describe('Unit | Serializer | wallet', () => {
     // Specify the other units that are required for this test.
     needs: [
       'model:account',
+      'model:block',
       'model:frontier',
       'serializer:wallet',
       'transform:big-number',
