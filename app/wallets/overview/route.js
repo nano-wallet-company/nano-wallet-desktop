@@ -19,13 +19,13 @@ export default class WalletsOverviewRoute extends Route {
     return wallet;
   }
 
-  setupController(controller, model) {
+  resetController(controller, isExiting) {
     setProperties(controller, {
       hideHistory: true,
       isExpanded: false,
     });
 
-    return super.setupController(controller, model);
+    return super.resetController(controller, isExiting);
   }
 
   @action
