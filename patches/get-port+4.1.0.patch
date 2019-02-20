@@ -1,0 +1,13 @@
+diff --git a/node_modules/get-port/index.js b/node_modules/get-port/index.js
+index c1d6585..368752b 100644
+--- a/node_modules/get-port/index.js
++++ b/node_modules/get-port/index.js
+@@ -24,7 +24,7 @@ const getPort = options => {
+ 		(seq, port) => seq.catch(
+ 			() => isAvailable(Object.assign({}, options, {port}))
+ 		),
+-		Promise.reject()
++		Promise.reject(new Error('unavailable'))
+ 	);
+ };
+ 
