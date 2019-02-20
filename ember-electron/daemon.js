@@ -175,6 +175,7 @@ const startDaemon = async () => {
   config.node.io_threads = Math.max(2, Math.ceil(cpuCount / 2));
   config.node.network_threads = config.node.io_threads;
   config.node.work_threads = 2;
+  config.node.signature_checker_threads = config.node.io_threads - 1;
   config.node.bootstrap_connections = Math.max(4, config.node.network_threads);
   config.node.bootstrap_connections_max = Math.min(64, config.node.bootstrap_connections * 4);
 
@@ -187,7 +188,7 @@ const startDaemon = async () => {
     },
   });
 
-  const cmd = path.join(global.resourcesPath, toExecutableName('rai_node'));
+  const cmd = path.join(global.resourcesPath, toExecutableName('nano_node'));
   log.info('Starting node:', cmd);
 
   const child = crossSpawn(cmd, ['--daemon', '--data_path', dataPath], {
