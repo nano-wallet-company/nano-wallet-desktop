@@ -18,6 +18,9 @@ const log = require('electron-log');
 const unhandled = require('electron-unhandled');
 const { is, appLaunchTimestamp } = require('electron-util');
 
+process.traceDeprecation = !!is.development;
+process.traceProcessWarnings = !!is.development;
+
 log.transports.file.level = 'info';
 log.transports.rendererConsole.level = 'info';
 
