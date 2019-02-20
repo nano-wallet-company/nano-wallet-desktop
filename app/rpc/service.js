@@ -181,8 +181,13 @@ export default class RPCService extends Service {
     return representative;
   }
 
-  async walletRepresentativeSet(wallet, representative) {
-    const { set } = await this.call(actions.WALLET_REPRESENTATIVE_SET, { wallet, representative });
+  async walletRepresentativeSet(wallet, representative, update_existing_accounts = true) {
+    const { set } = await this.call(actions.WALLET_REPRESENTATIVE_SET, {
+      wallet,
+      representative,
+      update_existing_accounts,
+    });
+
     if (set !== '1') {
       throw new RepresentativeChangeError({ params: { representative } });
     }

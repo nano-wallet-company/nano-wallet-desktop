@@ -24,13 +24,14 @@ export default class AccountAdapter extends Adapter {
   }
 
   async updateRecord(store, type, snapshot) {
+    const data = this.serialize(snapshot, { includeId: true });
     const { representative: [, representative] = [] } = snapshot.changedAttributes();
     if (representative) {
-      const { wallet, account } = this.serialize(snapshot, { includeId: true });
+      const { wallet, account } = data;
       await this.get('rpc').accountRepresentativeSet(wallet, account, representative);
     }
 
-    return snapshot;
+    return data;
   }
 
   async deleteRecord(store, type, snapshot) {

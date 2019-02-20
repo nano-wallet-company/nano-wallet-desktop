@@ -1,4 +1,5 @@
 import DS from 'ember-data';
+
 import { hash } from 'ember-concurrency';
 import { inject as service } from '@ember-decorators/service';
 
@@ -18,11 +19,19 @@ export default class WalletAdapter extends Adapter {
       representative: rpc.walletRepresentative(wallet),
       accounts: rpc.accountList(wallet),
     });
+
     return { wallet, representative, accounts };
   }
 
   async updateRecord(store, type, snapshot) {
-    return this.serialize(snapshot, { includeId: true });
+    const data = this.serialize(snapshot, { includeId: true });
+    const { representative: [, representative] = [] } = snapshot.changedAttributes();
+    if (representative) {
+      const { wallet } = data;
+      await this.get('rpc').walletRepresentativeSet(wallet, representative, true);
+    }
+
+    return data;
   }
 
   createRecord() {

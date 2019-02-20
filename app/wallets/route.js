@@ -1,5 +1,5 @@
 import Route from '@ember/routing/route';
-import { get } from '@ember/object';
+import { get, set } from '@ember/object';
 
 import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 import { action } from '@ember-decorators/object';
@@ -42,15 +42,16 @@ export default class WalletsRoute extends Route.extend(
   }
 
   @action
-  async changeRepresentative(model, changeset) {
+  async changeRepresentative(wallet, changeset) {
     const flashMessages = this.get('flashMessages');
-    const wallet = get(model, 'id');
-    const representative = get(changeset, 'representative');
     try {
-      await this.get('rpc').walletRepresentativeSet(wallet, representative);
+      const representative = get(changeset, 'representative');
+      set(wallet, 'representative', representative);
+      await wallet.save();
     } catch (err) {
       const failureMessage = this.get('intl').t('wallets.settings.representativeChangeFailed');
       flashMessages.danger(failureMessage);
+      wallet.rollbackAttributes();
       throw err;
     }
 
