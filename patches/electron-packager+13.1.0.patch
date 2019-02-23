@@ -1,0 +1,26 @@
+diff --git a/node_modules/electron-packager/common.js b/node_modules/electron-packager/common.js
+index 046704f..f612a18 100644
+--- a/node_modules/electron-packager/common.js
++++ b/node_modules/electron-packager/common.js
+@@ -87,7 +87,8 @@ function sanitizeAppName (name) {
+ }
+ 
+ function generateFinalBasename (opts) {
+-  return `${sanitizeAppName(opts.name)}-${opts.platform}-${opts.arch}`
++  const targetName = sanitizeAppName(opts.name).replace(/\s+/g, '-').toLowerCase()
++  return `${targetName}-${opts.platform}-${opts.arch}`
+ }
+ 
+ function generateFinalPath (opts) {
+diff --git a/node_modules/electron-packager/targets.js b/node_modules/electron-packager/targets.js
+index 803cf1f..1fd4212 100644
+--- a/node_modules/electron-packager/targets.js
++++ b/node_modules/electron-packager/targets.js
+@@ -93,6 +93,7 @@ module.exports = {
+     return archs
+   },
+   createPlatformArchPairs: createPlatformArchPairs,
++  hostArch: hostArch,
+   officialArchs: officialArchs,
+   officialPlatformArchCombos: officialPlatformArchCombos,
+   officialPlatforms: officialPlatforms,
