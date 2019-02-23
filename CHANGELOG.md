@@ -2,6 +2,37 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [1.7.0](https://github.com/nano-wallet-company/nano-wallet-desktop/compare/v1.6.2...v1.7.0) (2019-02-23)
+
+
+### Bug Fixes
+
+* **account-card:** remove disabled attr causing Glimmer cycle issue ([4cebb04](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/4cebb04))
+* **account-send:** use new belongsTo relationship paths ([c1f97b9](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/c1f97b9))
+* **editorconfig:** don't do any auto-formatting to patch files ([de5f244](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/de5f244))
+* **get-port:** reject with an actual Error to make Bluebird happy ([7f4d5b0](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/7f4d5b0))
+* **mirage:** exclude Mirage from builds for fix issues with source maps ([2fe145d](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/2fe145d))
+* **send:** reset overview controller on it's route ([ad05121](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/ad05121))
+* **send:** toggle isExpanded during route activation/deactivation ([67512b6](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/67512b6))
+* **wallet-settings:** update existing account representatives ([05f1a24](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/05f1a24)), closes [#90](https://github.com/nano-wallet-company/nano-wallet-desktop/issues/90)
+
+
+### Features
+
+* **app:** add no-referrer policy by meta tag ([f30bfdf](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/f30bfdf))
+* **app:** use ember-exam to run tests ([df57e23](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/df57e23))
+* **electron:** enable deprecation and warning traces during development ([fb15074](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/fb15074))
+* **electron:** upgrade node to V18.0 ([0434294](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/0434294))
+* **electron:** upgrade node to V18.0RC3 ([b03a4be](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/b03a4be))
+
+
+### Performance Improvements
+
+* **electron:** update ASAR ordering files ([e54dc90](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/e54dc90))
+* **wallets-controller:** use wallet_balances over accounts_balances ([3444535](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/3444535))
+
+
+
 <a name="1.6.2"></a>
 ## [1.6.2](https://github.com/nano-wallet-company/nano-wallet-desktop/compare/v1.6.1...v1.6.2) (2019-01-28)
 
