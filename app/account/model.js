@@ -26,4 +26,6 @@ export default class AccountModel extends Model {
   @attr('number') blockCount = null;
 
   @attr('timestamp', { defaultValue: () => new Date() }) modifiedTimestamp = null;
+
+  visible = true;
 }

@@ -22,11 +22,11 @@
       {{/bs-form}}
     {{/modal.body}}
     {{#modal.footer}}
-      {{!--
-      {{#bs-button onClick=(action 'remove' account) type="danger" class="mr-auto"}}
-        {{t 'delete'}}
-      {{/bs-button}}
-      --}}
+      {{#if hideAble}}
+        {{#bs-button onClick=(queue (action modal.close) (action onHideAccount account)) type="danger" class="mr-auto"}}
+          {{t 'delete'}}
+        {{/bs-button}}
+      {{/if}}
       {{#bs-button onClick=(action modal.close) type="secondary"}}
         {{t 'cancel'}}
       {{/bs-button}}
