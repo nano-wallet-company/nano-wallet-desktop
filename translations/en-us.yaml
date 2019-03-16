@@ -28,6 +28,7 @@ type: 'Type'
 amount: 'Amount'
 wallet: 'Wallet'
 account: 'Account'
+accounts: 'Accounts'
 balance: 'Balance'
 pending: 'Pending'
 node: 'node'
@@ -80,6 +81,7 @@ EUR: 'EUR'
 walletSettings: 'Wallet Settings'
 languageSettings: 'Language Settings'
 editAccountSettings: 'Edit account settings'
+deleteAccount: 'Delete account'
 accountSettings: 'Account Settings'
 accountSettingsSaved: 'Account settings saved!'
 unknown: '(unknown)'
@@ -132,9 +134,17 @@ wallets:
         easily deleted later. You should only proceed if you need an additional MIKRON account number beside
         your current one(s). Are you sure to proceed?
       createButton: 'Create'
+    delete:
+      title: 'Delete Account'
+      lead: 'Are you sure to delete this account?'
+      body: >
+        <strong>Warning</strong>: If you proceed you will delete this MIKRON account from your wallet. However it can
+        be restored by clicking on Accounts menu and choosing Show All. Are you sure to proceed?
+      deleteButton: 'Delete'
   overview:
     none: 'No accounts in wallet.'
     create: 'Create Account'
+    showAll: 'Show All'
     created: 'New account created!'
   settings:
     defaultRepresentative: 'Default Representative Account'

@@ -21,13 +21,9 @@ export default class AccountSettingsComponent extends Component {
 
   @argument onSave = null;
 
-  @argument onHideAccount = null;
-
   @argument onCancel = null;
 
   @gt('account.blockCount', 0) hasOpenBlock = false;
-
-  @storage('account') settings = null;
 
   @action
   async remove(account) {
@@ -56,16 +52,6 @@ export default class AccountSettingsComponent extends Component {
       await account.save();
     }
 
-    return false;
-  }
-
-  get hideAble() {
-    const settings = this.get('settings');
-    const hidden = get(settings, 'hidden');
-    const balance = get(this.account, 'balance');
-    if (!hidden && !fromAmount(balance).gt(0)) {
-      return true;
-    }
     return false;
   }
 }

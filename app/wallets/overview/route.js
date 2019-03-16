@@ -1,7 +1,6 @@
 import Route from '@ember/routing/route';
 import { get, set, setProperties } from '@ember/object';
-import { isEmpty } from '@ember/utils';
-
+import { isEmpty, tryInvoke } from '@ember/utils';
 import { action } from '@ember-decorators/object';
 import { service } from '@ember-decorators/service';
 import { storage } from '../../decorators';
@@ -31,11 +30,16 @@ export default class WalletsOverviewRoute extends Route {
     accounts.forEach((account) => {
       this.set('account', account);
       const settings = this.get('settings');
-      const hidden = get(settings, 'hidden');
+      const isHidden = get(settings, 'hidden');
       const balance = get(account, 'balance');
       const hasBalance = fromAmount(balance).gt(0);
-      if (hidden && !hasBalance) {
+      if (isHidden && !hasBalance) {
         set(account, 'visible', false);
+      }
+      if (isHidden && hasBalance) {
+        set(account, 'visible', true);
+        const hidden = false;
+        tryInvoke(settings, 'setProperties', [{ hidden }]);
       }
     });
     if (isEmpty(accounts)) {

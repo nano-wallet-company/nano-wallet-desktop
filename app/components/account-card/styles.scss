@@ -29,6 +29,9 @@ button {
     .settings {
       display: block
     }
+    .delete {
+      display: block
+    }
   }
 
   .settings {
@@ -39,6 +42,14 @@ button {
     right: 10px;
   }
 
+  .delete {
+    display: none;
+    outline: none;
+    position: absolute;
+    top: 35px;
+    right: 11px;
+  }
+
   img.qr-code {
     display: block;
     height: auto;
@@ -47,6 +58,10 @@ button {
 
   i {
     color: $blue;
+  }
+
+  span {
+    color: $red;
   }
 
   sup > img {
