@@ -12,8 +12,10 @@
 .config
 .DS_Store
 .git
+.idea
 .local
 /.env*
+/.pnp*
 /.sass-cache
 /connect.lock
 /coverage/*
@@ -22,7 +24,6 @@ jsconfig.json
 npm-debug.log*
 testem.log
 yarn-error.log
-.idea
 
 # ember-try
 .node_modules.ember-try/

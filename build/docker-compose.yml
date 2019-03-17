@@ -1,4 +1,4 @@
-version: '3.6'
+version: '3.7'
 services:
   app:
     build:
@@ -10,7 +10,7 @@ services:
         - ELECTRON_PLATFORM=${ELECTRON_PLATFORM:-linux}
         - ELECTRON_ARCH=${ELECTRON_ARCH:-x64}
     volumes:
-      - .:/project:cached
+      - ..:/project:cached
       - /project/dist
       - /project/electron-out
       - /project/node_modules

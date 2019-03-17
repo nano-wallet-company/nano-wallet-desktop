@@ -1,6 +1,7 @@
-version: '3.6'
+version: '3.7'
 services:
   app:
+    init: true
     build: .
     ports:
       - 4200:4200
