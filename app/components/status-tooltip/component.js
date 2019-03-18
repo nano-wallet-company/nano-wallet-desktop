@@ -14,12 +14,12 @@ export default class StatusTooltipComponent extends Component.extend(
 
   @lt('status.peers.length', 1) isPeerless = false;
 
-  @gt('uncheckedPercentage', 0.01) isSyncing = false;
+  @gt('uncheckedPercentage', 0.01) isSyncing = true;
 
   @computed('status.blocks.{count,unchecked}')
   get uncheckedPercentage() {
     const status = this.get('status');
-    const count = get(status, 'blocks.count') || 0;
+    const count = get(status, 'blocks.count') || 1;
     const unchecked = get(status, 'blocks.unchecked') || 1;
     return (unchecked / count) * 100;
   }
