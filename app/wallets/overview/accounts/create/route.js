@@ -15,7 +15,8 @@ export default class WalletsOverviewCreateAccountRoute extends Route {
     await account.save();
     const message = this.get('intl').t('wallets.overview.created');
     this.get('flashMessages').success(message);
-    return this.transitionTo('wallets.overview');
+    // return this.transitionTo('wallets.overview');
+    window.location.href = '/';
   }
 
   @action
