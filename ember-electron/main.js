@@ -1,4 +1,6 @@
 /* eslint-env node */
+const process = require('process');
+
 const environment = process.env.ELECTRON_ENV || process.env.EMBER_ENV || process.env.NODE_ENV || 'production';
 process.env.NODE_ENV = environment;
 process.env.EMBER_ENV = environment;
@@ -10,6 +12,7 @@ if (typeof process.env.ELECTRON_IS_DEV === 'undefined') {
   }
 }
 
+const global = require('global');
 const Promise = require('bluebird');
 
 global.Promise = Promise;
