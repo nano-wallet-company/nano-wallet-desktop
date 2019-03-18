@@ -20,8 +20,8 @@ export default class StatusTooltipComponent extends Component.extend(
   get uncheckedPercentage() {
     const status = this.get('status');
     const count = get(status, 'blocks.count') || 1;
-    const unchecked = get(status, 'blocks.unchecked') || 1;
-    return (unchecked / count) * 100;
+    const unchecked = get(status, 'blocks.unchecked') || 0;
+    return (unchecked / (count + unchecked)) * 100;
   }
 
   @on('didEnterViewport')
