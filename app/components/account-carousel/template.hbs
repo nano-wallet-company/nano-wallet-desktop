@@ -1,5 +1,7 @@
 {{#each accounts as |account|}}
-  <div style="display: none">
-    {{account-card hideHistory=hideHistory account=account}}
-  </div>
+  {{#if account.visible}}
+    <div style="display: none">
+      {{account-card hideHistory=hideHistory account=account}}
+    </div>
+  {{/if}}
 {{/each}}

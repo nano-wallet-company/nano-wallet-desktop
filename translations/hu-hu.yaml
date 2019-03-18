@@ -20,6 +20,7 @@ logout: 'Kijelentkezés'
 history: 'Történet'
 save: 'Ment'
 delete: 'Töröl'
+hide: 'Elrejt'
 seed: 'Írmag'
 mnemonic: 'Emlékeztető'
 reveal: 'Megmutat'
@@ -27,6 +28,7 @@ type: 'Típus'
 amount: 'Összeg'
 wallet: 'Tárca'
 account: 'Számla'
+accounts: 'Számlák'
 balance: 'Egyenleg'
 pending: 'Függő'
 node: 'csomópont'
@@ -83,6 +85,7 @@ EUR: 'EUR'
 walletSettings: 'Tárca Beállítások'
 languageSettings: 'Nyelvi Beállítások'
 editAccountSettings: 'Számla beállítások szerkesztése'
+deleteAccount: 'Számla törlése'
 accountSettings: 'Számla Beállítások'
 accountSettingsSaved: 'Számla beállítások mentve!'
 unknown: '(ismeretlen)'
@@ -135,9 +138,17 @@ wallets:
         egyszerűen törölni. Csak akkor érdemes ezt megtenni, ha a jelenlegi(ek) mellett szeretnél egy újabb MIKRON számlát is.
         Biztosan folytatod?
       createButton: 'Lérehozás'
+    delete:
+      title: 'Számla törlése'
+      lead: 'Biztosan törölni szeretnéd ezt a számlát?'
+      body: >
+        <strong>Figyelmeztetés</strong>: A művelet törölni fogja ezt a MIKRON számlát a tárcádból. Ha később úgy döntenél,
+        hogy mégis szükséged van rá, akkor a Számlák menü Összes mutatása opcióra kattintva visszaállíthatod. Biztosan folytatod?
+      deleteButton: 'Törlés'
   overview:
     none: 'Nincs a tárcában számla.'
     create: 'Új számla létrehozása'
+    showAll: 'Összes mutatása'
     created: 'Új számla létrehozva!'
   settings:
     defaultRepresentative: 'Tárca alapértelmezett képviselője'

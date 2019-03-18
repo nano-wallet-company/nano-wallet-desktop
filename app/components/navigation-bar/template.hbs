@@ -21,11 +21,22 @@
           {{t 'overview'}}
         {{/nav.link-to}}
       {{/nav.item}}
-      {{#nav.item}}
-        {{#nav.link-to 'wallets.overview.accounts.create' wallet}}
-          {{fa-icon "plus-square"}} {{t 'wallets.overview.create'}}
-        {{/nav.link-to}}
-      {{/nav.item}}
+      {{#nav.dropdown as |add|}}
+        {{#add.toggle}}{{t 'accounts'}}{{/add.toggle}}
+        {{#add.menu as |addm|}}
+          {{#addm.item}}
+            {{#addm.link-to 'wallets.overview.accounts.create' wallet}}
+              {{fa-icon "plus-square"}} {{t 'wallets.overview.create'}}
+            {{/addm.link-to}}
+          {{/addm.item}}
+          {{addm.divider}}
+          {{#addm.item}}
+            <a class="dropdown-item" href="#" {{action revealAccounts on='click'}}>
+              {{fa-icon "eye"}} {{t 'wallets.overview.showAll'}}
+            </a>
+          {{/addm.item}}
+        {{/add.menu}}
+      {{/nav.dropdown}}
       {{#nav.item}}
         {{#nav.link-to 'wallets.overview.settings' wallet}}
           {{t 'settings'}}

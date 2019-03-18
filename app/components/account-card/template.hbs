@@ -6,6 +6,12 @@
           {{bs-tooltip fade=true delayShow=500 placement='top' title=(t 'editAccountSettings')}}
           {{fa-icon 'cog' size='2' ariaLabel=(t 'editAccountSettings')}}
         {{/link-to}}
+        {{#if hideAble}}
+          {{#link-to 'wallets.overview.accounts.delete' account bubbles=false class='delete' title=(t 'deleteAccount')}}
+            {{bs-tooltip fade=true delayShow=500 placement='top' title=(t 'deleteAccount')}}
+            {{fa-icon 'times' tagName="span" size='2' ariaLabel=(t 'deleteAccount')}}
+          {{/link-to}}
+        {{/if}}
         {{qr-code text=account.id width=170 height=170}}
       {{/if}}
       <p class="balance">

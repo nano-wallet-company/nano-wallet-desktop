@@ -27,6 +27,7 @@ Router.map(function routerMap() {
       this.route('settings');
       this.route('accounts', { path: '/:account_id' }, function accountsRoute() {
         this.route('create');
+        this.route('delete');
         this.route('send');
         this.route('history');
         this.route('settings');
