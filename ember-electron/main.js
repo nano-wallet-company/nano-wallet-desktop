@@ -76,7 +76,13 @@ const { default: installExtension, EMBER_INSPECTOR } = require('electron-devtool
 const updateElectronApp = require('update-electron-app');
 
 const { createWindow } = require('./window');
-const { downloadStart, nodeStart } = require('./ipc');
+const {
+  downloadStart,
+  nodeStart,
+  keychainGet,
+  keychainSet,
+  keychainDelete,
+} = require('./ipc');
 
 const { version, productName } = require('../package');
 
@@ -134,6 +140,9 @@ app.on('activate', () => {
 
 ipcMain.on('download-start', downloadStart);
 ipcMain.on('node-start', nodeStart);
+ipcMain.on('keychain-get', keychainGet);
+ipcMain.on('keychain-set', keychainSet);
+ipcMain.on('keychain-delete', keychainDelete);
 
 // Registering a protocol & schema to serve our Ember application
 const protocolServeName = protocolServe({

@@ -18,6 +18,7 @@ addons:
       - jq
       - fakeroot
       - rpm
+      - libsecret-1-dev
   homebrew:
     packages:
       - jq

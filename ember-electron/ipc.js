@@ -1,3 +1,4 @@
+const keytar = require('keytar');
 const debounceFn = require('debounce-fn');
 
 const electron = require('electron');
@@ -5,6 +6,8 @@ const log = require('electron-log');
 
 const { downloadAsset } = require('./assets');
 const { startDaemon } = require('./daemon');
+
+const { productName } = require('../package');
 
 const { ipcMain } = electron;
 
@@ -69,7 +72,55 @@ const nodeStart = ({ sender }) => {
     });
 };
 
+const keychainGet = ({ sender }, key) => {
+  keytar.getPassword(productName, key)
+    .then((value) => {
+      if (!sender.isDestroyed()) {
+        sender.send('keychain-get-done', value);
+      }
+    })
+    .catch((err) => {
+      log.error('Error retrieving keychain value:', err);
+      if (!sender.isDestroyed()) {
+        sender.send('keychain-get-error');
+      }
+    });
+};
+
+const keychainSet = ({ sender }, key, value) => {
+  keytar.setPassword(productName, key, value)
+    .then(() => {
+      if (!sender.isDestroyed()) {
+        sender.send('keychain-set-done');
+      }
+    })
+    .catch((err) => {
+      log.error('Error setting keychain value:', err);
+      if (!sender.isDestroyed()) {
+        sender.send('keychain-set-error');
+      }
+    });
+};
+
+const keychainDelete = ({ sender }, key) => {
+  keytar.deletePassword(productName, key)
+    .then((result) => {
+      if (!sender.isDestroyed()) {
+        sender.send('keychain-delete-done', result);
+      }
+    })
+    .catch((err) => {
+      log.error('Error deleting keychain value:', err);
+      if (!sender.isDestroyed()) {
+        sender.send('keychain-delete-error');
+      }
+    });
+};
+
 module.exports = {
   downloadStart,
   nodeStart,
+  keychainGet,
+  keychainSet,
+  keychainDelete,
 };
