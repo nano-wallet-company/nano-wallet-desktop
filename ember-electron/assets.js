@@ -103,7 +103,9 @@ const downloadAsset = async (sender, url, onStarted, onProgress) => {
   await del(directory, { force: true });
   await makeDir(directory, { fs });
 
-  const { webContents: { session } } = sender;
+  const {
+    webContents: { session },
+  } = sender;
   session.setUserAgent(USER_AGENT);
 
   const dl = await download(sender, url, {

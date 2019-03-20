@@ -5,9 +5,7 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 import { action } from '@ember-decorators/object';
 import { inject as service } from '@ember-decorators/service';
 
-export default class WalletsRoute extends Route.extend(
-  AuthenticatedRouteMixin,
-) {
+export default class WalletsRoute extends Route.extend(AuthenticatedRouteMixin) {
   @service intl;
 
   @service session;

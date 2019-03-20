@@ -44,7 +44,10 @@ class WalletBackupComponent extends Component {
 
   @action
   downloadMnemonic(mnemonic) {
-    const fileName = String(mnemonic).split(' ').slice(0, 2).join('-');
+    const fileName = String(mnemonic)
+      .split(' ')
+      .slice(0, 2)
+      .join('-');
     downloadjs(mnemonic, fileName, 'text/plain');
   }
 

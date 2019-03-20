@@ -2,7 +2,7 @@ import { helper } from '@ember/component/helper';
 
 import bip39 from 'bip39';
 
-export function mnemonic([seed]/* , hash */) {
+export function mnemonic([seed] /* , hash */) {
   if (typeof seed !== 'string') {
     return null;
   }

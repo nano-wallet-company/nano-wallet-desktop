@@ -8,9 +8,7 @@ import { action } from '@ember-decorators/object';
 
 import { AuthenticateError } from '../authenticators/wallet';
 
-export default class LoginRoute extends Route.extend(
-  UnauthenticatedRouteMixin,
-) {
+export default class LoginRoute extends Route.extend(UnauthenticatedRouteMixin) {
   @service intl;
 
   @service session;

@@ -1,12 +1,7 @@
 /* eslint-env node */
-const {
-  version,
-  description,
-  name: modulePrefix,
-  productName: title,
-} = require('../package');
+const { version, description, name: modulePrefix, productName: title } = require('../package');
 
-module.exports = (environment) => {
+module.exports = environment => {
   const isElectron = !!process.env.EMBER_CLI_ELECTRON;
   const ENV = {
     title,
@@ -66,9 +61,7 @@ module.exports = (environment) => {
           'times',
           'upload',
         ],
-        'free-regular-svg-icons': [
-          'question-circle',
-        ],
+        'free-regular-svg-icons': ['question-circle'],
       },
     },
 
@@ -119,7 +112,9 @@ module.exports = (environment) => {
     ENV.APP.rootElement = '#ember-testing';
     ENV.APP.autoboot = false;
 
-    ENV.contentSecurityPolicy['script-src'].push("'sha256-37u63EBe1EibDZ3vZNr6mxLepqlY1CQw+4N89HrzP9s='");
+    ENV.contentSecurityPolicy['script-src'].push(
+      "'sha256-37u63EBe1EibDZ3vZNr6mxLepqlY1CQw+4N89HrzP9s='",
+    );
 
     ENV.rpc.host = '';
     ENV.rpc.namespace = 'rpc';
@@ -130,8 +125,12 @@ module.exports = (environment) => {
   }
 
   if (isElectron) {
-    ENV.contentSecurityPolicy['script-src'].push("'sha256-bOpoN0CEbM1axa1+hv51a4JK31vrAOV7Cbze5rS9GJI='");
-    ENV.contentSecurityPolicy['script-src'].push("'sha256-k8ysrhm1lqKyZpON3/YocPOUXAF4sGsu7JIycGDxCWw='");
+    ENV.contentSecurityPolicy['script-src'].push(
+      "'sha256-bOpoN0CEbM1axa1+hv51a4JK31vrAOV7Cbze5rS9GJI='",
+    );
+    ENV.contentSecurityPolicy['script-src'].push(
+      "'sha256-k8ysrhm1lqKyZpON3/YocPOUXAF4sGsu7JIycGDxCWw='",
+    );
     ENV.contentSecurityPolicy['connect-src'].push('https://localhost:17076');
 
     ENV.rpc.host = 'https://localhost:17076';

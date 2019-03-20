@@ -10,13 +10,9 @@ const {
   copyright: appCopyright,
   build: {
     appId: appBundleId,
-    mac: {
-      category: appCategoryType,
-    },
+    mac: { category: appCategoryType },
     linux: {
-      desktop: {
-        Categories: linuxDesktopCategories,
-      },
+      desktop: { Categories: linuxDesktopCategories },
     },
   },
 } = require('../package');
@@ -26,7 +22,10 @@ const icon = path.join(__dirname, 'resources', 'icon');
 const [, name] = packageName.split('/');
 const categories = linuxDesktopCategories.split(';');
 
-const buildNumber = new Date().toISOString().split('.')[0].replace(/[^\d]/g, '');
+const buildNumber = new Date()
+  .toISOString()
+  .split('.')[0]
+  .replace(/[^\d]/g, '');
 const buildVersion = `${version}+${buildNumber}`;
 
 const osxSign = {
@@ -36,47 +35,32 @@ const osxSign = {
 
 const certificateFile = process.env.CSC_FILE ? path.resolve(process.env.CSC_FILE) : null;
 const certificatePassword = process.env.CSC_KEY_PASSWORD || null;
-const signWithParams = certificateFile && certificatePassword
-  ? `/a /f "${certificateFile}" /p "${certificatePassword}" /fd sha256 /tr http://timestamp.digicert.com /td sha256`
-  : undefined;
+const signWithParams =
+  certificateFile && certificatePassword
+    ? `/a /f "${certificateFile}" /p "${certificatePassword}" /fd sha256 /tr http://timestamp.digicert.com /td sha256`
+    : undefined;
 
 const unsupportedArch = (target, type) => {
   throw new Error(`Unsupported architecture for ${target}: ${type}`);
 };
 
-const debianArch = (type) => {
-  const supported = new Map([
-    ['x64', 'amd64'],
-    ['x32', 'i386'],
-  ]);
+const debianArch = type => {
+  const supported = new Map([['x64', 'amd64'], ['x32', 'i386']]);
 
   return supported.get(type) || unsupportedArch('deb', type);
 };
 
-const redhatArch = (type) => {
-  const supported = new Map([
-    ['x64', 'x86_64'],
-    ['x32', 'x86'],
-  ]);
+const redhatArch = type => {
+  const supported = new Map([['x64', 'x86_64'], ['x32', 'x86']]);
 
   return supported.get(type) || unsupportedArch('rpm', type);
 };
 
 module.exports = {
   make_targets: {
-    win32: [
-      'zip',
-      'squirrel',
-    ],
-    darwin: [
-      'zip',
-      'dmg',
-    ],
-    linux: [
-      'zip',
-      'deb',
-      'rpm',
-    ],
+    win32: ['zip', 'squirrel'],
+    darwin: ['zip', 'dmg'],
+    linux: ['zip', 'deb', 'rpm'],
   },
   electronPackagerConfig: {
     icon,
@@ -85,12 +69,7 @@ module.exports = {
     buildVersion,
     appBundleId,
     appCategoryType,
-    ignore: [
-      '\\.xml$',
-      '\\.node$',
-      '/\\.DS_Store$',
-      '/ember-electron/resources/ordering.txt$',
-    ],
+    ignore: ['\\.xml$', '\\.node$', '/\\.DS_Store$', '/ember-electron/resources/ordering.txt$'],
     asar: {
       ordering: path.join(__dirname, 'resources', 'ordering.txt'),
       unpackDir: '{ember-electron/resources,node_modules/7zip,node_modules/**/binding-*}',

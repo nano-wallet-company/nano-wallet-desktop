@@ -8,12 +8,12 @@ describe('Integration | Component | wallet import', () => {
     integration: true,
   });
 
-  beforeEach(function () {
+  beforeEach(function() {
     this.inject.service('intl');
     this.get('intl').setLocale('en-us');
   });
 
-  it('renders', function () {
+  it('renders', function() {
     // Set any properties with this.set('myProperty', 'value');
     // Handle any actions with this.on('myAction', function(val) { ... });
     // Template block usage:
@@ -40,7 +40,9 @@ describe('Integration | Component | wallet import', () => {
       onCancel,
     });
 
-    this.render(hbs`{{wallet-import wallet=wallet onChange=onChange onSubmit=onSubmit onCancel=onCancel}}`);
+    this.render(
+      hbs`{{wallet-import wallet=wallet onChange=onChange onSubmit=onSubmit onCancel=onCancel}}`,
+    );
     expect(this.$()).to.have.length(1);
   });
 });

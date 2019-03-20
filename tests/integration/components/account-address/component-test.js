@@ -21,7 +21,7 @@ describe('Integration | Component | account-address', () => {
     expect(find('span')).to.exist;
   });
 
-  it('displays the full address', async function () {
+  it('displays the full address', async function() {
     const value = 'nano_3arg3asgtigae3xckabaaewkx3bzsh7nwz7jkmjos79ihyaxwphhm6qgjps4';
     this.set('value', value);
     await render(hbs`{{account-address value=value}}`);
@@ -30,7 +30,7 @@ describe('Integration | Component | account-address', () => {
     expect(address).to.equal(value);
   });
 
-  it('visually separates the first 9 and last 5 characters', async function () {
+  it('visually separates the first 9 and last 5 characters', async function() {
     const value = 'nano_3arg3asgtigae3xckabaaewkx3bzsh7nwz7jkmjos79ihyaxwphhm6qgjps4';
     this.set('value', value);
     await render(hbs`{{account-address value=value}}`);
@@ -44,7 +44,7 @@ describe('Integration | Component | account-address', () => {
     expect(tail).to.equal('gjps4');
   });
 
-  it('converts xrb_ to nano_ addresses', async function () {
+  it('converts xrb_ to nano_ addresses', async function() {
     const value = 'xrb_3arg3asgtigae3xckabaaewkx3bzsh7nwz7jkmjos79ihyaxwphhm6qgjps4';
     this.set('value', value);
     await render(hbs`{{account-address value=value}}`);

@@ -23,12 +23,12 @@ export default async function upgradeSettings(settings) {
   });
 
   try {
-    await new Promise((resolve) => {
+    await new Promise(resolve => {
       run(localStorage, 'clear', []);
       next(() => resolve());
     });
   } finally {
-    await new Promise((resolve) => {
+    await new Promise(resolve => {
       run(() => {
         entries.forEach(([key, value]) => {
           localStorage.setItem(key, JSON.stringify(value));

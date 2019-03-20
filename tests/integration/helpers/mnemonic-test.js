@@ -7,7 +7,7 @@ import hbs from 'htmlbars-inline-precompile';
 describe('Integration | Helper | mnemonic', () => {
   setupRenderingTest();
 
-  it('renders', async function () {
+  it('renders', async function() {
     // Set any properties with this.set('myProperty', 'value');
     // Handle any actions with this.on('myAction', function(val) { ... });
     // Template block usage:
@@ -20,7 +20,8 @@ describe('Integration | Helper | mnemonic', () => {
 
     await render(hbs`{{mnemonic seed}}`);
 
-    const expected = 'insane night team fog aunt eye long believe record fly garment health grunt mountain maze lake mechanic scare utility angry entry limb inhale stumble';
+    const expected =
+      'insane night team fog aunt eye long believe record fly garment health grunt mountain maze lake mechanic scare utility angry entry limb inhale stumble';
     expect(this.element.textContent.trim()).to.equal(expected);
   });
 });

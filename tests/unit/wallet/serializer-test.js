@@ -15,7 +15,7 @@ describe('Unit | Serializer | wallet', () => {
   });
 
   // Replace this with your real tests.
-  it('serializes records', function () {
+  it('serializes records', function() {
     const record = this.subject();
 
     const serializedRecord = record.serialize();

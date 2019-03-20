@@ -8,7 +8,7 @@ describe('Unit | Route | setup/import', () => {
     needs: ['service:rpc'],
   });
 
-  it('exists', function () {
+  it('exists', function() {
     const route = this.subject();
     expect(route).to.be.ok;
   });

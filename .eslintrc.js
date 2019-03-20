@@ -14,6 +14,7 @@ module.exports = {
     'plugin:ember-suave/recommended',
     'airbnb-base',
     'plugin:security/recommended',
+    'plugin:prettier/recommended',
   ],
   env: {
     browser: true,
@@ -28,7 +29,10 @@ module.exports = {
     'generator-star-spacing': ['error', {
       before: false,
       after: true,
-      method: { before: true, after: true },
+      method: {
+        before: true,
+        after: true
+      },
     }]
   },
 };

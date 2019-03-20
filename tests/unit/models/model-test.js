@@ -6,7 +6,7 @@ describe('Unit | Model | frontier', () => {
   setupTest();
 
   // Replace this with your real tests.
-  it('exists', function () {
+  it('exists', function() {
     const store = this.owner.lookup('service:store');
     const model = store.createRecord('frontier', {});
     expect(model).to.be.ok;

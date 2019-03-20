@@ -10,10 +10,7 @@ const { BrowserWindow, Menu } = electron;
 
 const getWindowState = () => {
   const {
-    workAreaSize: {
-      width: maxWidth,
-      height: maxHeight,
-    },
+    workAreaSize: { width: maxWidth, height: maxHeight },
   } = electron.screen.getPrimaryDisplay();
 
   return windowState({
@@ -24,12 +21,7 @@ const getWindowState = () => {
 
 const createWindow = async () => {
   const windowStateManager = getWindowState();
-  const {
-    x,
-    y,
-    width,
-    height,
-  } = windowStateManager;
+  const { x, y, width, height } = windowStateManager;
 
   const icon = getIconPath();
   const window = new BrowserWindow({
@@ -62,7 +54,7 @@ const createWindow = async () => {
   const menu = getApplicationMenu();
   Menu.setApplicationMenu(menu);
 
-  window.on('close', (event) => {
+  window.on('close', event => {
     if (is.macos && !global.isQuitting && !global.isUpdating) {
       event.preventDefault();
       window.hide();

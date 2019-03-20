@@ -9,7 +9,7 @@ describe('Unit | Transform | timestamp', () => {
   });
 
   // Replace this with your real tests.
-  it('exists', function () {
+  it('exists', function() {
     const transform = this.subject();
     expect(transform).to.be.ok;
   });

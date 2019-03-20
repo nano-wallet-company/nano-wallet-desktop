@@ -10,7 +10,7 @@ export default class SetupDownloadRoute extends Route {
     asset: {
       refreshModel: true,
     },
-  }
+  };
 
   model({ asset }) {
     return this.get('electron').download(asset);

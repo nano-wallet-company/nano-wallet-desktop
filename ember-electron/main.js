@@ -1,7 +1,8 @@
 /* eslint-env node */
 const process = require('process');
 
-const environment = process.env.ELECTRON_ENV || process.env.EMBER_ENV || process.env.NODE_ENV || 'production';
+const environment =
+  process.env.ELECTRON_ENV || process.env.EMBER_ENV || process.env.NODE_ENV || 'production';
 process.env.NODE_ENV = environment;
 process.env.EMBER_ENV = environment;
 process.env.ELECTRON_ENV = environment;
@@ -76,22 +77,11 @@ const { default: installExtension, EMBER_INSPECTOR } = require('electron-devtool
 const updateElectronApp = require('update-electron-app');
 
 const { createWindow } = require('./window');
-const {
-  downloadStart,
-  nodeStart,
-  keychainGet,
-  keychainSet,
-  keychainDelete,
-} = require('./ipc');
+const { downloadStart, nodeStart, keychainGet, keychainSet, keychainDelete } = require('./ipc');
 
 const { version, productName } = require('../package');
 
-const {
-  app,
-  ipcMain,
-  protocol,
-  autoUpdater,
-} = electron;
+const { app, ipcMain, protocol, autoUpdater } = electron;
 
 let mainWindow = null;
 
@@ -111,7 +101,9 @@ app.on('second-instance', () => {
   }
 });
 
-const basePath = is.development ? __dirname : path.join(process.resourcesPath, 'app.asar.unpacked', 'ember-electron');
+const basePath = is.development
+  ? __dirname
+  : path.join(process.resourcesPath, 'app.asar.unpacked', 'ember-electron');
 global.environment = environment;
 global.dataPath = path.normalize(app.getPath('userData'));
 global.resourcesPath = path.normalize(path.join(basePath, 'resources'));
@@ -168,7 +160,7 @@ const run = async () => {
   await app.whenReady();
 
   if (!is.development) {
-    autoUpdater.on('error', (err) => {
+    autoUpdater.on('error', err => {
       log.error('Error updating:', err);
     });
 
@@ -258,7 +250,10 @@ const run = async () => {
 
   mainWindow.once('ready-to-show', () => {
     const elapsed = Date.now() - appLaunchTimestamp;
-    log.info(`Application window ready to show (took ${prettyMs(elapsed)}):`, mainWindow.getTitle());
+    log.info(
+      `Application window ready to show (took ${prettyMs(elapsed)}):`,
+      mainWindow.getTitle(),
+    );
     mainWindow.show();
   });
 

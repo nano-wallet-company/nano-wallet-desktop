@@ -14,7 +14,7 @@ describe('Unit | Route | wallets', () => {
     ],
   });
 
-  it('exists', function () {
+  it('exists', function() {
     const route = this.subject();
     expect(route).to.be.ok;
   });

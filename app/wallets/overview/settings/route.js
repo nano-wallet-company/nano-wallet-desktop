@@ -6,7 +6,6 @@ import { hash } from 'ember-concurrency';
 import { inject as service } from '@ember-decorators/service';
 import { action } from '@ember-decorators/object';
 
-
 export default class WalletsOverviewSettingsRoute extends Route {
   @service rpc;
 

@@ -2,10 +2,7 @@ import AjaxService from 'ember-ajax/services/ajax';
 import { get } from '@ember/object';
 
 import { task } from 'ember-concurrency';
-import {
-  retryable,
-  ExponentialBackoffPolicy,
-} from 'ember-concurrency-retryable';
+import { retryable, ExponentialBackoffPolicy } from 'ember-concurrency-retryable';
 import { defineError } from 'ember-exex/error';
 
 import { inject as service } from '@ember-decorators/service';
@@ -23,16 +20,21 @@ export const backoffPolicy = new ExponentialBackoffPolicy({
 });
 
 export default class ApplicationAjaxService extends AjaxService.extend({
-  requestTask: retryable(task(function* requestTask(fn) {
-    const promise = fn.call(this);
-    try {
-      return yield promise;
-    } catch (err) {
-      throw new AjaxError().withPreviousError(err);
-    } finally {
-      promise.xhr.abort();
-    }
-  }), backoffPolicy).enqueue().maxConcurrency(20),
+  requestTask: retryable(
+    task(function* requestTask(fn) {
+      const promise = fn.call(this);
+      try {
+        return yield promise;
+      } catch (err) {
+        throw new AjaxError().withPreviousError(err);
+      } finally {
+        promise.xhr.abort();
+      }
+    }),
+    backoffPolicy,
+  )
+    .enqueue()
+    .maxConcurrency(20),
 }) {
   @service config;
 
@@ -44,7 +46,7 @@ export default class ApplicationAjaxService extends AjaxService.extend({
 
   @reads('config.rpc.namespace') namespace;
 
-  contentType = 'application/json'
+  contentType = 'application/json';
 
   get headers() {
     const headers = {};

@@ -8,12 +8,12 @@ describe('Integration | Component | account send', () => {
     integration: true,
   });
 
-  beforeEach(function () {
+  beforeEach(function() {
     this.inject.service('intl');
     this.get('intl').setLocale('en-us');
   });
 
-  it('renders', function () {
+  it('renders', function() {
     // Set any properties with this.set('myProperty', 'value');
     // Handle any actions with this.on('myAction', function(val) { ... });
     // Template block usage:
@@ -54,7 +54,9 @@ describe('Integration | Component | account send', () => {
       onSubmit,
     });
 
-    this.render(hbs`{{account-send accounts=accounts block=block onChange=onChange onSubmit=onSubmit}}`);
+    this.render(
+      hbs`{{account-send accounts=accounts block=block onChange=onChange onSubmit=onSubmit}}`,
+    );
     expect(this.$()).to.have.length(1);
   });
 });

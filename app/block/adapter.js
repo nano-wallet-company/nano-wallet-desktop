@@ -17,12 +17,7 @@ export default class BlockAdapter extends Adapter {
   }
 
   createRecord(store, type, snapshot) {
-    const {
-      wallet,
-      source,
-      destination,
-      amount,
-    } = this.serialize(snapshot, { includeId: true });
+    const { wallet, source, destination, amount } = this.serialize(snapshot, { includeId: true });
 
     return this.get('rpc').send(wallet, source, destination, amount);
   }

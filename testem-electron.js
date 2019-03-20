@@ -7,10 +7,6 @@ module.exports = {
   launchers: {
     Electron,
   },
-  launch_in_ci: [
-    'Electron',
-  ],
-  launch_in_dev: [
-    'Electron',
-  ],
+  launch_in_ci: ['Electron'],
+  launch_in_dev: ['Electron'],
 };

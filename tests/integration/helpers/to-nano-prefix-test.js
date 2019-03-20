@@ -7,7 +7,7 @@ import hbs from 'htmlbars-inline-precompile';
 describe('Integration | Helper | to-nano-prefix', () => {
   setupRenderingTest();
 
-  it('renders', async function () {
+  it('renders', async function() {
     // Set any properties with this.set('myProperty', 'value');
     // Handle any actions with this.on('myAction', function(val) { ... });
     // Template block usage:

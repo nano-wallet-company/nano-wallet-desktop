@@ -4,9 +4,7 @@ import { ContextBoundTasksMixin, runTask, runDisposables } from 'ember-lifeline'
 
 import { on, observes } from '@ember-decorators/object';
 
-export default class AccountCarouselComponent extends Component.extend(
-  ContextBoundTasksMixin,
-) {
+export default class AccountCarouselComponent extends Component.extend(ContextBoundTasksMixin) {
   accounts = null;
 
   currentSlide = 0;

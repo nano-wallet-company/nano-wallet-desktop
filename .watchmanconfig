@@ -1,1 +1,8 @@
-{"ignore_dirs":["tmp","dist","corber","electron-out"]}
+{
+  "ignore_dirs": [
+    "tmp",
+    "dist",
+    "corber",
+    "electron-out"
+  ]
+}

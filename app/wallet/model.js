@@ -9,7 +9,7 @@ import sumAmounts from '../utils/sum-amounts';
 
 const { Model } = DS;
 
-const sumAccounts = computedDecorator((desc) => {
+const sumAccounts = computedDecorator(desc => {
   const { key } = desc;
   return computed(`accounts.@each.${key}`, {
     get() {

@@ -53,7 +53,7 @@ export default class BalanceOverviewComponent extends Component.extend(
   }
 
   @keepLatestTask
-  * exchangeRateTask(currency = DEFAULT_CURRENCY) {
+  * exchangeRateTask(currency = DEFAULT_CURRENCY) { // eslint-disable-line
     return yield getExchangeRate(currency);
   }
 

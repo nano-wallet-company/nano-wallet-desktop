@@ -2,15 +2,13 @@
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 const { extensions: defaultExtensions } = require('broccoli-asset-rev/lib/default-options');
 
-module.exports = (defaults) => {
+module.exports = defaults => {
   const isProduction = EmberApp.env() === 'production';
   const isElectron = !!process.env.EMBER_CLI_ELECTRON;
   const app = new EmberApp(defaults, {
     babel: {
       sourceMaps: isProduction ? false : 'inline',
-      plugins: [
-        '@babel/plugin-proposal-function-bind',
-      ],
+      plugins: ['@babel/plugin-proposal-function-bind'],
     },
 
     fingerprint: {

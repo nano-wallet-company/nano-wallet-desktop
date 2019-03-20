@@ -3,10 +3,7 @@ import { get, set } from '@ember/object';
 
 import { hash } from 'ember-concurrency';
 import { action } from '@ember-decorators/object';
-import {
-  bindKeyboardShortcuts,
-  unbindKeyboardShortcuts,
-} from 'ember-keyboard-shortcuts';
+import { bindKeyboardShortcuts, unbindKeyboardShortcuts } from 'ember-keyboard-shortcuts';
 
 export default class WalletsOverviewAccountsHistoryRoute extends Route {
   get keyboardShortcuts() {

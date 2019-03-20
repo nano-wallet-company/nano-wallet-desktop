@@ -13,17 +13,20 @@ const { ipcMain } = electron;
 
 const downloadStart = ({ sender }, url) => {
   const window = sender.getOwnerBrowserWindow();
-  const onProgress = debounceFn((progress = 0) => {
-    if (!window.isDestroyed()) {
-      window.setProgressBar(progress);
-    }
+  const onProgress = debounceFn(
+    (progress = 0) => {
+      if (!window.isDestroyed()) {
+        window.setProgressBar(progress);
+      }
 
-    if (!sender.isDestroyed()) {
-      sender.send('download-progress', progress);
-    }
-  }, { wait: 250, immediate: true });
+      if (!sender.isDestroyed()) {
+        sender.send('download-progress', progress);
+      }
+    },
+    { wait: 250, immediate: true },
+  );
 
-  const onStarted = (item) => {
+  const onStarted = item => {
     const cancelDownload = () => item.cancel();
     ipcMain.once('window-unloading', cancelDownload);
     item.once('done', () => ipcMain.removeListener('window-unloading', cancelDownload));
@@ -39,7 +42,7 @@ const downloadStart = ({ sender }, url) => {
         sender.send('download-done');
       }
     })
-    .catch((err) => {
+    .catch(err => {
       log.error('Error downloading asset:', err);
       if (!window.isDestroyed()) {
         window.setProgressBar(-1);
@@ -51,9 +54,9 @@ const downloadStart = ({ sender }, url) => {
     });
 };
 
-const nodeStart = ({ sender }) => {
+const nodeStart = ({ sender }) =>
   startDaemon()
-    .then((server) => {
+    .then(server => {
       server.once('close', () => {
         if (!sender.isDestroyed()) {
           sender.send('node-exit');
@@ -64,58 +67,57 @@ const nodeStart = ({ sender }) => {
         sender.send('node-ready');
       }
     })
-    .catch((err) => {
+    .catch(err => {
       log.error('Error starting node:', err);
       if (!sender.isDestroyed()) {
         sender.send('node-error');
       }
     });
-};
 
-const keychainGet = ({ sender }, key) => {
-  keytar.getPassword(productName, key)
-    .then((value) => {
+const keychainGet = ({ sender }, key) =>
+  keytar
+    .getPassword(productName, key)
+    .then(value => {
       if (!sender.isDestroyed()) {
         sender.send('keychain-get-done', value);
       }
     })
-    .catch((err) => {
+    .catch(err => {
       log.error('Error retrieving keychain value:', err);
       if (!sender.isDestroyed()) {
         sender.send('keychain-get-error');
       }
     });
-};
 
-const keychainSet = ({ sender }, key, value) => {
-  keytar.setPassword(productName, key, value)
+const keychainSet = ({ sender }, key, value) =>
+  keytar
+    .setPassword(productName, key, value)
     .then(() => {
       if (!sender.isDestroyed()) {
         sender.send('keychain-set-done');
       }
     })
-    .catch((err) => {
+    .catch(err => {
       log.error('Error setting keychain value:', err);
       if (!sender.isDestroyed()) {
         sender.send('keychain-set-error');
       }
     });
-};
 
-const keychainDelete = ({ sender }, key) => {
-  keytar.deletePassword(productName, key)
-    .then((result) => {
+const keychainDelete = ({ sender }, key) =>
+  keytar
+    .deletePassword(productName, key)
+    .then(result => {
       if (!sender.isDestroyed()) {
         sender.send('keychain-delete-done', result);
       }
     })
-    .catch((err) => {
+    .catch(err => {
       log.error('Error deleting keychain value:', err);
       if (!sender.isDestroyed()) {
         sender.send('keychain-delete-error');
       }
     });
-};
 
 module.exports = {
   downloadStart,

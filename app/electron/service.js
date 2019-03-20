@@ -35,10 +35,7 @@ const KeychainError = defineError({
   extends: ElectronError,
 });
 
-export default class ElectronService extends Service.extend(
-  Evented,
-  DisposableMixin,
-) {
+export default class ElectronService extends Service.extend(Evented, DisposableMixin) {
   @service intl;
 
   @service config;
@@ -59,7 +56,9 @@ export default class ElectronService extends Service.extend(
       this.remote = remote;
       this.ipcRenderer = ipcRenderer;
 
-      addEventListener(this, window, 'beforeunload', () => this.ipcRenderer.send('window-unloading'));
+      addEventListener(this, window, 'beforeunload', () =>
+        this.ipcRenderer.send('window-unloading'),
+      );
 
       const onDownloadProgress = ::this.onDownloadProgress;
       const onDownloadVerify = ::this.onDownloadVerify;

@@ -38,7 +38,7 @@ const { is } = require('electron-util');
 
 const { app } = electron;
 
-const generateCert = (commonName) => {
+const generateCert = commonName => {
   const attrs = [
     { name: 'commonName', value: commonName },
     { name: 'countryName', value: 'US' },
@@ -57,21 +57,22 @@ const generateCert = (commonName) => {
   });
 };
 
-const getLoopbackAddress = () => new Promise((resolve, reject) => {
-  const server = net.createServer();
-  server.unref();
-  return server.listen(function Server(err) {
-    if (err) {
-      return reject(err);
-    }
+const getLoopbackAddress = () =>
+  new Promise((resolve, reject) => {
+    const server = net.createServer();
+    server.unref();
+    return server.listen(function Server(err) {
+      if (err) {
+        return reject(err);
+      }
 
-    const { address } = this.address();
-    return server.close(() => {
-      const loopback = net.isIPv6(address) ? '::1' : '127.0.0.1';
-      return resolve(loopback);
+      const { address } = this.address();
+      return server.close(() => {
+        const loopback = net.isIPv6(address) ? '::1' : '127.0.0.1';
+        return resolve(loopback);
+      });
     });
   });
-});
 
 const forceKill = (child, timeout = 5000) => {
   if (!child.killed) {
@@ -268,10 +269,12 @@ const startDaemon = async () => {
     jwtid,
   };
 
-  const jwtMiddleware = expressJwt(Object.assign({}, jwtOptions, {
-    secret: proxyCert,
-    algorithms: ['RS256'],
-  }));
+  const jwtMiddleware = expressJwt(
+    Object.assign({}, jwtOptions, {
+      secret: proxyCert,
+      algorithms: ['RS256'],
+    }),
+  );
 
   const connectApp = connect();
   connectApp.use(helmet());
@@ -321,7 +324,7 @@ const startDaemon = async () => {
   server.once('close', killHandler);
   child.once('exit', () => {
     server.removeListener('close', killHandler);
-    server.destroy((() => server.unref()));
+    server.destroy(() => server.unref());
   });
 
   Object.defineProperty(global, 'isNodeStarted', {

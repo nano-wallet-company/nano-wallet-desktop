@@ -17,10 +17,7 @@ import guessLocale, { DEFAULT_LOCALE } from '../utils/guess-locale';
 import normalizeLocale from '../utils/normalize-locale';
 import reload from '../utils/reload';
 
-export default class ApplicationRoute extends Route.extend(
-  ApplicationRouteMixin,
-  DisposableMixin,
-) {
+export default class ApplicationRoute extends Route.extend(ApplicationRouteMixin, DisposableMixin) {
   @service intl;
 
   @service config;
@@ -53,19 +50,21 @@ export default class ApplicationRoute extends Route.extend(
       locales.unshift(`${currentLocale}-${currentLocale}`);
     }
 
-    const promises = A(locales).uniq().map(async (key) => {
-      try {
-        const response = await fetch(`${rootURL}translations/${key}.json`);
-        if (response.ok) {
-          const data = await response.json();
-          intl.addTranslations(key, data);
+    const promises = A(locales)
+      .uniq()
+      .map(async key => {
+        try {
+          const response = await fetch(`${rootURL}translations/${key}.json`);
+          if (response.ok) {
+            const data = await response.json();
+            intl.addTranslations(key, data);
+          }
+        } catch (e) {
+          return null;
         }
-      } catch (e) {
-        return null;
-      }
 
-      return key;
-    });
+        return key;
+      });
 
     await all(promises);
 

@@ -293,10 +293,7 @@ export default class RPCService extends Service {
   }
 
   async blockCount() {
-    const {
-      count = 0,
-      unchecked = 0,
-    } = await this.call(actions.BLOCK_COUNT);
+    const { count = 0, unchecked = 0 } = await this.call(actions.BLOCK_COUNT);
 
     return {
       count: parseInt(count, 10),

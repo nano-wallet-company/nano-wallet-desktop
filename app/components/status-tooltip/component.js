@@ -7,9 +7,7 @@ import { inject as service } from '@ember-decorators/service';
 import { on, computed } from '@ember-decorators/object';
 import { gt, lt } from '@ember-decorators/object/computed';
 
-export default class StatusTooltipComponent extends Component.extend(
-  InViewportMixin,
-) {
+export default class StatusTooltipComponent extends Component.extend(InViewportMixin) {
   @service status;
 
   @lt('status.peers.length', 1) isPeerless;
