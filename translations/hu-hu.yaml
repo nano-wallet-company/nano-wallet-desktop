@@ -35,7 +35,7 @@ node: 'csomópont'
 data: 'adat'
 syncing: 'folyamatos szinkronizálás'
 sending: 'Küld...'
-sent: 'Küldés szétküldve!'
+sent: 'Elküldve!'
 progress: >
   {value, number, percent} {eta, select,
     null {(estimating...)}
