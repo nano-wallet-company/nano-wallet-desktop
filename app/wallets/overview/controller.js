@@ -17,6 +17,6 @@ export default class WalletsOverviewController extends Controller {
 
   get sortBy() {
     // Fallback to sorting by `id` for stable sort.
-    return ['modifiedTimestamp', 'id'];
+    return ['id', 'modifiedTimestamp'];
   }
 }
