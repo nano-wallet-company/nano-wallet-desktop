@@ -163,13 +163,14 @@ export default class RPCService extends Service {
     return this.call(actions.ACCOUNT_CREATE, { wallet, work });
   }
 
-  async accountInfo(account, representative = true, pending = true) {
+  async accountInfo(account, representative = true, pending = true, comment = true) {
     let info = {};
     try {
       info = await this.call(actions.ACCOUNT_INFO, {
         account,
         representative,
         pending,
+        comment,
       });
     } catch (err) {
       if (!(err instanceof AccountNotFound)) {

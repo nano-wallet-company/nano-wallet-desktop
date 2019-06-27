@@ -1,7 +1,14 @@
-{{#if settings.label}}
-  <big>{{settings.label}}</big>
+{{#if (not (or account.comment settings.label)) }}
+  {{account-address value=(to-mik-prefix account.id) truncate=truncate}}
+{{else}}
+  <big>
+    {{#if account.comment}}
+      {{account.comment}}
+    {{/if}}
+    {{#if settings.label}}
+      ({{settings.label}})
+    {{/if}}
+  </big>
   <br>
   {{account-address value=(to-mik-prefix account.id) truncate=true}}
-{{else}}
-  {{account-address value=(to-mik-prefix account.id) truncate=truncate}}
 {{/if}}
