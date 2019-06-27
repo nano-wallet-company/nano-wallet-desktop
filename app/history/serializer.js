@@ -8,5 +8,6 @@ export default class HistorySerializer extends JSONSerializer {
   // map name from JSON result to internal 'nice' name
   attrs = {
     blockTime: 'block_time',
+    accountComment: 'account_comment',
   }
 }

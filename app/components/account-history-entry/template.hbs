@@ -35,7 +35,12 @@
     </div>
     <div class="col-12 col-sm-4 justify-content-center d-flex">
       <p class="text-truncate">
-        {{account-address value=entry.account truncate=25}}
+        {{#if entry.accountComment}}
+          {{entry.accountComment}}
+          {{account-address value=entry.account truncate=10}}
+        {{else}}
+          {{account-address value=entry.account truncate=25}}
+        {{/if}}
       </p>
     </div>
   </div>
