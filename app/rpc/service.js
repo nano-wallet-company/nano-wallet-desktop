@@ -200,10 +200,11 @@ export default class RPCService extends Service {
     return accounts;
   }
 
-  async accountHistory(account, count = 1, include_comment = 1) {
+  async accountHistory(account, count = 1, raw = 0, include_comment = 1) {
     const { history } = await this.call(actions.ACCOUNT_HISTORY, {
       account,
       count,
+      raw,
       include_comment,
     });
 

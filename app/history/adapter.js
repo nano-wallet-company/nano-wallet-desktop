@@ -8,6 +8,6 @@ export default class HistoryAdapter extends Adapter {
   @service rpc = null;
 
   query(store, type, { account, count = 10 }) {
-    return this.get('rpc').accountHistory(account, count, 1);
+    return this.get('rpc').accountHistory(account, count, 0, 1);
   }
 }
