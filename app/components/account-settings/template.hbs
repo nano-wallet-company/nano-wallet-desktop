@@ -1,4 +1,4 @@
-{{#let (changeset (hash label=settings.label representative=account.representative) ChangeAccountSettingsValidations) as |model|}}
+{{#let (changeset (hash publicLabel=account.comment privateLabel=settings.label representative=account.representative) ChangeAccountSettingsValidations) as |model|}}
   {{#bs-modal position='center' onHide=(action (optional onCancel)) as |modal|}}
     {{#modal.header}}
       <h4 class="modal-title">
@@ -12,7 +12,8 @@
           <label>{{t 'account'}}</label>
           {{account-address class="form-control-plaintext" value=account.id truncate=true}}
         </div>
-        {{form.element controlType="text" label=(t 'label') property="label"}}
+        {{form.element controlType="text" label=(t 'publicLabel') property="publicLabel"}}
+        {{form.element controlType="text" label=(t 'privateLabel') property="privateLabel"}}
         {{#if hasOpenBlock}}
           {{#form.element controlType="text" label=(t 'wallets.accounts.settings.representative') property='representative'
               minlength=64 maxlength=65 required=true pattern="^(mik|xrb)(_|-)[13](?![lv])[a-z1-9]{59}$" as |el|}}

@@ -5,6 +5,7 @@ import { tryInvoke } from '@ember/utils';
 import { action } from '@ember-decorators/object';
 import { gt } from '@ember-decorators/object/computed';
 import { argument } from '@ember-decorators/argument';
+import { service } from '@ember-decorators/service';
 
 import { storage } from '../../decorators';
 
@@ -13,6 +14,8 @@ import ChangeAccountSettingsValidations from '../../validations/change-account-s
 import fromAmount from '../../utils/from-amount';
 
 export default class AccountSettingsComponent extends Component {
+  @service intl = null;
+
   @storage('account') settings = null;
 
   ChangeAccountSettingsValidations = ChangeAccountSettingsValidations;
@@ -40,17 +43,48 @@ export default class AccountSettingsComponent extends Component {
 
   @action
   async save(changeset, account) {
-    const label = get(changeset, 'label');
-    if (label) {
+    const publicLabel = get(changeset, 'publicLabel');
+    const publicLabelOld = get(account, 'comment');
+    const privateLabel = get(changeset, 'privateLabel');
+    const representative = get(changeset, 'representative');
+    const representativeOld = get(account, 'representative');
+
+    let error = null;
+    if (privateLabel) {
       const settings = this.get('settings');
-      tryInvoke(settings, 'setProperties', [{ label }]);
+      tryInvoke(settings, 'setProperties', [{ label: privateLabel }]);
     }
 
-    const representative = get(changeset, 'representative');
-    if (representative && representative !== get(account, 'representative')) {
-      set(account, 'representative', representative);
-      await account.save();
+    if (publicLabel && publicLabel !== publicLabelOld) {
+      set(account, 'comment', publicLabel);
+      try {
+        await account.save();
+      } catch (err) {
+        error = err;
+        // revert
+        set(account, 'comment', publicLabelOld);
+      }
     }
+
+    if (representative && representative !== representativeOld) {
+      set(account, 'representative', representative);
+      try {
+        await account.save();
+      } catch (err) {
+        error = err;
+        // revert
+        set(account, 'representative', representativeOld);
+      }
+    }
+
+    if (error) {
+      const message = this.get('intl').t('accountSettingsSaveError');
+      this.get('flashMessages').success(`${message} -- ${error}`);
+      return false;
+    }
+
+    const message = this.get('intl').t('accountSettingsSaved');
+    this.get('flashMessages').success(message);
 
     return false;
   }

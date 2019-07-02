@@ -36,6 +36,7 @@ export const actions = {
   NODE_ID_GET: 'node_id_get',
   NODE_ID_RESET: 'node_id_reset',
   NODE_ID_SET: 'node_id_set',
+  ADD_COMMENT_ACCOUNT: 'add_comment_account',
 };
 
 export const errors = {
@@ -221,6 +222,10 @@ export default class RPCService extends Service {
       account,
       representative,
     });
+  }
+
+  async addCommentAccount(wallet, account, comment) {
+    return this.call(actions.ADD_COMMENT_ACCOUNT, { wallet, account, comment });
   }
 
   async accountRemove(wallet, account) {

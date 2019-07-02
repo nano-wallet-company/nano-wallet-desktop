@@ -10,8 +10,6 @@ export default class WalletsOverviewAccountsSettingsRoute extends Route {
 
   @action
   save() {
-    const message = this.get('intl').t('accountSettingsSaved');
-    this.get('flashMessages').success(message);
     return this.transitionTo('wallets.overview');
   }
 
