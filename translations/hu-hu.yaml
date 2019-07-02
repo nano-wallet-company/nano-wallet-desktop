@@ -132,6 +132,7 @@ wallets:
       none: 'Nincs még számla történet'
     settings:
       representative: 'Képviselő számla'
+      publicLabelHint: 'FIGYELEM: A publikus számla címkék a blokkláncban tárolódnak, mindenki által láthatóak, a történetüket soha nem lehet letörölni, és helyet foglalnak a blokkláncban.'
     create:
       title: 'Új számla létrehozása'
       lead: 'Biztosan szeretnél új számlát létrehozni?'

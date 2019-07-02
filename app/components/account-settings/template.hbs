@@ -13,6 +13,7 @@
           {{account-address class="form-control-plaintext" value=account.id truncate=true}}
         </div>
         {{#if hasOpenBlock}}
+          {{t 'wallets.accounts.settings.publicLabelHint'}}
           {{form.element controlType="text" label=(t 'publicLabel') property="publicLabel"}}
         {{/if}}
         {{form.element controlType="text" label=(t 'privateLabel') property="privateLabel"}}

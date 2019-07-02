@@ -128,6 +128,7 @@ wallets:
       none: 'No history yet'
     settings:
       representative: 'Representative Account'
+      publicLabelHint: 'WARNING: Public account labels are stored in the blockchain, are visible by everyone, their history can never be deleted, and they take up space in the blockchain.'
     create:
       title: 'Create Account'
       lead: 'Are you sure to create a new account?'
