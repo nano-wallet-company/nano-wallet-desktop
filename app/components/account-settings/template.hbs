@@ -12,7 +12,9 @@
           <label>{{t 'account'}}</label>
           {{account-address class="form-control-plaintext" value=account.id truncate=true}}
         </div>
-        {{form.element controlType="text" label=(t 'publicLabel') property="publicLabel"}}
+        {{#if hasOpenBlock}}
+          {{form.element controlType="text" label=(t 'publicLabel') property="publicLabel"}}
+        {{/if}}
         {{form.element controlType="text" label=(t 'privateLabel') property="privateLabel"}}
         {{#if hasOpenBlock}}
           {{#form.element controlType="text" label=(t 'wallets.accounts.settings.representative') property='representative'
