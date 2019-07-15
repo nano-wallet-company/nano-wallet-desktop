@@ -1,8 +1,6 @@
 import DS from 'ember-data';
 
-import { attr, belongsTo } from '@ember-decorators/data';
-
-const { Model } = DS;
+const { Model, attr, belongsTo } = DS;
 
 export default class HistoryModel extends Model {
   @belongsTo('account', { async: true, inverse: 'history' }) source;

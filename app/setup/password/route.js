@@ -1,8 +1,7 @@
 import Route from '@ember/routing/route';
-import { get, set } from '@ember/object';
+import { get, set, action } from '@ember/object';
 
-import { inject as service } from '@ember-decorators/service';
-import { action } from '@ember-decorators/object';
+import { inject as service } from '@ember/service';
 
 export default class SetupPasswordRoute extends Route {
   @service rpc;

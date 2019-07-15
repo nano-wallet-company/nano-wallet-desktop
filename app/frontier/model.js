@@ -1,8 +1,6 @@
 import DS from 'ember-data';
 
-import { belongsTo, hasMany } from '@ember-decorators/data';
-
-const { Model } = DS;
+const { Model, belongsTo, hasMany } = DS;
 
 export default class FrontierModel extends Model {
   @belongsTo('wallet', { async: true, inverse: null }) wallet;

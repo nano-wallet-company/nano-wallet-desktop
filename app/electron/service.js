@@ -1,4 +1,4 @@
-import Service from '@ember/service';
+import Service, { inject as service } from '@ember/service';
 import Evented from '@ember/object/evented';
 import { get } from '@ember/object';
 
@@ -7,7 +7,6 @@ import { Promise } from 'rsvp';
 import window from 'ember-window-mock';
 import { defineError } from 'ember-exex/error';
 import { DisposableMixin, addEventListener } from 'ember-lifeline';
-import { inject as service } from '@ember-decorators/service';
 
 import isElectron from '../utils/is-electron';
 import getPlatform from '../utils/get-platform';

@@ -1,20 +1,20 @@
 import Component from '@ember/component';
-import { get, set, setProperties } from '@ember/object';
+import { get, set, setProperties, action } from '@ember/object';
 import { tryInvoke } from '@ember/utils';
 
-import { inject as service } from '@ember-decorators/service';
-import { on, action } from '@ember-decorators/object';
+import { inject as service } from '@ember/service';
+import { on } from '@ember-decorators/object';
 
 import bip39 from 'bip39';
 
-import { storage } from '../../decorators';
+import { storageFor } from 'ember-local-storage';
 
 import ImportWalletValidations from '../../validations/import-wallet';
 
 export default class WalletImportComponent extends Component {
   @service intl;
 
-  @storage('wallet') settings;
+  @storageFor('settings', 'wallet') settings;
 
   ImportWalletValidations = ImportWalletValidations;
 

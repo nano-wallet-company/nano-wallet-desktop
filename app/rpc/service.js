@@ -1,8 +1,6 @@
-import Service from '@ember/service';
+import Service, { inject as service } from '@ember/service';
 import { assign } from '@ember/polyfills';
 import { A } from '@ember/array';
-
-import { inject as service } from '@ember-decorators/service';
 
 import { defineError } from 'ember-exex/error';
 import generateId from '../utils/generate-id';

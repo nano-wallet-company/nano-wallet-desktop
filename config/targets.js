@@ -6,8 +6,8 @@ const { devDependencies } = require('../package');
 const browsers = [];
 const isElectron = !!process.env.EMBER_CLI_ELECTRON;
 if (isElectron) {
-  const electronVersion = semver.clean(devDependencies['electron-prebuilt-compile']);
-  browsers.push(`Electron >= ${electronVersion}`);
+  const { version } = semver.minVersion(devDependencies['electron-prebuilt-compile']);
+  browsers.push(`Electron >= ${version}`);
 } else {
   browsers.push('last 1 Chrome versions');
 

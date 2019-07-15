@@ -1,13 +1,15 @@
 import ObjectProxy from '@ember/object/proxy';
 
-import { alias } from '@ember-decorators/object/computed';
+import { alias } from '@ember/object/computed';
 
-import { storage } from '../decorators';
+import { storageFor } from 'ember-local-storage';
 
 export default class SettingsService extends ObjectProxy {
-  @storage() settings;
+  @storageFor('settings') settings;
 
   @alias('settings') content;
 
   static isServiceFactory = true;
+
+  willDestroy() {}
 }

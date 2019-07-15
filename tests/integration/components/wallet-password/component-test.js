@@ -25,7 +25,6 @@ describe('Integration | Component | wallet password', () => {
 
     const wallet = {
       id: '1',
-      balance: '1000000000000000000000000000000',
       accounts: ['1'],
     };
 

@@ -3,7 +3,7 @@ import PromiseProxyMixin from '@ember/object/promise-proxy-mixin';
 import { set } from '@ember/object';
 
 import { ContextBoundTasksMixin } from 'ember-lifeline';
-import { inject as service } from '@ember-decorators/service';
+import { inject as service } from '@ember/service';
 import { hash } from 'ember-concurrency';
 
 export const STATUS_POLL_INTERVAL = 10 * 1000; // 10s

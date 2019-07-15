@@ -1,6 +1,6 @@
 import Component from '@ember/component';
 
-import { inject as service } from '@ember-decorators/service';
+import { inject as service } from '@ember/service';
 
 export default class WalletOverviewComponent extends Component {
   @service intl;

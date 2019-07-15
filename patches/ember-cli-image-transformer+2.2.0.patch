@@ -1,0 +1,26 @@
+diff --git a/node_modules/ember-cli-image-transformer/lib/generate-icons.js b/node_modules/ember-cli-image-transformer/lib/generate-icons.js
+index 0a3b42b..aacc4a3 100644
+--- a/node_modules/ember-cli-image-transformer/lib/generate-icons.js
++++ b/node_modules/ember-cli-image-transformer/lib/generate-icons.js
+@@ -18,13 +18,20 @@ class GenerateIcons extends CachingWriter {
+ 
+   build() {
+     const options = this.options;
+-    const promises = [];
++    const promises = [this.warmupSharp()];
+     options.sizes.forEach(size => {
+       promises.push(this.writeIcon(size));
+     });
+ 
+     return RSVP.all(promises);
+   }
++
++  // See: https://github.com/lovell/sharp/issues/1593
++  warmupSharp() {
++    const svg = Buffer.from('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1 1"/>');
++    return sharp(svg).metadata({ format: 'svg' });
++  }
++
+   writeIcon(size) {
+     const fileName = `${this.options.outputFileName}${size}.${this.options.convertTo}`;
+     const outputPath = path.join(this.outputPath, fileName);

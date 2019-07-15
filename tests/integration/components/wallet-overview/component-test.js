@@ -35,7 +35,6 @@ describe('Integration | Component | wallet overview', () => {
     const wallet = store.createRecord('wallet', {
       accounts,
       id: '1',
-      balance: '1000000000000000000000000000000',
     });
 
     const onChangeSlide = () => false;

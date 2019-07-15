@@ -15,7 +15,7 @@ module.exports = environment => {
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
-        // e.g. 'with-controller': true
+        // e.g. EMBER_NATIVE_DECORATOR_SUPPORT: true
         'ember-improved-instrumentation': true,
       },
       EXTEND_PROTOTYPES: false,
@@ -35,6 +35,7 @@ module.exports = environment => {
       'style-src': ["'self'", "'unsafe-inline'"],
       'media-src': ["'self'"],
       'manifest-src': ["'self'"],
+      'frame-src': ["'self'"],
     },
 
     contentSecurityPolicyMeta: true,
@@ -114,6 +115,7 @@ module.exports = environment => {
 
     ENV.contentSecurityPolicy['script-src'].push(
       "'sha256-37u63EBe1EibDZ3vZNr6mxLepqlY1CQw+4N89HrzP9s='",
+      "'sha256-DK9DjoQBD9xk52Kz93dkfZXwVlSv2fP4PvwX+C4/rEY='",
     );
 
     ENV.rpc.host = '';
@@ -127,14 +129,22 @@ module.exports = environment => {
   if (isElectron) {
     ENV.contentSecurityPolicy['script-src'].push(
       "'sha256-bOpoN0CEbM1axa1+hv51a4JK31vrAOV7Cbze5rS9GJI='",
-    );
-    ENV.contentSecurityPolicy['script-src'].push(
       "'sha256-k8ysrhm1lqKyZpON3/YocPOUXAF4sGsu7JIycGDxCWw='",
     );
+
     ENV.contentSecurityPolicy['connect-src'].push('https://localhost:17076');
 
     ENV.rpc.host = 'https://localhost:17076';
     ENV.rpc.namespace = 'rpc';
+
+    if (environment === 'test') {
+      ENV.contentSecurityPolicy['script-src'].push(
+        'http://localhost:7357/testem.js',
+        'http://testemserver/testem.js',
+      );
+
+      ENV.contentSecurityPolicy['frame-src'].push('http://localhost:7357', 'http://testemserver');
+    }
   }
 
   return ENV;

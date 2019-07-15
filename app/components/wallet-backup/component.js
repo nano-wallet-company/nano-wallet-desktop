@@ -1,15 +1,16 @@
 import Component from '@ember/component';
+import { action } from '@ember/object';
 import { tryInvoke } from '@ember/utils';
+import { inject as service } from '@ember/service';
 
-import { inject as service } from '@ember-decorators/service';
-import { on, action } from '@ember-decorators/object';
+import { on } from '@ember-decorators/object';
 import { classNames } from '@ember-decorators/component';
 
 import { reject } from 'rsvp';
 
 import downloadjs from 'downloadjs';
 
-import { storage } from '../../decorators';
+import { storageFor } from 'ember-local-storage';
 
 @classNames('import')
 class WalletBackupComponent extends Component {
@@ -17,7 +18,7 @@ class WalletBackupComponent extends Component {
 
   @service flashMessages;
 
-  @storage('wallet') settings;
+  @storageFor('settings', 'wallet') settings;
 
   wallet = null;
 

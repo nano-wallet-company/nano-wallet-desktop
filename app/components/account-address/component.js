@@ -1,7 +1,7 @@
 import Component from '@ember/component';
+import { bool } from '@ember/object/computed';
 
 import { on, observes } from '@ember-decorators/object';
-import { bool } from '@ember-decorators/object/computed';
 import { tagName, attribute } from '@ember-decorators/component';
 
 import toNanoPrefix from '../../utils/to-nano-prefix';

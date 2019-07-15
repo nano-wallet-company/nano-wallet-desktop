@@ -1,8 +1,8 @@
 import Component from '@ember/component';
-import { set } from '@ember/object';
+import { set, action } from '@ember/object';
 import { tryInvoke } from '@ember/utils';
 
-import { on, action } from '@ember-decorators/object';
+import { on } from '@ember-decorators/object';
 
 import UnlockWalletValidations from '../../validations/unlock-wallet';
 

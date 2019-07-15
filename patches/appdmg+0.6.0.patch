@@ -1,13 +1,13 @@
 diff --git a/node_modules/appdmg/lib/hdiutil.js b/node_modules/appdmg/lib/hdiutil.js
-index e712705..8e55732 100644
+index e712705..ecdb7b7 100644
 --- a/node_modules/appdmg/lib/hdiutil.js
 +++ b/node_modules/appdmg/lib/hdiutil.js
-@@ -61,7 +61,7 @@ exports.attach = function (path, cb) {
- }
-
- exports.detach = function (path, cb) {
--  const args = ['detach', path]
-+  const args = ['detach', path, '-force']
-
+@@ -66,7 +66,7 @@ exports.detach = function (path, cb) {
    util.sh('hdiutil', args, function (err) {
      if (err && err.exitCode === 16 && /Resource busy/.test(err.stderr)) {
+       setTimeout(function () {
+-        util.sh('hdiutil', args, (err) => cb(err))
++        util.sh('hdiutil', args.concat('-force'), (err) => cb(err))
+       }, 1000)
+     } else {
+       cb(err)

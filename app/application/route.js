@@ -1,6 +1,6 @@
 import Route from '@ember/routing/route';
 import { A } from '@ember/array';
-import { get, getWithDefault } from '@ember/object';
+import { get, getWithDefault, action } from '@ember/object';
 
 import fetch from 'fetch';
 import nprogress from 'nprogress';
@@ -9,8 +9,7 @@ import { all } from 'rsvp';
 import ApplicationRouteMixin from 'ember-simple-auth/mixins/application-route-mixin';
 import { DisposableMixin } from 'ember-lifeline';
 
-import { inject as service } from '@ember-decorators/service';
-import { action } from '@ember-decorators/object';
+import { inject as service } from '@ember/service';
 
 import upgradeSettings from '../utils/upgrade-settings';
 import guessLocale, { DEFAULT_LOCALE } from '../utils/guess-locale';

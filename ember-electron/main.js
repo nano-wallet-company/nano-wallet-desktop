@@ -137,13 +137,28 @@ ipcMain.on('keychain-set', keychainSet);
 ipcMain.on('keychain-delete', keychainDelete);
 
 // Registering a protocol & schema to serve our Ember application
-const protocolServeName = protocolServe({
+const scheme = protocolServe({
   app,
   protocol,
   cwd: path.join(__dirname || path.resolve(path.dirname('')), '..', 'ember'),
 });
 
-protocol.registerStandardSchemes([protocolServeName], { secure: true });
+// Registering a protocol & schema to serve our Ember application
+if (typeof protocol.registerSchemesAsPrivileged === 'function') {
+  // Available in Electron >= 5
+  protocol.registerSchemesAsPrivileged([
+    {
+      scheme,
+      privileges: {
+        secure: true,
+        standard: true,
+      },
+    },
+  ]);
+} else {
+  // For compatibility with Electron < 5
+  protocol.registerStandardSchemes([scheme], { secure: true });
+}
 
 // Uncomment the lines below to enable Electron's crash reporter
 // For more information, see http://electron.atom.io/docs/api/crash-reporter/

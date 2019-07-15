@@ -1,8 +1,7 @@
 import Component from '@ember/component';
-import { set } from '@ember/object';
+import { set, action } from '@ember/object';
 
-import { inject as service } from '@ember-decorators/service';
-import { action } from '@ember-decorators/object';
+import { inject as service } from '@ember/service';
 
 import SendValidations from '../../validations/send';
 import ChangeAmountValidations from '../../validations/change-amount';

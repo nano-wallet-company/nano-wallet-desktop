@@ -1,7 +1,7 @@
 import DS from 'ember-data';
 
 import { hash } from 'ember-concurrency';
-import { inject as service } from '@ember-decorators/service';
+import { inject as service } from '@ember/service';
 
 const { Adapter } = DS;
 
