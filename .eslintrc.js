@@ -11,8 +11,13 @@ module.exports = {
   plugins: [
     'babel',
     'hbs',
+    'ember',
+    'ember-suave',
+    'security',
+    'prettier',
   ],
   extends: [
+    'eslint:recommended',
     'plugin:ember/recommended',
     'plugin:ember-suave/recommended',
     'airbnb-base',

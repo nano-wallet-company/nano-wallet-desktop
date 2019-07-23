@@ -39,9 +39,11 @@ export default class AccountCarouselComponent extends Component.extend(ContextBo
       1500: {
         slidesPerView: 3,
       },
+
       1200: {
         slidesPerView: 2,
       },
+
       780: {
         slidesPerView: 1,
       },

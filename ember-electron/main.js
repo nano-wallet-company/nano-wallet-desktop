@@ -108,6 +108,7 @@ global.environment = environment;
 global.dataPath = path.normalize(app.getPath('userData'));
 global.resourcesPath = path.normalize(path.join(basePath, 'resources'));
 global.locale = null;
+global.useKeychain = false;
 global.isDataDownloaded = false;
 global.isNodeStarted = false;
 global.isQuitting = false;
@@ -221,12 +222,16 @@ const run = async () => {
 
   const storeVersion = store.get('version');
   if (!storeVersion || semver.gt(version, storeVersion)) {
-    const outdatedAssets = ['config.json', 'log'];
+    const outdatedAssets = ['config.json', 'rpc_config.json', 'log'];
     log.info('Deleting outdated assets:', outdatedAssets.join(', '));
     await del(outdatedAssets, { force: true, cwd: dataPath });
   }
 
   store.set('version', version);
+
+  if (!store.has('useKeychain')) {
+    store.set('useKeychain', false);
+  }
 
   Object.defineProperty(global, 'dataPath', { value: dataPath });
 
@@ -236,9 +241,9 @@ const run = async () => {
     },
   });
 
-  Object.defineProperty(global, 'locale', {
+  Object.defineProperty(global, 'useKeychain', {
     get() {
-      return app.getLocale() || locale2 || null;
+      return store.get('useKeychain', false);
     },
   });
 

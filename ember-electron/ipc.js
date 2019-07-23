@@ -74,7 +74,14 @@ const nodeStart = ({ sender }) =>
       }
     });
 
-const keychainGet = ({ sender }, key) =>
+const keychainGet = ({ sender }, key) => {
+  const { useKeychain } = global;
+  if (!useKeychain) {
+    if (!sender.isDestroyed()) {
+      sender.send('keychain-get-done', null);
+    }
+  }
+
   keytar
     .getPassword(productName, key)
     .then(value => {
@@ -88,8 +95,16 @@ const keychainGet = ({ sender }, key) =>
         sender.send('keychain-get-error');
       }
     });
+};
 
-const keychainSet = ({ sender }, key, value) =>
+const keychainSet = ({ sender }, key, value) => {
+  const { useKeychain } = global;
+  if (!useKeychain) {
+    if (!sender.isDestroyed()) {
+      sender.send('keychain-set-done');
+    }
+  }
+
   keytar
     .setPassword(productName, key, value)
     .then(() => {
@@ -103,8 +118,16 @@ const keychainSet = ({ sender }, key, value) =>
         sender.send('keychain-set-error');
       }
     });
+};
 
-const keychainDelete = ({ sender }, key) =>
+const keychainDelete = ({ sender }, key) => {
+  const { useKeychain } = global;
+  if (!useKeychain) {
+    if (!sender.isDestroyed()) {
+      sender.send('keychain-delete-done', false);
+    }
+  }
+
   keytar
     .deletePassword(productName, key)
     .then(result => {
@@ -118,6 +141,7 @@ const keychainDelete = ({ sender }, key) =>
         sender.send('keychain-delete-error');
       }
     });
+};
 
 module.exports = {
   downloadStart,

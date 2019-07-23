@@ -18,6 +18,7 @@ module.exports = environment => {
         // e.g. EMBER_NATIVE_DECORATOR_SUPPORT: true
         'ember-improved-instrumentation': true,
       },
+
       EXTEND_PROTOTYPES: false,
     },
 
@@ -62,6 +63,7 @@ module.exports = environment => {
           'times',
           'upload',
         ],
+
         'free-regular-svg-icons': ['question-circle'],
       },
     },

@@ -29,8 +29,11 @@ export default function() {
   // Live network
   this.passthrough('http://localhost:7076');
 
-  // Test network
+  // Beta network
   this.passthrough('http://localhost:55000');
+
+  // Test network
+  this.passthrough('http://localhost:45000');
 
   // Electron proxy
   this.passthrough('https://localhost:17076/**');

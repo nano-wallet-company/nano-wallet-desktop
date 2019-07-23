@@ -62,6 +62,7 @@ module.exports = {
     darwin: ['zip', 'dmg'],
     linux: ['zip', 'deb', 'rpm'],
   },
+
   electronPackagerConfig: {
     icon,
     osxSign,
@@ -69,25 +70,31 @@ module.exports = {
     buildVersion,
     appBundleId,
     appCategoryType,
+
     ignore: ['\\.xml$', '\\.node$', '/\\.DS_Store$', '/ember-electron/resources/ordering.txt$'],
+
     asar: {
       ordering: path.join(__dirname, 'resources', 'ordering.txt'),
       unpackDir: '{ember-electron/resources,node_modules/7zip,node_modules/**/binding-*}',
     },
+
     // extendInfo: {
     //   CSResourcesFileMapped: true,
     // },
+
     overwrite: true,
     packageManager: 'yarn',
     executableName: name,
     derefSymlinks: true,
     darwinDarkModeSupport: true,
+
     win32metadata: {
       FileDescription: productName,
       InternalName: name,
       OriginalFilename: `${name}.exe`,
       ProductName: productName,
     },
+
     afterPrune: [
       async (buildPath, electronVersion, platform, arch, callback) => {
         const cwd = path.join(buildPath, 'node_modules');
@@ -109,6 +116,7 @@ module.exports = {
       },
     ],
   },
+
   electronWinstallerConfig: {
     name,
     signWithParams,
@@ -117,6 +125,7 @@ module.exports = {
     setupIcon: `${icon}.ico`,
     loadingGif: path.join(__dirname, 'resources', 'install-spinner.gif'),
   },
+
   electronInstallerDMG: {
     icon: `${icon}.icns`,
     format: 'ULFO',
@@ -126,6 +135,7 @@ module.exports = {
       },
     },
   },
+
   electronInstallerDebian: {
     name,
     categories,
@@ -136,6 +146,7 @@ module.exports = {
       '512x512': `${icon}.png`,
     },
   },
+
   electronInstallerRedhat: {
     name,
     categories,
@@ -144,6 +155,7 @@ module.exports = {
     compressionLevel: 9,
     icon: `${icon}.png`,
   },
+
   github_repository: {
     owner: 'nano-wallet-company',
     name: 'nano-wallet-desktop',
