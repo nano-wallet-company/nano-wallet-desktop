@@ -36,6 +36,7 @@ export const actions = {
   NODE_ID_GET: 'node_id_get',
   NODE_ID_RESET: 'node_id_reset',
   NODE_ID_SET: 'node_id_set',
+  ADD_COMMENT_ACCOUNT: 'add_comment_account',
 };
 
 export const errors = {
@@ -163,13 +164,14 @@ export default class RPCService extends Service {
     return this.call(actions.ACCOUNT_CREATE, { wallet, work });
   }
 
-  async accountInfo(account, representative = true, pending = true) {
+  async accountInfo(account, representative = true, pending = true, comment = true) {
     let info = {};
     try {
       info = await this.call(actions.ACCOUNT_INFO, {
         account,
         representative,
         pending,
+        comment,
       });
     } catch (err) {
       if (!(err instanceof AccountNotFound)) {
@@ -199,10 +201,12 @@ export default class RPCService extends Service {
     return accounts;
   }
 
-  async accountHistory(account, count = 1) {
+  async accountHistory(account, count = 1, raw = 0, include_comment = 1) {
     const { history } = await this.call(actions.ACCOUNT_HISTORY, {
       account,
       count,
+      raw,
+      include_comment,
     });
 
     return A(history);
@@ -218,6 +222,10 @@ export default class RPCService extends Service {
       account,
       representative,
     });
+  }
+
+  async addCommentAccount(wallet, account, comment) {
+    return this.call(actions.ADD_COMMENT_ACCOUNT, { wallet, account, comment });
   }
 
   async accountRemove(wallet, account) {

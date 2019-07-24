@@ -27,5 +27,7 @@ export default class AccountModel extends Model {
 
   @attr('timestamp', { defaultValue: () => new Date() }) modifiedTimestamp = null;
 
+  @attr('string') comment = null;
+
   visible = true;
 }

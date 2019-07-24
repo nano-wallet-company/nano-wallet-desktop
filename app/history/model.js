@@ -16,4 +16,6 @@ export default class HistoryModel extends Model {
   @attr('big-number') amount = null;
 
   @attr blockTime = 0;
+
+  @attr('string') accountComment = null;
 }

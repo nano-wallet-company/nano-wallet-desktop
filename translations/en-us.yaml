@@ -84,8 +84,10 @@ editAccountSettings: 'Edit account settings'
 deleteAccount: 'Hide account'
 accountSettings: 'Account Settings'
 accountSettingsSaved: 'Account settings saved!'
+accountSettingsSaveError: 'Error while saving account settings!'
 unknown: '(unknown)'
-label: 'Label'
+publicLabel: 'Public Label'
+privateLabel: 'Private Label'
 login:
   lead: 'Login to unlock your wallet.'
   instructions: 'You can login to continue using your current wallet by unlocking it. Alternatively, you may choose to create a new wallet.'
@@ -126,6 +128,7 @@ wallets:
       none: 'No history yet'
     settings:
       representative: 'Representative Account'
+      publicLabelHint: 'WARNING: Public account labels are stored in the blockchain, are visible by everyone, their history can never be deleted, and they take up space in the blockchain.'
     create:
       title: 'Create Account'
       lead: 'Are you sure to create a new account?'
