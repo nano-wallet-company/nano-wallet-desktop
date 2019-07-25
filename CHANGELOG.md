@@ -1,6 +1,16 @@
-# Change Log
+# Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+## [1.8.0](https://github.com/nano-wallet-company/nano-wallet-desktop/compare/v1.7.0...v1.8.0) (2019-07-25)
+
+
+### Features
+
+* upgrade to Nano V19.0 Solidus ([586c6b1](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/586c6b1))
+* **electron:** support auto-login using system keychain ([b4883ac](https://github.com/nano-wallet-company/nano-wallet-desktop/commit/b4883ac))
+
+
 
 # [1.7.0](https://github.com/nano-wallet-company/nano-wallet-desktop/compare/v1.6.2...v1.7.0) (2019-02-23)
 
