@@ -31,9 +31,11 @@ module.exports = (environment, appConfig) => {
         sizes: `${size}x${size}`,
       })),
     ],
+
     apple: {
       statusBarStyle: 'black',
     },
+
     ms: {
       tileColor: '#e9ecef',
     },

@@ -1,9 +1,9 @@
 import Component from '@ember/component';
 
-import { storage } from '../../decorators';
+import { storageFor } from 'ember-local-storage';
 
 export default class AccountLabelComponent extends Component {
-  @storage('account') settings;
+  @storageFor('settings', 'account') settings;
 
   account = null;
 

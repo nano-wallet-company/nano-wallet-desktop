@@ -1,7 +1,7 @@
 import Route from '@ember/routing/route';
 
-import { inject as service } from '@ember-decorators/service';
-import { action } from '@ember-decorators/object';
+import { inject as service } from '@ember/service';
+import { action } from '@ember/object';
 
 export default class SetupDownloadRoute extends Route {
   @service electron;
@@ -10,7 +10,7 @@ export default class SetupDownloadRoute extends Route {
     asset: {
       refreshModel: true,
     },
-  }
+  };
 
   model({ asset }) {
     return this.get('electron').download(asset);

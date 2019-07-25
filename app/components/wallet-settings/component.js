@@ -2,12 +2,12 @@ import Component from '@ember/component';
 
 import { on } from '@ember-decorators/object';
 
-import { storage } from '../../decorators';
+import { storageFor } from 'ember-local-storage';
 
 import ChangeRepresentativeValidations from '../../validations/change-representative';
 
 export default class WalletSettingsComponent extends Component {
-  @storage('wallet') settings;
+  @storageFor('settings', 'wallet') settings;
 
   ChangeRepresentativeValidations = ChangeRepresentativeValidations;
 

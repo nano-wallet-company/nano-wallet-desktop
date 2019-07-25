@@ -38,7 +38,7 @@ const { is } = require('electron-util');
 
 const { app } = electron;
 
-const generateCert = (commonName) => {
+const generateCert = async commonName => {
   const attrs = [
     { name: 'commonName', value: commonName },
     { name: 'countryName', value: 'US' },
@@ -57,21 +57,33 @@ const generateCert = (commonName) => {
   });
 };
 
-const getLoopbackAddress = () => new Promise((resolve, reject) => {
-  const server = net.createServer();
-  server.unref();
-  return server.listen(function Server(err) {
-    if (err) {
-      return reject(err);
-    }
+const getLoopbackAddress = () =>
+  new Promise((resolve, reject) => {
+    const server = net.createServer();
+    server.unref();
+    return server.listen(function Server(err) {
+      if (err) {
+        return reject(err);
+      }
 
-    const { address } = this.address();
-    return server.close(() => {
-      const loopback = net.isIPv6(address) ? '::1' : '127.0.0.1';
-      return resolve(loopback);
+      const { address } = this.address();
+      return server.close(() => {
+        const loopback = net.isIPv6(address) ? '::1' : '127.0.0.1';
+        return resolve(loopback);
+      });
     });
   });
-});
+
+const getNetwork = async () => {
+  switch (global.environment) {
+    case 'production':
+      return 'live';
+    case 'development':
+      return 'beta';
+    default:
+      return 'test';
+  }
+};
 
 const forceKill = (child, timeout = 5000) => {
   if (!child.killed) {
@@ -114,29 +126,42 @@ const forceKill = (child, timeout = 5000) => {
 };
 
 const startDaemon = async () => {
+  const env = global.environment;
   const dataPath = path.normalize(global.dataPath);
   const configPath = path.join(dataPath, 'config.json');
+  const rpcConfigPath = path.join(dataPath, 'rpc_config.json');
   const loopbackAddress = await getLoopbackAddress();
   let config = {};
   try {
     config = await loadJsonFile(configPath);
   } catch (err) {
-    const env = global.environment;
     log.info(`Node configuration not found, generating for ${env}`);
     config = await loadJsonFile(path.join(__dirname, `config.${env}.json`));
-    config.rpc.address = loopbackAddress;
+  }
+
+  config.rpc.child_process = {
+    enable: false,
+    rpc_path: path.join(global.resourcesPath, toExecutableName('nano_rpc')),
+  };
+
+  let rpcConfig = {};
+  try {
+    rpcConfig = await loadJsonFile(rpcConfigPath);
+  } catch (err) {
+    log.info(`Node RPC configuration not found, generating for ${env}`);
+    rpcConfig = await loadJsonFile(path.join(__dirname, `rpc_config.${env}.json`));
   }
 
   const tlsPath = path.join(dataPath, 'tls');
   const dhparamPath = path.join(tlsPath, 'dhparam.pem');
-  if (!config.rpc.secure) {
+  if (!rpcConfig.secure) {
     log.info('Generating secure node RPC configuration...');
     const clientsPath = path.join(tlsPath, 'clients');
     await makeDir(clientsPath, { fs });
 
     const serverCertPath = path.join(tlsPath, 'server.cert.pem');
     const serverKeyPath = path.join(tlsPath, 'server.key.pem');
-    const serverPems = generateCert('nanowalletcompany.com');
+    const serverPems = await generateCert('nanowalletcompany.com');
     const dhparam = await fs.readFileAsync(path.join(__dirname, 'tls', 'dhparam.pem'));
     await writeFileAtomic(serverCertPath, normalizeNewline(serverPems.cert), { mode: 0o600 });
     await writeFileAtomic(serverKeyPath, normalizeNewline(serverPems.private), { mode: 0o600 });
@@ -144,7 +169,7 @@ const startDaemon = async () => {
 
     const clientCertPath = path.join(clientsPath, 'rpcuser1.cert.pem');
     const clientKeyPath = path.join(clientsPath, 'rpcuser1.key.pem');
-    const clientPems = generateCert('desktop.nanowalletcompany.com');
+    const clientPems = await generateCert('desktop.nanowalletcompany.com');
     await writeFileAtomic(clientCertPath, normalizeNewline(clientPems.cert), { mode: 0o600 });
     await writeFileAtomic(clientKeyPath, normalizeNewline(clientPems.private), { mode: 0o600 });
 
@@ -153,7 +178,7 @@ const startDaemon = async () => {
     await cpFile(clientCertPath, subjectHashPath);
 
     // https://github.com/cryptocode/notes/wiki/RPC-TLS
-    config.rpc.secure = {
+    rpcConfig.secure = {
       enable: true,
       verbose_logging: is.development,
       server_cert_path: serverCertPath,
@@ -164,10 +189,11 @@ const startDaemon = async () => {
     };
   }
 
-  const host = config.rpc.address;
-  const port = await getPort({ host, port: [config.rpc.port] });
+  const host = rpcConfig.address;
+  const port = await getPort({ host, port: [rpcConfig.port] });
+  rpcConfig.port = port;
+
   const peeringPort = await getPort({ host, port: [config.node.peering_port] });
-  config.rpc.port = port;
   config.node.peering_port = peeringPort;
   config.node.logging.log_rpc = is.development;
 
@@ -175,9 +201,10 @@ const startDaemon = async () => {
   config.node.io_threads = Math.max(2, Math.ceil(cpuCount / 2));
   config.node.network_threads = config.node.io_threads;
   config.node.work_threads = 2;
-  config.node.signature_checker_threads = config.node.io_threads - 1;
+  config.node.signature_checker_threads = Math.max(0, config.node.io_threads - 1);
   config.node.bootstrap_connections = Math.max(4, config.node.network_threads);
   config.node.bootstrap_connections_max = Math.min(64, config.node.bootstrap_connections * 4);
+  rpcConfig.process.io_threads = config.node.io_threads;
 
   const { version: configVersion } = config;
   log.info(`Writing node configuration version ${configVersion}:`, configPath);
@@ -188,10 +215,20 @@ const startDaemon = async () => {
     },
   });
 
+  const { version: rpcConfigVersion } = rpcConfig;
+  log.info(`Writing node RPC configuration version ${rpcConfigVersion}:`, rpcConfigPath);
+  await writeJsonFile(rpcConfigPath, rpcConfig, {
+    mode: 0o600,
+    replacer(key, value) {
+      return typeof value === 'object' ? value : String(value);
+    },
+  });
+
   const cmd = path.join(global.resourcesPath, toExecutableName('nano_node'));
   log.info('Starting node:', cmd);
 
-  const child = crossSpawn(cmd, ['--daemon', '--data_path', dataPath], {
+  const network = await getNetwork();
+  const child = crossSpawn(cmd, ['--daemon', '--data_path', dataPath, '--network', network], {
     cwd: dataPath,
     windowsHide: true,
     stdio: ['ignore', 'pipe', 'pipe'],
@@ -231,7 +268,7 @@ const startDaemon = async () => {
   app.once('will-quit', killHandler);
   child.once('exit', () => app.removeListener('will-quit', killHandler));
 
-  const { client_certs_path: clientCertsPath } = config.rpc.secure;
+  const { client_certs_path: clientCertsPath } = rpcConfig.secure;
   const cert = await fs.readFileAsync(path.join(clientCertsPath, 'rpcuser1.cert.pem'));
   const key = await fs.readFileAsync(path.join(clientCertsPath, 'rpcuser1.key.pem'));
   const dhparam = await fs.readFileAsync(dhparamPath);
@@ -243,17 +280,19 @@ const startDaemon = async () => {
       key,
       protocol: 'https:',
     },
+
     ssl: {
       dhparam,
       secureProtocol: 'TLSv1_2_client_method',
     },
+
     secure: false,
     changeOrigin: true,
   });
 
   proxy.on('error', err => log.error('[proxy]', err));
 
-  const pems = generateCert('rpc.nanowalletcompany.com');
+  const pems = await generateCert('rpc.nanowalletcompany.com');
   const proxyCert = normalizeNewline(pems.cert);
   const proxyKey = normalizeNewline(pems.private);
 
@@ -268,10 +307,12 @@ const startDaemon = async () => {
     jwtid,
   };
 
-  const jwtMiddleware = expressJwt(Object.assign({}, jwtOptions, {
-    secret: proxyCert,
-    algorithms: ['RS256'],
-  }));
+  const jwtMiddleware = expressJwt(
+    Object.assign({}, jwtOptions, {
+      secret: proxyCert,
+      algorithms: ['RS256'],
+    }),
+  );
 
   const connectApp = connect();
   connectApp.use(helmet());
@@ -321,7 +362,7 @@ const startDaemon = async () => {
   server.once('close', killHandler);
   child.once('exit', () => {
     server.removeListener('close', killHandler);
-    server.destroy((() => server.unref()));
+    server.destroy(() => server.unref());
   });
 
   Object.defineProperty(global, 'isNodeStarted', {

@@ -9,7 +9,7 @@ describe('Unit | Adapter | block', () => {
   });
 
   // Replace this with your real tests.
-  it('exists', function () {
+  it('exists', function() {
     const adapter = this.subject();
     expect(adapter).to.be.ok;
   });

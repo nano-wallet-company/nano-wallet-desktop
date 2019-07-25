@@ -1,9 +1,9 @@
 import Route from '@ember/routing/route';
-import { get, set, setProperties } from '@ember/object';
+import { get, set, setProperties, action } from '@ember/object';
 
 import { hash } from 'ember-concurrency';
-import { action } from '@ember-decorators/object';
-import { inject as service } from '@ember-decorators/service';
+
+import { inject as service } from '@ember/service';
 
 import generateSeed from '../../utils/generate-seed';
 

@@ -1,6 +1,6 @@
 import Route from '@ember/routing/route';
 import { A } from '@ember/array';
-import { get, getWithDefault } from '@ember/object';
+import { get, getWithDefault, action } from '@ember/object';
 
 import fetch from 'fetch';
 import nprogress from 'nprogress';
@@ -9,18 +9,14 @@ import { all } from 'rsvp';
 import ApplicationRouteMixin from 'ember-simple-auth/mixins/application-route-mixin';
 import { DisposableMixin } from 'ember-lifeline';
 
-import { inject as service } from '@ember-decorators/service';
-import { action } from '@ember-decorators/object';
+import { inject as service } from '@ember/service';
 
 import upgradeSettings from '../utils/upgrade-settings';
 import guessLocale, { DEFAULT_LOCALE } from '../utils/guess-locale';
 import normalizeLocale from '../utils/normalize-locale';
 import reload from '../utils/reload';
 
-export default class ApplicationRoute extends Route.extend(
-  ApplicationRouteMixin,
-  DisposableMixin,
-) {
+export default class ApplicationRoute extends Route.extend(ApplicationRouteMixin, DisposableMixin) {
   @service intl;
 
   @service config;
@@ -53,19 +49,21 @@ export default class ApplicationRoute extends Route.extend(
       locales.unshift(`${currentLocale}-${currentLocale}`);
     }
 
-    const promises = A(locales).uniq().map(async (key) => {
-      try {
-        const response = await fetch(`${rootURL}translations/${key}.json`);
-        if (response.ok) {
-          const data = await response.json();
-          intl.addTranslations(key, data);
+    const promises = A(locales)
+      .uniq()
+      .map(async key => {
+        try {
+          const response = await fetch(`${rootURL}translations/${key}.json`);
+          if (response.ok) {
+            const data = await response.json();
+            intl.addTranslations(key, data);
+          }
+        } catch (e) {
+          return null;
         }
-      } catch (e) {
-        return null;
-      }
 
-      return key;
-    });
+        return key;
+      });
 
     await all(promises);
 

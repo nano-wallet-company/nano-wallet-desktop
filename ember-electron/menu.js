@@ -16,10 +16,7 @@ const {
   version,
   productName,
   copyright,
-  bugs: {
-    url,
-    email,
-  },
+  bugs: { url, email },
 } = require('../package');
 
 const { getIconPath } = require('./utils');
@@ -68,11 +65,7 @@ const getApplicationMenu = () => {
     { role: 'editMenu' },
     {
       label: 'View',
-      submenu: [
-        { role: 'toggleFullScreen' },
-        { type: 'separator' },
-        { role: 'toggleDevTools' },
-      ],
+      submenu: [{ role: 'toggleFullScreen' }, { type: 'separator' }, { role: 'toggleDevTools' }],
     },
     { role: 'windowMenu' },
     {
@@ -90,7 +83,9 @@ const getApplicationMenu = () => {
           click() {
             const subject = `${productName} Support Request`;
             const body = `Version: ${version}\r\nPlatform: ${process.platform}`;
-            const mailto = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            const mailto = `mailto:${email}?subject=${encodeURIComponent(
+              subject,
+            )}&body=${encodeURIComponent(body)}`;
             return shell.openExternal(mailto);
           },
         },

@@ -4,10 +4,10 @@ index e712705..8e55732 100644
 +++ b/node_modules/appdmg/lib/hdiutil.js
 @@ -61,7 +61,7 @@ exports.attach = function (path, cb) {
  }
-
+ 
  exports.detach = function (path, cb) {
 -  const args = ['detach', path]
 +  const args = ['detach', path, '-force']
-
+ 
    util.sh('hdiutil', args, function (err) {
      if (err && err.exitCode === 16 && /Resource busy/.test(err.stderr)) {

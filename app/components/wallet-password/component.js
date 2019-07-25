@@ -1,10 +1,11 @@
 import Component from '@ember/component';
-import { get, setProperties } from '@ember/object';
+import { get, setProperties, action } from '@ember/object';
 import { tryInvoke } from '@ember/utils';
 
 import { defineError } from 'ember-exex/error';
-import { on, action } from '@ember-decorators/object';
-import { inject as service } from '@ember-decorators/service';
+
+import { inject as service } from '@ember/service';
+import { on } from '@ember-decorators/object';
 
 import ChangePasswordValidations from '../../validations/change-password';
 

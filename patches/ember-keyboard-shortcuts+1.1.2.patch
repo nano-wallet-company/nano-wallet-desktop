@@ -1,0 +1,13 @@
+diff --git a/node_modules/ember-keyboard-shortcuts/index.js b/node_modules/ember-keyboard-shortcuts/index.js
+index a1b1211..e3f7a8e 100644
+--- a/node_modules/ember-keyboard-shortcuts/index.js
++++ b/node_modules/ember-keyboard-shortcuts/index.js
+@@ -28,7 +28,7 @@ module.exports = {
+ 
+   pathBase(packageName) {
+     return path.dirname(
+-      require.resolve(packageName + '/package.json', { basedir: __dirname })
++      require.resolve(packageName)
+     );
+   }
+ };

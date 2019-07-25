@@ -9,12 +9,12 @@ describe('helper:unformat-amount', () => {
     needs: ['service:intl'],
   });
 
-  beforeEach(function () {
+  beforeEach(function() {
     const intl = this.owner.lookup('service:intl');
     intl.setLocale('en-us');
   });
 
-  it('renders', async function () {
+  it('renders', async function() {
     // Set any properties with this.set('myProperty', 'value');
     // Handle any actions with this.on('myAction', function(val) { ... });
     // Template block usage:
@@ -29,37 +29,37 @@ describe('helper:unformat-amount', () => {
     expect(find('*').textContent.trim()).to.equal('0');
   });
 
-  it('handles integer values', async function () {
+  it('handles integer values', async function() {
     this.set('inputValue', '9');
     await render(hbs`{{format-amount (unformat-amount inputValue)}}`);
     expect(find('*').textContent.trim()).to.equal('9');
   });
 
-  it('handles decimal values', async function () {
+  it('handles decimal values', async function() {
     this.set('inputValue', '0.9');
     await render(hbs`{{format-amount (unformat-amount inputValue)}}`);
     expect(find('*').textContent.trim()).to.equal('0.9');
   });
 
-  it('handles integer values with empty decimal component', async function () {
+  it('handles integer values with empty decimal component', async function() {
     this.set('inputValue', '999.');
     await render(hbs`{{format-amount (unformat-amount inputValue)}}`);
     expect(find('*').textContent.trim()).to.equal('999');
   });
 
-  it('handles decimal values with empty integer component', async function () {
+  it('handles decimal values with empty integer component', async function() {
     this.set('inputValue', '.999');
     await render(hbs`{{format-amount (unformat-amount inputValue)}}`);
     expect(find('*').textContent.trim()).to.equal('0.999');
   });
 
-  it('handles values with both an integer and decimal component', async function () {
+  it('handles values with both an integer and decimal component', async function() {
     this.set('inputValue', '999.999');
     await render(hbs`{{format-amount (unformat-amount inputValue)}}`);
     expect(find('*').textContent.trim()).to.equal('999.999');
   });
 
-  it('handles different locale grouping', async function () {
+  it('handles different locale grouping', async function() {
     this.set('inputValue', '99 999,99');
     this.set('locale', 'fr-fr');
     await render(hbs`{{format-amount (unformat-amount inputValue locale=locale)}}`);

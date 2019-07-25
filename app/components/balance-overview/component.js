@@ -1,13 +1,12 @@
 import Component from '@ember/component';
 
 import InViewportMixin from 'ember-in-viewport';
-import { keepLatestTask } from 'ember-concurrency-decorators';
 import { ContextBoundTasksMixin } from 'ember-lifeline';
 
 import { on, observes } from '@ember-decorators/object';
-import { alias } from '@ember-decorators/object/computed';
+import { alias } from '@ember/object/computed';
 
-import { storage } from '../../decorators';
+import { storageFor } from 'ember-local-storage';
 
 import getExchangeRate, {
   DEFAULT_CURRENCY,
@@ -20,7 +19,7 @@ export default class BalanceOverviewComponent extends Component.extend(
   InViewportMixin,
   ContextBoundTasksMixin,
 ) {
-  @storage('wallet') settings;
+  @storageFor('settings', 'wallet') settings;
 
   @alias('settings.currency') currency;
 
@@ -52,11 +51,6 @@ export default class BalanceOverviewComponent extends Component.extend(
     return null;
   }
 
-  @keepLatestTask
-  * exchangeRateTask(currency = DEFAULT_CURRENCY) {
-    return yield getExchangeRate(currency);
-  }
-
   @observes('currency')
   async updateExchangeRate() {
     return this.runTask(async () => {
@@ -68,7 +62,7 @@ export default class BalanceOverviewComponent extends Component.extend(
 
       this.set('exchangeRate', null);
 
-      const exchangeRate = await this.get('exchangeRateTask').perform(currency);
+      const exchangeRate = await getExchangeRate(currency);
       this.set('exchangeRate', exchangeRate);
       return exchangeRate;
     });

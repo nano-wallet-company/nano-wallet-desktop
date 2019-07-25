@@ -1,16 +1,13 @@
 import Route from '@ember/routing/route';
-import { get } from '@ember/object';
+import { get, action } from '@ember/object';
 
 import UnauthenticatedRouteMixin from 'ember-simple-auth/mixins/unauthenticated-route-mixin';
 
-import { inject as service } from '@ember-decorators/service';
-import { action } from '@ember-decorators/object';
+import { inject as service } from '@ember/service';
 
 import { AuthenticateError } from '../authenticators/wallet';
 
-export default class LoginRoute extends Route.extend(
-  UnauthenticatedRouteMixin,
-) {
+export default class LoginRoute extends Route.extend(UnauthenticatedRouteMixin) {
   @service intl;
 
   @service session;
@@ -32,10 +29,19 @@ export default class LoginRoute extends Route.extend(
     return super.beforeModel(...args);
   }
 
-  model() {
+  async model() {
     const wallet = this.get('session.data.wallet');
     if (!wallet) {
       return this.transitionTo('setup');
+    }
+
+    const electron = this.get('electron');
+    const isElectron = get(electron, 'isElectron');
+    if (isElectron) {
+      const password = await electron.getPassword(wallet);
+      if (password) {
+        await this.get('session').authenticate('authenticator:wallet', { wallet, password });
+      }
     }
 
     return wallet;
@@ -55,6 +61,12 @@ export default class LoginRoute extends Route.extend(
       const message = this.get('intl').t('wallets.unlock.invalidPassword');
       this.get('flashMessages').danger(message);
       throw err;
+    }
+
+    const electron = this.get('electron');
+    const isElectron = get(electron, 'isElectron');
+    if (isElectron) {
+      await electron.setPassword(wallet, password);
     }
   }
 

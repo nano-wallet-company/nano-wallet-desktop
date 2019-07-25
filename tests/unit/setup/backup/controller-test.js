@@ -6,7 +6,7 @@ describe('Unit | Controller | setup/backup', () => {
   setupTest();
 
   // Replace this with your real tests.
-  it('exists', function () {
+  it('exists', function() {
     const controller = this.owner.lookup('controller:setup/backup');
     expect(controller).to.be.ok;
   });

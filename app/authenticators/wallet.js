@@ -1,7 +1,7 @@
 import { get } from '@ember/object';
 
 import Base from 'ember-simple-auth/authenticators/base';
-import { inject as service } from '@ember-decorators/service';
+import { inject as service } from '@ember/service';
 import { defineError } from 'ember-exex/error';
 
 export const AuthenticatorError = defineError({

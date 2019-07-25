@@ -1,8 +1,6 @@
 import DS from 'ember-data';
 
-import { attr, hasMany, belongsTo } from '@ember-decorators/data';
-
-const { Model } = DS;
+const { Model, attr, hasMany, belongsTo } = DS;
 
 export default class AccountModel extends Model {
   @belongsTo('wallet', { async: true }) wallet;

@@ -1,18 +1,17 @@
 import Component from '@ember/component';
-import { get, set } from '@ember/object';
+import { get, set, action } from '@ember/object';
 import { tryInvoke } from '@ember/utils';
 
-import { action } from '@ember-decorators/object';
-import { gt } from '@ember-decorators/object/computed';
+import { gt } from '@ember/object/computed';
 
-import { storage } from '../../decorators';
+import { storageFor } from 'ember-local-storage';
 
 import ChangeAccountSettingsValidations from '../../validations/change-account-settings';
 
 import fromAmount from '../../utils/from-amount';
 
 export default class AccountSettingsComponent extends Component {
-  @storage('account') settings;
+  @storageFor('settings', 'account') settings;
 
   ChangeAccountSettingsValidations = ChangeAccountSettingsValidations;
 

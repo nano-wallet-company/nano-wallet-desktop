@@ -2,10 +2,7 @@ import Component from '@ember/component';
 
 import moment from 'moment';
 
-import {
-  DisposableMixin,
-  ContextBoundTasksMixin,
-} from 'ember-lifeline';
+import { DisposableMixin, ContextBoundTasksMixin } from 'ember-lifeline';
 import { on } from '@ember-decorators/object';
 
 import speedometer from 'speedometer';
@@ -100,7 +97,9 @@ export default class DownloadProgressComponent extends Component.extend(
     const remaining = Math.max(0, 1 - value);
     const seconds = Math.round(remaining / speed);
     const eta = Number.isFinite(seconds)
-      ? moment().add(seconds, 'second').toDate()
+      ? moment()
+          .add(seconds, 'second')
+          .toDate()
       : null;
     this.setProperties({ value, eta });
   }

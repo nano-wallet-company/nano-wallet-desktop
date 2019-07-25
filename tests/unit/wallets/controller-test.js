@@ -5,14 +5,11 @@ import { setupTest } from 'ember-mocha';
 describe('Unit | Controller | wallets', () => {
   setupTest('controller:wallets', {
     // Specify the other units that are required for this test.
-    needs: [
-      'service:flashMessages',
-      'service:rpc',
-    ],
+    needs: ['service:flashMessages', 'service:rpc'],
   });
 
   // Replace this with your real tests.
-  it('exists', function () {
+  it('exists', function() {
     const controller = this.subject();
     expect(controller).to.be.ok;
   });

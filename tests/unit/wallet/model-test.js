@@ -9,7 +9,7 @@ describe('Unit | Model | wallet', () => {
   });
 
   // Replace this with your real tests.
-  it('exists', function () {
+  it('exists', function() {
     const model = this.subject();
     // var store = this.store();
     expect(model).to.be.ok;

@@ -6,10 +6,7 @@ import BigNumber from 'bignumber.js';
 import formats from '../formats';
 
 import getConversion, { DEFAULT_UNIT } from './get-conversion';
-import {
-  DEFAULT_CURRENCY,
-  DEFAULT_EXCHANGE_RATE,
-} from './get-exchange-rate';
+import { DEFAULT_CURRENCY, DEFAULT_EXCHANGE_RATE } from './get-exchange-rate';
 
 const currencyFormats = new Map(Object.entries(formats.number || {}));
 

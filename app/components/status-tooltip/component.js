@@ -1,15 +1,14 @@
 import Component from '@ember/component';
-import { get } from '@ember/object';
+import { get, computed } from '@ember/object';
 
 import InViewportMixin from 'ember-in-viewport';
 
-import { inject as service } from '@ember-decorators/service';
-import { on, computed } from '@ember-decorators/object';
-import { gt, lt } from '@ember-decorators/object/computed';
+import { inject as service } from '@ember/service';
 
-export default class StatusTooltipComponent extends Component.extend(
-  InViewportMixin,
-) {
+import { gt, lt } from '@ember/object/computed';
+import { on } from '@ember-decorators/object';
+
+export default class StatusTooltipComponent extends Component.extend(InViewportMixin) {
   @service status;
 
   @lt('status.peers.length', 1) isPeerless;

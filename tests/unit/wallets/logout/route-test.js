@@ -12,7 +12,7 @@ describe('Unit | Route | wallets/logout', () => {
 
   beforeEach(() => reset());
 
-  it('exists', function () {
+  it('exists', function() {
     const route = this.subject();
     expect(route).to.be.ok;
   });

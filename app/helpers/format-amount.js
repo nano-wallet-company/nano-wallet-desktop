@@ -1,6 +1,6 @@
 import Helper from '@ember/component/helper';
 
-import { inject as service } from '@ember-decorators/service';
+import { inject as service } from '@ember/service';
 import { observes } from '@ember-decorators/object';
 
 import formatAmount from '../utils/format-amount';

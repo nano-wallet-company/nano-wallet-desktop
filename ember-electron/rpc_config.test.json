@@ -1,0 +1,13 @@
+{
+    "version": "1",
+    "address": "::1",
+    "port": "45000",
+    "enable_control": "false",
+    "max_json_depth": "20",
+    "max_request_size": "33554432",
+    "process": {
+        "io_threads": "4",
+        "ipc_port": "46000",
+        "num_ipc_connections": "1"
+    }
+}

@@ -1,16 +1,12 @@
 import Component from '@ember/component';
+import { action } from '@ember/object';
 
 import { DisposableMixin } from 'ember-lifeline';
-import { on, action } from '@ember-decorators/object';
+import { on } from '@ember-decorators/object';
 import { className } from '@ember-decorators/component';
-import {
-  bindKeyboardShortcuts,
-  unbindKeyboardShortcuts,
-} from 'ember-keyboard-shortcuts';
+import { bindKeyboardShortcuts, unbindKeyboardShortcuts } from 'ember-keyboard-shortcuts';
 
-export default class SendButtonComponent extends Component.extend(
-  DisposableMixin,
-) {
+export default class SendButtonComponent extends Component.extend(DisposableMixin) {
   @className('expand') isExpanded = false;
 
   wallet = null;

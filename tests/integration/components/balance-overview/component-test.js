@@ -8,12 +8,12 @@ describe('Integration | Component | balance-overview', () => {
     integration: true,
   });
 
-  beforeEach(function () {
+  beforeEach(function() {
     this.inject.service('intl');
     this.get('intl').setLocale('en-us');
   });
 
-  it('renders', function () {
+  it('renders', function() {
     // Set any properties with this.set('myProperty', 'value');
     // Handle any actions with this.on('myAction', function(val) { ... });
     // Template block usage:
@@ -26,7 +26,6 @@ describe('Integration | Component | balance-overview', () => {
     const store = this.container.lookup('service:store');
     const wallet = store.createRecord('wallet', {
       id: '1',
-      balance: '1000000000000000000000000000000',
     });
 
     const onChangeCurrency = () => false;

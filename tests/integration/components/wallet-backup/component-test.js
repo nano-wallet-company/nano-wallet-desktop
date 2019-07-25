@@ -8,12 +8,12 @@ describe('Integration | Component | wallet backup', () => {
     integration: true,
   });
 
-  beforeEach(function () {
+  beforeEach(function() {
     this.inject.service('intl');
     this.get('intl').setLocale('en-us');
   });
 
-  it('renders', function () {
+  it('renders', function() {
     // Set any properties with this.set('myProperty', 'value');
     // Handle any actions with this.on('myAction', function(val) { ... });
     // Template block usage:
@@ -25,7 +25,6 @@ describe('Integration | Component | wallet backup', () => {
 
     const wallet = {
       id: '1',
-      balance: '1000000000000000000000000000000',
       accounts: ['1'],
     };
 

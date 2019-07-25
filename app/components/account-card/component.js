@@ -1,7 +1,7 @@
 import Component from '@ember/component';
 
-import { inject as service } from '@ember-decorators/service';
-import { action } from '@ember-decorators/object';
+import { inject as service } from '@ember/service';
+import { action } from '@ember/object';
 
 import toNanoPrefix from '../../utils/to-nano-prefix';
 

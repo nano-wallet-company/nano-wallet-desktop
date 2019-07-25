@@ -8,12 +8,12 @@ describe('Integration | Component | wallet overview', () => {
     integration: true,
   });
 
-  beforeEach(function () {
+  beforeEach(function() {
     this.inject.service('intl');
     this.get('intl').setLocale('en-us');
   });
 
-  it('renders', function () {
+  it('renders', function() {
     // Set any properties with this.set('myProperty', 'value');
     // Handle any actions with this.on('myAction', function(val) { ... });
     // Template block usage:
@@ -35,7 +35,6 @@ describe('Integration | Component | wallet overview', () => {
     const wallet = store.createRecord('wallet', {
       accounts,
       id: '1',
-      balance: '1000000000000000000000000000000',
     });
 
     const onChangeSlide = () => false;
@@ -46,7 +45,9 @@ describe('Integration | Component | wallet overview', () => {
       onChangeSlide,
     });
 
-    this.render(hbs`{{wallet-overview wallet=wallet accounts=accounts onChangeSlide=onChangeSlide}}`);
+    this.render(
+      hbs`{{wallet-overview wallet=wallet accounts=accounts onChangeSlide=onChangeSlide}}`,
+    );
     expect(this.$()).to.have.length(1);
   });
 });

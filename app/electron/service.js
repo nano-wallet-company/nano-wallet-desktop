@@ -1,4 +1,4 @@
-import Service from '@ember/service';
+import Service, { inject as service } from '@ember/service';
 import Evented from '@ember/object/evented';
 import { get } from '@ember/object';
 
@@ -7,7 +7,6 @@ import { Promise } from 'rsvp';
 import window from 'ember-window-mock';
 import { defineError } from 'ember-exex/error';
 import { DisposableMixin, addEventListener } from 'ember-lifeline';
-import { inject as service } from '@ember-decorators/service';
 
 import isElectron from '../utils/is-electron';
 import getPlatform from '../utils/get-platform';
@@ -29,10 +28,13 @@ const NodeError = defineError({
   extends: ElectronError,
 });
 
-export default class ElectronService extends Service.extend(
-  Evented,
-  DisposableMixin,
-) {
+const KeychainError = defineError({
+  name: 'KeychainError',
+  message: 'Encountered an error working with the system keychain',
+  extends: ElectronError,
+});
+
+export default class ElectronService extends Service.extend(Evented, DisposableMixin) {
   @service intl;
 
   @service config;
@@ -53,7 +55,9 @@ export default class ElectronService extends Service.extend(
       this.remote = remote;
       this.ipcRenderer = ipcRenderer;
 
-      addEventListener(this, window, 'beforeunload', () => this.ipcRenderer.send('window-unloading'));
+      addEventListener(this, window, 'beforeunload', () =>
+        this.ipcRenderer.send('window-unloading'),
+      );
 
       const onDownloadProgress = ::this.onDownloadProgress;
       const onDownloadVerify = ::this.onDownloadVerify;
@@ -128,6 +132,33 @@ export default class ElectronService extends Service.extend(
       ipcRenderer.once('node-error', () => reject(new NodeError()));
       ipcRenderer.once('node-ready', () => resolve(this));
       ipcRenderer.send('node-start');
+    });
+  }
+
+  getPassword(wallet) {
+    return new Promise((resolve, reject) => {
+      const ipcRenderer = this.get('ipcRenderer');
+      ipcRenderer.once('keychain-get-error', () => reject(new KeychainError()));
+      ipcRenderer.once('keychain-get-done', (event, password) => resolve(password));
+      ipcRenderer.send('keychain-get', wallet);
+    });
+  }
+
+  setPassword(wallet, password) {
+    return new Promise((resolve, reject) => {
+      const ipcRenderer = this.get('ipcRenderer');
+      ipcRenderer.once('keychain-set-error', () => reject(new KeychainError()));
+      ipcRenderer.once('keychain-set-done', () => resolve(this));
+      ipcRenderer.send('keychain-set', wallet, password);
+    });
+  }
+
+  deletePassword(wallet) {
+    return new Promise((resolve, reject) => {
+      const ipcRenderer = this.get('ipcRenderer');
+      ipcRenderer.once('keychain-delete-error', () => reject(new KeychainError()));
+      ipcRenderer.once('keychain-delete-done', (event, result) => resolve(result));
+      ipcRenderer.send('keychain-delete', wallet);
     });
   }
 

@@ -1,6 +1,6 @@
 import Controller from '@ember/controller';
 
-import { sort } from '@ember-decorators/object/computed';
+import { sort } from '@ember/object/computed';
 
 export default class WalletsOverviewController extends Controller {
   queryParams = ['slide', 'currency'];

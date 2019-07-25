@@ -1,4 +1,4 @@
-FROM node:10.15.0
+FROM node:12.7.0
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -24,6 +24,7 @@ COPY patches/*.patch patches/
 COPY package.json .
 COPY yarn.lock .
 
+ENV FORCE_COLOR=1
 RUN yarn install --frozen-lockfile --non-interactive
 
 COPY . .

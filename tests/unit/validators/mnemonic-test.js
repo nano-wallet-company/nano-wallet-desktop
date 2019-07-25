@@ -5,7 +5,8 @@ import validateMnemonic from '@nano-wallet-company/nano-wallet-desktop/validator
 describe('Unit | Validator | mnemonic', () => {
   it('passes valid mnemonic', () => {
     const validator = validateMnemonic();
-    const mnemonic = 'crunch lunar team fog aunt eye long believe record fly garment head grunt mountain maze lake mechanic scare utility angry entry limb inform neutral';
+    const mnemonic =
+      'crunch lunar team fog aunt eye long believe record fly garment head grunt mountain maze lake mechanic scare utility angry entry limb inform neutral';
     expect(validator('mnemonic', mnemonic)).to.be.true;
   });
 

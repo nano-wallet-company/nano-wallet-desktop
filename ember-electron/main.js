@@ -1,5 +1,8 @@
 /* eslint-env node */
-const environment = process.env.ELECTRON_ENV || process.env.EMBER_ENV || process.env.NODE_ENV || 'production';
+const process = require('process');
+
+const environment =
+  process.env.ELECTRON_ENV || process.env.EMBER_ENV || process.env.NODE_ENV || 'production';
 process.env.NODE_ENV = environment;
 process.env.EMBER_ENV = environment;
 process.env.ELECTRON_ENV = environment;
@@ -10,6 +13,7 @@ if (typeof process.env.ELECTRON_IS_DEV === 'undefined') {
   }
 }
 
+const global = require('global');
 const Promise = require('bluebird');
 
 global.Promise = Promise;
@@ -73,16 +77,11 @@ const { default: installExtension, EMBER_INSPECTOR } = require('electron-devtool
 const updateElectronApp = require('update-electron-app');
 
 const { createWindow } = require('./window');
-const { downloadStart, nodeStart } = require('./ipc');
+const { downloadStart, nodeStart, keychainGet, keychainSet, keychainDelete } = require('./ipc');
 
 const { version, productName } = require('../package');
 
-const {
-  app,
-  ipcMain,
-  protocol,
-  autoUpdater,
-} = electron;
+const { app, ipcMain, protocol, autoUpdater } = electron;
 
 let mainWindow = null;
 
@@ -102,11 +101,14 @@ app.on('second-instance', () => {
   }
 });
 
-const basePath = is.development ? __dirname : path.join(process.resourcesPath, 'app.asar.unpacked', 'ember-electron');
+const basePath = is.development
+  ? __dirname
+  : path.join(process.resourcesPath, 'app.asar.unpacked', 'ember-electron');
 global.environment = environment;
 global.dataPath = path.normalize(app.getPath('userData'));
 global.resourcesPath = path.normalize(path.join(basePath, 'resources'));
 global.locale = null;
+global.useKeychain = false;
 global.isDataDownloaded = false;
 global.isNodeStarted = false;
 global.isQuitting = false;
@@ -131,15 +133,33 @@ app.on('activate', () => {
 
 ipcMain.on('download-start', downloadStart);
 ipcMain.on('node-start', nodeStart);
+ipcMain.on('keychain-get', keychainGet);
+ipcMain.on('keychain-set', keychainSet);
+ipcMain.on('keychain-delete', keychainDelete);
 
 // Registering a protocol & schema to serve our Ember application
-const protocolServeName = protocolServe({
+const scheme = protocolServe({
   app,
   protocol,
   cwd: path.join(__dirname || path.resolve(path.dirname('')), '..', 'ember'),
 });
 
-protocol.registerStandardSchemes([protocolServeName], { secure: true });
+// Registering a protocol & schema to serve our Ember application
+if (typeof protocol.registerSchemesAsPrivileged === 'function') {
+  // Available in Electron >= 5
+  protocol.registerSchemesAsPrivileged([
+    {
+      scheme,
+      privileges: {
+        secure: true,
+        standard: true,
+      },
+    },
+  ]);
+} else {
+  // For compatibility with Electron < 5
+  protocol.registerStandardSchemes([scheme], { secure: true });
+}
 
 // Uncomment the lines below to enable Electron's crash reporter
 // For more information, see http://electron.atom.io/docs/api/crash-reporter/
@@ -156,7 +176,7 @@ const run = async () => {
   await app.whenReady();
 
   if (!is.development) {
-    autoUpdater.on('error', (err) => {
+    autoUpdater.on('error', err => {
       log.error('Error updating:', err);
     });
 
@@ -202,12 +222,16 @@ const run = async () => {
 
   const storeVersion = store.get('version');
   if (!storeVersion || semver.gt(version, storeVersion)) {
-    const outdatedAssets = ['config.json', 'log'];
+    const outdatedAssets = ['config.json', 'rpc_config.json', 'log'];
     log.info('Deleting outdated assets:', outdatedAssets.join(', '));
     await del(outdatedAssets, { force: true, cwd: dataPath });
   }
 
   store.set('version', version);
+
+  if (!store.has('useKeychain')) {
+    store.set('useKeychain', false);
+  }
 
   Object.defineProperty(global, 'dataPath', { value: dataPath });
 
@@ -217,9 +241,9 @@ const run = async () => {
     },
   });
 
-  Object.defineProperty(global, 'locale', {
+  Object.defineProperty(global, 'useKeychain', {
     get() {
-      return app.getLocale() || locale2 || null;
+      return store.get('useKeychain', false);
     },
   });
 
@@ -246,7 +270,10 @@ const run = async () => {
 
   mainWindow.once('ready-to-show', () => {
     const elapsed = Date.now() - appLaunchTimestamp;
-    log.info(`Application window ready to show (took ${prettyMs(elapsed)}):`, mainWindow.getTitle());
+    log.info(
+      `Application window ready to show (took ${prettyMs(elapsed)}):`,
+      mainWindow.getTitle(),
+    );
     mainWindow.show();
   });
 

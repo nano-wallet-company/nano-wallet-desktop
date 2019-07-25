@@ -2,7 +2,7 @@ import Component from '@ember/component';
 import { get } from '@ember/object';
 import { tryInvoke } from '@ember/utils';
 
-import { inject as service } from '@ember-decorators/service';
+import { inject as service } from '@ember/service';
 import { tagName, attribute } from '@ember-decorators/component';
 
 import window from 'ember-window-mock';

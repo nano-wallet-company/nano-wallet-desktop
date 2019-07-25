@@ -1,7 +1,7 @@
 import Controller from '@ember/controller';
 
 export default class SetupDownloadController extends Controller {
-  queryParams = ['asset']
+  queryParams = ['asset'];
 
-  asset = 'data'
+  asset = 'data';
 }

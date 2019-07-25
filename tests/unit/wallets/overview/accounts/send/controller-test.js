@@ -9,7 +9,7 @@ describe('Unit | Controller | wallets/overview/accounts/send', () => {
   });
 
   // Replace this with your real tests.
-  it('exists', function () {
+  it('exists', function() {
     const controller = this.subject();
     expect(controller).to.be.ok;
   });

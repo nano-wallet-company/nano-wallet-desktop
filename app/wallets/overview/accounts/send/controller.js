@@ -1,7 +1,6 @@
-import Controller from '@ember/controller';
+import Controller, { inject as controller } from '@ember/controller';
 
-import { inject as controller } from '@ember-decorators/controller';
-import { reads } from '@ember-decorators/object/computed';
+import { reads } from '@ember/object/computed';
 
 export default class WalletsOverviewAccountsSendController extends Controller {
   @controller('wallets/overview') overviewController;

@@ -8,12 +8,7 @@ export const BTC = 'BTC';
 export const USD = 'USD';
 export const EUR = 'EUR';
 
-export const CURRENCIES = new Set([
-  NANO,
-  BTC,
-  USD,
-  EUR,
-]);
+export const CURRENCIES = new Set([NANO, BTC, USD, EUR]);
 
 export const DEFAULT_CURRENCY = NANO;
 export const DEFAULT_EXCHANGE_RATE = 1;

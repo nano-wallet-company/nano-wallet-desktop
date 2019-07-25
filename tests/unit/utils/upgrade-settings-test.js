@@ -17,13 +17,16 @@ describe('Unit | Utility | upgrade-settings', () => {
   });
 
   it('overwrites localStorage with upgraded settings', async () => {
-    localStorage.setItem('wallet', JSON.stringify({
-      key: 'somevalue',
-      seed: 'someseed',
-      subkey: {
+    localStorage.setItem(
+      'wallet',
+      JSON.stringify({
+        key: 'somevalue',
         seed: 'someseed',
-      },
-    }));
+        subkey: {
+          seed: 'someseed',
+        },
+      }),
+    );
 
     await upgradeSettings({ version: 0 });
 

@@ -2,23 +2,9 @@ import DS from 'ember-data';
 import { A } from '@ember/array';
 import { computed } from '@ember/object';
 
-import { attr, hasMany } from '@ember-decorators/data';
-import { computedDecorator } from '@ember-decorators/utils/computed';
-
 import sumAmounts from '../utils/sum-amounts';
 
-const { Model } = DS;
-
-const sumAccounts = computedDecorator((desc) => {
-  const { key } = desc;
-  return computed(`accounts.@each.${key}`, {
-    get() {
-      const accounts = this.get('accounts');
-      const amounts = A(accounts).mapBy(key);
-      return sumAmounts(amounts, 0);
-    },
-  });
-});
+const { Model, attr, hasMany } = DS;
 
 export default class WalletModel extends Model {
   @hasMany('account', { async: true }) accounts;
@@ -31,7 +17,17 @@ export default class WalletModel extends Model {
 
   @attr('string') representative;
 
-  @sumAccounts balance;
+  @computed('accounts.@each.balance')
+  get balance() {
+    const accounts = this.get('accounts');
+    const amounts = A(accounts).mapBy('balance');
+    return sumAmounts(amounts, 0);
+  }
 
-  @sumAccounts pending;
+  @computed('accounts.@each.pending')
+  get pending() {
+    const accounts = this.get('accounts');
+    const amounts = A(accounts).mapBy('pending');
+    return sumAmounts(amounts, 0);
+  }
 }

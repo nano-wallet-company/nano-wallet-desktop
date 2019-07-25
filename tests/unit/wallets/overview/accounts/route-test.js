@@ -8,7 +8,7 @@ describe('Unit | Route | wallets/overview/accounts', () => {
     // needs: ['controller:foo']
   });
 
-  it('exists', function () {
+  it('exists', function() {
     const route = this.subject();
     expect(route).to.be.ok;
   });

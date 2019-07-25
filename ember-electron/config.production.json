@@ -2,25 +2,25 @@
     "version": "2",
     "rpc_enable": "true",
     "rpc": {
-        "address": "::1",
-        "port": "7076",
-        "enable_control": "true",
-        "frontier_request_limit": "16384",
-        "chain_request_limit": "16384",
-        "max_json_depth": "20",
-        "enable_sign_hash": "false"
+        "version": "1",
+        "enable_sign_hash": "false",
+        "max_work_generate_difficulty": "ffffffffc0000000",
+        "child_process": {
+            "enable": "false"
+        }
     },
     "node": {
-        "version": "16",
+        "version": "17",
         "peering_port": "7075",
         "bootstrap_fraction_numerator": "1",
-        "receive_minimum": "1",
+        "receive_minimum": "1000000000000000000000000",
         "logging": {
-            "version": "6",
+            "version": "7",
             "ledger": "false",
             "ledger_duplicate": "false",
             "vote": "false",
             "network": "true",
+            "network_timeout": "false",
             "network_message": "false",
             "network_publish": "false",
             "network_packet": "false",
@@ -28,7 +28,6 @@
             "network_node_id_handshake": "false",
             "node_lifetime_tracing": "false",
             "insufficient_work": "true",
-            "log_rpc": "false",
             "log_ipc": "false",
             "bulk_pull": "false",
             "work_generation_time": "true",
@@ -37,21 +36,22 @@
             "log_to_cerr": "false",
             "max_size": "134217728",
             "rotation_size": "4194304",
-            "flush": "true"
+            "flush": "true",
+            "min_time_between_output": "5"
         },
         "work_peers": "",
         "preconfigured_peers": [
             "peering.nano.org"
         ],
         "preconfigured_representatives": [
-            "xrb_3arg3asgtigae3xckabaaewkx3bzsh7nwz7jkmjos79ihyaxwphhm6qgjps4",
-            "xrb_1stofnrxuz3cai7ze75o174bpm7scwj9jn3nxsn8ntzg784jf1gzn1jjdkou",
-            "xrb_1q3hqecaw15cjt7thbtxu3pbzr1eihtzzpzxguoc37bj1wc5ffoh7w74gi6p",
-            "xrb_3dmtrrws3pocycmbqwawk6xs7446qxa36fcncush4s1pejk16ksbmakis78m",
-            "xrb_3hd4ezdgsp15iemx7h81in7xz5tpxi43b6b41zn3qmwiuypankocw3awes5k",
-            "xrb_1awsn43we17c1oshdru4azeqjz9wii41dy8npubm4rg11so7dx3jtqgoeahy",
-            "xrb_1anrzcuwe64rwxzcco8dkhpyxpi8kd7zsjc1oeimpc3ppca4mrjtwnqposrs",
-            "xrb_1hza3f7wiiqa7ig3jczyxj5yo86yegcmqk3criaz838j91sxcckpfhbhhra1"
+            "nano_3arg3asgtigae3xckabaaewkx3bzsh7nwz7jkmjos79ihyaxwphhm6qgjps4",
+            "nano_1stofnrxuz3cai7ze75o174bpm7scwj9jn3nxsn8ntzg784jf1gzn1jjdkou",
+            "nano_1q3hqecaw15cjt7thbtxu3pbzr1eihtzzpzxguoc37bj1wc5ffoh7w74gi6p",
+            "nano_3dmtrrws3pocycmbqwawk6xs7446qxa36fcncush4s1pejk16ksbmakis78m",
+            "nano_3hd4ezdgsp15iemx7h81in7xz5tpxi43b6b41zn3qmwiuypankocw3awes5k",
+            "nano_1awsn43we17c1oshdru4azeqjz9wii41dy8npubm4rg11so7dx3jtqgoeahy",
+            "nano_1anrzcuwe64rwxzcco8dkhpyxpi8kd7zsjc1oeimpc3ppca4mrjtwnqposrs",
+            "nano_1hza3f7wiiqa7ig3jczyxj5yo86yegcmqk3criaz838j91sxcckpfhbhhra1"
         ],
         "online_weight_minimum": "60000000000000000000000000000000000000",
         "online_weight_quorum": "50",
@@ -70,6 +70,20 @@
         "block_processor_batch_max_time": "5000",
         "allow_local_peers": "false",
         "vote_minimum": "1000000000000000000000000000000000",
+        "vote_generator_delay": "50",
+        "vote_generator_threshold": "3",
+        "unchecked_cutoff_time": "14400",
+        "tcp_io_timeout": "15",
+        "pow_sleep_interval": "0",
+        "external_address": "::",
+        "external_port": "0",
+        "tcp_incoming_connections_max": "1024",
+        "use_memory_pools": "true",
+        "websocket": {
+            "enable": "false",
+            "address": "::1",
+            "port": "7078"
+        },
         "ipc": {
             "tcp": {
                 "enable": "false",
@@ -77,11 +91,24 @@
                 "io_timeout": "15"
             },
             "local": {
+                "version": "1",
                 "enable": "false",
+                "allow_unsafe": "false",
                 "path": "\/tmp\/nano",
                 "io_timeout": "15"
             }
-        }
+        },
+        "diagnostics": {
+            "txn_tracking": {
+                "enable": "false",
+                "min_read_txn_time": "5000",
+                "min_write_txn_time": "500",
+                "ignore_writes_below_block_processor_max_time": "true"
+            }
+        },
+        "confirmation_history_size": "2048",
+        "active_elections_size": "50000",
+        "bandwidth_limit": "5242880"
     },
     "opencl_enable": "false",
     "opencl": {

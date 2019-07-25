@@ -2,13 +2,11 @@ import Controller from '@ember/controller';
 import { get } from '@ember/object';
 
 import { ContextBoundTasksMixin } from 'ember-lifeline';
-import { inject as service } from '@ember-decorators/service';
+import { inject as service } from '@ember/service';
 
 const WALLET_POLL_INTERVAL = 5 * 1000; // 5s
 
-export default class WalletsController extends Controller.extend(
-  ContextBoundTasksMixin,
-) {
+export default class WalletsController extends Controller.extend(ContextBoundTasksMixin) {
   @service flashMessages;
 
   @service rpc;

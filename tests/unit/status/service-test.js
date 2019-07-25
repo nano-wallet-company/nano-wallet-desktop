@@ -9,7 +9,7 @@ describe('Unit | Service | status', () => {
   });
 
   // Replace this with your real tests.
-  it('exists', function () {
+  it('exists', function() {
     const service = this.subject();
     expect(service).to.be.ok;
   });

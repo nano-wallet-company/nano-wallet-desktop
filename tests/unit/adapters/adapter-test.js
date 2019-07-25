@@ -6,7 +6,7 @@ describe('Unit | Adapter | frontier', () => {
   setupTest();
 
   // Replace this with your real tests.
-  it('exists', function () {
+  it('exists', function() {
     const adapter = this.owner.lookup('adapter:frontier');
     expect(adapter).to.be.ok;
   });

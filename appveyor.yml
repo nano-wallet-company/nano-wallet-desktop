@@ -10,7 +10,7 @@ environment:
     MOCHA_REPORTER: 'mocha-appveyor-reporter'
     GYP_MSVS_VERSION: '2017'
   matrix:
-    - nodejs_version: '10.15.0'
+    - nodejs_version: '12.7.0'
 
 cache:
   - node_modules -> yarn.lock
@@ -27,10 +27,10 @@ install:
   - yarn --version
   - appveyor-retry yarn --frozen-lockfile --non-interactive
 
-build: 'off'
+build: off
 
 test_script:
-  - yarn lint:js
+  - yarn lint
   - yarn test
 
 after_test:
