@@ -91,6 +91,25 @@ if (shouldQuit) {
   return;
 }
 
+const ua = require('universal-analytics');
+const uuid = require('uuid/v4');
+const { JSONStorage } = require('node-localstorage');
+const nodeStorage = new JSONStorage(app.getPath('userData'));
+const userId = nodeStorage.getItem('userid') || uuid();
+nodeStorage.setItem('userid', userId);
+
+const trackEvent = function(category, action, label, value) {
+  const usr = ua('UA-145837900-1', userId);
+  usr
+    .event({
+      ec: category,
+      ea: action,
+      el: label,
+      ev: value,
+    })
+    .send();
+};
+
 app.on('second-instance', () => {
   if (mainWindow) {
     if (mainWindow.isMinimized()) {
@@ -114,6 +133,7 @@ global.isNodeStarted = false;
 global.isQuitting = false;
 global.isUpdating = false;
 global.authorizationToken = null;
+global.trackEvent = trackEvent;
 
 app.on('before-quit', () => {
   global.isQuitting = true;
@@ -172,6 +192,8 @@ if (typeof protocol.registerSchemesAsPrivileged === 'function') {
 
 const run = async () => {
   log.info(`Starting application: ${productName} ${version} (${environment})`);
+
+  trackEvent('User Interaction', 'Application started');
 
   await app.whenReady();
 
