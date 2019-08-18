@@ -76,29 +76,17 @@ const { default: installExtension, EMBER_INSPECTOR } = require('electron-devtool
 
 const updateElectronApp = require('update-electron-app');
 
-const { createWindow } = require('./window');
-const { downloadStart, nodeStart, keychainGet, keychainSet, keychainDelete } = require('./ipc');
-
-const { version, productName } = require('../package');
-
 const { app, ipcMain, protocol, autoUpdater } = electron;
-
-let mainWindow = null;
-
-const shouldQuit = !app.requestSingleInstanceLock();
-if (shouldQuit) {
-  app.quit();
-  return;
-}
 
 const ua = require('universal-analytics');
 const uuid = require('uuid/v4');
 const { JSONStorage } = require('node-localstorage');
+
 const nodeStorage = new JSONStorage(app.getPath('userData'));
 const userId = nodeStorage.getItem('userid') || uuid();
 nodeStorage.setItem('userid', userId);
 
-const trackEvent = function(category, action, label, value) {
+function trackEvent(category, action, label, value) {
   const usr = ua('UA-145837900-1', userId);
   usr
     .event({
@@ -108,7 +96,20 @@ const trackEvent = function(category, action, label, value) {
       ev: value,
     })
     .send();
-};
+}
+
+const { createWindow } = require('./window');
+const { downloadStart, nodeStart, keychainGet, keychainSet, keychainDelete } = require('./ipc');
+
+const { version, productName } = require('../package');
+
+let mainWindow = null;
+
+const shouldQuit = !app.requestSingleInstanceLock();
+if (shouldQuit) {
+  app.quit();
+  return;
+}
 
 app.on('second-instance', () => {
   if (mainWindow) {
