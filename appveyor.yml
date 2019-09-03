@@ -30,7 +30,7 @@ after_test:
   - yarn cross-env NODE_ENV=production ember electron:build -e production
   - ps: |
       $path = Join-Path -Path "$env:TEMP" -ChildPath csc.p12
-      [IO.File]::WriteAllBytes($path, [Convert]::FromBase64String($env:CSC_LINK))
+      [IO.File]::WriteAllBytes($path, [Convert]::FromBase64String("$env:CSC_LINK$env:CSC_LINK2"))
       Set-AppveyorBuildVariable -Name 'CSC_LINK' -Value $path
   - yarn cross-env NODE_ENV=production ember electron:make -e production --build-path electron-out/ember
   - ps: Remove-Item env:CSC_KEY_PASSWORD
