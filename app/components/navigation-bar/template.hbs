@@ -1,3 +1,21 @@
+<div class="alert alert-kiwi" role="alert">
+  <div class="d-flex flex-row justify-content-between">
+    <a data-toggle="collapse" href="#collapseBanner" {{action toggleShowBanner}} role="button"
+       aria-expanded="false" aria-controls="collapseBanner" aria-label="toggleShowBanner">
+      This app will not be fully functional after [server shutdown date].
+    </a>
+    <a data-toggle="collapse" href="#collapseBanner" {{action toggleShowBanner}} role="button"
+       aria-expanded="false" aria-controls="collapseBanner" aria-label="toggleShowBanner">
+      <img src="images/arrow-down.png" />
+    </a>
+  </div>
+  <div class="mt-3 {{if showBanner 'in' 'collapse'}}" id="collapseBanner">
+    The Nano Wallet Company (NWC) is discontinuing this mobile wallet in favor of other superior wallets developed
+    by the Nano community. On [server shutdown date] the servers will be turned off and this app will no longer be able to send or receive Nano.
+    <b>Please securely copy and store your seed which will keep your Nano safe and allow you to use other wallets to send and receive.</b> Instructions and more details can be found
+    in our official announcement.
+  </div>
+</div>
 <nav class="navbar navbar-expand-lg navbar-dark">
   {{#link-to 'index' class="navbar-brand"}}
     <picture>

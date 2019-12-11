@@ -83,6 +83,23 @@ code {
   }
 }
 
+.alert-kiwi {
+  background: $kiwi-green-light;
+  border-radius: 0;
+
+  & a {
+    color: unset;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  & img {
+    height: 15px;
+  }
+}
+
 @keyframes fade-in {
   from {
     opacity: 0;
