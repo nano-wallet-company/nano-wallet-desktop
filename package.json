@@ -252,7 +252,7 @@
     "postinstall-postinstall": "^2.0.0",
     "prettier": "^1.18.2",
     "rimraf": "^2.6.3",
-    "sass": "^1.22.8",
+    "sass": "^1.22.9",
     "speedometer": "^1.1.0",
     "standard-version": "^6.0.1"
   },

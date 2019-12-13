@@ -1,19 +1,25 @@
 <div class="alert alert-kiwi" role="alert">
   <div class="d-flex flex-row justify-content-between">
     <a data-toggle="collapse" href="#collapseBanner" {{action toggleShowBanner}} role="button"
-       aria-expanded="false" aria-controls="collapseBanner" aria-label="toggleShowBanner">
-      This app will not be fully functional after [server shutdown date].
+       aria-expanded="false" aria-controls="collapseBanner" aria-label="{{t 'toggleShowBanner'}}">
+      {{"This app will not be fully functional after February 10, 2020"}}
     </a>
+    {{#let (component 'external-link' text="View Announcement" href=announcementLink) as |label|}}
+      {{label class="button2"}}
+    {{/let}}
     <a data-toggle="collapse" href="#collapseBanner" {{action toggleShowBanner}} role="button"
-       aria-expanded="false" aria-controls="collapseBanner" aria-label="toggleShowBanner">
-      <img src="images/arrow-down.png" />
+       aria-expanded="false" aria-controls="collapseBanner" aria-label="{{t 'toggleShowBanner'}}">
+      <img src="images/arrow-down.png" alt="{{"show More"}}">
     </a>
   </div>
   <div class="mt-3 {{if showBanner 'in' 'collapse'}}" id="collapseBanner">
-    The Nano Wallet Company (NWC) is discontinuing this mobile wallet in favor of other superior wallets developed
-    by the Nano community. On [server shutdown date] the servers will be turned off and this app will no longer be able to send or receive Nano.
-    <b>Please securely copy and store your seed which will keep your Nano safe and allow you to use other wallets to send and receive.</b> Instructions and more details can be found
-    in our official announcement.
+    {{"The Nano Wallet Company (NWC) is discontinuing this wallet in favor of other superior wallets developed by the Nano community. Although the desktop app may continue to function as long as nodes on the network are peering with node V19.0 (protocol V17), it will take longer to sync a new install over time and we will no longer provide support for the application. As a result, we recommend another wallet option is used."}} 
+    <b>{{"On February 10, 2020 the downloads that allow fast-syncing of the ledger will be turned off, resulting in even slower and longer bootstrapping times."}} </b>
+    {{"Please securely copy and store your seed which will keep your Nano safe and allow you to use other wallets to send and receive. Instructions for saving your seed, information on finding a new wallet and other details can be found in our official announcement at "}}
+    {{#let (component 'external-link' text=announcementLink href=announcementLink) as |label|}}
+      {{label}}
+    {{/let}}
+    
   </div>
 </div>
 <nav class="navbar navbar-expand-lg navbar-dark">

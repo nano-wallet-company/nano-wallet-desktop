@@ -25,7 +25,7 @@ install:
   - appveyor-retry cinst yarn -iy --no-progress
   - node --version
   - yarn --version
-  - appveyor-retry yarn --frozen-lockfile --non-interactive
+  - appveyor-retry yarn --non-interactive
 
 build: off
 

@@ -15,6 +15,8 @@ export default class NavigationBarComponent extends Component {
 
   onChangePassword = null;
 
+  announcementLink = 'https://nanowalletcompany.com';
+
   @action
   toggleShow() {
     this.toggleProperty('show');
