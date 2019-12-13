@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.8.1](https://github.com/nano-wallet-company/nano-wallet-desktop/compare/v1.8.0...v1.8.1) (2019-12-17)
+
+
+### Features
+* Addition of banner with information about discontinuing the Nano Wallet Company wallets. As of February 10, 2020 the wallets will no longer be fully functioning. See https://nanowalletcompany.com for more details. 
+
+
+
 ## [1.8.0](https://github.com/nano-wallet-company/nano-wallet-desktop/compare/v1.7.0...v1.8.0) (2019-07-25)
 
 
