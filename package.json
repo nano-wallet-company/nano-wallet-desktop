@@ -254,7 +254,7 @@
     "rimraf": "^2.6.3",
     "sass": "^1.22.9",
     "speedometer": "^1.1.0",
-    "standard-version": "^6.0.1"
+    "standard-version": "^8.0.1"
   },
   "resolutions": {
     "electron-forge": "^5.2.4",
