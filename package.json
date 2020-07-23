@@ -255,7 +255,7 @@
     "rimraf": "^2.6.2",
     "sass": "^1.14.1",
     "slick-carousel": "^1.8.1",
-    "standard-version": "^4.4.0"
+    "standard-version": "^8.0.2"
   },
   "engines": {
     "node": ">= 10.2.0"
