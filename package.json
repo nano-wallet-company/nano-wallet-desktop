@@ -101,7 +101,7 @@
     "lzma-native": "^4.0.5",
     "make-dir": "^3.0.0",
     "nanoid": "^2.0.3",
-    "node-forge": "^0.8.5",
+    "node-forge": "^0.10.0",
     "normalize-newline": "^3.0.0",
     "path-exists": "^4.0.0",
     "pretty-ms": "^5.0.0",
